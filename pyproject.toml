@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 120
+src = ["<PROJECT_NAME>"]
+target-version = "py312"
+include = ["pyproject.toml", "<PROJECT_NAME>/**/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "W"]
+ignore = [
+    "E501",   # Line too long (handled by formatter)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
