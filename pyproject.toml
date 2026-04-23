@@ -1,8 +1,8 @@
 [tool.ruff]
 line-length = 120
-src = ["<PROJECT_NAME>"]
+src = ["00.data_preparation", "01.ontology_pipeline", "02.rag_evaluation", "03.expert_annotation"]
 target-version = "py312"
-include = ["pyproject.toml", "<PROJECT_NAME>/**/*.py"]
+include = ["pyproject.toml", "**/*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "W"]

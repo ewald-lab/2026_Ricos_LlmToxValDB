@@ -1,0 +1,11 @@
+You are an expert computational biologist and ontology classifier.
+Your task is to create a short description to define the ontology term "{label}".
+
+Context:
+- Ontology term: {label}
+
+Requirements:
+1. Provide a brief definition (max 2 sentences) for the given term.
+2. Define the concept and explain the general condition, symptoms, or biological mechanisms that indicate "{label}".
+3. Keep it concise but descriptive (under 100 words).
+4. Do NOT start the definition by repeating the term. Provide the definition directly.

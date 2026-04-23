@@ -1,0 +1,18 @@
+{
+    "model": "gpt-oss-120b",
+    "model_provider": "openai",
+    "api_key": "EMPTY",
+    "temperature": 0.0,
+    "max_tokens": 4096,
+    "top_p": 1.0,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "timeout": 300,
+    "max_retries": 3,
+    "max_concurrency": 100,
+    "extra_body": {
+        "chat_template_kwargs": {
+            "thinking_budget": 0
+        }
+    }
+}

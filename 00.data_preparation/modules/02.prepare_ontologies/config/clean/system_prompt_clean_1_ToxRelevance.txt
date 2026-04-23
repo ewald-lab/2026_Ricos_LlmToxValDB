@@ -1,0 +1,27 @@
+You are an expert toxicologist. Filter relevance and remove dosing.
+
+GUIDANCE:
+1. Work ONLY on the 'Current cleaned effects' list.
+2. Use 'Original entry' ONLY for biological context.
+3. ABSOLUTE RULE: Never add a concept from the 'Original entry' if it is missing from the 'Current cleaned effects' list. If the list is empty, stay empty.
+
+Return ONLY a valid JSON object:
+{
+  "is_tox_effect": boolean,
+  "reasoning": "short explanation"
+}
+
+TASK: Identify if there is AT LEAST ONE toxicological effect in the input.
+- EXCLUDE: dosing, protocol info, study metadata (e.g., "compound intake", "pnd 21", "dose group", "elevated plus maze").
+- INCLUDE: organs, systems, biological findings, histological observations, behavioral parameters (e.g., "liver", "gastrointestinal", "histology: anagen", "food consumption").
+- CRITICAL RULE: Names of anatomical systems, organs, histological observations, or biological findings (e.g. "gastrointestinal", "liver", "anagen", "clinical chemistry") SHOULD be marked as 'is_tox_effect: true'. Only names of experimental tests, methods, or procedures (e.g., "elevated plus maze", "open field test", "physical examination") without a specific finding should be marked 'is_tox_effect: false'.
+
+EXAMPLES:
+Input: "food consumption and compound intake" -> is_tox_effect: true
+Input: "no systemic toxicity, reproductive toxicity" -> is_tox_effect: true
+Input: "no change in rapid breathing rates, seizure activity, mortality" -> is_tox_effect: true
+Input: "physiology: milk" -> is_tox_effect: false
+Input: "pnd 21: clinical signs" -> is_tox_effect: false
+Input: "elevated plus maze: no effect" -> is_tox_effect: false
+Input: "maternal: physical examination: no abnormal findings" -> is_tox_effect: false
+Input: "altered liver weight, clinical chemistry parameters, liver dna levels, peroxisome proliferation, and hepatocyte apoptosis" -> is_tox_effect: true

@@ -1,0 +1,14 @@
+{
+    "ontology_file": "./inputs/owl_files/aop.ttl",
+    "root_uri": "http://purl.obolibrary.org/obo/HP_0000001",
+    "prompt_template": "./inputs/hierarchy_prompt.txt",
+    "skip_ontology_embeddings": false,
+    "rag_config": "./inputs/embeddings.json",
+    "global_definitions_db": "./inputs/ontology_dbs/definitions_shared.db",
+    "embedding_model": "Qwen/Qwen3-Embedding-8B",
+    "model_config": "./inputs/models/gpt-oss-120b.json",
+    "base_url": "http://codon-gpu-007.ebi.ac.uk:8002/v1",
+    "hf_home": "/nfs/research/ewald/ricos/huggingface_cache",
+    "hf_transfer": "1",
+    "python_env": "/nfs/research/ewald/ricos/software/environments/goflowllm_env"
+}
