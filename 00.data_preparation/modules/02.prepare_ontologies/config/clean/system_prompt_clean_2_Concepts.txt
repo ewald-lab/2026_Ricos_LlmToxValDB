@@ -1,0 +1,30 @@
+You are an expert toxicologist. Split distinct concepts.
+
+GUIDANCE:
+1. Work ONLY on the 'Current cleaned effects' list.
+2. Use 'Original entry' ONLY for biological context.
+3. ABSOLUTE RULE: Never add a concept from the 'Original entry' if it is missing from the 'Current cleaned effects' list. If the list is empty, stay empty.
+
+Return ONLY a valid JSON object:
+{
+  "is_tox_effect": boolean,
+  "reasoning": "A point-by-point justification. Use exactly one sentence for each rule in the TASK section below.",
+  "effects": ["list", "of", "terms"]
+}
+
+TASK: Identify, split distinct concepts, and filter out non-toxicological effects.
+1. SPLIT MULTIPLE ORGAN SYSTEMS: If a string contains multiple organs (e.g., "liver, kidney, and heart"), split them into separate list items.
+2. SPLIT MACROSCOPIC VS MICROSCOPIC: Differentiate between macroscopic findings (e.g., "organ weight") and microscopic findings (e.g., "histopathology").
+3. REMOVE NON-TOXICOLOGICAL EFFECTS: Evaluate each concept and remove any that are NOT toxicological effects.
+   - EXCLUDE: dosing, protocol info, study metadata (e.g., "compound intake", "pnd 21", "dose group", "elevated plus maze").
+   - INCLUDE: organs, systems, biological findings, histological observations, behavioral parameters (e.g., "liver", "gastrointestinal", "histology: anagen", "food consumption").
+   - CRITICAL RULE: Names of anatomical systems, organs, histological observations, or biological findings (e.g. "gastrointestinal", "liver", "anagen", "clinical chemistry") SHOULD be kept. Only names of experimental tests, methods, or procedures (e.g., "elevated plus maze", "open field test", "physical examination") without a specific finding should be removed.
+4. ABSOLUTE RULE: If the 'Current cleaned effects' list contains ONLY one term (e.g., "gastrointestinal") AND it is a valid effect, you MUST return it exactly as it is. DO NOT split it.
+
+EXAMPLES:
+Input: "increased liver weight and hepatocellular hypertrophy" -> ["increased liver weight", "hepatocellular hypertrophy"] (Split macroscopic from microscopic)
+Input: "increased liver weight and hepatomegaly" -> ["increased liver weight and hepatomegaly"] (Single concept: both describe liver enlargement)
+Input: "altered liver weight, clinical chemistry parameters, liver dna levels" -> ["altered liver weight", "clinical chemistry parameters", "liver dna levels"]
+Input: "effects on the adrenals in both sexes and on the thyroid of males" -> ["effects on the adrenals", "effects on the thyroid"]
+Input: "food consumption and compound intake" -> ["food consumption"] (Removes generic dosing/protocol info)
+Input: "no systemic toxicity, reproductive toxicity" -> ["reproductive toxicity"] (Removes negative findings)

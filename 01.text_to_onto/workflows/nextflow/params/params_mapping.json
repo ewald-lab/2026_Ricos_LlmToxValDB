@@ -1,0 +1,35 @@
+{
+    "input_csv": "../00.data_preparation/outputs/ToxValDB_v9.7.0_LLM_Cleaned.tsv",
+    "output_dir": "./outputs",
+    "target_column": "TOXICOLOGICAL_EFFECT",
+    "system_prompt_file": "./inputs/system_prompt_1.txt",
+    "mode": 1,
+    "consensus_runs": 3,
+    "ontology_definitions": false,
+    "include_superiors": true,
+    "rag_config": "./inputs/embeddings.json",
+    "global_definitions_db": "./inputs/ontology_dbs/definitions_shared.db",
+    "num_backups": 10,
+    "context_ontology": "General biological ontology context",
+    "target_embedding_db": "../00.data_preparation/outputs/tox_effects_embeddings.db",
+    "debug_rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+    ],
+    "random_debug_rows": "",
+    "seed": 43,
+    "model_config": [
+        "./inputs/models/Qwen3.5-122B-A10B-FP8.json"
+    ],
+    "base_url": [
+        "http://codon-gpu-001.ebi.ac.uk:8003/v1"
+    ],
+    "hf_home": "/nfs/research/ewald/ricos/huggingface_cache",
+    "hf_transfer": "1",
+    "python_env": "/nfs/research/ewald/ricos/software/environments/goflowllm_env"
+}

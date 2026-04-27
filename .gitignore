@@ -129,6 +129,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+env-*/
 
 # Spyder
 .spyderproject
@@ -177,3 +178,29 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# NextFlow
+.nextflow/
+*.nextflow*
+
+# SLURM logs
+*.err
+*.out
+**/jobs/logs/
+*dcgm/
+
+# Large data files — download via scripts or symlinks
+*.tsv
+*.db
+*.parquet
+*.csv
+!requirements*.txt
+**/inputs/raw_*/
+**/outputs/results_*/
+**/outputs/debug/
+*.ttl
+*.owl
+**/outputs/**/*.json
+**/outputs/*.json
+!**/config/**/*.json
+!**/params/**/*.json

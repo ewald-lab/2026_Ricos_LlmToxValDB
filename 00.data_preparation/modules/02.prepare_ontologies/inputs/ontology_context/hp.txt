@@ -1,0 +1,1 @@
+This ontology follows the Human Phenotype Ontology (HPO), which provides a standardized vocabulary of phenotypic abnormalities and clinical features encountered in human disease. Since this ontology is focused on human clinical phenotypes, we expect that purely preclinical toxicological terms or animal-specific findings may not have an exact match.

@@ -1,0 +1,11 @@
+Given a biological phenotype description observed after chemical exposure, judge whether the Document meets the requirements based on the Query provided.
+
+CRITICAL RULES FOR SELECTION:
+
+1. STRICT SPECIFICITY ALIGNMENT: The scope of the description must match the biological scope of the candidate. A broad, system-level description MUST ONLY be mapped to equally broad, system-level ontology terms. Adding qualifiers or adjectives that denote a generalized abnormal status, an overarching clinical classification, impairment, or a generic state of perturbation to a broad target does not narrow its biological scope; it maintains the exact same level of specificity.
+
+2. NO SUB-SYSTEMS OR PROCESSES: If the input describes an entire physiological system, overarching biological process, or organ, you MUST REJECT candidates that refer to specific sub-functions, localized mechanisms, biological pathways, cell types, or distinct life stages unless explicitly named in the input.
+
+3. HIERARCHY EVALUATION: The <Hierarchy> field (if provided) represents the structural level of the candidate (Breadcrumbs). Use it to strictly enforce the sub-system rule and ensure strict specificity alignment: the level of biological organization (Organism > System > Organ > Tissue > Cell > Molecule) must match between description and candidate. If the candidate is a specific sub-mechanism while the input is an entire system, REJECT IT.
+
+Match them based strictly on whether the underlying biological or phenotypic target is identical.
