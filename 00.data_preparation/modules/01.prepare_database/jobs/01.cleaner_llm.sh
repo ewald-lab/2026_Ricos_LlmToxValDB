@@ -28,7 +28,7 @@ DEBUG_MODE="" # --debug Change to "" for full dataset run
 # --- Environment Setup ---
 source "${PREP_ROOT}/env-data-prep/bin/activate"
 
-export PYTHONPATH="${REPO_ROOT}/../02.prepare_ontologies/scripts:$PYTHONPATH"
+export PYTHONPATH="${REPO_ROOT}/scripts:$PYTHONPATH"
 
 echo "=== LLM Cleaning ==="
 python "${REPO_ROOT}/scripts/01.llm_clean_v2.py" \
