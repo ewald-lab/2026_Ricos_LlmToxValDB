@@ -1,0 +1,7 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+406,Clinical Observations,Skin reaction at challenge site (Magnusson-Kligman grading scale),Required,Guideline text,"Graded 0-3 at 48h and 72h post-challenge (GPMT) or 30h and 54h (Buehler); primary endpoint of the test"
+406,Clinical Observations,Body weight,Required,Guideline text,Weighed before the test commences and at the end of the test
+406,Clinical Observations,Systemic reactions,Required,Guideline text,All unusual findings including systemic reactions should be observed and recorded
+406,Clinical Observations,Dermal irritation at induction site,Required,Guideline text,All skin reactions from induction procedures should be observed and recorded; reported per animal
+406,Pathology,Histopathological examination,Optional,Guideline text,May be carried out to clarify doubtful reactions
+406,Pathology,Skin fold thickness measurement,Optional,Guideline text,May be carried out to clarify doubtful reactions

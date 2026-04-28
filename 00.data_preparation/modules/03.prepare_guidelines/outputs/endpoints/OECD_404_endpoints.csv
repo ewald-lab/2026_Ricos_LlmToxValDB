@@ -1,0 +1,10 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+404,Dermal Scoring,Erythema and eschar formation score,Required,"Para 19; Grading Table","Draize scale 0-4; scored at 60 min, 24, 48, 72 h after patch removal"
+404,Dermal Scoring,Oedema formation score,Required,"Para 19; Grading Table","Draize scale 0-4; scored at 60 min, 24, 48, 72 h after patch removal"
+404,Dermal Assessment,Irritation determination,Required,"Para 22-23","Evaluated in conjunction with nature and severity of lesions and reversibility"
+404,Dermal Assessment,Corrosion determination,Required,"Para 15; Annex definition 2","Irreversible damage; visible necrosis through epidermis into dermis"
+404,Dermal Assessment,Reversibility of dermal lesions,Required,"Para 18, 23","Observed up to 14 days; persistent alopecia, hyperkeratosis, hyperplasia, scaling indicate irritant"
+404,Clinical Observations,"Local toxic effects (e.g., defatting of skin)",Required,Para 19,Should be fully described and recorded
+404,Clinical Observations,Clinical signs of toxicity (systemic adverse effects),Required,Para 19,Should be fully described and recorded
+404,Clinical Observations,Body weight,Required,"Para 19; Para 24",Recorded at start and conclusion of test; reported as systemic effect
+404,Pathology,Histopathological examination,Optional,"Para 19; Annex definition 2",Should be considered to clarify equivocal responses

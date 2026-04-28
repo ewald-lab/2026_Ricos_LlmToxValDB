@@ -1,0 +1,62 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+412,Clinical Observations,Clinical observations (cage-side),Required,Guideline text (para. 43-45),"Skin/fur, eyes, mucous membranes, respiratory, circulatory, nervous systems, somatomotor activity, tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma"
+412,Clinical Observations,Body weight,Required,Guideline text (para. 46),"Recorded day 0, twice weekly thereafter, and at death/euthanasia"
+412,Clinical Observations,Food consumption,Required,Guideline text (para. 47),Measured weekly
+412,Clinical Observations,Ophthalmological examination,Required,Guideline text (para. 52),"Fundus, refractive media, iris, conjunctivae; all animals pre-treatment; high-concentration and controls at termination"
+412,Clinical Observations,Water consumption,Optional,Guideline text (para. 47),May also be measured
+412,Clinical Observations,Rectal temperature,Optional,Guideline text (para. 45),May provide supportive evidence of reflex bradypnea or Paintal reflex
+412,Haematology,Erythrocyte count,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Haematocrit,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Haemoglobin concentration,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Mean corpuscular haemoglobin,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Mean corpuscular volume,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Mean corpuscular haemoglobin concentration,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Reticulocytes,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Total leukocyte count,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Differential leukocyte count,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Platelet count,Required,Table 1,Standard clinical pathology parameter
+412,Haematology,Clotting potential,Required,Table 1,"Select one: prothrombin time, clotting time, or partial thromboplastin time"
+412,Clinical Chemistry,Glucose,Required,Table 1,Fasting period considerations; study director determines if fasting is appropriate
+412,Clinical Chemistry,Total cholesterol,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Triglycerides,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Blood urea nitrogen,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Total bilirubin,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Creatinine,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Total protein,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Albumin,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Globulin,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Alanine aminotransferase,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Aspartate aminotransferase,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Alkaline phosphatase,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Potassium,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Sodium,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Calcium,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Phosphorus,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Chloride,Required,Table 1,Standard clinical pathology parameter
+412,Clinical Chemistry,Cholinesterase,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Lipids,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Hormones,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Acid/base balance,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Methaemoglobin or Heinz bodies,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Creatine kinase,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Bone marrow cytology,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Troponins,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Lactate dehydrogenase (serum),Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Glutamate dehydrogenase,Optional,Guideline text (para. 49),At study director's discretion
+412,Clinical Chemistry,Gamma glutamyl transpeptidase,Optional,Guideline text (para. 49),At study director's discretion
+412,Bronchoalveolar Lavage (BALF),Lactate dehydrogenase (LDH),Required,Guideline text (para. 50),Mandatory BALF analysis; performed at PEO-1 and additional PEOs if planned
+412,Bronchoalveolar Lavage (BALF),Total protein or albumin,Required,Guideline text (para. 50),Mandatory BALF analysis
+412,Bronchoalveolar Lavage (BALF),Cell counts and differentials,Required,Guideline text (para. 50),"Alveolar macrophages, lymphocytes, neutrophils, and eosinophils"
+412,Urinalysis,Appearance (colour and turbidity),Optional,Table 1,Not required on routine basis; performed when deemed useful
+412,Urinalysis,Volume,Optional,Table 1,Not required on routine basis
+412,Urinalysis,Specific gravity or osmolality,Optional,Table 1,Not required on routine basis
+412,Urinalysis,pH,Optional,Table 1,Not required on routine basis
+412,Urinalysis,Total protein (urine),Optional,Table 1,Not required on routine basis
+412,Urinalysis,Glucose (urine),Optional,Table 1,Not required on routine basis
+412,Urinalysis,Blood/blood cells (urine),Optional,Table 1,Not required on routine basis
+412,Pathology,Gross pathology (complete necropsy),Required,Guideline text (para. 53),All animals; particular attention to respiratory tract changes
+412,Pathology,Organ weights,Required,Guideline text (para. 53-54; Table 2),"Weighed wet: adrenals, brain, heart, kidneys, liver, lung (left), ovaries, spleen, testes, thymus, thyroid, uterus"
+412,Pathology,Histopathology,Required,Guideline text (para. 57; Table 2),All Table 2 organs/tissues for control and high-concentration groups
+412,Pathology,Lung burden measurements,Optional,Guideline text (para. 51),Required only for poorly soluble solid aerosols (Option B); 5 males per concentration at PEO-1
+412,Pathology,Pulmonary function,Optional,Guideline text (para. 58),When evidence of reflex bradypnea or Paintal reflex; periodic measurements of lung function and body temperature
+412,Pathology,Toxicokinetics,Optional,Guideline text (para. 1),Additional optional investigation to characterize overall toxicity

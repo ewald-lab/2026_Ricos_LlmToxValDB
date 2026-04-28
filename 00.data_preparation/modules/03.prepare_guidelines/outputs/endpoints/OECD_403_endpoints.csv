@@ -1,0 +1,15 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+403,Clinical Observations,Mortality/lethality,Required,Guideline text,Number of animals found dead or killed for humane reasons per test group (par. 41 and 46)
+403,Clinical Observations,Clinical observations during exposure,Required,Guideline text,Animals should be clinically observed frequently during the exposure period (par. 41)
+403,Clinical Observations,Clinical observations post-exposure,Required,Guideline text,At least twice on day of exposure; at least once daily for 14 days total (par. 41)
+403,Clinical Observations,Cage-side observations,Required,Guideline text,"Skin/fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, somatomotor activity, behaviour (par. 42)"
+403,Clinical Observations,Time of death,Required,Guideline text,Should be recorded as precisely as possible when animals killed for humane reasons or found dead (par. 41)
+403,Clinical Observations,Rectal temperature,Optional,Guideline text,May provide supportive evidence of reflex bradypnea or hypo/hyperthermia (par. 42)
+403,Body Weight,Body weight,Required,Guideline text,"Recorded during acclimatization, day 0, days 1, 3, 7, weekly thereafter, and at death/euthanasia (par. 43)"
+403,Pathology,Gross necropsy,Required,Guideline text,All test animals subjected to gross necropsy; particular attention to respiratory tract (par. 44)
+403,Pathology,Gross pathological changes,Required,Guideline text,All changes recorded for each animal with emphasis on respiratory tract (par. 44)
+403,Pathology,Lung weight,Optional,Guideline text,May be considered to extend interpretive value of the study (par. 45)
+403,Pathology,Microscopic examination of respiratory tract,Optional,Guideline text,May provide useful information especially for reactive/hygroscopic test articles (par. 45)
+403,Pathology,Histopathological findings,Optional,Guideline text,"Organs showing gross pathology in animals surviving 24+ hours; reported if available (par. 45, 47)"
+403,Lethality Estimates,LC50 with 95% CI and slope,Required,Guideline text,"Lethality estimates including confidence limits and slope; only actual concentrations used (par. 7, 47)"
+403,Lethality Estimates,LC01,Optional,Guideline text,Non-lethal threshold concentration; listed as example alongside LC50 (par. 7)
