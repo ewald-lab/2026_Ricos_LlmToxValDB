@@ -1,0 +1,381 @@
+endpoint_id,guideline_number,original_category,normalized_category,original_endpoint,normalized_endpoint,requirement_level,source,footnotes
+EP_403_001,403,Clinical Observations,Clinical Observations,Mortality/lethality,mortality/lethality,Required,Guideline text,Number of animals found dead or killed for humane reasons per test group (par. 41 and 46)
+EP_403_002,403,Clinical Observations,Clinical Observations,Clinical observations during exposure,clinical observations during exposure,Required,Guideline text,Animals should be clinically observed frequently during the exposure period (par. 41)
+EP_403_003,403,Clinical Observations,Clinical Observations,Clinical observations post-exposure,clinical observations post-exposure,Required,Guideline text,At least twice on day of exposure; at least once daily for 14 days total (par. 41)
+EP_403_004,403,Clinical Observations,Clinical Observations,Cage-side observations,cage-side observations,Required,Guideline text,"Skin/fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, somatomotor activity, behaviour (par. 42)"
+EP_403_005,403,Clinical Observations,Clinical Observations,Time of death,time of death,Required,Guideline text,Should be recorded as precisely as possible when animals killed for humane reasons or found dead (par. 41)
+EP_403_006,403,Clinical Observations,Clinical Observations,Rectal temperature,rectal temperature,Optional,Guideline text,May provide supportive evidence of reflex bradypnea or hypo/hyperthermia (par. 42)
+EP_403_007,403,Body Weight,Clinical Observations,Body weight,body weight,Required,Guideline text,"Recorded during acclimatization, day 0, days 1, 3, 7, weekly thereafter, and at death/euthanasia (par. 43)"
+EP_403_008,403,Pathology,Pathology,Gross necropsy,gross necropsy,Required,Guideline text,All test animals subjected to gross necropsy; particular attention to respiratory tract (par. 44)
+EP_403_009,403,Pathology,Pathology,Gross pathological changes,gross pathological changes,Required,Guideline text,All changes recorded for each animal with emphasis on respiratory tract (par. 44)
+EP_403_010,403,Pathology,Pathology,Lung weight,lung weight,Optional,Guideline text,May be considered to extend interpretive value of the study (par. 45)
+EP_403_011,403,Pathology,Pathology,Microscopic examination of respiratory tract,microscopic examination of respiratory tract,Optional,Guideline text,May provide useful information especially for reactive/hygroscopic test articles (par. 45)
+EP_403_012,403,Pathology,Histopathology,Histopathological findings,histopathological findings,Optional,Guideline text,"Organs showing gross pathology in animals surviving 24+ hours; reported if available (par. 45, 47)"
+EP_403_013,403,Lethality Estimates,Lethality Estimates,LC50 with 95% CI and slope,lc50 with 95% ci and slope,Required,Guideline text,"Lethality estimates including confidence limits and slope; only actual concentrations used (par. 7, 47)"
+EP_403_014,403,Lethality Estimates,Lethality Estimates,LC01,lc01,Optional,Guideline text,Non-lethal threshold concentration; listed as example alongside LC50 (par. 7)
+EP_404_001,404,Dermal Scoring,Dermal Assessment,Erythema and eschar formation score,erythema and eschar formation score,Required,Para 19; Grading Table,"Draize scale 0-4; scored at 60 min, 24, 48, 72 h after patch removal"
+EP_404_002,404,Dermal Scoring,Dermal Assessment,Oedema formation score,oedema formation score,Required,Para 19; Grading Table,"Draize scale 0-4; scored at 60 min, 24, 48, 72 h after patch removal"
+EP_404_003,404,Dermal Assessment,Dermal Assessment,Irritation determination,irritation determination,Required,Para 22-23,Evaluated in conjunction with nature and severity of lesions and reversibility
+EP_404_004,404,Dermal Assessment,Dermal Assessment,Corrosion determination,corrosion determination,Required,Para 15; Annex definition 2,Irreversible damage; visible necrosis through epidermis into dermis
+EP_404_005,404,Dermal Assessment,Dermal Assessment,Reversibility of dermal lesions,reversibility of dermal lesions,Required,"Para 18, 23","Observed up to 14 days; persistent alopecia, hyperkeratosis, hyperplasia, scaling indicate irritant"
+EP_404_006,404,Clinical Observations,Clinical Observations,"Local toxic effects (e.g., defatting of skin)","local toxic effects (e.g., defatting of skin)",Required,Para 19,Should be fully described and recorded
+EP_404_007,404,Clinical Observations,Clinical Observations,Clinical signs of toxicity (systemic adverse effects),clinical signs of toxicity (systemic adverse effects),Required,Para 19,Should be fully described and recorded
+EP_404_008,404,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Para 19; Para 24,Recorded at start and conclusion of test; reported as systemic effect
+EP_404_009,404,Pathology,Histopathology,Histopathological examination,histopathology (full),Optional,Para 19; Annex definition 2,Should be considered to clarify equivocal responses
+EP_406_001,406,Clinical Observations,Clinical Observations,Skin reaction at challenge site (Magnusson-Kligman grading scale),skin reaction at challenge site (magnusson-kligman grading scale),Required,Guideline text,Graded 0-3 at 48h and 72h post-challenge (GPMT) or 30h and 54h (Buehler); primary endpoint of the test
+EP_406_002,406,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline text,Weighed before the test commences and at the end of the test
+EP_406_003,406,Clinical Observations,Clinical Observations,Systemic reactions,systemic reactions,Required,Guideline text,All unusual findings including systemic reactions should be observed and recorded
+EP_406_004,406,Clinical Observations,Clinical Observations,Dermal irritation at induction site,dermal irritation at induction site,Required,Guideline text,All skin reactions from induction procedures should be observed and recorded; reported per animal
+EP_406_005,406,Pathology,Histopathology,Histopathological examination,histopathology (full),Optional,Guideline text,May be carried out to clarify doubtful reactions
+EP_406_006,406,Pathology,Pathology,Skin fold thickness measurement,skin fold thickness measurement,Optional,Guideline text,May be carried out to clarify doubtful reactions
+EP_407_001,407,Weight,Organ Weights,Testes,testes weight,Required,Annex,
+EP_407_002,407,Weight,Organ Weights,Epididymides,epididymides weight,Required,Annex,
+EP_407_003,407,Weight,Organ Weights,Adrenals,adrenal glands weight,Required,Annex,
+EP_407_004,407,Weight,Organ Weights,Prostate + seminal vesicles with coagulating glands,prostate + seminal vesicles with coagulating glands weight,Required,Annex,
+EP_407_005,407,Weight,Organ Weights,Ovaries,ovaries weight,Optional,Annex,
+EP_407_006,407,Weight,Organ Weights,"Uterus, including cervix",uterus with cervix weight,Optional,Annex,
+EP_407_007,407,Weight,Organ Weights,Thyroid,thyroid weight,Optional,Annex,
+EP_407_008,407,Histopathology,Histopathology,Testes,testes histopathology,Required,Annex,
+EP_407_009,407,Histopathology,Histopathology,Ovaries,ovaries histopathology,Required,Annex,
+EP_407_010,407,Histopathology,Histopathology,Epididymides,epididymides histopathology,Required,Annex,
+EP_407_011,407,Histopathology,Histopathology,Prostate + seminal vesicle with coagulating glands,prostate + seminal vesicle with coagulating glands histopathology,Required,Annex,
+EP_407_012,407,Histopathology,Histopathology,"Uterus, including cervix",uterus with cervix histopathology,Required,Annex,
+EP_407_013,407,Histopathology,Histopathology,Adrenal,adrenal glands histopathology,Required,Annex,
+EP_407_014,407,Histopathology,Histopathology,Thyroid,thyroid histopathology,Required,Annex,
+EP_407_015,407,Histopathology,Histopathology,Vagina,vagina histopathology,Required,Annex,
+EP_407_016,407,Histopathology,Histopathology,Vaginal smears,vaginal smears,Optional,Annex,
+EP_407_017,407,Histopathology,Histopathology,Male mammary glands,male mammary glands histopathology,Optional,Annex,
+EP_407_018,407,Histopathology,Histopathology,Pituitary,pituitary histopathology,Optional,Annex,
+EP_407_019,407,Hormones measurement,Hormones,"Circulating levels of T3, T4",circulating t3 and t4,Optional,Annex,
+EP_407_020,407,Hormones measurement,Hormones,Circulating levels of TSH,tsh,Optional,Annex,
+EP_408_001,408,Organ Weights,Organ Weights,Testes,testes weight,Required,Annex,
+EP_408_002,408,Organ Weights,Organ Weights,Epididymides,epididymides weight,Required,Annex,
+EP_408_003,408,Organ Weights,Organ Weights,Adrenal glands,adrenal glands weight,Required,Annex,
+EP_408_004,408,Organ Weights,Organ Weights,Prostate + seminal vesicles with coagulating glands as a whole complex,prostate + seminal vesicles with coagulating glands as a whole complex weight,Required,Annex,
+EP_408_005,408,Organ Weights,Organ Weights,Uterus,uterus weight,Required,Annex,
+EP_408_006,408,Organ Weights,Organ Weights,Ovaries,ovaries weight,Required,Annex,
+EP_408_007,408,Organ Weights,Organ Weights,Pituitary gland,pituitary weight,Required,Annex,
+EP_408_008,408,Organ Weights,Organ Weights,Thyroid gland,thyroid weight,Required,Annex,
+EP_408_009,408,Histopathology,Histopathology,Thyroid and parathyroid glands,thyroid and parathyroid glands histopathology,Required,Annex,
+EP_408_010,408,Histopathology,Histopathology,Adrenal glands,adrenal glands histopathology,Required,Annex,
+EP_408_011,408,Histopathology,Histopathology,Pituitary gland,pituitary histopathology,Required,Annex,The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination
+EP_408_012,408,Histopathology,Histopathology,Testis,testes histopathology,Required,Annex,
+EP_408_013,408,Histopathology,Histopathology,Epididymides,epididymides histopathology,Required,Annex,
+EP_408_014,408,Histopathology,Histopathology,Ventral and dorsolateral prostate,ventral and dorsolateral prostate histopathology,Required,Annex,
+EP_408_015,408,Histopathology,Histopathology,Seminal vesicles and coagulating glands,seminal vesicles and coagulating glands histopathology,Required,Annex,
+EP_408_016,408,Histopathology,Histopathology,Ovaries,ovaries histopathology,Required,Annex,The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination
+EP_408_017,408,Histopathology,Histopathology,Cervix,cervix histopathology,Required,Annex,The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination
+EP_408_018,408,Histopathology,Histopathology,Vagina,vagina histopathology,Required,Annex,The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination
+EP_408_019,408,Histopathology,Histopathology,Uterus,uterus histopathology,Required,Annex,The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination
+EP_408_020,408,Histopathology,Histopathology,Vaginal smear (collected at necropsy) to determine stage of oestrus cycle,vaginal smears,Required,Annex,
+EP_408_021,408,Histopathology,Histopathology,Mammary glands (female and male),mammary glands histopathology,Required,Annex,The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination
+EP_408_022,408,Histopathology,Histopathology,Pancreatic islets,pancreatic islets histopathology,Optional,Annex,
+EP_408_023,408,Serum/Plasma Biochemistry,Clinical Biochemistry,Total cholesterol,total cholesterol,Required,Annex,
+EP_408_024,408,Serum/Plasma Biochemistry,Clinical Biochemistry,HDL,hdl,Required,Annex,
+EP_408_025,408,Serum/Plasma Biochemistry,Clinical Biochemistry,LDL,ldl,Required,Annex,
+EP_408_026,408,Serum/Plasma Hormone Analyses,Hormones,Thyroxine (T4),thyroxine (t4),Required,Annex,
+EP_408_027,408,Serum/Plasma Hormone Analyses,Hormones,TSH,tsh,Required,Annex,
+EP_408_028,408,Serum/Plasma Hormone Analyses,Hormones,T3,triiodothyronine (t3),Required,Annex,
+EP_408_029,408,Serum/Plasma Hormone Analyses,Hormones,FSH,fsh,Optional,Annex,
+EP_408_030,408,Serum/Plasma Hormone Analyses,Hormones,LH,lh,Optional,Annex,
+EP_408_031,408,Serum/Plasma Hormone Analyses,Hormones,Oestradiol,oestradiol,Optional,Annex,
+EP_408_032,408,Serum/Plasma Hormone Analyses,Hormones,Testosterone,testosterone,Optional,Annex,
+EP_408_033,408,Sperm Measures,Reproductive,Cauda epididymis sperm reserves,cauda epididymis sperm reserves,Optional,Annex,
+EP_408_034,408,Sperm Measures,Reproductive,Sperm motility,sperm motility,Optional,Annex,
+EP_408_035,408,Sperm Measures,Reproductive,Sperm morphology,sperm morphology,Optional,Annex,
+EP_409_001,409,Clinical Observations,Clinical Observations,Body weight (weekly),body weight (weekly),Required,Par. 23,All animals should be weighed at least once a week
+EP_409_002,409,Clinical Observations,Clinical Observations,Food consumption (weekly),food consumption (weekly),Required,Par. 23,Measurements of food consumption should be made at least weekly
+EP_409_003,409,Clinical Observations,Clinical Observations,Water consumption (weekly),water consumption (weekly),Required,Par. 23,water consumption should also be measured at least weekly; when substance administered via drinking water
+EP_409_004,409,Clinical Observations,Clinical Observations,Clinical signs of toxicity,clinical signs of toxicity,Required,Par. 20-21,"Daily general + weekly detailed observations; includes skin, fur, eyes, mucous membranes, secretions, excretions, autonomic activity, gait, posture, behaviour"
+EP_409_005,409,Clinical Observations,Clinical Observations,Ophthalmological examination,ophthalmological examination,Required,Par. 22,should be made prior to administration and at termination; at least high dose and control groups
+EP_409_006,409,Haematology,Haematology,Haematocrit,haematocrit,Required,Par. 25,"should be investigated at start, monthly/midway, and end"
+EP_409_007,409,Haematology,Haematology,Haemoglobin concentration,haemoglobin concentration,Required,Par. 25,"should be investigated at start, monthly/midway, and end"
+EP_409_008,409,Haematology,Haematology,Erythrocyte count,erythrocyte count,Required,Par. 25,"should be investigated at start, monthly/midway, and end"
+EP_409_009,409,Haematology,Haematology,Total and differential leukocyte count,total and differential leukocyte count,Required,Par. 25,"should be investigated at start, monthly/midway, and end"
+EP_409_010,409,Haematology,Haematology,Platelet count,platelet count,Required,Par. 25,"should be investigated at start, monthly/midway, and end"
+EP_409_011,409,Haematology,Haematology,Clotting potential,clotting potential,Required,Par. 25,"should be investigated; clotting time, prothrombin time, or thromboplastin time"
+EP_409_012,409,Clinical Biochemistry,Clinical Biochemistry,Calcium,calcium,Optional,Par. 26,Suggested determinations
+EP_409_013,409,Clinical Biochemistry,Clinical Biochemistry,Phosphorus,phosphorus,Optional,Par. 26,Suggested determinations
+EP_409_014,409,Clinical Biochemistry,Clinical Biochemistry,Chloride,chloride,Optional,Par. 26,Suggested determinations
+EP_409_015,409,Clinical Biochemistry,Clinical Biochemistry,Sodium,sodium,Optional,Par. 26,Suggested determinations
+EP_409_016,409,Clinical Biochemistry,Clinical Biochemistry,Potassium,potassium,Optional,Par. 26,Suggested determinations
+EP_409_017,409,Clinical Biochemistry,Clinical Biochemistry,Fasting glucose,glucose (fasting),Optional,Par. 26,Suggested determinations
+EP_409_018,409,Clinical Biochemistry,Clinical Biochemistry,Alanine aminotransferase (ALT),alanine aminotransferase,Optional,Par. 26,Suggested determinations
+EP_409_019,409,Clinical Biochemistry,Clinical Biochemistry,Aspartate aminotransferase (AST),aspartate aminotransferase,Optional,Par. 26,Suggested determinations
+EP_409_020,409,Clinical Biochemistry,Clinical Biochemistry,Ornithine decarboxylase,ornithine decarboxylase,Optional,Par. 26,Suggested determinations
+EP_409_021,409,Clinical Biochemistry,Clinical Biochemistry,Gamma glutamyl transpeptidase,gamma glutamyl transpeptidase,Optional,Par. 26,Suggested determinations
+EP_409_022,409,Clinical Biochemistry,Clinical Biochemistry,Urea nitrogen,urea nitrogen,Optional,Par. 26,Suggested determinations
+EP_409_023,409,Clinical Biochemistry,Clinical Biochemistry,Albumin,albumin,Optional,Par. 26,Suggested determinations
+EP_409_024,409,Clinical Biochemistry,Clinical Biochemistry,Blood creatinine,creatinine,Optional,Par. 26,Suggested determinations
+EP_409_025,409,Clinical Biochemistry,Clinical Biochemistry,Total bilirubin,total bilirubin,Optional,Par. 26,Suggested determinations
+EP_409_026,409,Clinical Biochemistry,Clinical Biochemistry,Total serum protein,total protein,Optional,Par. 26,Suggested determinations
+EP_409_027,409,Urinalysis,Urinalysis,Appearance,appearance,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_028,409,Urinalysis,Urinalysis,Volume,volume,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_029,409,Urinalysis,Urinalysis,Osmolality or specific gravity,specific gravity or osmolality,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_030,409,Urinalysis,Urinalysis,pH,ph,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_031,409,Urinalysis,Urinalysis,Protein,protein,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_032,409,Urinalysis,Urinalysis,Glucose,glucose,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_033,409,Urinalysis,Urinalysis,Blood/blood cells,blood/blood cells,Required,Par. 27,Urinalysis determinations should be performed; listed as included parameter
+EP_409_034,409,Additional Biochemistry,Clinical Biochemistry,Lipids,lipids,Optional,Par. 28,may be necessary for an adequate toxicological evaluation
+EP_409_035,409,Additional Biochemistry,Clinical Biochemistry,Hormones,hormones,Optional,Par. 28,may be necessary for an adequate toxicological evaluation
+EP_409_036,409,Additional Biochemistry,Clinical Biochemistry,Acid/base balance,acid/base balance,Optional,Par. 28,may be necessary for an adequate toxicological evaluation
+EP_409_037,409,Additional Biochemistry,Clinical Biochemistry,Methaemoglobin,methaemoglobin,Optional,Par. 28,may be necessary for an adequate toxicological evaluation
+EP_409_038,409,Additional Biochemistry,Clinical Biochemistry,Cholinesterase inhibition,cholinesterase,Optional,Par. 28,may be necessary for an adequate toxicological evaluation
+EP_409_039,409,Pathology,Pathology,Gross necropsy,gross necropsy,Required,Par. 30,All animals in the study shall be subjected to a full detailed gross necropsy
+EP_409_040,409,Pathology,Organ Weights,Organ weights,organ weights weight,Required,Par. 30,"should be trimmed and their wet weight taken; liver, kidneys, adrenals, testes, epididymides, ovaries, uterus, thyroid, thymus, spleen, brain, heart"
+EP_409_041,409,Pathology,Histopathology,Histopathology,histopathology (full),Required,Par. 32,Full histopathology should be carried out on control and high dose groups
+EP_410_001,410,Clinical Observations,Clinical Observations,Clinical signs (cage-side),clinical signs (cage-side),Required,Guideline text (Procedure),"Changes in skin and fur, eyes and mucous membranes, respiratory, circulatory, autonomic and central nervous system, somatomotor activity and behaviour pattern"
+EP_410_002,410,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline text (Procedure),Weighed weekly
+EP_410_003,410,Clinical Observations,Clinical Observations,Food consumption,food consumption,Required,Guideline text (Procedure),Measured weekly
+EP_410_004,410,Haematology,Haematology,Haematocrit,haematocrit,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
+EP_410_005,410,Haematology,Haematology,Haemoglobin concentration,haemoglobin concentration,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
+EP_410_006,410,Haematology,Haematology,Erythrocyte count,erythrocyte count,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
+EP_410_007,410,Haematology,Haematology,Total leucocyte count,total leukocyte count,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
+EP_410_008,410,Haematology,Haematology,Differential leucocyte count,differential leukocyte count,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
+EP_410_009,410,Haematology,Haematology,Clotting potential,clotting potential,Required,Guideline text (Clinical examinations section a),"Select one: clotting time, prothrombin time, thromboplastin time, or platelet count"
+EP_410_010,410,Clinical Biochemistry,Clinical Biochemistry,Calcium,calcium,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_011,410,Clinical Biochemistry,Clinical Biochemistry,Phosphorus,phosphorus,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_012,410,Clinical Biochemistry,Clinical Biochemistry,Chloride,chloride,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_013,410,Clinical Biochemistry,Clinical Biochemistry,Sodium,sodium,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_014,410,Clinical Biochemistry,Clinical Biochemistry,Potassium,potassium,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_015,410,Clinical Biochemistry,Clinical Biochemistry,Fasting glucose,glucose (fasting),Required,Guideline text (Clinical examinations section b),With period of fasting appropriate to the species
+EP_410_016,410,Clinical Biochemistry,Clinical Biochemistry,Alanine aminotransferase (ALT),alanine aminotransferase,Required,Guideline text (Clinical examinations section b),Listed as serum glutamic-pyruvic transaminase in original text
+EP_410_017,410,Clinical Biochemistry,Clinical Biochemistry,Aspartate aminotransferase (AST),aspartate aminotransferase,Required,Guideline text (Clinical examinations section b),Listed as serum glutamic-oxaloacetic transaminase in original text
+EP_410_018,410,Clinical Biochemistry,Clinical Biochemistry,Ornithine decarboxylase,ornithine decarboxylase,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_019,410,Clinical Biochemistry,Clinical Biochemistry,Gamma glutamyl transpeptidase,gamma glutamyl transpeptidase,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_020,410,Clinical Biochemistry,Clinical Biochemistry,Urea nitrogen,urea nitrogen,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_021,410,Clinical Biochemistry,Clinical Biochemistry,Albumin,albumin,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_022,410,Clinical Biochemistry,Clinical Biochemistry,Blood creatinine,creatinine,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_023,410,Clinical Biochemistry,Clinical Biochemistry,Total bilirubin,total bilirubin,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_024,410,Clinical Biochemistry,Clinical Biochemistry,Total serum protein,total protein,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
+EP_410_025,410,Clinical Biochemistry,Clinical Biochemistry,Lipids,lipids,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
+EP_410_026,410,Clinical Biochemistry,Clinical Biochemistry,Hormones,hormones,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
+EP_410_027,410,Clinical Biochemistry,Clinical Biochemistry,Acid/base balance,acid/base balance,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
+EP_410_028,410,Clinical Biochemistry,Clinical Biochemistry,Methaemoglobin,methaemoglobin,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
+EP_410_029,410,Clinical Biochemistry,Clinical Biochemistry,Cholinesterase activity,cholinesterase,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
+EP_410_030,410,Urinalysis,Urinalysis,Urinalysis,urinalysis,Optional,Guideline text (Clinical examinations section c),Not required on routine basis; only when indicated by expected or observed toxicity
+EP_410_031,410,Organ Weights,Organ Weights,Liver,liver weight,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
+EP_410_032,410,Organ Weights,Organ Weights,Kidneys,kidneys weight,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
+EP_410_033,410,Organ Weights,Organ Weights,Adrenals,adrenal glands weight,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
+EP_410_034,410,Organ Weights,Organ Weights,Testes,testes weight,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
+EP_410_035,410,Pathology,Pathology,Gross necropsy,gross necropsy,Required,Guideline text (Pathology Gross necropsy),"External surface, all orifices, cranial, thoracic and abdominal cavities and their contents"
+EP_410_036,410,Pathology,Histopathology,Histopathology (high dose and control),histopathology (full),Required,Guideline text (Pathology Histopathology),"Preserved organs and tissues: normal and treated skin, liver, kidney, and target organs"
+EP_410_037,410,Pathology,Histopathology,Histopathology (extended to lower dose groups),histopathology (extended to lower dose groups),Optional,Guideline text (Pathology Histopathology),May be extended if considered necessary to investigate changes observed in high dose group
+EP_412_001,412,Clinical Observations,Clinical Observations,Clinical observations (cage-side),clinical observations (cage-side),Required,Guideline text (para. 43-45),"Skin/fur, eyes, mucous membranes, respiratory, circulatory, nervous systems, somatomotor activity, tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma"
+EP_412_002,412,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline text (para. 46),"Recorded day 0, twice weekly thereafter, and at death/euthanasia"
+EP_412_003,412,Clinical Observations,Clinical Observations,Food consumption,food consumption,Required,Guideline text (para. 47),Measured weekly
+EP_412_004,412,Clinical Observations,Clinical Observations,Ophthalmological examination,ophthalmological examination,Required,Guideline text (para. 52),"Fundus, refractive media, iris, conjunctivae; all animals pre-treatment; high-concentration and controls at termination"
+EP_412_005,412,Clinical Observations,Clinical Observations,Water consumption,water consumption,Optional,Guideline text (para. 47),May also be measured
+EP_412_006,412,Clinical Observations,Clinical Observations,Rectal temperature,rectal temperature,Optional,Guideline text (para. 45),May provide supportive evidence of reflex bradypnea or Paintal reflex
+EP_412_007,412,Haematology,Haematology,Erythrocyte count,erythrocyte count,Required,Table 1,Standard clinical pathology parameter
+EP_412_008,412,Haematology,Haematology,Haematocrit,haematocrit,Required,Table 1,Standard clinical pathology parameter
+EP_412_009,412,Haematology,Haematology,Haemoglobin concentration,haemoglobin concentration,Required,Table 1,Standard clinical pathology parameter
+EP_412_010,412,Haematology,Haematology,Mean corpuscular haemoglobin,mean corpuscular haemoglobin,Required,Table 1,Standard clinical pathology parameter
+EP_412_011,412,Haematology,Haematology,Mean corpuscular volume,mean corpuscular volume,Required,Table 1,Standard clinical pathology parameter
+EP_412_012,412,Haematology,Haematology,Mean corpuscular haemoglobin concentration,mean corpuscular haemoglobin concentration,Required,Table 1,Standard clinical pathology parameter
+EP_412_013,412,Haematology,Haematology,Reticulocytes,reticulocytes,Required,Table 1,Standard clinical pathology parameter
+EP_412_014,412,Haematology,Haematology,Total leukocyte count,total leukocyte count,Required,Table 1,Standard clinical pathology parameter
+EP_412_015,412,Haematology,Haematology,Differential leukocyte count,differential leukocyte count,Required,Table 1,Standard clinical pathology parameter
+EP_412_016,412,Haematology,Haematology,Platelet count,platelet count,Required,Table 1,Standard clinical pathology parameter
+EP_412_017,412,Haematology,Haematology,Clotting potential,clotting potential,Required,Table 1,"Select one: prothrombin time, clotting time, or partial thromboplastin time"
+EP_412_018,412,Clinical Chemistry,Clinical Biochemistry,Glucose,glucose,Required,Table 1,Fasting period considerations; study director determines if fasting is appropriate
+EP_412_019,412,Clinical Chemistry,Clinical Biochemistry,Total cholesterol,total cholesterol,Required,Table 1,Standard clinical pathology parameter
+EP_412_020,412,Clinical Chemistry,Clinical Biochemistry,Triglycerides,triglycerides,Required,Table 1,Standard clinical pathology parameter
+EP_412_021,412,Clinical Chemistry,Clinical Biochemistry,Blood urea nitrogen,urea nitrogen,Required,Table 1,Standard clinical pathology parameter
+EP_412_022,412,Clinical Chemistry,Clinical Biochemistry,Total bilirubin,total bilirubin,Required,Table 1,Standard clinical pathology parameter
+EP_412_023,412,Clinical Chemistry,Clinical Biochemistry,Creatinine,creatinine,Required,Table 1,Standard clinical pathology parameter
+EP_412_024,412,Clinical Chemistry,Clinical Biochemistry,Total protein,total protein,Required,Table 1,Standard clinical pathology parameter
+EP_412_025,412,Clinical Chemistry,Clinical Biochemistry,Albumin,albumin,Required,Table 1,Standard clinical pathology parameter
+EP_412_026,412,Clinical Chemistry,Clinical Biochemistry,Globulin,globulin,Required,Table 1,Standard clinical pathology parameter
+EP_412_027,412,Clinical Chemistry,Clinical Biochemistry,Alanine aminotransferase,alanine aminotransferase,Required,Table 1,Standard clinical pathology parameter
+EP_412_028,412,Clinical Chemistry,Clinical Biochemistry,Aspartate aminotransferase,aspartate aminotransferase,Required,Table 1,Standard clinical pathology parameter
+EP_412_029,412,Clinical Chemistry,Clinical Biochemistry,Alkaline phosphatase,alkaline phosphatase,Required,Table 1,Standard clinical pathology parameter
+EP_412_030,412,Clinical Chemistry,Clinical Biochemistry,Potassium,potassium,Required,Table 1,Standard clinical pathology parameter
+EP_412_031,412,Clinical Chemistry,Clinical Biochemistry,Sodium,sodium,Required,Table 1,Standard clinical pathology parameter
+EP_412_032,412,Clinical Chemistry,Clinical Biochemistry,Calcium,calcium,Required,Table 1,Standard clinical pathology parameter
+EP_412_033,412,Clinical Chemistry,Clinical Biochemistry,Phosphorus,phosphorus,Required,Table 1,Standard clinical pathology parameter
+EP_412_034,412,Clinical Chemistry,Clinical Biochemistry,Chloride,chloride,Required,Table 1,Standard clinical pathology parameter
+EP_412_035,412,Clinical Chemistry,Clinical Biochemistry,Cholinesterase,cholinesterase,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_036,412,Clinical Chemistry,Clinical Biochemistry,Lipids,lipids,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_037,412,Clinical Chemistry,Clinical Biochemistry,Hormones,hormones,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_038,412,Clinical Chemistry,Clinical Biochemistry,Acid/base balance,acid/base balance,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_039,412,Clinical Chemistry,Clinical Biochemistry,Methaemoglobin or Heinz bodies,methaemoglobin or heinz bodies,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_040,412,Clinical Chemistry,Clinical Biochemistry,Creatine kinase,creatine kinase,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_041,412,Clinical Chemistry,Clinical Biochemistry,Bone marrow cytology,bone marrow cytology,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_042,412,Clinical Chemistry,Clinical Biochemistry,Troponins,troponins,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_043,412,Clinical Chemistry,Clinical Biochemistry,Lactate dehydrogenase (serum),lactate dehydrogenase (serum),Optional,Guideline text (para. 49),At study director's discretion
+EP_412_044,412,Clinical Chemistry,Clinical Biochemistry,Glutamate dehydrogenase,glutamate dehydrogenase,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_045,412,Clinical Chemistry,Clinical Biochemistry,Gamma glutamyl transpeptidase,gamma glutamyl transpeptidase,Optional,Guideline text (para. 49),At study director's discretion
+EP_412_046,412,Bronchoalveolar Lavage (BALF),Bronchoalveolar Lavage,Lactate dehydrogenase (LDH),lactate dehydrogenase (ldh),Required,Guideline text (para. 50),Mandatory BALF analysis; performed at PEO-1 and additional PEOs if planned
+EP_412_047,412,Bronchoalveolar Lavage (BALF),Bronchoalveolar Lavage,Total protein or albumin,total protein or albumin,Required,Guideline text (para. 50),Mandatory BALF analysis
+EP_412_048,412,Bronchoalveolar Lavage (BALF),Bronchoalveolar Lavage,Cell counts and differentials,cell counts and differentials,Required,Guideline text (para. 50),"Alveolar macrophages, lymphocytes, neutrophils, and eosinophils"
+EP_412_049,412,Urinalysis,Urinalysis,Appearance (colour and turbidity),appearance,Optional,Table 1,Not required on routine basis; performed when deemed useful
+EP_412_050,412,Urinalysis,Urinalysis,Volume,volume,Optional,Table 1,Not required on routine basis
+EP_412_051,412,Urinalysis,Urinalysis,Specific gravity or osmolality,specific gravity or osmolality,Optional,Table 1,Not required on routine basis
+EP_412_052,412,Urinalysis,Urinalysis,pH,ph,Optional,Table 1,Not required on routine basis
+EP_412_053,412,Urinalysis,Urinalysis,Total protein (urine),total protein (urine),Optional,Table 1,Not required on routine basis
+EP_412_054,412,Urinalysis,Urinalysis,Glucose (urine),glucose (urine),Optional,Table 1,Not required on routine basis
+EP_412_055,412,Urinalysis,Urinalysis,Blood/blood cells (urine),blood/blood cells (urine),Optional,Table 1,Not required on routine basis
+EP_412_056,412,Pathology,Pathology,Gross pathology (complete necropsy),gross necropsy,Required,Guideline text (para. 53),All animals; particular attention to respiratory tract changes
+EP_412_057,412,Pathology,Organ Weights,Organ weights,organ weights weight,Required,Guideline text (para. 53-54; Table 2),"Weighed wet: adrenals, brain, heart, kidneys, liver, lung (left), ovaries, spleen, testes, thymus, thyroid, uterus"
+EP_412_058,412,Pathology,Histopathology,Histopathology,histopathology (full),Required,Guideline text (para. 57; Table 2),All Table 2 organs/tissues for control and high-concentration groups
+EP_412_059,412,Pathology,Pathology,Lung burden measurements,lung burden measurements,Optional,Guideline text (para. 51),Required only for poorly soluble solid aerosols (Option B); 5 males per concentration at PEO-1
+EP_412_060,412,Pathology,Pathology,Pulmonary function,pulmonary function,Optional,Guideline text (para. 58),When evidence of reflex bradypnea or Paintal reflex; periodic measurements of lung function and body temperature
+EP_412_061,412,Pathology,Pathology,Toxicokinetics,toxicokinetics,Optional,Guideline text (para. 1),Additional optional investigation to characterize overall toxicity
+EP_414_001,414,Maternal Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline text,Weighed on day 0; every 3 days during dosing; at scheduled killing
+EP_414_002,414,Maternal Clinical Observations,Clinical Observations,Food consumption,food consumption,Required,Guideline text,Recorded at 3-day intervals coinciding with body weight determination
+EP_414_003,414,Organ Weights,Organ Weights,Gravid uterine weight (including cervix),gravid uterine weight (including cervix),Required,Guideline text,Not obtained from animals found dead during study
+EP_414_004,414,Organ Weights,Organ Weights,Thyroid gland weight,thyroid gland weight,Required,Guideline text,From every dam at termination
+EP_414_005,414,Histopathology,Histopathology,Thyroid gland histopathology,thyroid gland histopathology,Required,Guideline text,From every dam to observe pathological changes
+EP_414_006,414,Hormones,Hormones,Thyroxine (T4),thyroxine (t4),Required,Guideline text,Mandatory; from all dams at termination within short timeframe (e.g. 2 hours) on morning of necropsy day
+EP_414_007,414,Hormones,Hormones,Triiodothyronine (T3),triiodothyronine (t3),Required,Guideline text,Mandatory; from all dams at termination within short timeframe (e.g. 2 hours) on morning of necropsy day
+EP_414_008,414,Hormones,Hormones,Thyroid stimulating hormone (TSH),tsh,Required,Guideline text,Mandatory; from all dams at termination within short timeframe (e.g. 2 hours) on morning of necropsy day
+EP_414_009,414,Hormones,Hormones,Other hormones,other hormones,Optional,Guideline text,May be measured if relevant
+EP_414_010,414,Reproductive,Reproductive,Number of corpora lutea,number of corpora lutea,Required,Guideline text,Determined for pregnant animals
+EP_414_011,414,Reproductive,Reproductive,Number of implantations and live/dead fetuses,number of implantations and live/dead fetuses,Required,Guideline text,Uterine contents examined for embryonic/fetal deaths and viable fetuses
+EP_414_012,414,Reproductive,Reproductive,Resorptions (early and late),resorptions (early and late),Required,Guideline text,Degree of resorption described to estimate relative time of death
+EP_414_013,414,Reproductive,Reproductive,Pre- and post-implantation losses,pre- and post-implantation losses,Required,Guideline text,Number and percent reported
+EP_414_014,414,Fetal Measurements,Developmental,Fetal body weight,fetal body weight,Required,Guideline text,Preferably reported by sex and with sexes combined
+EP_414_015,414,Fetal Measurements,Developmental,Fetal sex determination,fetal sex determination,Required,Guideline text,Sex of each fetus determined
+EP_414_016,414,Fetal Measurements,Developmental,Anogenital distance (AGD),anogenital distance (agd),Required,Guideline text,Measured in all live rodent fetuses; statistically evaluated by sex/gender and related to weight
+EP_414_017,414,Fetal Measurements,Developmental,External alterations,external alterations,Required,Guideline text,Each fetus examined
+EP_414_018,414,Fetal Measurements,Developmental,Skeletal alterations,skeletal alterations,Required,Guideline text,Variations and malformations; rodents ~half of litter; rabbits all fetuses
+EP_414_019,414,Fetal Measurements,Developmental,Soft tissue alterations,soft tissue alterations,Required,Guideline text,Variations and malformations; rodents ~half of litter; rabbits all fetuses
+EP_414_020,414,Fetal Measurements,Developmental,Reproductive tract examination,reproductive tract examination,Required,Guideline text,Examined for signs of altered development
+EP_414_021,414,Fetal Measurements,Developmental,External vs gonadal sex comparison,external vs gonadal sex comparison,Required,Guideline text,External fetal sex compared with internal (gonadal) sex in all fetuses
+EP_414_022,414,Fetal Measurements,Developmental,Cryptorchidism assessment,cryptorchidism assessment,Required,Guideline text,Incomplete testicular descent noted in male fetuses
+EP_416_001,416,Clinical Observations,Clinical Observations,Body weight (P and F1 adults),body weight (p and f1 adults),Required,Guideline text,Weighed first day of dosing and at least weekly; females also on GD 0 7 14 20/21 and during lactation (para 27)
+EP_416_002,416,Clinical Observations,Clinical Observations,Food consumption,food consumption,Required,Guideline text,Measured weekly minimum during premating and gestation periods (para 27)
+EP_416_003,416,Clinical Observations,Clinical Observations,Water consumption,water consumption,Required,Guideline text,Measured weekly minimum when test substance administered in water (para 27)
+EP_416_004,416,Clinical Observations,Clinical Observations,Oestrous cycle length and normality,oestrous cycle length and normality,Required,Guideline text,Evaluated by vaginal smears in P and F1 females prior to mating; optionally during mating; cycle length reported (para 28 51)
+EP_416_005,416,Clinical Observations,Clinical Observations,General clinical observations (daily),general clinical observations (daily),Optional,Guideline text,Timing in gavage studies should account for peak effects; behavioural changes and all toxicity signs recorded (para 26)
+EP_416_006,416,Clinical Observations,Clinical Observations,Detailed clinical examination (weekly),detailed clinical examination (weekly),Optional,Guideline text,More detailed examination at least weekly; conveniently combined with weighing (para 26)
+EP_416_007,416,Reproductive/Sperm Parameters,Reproductive,Testis weight,testes weight,Required,Guideline text,Recorded for all P and F1 males at termination (para 29)
+EP_416_008,416,Reproductive/Sperm Parameters,Reproductive,Epididymis weight,epididymides weight,Required,Guideline text,Recorded for all P and F1 males at termination (para 29)
+EP_416_009,416,Reproductive/Sperm Parameters,Reproductive,Time-to-mating,time-to-mating,Required,Guideline text,Number of days until mating; report must include (para 51)
+EP_416_010,416,Reproductive/Sperm Parameters,Reproductive,Gestation length,gestation length,Required,Guideline text,Report must include (para 51)
+EP_416_011,416,Reproductive/Sperm Parameters,Reproductive,"Reproductive indices (mating, fertility, gestation, birth, viability, lactation)","reproductive indices (mating, fertility, gestation, birth, viability, lactation)",Required,Guideline text,Toxic response data by sex and dose; report must include indices and numbers used in calculation (para 51)
+EP_416_012,416,Reproductive/Sperm Parameters,Reproductive,Homogenisation-resistant testicular spermatids,homogenisation-resistant testicular spermatids,Optional,Guideline text,Enumeration in subset of >=10 males/group of P and F1 males (para 29-30)
+EP_416_013,416,Reproductive/Sperm Parameters,Reproductive,Cauda epididymal sperm reserves,cauda epididymal sperm reserves,Optional,Guideline text,Derived from concentration and volume of sperm suspension plus remaining cauda tissue (para 29-30)
+EP_416_014,416,Reproductive/Sperm Parameters,Reproductive,Sperm motility (% progressively motile),sperm motility (% progressively motile),Optional,Guideline text,Evaluated immediately after sacrifice; subjective or objective determination (para 31)
+EP_416_015,416,Reproductive/Sperm Parameters,Reproductive,Sperm morphology,sperm morphology,Optional,Guideline text,At least 200 sperm per sample examined as fixed wet preparations; classified as normal or abnormal (para 32)
+EP_416_016,416,Offspring/Developmental,Developmental,Litter size,litter size,Required,Guideline text,Established at delivery on lactation day 0 (para 34); report must include (para 51)
+EP_416_017,416,Offspring/Developmental,Developmental,Sex ratio,sex ratio,Required,Guideline text,Number and sex of pups established at delivery (para 34); report must include (para 51)
+EP_416_018,416,Offspring/Developmental,Developmental,Pup body weight,pup body weight,Required,Guideline text,Weighed individually at birth (day 0 or 1) and on days 4 7 14 21 of lactation (para 34)
+EP_416_019,416,Offspring/Developmental,Developmental,Stillbirths,stillbirths,Required,Guideline text,Established at delivery; dead pups examined for defects and cause of death (para 34)
+EP_416_020,416,Offspring/Developmental,Developmental,Live births,live births,Required,Guideline text,Number of live births established at delivery (para 34); report must include (para 51)
+EP_416_021,416,Offspring/Developmental,Developmental,Gross anomalies (pups),gross anomalies (pups),Required,Guideline text,Presence of gross anomalies established at delivery (para 34); pups with visible abnormalities reported (para 51)
+EP_416_022,416,Offspring/Developmental,Developmental,Corpora lutea count,corpora lutea count,Required,Guideline text,Report must include number of corpora lutea (para 51)
+EP_416_023,416,Offspring/Developmental,Developmental,Post-implantation loss,post-implantation loss,Required,Guideline text,Report must include post-implantation loss (para 51)
+EP_416_024,416,Offspring/Developmental,Developmental,Physical developmental landmarks,physical developmental landmarks,Optional,Guideline text,Ear/eye opening tooth eruption hair growth; may give supplementary information evaluated in context of sexual maturation data (para 35)
+EP_416_025,416,Offspring/Developmental,Developmental,Age of vaginal opening (F1 weanlings),age of vaginal opening (f1 weanlings),Optional,Guideline text,Determined for F1 weanlings selected for mating (para 35)
+EP_416_026,416,Offspring/Developmental,Developmental,Age of preputial separation (F1 weanlings),age of preputial separation (f1 weanlings),Optional,Guideline text,Determined for F1 weanlings selected for mating (para 35)
+EP_416_027,416,Offspring/Developmental,Developmental,Anogenital distance (AGD) (F2 pups),anogenital distance (agd) (f2 pups),Optional,Guideline text,Measured at postnatal day 0 if triggered by alterations in F1 sex ratio or sexual maturation timing (para 35)
+EP_416_028,416,Offspring/Developmental,Developmental,Functional observations (F1 offspring),functional observations (f1 offspring),Optional,Guideline text,Motor activity sensory function reflex ontogeny; recommended if not in separate studies (para 35)
+EP_416_029,416,Organ Weights (parental),Organ Weights,Uterus,uterus weight,Required,Guideline text,P and F1 parental animals at termination (para 39)
+EP_416_030,416,Organ Weights (parental),Organ Weights,Ovaries,ovaries weight,Required,Guideline text,Paired organs weighed individually (para 39)
+EP_416_031,416,Organ Weights (parental),Organ Weights,Testes,testes weight,Required,Guideline text,Paired organs weighed individually (para 39)
+EP_416_032,416,Organ Weights (parental),Organ Weights,Epididymides (total and cauda),epididymides weight,Required,Guideline text,Paired organs weighed individually (para 39)
+EP_416_033,416,Organ Weights (parental),Organ Weights,Prostate,prostate weight,Required,Guideline text,P and F1 parental males (para 39)
+EP_416_034,416,Organ Weights (parental),Organ Weights,Seminal vesicles with coagulating glands and fluids,seminal vesicles with coagulating glands and fluids weight,Required,Guideline text,Weighed as one unit (para 39)
+EP_416_035,416,Organ Weights (parental),Organ Weights,Brain,brain weight,Required,Guideline text,P and F1 parental animals (para 39)
+EP_416_036,416,Organ Weights (parental),Organ Weights,Liver,liver weight,Required,Guideline text,P and F1 parental animals (para 39)
+EP_416_037,416,Organ Weights (parental),Organ Weights,Kidneys,kidneys weight,Required,Guideline text,Paired organs weighed individually (para 39)
+EP_416_038,416,Organ Weights (parental),Organ Weights,Spleen,spleen weight,Required,Guideline text,P and F1 parental animals (para 39)
+EP_416_039,416,Organ Weights (parental),Organ Weights,Pituitary,pituitary weight,Required,Guideline text,P and F1 parental animals (para 39)
+EP_416_040,416,Organ Weights (parental),Organ Weights,Thyroid,thyroid weight,Required,Guideline text,P and F1 parental animals (para 39)
+EP_416_041,416,Organ Weights (parental),Organ Weights,Adrenal glands,adrenal glands weight,Required,Guideline text,P and F1 parental animals (para 39)
+EP_416_042,416,Organ Weights (pups),Organ Weights,Brain,brain weight,Required,Guideline text,One randomly selected pup/sex/litter from F1 and F2 (para 40)
+EP_416_043,416,Organ Weights (pups),Organ Weights,Spleen,spleen weight,Required,Guideline text,One randomly selected pup/sex/litter from F1 and F2 (para 40)
+EP_416_044,416,Organ Weights (pups),Organ Weights,Thymus,thymus weight,Required,Guideline text,One randomly selected pup/sex/litter from F1 and F2 (para 40)
+EP_416_045,416,Histopathology,Histopathology,Vagina,vagina histopathology,Required,Guideline text,Fixed and stored for histopathological examination; full histopathology for high dose and control (para 42-43)
+EP_416_046,416,Histopathology,Histopathology,Uterus with cervix,uterus with cervix histopathology,Required,Guideline text,Fixed and stored for histopathological examination (para 42-43)
+EP_416_047,416,Histopathology,Histopathology,Ovaries,ovaries histopathology,Required,Guideline text,Preserved in appropriate fixative; examination of P animal ovaries optional (para 42-43)
+EP_416_048,416,Histopathology,Histopathology,Testis,testes histopathology,Required,Guideline text,Preserved in Bouin's or comparable fixative (para 42-43)
+EP_416_049,416,Histopathology,Histopathology,Epididymis,epididymides histopathology,Required,Guideline text,Longitudinal section covering caput corpus and cauda (para 42 44)
+EP_416_050,416,Histopathology,Histopathology,Seminal vesicles,seminal vesicles histopathology,Required,Guideline text,Fixed and stored for histopathological examination (para 42-43)
+EP_416_051,416,Histopathology,Histopathology,Prostate,prostate histopathology,Required,Guideline text,Fixed and stored for histopathological examination (para 42-43)
+EP_416_052,416,Histopathology,Histopathology,Coagulating gland,coagulating gland histopathology,Required,Guideline text,Fixed and stored for histopathological examination (para 42-43)
+EP_416_053,416,Histopathology,Histopathology,Target organ histopathology (parental),target organ histopathology (parental),Required,Guideline text,Previously identified target organs from all P and F1 animals selected for mating (para 42)
+EP_416_054,416,Histopathology,Histopathology,Weanling histopathology,weanling histopathology,Required,Guideline text,Grossly abnormal tissue and target organs from selected pups; emphasis on reproductive organs (para 46)
+EP_416_055,416,Histopathology,Histopathology,Detailed testicular histopathology,detailed testicular histopathology,Optional,Guideline text,Bouin's fixative paraffin embedding transverse sections 4-5 um; evaluates retained spermatids missing germ cell layers multinucleated giant cells (para 44)
+EP_416_056,416,Histopathology,Histopathology,Primordial follicle quantification (F1 females),primordial follicle quantification (f1 females),Optional,Guideline text,Quantitative evaluation of primordial follicles for comparison of treated and control ovaries (para 45)
+EP_416_057,416,Pathology,Pathology,Gross necropsy (macroscopic examination),gross necropsy,Required,Guideline text,All P and F1 parental animals and selected pups examined for structural abnormalities or pathological changes (para 37)
+EP_416_058,416,Pathology,Pathology,Implantation site count,implantation site count,Required,Guideline text,Uteri of all primiparous females examined for presence and number of implantation sites (para 38); report must include (para 51)
+EP_440_001,440,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline text,Weighed daily to nearest 0.1 g; weight variation in immature model should not exceed +/-20% of mean
+EP_440_002,440,Clinical Observations,Clinical Observations,General clinical observations,general clinical observations,Required,Guideline text,At least once daily; includes mortality
+EP_440_003,440,Clinical Observations,Clinical Observations,Food consumption,food consumption,Optional,Guideline text,Optional measurement; per cage; expressed in grams per rat per day
+EP_440_004,440,Organ Weights,Organ Weights,Wet uterine weight,wet uterine weight,Required,Guideline text,Uterus with luminal fluid; to nearest 0.1 mg
+EP_440_005,440,Organ Weights,Organ Weights,Blotted uterine weight,blotted uterine weight,Required,Guideline text,Uterus after luminal fluid expressed and removed; to nearest 0.1 mg
+EP_440_006,440,Reproductive,Reproductive,Vaginal opening status,vaginal opening status,Required,Guideline text,Examined before dissection in immature animals
+EP_440_007,440,Pathology,Pathology,Ovarian stubs examination,ovarian stubs examination,Required,Guideline text,In OVX animals; examined at necropsy for residual ovarian tissue; animals with tissue present excluded from calculations
+EP_440_008,440,Pathology,Histopathology,Histopathological examination of uterus,uterus histopathology,Optional,Guideline text,Fixed in 10% neutral buffered formalin; H&E staining
+EP_440_009,440,Pathology,Pathology,Vaginal histology,vaginal histology,Optional,Guideline text,Keratinization and cornification assessment; may help clarify origin of positive response
+EP_440_010,440,Pathology,Pathology,Morphometric measurement of endometrial epithelium,morphometric measurement of endometrial epithelium,Optional,Guideline text,Quantitative comparison of endometrial epithelium height
+EP_441_001,441,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline text,Weighed daily to nearest 0.1 g
+EP_441_002,441,Clinical Observations,Clinical Observations,Food consumption,food consumption,Optional,Guideline text,Measured per cage; expressed in grams per rat per day
+EP_441_003,441,Organ Weights,Organ Weights,Ventral prostate (VP),ventral prostate (vp) weight,Required,Guideline text,Fresh weight to nearest 0.1 mg (both lobes combined)
+EP_441_004,441,Organ Weights,Organ Weights,Seminal vesicles with coagulating glands including fluid (SVCG),seminal vesicles with coagulating glands including fluid (svcg) weight,Required,Guideline text,Paired; to nearest 0.1 mg; hemostat clamped at base to prevent fluid loss
+EP_441_005,441,Organ Weights,Organ Weights,Levator ani-bulbocavernosus muscle complex (LABC),levator ani-bulbocavernosus muscle complex (labc) weight,Required,Guideline text,To nearest 0.1 mg; trimmed of fat and adnexa
+EP_441_006,441,Organ Weights,Organ Weights,Cowper's (bulbourethral) glands (COW),cowper's (bulbourethral) glands (cow) weight,Required,Guideline text,Paired; fresh weight to nearest 0.1 mg; care to avoid nicking capsule
+EP_441_007,441,Organ Weights,Organ Weights,Glans penis (GP),glans penis (gp) weight,Required,Guideline text,Fresh weight to nearest 0.1 mg; only measurable after preputial separation
+EP_441_008,441,Organ Weights,Organ Weights,Liver,liver weight,Optional,Guideline text,To nearest 0.1 g; systemic toxicity index
+EP_441_009,441,Organ Weights,Organ Weights,Paired kidneys,kidneys weight,Optional,Guideline text,To nearest 0.1 mg; systemic toxicity index
+EP_441_010,441,Organ Weights,Organ Weights,Paired adrenals,adrenal glands weight,Optional,Guideline text,To nearest 0.1 mg; systemic toxicity index
+EP_441_011,441,Hormones,Hormones,Serum LH (luteinising hormone),lh,Optional,Guideline text,Reported as ng per ml of serum; provides information on hypothalamic-pituitary function
+EP_441_012,441,Hormones,Hormones,Serum FSH (follicular stimulating hormone),fsh,Optional,Guideline text,Important hormone for spermatogenesis
+EP_441_013,441,Hormones,Hormones,Serum testosterone (T),testosterone,Optional,Guideline text,Reported as ng per ml of serum; useful to detect liver metabolism of testosterone
+EP_441_014,441,Hormones,Hormones,Serum T4,thyroxine (t4),Optional,Guideline text,Supplemental information on thyroid hormone homeostasis
+EP_441_015,441,Hormones,Hormones,Serum T3,triiodothyronine (t3),Optional,Guideline text,Supplemental information on thyroid hormone homeostasis
+EP_441_016,441,Reproductive,Reproductive,Preputial separation (PPS),preputial separation (pps),Optional,Guideline text,Incidence recorded; compared to control via Fisher Exact test if absent in any group
+EP_452_001,452,Clinical Observations,Clinical Observations,Body weight,body weight,Required,Guideline body text,At start of treatment; weekly for first 13 weeks; at least monthly thereafter
+EP_452_002,452,Clinical Observations,Clinical Observations,Food consumption,food consumption,Required,Guideline body text,At least weekly for first 13 weeks; at least monthly thereafter
+EP_452_003,452,Clinical Observations,Clinical Observations,Food efficiency,food efficiency,Required,Guideline body text,At least weekly for first 13 weeks; at least monthly thereafter
+EP_452_004,452,Clinical Observations,Clinical Observations,Water consumption,water consumption,Required,Guideline body text,When substance administered in drinking water or when drinking activity altered; weekly for first 13 weeks then monthly
+EP_452_005,452,Clinical Observations,Clinical Observations,Clinical signs of toxicity,clinical signs of toxicity,Required,Guideline body text,Daily general observations; detailed monthly observations outside home cage
+EP_452_006,452,Clinical Observations,Clinical Observations,Ophthalmological examination,ophthalmological examination,Required,Guideline body text,Before first administration and at termination; at least high dose and control groups
+EP_452_007,452,Clinical Observations,Clinical Observations,Sensory reactivity assessment,sensory reactivity assessment,Optional,Guideline body text,If prior 28-day/90-day studies indicated neurotoxic potential; auditory visual proprioceptive stimuli
+EP_452_008,452,Clinical Observations,Clinical Observations,Grip strength assessment,grip strength assessment,Optional,Guideline body text,If prior studies indicated neurotoxic potential; before study and at 3-month intervals
+EP_452_009,452,Clinical Observations,Clinical Observations,Motor activity assessment,motor activity assessment,Optional,Guideline body text,If prior studies indicated neurotoxic potential; before study and at 3-month intervals
+EP_452_010,452,Clinical Observations,Clinical Observations,Immunotoxicity investigations,immunotoxicity investigations,Optional,Guideline body text,If prior studies indicated immunotoxic potential; conducted at termination
+EP_452_011,452,Haematology,Haematology,Total and differential leukocyte count,total and differential leukocyte count,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_012,452,Haematology,Haematology,Erythrocyte count,erythrocyte count,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_013,452,Haematology,Haematology,Platelet count,platelet count,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_014,452,Haematology,Haematology,Haemoglobin concentration,haemoglobin concentration,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_015,452,Haematology,Haematology,Haematocrit (packed cell volume),haematocrit,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_016,452,Haematology,Haematology,Mean corpuscular volume (MCV),mean corpuscular volume (mcv),Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_017,452,Haematology,Haematology,Mean corpuscular haemoglobin (MCH),mean corpuscular haemoglobin (mch),Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_018,452,Haematology,Haematology,Mean corpuscular haemoglobin concentration (MCHC),mean corpuscular haemoglobin concentration (mchc),Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_019,452,Haematology,Haematology,Prothrombin time,prothrombin time,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_020,452,Haematology,Haematology,Activated partial thromboplastin time,activated partial thromboplastin time,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_021,452,Haematology,Haematology,Heinz bodies or atypical erythrocyte morphology,heinz bodies or atypical erythrocyte morphology,Optional,Guideline body text,May be measured as appropriate depending on toxicity of substance
+EP_452_022,452,Haematology,Haematology,Methaemoglobin,methaemoglobin,Optional,Guideline body text,May be measured as appropriate depending on toxicity of substance
+EP_452_023,452,Haematology,Haematology,Reticulocyte counts,reticulocyte counts,Optional,Guideline body text,Indicated if chemical affects haematopoietic system; not routine
+EP_452_024,452,Haematology,Haematology,Bone marrow cytology,bone marrow cytology,Optional,Guideline body text,Indicated if chemical affects haematopoietic system; not routine
+EP_452_025,452,Clinical Biochemistry,Clinical Biochemistry,Glucose,glucose,Required,Guideline body text,"Overnight fasting recommended (except mice); at 3, 6, and 12 months"
+EP_452_026,452,Clinical Biochemistry,Clinical Biochemistry,Urea (urea nitrogen),urea nitrogen,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_027,452,Clinical Biochemistry,Clinical Biochemistry,Creatinine,creatinine,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_028,452,Clinical Biochemistry,Clinical Biochemistry,Total protein,total protein,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_029,452,Clinical Biochemistry,Clinical Biochemistry,Albumin,albumin,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_030,452,Clinical Biochemistry,Clinical Biochemistry,Calcium,calcium,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_031,452,Clinical Biochemistry,Clinical Biochemistry,Sodium,sodium,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_032,452,Clinical Biochemistry,Clinical Biochemistry,Potassium,potassium,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_033,452,Clinical Biochemistry,Clinical Biochemistry,Total cholesterol,total cholesterol,Required,Guideline body text,"At 3, 6, and 12 months and at study termination"
+EP_452_034,452,Clinical Biochemistry,Clinical Biochemistry,"Hepatocellular tests (at least 2 of: ALT, AST, GLDH, total bile acids)","hepatocellular tests (at least 2 of: alt, ast, gldh, total bile acids)",Required,Guideline body text,At least 2 appropriate tests required for hepatocellular evaluation
+EP_452_035,452,Clinical Biochemistry,Clinical Biochemistry,"Hepatobiliary tests (at least 2 of: ALP, GGT, 5'-nucleotidase, total bilirubin, total bile acids)","hepatobiliary tests (at least 2 of: alp, ggt, 5'-nucleotidase, total bilirubin, total bile acids)",Required,Guideline body text,At least 2 appropriate tests required for hepatobiliary evaluation
+EP_452_036,452,Clinical Biochemistry,Clinical Biochemistry,Fasting triglycerides,triglycerides,Optional,Guideline body text,May be measured as appropriate depending on toxicity of substance
+EP_452_037,452,Clinical Biochemistry,Clinical Biochemistry,Specific hormones,specific hormones,Optional,Guideline body text,May be measured as appropriate depending on toxicity of substance
+EP_452_038,452,Clinical Biochemistry,Clinical Biochemistry,Cholinesterase,cholinesterase,Optional,Guideline body text,May be measured as appropriate depending on toxicity of substance
+EP_452_039,452,Urinalysis,Urinalysis,Appearance,appearance,Required,Guideline body text,At same intervals as haematology and clinical biochemistry
+EP_452_040,452,Urinalysis,Urinalysis,Volume,volume,Required,Guideline body text,At same intervals as haematology and clinical biochemistry
+EP_452_041,452,Urinalysis,Urinalysis,Osmolality or specific gravity,specific gravity or osmolality,Required,Guideline body text,At same intervals as haematology and clinical biochemistry
+EP_452_042,452,Urinalysis,Urinalysis,pH,ph,Required,Guideline body text,At same intervals as haematology and clinical biochemistry
+EP_452_043,452,Urinalysis,Urinalysis,Total protein,total protein,Required,Guideline body text,At same intervals as haematology and clinical biochemistry
+EP_452_044,452,Urinalysis,Urinalysis,Glucose,glucose,Required,Guideline body text,At same intervals as haematology and clinical biochemistry
+EP_452_045,452,Urinalysis,Urinalysis,Ketone,ketone,Optional,Guideline body text,Other determination; may extend investigation of observed effects
+EP_452_046,452,Urinalysis,Urinalysis,Urobilinogen,urobilinogen,Optional,Guideline body text,Other determination; may extend investigation of observed effects
+EP_452_047,452,Urinalysis,Urinalysis,Bilirubin,bilirubin,Optional,Guideline body text,Other determination; may extend investigation of observed effects
+EP_452_048,452,Urinalysis,Urinalysis,Occult blood,occult blood,Optional,Guideline body text,Other determination; may extend investigation of observed effects
+EP_452_049,452,Pathology,Pathology,Gross necropsy,gross necropsy,Required,Guideline body text,"All animals shall normally be subjected to a full, detailed gross necropsy"
+EP_452_050,452,Pathology,Organ Weights,Organ weights,organ weights weight,Required,Guideline body text,"Adrenals, brain, epididymides, heart, kidneys, liver, ovaries, spleen, testes, thyroid (with parathyroids), uterus; adrenal glands optional in mice"
+EP_452_051,452,Pathology,Histopathology,Histopathology,histopathology (full),Required,Guideline body text,All tissues from high dose and control groups; all tissues from animals dying/killed; all macroscopic abnormalities; target tissues from all dose groups
