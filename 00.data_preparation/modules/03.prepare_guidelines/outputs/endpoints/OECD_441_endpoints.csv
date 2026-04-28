@@ -1,0 +1,17 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+441,Clinical Observations,Body weight,Required,Guideline text,Weighed daily to nearest 0.1 g
+441,Clinical Observations,Food consumption,Optional,Guideline text,Measured per cage; expressed in grams per rat per day
+441,Organ Weights,Ventral prostate (VP),Required,Guideline text,Fresh weight to nearest 0.1 mg (both lobes combined)
+441,Organ Weights,"Seminal vesicles with coagulating glands including fluid (SVCG)",Required,Guideline text,"Paired; to nearest 0.1 mg; hemostat clamped at base to prevent fluid loss"
+441,Organ Weights,Levator ani-bulbocavernosus muscle complex (LABC),Required,Guideline text,To nearest 0.1 mg; trimmed of fat and adnexa
+441,Organ Weights,"Cowper's (bulbourethral) glands (COW)",Required,Guideline text,"Paired; fresh weight to nearest 0.1 mg; care to avoid nicking capsule"
+441,Organ Weights,Glans penis (GP),Required,Guideline text,Fresh weight to nearest 0.1 mg; only measurable after preputial separation
+441,Organ Weights,Liver,Optional,Guideline text,To nearest 0.1 g; systemic toxicity index
+441,Organ Weights,Paired kidneys,Optional,Guideline text,To nearest 0.1 mg; systemic toxicity index
+441,Organ Weights,Paired adrenals,Optional,Guideline text,To nearest 0.1 mg; systemic toxicity index
+441,Hormones,Serum LH (luteinising hormone),Optional,Guideline text,Reported as ng per ml of serum; provides information on hypothalamic-pituitary function
+441,Hormones,Serum FSH (follicular stimulating hormone),Optional,Guideline text,Important hormone for spermatogenesis
+441,Hormones,Serum testosterone (T),Optional,Guideline text,Reported as ng per ml of serum; useful to detect liver metabolism of testosterone
+441,Hormones,Serum T4,Optional,Guideline text,Supplemental information on thyroid hormone homeostasis
+441,Hormones,Serum T3,Optional,Guideline text,Supplemental information on thyroid hormone homeostasis
+441,Reproductive,Preputial separation (PPS),Optional,Guideline text,Incidence recorded; compared to control via Fisher Exact test if absent in any group

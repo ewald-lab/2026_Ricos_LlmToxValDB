@@ -1,0 +1,36 @@
+guideline_number,category,endpoint_name,requirement_level,footnotes
+408,Organ Weights,Testes,Required,
+408,Organ Weights,Epididymides,Required,
+408,Organ Weights,Adrenal glands,Required,
+408,Organ Weights,"Prostate + seminal vesicles with coagulating glands as a whole complex",Required,
+408,Organ Weights,Uterus,Required,
+408,Organ Weights,Ovaries,Required,
+408,Organ Weights,Pituitary gland,Required,
+408,Organ Weights,Thyroid gland,Required,
+408,Histopathology,Thyroid and parathyroid glands,Required,
+408,Histopathology,Adrenal glands,Required,
+408,Histopathology,Pituitary gland,Required,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Testis,Required,
+408,Histopathology,Epididymides,Required,
+408,Histopathology,Ventral and dorsolateral prostate,Required,
+408,Histopathology,Seminal vesicles and coagulating glands,Required,
+408,Histopathology,Ovaries,Required,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Cervix,Required,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Vagina,Required,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Uterus,Required,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Vaginal smear (collected at necropsy) to determine stage of oestrus cycle,Required,
+408,Histopathology,"Mammary glands (female and male)",Required,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Pancreatic islets,Optional,
+408,Serum/Plasma Biochemistry,Total cholesterol,Required,
+408,Serum/Plasma Biochemistry,HDL,Required,
+408,Serum/Plasma Biochemistry,LDL,Required,
+408,Serum/Plasma Hormone Analyses,Thyroxine (T4),Required,
+408,Serum/Plasma Hormone Analyses,TSH,Required,
+408,Serum/Plasma Hormone Analyses,T3,Required,
+408,Serum/Plasma Hormone Analyses,FSH,Optional,
+408,Serum/Plasma Hormone Analyses,LH,Optional,
+408,Serum/Plasma Hormone Analyses,Oestradiol,Optional,
+408,Serum/Plasma Hormone Analyses,Testosterone,Optional,
+408,Sperm Measures,Cauda epididymis sperm reserves,Optional,
+408,Sperm Measures,Sperm motility,Optional,
+408,Sperm Measures,Sperm morphology,Optional,

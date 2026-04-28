@@ -1,0 +1,11 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+440,Clinical Observations,Body weight,Required,Guideline text,Weighed daily to nearest 0.1 g; weight variation in immature model should not exceed +/-20% of mean
+440,Clinical Observations,General clinical observations,Required,Guideline text,At least once daily; includes mortality, morbidity, behaviour, skin, fur, eyes, mucous membranes, autonomic activity
+440,Clinical Observations,Food consumption,Optional,Guideline text,Optional measurement; per cage; expressed in grams per rat per day
+440,Organ Weights,Wet uterine weight,Required,Guideline text,Uterus with luminal fluid; to nearest 0.1 mg
+440,Organ Weights,Blotted uterine weight,Required,Guideline text,Uterus after luminal fluid expressed and removed; to nearest 0.1 mg
+440,Reproductive,Vaginal opening status,Required,Guideline text,Examined before dissection in immature animals
+440,Pathology,Ovarian stubs examination,Required,Guideline text,In OVX animals; examined at necropsy for residual ovarian tissue; animals with tissue present excluded from calculations
+440,Pathology,Histopathological examination of uterus,Optional,Guideline text,Fixed in 10% neutral buffered formalin; H&E staining
+440,Pathology,Vaginal histology,Optional,Guideline text,Keratinization and cornification assessment; may help clarify origin of positive response
+440,Pathology,Morphometric measurement of endometrial epithelium,Optional,Guideline text,Quantitative comparison of endometrial epithelium height

@@ -1,0 +1,23 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+414,Maternal Clinical Observations,Body weight,Required,Guideline text,Weighed on day 0; every 3 days during dosing; at scheduled killing
+414,Maternal Clinical Observations,Food consumption,Required,Guideline text,Recorded at 3-day intervals coinciding with body weight determination
+414,Organ Weights,Gravid uterine weight (including cervix),Required,Guideline text,Not obtained from animals found dead during study
+414,Organ Weights,Thyroid gland weight,Required,Guideline text,From every dam at termination
+414,Histopathology,Thyroid gland histopathology,Required,Guideline text,From every dam to observe pathological changes
+414,Hormones,Thyroxine (T4),Required,Guideline text,Mandatory; from all dams at termination within short timeframe (e.g. 2 hours) on morning of necropsy day
+414,Hormones,Triiodothyronine (T3),Required,Guideline text,Mandatory; from all dams at termination within short timeframe (e.g. 2 hours) on morning of necropsy day
+414,Hormones,Thyroid stimulating hormone (TSH),Required,Guideline text,Mandatory; from all dams at termination within short timeframe (e.g. 2 hours) on morning of necropsy day
+414,Hormones,Other hormones,Optional,Guideline text,May be measured if relevant
+414,Reproductive,Number of corpora lutea,Required,Guideline text,Determined for pregnant animals
+414,Reproductive,"Number of implantations and live/dead fetuses",Required,Guideline text,Uterine contents examined for embryonic/fetal deaths and viable fetuses
+414,Reproductive,"Resorptions (early and late)",Required,Guideline text,Degree of resorption described to estimate relative time of death
+414,Reproductive,Pre- and post-implantation losses,Required,Guideline text,Number and percent reported
+414,Fetal Measurements,Fetal body weight,Required,Guideline text,Preferably reported by sex and with sexes combined
+414,Fetal Measurements,Fetal sex determination,Required,Guideline text,Sex of each fetus determined
+414,Fetal Measurements,Anogenital distance (AGD),Required,Guideline text,Measured in all live rodent fetuses; statistically evaluated by sex/gender and related to weight
+414,Fetal Measurements,External alterations,Required,Guideline text,Each fetus examined
+414,Fetal Measurements,Skeletal alterations,Required,Guideline text,Variations and malformations; rodents ~half of litter; rabbits all fetuses
+414,Fetal Measurements,Soft tissue alterations,Required,Guideline text,Variations and malformations; rodents ~half of litter; rabbits all fetuses
+414,Fetal Measurements,Reproductive tract examination,Required,Guideline text,Examined for signs of altered development
+414,Fetal Measurements,External vs gonadal sex comparison,Required,Guideline text,External fetal sex compared with internal (gonadal) sex in all fetuses
+414,Fetal Measurements,Cryptorchidism assessment,Required,Guideline text,Incomplete testicular descent noted in male fetuses
