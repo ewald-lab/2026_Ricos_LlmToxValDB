@@ -1,0 +1,231 @@
+normalized_category,normalized_endpoint,guideline_numbers,occurrence_count,original_categories,original_endpoints
+Bronchoalveolar Lavage,cell counts and differentials,412,1,Bronchoalveolar Lavage (BALF),Cell counts and differentials
+Bronchoalveolar Lavage,lactate dehydrogenase (ldh),412,1,Bronchoalveolar Lavage (BALF),Lactate dehydrogenase (LDH)
+Bronchoalveolar Lavage,total protein or albumin,412,1,Bronchoalveolar Lavage (BALF),Total protein or albumin
+Clinical Biochemistry,acid/base balance,409|410|412,3,Additional Biochemistry|Clinical Biochemistry|Clinical Chemistry,Acid/base balance
+Clinical Biochemistry,alanine aminotransferase,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Alanine aminotransferase|Alanine aminotransferase (ALT)
+Clinical Biochemistry,albumin,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Albumin
+Clinical Biochemistry,alkaline phosphatase,412,1,Clinical Chemistry,Alkaline phosphatase
+Clinical Biochemistry,aspartate aminotransferase,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Aspartate aminotransferase|Aspartate aminotransferase (AST)
+Clinical Biochemistry,bone marrow cytology,412,1,Clinical Chemistry,Bone marrow cytology
+Clinical Biochemistry,calcium,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Calcium
+Clinical Biochemistry,chloride,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Chloride
+Clinical Biochemistry,cholinesterase,409|410|412|452,4,Additional Biochemistry|Clinical Biochemistry|Clinical Chemistry,Cholinesterase|Cholinesterase activity|Cholinesterase inhibition
+Clinical Biochemistry,creatine kinase,412,1,Clinical Chemistry,Creatine kinase
+Clinical Biochemistry,creatinine,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Blood creatinine|Creatinine
+Clinical Biochemistry,gamma glutamyl transpeptidase,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Gamma glutamyl transpeptidase
+Clinical Biochemistry,globulin,412,1,Clinical Chemistry,Globulin
+Clinical Biochemistry,glucose,412|452,2,Clinical Biochemistry|Clinical Chemistry,Glucose
+Clinical Biochemistry,glucose (fasting),409|410,2,Clinical Biochemistry,Fasting glucose
+Clinical Biochemistry,glutamate dehydrogenase,412,1,Clinical Chemistry,Glutamate dehydrogenase
+Clinical Biochemistry,hdl,408,1,Serum/Plasma Biochemistry,HDL
+Clinical Biochemistry,"hepatobiliary tests (at least 2 of: alp, ggt, 5'-nucleotidase, total bilirubin, total bile acids)",452,1,Clinical Biochemistry,"Hepatobiliary tests (at least 2 of: ALP, GGT, 5'-nucleotidase, total bilirubin, total bile acids)"
+Clinical Biochemistry,"hepatocellular tests (at least 2 of: alt, ast, gldh, total bile acids)",452,1,Clinical Biochemistry,"Hepatocellular tests (at least 2 of: ALT, AST, GLDH, total bile acids)"
+Clinical Biochemistry,hormones,409|410|412,3,Additional Biochemistry|Clinical Biochemistry|Clinical Chemistry,Hormones
+Clinical Biochemistry,lactate dehydrogenase (serum),412,1,Clinical Chemistry,Lactate dehydrogenase (serum)
+Clinical Biochemistry,ldl,408,1,Serum/Plasma Biochemistry,LDL
+Clinical Biochemistry,lipids,409|410|412,3,Additional Biochemistry|Clinical Biochemistry|Clinical Chemistry,Lipids
+Clinical Biochemistry,methaemoglobin,409|410,2,Additional Biochemistry|Clinical Biochemistry,Methaemoglobin
+Clinical Biochemistry,methaemoglobin or heinz bodies,412,1,Clinical Chemistry,Methaemoglobin or Heinz bodies
+Clinical Biochemistry,ornithine decarboxylase,409|410,2,Clinical Biochemistry,Ornithine decarboxylase
+Clinical Biochemistry,phosphorus,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Phosphorus
+Clinical Biochemistry,potassium,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Potassium
+Clinical Biochemistry,sodium,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Sodium
+Clinical Biochemistry,specific hormones,452,1,Clinical Biochemistry,Specific hormones
+Clinical Biochemistry,total bilirubin,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Total bilirubin
+Clinical Biochemistry,total cholesterol,408|412|452,3,Clinical Biochemistry|Clinical Chemistry|Serum/Plasma Biochemistry,Total cholesterol
+Clinical Biochemistry,total protein,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Total protein|Total serum protein
+Clinical Biochemistry,triglycerides,412|452,2,Clinical Biochemistry|Clinical Chemistry,Fasting triglycerides|Triglycerides
+Clinical Biochemistry,troponins,412,1,Clinical Chemistry,Troponins
+Clinical Biochemistry,urea nitrogen,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Blood urea nitrogen|Urea (urea nitrogen)|Urea nitrogen
+Clinical Observations,body weight,403|404|406|410|412|414|440|441|452,9,Body Weight|Clinical Observations|Maternal Clinical Observations,Body weight
+Clinical Observations,body weight (p and f1 adults),416,1,Clinical Observations,Body weight (P and F1 adults)
+Clinical Observations,body weight (weekly),409,1,Clinical Observations,Body weight (weekly)
+Clinical Observations,cage-side observations,403,1,Clinical Observations,Cage-side observations
+Clinical Observations,clinical observations (cage-side),412,1,Clinical Observations,Clinical observations (cage-side)
+Clinical Observations,clinical observations during exposure,403,1,Clinical Observations,Clinical observations during exposure
+Clinical Observations,clinical observations post-exposure,403,1,Clinical Observations,Clinical observations post-exposure
+Clinical Observations,clinical signs (cage-side),410,1,Clinical Observations,Clinical signs (cage-side)
+Clinical Observations,clinical signs of toxicity,409|452,2,Clinical Observations,Clinical signs of toxicity
+Clinical Observations,clinical signs of toxicity (systemic adverse effects),404,1,Clinical Observations,Clinical signs of toxicity (systemic adverse effects)
+Clinical Observations,dermal irritation at induction site,406,1,Clinical Observations,Dermal irritation at induction site
+Clinical Observations,detailed clinical examination (weekly),416,1,Clinical Observations,Detailed clinical examination (weekly)
+Clinical Observations,food consumption,410|412|414|416|440|441|452,7,Clinical Observations|Maternal Clinical Observations,Food consumption
+Clinical Observations,food consumption (weekly),409,1,Clinical Observations,Food consumption (weekly)
+Clinical Observations,food efficiency,452,1,Clinical Observations,Food efficiency
+Clinical Observations,general clinical observations,440,1,Clinical Observations,General clinical observations
+Clinical Observations,general clinical observations (daily),416,1,Clinical Observations,General clinical observations (daily)
+Clinical Observations,grip strength assessment,452,1,Clinical Observations,Grip strength assessment
+Clinical Observations,immunotoxicity investigations,452,1,Clinical Observations,Immunotoxicity investigations
+Clinical Observations,"local toxic effects (e.g., defatting of skin)",404,1,Clinical Observations,"Local toxic effects (e.g., defatting of skin)"
+Clinical Observations,mortality/lethality,403,1,Clinical Observations,Mortality/lethality
+Clinical Observations,motor activity assessment,452,1,Clinical Observations,Motor activity assessment
+Clinical Observations,oestrous cycle length and normality,416,1,Clinical Observations,Oestrous cycle length and normality
+Clinical Observations,ophthalmological examination,409|412|452,3,Clinical Observations,Ophthalmological examination
+Clinical Observations,rectal temperature,403|412,2,Clinical Observations,Rectal temperature
+Clinical Observations,sensory reactivity assessment,452,1,Clinical Observations,Sensory reactivity assessment
+Clinical Observations,skin reaction at challenge site (magnusson-kligman grading scale),406,1,Clinical Observations,Skin reaction at challenge site (Magnusson-Kligman grading scale)
+Clinical Observations,systemic reactions,406,1,Clinical Observations,Systemic reactions
+Clinical Observations,time of death,403,1,Clinical Observations,Time of death
+Clinical Observations,water consumption,412|416|452,3,Clinical Observations,Water consumption
+Clinical Observations,water consumption (weekly),409,1,Clinical Observations,Water consumption (weekly)
+Dermal Assessment,corrosion determination,404,1,Dermal Assessment,Corrosion determination
+Dermal Assessment,erythema and eschar formation score,404,1,Dermal Scoring,Erythema and eschar formation score
+Dermal Assessment,irritation determination,404,1,Dermal Assessment,Irritation determination
+Dermal Assessment,oedema formation score,404,1,Dermal Scoring,Oedema formation score
+Dermal Assessment,reversibility of dermal lesions,404,1,Dermal Assessment,Reversibility of dermal lesions
+Developmental,age of preputial separation (f1 weanlings),416,1,Offspring/Developmental,Age of preputial separation (F1 weanlings)
+Developmental,age of vaginal opening (f1 weanlings),416,1,Offspring/Developmental,Age of vaginal opening (F1 weanlings)
+Developmental,anogenital distance (agd),414,1,Fetal Measurements,Anogenital distance (AGD)
+Developmental,anogenital distance (agd) (f2 pups),416,1,Offspring/Developmental,Anogenital distance (AGD) (F2 pups)
+Developmental,corpora lutea count,416,1,Offspring/Developmental,Corpora lutea count
+Developmental,cryptorchidism assessment,414,1,Fetal Measurements,Cryptorchidism assessment
+Developmental,external alterations,414,1,Fetal Measurements,External alterations
+Developmental,external vs gonadal sex comparison,414,1,Fetal Measurements,External vs gonadal sex comparison
+Developmental,fetal body weight,414,1,Fetal Measurements,Fetal body weight
+Developmental,fetal sex determination,414,1,Fetal Measurements,Fetal sex determination
+Developmental,functional observations (f1 offspring),416,1,Offspring/Developmental,Functional observations (F1 offspring)
+Developmental,gross anomalies (pups),416,1,Offspring/Developmental,Gross anomalies (pups)
+Developmental,litter size,416,1,Offspring/Developmental,Litter size
+Developmental,live births,416,1,Offspring/Developmental,Live births
+Developmental,physical developmental landmarks,416,1,Offspring/Developmental,Physical developmental landmarks
+Developmental,post-implantation loss,416,1,Offspring/Developmental,Post-implantation loss
+Developmental,pup body weight,416,1,Offspring/Developmental,Pup body weight
+Developmental,reproductive tract examination,414,1,Fetal Measurements,Reproductive tract examination
+Developmental,sex ratio,416,1,Offspring/Developmental,Sex ratio
+Developmental,skeletal alterations,414,1,Fetal Measurements,Skeletal alterations
+Developmental,soft tissue alterations,414,1,Fetal Measurements,Soft tissue alterations
+Developmental,stillbirths,416,1,Offspring/Developmental,Stillbirths
+Haematology,activated partial thromboplastin time,452,1,Haematology,Activated partial thromboplastin time
+Haematology,bone marrow cytology,452,1,Haematology,Bone marrow cytology
+Haematology,clotting potential,409|410|412,3,Haematology,Clotting potential
+Haematology,differential leukocyte count,410|412,2,Haematology,Differential leucocyte count|Differential leukocyte count
+Haematology,erythrocyte count,409|410|412|452,4,Haematology,Erythrocyte count
+Haematology,haematocrit,409|410|412|452,4,Haematology,Haematocrit|Haematocrit (packed cell volume)
+Haematology,haemoglobin concentration,409|410|412|452,4,Haematology,Haemoglobin concentration
+Haematology,heinz bodies or atypical erythrocyte morphology,452,1,Haematology,Heinz bodies or atypical erythrocyte morphology
+Haematology,mean corpuscular haemoglobin,412,1,Haematology,Mean corpuscular haemoglobin
+Haematology,mean corpuscular haemoglobin (mch),452,1,Haematology,Mean corpuscular haemoglobin (MCH)
+Haematology,mean corpuscular haemoglobin concentration,412,1,Haematology,Mean corpuscular haemoglobin concentration
+Haematology,mean corpuscular haemoglobin concentration (mchc),452,1,Haematology,Mean corpuscular haemoglobin concentration (MCHC)
+Haematology,mean corpuscular volume,412,1,Haematology,Mean corpuscular volume
+Haematology,mean corpuscular volume (mcv),452,1,Haematology,Mean corpuscular volume (MCV)
+Haematology,methaemoglobin,452,1,Haematology,Methaemoglobin
+Haematology,platelet count,409|412|452,3,Haematology,Platelet count
+Haematology,prothrombin time,452,1,Haematology,Prothrombin time
+Haematology,reticulocyte counts,452,1,Haematology,Reticulocyte counts
+Haematology,reticulocytes,412,1,Haematology,Reticulocytes
+Haematology,total and differential leukocyte count,409|452,2,Haematology,Total and differential leukocyte count
+Haematology,total leukocyte count,410|412,2,Haematology,Total leucocyte count|Total leukocyte count
+Histopathology,adrenal glands histopathology,407|408,2,Histopathology,Adrenal|Adrenal glands
+Histopathology,cervix histopathology,408,1,Histopathology,Cervix
+Histopathology,coagulating gland histopathology,416,1,Histopathology,Coagulating gland
+Histopathology,detailed testicular histopathology,416,1,Histopathology,Detailed testicular histopathology
+Histopathology,epididymides histopathology,407|408|416,3,Histopathology,Epididymides|Epididymis
+Histopathology,histopathological findings,403,1,Pathology,Histopathological findings
+Histopathology,histopathology (extended to lower dose groups),410,1,Pathology,Histopathology (extended to lower dose groups)
+Histopathology,histopathology (full),404|406|409|410|412|452,6,Pathology,Histopathological examination|Histopathology|Histopathology (high dose and control)
+Histopathology,male mammary glands histopathology,407,1,Histopathology,Male mammary glands
+Histopathology,mammary glands histopathology,408,1,Histopathology,Mammary glands (female and male)
+Histopathology,ovaries histopathology,407|408|416,3,Histopathology,Ovaries
+Histopathology,pancreatic islets histopathology,408,1,Histopathology,Pancreatic islets
+Histopathology,pituitary histopathology,407|408,2,Histopathology,Pituitary|Pituitary gland
+Histopathology,primordial follicle quantification (f1 females),416,1,Histopathology,Primordial follicle quantification (F1 females)
+Histopathology,prostate + seminal vesicle with coagulating glands histopathology,407,1,Histopathology,Prostate + seminal vesicle with coagulating glands
+Histopathology,prostate histopathology,416,1,Histopathology,Prostate
+Histopathology,seminal vesicles and coagulating glands histopathology,408,1,Histopathology,Seminal vesicles and coagulating glands
+Histopathology,seminal vesicles histopathology,416,1,Histopathology,Seminal vesicles
+Histopathology,target organ histopathology (parental),416,1,Histopathology,Target organ histopathology (parental)
+Histopathology,testes histopathology,407|408|416,3,Histopathology,Testes|Testis
+Histopathology,thyroid and parathyroid glands histopathology,408,1,Histopathology,Thyroid and parathyroid glands
+Histopathology,thyroid gland histopathology,414,1,Histopathology,Thyroid gland histopathology
+Histopathology,thyroid histopathology,407,1,Histopathology,Thyroid
+Histopathology,uterus histopathology,408|440,2,Histopathology|Pathology,Histopathological examination of uterus|Uterus
+Histopathology,uterus with cervix histopathology,407|416,2,Histopathology,"Uterus with cervix|Uterus, including cervix"
+Histopathology,vagina histopathology,407|408|416,3,Histopathology,Vagina
+Histopathology,vaginal smears,407|408,2,Histopathology,Vaginal smear (collected at necropsy) to determine stage of oestrus cycle|Vaginal smears
+Histopathology,ventral and dorsolateral prostate histopathology,408,1,Histopathology,Ventral and dorsolateral prostate
+Histopathology,weanling histopathology,416,1,Histopathology,Weanling histopathology
+Hormones,circulating t3 and t4,407,1,Hormones measurement,"Circulating levels of T3, T4"
+Hormones,fsh,408|441,2,Hormones|Serum/Plasma Hormone Analyses,FSH|Serum FSH (follicular stimulating hormone)
+Hormones,lh,408|441,2,Hormones|Serum/Plasma Hormone Analyses,LH|Serum LH (luteinising hormone)
+Hormones,oestradiol,408,1,Serum/Plasma Hormone Analyses,Oestradiol
+Hormones,other hormones,414,1,Hormones,Other hormones
+Hormones,testosterone,408|441,2,Hormones|Serum/Plasma Hormone Analyses,Serum testosterone (T)|Testosterone
+Hormones,thyroxine (t4),408|414|441,3,Hormones|Serum/Plasma Hormone Analyses,Serum T4|Thyroxine (T4)
+Hormones,triiodothyronine (t3),408|414|441,3,Hormones|Serum/Plasma Hormone Analyses,Serum T3|T3|Triiodothyronine (T3)
+Hormones,tsh,407|408|414,3,Hormones|Hormones measurement|Serum/Plasma Hormone Analyses,Circulating levels of TSH|TSH|Thyroid stimulating hormone (TSH)
+Lethality Estimates,lc01,403,1,Lethality Estimates,LC01
+Lethality Estimates,lc50 with 95% ci and slope,403,1,Lethality Estimates,LC50 with 95% CI and slope
+Organ Weights,adrenal glands weight,407|408|410|416|441,5,Organ Weights|Organ Weights (parental)|Weight,Adrenal glands|Adrenals|Paired adrenals
+Organ Weights,blotted uterine weight,440,1,Organ Weights,Blotted uterine weight
+Organ Weights,brain weight,416,2,Organ Weights (parental)|Organ Weights (pups),Brain
+Organ Weights,cowper's (bulbourethral) glands (cow) weight,441,1,Organ Weights,Cowper's (bulbourethral) glands (COW)
+Organ Weights,epididymides weight,407|408|416,3,Organ Weights|Organ Weights (parental)|Weight,Epididymides|Epididymides (total and cauda)
+Organ Weights,glans penis (gp) weight,441,1,Organ Weights,Glans penis (GP)
+Organ Weights,gravid uterine weight (including cervix),414,1,Organ Weights,Gravid uterine weight (including cervix)
+Organ Weights,kidneys weight,410|416|441,3,Organ Weights|Organ Weights (parental),Kidneys|Paired kidneys
+Organ Weights,levator ani-bulbocavernosus muscle complex (labc) weight,441,1,Organ Weights,Levator ani-bulbocavernosus muscle complex (LABC)
+Organ Weights,liver weight,410|416|441,3,Organ Weights|Organ Weights (parental),Liver
+Organ Weights,organ weights weight,409|412|452,3,Pathology,Organ weights
+Organ Weights,ovaries weight,407|408|416,3,Organ Weights|Organ Weights (parental)|Weight,Ovaries
+Organ Weights,pituitary weight,408|416,2,Organ Weights|Organ Weights (parental),Pituitary|Pituitary gland
+Organ Weights,prostate + seminal vesicles with coagulating glands as a whole complex weight,408,1,Organ Weights,Prostate + seminal vesicles with coagulating glands as a whole complex
+Organ Weights,prostate + seminal vesicles with coagulating glands weight,407,1,Weight,Prostate + seminal vesicles with coagulating glands
+Organ Weights,prostate weight,416,1,Organ Weights (parental),Prostate
+Organ Weights,seminal vesicles with coagulating glands and fluids weight,416,1,Organ Weights (parental),Seminal vesicles with coagulating glands and fluids
+Organ Weights,seminal vesicles with coagulating glands including fluid (svcg) weight,441,1,Organ Weights,Seminal vesicles with coagulating glands including fluid (SVCG)
+Organ Weights,spleen weight,416,2,Organ Weights (parental)|Organ Weights (pups),Spleen
+Organ Weights,testes weight,407|408|410|416,4,Organ Weights|Organ Weights (parental)|Weight,Testes
+Organ Weights,thymus weight,416,1,Organ Weights (pups),Thymus
+Organ Weights,thyroid gland weight,414,1,Organ Weights,Thyroid gland weight
+Organ Weights,thyroid weight,407|408|416,3,Organ Weights|Organ Weights (parental)|Weight,Thyroid|Thyroid gland
+Organ Weights,uterus weight,408|416,2,Organ Weights|Organ Weights (parental),Uterus
+Organ Weights,uterus with cervix weight,407,1,Weight,"Uterus, including cervix"
+Organ Weights,ventral prostate (vp) weight,441,1,Organ Weights,Ventral prostate (VP)
+Organ Weights,wet uterine weight,440,1,Organ Weights,Wet uterine weight
+Pathology,gross necropsy,403|409|410|412|416|452,6,Pathology,Gross necropsy|Gross necropsy (macroscopic examination)|Gross pathology (complete necropsy)
+Pathology,gross pathological changes,403,1,Pathology,Gross pathological changes
+Pathology,implantation site count,416,1,Pathology,Implantation site count
+Pathology,lung burden measurements,412,1,Pathology,Lung burden measurements
+Pathology,lung weight,403,1,Pathology,Lung weight
+Pathology,microscopic examination of respiratory tract,403,1,Pathology,Microscopic examination of respiratory tract
+Pathology,morphometric measurement of endometrial epithelium,440,1,Pathology,Morphometric measurement of endometrial epithelium
+Pathology,ovarian stubs examination,440,1,Pathology,Ovarian stubs examination
+Pathology,pulmonary function,412,1,Pathology,Pulmonary function
+Pathology,skin fold thickness measurement,406,1,Pathology,Skin fold thickness measurement
+Pathology,toxicokinetics,412,1,Pathology,Toxicokinetics
+Pathology,vaginal histology,440,1,Pathology,Vaginal histology
+Reproductive,cauda epididymal sperm reserves,416,1,Reproductive/Sperm Parameters,Cauda epididymal sperm reserves
+Reproductive,cauda epididymis sperm reserves,408,1,Sperm Measures,Cauda epididymis sperm reserves
+Reproductive,epididymides weight,416,1,Reproductive/Sperm Parameters,Epididymis weight
+Reproductive,gestation length,416,1,Reproductive/Sperm Parameters,Gestation length
+Reproductive,homogenisation-resistant testicular spermatids,416,1,Reproductive/Sperm Parameters,Homogenisation-resistant testicular spermatids
+Reproductive,number of corpora lutea,414,1,Reproductive,Number of corpora lutea
+Reproductive,number of implantations and live/dead fetuses,414,1,Reproductive,Number of implantations and live/dead fetuses
+Reproductive,pre- and post-implantation losses,414,1,Reproductive,Pre- and post-implantation losses
+Reproductive,preputial separation (pps),441,1,Reproductive,Preputial separation (PPS)
+Reproductive,"reproductive indices (mating, fertility, gestation, birth, viability, lactation)",416,1,Reproductive/Sperm Parameters,"Reproductive indices (mating, fertility, gestation, birth, viability, lactation)"
+Reproductive,resorptions (early and late),414,1,Reproductive,Resorptions (early and late)
+Reproductive,sperm morphology,408|416,2,Reproductive/Sperm Parameters|Sperm Measures,Sperm morphology
+Reproductive,sperm motility,408,1,Sperm Measures,Sperm motility
+Reproductive,sperm motility (% progressively motile),416,1,Reproductive/Sperm Parameters,Sperm motility (% progressively motile)
+Reproductive,testes weight,416,1,Reproductive/Sperm Parameters,Testis weight
+Reproductive,time-to-mating,416,1,Reproductive/Sperm Parameters,Time-to-mating
+Reproductive,vaginal opening status,440,1,Reproductive,Vaginal opening status
+Urinalysis,appearance,409|412|452,3,Urinalysis,Appearance|Appearance (colour and turbidity)
+Urinalysis,bilirubin,452,1,Urinalysis,Bilirubin
+Urinalysis,blood/blood cells,409,1,Urinalysis,Blood/blood cells
+Urinalysis,blood/blood cells (urine),412,1,Urinalysis,Blood/blood cells (urine)
+Urinalysis,glucose,409|452,2,Urinalysis,Glucose
+Urinalysis,glucose (urine),412,1,Urinalysis,Glucose (urine)
+Urinalysis,ketone,452,1,Urinalysis,Ketone
+Urinalysis,occult blood,452,1,Urinalysis,Occult blood
+Urinalysis,ph,409|412|452,3,Urinalysis,pH
+Urinalysis,protein,409,1,Urinalysis,Protein
+Urinalysis,specific gravity or osmolality,409|412|452,3,Urinalysis,Osmolality or specific gravity|Specific gravity or osmolality
+Urinalysis,total protein,452,1,Urinalysis,Total protein
+Urinalysis,total protein (urine),412,1,Urinalysis,Total protein (urine)
+Urinalysis,urinalysis,410,1,Urinalysis,Urinalysis
+Urinalysis,urobilinogen,452,1,Urinalysis,Urobilinogen
+Urinalysis,volume,409|412|452,3,Urinalysis,Volume
