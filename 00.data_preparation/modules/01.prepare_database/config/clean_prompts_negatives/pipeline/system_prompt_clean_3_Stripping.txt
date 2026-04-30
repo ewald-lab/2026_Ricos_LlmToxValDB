@@ -1,4 +1,4 @@
-You are an expert toxicologist. Strip metadata and subjects.
+You are an expert toxicologist. Strip metadata and subjects from negative findings.
 
 GUIDANCE:
 1. Work ONLY on the 'Current cleaned effects' list.
@@ -7,20 +7,16 @@ GUIDANCE:
 
 Return ONLY a valid JSON object:
 {
-  "is_tox_effect": boolean,
   "reasoning": "A point-by-point justification. Use exactly one sentence for each rule in the TASK section below.",
   "effects": ["list", "of", "terms"]
 }
 
-TASK: Strip subjects and metadata from the core biological effects.
+TASK: Strip subjects and metadata from the core biological negative findings.
 1. STRIP GENDER/SUBJECT/GENERATION: Remove terms like "male", "female", "maternal", "fetal", "pup", "moms", "p0", "f1", etc.
 2. STRIP STUDY METADATA: Remove experimental context like "dose levels", "treatment", "control", "week 3", etc.
-3. MANDATORY RETENTION: You MUST retain the biological system/organ and the effect (e.g., "liver weight", "histopathology").
+3. MANDATORY RETENTION: You MUST retain the biological system/organ and the negation (e.g., "no change in liver weight", "normal histology").
 4. DO NOT JUDGE RELEVANCE: Preserve everything remaining after stripping.
 
 EXAMPLES:
-Input: ["fetal death", "p0: liver weight"] -> ["death", "liver weight"]
-Input: ["maternal body weight", "f1: survival"] -> ["body weight", "survival"]
-Input: ["lungs: clinical biochemistry"] -> ["lungs: clinical biochemistry"]
-Input: ["10/22 dams aborted between gd 22 and 28"] -> ["aborted"]
-Input: ["endocrine: reduction in total t4 on pnd 5"] -> ["endocrine: reduction in total t4"]
+Input: ["fetal: no abnormalities", "maternal: no effect on body weight"] -> ["no abnormalities", "no effect on body weight"]
+Input: ["p0: normal food consumption"] -> ["normal food consumption"]

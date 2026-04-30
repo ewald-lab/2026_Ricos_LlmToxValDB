@@ -1,4 +1,4 @@
-You are an expert toxicologist. Split distinct concepts.
+You are an expert toxicologist. Split distinct negative concepts and remove positive ones.
 
 GUIDANCE:
 1. Work ONLY on the 'Current cleaned effects' list.
@@ -7,24 +7,20 @@ GUIDANCE:
 
 Return ONLY a valid JSON object:
 {
-  "is_tox_effect": boolean,
+  "is_negative_tox_effect": boolean,
   "reasoning": "A point-by-point justification. Use exactly one sentence for each rule in the TASK section below.",
   "effects": ["list", "of", "terms"]
 }
 
-TASK: Identify, split distinct concepts, and filter out non-toxicological effects.
-1. SPLIT MULTIPLE ORGAN SYSTEMS: If a string contains multiple organs (e.g., "liver, kidney, and heart"), split them into separate list items.
-2. SPLIT MACROSCOPIC VS MICROSCOPIC: Differentiate between macroscopic findings (e.g., "organ weight") and microscopic findings (e.g., "histopathology").
-3. KEEP ALL TOXICOLOGICAL FINDINGS (INCLUDING NEGATIVES): Evaluate each concept.
-   - EXCLUDE: dosing, protocol info, study metadata (e.g., "compound intake", "pnd 21", "dose group", "elevated plus maze").
-   - INCLUDE: organs, systems, biological findings, histological observations, behavioral parameters.
-   - CRITICAL RULE: KEEP negative findings (e.g., "no observed weight changes", "no systemic toxicity"). These are valid toxicological observations.
-4. ABSOLUTE RULE: If the 'Current cleaned effects' list contains ONLY one term (e.g., "gastrointestinal") AND it is a valid effect, you MUST return it exactly as it is. DO NOT split it.
+TASK: Identify, split distinct concepts, and filter out POSITIVE toxicological effects and non-toxicological info.
+1. SPLIT MULTIPLE ORGAN SYSTEMS: If a string contains multiple organs with negative findings (e.g., "no effect on liver, kidney, or heart"), split them into separate list items.
+2. REMOVE POSITIVE FINDINGS: Remove any concept that describes a presence of an effect (e.g., "increased weight", "lesions").
+3. KEEP NEGATIVE FINDINGS: Keep concepts describing absence of effect (e.g., "no systemic toxicity", "no histopathological findings", "normal food consumption").
+4. REMOVE NON-TOXICOLOGICAL INFO: Exclude dosing, protocol info, study metadata.
 
 EXAMPLES:
-Input: "increased liver weight and hepatocellular hypertrophy" -> ["increased liver weight", "hepatocellular hypertrophy"] (Split macroscopic from microscopic)
-Input: "increased liver weight and hepatomegaly" -> ["increased liver weight and hepatomegaly"] (Single concept: both describe liver enlargement)
-Input: "altered liver weight, clinical chemistry parameters, liver dna levels" -> ["altered liver weight", "clinical chemistry parameters", "liver dna levels"]
-Input: "effects on the adrenals in both sexes and on the thyroid of males" -> ["effects on the adrenals", "effects on the thyroid"]
-Input: "food consumption and compound intake" -> ["food consumption"] (Removes generic dosing/protocol info)
-Input: "no systemic toxicity, reproductive toxicity" -> ["no systemic toxicity", "reproductive toxicity"] (KEEPS negative findings)
+Input: "no systemic toxicity, reproductive toxicity" -> ["no systemic toxicity"] (Removes the positive finding "reproductive toxicity")
+Input: "increased liver weight and normal kidney histology" -> ["normal kidney histology"] (Removes positive "increased liver weight")
+Input: "no change in body weight, food consumption, or clinical signs" -> ["no change in body weight", "no change in food consumption", "no change in clinical signs"]
+Input: "food consumption and compound intake" -> [] (If food consumption is neutral/positive, but if it says "no change in food consumption" then keep)
+Input: "within normal limits for all parameters" -> ["within normal limits for all parameters"]

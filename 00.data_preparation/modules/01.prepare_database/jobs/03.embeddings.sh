@@ -39,7 +39,7 @@ TASK_ID=$SLURM_ARRAY_TASK_ID
 EMBED_MODEL="${MODELS_KEYS[$TASK_ID]}"
 
 RAG_CONFIG="${REPO_ROOT}/config/rag/embeddings.json"
-INPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02.tsv"
+INPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03_merged.tsv"
 OUTPUT_DB="${REPO_ROOT}/outputs/embeddings_db/tox_effects_${EMBED_MODEL}.db"
 
 echo "=========================================================="
@@ -48,7 +48,7 @@ echo "=========================================================="
 
 mkdir -p "$(dirname "${OUTPUT_DB}")"
 
-python "${REPO_ROOT}/scripts/02.embeddings.py" \
+python "${REPO_ROOT}/scripts/03.embeddings.py" \
     --input_file "${INPUT_FILE}" \
     --target_column "TOXICOLOGICAL_EFFECT_LLM_CLEANED" \
     --std_column "TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED" \

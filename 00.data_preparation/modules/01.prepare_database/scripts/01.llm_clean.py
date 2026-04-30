@@ -159,6 +159,7 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
                         if "is_tox_effect" in result:
                             is_tox = result.get("is_tox_effect", True)
                             if not is_tox:
+                                current_effects = []
                                 break # Exit prompt loop for this description
                                 
                         # Speedy exit: if the effects list becomes empty mid-pipeline, there's no point running the rest

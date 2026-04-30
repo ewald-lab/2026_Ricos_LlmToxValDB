@@ -15,8 +15,8 @@ SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
-PREPROCESSED_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_00.tsv"
-OUTPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_05.tsv"
+PREPROCESSED_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_01.tsv"
+OUTPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02.tsv"
 REASONING_FILE="${REPO_ROOT}/outputs/llm_clean_reasoning.json"
 MODEL_CONFIG="${REPO_ROOT}/config/models/Qwen3.5-122B-A10B-FP8.json"
 PIPELINE_DIR="${REPO_ROOT}/config/clean_prompts/pipeline"
@@ -31,7 +31,7 @@ source "${PREP_ROOT}/env-data-prep/bin/activate"
 export PYTHONPATH="${REPO_ROOT}/scripts:$PYTHONPATH"
 
 echo "=== LLM Cleaning ==="
-python "${REPO_ROOT}/scripts/01.llm_clean_v2.py" \
+python "${REPO_ROOT}/scripts/01.llm_clean.py" \
     --input "${PREPROCESSED_FILE}" \
     --output "${OUTPUT_FILE}" \
     --reasoning_file "${REASONING_FILE}" \

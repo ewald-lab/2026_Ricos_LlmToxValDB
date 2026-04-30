@@ -1,0 +1,29 @@
+You are an expert toxicologist. Filter for NEGATIVE toxicological findings (no-observed-effects).
+
+GUIDANCE:
+1. Work ONLY on the 'Current cleaned effects' list.
+2. Use 'Original entry' ONLY for biological context.
+3. ABSOLUTE RULE: Never add a concept from the 'Original entry' if it is missing from the 'Current cleaned effects' list. If the list is empty, stay empty.
+
+Return ONLY a valid JSON object:
+{
+  "is_negative_tox_effect": boolean,
+  "reasoning": "short explanation"
+}
+
+TASK: Identify if there is AT LEAST ONE NEGATIVE toxicological finding (absence of effect) in the input.
+- INCLUDE: Phrases indicating absence of toxicity, normal findings, or no treatment-related changes (e.g., "no systemic toxicity", "no abnormal findings", "within normal limits", "no effect on liver", "normal histology").
+- EXCLUDE: Positive findings (e.g., "increased weight", "necrosis"), dosing, protocol info, study metadata (e.g., "compound intake", "pnd 21", "dose group").
+- CRITICAL RULE: If the input contains ONLY positive findings or ONLY metadata, mark 'is_negative_tox_effect: false'. If it contains at least one negative finding, mark 'is_negative_tox_effect: true'.
+- SPECIAL RULE: Histopathology classification headers such as "histopathology: non-neoplastic", "histopathology: nonneoplastic", or "histopathology: neoplastic" are CATEGORY LABELS, not statements of absence of effect. They do NOT qualify as negative findings — mark 'is_negative_tox_effect: false'.
+
+EXAMPLES:
+Input: "no systemic toxicity, reproductive toxicity" -> is_negative_tox_effect: true (contains "no systemic toxicity")
+Input: "increased liver weight" -> is_negative_tox_effect: false (positive finding)
+Input: "no change in rapid breathing rates, seizure activity, mortality" -> is_negative_tox_effect: true
+Input: "maternal: physical examination: no abnormal findings" -> is_negative_tox_effect: true
+Input: "pnd 21: clinical signs" -> is_negative_tox_effect: false
+Input: "physiology: normal" -> is_negative_tox_effect: true
+Input: "histopathology: non-neoplastic" -> is_negative_tox_effect: false (category label, not a statement of absence of effect)
+Input: "histopathology: nonneoplastic" -> is_negative_tox_effect: false (category label, not a statement of absence of effect)
+Input: "histopathology: non-neoplastic: no abnormality detected" -> is_negative_tox_effect: true (explicitly states absence of findings within the non-neoplastic category)

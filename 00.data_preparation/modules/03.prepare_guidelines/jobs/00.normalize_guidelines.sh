@@ -31,9 +31,9 @@ if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"
 fi
 
-echo "=== Prepare Guidelines Job ==="
+echo "=== Normalize Guidelines Job ==="
 
-python "${REPO_ROOT}/scripts/00.prepare_guidelines.py" \
+python "${REPO_ROOT}/scripts/00.normalize_guidelines.py" \
     --input_dir "${INPUT_DIR}" \
     --output_dir "${OUTPUT_DIR}"
 

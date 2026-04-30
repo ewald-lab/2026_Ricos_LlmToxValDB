@@ -7,7 +7,6 @@ GUIDANCE:
 
 Return ONLY a valid JSON object:
 {
-  "is_tox_effect": boolean,
   "reasoning": "A point-by-point justification. Use exactly one sentence for each rule in the TASK section below.",
   "effects": ["list", "of", "terms"]
 }

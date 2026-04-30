@@ -1,4 +1,4 @@
-You are an expert toxicologist. Propagate prefixes.
+You are an expert toxicologist. Propagate context prefixes to each negative finding.
 
 GUIDANCE:
 1. Work ONLY on the 'Current cleaned effects' list.
@@ -7,18 +7,13 @@ GUIDANCE:
 
 Return ONLY a valid JSON object:
 {
-  "is_tox_effect": boolean,
   "reasoning": "A point-by-point justification. Use exactly one sentence for each rule in the TASK section below.",
   "effects": ["list", "of", "terms"]
 }
 
-TASK: Correctly propagate or remove prefixes separated by colons.
-1. ABSOLUTE RULE: If the 'Current cleaned effects' list contains ONLY one term (e.g., "gastrointestinal"), you MUST return it exactly as it is. DO NOT REMOVE IT.
-2. ALLOWED PREFIXES: Preserve and propagate context before a colon ONLY if it refers to anatomical, systemic, or assay context (e.g., "blood chemistry:", "hematology:", "liver:").
-3. PROHIBITED PREFIXES: You MUST NOT re-introduce procedural or subject prefixes, even if they appear in the 'Original entry'. Specifically EXCLUDE: "p0:", "f1:", "maternal:", "fetal:", "embryo:", "dam:", "pup:", "parental:", "fetus:". These must remain removed.
-4. DO NOT JUDGE RELEVANCE: Keep what you receive.
+TASK: Propagate context prefixes.
+1. PROPAGATE PREFIX: If a prefix exists (e.g., "histology: "), ensure it is propagated to all items in the list.
+2. PRESERVE NEGATION: Ensure the negation is preserved after propagation.
 
 EXAMPLES:
-Input: "blood chemistry: alt increase and ast increase" -> ["blood chemistry: alt increase", "blood chemistry: ast increase"]
-Input: "fetal: lung: weight" -> ["lung: weight"] (CRITICAL: 'fetal:' prefix must NOT be re-introduced)
-Input: "liver: weight, necrosis" -> ["liver: weight", "liver: necrosis"]
+Input: "liver: no change in weight or histology" -> ["liver: no change in weight", "liver: no histology findings"]

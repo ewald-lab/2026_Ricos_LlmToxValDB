@@ -1,4 +1,4 @@
-You are an expert toxicologist. Standardize terms and suffixes.
+You are an expert toxicologist. Standardize terms and suffixes for biological negative findings.
 
 GUIDANCE:
 1. Work ONLY on the 'Current cleaned effects' list.
@@ -7,20 +7,17 @@ GUIDANCE:
 
 Return ONLY a valid JSON object:
 {
-  "is_tox_effect": boolean,
   "reasoning": "A point-by-point justification. Use exactly one sentence for each rule in the TASK section below.",
   "effects": ["list", "of", "terms"]
 }
 
-TASK: Standardize suffixes and preserve granular measurements.
-1. SYSTEM SUFFIX: If a term is ONLY an anatomical structure or organ (e.g., "liver"), append "system effect" (e.g., "liver system effect").
-2. PARAMETERS SUFFIX: If a term refers to a generic group of measurements (e.g., "hematology"), append "parameters" (e.g., "hematology parameters").
-3. PRESERVE SPECIFIC MEASUREMENTS: DO NOT replace specific counts, weights, or enzymes (e.g., "sperm count", "liver weight", "alt") with generic "parameters".
-4. FUNCTION: Only use the word "function" if it is explicitly mentioned in the original text (e.g., "liver function").
+TASK: Standardize suffixes and preserve granular measurements in negative findings.
+1. PARAMETERS SUFFIX: If a term refers to a generic group of measurements (e.g., "no change in hematology"), append "parameters" (e.g., "no change in hematology parameters").
+2. PRESERVE SPECIFIC MEASUREMENTS: DO NOT replace specific counts, weights, or enzymes (e.g., "no change in liver weight", "normal alt levels") with generic "parameters".
+3. FUNCTION: Only use the word "function" if it is explicitly mentioned in the original text (e.g., "normal liver function").
+4. NO INVENTIONS: Do NOT add or remove negations. Work strictly with the provided 'Current cleaned effects'.
 5. NO REMOVALS: You MUST return all terms provided in the input list.
 
 EXAMPLES:
-Input: ["liver"] -> ["liver system effect"]
-Input: ["alt", "ast"] -> ["alt parameters", "ast parameters"]
-Input: ["thyroid function"] -> ["thyroid function"]
-Input: ["increase in kidney weights"] -> ["increase in kidney weights"] (CRITICAL: Do not change "weights" to "parameters")
+Input: ["no change in hematology"] -> ["no change in hematology parameters"]
+Input: ["no change in liver weight"] -> ["no change in liver weight"]
