@@ -1,0 +1,14 @@
+langchain
+langchain_openai
+polars
+huggingface_hub
+torch>2.0.0,<=2.10
+transformers
+rdflib
+scikit-learn
+matplotlib
+ipykernel
+pandas
+tqdm
+openai
+tiktoken

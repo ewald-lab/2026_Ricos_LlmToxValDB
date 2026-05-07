@@ -1,38 +1,42 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-410,Clinical Observations,Clinical signs (cage-side),Required,Guideline text (Procedure),"Changes in skin and fur, eyes and mucous membranes, respiratory, circulatory, autonomic and central nervous system, somatomotor activity and behaviour pattern"
-410,Clinical Observations,Body weight,Required,Guideline text (Procedure),Weighed weekly
-410,Clinical Observations,Food consumption,Required,Guideline text (Procedure),Measured weekly
-410,Haematology,Haematocrit,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
-410,Haematology,Haemoglobin concentration,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
-410,Haematology,Erythrocyte count,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
-410,Haematology,Total leucocyte count,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
-410,Haematology,Differential leucocyte count,Required,Guideline text (Clinical examinations section a),Investigated at end of test period
-410,Haematology,Clotting potential,Required,Guideline text (Clinical examinations section a),"Select one: clotting time, prothrombin time, thromboplastin time, or platelet count"
-410,Clinical Biochemistry,Calcium,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Phosphorus,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Chloride,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Sodium,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Potassium,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Fasting glucose,Required,Guideline text (Clinical examinations section b),With period of fasting appropriate to the species
-410,Clinical Biochemistry,Alanine aminotransferase (ALT),Required,Guideline text (Clinical examinations section b),Listed as serum glutamic-pyruvic transaminase in original text
-410,Clinical Biochemistry,Aspartate aminotransferase (AST),Required,Guideline text (Clinical examinations section b),Listed as serum glutamic-oxaloacetic transaminase in original text
-410,Clinical Biochemistry,Ornithine decarboxylase,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Gamma glutamyl transpeptidase,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Urea nitrogen,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Albumin,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Blood creatinine,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Total bilirubin,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Total serum protein,Required,Guideline text (Clinical examinations section b),Suggested determination; carried out at end of test period
-410,Clinical Biochemistry,Lipids,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
-410,Clinical Biochemistry,Hormones,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
-410,Clinical Biochemistry,Acid/base balance,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
-410,Clinical Biochemistry,Methaemoglobin,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
-410,Clinical Biochemistry,Cholinesterase activity,Optional,Guideline text (Clinical examinations section b),May be necessary for adequate toxicological evaluation
-410,Urinalysis,Urinalysis,Optional,Guideline text (Clinical examinations section c),Not required on routine basis; only when indicated by expected or observed toxicity
-410,Organ Weights,Liver,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
-410,Organ Weights,Kidneys,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
-410,Organ Weights,Adrenals,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
-410,Organ Weights,Testes,Required,Guideline text (Pathology Gross necropsy),Must be weighed wet as soon as possible after dissection
-410,Pathology,Gross necropsy,Required,Guideline text (Pathology Gross necropsy),"External surface, all orifices, cranial, thoracic and abdominal cavities and their contents"
-410,Pathology,Histopathology (high dose and control),Required,Guideline text (Pathology Histopathology),"Preserved organs and tissues: normal and treated skin, liver, kidney, and target organs"
-410,Pathology,Histopathology (extended to lower dose groups),Optional,Guideline text (Pathology Histopathology),May be extended if considered necessary to investigate changes observed in high dose group
+410,Clinical Observations,Skin and fur changes,Required,Guideline text,
+410,Clinical Observations,Eye and mucous membrane changes,Required,Guideline text,
+410,Clinical Observations,"Respiratory/Circulatory/Autonomic/CNS signs",Required,Guideline text,
+410,Clinical Observations,Somatomotor activity and behaviour,Required,Guideline text,
+410,Clinical Observations,Food consumption,Required,Guideline text,Measured weekly
+410,Clinical Observations,Body weight,Required,Guideline text,Measured weekly
+410,Hematology,Hematocrit,Required,Guideline text,
+410,Hematology,Hemoglobin concentration,Required,Guideline text,
+410,Hematology,Erythrocyte count,Required,Guideline text,
+410,Hematology,Total leucocyte count,Required,Guideline text,
+410,Hematology,Differential leucocyte count,Required,Guideline text,
+410,Hematology,Clotting potential measure,Required,Guideline text,e.g., clotting time, prothrombin time, thromboplastin time, or platelet count
+410,Clinical Biochemistry,Calcium,Required,Guideline text,
+410,Clinical Biochemistry,Phosphorus,Required,Guideline text,
+410,Clinical Biochemistry,Chloride,Required,Guideline text,
+410,Clinical Biochemistry,Sodium,Required,Guideline text,
+410,Clinical Biochemistry,Potassium,Required,Guideline text,
+410,Clinical Biochemistry,Fasting glucose,Required,Guideline text,With period of fasting appropriate to species
+410,Clinical Biochemistry,Serum alanine aminotransferase (ALT),Required,Guideline text,Formerly serum glutamic-pyruvic transaminase
+410,Clinical Biochemistry,Serum aspartate aminotransferase (AST),Required,Guideline text,Formerly serum glutamic-oxaloacetic transaminase
+410,Clinical Biochemistry,Ornithine decarboxylase,Required,Guideline text,
+410,Clinical Biochemistry,Gamma glutamyl transpeptidase,Required,Guideline text,
+410,Clinical Biochemistry,Urea nitrogen,Required,Guideline text,
+410,Clinical Biochemistry,Albumen,Required,Guideline text,
+410,Clinical Biochemistry,Blood creatinine,Required,Guideline text,
+410,Clinical Biochemistry,Total bilirubin,Required,Guideline text,
+410,Clinical Biochemistry,Total serum protein,Required,Guideline text,
+410,Clinical Biochemistry,Lipids,Optional,Guideline text,Additional if necessary for adequate evaluation
+410,Clinical Biochemistry,Hormones,Optional,Guideline text,Additional if necessary for adequate evaluation
+410,Clinical Biochemistry,Acid/base balance,Optional,Guideline text,Additional if necessary for adequate evaluation
+410,Clinical Biochemistry,Methaemoglobin,Optional,Guideline text,Additional if necessary for adequate evaluation
+410,Clinical Biochemistry,Cholinesterase activity,Optional,Guideline text,Additional if necessary for adequate evaluation
+410,Organ Weights,Liver weight,Required,Guideline text,Wet weight immediately after dissection
+410,Organ Weights,Kidney weight,Required,Guideline text,Wet weight immediately after dissection
+410,Organ Weights,Adrenals weight,Required,Guideline text,Wet weight immediately after dissection
+410,Organ Weights,Testes weight,Required,Guideline text,Wet weight immediately after dissection
+410,Histopathology,Skin,Required,Guideline text,Normal and treated skin
+410,Histopathology,Liver,Required,Guideline text,
+410,Histopathology,Kidney,Required,Guideline text,
+410,Histopathology,Target organs,Required,Guideline text,Organs showing gross lesions or size changes
+410,Urinalysis,Urinalysis,Optional,Guideline text,Not required routinely; only when indicated by expected/observed toxicity

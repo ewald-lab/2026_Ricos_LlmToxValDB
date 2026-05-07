@@ -1,0 +1,20 @@
+cellular
+cellular > granulosa cell damage
+cellular > hyperplasia leydig cell
+cellular > hyperplasia ovarian stromal cells
+cellular > increase leydig cell tumors
+cellular > increased lactotroph hyperplasia and hypertrophy
+molecular
+molecular > ovary
+organ
+organ > epididymal agenesis
+organ > uterine adenocarcinoma
+tissue
+tissue > hyperplasia mammary gland
+tissue > hyperplasia ovarian epithelium
+tissue > increase thyroid stimulating hormone
+tissue > increased adenosquamous carcinomas of endometrium
+tissue > increased ductal hyperplasia
+tissue > increased histomorphological alteration of testis
+tissue > increased oocyte atresia
+tissue > increased thyroid stimulating hormone

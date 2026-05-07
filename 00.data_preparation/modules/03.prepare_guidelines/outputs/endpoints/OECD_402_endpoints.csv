@@ -1,0 +1,6 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+402,Clinical Observations,General clinical signs (skin, fur, eyes, mucous membranes, CNS, behavior, etc.),Required,Guideline text,"Must be systematically recorded for each animal."
+402,Clinical Observations,Treatment site assessment (Draize criteria),Optional,Guideline text,"Conducted at 24, 48, and 72 hours; useful for waiving separate irritation studies."
+402,Body Weight,Individual body weight,Required,Guideline text,"Measured on day of dosing, weekly thereafter, and at death/euthanasia."
+402,Pathology (Gross),Gross necropsy findings,Required,Guideline text,"All gross pathological changes recorded for every animal."
+402,Pathology (Histopathology),Microscopic examination of affected organs/treatment site,Optional,Guideline text,"Considered only for animals surviving 24+ hours; yields useful information but not mandatory."

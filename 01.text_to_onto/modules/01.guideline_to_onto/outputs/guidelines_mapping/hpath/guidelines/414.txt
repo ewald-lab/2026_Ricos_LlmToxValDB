@@ -1,0 +1,44 @@
+atrophy with degeneration and fibrosis
+decreased bone mass
+exostosis
+hyperostosis
+increased bone mass
+increased immature trabecular bone
+increased mature trabecular bone
+inflammation induced tissue alteration
+inflammatory degenerative changes
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > fat necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis soft tissue
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia osseous
+morphologic change > general observation
+morphologic change > general observation > cause of death moribund condition
+morphologic change > general observation > macroscopic comment
+morphologic change > neoplasia
+morphologic change > neoplasia > malignant tumor
+morphologic change > neoplasia > malignant tumor > carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma follicular cell
+morphologic change > normal altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > decreased number absent corpora lutea
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased number corpora lutea
+morphologic change > structural alteration
+morphologic change > structural alteration > abnormal growth differentiation
+morphologic change > structural alteration > abnormal growth differentiation > abnormal bone modelling remodelling
+morphologic change > structural alteration > abnormal growth differentiation > abnormal bone modelling remodelling > decreased bone trabeculae and or cortex
+morphologic change > structural alteration > abnormal growth differentiation > abnormal bone modelling remodelling > increased bone trabeculae and or cortex
+morphologic change > structural alteration > abnormal growth differentiation > abnormal cartilage modelling remodelling
+morphologic change > structural alteration > abnormal growth differentiation > abnormal cartilage modelling remodelling > cartilage degeneration
+morphologic change > structural alteration > abnormal growth differentiation > abnormal skeletal tissue modelling remodelling
+morphologic change > structural alteration > architectural anomalies
+morphologic change > structural alteration > developmental errors
+morphologic change > structural alteration > developmental errors > cryptorchidism
+morphologic change > structural alteration > developmental errors > malformation
+morphologic change > structural alteration > structural injury
+tissue remodelling

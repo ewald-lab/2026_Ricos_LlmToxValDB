@@ -1,0 +1,19 @@
+mammalian phenotype
+mammalian phenotype > behavior neurological phenotype
+mammalian phenotype > behavior neurological phenotype > abnormal behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > unresponsive to tactile stimuli
+mammalian phenotype > cardiovascular system phenotype
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal heartbeat
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal heartbeat > absent heartbeat
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin physiology
+mammalian phenotype > mortality aging
+mammalian phenotype > mortality aging > abnormal survival
+mammalian phenotype > mortality aging > abnormal survival > moribund
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality

@@ -1,7 +1,7 @@
 # OECD Test Guideline 205: Avian Dietary Toxicity Test
 
-**Generated:** 2026-02-25
-**Source PDF:** `Documentation/OECD Guidelines/205.pdf`
+**Generated:** 2023-10-27
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/205.pdf`
 
 ## Summary
 
@@ -10,38 +10,58 @@
 | Guideline Number | 205 |
 | Title | Avian Dietary Toxicity Test |
 | Adoption Date | 4 April 1984 |
-| Preferred Species | Various avian species: mallard duck (Anas platyrhynchos), bobwhite quail (Colinus virginianus), pigeon (Columba livia), Japanese quail (Coturnix coturnix japonica), ring-necked pheasant (Phasianus colchicus), red-legged partridge (Alectoris rufa) |
-| Study Duration | 8 days minimum (5 days dietary exposure + minimum 3 days recovery); extended up to 21 days if mortalities occur on days 7-8 or signs of toxicity persist |
-| Animals per Dose Level | 10 birds per group (2 control groups + 1 treatment group per concentration) |
-| Dose Groups | At least 5 dietary concentration levels (separated by a constant factor preferably not exceeding 2.0) + 2 control groups |
-| Route of Administration | Dietary exposure (test substance mixed uniformly in feed) |
+| Preferred Species | Mallard duck, Bobwhite quail, Pigeon, Japanese quail, Ring-necked pheasant, Red-legged partridge (See Table 1) |
+| Study Duration | Minimum 8 days (5 days exposure + 3 days recovery), up to 21 days if necessary |
+| Animals per Dose Level | 10 birds per group |
+| Dose Groups | At least 5 test groups + 2 control groups |
+| Route of Administration | Oral (Dietary) |
 
 ## Purpose and Scope
 
-This test guideline determines the median lethal concentration (LC50) of a test chemical in the diet of birds following a 5-day dietary exposure and a minimum 3-day recovery period. Birds are fed a diet containing the test substance at a range of concentrations, and mortalities and signs of toxicity are recorded daily. The LC50 is defined as the concentration of the chemical in the diet estimated to result in 50 per cent mortality. The guideline cannot be used for highly volatile substances and requires the test substance to possess characteristics allowing uniform mixing in the diet. If a test at one dose level of at least 5000 ppm produces no compound-related mortality or other observed toxic effects, a full study using five dose levels may not be necessary.
+This guideline describes a method for determining the median lethal concentration (LC50) of chemicals in the diet for avian species. Birds are fed a diet containing the test substance at a range of concentrations for five days, followed by a recovery period of at least three days on a basal diet. The test is used to assess acute dietary toxicity and is particularly relevant for pesticides and environmental pollutants affecting wildlife. It cannot be used for highly volatile substances or those that cannot be uniformly mixed in the diet.
 
 ## Key Observations
 
 ### Clinical Observations
-- Signs of intoxication and other abnormal behaviour: twice on day 1, daily thereafter
-- Mortality: twice on day 1, daily thereafter
-- Body weights: day 0, 5, 8, and end of test (if extended beyond 8 days)
-- Food consumption: estimated by weigh-back method per pen for days 0-5, 5-8, and 8-end of test (if extended)
-- Description of all signs of intoxication (e.g., convulsions, lethargy) and other abnormal behaviour (e.g., unusual interactions with other birds), including day of onset, duration, severity (including death), and numbers affected at each concentration and controls for each day
-- Individual weights recorded for all birds that die during the test
+- Signs of intoxication and abnormal behavior (observed twice on day 1, daily thereafter).
+- Mortality (recorded twice on day 1, daily thereafter).
+- Body weights (measured on day 0, 5, 8, and end of test).
+- Food consumption (measured for periods 0-5, 5-8, and 8-end of test).
 
 ### Haematology
-- Not applicable for this guideline (acute avian dietary toxicity test)
+*Not specified as a standard requirement in this acute dietary toxicity guideline.*
 
 ### Clinical Biochemistry
-- Not applicable for this guideline (acute avian dietary toxicity test)
+*Not specified as a standard requirement in this acute dietary toxicity guideline.*
 
 ### Pathology
-- Not applicable for this guideline (acute avian dietary toxicity test)
+- Gross necropsy implied for dead birds to determine cause of death (though not explicitly detailed as a separate histopathology section, individual weights of all birds that die are recorded).
+- Observation of signs of intoxication (e.g., convulsions, lethargy) throughout the test.
 
 ## Endpoints
 
-**Source:** None
-**Column Convention:** N/A
+**Source:** Guideline body text
+**Column Convention:** Inferred from guideline language
 
-This guideline does not contain extractable endpoints. It is an acute avian dietary toxicity test focused on determining the LC50 (median lethal concentration) from mortality data. The primary calculated result is the LC50 value with 95% confidence limits, the slope of the concentration-response curve, the highest concentration causing no mortality, and the lowest concentration causing 100% mortality. The guideline does not include organ weights, histopathology, clinical biochemistry, haematology, or hormone measurements.
+### Endpoint Summary
+
+| Category | Required | Optional |
+|----------|----------|----------|
+| Mortality | 1 | 0 |
+| Clinical Observations | 2 | 0 |
+| Body Weight | 1 | 0 |
+| Food Consumption | 1 | 0 |
+| **Total** | **5** | **0** |
+
+### Detailed Endpoints
+
+| Category | Endpoint | Requirement Level | Source | Footnotes |
+|----------|----------|-------------------|--------|-----------|
+| Mortality | Mortality count | Required | Guideline text | Recorded twice on day 1, daily thereafter |
+| Clinical Observations | Signs of intoxication and abnormal behaviour | Required | Guideline text | Includes convulsions, lethargy, unusual interactions; observed twice on day 1, daily thereafter |
+| Body Weight | Body weight | Required | Guideline text | Measured on day 0, 5, 8, and end of test |
+| Food Consumption | Food consumption | Required | Guideline text | Estimated by weigh-back method per pen |
+| Statistical Analysis | LC50 value | Required | Guideline text | Determined by probit analysis or other appropriate statistical methods |
+
+### Footnotes
+*No specific footnotes associated with individual endpoints in the source text.*

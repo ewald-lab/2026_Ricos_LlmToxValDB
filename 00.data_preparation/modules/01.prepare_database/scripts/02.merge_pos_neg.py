@@ -1,49 +1,57 @@
-import pandas as pd
 import argparse
-import os
+import pandas as pd
+import logging
+import sys
+import time
+
+def setup_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        stream=sys.stdout
+    )
+    return logging.getLogger(__name__)
 
 def main():
-    parser = argparse.ArgumentParser(description="Merge positive and negative toxicological effect datasets.")
-    parser.add_argument("--positives", required=True, help="Path to positives TSV.")
-    parser.add_argument("--negatives", required=True, help="Path to negatives TSV.")
-    parser.add_argument("--output", required=True, help="Path to output merged TSV.")
+    parser = argparse.ArgumentParser(description="Merge positive and negative toxicological cleaned data.")
+    parser.add_argument("--positives", required=True, help="Path to the positives TSV file.")
+    parser.add_argument("--negatives", required=True, help="Path to the negatives TSV file.")
+    parser.add_argument("--output", required=True, help="Path to the output merged TSV file.")
     args = parser.parse_args()
 
-    print(f"Loading positives from {args.positives}...")
+    logger = setup_logging()
+    start_time = time.time()
+
+    logger.info(f"Loading positives from: {args.positives}")
     df_pos = pd.read_csv(args.positives, sep="\t", low_memory=False)
-    
-    print(f"Loading negatives from {args.negatives}...")
+    logger.info(f"Positives shape: {df_pos.shape}")
+
+    logger.info(f"Loading negatives from: {args.negatives}")
     df_neg = pd.read_csv(args.negatives, sep="\t", low_memory=False)
+    logger.info(f"Negatives shape: {df_neg.shape}")
 
-    # Ensure NEGATIVE column exists in positives and set to False
-    if 'NEGATIVE' not in df_pos.columns:
-        df_pos['NEGATIVE'] = False
+    # Add NEGATIVE column to positives and set to False
+    logger.info("Setting NEGATIVE=False for positive findings...")
+    df_pos['NEGATIVE'] = False
+
+    # Ensure NEGATIVE is present in negatives (it should be True)
+    if 'NEGATIVE' not in df_neg.columns:
+        logger.warning("NEGATIVE column missing in negatives file. Setting to True.")
+        df_neg['NEGATIVE'] = True
     else:
-        # Just in case it existed but with other values
-        df_pos['NEGATIVE'] = False
+        # Just to be sure, fill any NaNs with True
+        df_neg['NEGATIVE'] = df_neg['NEGATIVE'].fillna(True)
 
-    # Standardize column order. 
-    # We'll use the column order from the negatives file as the base, 
-    # but ensure it includes all columns from positives too.
-    neg_cols = list(df_neg.columns)
-    pos_cols = list(df_pos.columns)
-    
-    # Combined list of columns, preserving order from neg_cols then adding missing from pos_cols
-    all_cols = neg_cols + [c for c in pos_cols if c not in neg_cols]
-    
-    print(f"Merging datasets...")
     # Concatenate
+    logger.info("Merging dataframes...")
     df_merged = pd.concat([df_pos, df_neg], ignore_index=True)
-    
-    # Fill NaN for NEGATIVE (shouldn't be any now, but just in case)
-    df_merged['NEGATIVE'] = df_merged['NEGATIVE'].fillna(False)
+    logger.info(f"Merged shape: {df_merged.shape}")
 
-    # Reorder columns
-    df_merged = df_merged[all_cols]
-
-    print(f"Saving merged dataset to {args.output} (Shape: {df_merged.shape})...")
+    # Save
+    logger.info(f"Saving merged data to: {args.output}")
     df_merged.to_csv(args.output, sep="\t", index=False)
-    print("Done.")
+
+    logger.info(f"Done in {time.time() - start_time:.2f}s")
 
 if __name__ == "__main__":
     main()

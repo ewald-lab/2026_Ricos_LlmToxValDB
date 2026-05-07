@@ -1,0 +1,50 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the head
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > bitot spots of the conjunctiva
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > chemosis
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival hyperemia
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival icterus
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival membrane
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctivitis
+phenotypic abnormality > abnormality of the digestive system
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly > hepatomegaly
+phenotypic abnormality > abnormality of the endocrine system
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating gonadotropin concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating gonadotropin concentration > abnormal circulating follicle stimulating hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating gonadotropin concentration > abnormal circulating follicle stimulating hormone concentration > decreased circulating follicle stimulating hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating gonadotropin concentration > abnormal circulating luteinizing hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating sex hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating sex hormone concentration > abnormal circulating androgen level
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating sex hormone concentration > abnormal circulating androgen level > abnormal circulating testosterone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t3 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating t4 concentration
+phenotypic abnormality > abnormality of the eye
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > decreased lacrimation
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > decreased lacrimation > alacrima
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > epiphora
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > epiphora > increased tear production
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > epiphora > increased tear production > increased basal tear production
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > hemolacria
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure > focal autonomic seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure > focal autonomic seizure > focal autonomic seizure with lacrimation
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight

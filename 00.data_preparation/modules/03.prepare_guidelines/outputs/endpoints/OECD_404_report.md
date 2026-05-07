@@ -1,51 +1,45 @@
 # OECD Test Guideline 404: Acute Dermal Irritation/Corrosion
 
-**Generated:** 2026-02-25
-**Source PDF:** `Documentation/OECD Guidelines/404.pdf`
+**Generated:** 2023-10-27
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/404.pdf`
 
 ## Summary
 
 | Field | Value |
-|---|---|
-| **Guideline Number** | 404 |
-| **Title** | Acute Dermal Irritation/Corrosion |
-| **Adoption Date** | 28 July 2015 |
-| **Preferred Species** | Albino rabbit (preferred); healthy young adult rabbits used |
-| **Study Duration** | Up to 14 days observation (4-hour dermal exposure period) |
-| **Animals per Dose Level** | 1 animal in initial test; up to 2 additional in confirmatory test (maximum 3 total) |
-| **Dose Groups** | Single dose level (0.5 mL liquid or 0.5 g solid/paste); sequential patch application |
-| **Route of Administration** | Dermal application (single dose to approximately 6 cm2 of skin) |
+|-------|-------|
+| Guideline Number | 404 |
+| Title | Acute Dermal Irritation/Corrosion |
+| Adoption Date | 28 July 2015 |
+| Preferred Species | Albino rabbit (healthy young adult) |
+| Study Duration | Up to 14 days observation period (4 hours exposure) |
+| Animals per Dose Level | Initial test: 1 animal; Confirmatory test: up to 2 additional animals |
+| Dose Groups | Single dose application (0.5 mL liquid or 0.5 g solid/paste) |
+| Route of Administration | Dermal (topical application via gauze patch) |
 
 ## Purpose and Scope
 
-OECD Test Guideline 404 describes an in vivo method for assessing the acute dermal irritation and corrosion potential of chemicals applied to the skin of laboratory animals. The test chemical is applied as a single dose to the skin of an experimental animal, with untreated skin areas serving as the control, and the degree of irritation or corrosion is read and scored at specified intervals. In vivo testing should only be undertaken as a last resort after a weight-of-evidence analysis of all existing data (including human data, in vitro data, physico-chemical properties, and non-testing methods) has proven inconclusive.
+This guideline provides a method for testing chemicals to determine their potential to cause dermal irritation or corrosion in vivo. It emphasizes the use of Integrated Approaches to Testing and Assessment (IATA) and weight-of-evidence analysis to avoid unnecessary animal testing. The test involves applying a single dose to the skin of an experimental animal (preferably albino rabbits) and observing the degree of irritation/corrosion at specified intervals to evaluate reversibility.
 
 ## Key Observations
 
 ### Clinical Observations
-
-- Erythema and oedema are scored at 60 minutes, and then at 24, 48, and 72 hours after patch removal using the Draize scoring scale (0-4 for each parameter).
-- For the initial test in one animal, the test site is also examined immediately after patch removal.
-- Initial test uses sequential patch application: first patch removed after 3 minutes, second after 1 hour, third after 4 hours.
-- All local toxic effects such as defatting of the skin are fully described and recorded.
-- Any systemic adverse effects (e.g., effects on clinical signs of toxicity and body weight) are fully described and recorded.
-- Reversibility of effects is assessed over the 14-day observation period; persistent responses such as alopecia, hyperkeratosis, hyperplasia, and scaling indicate the chemical should be considered an irritant.
-- Corrosive reactions are identified by ulcers, bleeding, bloody scabs, and by the end of observation at 14 days, by discolouration due to blanching of the skin, complete areas of alopecia, and scars.
-- Animals showing continuing signs of severe distress and/or pain at any stage are humanely killed.
+- Examination for signs of erythema and oedema.
+- Scoring at 60 minutes, and then at 24, 48, and 72 hours after patch removal.
+- Immediate examination after patch removal for initial tests.
+- Observation for local toxic effects (e.g., defatting of skin).
+- Observation for systemic adverse effects (e.g., clinical signs of toxicity, body weight changes).
+- Monitoring for severe distress or pain (humane killing criteria).
 
 ### Haematology
-
-Not applicable. This guideline is an acute dermal irritation/corrosion test and does not require haematological assessments.
+- Not applicable (No haematological parameters listed in this acute irritation guideline).
 
 ### Clinical Biochemistry
-
-Not applicable. This guideline is an acute dermal irritation/corrosion test and does not require clinical biochemistry assessments.
+- Not applicable (No clinical biochemistry parameters listed in this acute irritation guideline).
 
 ### Pathology
-
-- Histopathological examination should be considered to clarify equivocal responses (optional).
-- For corrosion assessment: visible necrosis through the epidermis and into the dermis is evaluated.
-- Questionable lesions should be evaluated by histopathology.
+- Histopathological examination should be considered to clarify equivocal responses.
+- Evaluation of lesions for necrosis (corrosion) vs. reversible damage (irritation).
+- Assessment of ulceration, bleeding, bloody scabs, discolouration, alopecia, and scars by day 14.
 
 ## Endpoints
 
@@ -54,22 +48,20 @@ Not applicable. This guideline is an acute dermal irritation/corrosion test and 
 
 ### Endpoint Summary
 
-| Metric | Count |
-|---|---|
-| Total endpoints | 9 |
-| Required | 8 |
-| Optional | 1 |
+| Category | Required | Optional |
+|----------|----------|----------|
+| Clinical Observations | 2 | 0 |
+| Pathology | 1 | 0 |
+| **Total** | **3** | **0** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
-|---|---|---|---|---|
-| Dermal Scoring | Erythema and eschar formation score | Required | Para 19; Grading Table | Draize scale 0-4; scored at 60 min, 24, 48, 72 h after patch removal |
-| Dermal Scoring | Oedema formation score | Required | Para 19; Grading Table | Draize scale 0-4; scored at 60 min, 24, 48, 72 h after patch removal |
-| Dermal Assessment | Irritation determination | Required | Para 22-23 | Evaluated in conjunction with nature and severity of lesions and reversibility |
-| Dermal Assessment | Corrosion determination | Required | Para 15; Annex definition 2 | Irreversible damage; visible necrosis through epidermis into dermis |
-| Dermal Assessment | Reversibility of dermal lesions | Required | Para 18, 23 | Observed up to 14 days; persistent alopecia, hyperkeratosis, hyperplasia, scaling indicate irritant |
-| Clinical Observations | Local toxic effects (e.g., defatting of skin) | Required | Para 19 | Should be fully described and recorded |
-| Clinical Observations | Clinical signs of toxicity (systemic adverse effects) | Required | Para 19 | Should be fully described and recorded |
-| Clinical Observations | Body weight | Required | Para 19; Para 24 | Recorded at start and conclusion of test; reported as systemic effect |
-| Pathology | Histopathological examination | Optional | Para 19; Annex definition 2 | Should be considered to clarify equivocal responses |
+|----------|----------|-------------------|--------|-----------|
+| Clinical Observations | Erythema score | Required | Guideline text | Graded 0-4 based on severity (No erythema to Severe erythema/eschar) |
+| Clinical Observations | Oedema score | Required | Guideline text | Graded 0-4 based on severity (No oedema to Severe oedema) |
+| Pathology | Histopathological examination | Optional | Guideline text | To be carried out to clarify equivocal responses |
+
+### Footnotes
+
+None specific beyond the grading scale descriptions in the main text.

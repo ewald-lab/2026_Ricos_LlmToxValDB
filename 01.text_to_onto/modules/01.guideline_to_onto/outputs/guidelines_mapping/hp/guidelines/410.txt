@@ -1,0 +1,109 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of blood and blood forming tissues
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hematocrit
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hematocrit > reduced hematocrit
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hemoglobin
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hemoglobin > methemoglobinemia
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hemoglobin concentration
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hemoglobin concentration > decreased hemoglobin concentration
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal hemoglobin concentration > increased circulating hemoglobin concentration
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal red blood cell count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal red blood cell count > decreased red blood cell count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal erythrocyte morphology > abnormal red blood cell count > increased red blood cell count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology > abnormal leukocyte count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology > abnormal leukocyte count > abnormal granulocyte count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology > abnormal leukocyte count > abnormal granulocyte count > increased total granulocyte count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology > abnormal leukocyte count > decreased total leukocyte count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology > abnormal leukocyte count > increased total leukocyte count
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal leukocyte morphology > abnormal leukocyte count > increased total leukocyte count > hyperleukocytosis
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormality of coagulation
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormality of coagulation > hypercoagulability
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the head
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > abnormal morphology of the conjunctival vasculature
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > abnormal morphology of the conjunctival vasculature > conjunctival telangiectasia
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > bitot spots of the conjunctiva
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > chemosis
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival amyloidosis
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival hyperemia
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival hyperpigmentation
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival icterus
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival membrane
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival whitish salt like deposits
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival xerosis
+phenotypic abnormality > abnormality of metabolism homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration > abnormal blood monovalent inorganic cation concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood chloride concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating carboxylic acid concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating carboxylic acid concentration > abnormal circulating dicarboxylic acid concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating carboxylic acid concentration > abnormal circulating dicarboxylic acid concentration > abnormal circulating bilirubin concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating carboxylic acid concentration > abnormal circulating dicarboxylic acid concentration > abnormal circulating bilirubin concentration > hyperbilirubinemia
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating carboxylic acid concentration > abnormal circulating dicarboxylic acid concentration > abnormal circulating bilirubin concentration > hyperbilirubinemia > increased total bilirubin
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating nitrogen compound concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating nitrogen compound concentration > abnormal blood urea nitrogen concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating nitrogen compound concentration > abnormal blood urea nitrogen concentration > increased blood urea nitrogen
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating nitrogen compound concentration > abnormal blood urea nitrogen concentration > reduced blood urea nitrogen
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating nitrogen compound concentration > abnormal circulating creatinine concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration > abnormal circulating nitrogen compound concentration > azotemia
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal enzyme concentration or activity
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal enzyme concentration or activity > abnormal circulating enzyme concentration or activity
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal enzyme concentration or activity > abnormal circulating enzyme concentration or activity > abnormal gamma glutamyltransferase level
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal enzyme concentration or activity > abnormal circulating enzyme concentration or activity > abnormal gamma glutamyltransferase level > reduced gamma glutamyltransferase level
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal enzyme concentration or activity > abnormal circulating enzyme concentration or activity > reduced circulating cholinesterase activity
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > acidemia
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > alkalemia
+phenotypic abnormality > abnormality of the digestive system
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly > hepatomegaly
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > abnormal liver parenchyma morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > abnormal liver parenchyma morphology > hepatic lobular inflammation
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > cirrhosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic fibrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic necrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic necrosis > hepatocellular necrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatitis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatitis > chronic hepatitis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatitis > giant cell hepatitis
+phenotypic abnormality > abnormality of the eye
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal nephron morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal nephron morphology > abnormal renal tubule morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal nephron morphology > abnormal renal tubule morphology > abnormal tubulointerstitial morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal nephron morphology > abnormal renal tubule morphology > abnormal tubulointerstitial morphology > tubulointerstitial microganismal infiltration
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal renal interstitial morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal renal interstitial morphology > renal interstitial mononuclear cell infiltration
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > dermatological manifestations of systemic disorders
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > dermatological manifestations of systemic disorders > cyanosis
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index > increased body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > overweight

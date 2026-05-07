@@ -16,37 +16,22 @@ from typing import Iterable
 
 MODULE_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ENDPOINTS_DIR = MODULE_ROOT / "outputs" / "endpoints"
-DEFAULT_OUTPUT_DIR = MODULE_ROOT / "outputs" / "normalized_endpoints"
+DEFAULT_OUTPUT_DIR = MODULE_ROOT / "outputs" / "endpoints"
 
-CATEGORY_MAP = {
-    "Body Weight": "Clinical Observations",
-    "Clinical Observations": "Clinical Observations",
-    "Maternal Clinical Observations": "Clinical Observations",
-    "Dermal Scoring": "Dermal Assessment",
-    "Dermal Assessment": "Dermal Assessment",
-    "Weight": "Organ Weights",
-    "Organ Weights": "Organ Weights",
-    "Organ Weights (parental)": "Organ Weights",
-    "Organ Weights (pups)": "Organ Weights",
-    "Histopathology": "Histopathology",
-    "Hormones": "Hormones",
-    "Hormones measurement": "Hormones",
-    "Serum/Plasma Hormone Analyses": "Hormones",
-    "Haematology": "Haematology",
-    "Clinical Biochemistry": "Clinical Biochemistry",
-    "Clinical Chemistry": "Clinical Biochemistry",
-    "Serum/Plasma Biochemistry": "Clinical Biochemistry",
-    "Additional Biochemistry": "Clinical Biochemistry",
-    "Urinalysis": "Urinalysis",
-    "Pathology": "Pathology",
-    "Reproductive": "Reproductive",
-    "Reproductive/Sperm Parameters": "Reproductive",
-    "Sperm Measures": "Reproductive",
-    "Offspring/Developmental": "Developmental",
-    "Fetal Measurements": "Developmental",
-    "Lethality Estimates": "Lethality Estimates",
-    "Bronchoalveolar Lavage (BALF)": "Bronchoalveolar Lavage",
-}
+def load_category_map() -> dict[str, str]:
+    map_path = MODULE_ROOT / "config" / "category_normalization.csv"
+    mapping = {}
+    if map_path.exists():
+        with open(map_path, newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                original = row.get("original_category", "").strip()
+                normalized = row.get("normalized_category", "").strip()
+                if original:
+                    mapping[original] = normalized
+    return mapping
+
+CATEGORY_MAP = load_category_map()
 
 CATEGORY_SUFFIX = {
     "Organ Weights": "weight",
@@ -209,7 +194,7 @@ def guideline_sort_key(path: Path) -> tuple[int, str]:
 
 def discover_endpoint_csvs(endpoints_dir: Path = DEFAULT_ENDPOINTS_DIR) -> list[Path]:
     """Find all OECD endpoint CSV files."""
-    return sorted(endpoints_dir.glob("OECD_*_endpoints.csv"), key=guideline_sort_key)
+    return sorted(endpoints_dir.glob("OECD_*_endpoints*.csv"), key=guideline_sort_key)
 
 
 def load_endpoint_csv(path: Path) -> list[dict[str, str]]:
@@ -260,6 +245,18 @@ def normalize_endpoint_name(name: str, normalized_category: str) -> str:
     """Normalize endpoint names using synonym tables and category suffixes."""
     name_lower = name.strip().lower()
     normalized = ENDPOINT_SYNONYMS.get(name_lower, ORGAN_SYNONYMS.get(name_lower, name_lower))
+
+    # Remove text within parentheses
+    normalized = re.sub(r'\(.*?\)', '', normalized)
+    # Remove 'with 95% ci and slope' or similar
+    normalized = re.sub(r'\bwith\s+\d+%\s+ci\s+and\s+slope\b', '', normalized)
+    # Remove any standalone numbers with %
+    normalized = re.sub(r'\d+%', '', normalized)
+    # Clean up any leftover 'with  ci and slope' if present
+    normalized = re.sub(r'\bwith\s+ci\s+and\s+slope\b', '', normalized)
+    
+    # Remove extra whitespace
+    normalized = " ".join(normalized.split())
 
     suffix = CATEGORY_SUFFIX.get(normalized_category)
     if suffix and not normalized.endswith(suffix):

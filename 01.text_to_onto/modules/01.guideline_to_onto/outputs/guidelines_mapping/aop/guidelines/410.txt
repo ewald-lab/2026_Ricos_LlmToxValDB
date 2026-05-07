@@ -1,0 +1,23 @@
+cellular
+cellular > acetylcholinesterase inhibition
+individual
+individual > decreased body weight
+individual > increase incomplete ecdysis
+individual > increased locomotion
+individual > multi organ failure involving acute respiratory distress syndrome
+molecular
+molecular > decreased extracellular chloride
+molecular > endocrine disruption
+organ
+organ > coagulation
+organ > impaired oxygenation of the blood
+organ > increased serum creatinine
+organ > ke5 altered circulating reproductive hormones
+organ > liver dysfunction
+organ > liver injury
+organ > n a methemoglobinemia decreased hemoglobin hematocrit red blood cell number
+population
+population > increased kidney failure
+tissue
+tissue > increased accumulation of alpha2u microglobulin
+tissue > reduction eggshell thickness

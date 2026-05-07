@@ -1,0 +1,30 @@
+cell injury not otherwise specified
+eye degeneration replacement by fibrosis
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epithelial
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epithelial > necrosis respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > epithelial alteration
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy respiratory epithelium
+morphologic change > general observation
+morphologic change > general observation > cause of death moribund condition
+morphologic change > general observation > microscopic overall diagnosis
+morphologic change > neoplasia
+morphologic change > normal altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased mucification
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion
+morphologic change > structural alteration
+morphologic change > structural alteration > organ specific entities changes
+morphologic change > structural alteration > organ specific entities changes > phthisis bulbi

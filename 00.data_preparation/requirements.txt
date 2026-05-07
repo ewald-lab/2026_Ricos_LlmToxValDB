@@ -124,3 +124,5 @@ uuid-utils==0.14.1
 wcwidth==0.6.0
 xxhash==3.6.0
 zstandard==0.25.0
+langchain-community
+pypdf

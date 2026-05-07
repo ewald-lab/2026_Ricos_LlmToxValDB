@@ -1,0 +1,6 @@
+individual
+individual > decreased body weight
+individual > obesity
+organ
+organ > reduced anterior swim bladder inflation
+organ > reduced posterior swim bladder inflation

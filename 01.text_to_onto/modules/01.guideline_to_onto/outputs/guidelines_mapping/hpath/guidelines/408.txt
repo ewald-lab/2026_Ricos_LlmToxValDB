@@ -1,0 +1,18 @@
+dilatation of epididymal ducts
+hyperplasia mucosal thickened squamous layer
+inflammation induced tissue alteration
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular > necrosis testis
+morphologic change > neoplasia
+morphologic change > neoplasia > benign tumor
+morphologic change > neoplasia > benign tumor > adenoma
+morphologic change > neoplasia > benign tumor > adenoma > adenoma pars distalis
+morphologic change > neoplasia > benign tumor > adenoma > adenoma pars intermedia
+morphologic change > neoplasia > benign tumor > adenoma > adenoma rete testis
+morphologic change > neoplasia > malignant tumor
+morphologic change > neoplasia > malignant tumor > carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma rete testis

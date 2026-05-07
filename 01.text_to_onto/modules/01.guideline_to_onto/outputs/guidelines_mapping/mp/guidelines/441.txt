@@ -1,0 +1,177 @@
+mammalian phenotype
+mammalian phenotype > adipose tissue phenotype
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology > abnormal abdominal fat pad morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology > abnormal abdominal fat pad morphology > abnormal epididymal fat pad morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology > abnormal abdominal fat pad morphology > abnormal epididymal fat pad morphology > abnormal epididymal fat pad weight
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology > abnormal abdominal fat pad morphology > abnormal epididymal fat pad morphology > abnormal epididymal fat pad weight > increased epididymal fat pad weight
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology > abnormal abdominal fat pad morphology > abnormal gonadal fat pad morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology > abnormal abdominal fat pad morphology > abnormal gonadal fat pad morphology > increased gonadal fat pad weight
+mammalian phenotype > behavior neurological phenotype
+mammalian phenotype > behavior neurological phenotype > abnormal behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > decreased food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > increased food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior > increased aggression
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal sexual interaction
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal sexual interaction > abnormal copulation behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal sexual interaction > abnormal copulation behavior > abnormal copulatory plug deposition
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal sexual interaction > abnormal copulation behavior > abnormal copulatory plug deposition > increased copulatory plug deposition
+mammalian phenotype > cardiovascular system phenotype
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal eye vasculature morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal eye vasculature morphology > abnormal conjunctival vasculature morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal eye vasculature morphology > abnormal conjunctival vasculature morphology > conjunctival hyperemia
+mammalian phenotype > endocrine exocrine gland phenotype
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal gland weight > decreased adrenal gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal gland weight > increased adrenal gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland anterior lobe morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland anterior lobe morphology > enlarged prostate gland anterior lobe
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland anterior lobe morphology > enlarged prostate gland anterior lobe > increased prostate gland anterior lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland anterior lobe morphology > small prostate gland anterior lobe
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland anterior lobe morphology > small prostate gland anterior lobe > decreased prostate gland anterior lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland dorsolateral lobe morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland dorsolateral lobe morphology > enlarged prostate gland dorsolateral lobe
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland dorsolateral lobe morphology > enlarged prostate gland dorsolateral lobe > increased prostate gland dorsolateral lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland dorsolateral lobe morphology > small prostate gland dorsolateral lobe
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland dorsolateral lobe morphology > small prostate gland dorsolateral lobe > decreased prostate gland dorsolateral lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight > decreased prostate gland ventral lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight > decreased prostate gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight > increased prostate gland ventral lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight > increased prostate gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size > abnormal seminal vesicle weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size > abnormal seminal vesicle weight > decreased seminal vesicle weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size > abnormal seminal vesicle weight > increased seminal vesicle weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis interstitial tissue morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis interstitial tissue morphology > abnormal leydig cell morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis interstitial tissue morphology > abnormal leydig cell morphology > increased leydig cell number
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis interstitial tissue morphology > abnormal leydig cell morphology > leydig cell atrophy
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis interstitial tissue morphology > abnormal leydig cell morphology > leydig cell hypertrophy
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis size
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis size > abnormal testis weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal male reproductive gland morphology > abnormal testis morphology > abnormal testis size > abnormal testis weight > increased testis weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal exocrine gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal exocrine gland physiology > abnormal lacrimal gland physiology
+mammalian phenotype > growth size body region phenotype
+mammalian phenotype > growth size body region phenotype > organomegaly
+mammalian phenotype > growth size body region phenotype > organomegaly > enlarged kidney
+mammalian phenotype > growth size body region phenotype > organomegaly > enlarged kidney > increased kidney weight
+mammalian phenotype > growth size body region phenotype > organomegaly > visceromegaly
+mammalian phenotype > growth size body region phenotype > organomegaly > visceromegaly > enlarged liver
+mammalian phenotype > growth size body region phenotype > organomegaly > visceromegaly > enlarged liver > increased liver weight
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > abnormal circulating thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > abnormal circulating thyroxine level > decreased circulating thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > abnormal circulating thyroxine level > increased circulating thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > decreased thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > abnormal circulating triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > abnormal circulating triiodothyronine level > decreased circulating triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > abnormal circulating triiodothyronine level > increased circulating triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > decreased triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > increased triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating androgen level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating androgen level > abnormal circulating dihydrotestosterone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating androgen level > abnormal circulating dihydrotestosterone level > decreased circulating dihydrotestosterone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > decreased circulating gonadotropin level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > decreased circulating gonadotropin level > decreased circulating follicle stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > decreased circulating gonadotropin level > decreased circulating follicle stimulating hormone level > suppressed circulating follicle stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > decreased circulating gonadotropin level > decreased circulating luteinizing hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > increased circulating gonadotropin level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > increased circulating gonadotropin level > increased circulating follicle stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating gonadotropin level > increased circulating gonadotropin level > increased circulating luteinizing hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > increased circulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > increased circulating hormone level > increased circulating levels of thyroid hormone
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal follicle stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal follicle stimulating hormone level > decreased follicle stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal follicle stimulating hormone level > increased follicle stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal luteinizing hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal luteinizing hormone level > decreased luteinizing hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal luteinizing hormone level > increased luteinizing hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal testosterone level
+mammalian phenotype > integument phenotype
+mammalian phenotype > liver biliary system phenotype
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology > abnormal liver morphology
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology > abnormal liver morphology > abnormal liver size
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology > abnormal liver morphology > abnormal liver size > abnormal liver weight
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology > abnormal liver morphology > abnormal liver size > abnormal liver weight > decreased liver weight
+mammalian phenotype > mortality aging
+mammalian phenotype > mortality aging > abnormal induced morbidity mortality
+mammalian phenotype > mortality aging > abnormal survival
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > lethality during fetal growth through weaning
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > lethality during fetal growth through weaning > postnatal lethality
+mammalian phenotype > muscle phenotype
+mammalian phenotype > muscle phenotype > abnormal muscle morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight
+mammalian phenotype > nervous system phenotype
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal autonomic nervous system physiology
+mammalian phenotype > renal urinary system phenotype
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal kidney morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal kidney morphology > abnormal kidney size
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal kidney morphology > abnormal kidney size > abnormal kidney weight
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal kidney morphology > abnormal kidney size > abnormal kidney weight > decreased kidney weight
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology > abnormal foreskin morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology > phimosis
+mammalian phenotype > reproductive system phenotype
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination > abnormal secondary sex determination
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination > abnormal secondary sex determination > abnormal sexual maturation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination > abnormal secondary sex determination > abnormal sexual maturation > delayed sexual maturation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination > abnormal secondary sex determination > abnormal sexual maturation > delayed sexual maturation > delayed balanopreputial separation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination > abnormal secondary sex determination > abnormal sexual maturation > early sexual maturation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination > abnormal secondary sex determination > abnormal sexual maturation > early sexual maturation > early balanopreputial separation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal male reproductive system physiology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal male reproductive system physiology > abnormal epididymis physiology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal male reproductive system physiology > abnormal epididymis physiology > abnormal epididymal cell proliferation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal male reproductive system physiology > abnormal epididymis physiology > abnormal epididymal cell proliferation > increased epididymal cell proliferation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal male reproductive system physiology > abnormal epididymis physiology > abnormal epididymal cell proliferation > increased epididymal cell proliferation > increased epididymal epithelium cell proliferation
+mammalian phenotype > vision eye phenotype
+mammalian phenotype > vision eye phenotype > abnormal eye morphology
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal anterior eye segment morphology
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal anterior eye segment morphology > abnormal conjunctiva morphology
+mammalian phenotype > vision eye phenotype > abnormal eye physiology
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal lacrimal apparatus physiology
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal tear production
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal tear production > alacrima
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal tear production > chromodacryorrhea
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal tear production > decreased tear production
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal tear production > excessive tearing
+mammalian phenotype > vision eye phenotype > abnormal eye physiology > abnormal tear production > increased tear production

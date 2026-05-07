@@ -1,0 +1,306 @@
+mammalian phenotype
+mammalian phenotype > behavior neurological phenotype
+mammalian phenotype > behavior neurological phenotype > abnormal behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness > decreased alertness
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness > decreased alertness > lethargy
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol > enhanced behavioral response to alcohol
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol > enhanced behavioral response to alcohol > hyperactivity elicited by ethanol administration
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal seizure response to pharmacological agent
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal seizure response to pharmacological agent > increased susceptibility to pharmacologically induced seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal sensitization to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal associative learning
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal associative learning > abnormal conditioned emotional response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal nonassociative learning
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal nonassociative learning > abnormal dishabituation
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal nonassociative learning > abnormal habituation
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal nonassociative learning > abnormal habituation > abnormal habituation to a new environment
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal nonassociative learning > abnormal sensitization
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal response to new environment
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > dysphagia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > increased food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > increased food intake > polyphagia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal suckling behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal suckling behavior > no swallowing reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior > increased aggression
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal anxiety related response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal anxiety related response > increased anxiety related response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal fear related response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal fear related response > decreased fear related response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal grooming behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal grooming behavior > excessive scratching
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal impulsive behavior control
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal postural reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal postural reflex > abnormal righting response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal postural reflex > abnormal righting response > impaired righting response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to electrical stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to electrical stimuli > hyperresponsive to electrical stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to electrical stimuli > hyporesponsive to electrical stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to electrical stimuli > unresponsive to electrical stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > hyperresponsive to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > hyporesponsive to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > unresponsive to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex > decreased startle reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex > increased startle reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > tremors
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > ataxia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > dysmetria
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > impaired balance
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > impaired coordination
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements > head bobbing
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements > head shaking
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements > head tilt
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements > head tossing
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor activation
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal vertical activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal vertical activity > decreased vertical activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal vertical activity > increased vertical activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > decreased locomotor activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > increased locomotor activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity > hyperactivity elicited by feed restriction
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > bradykinesia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > hypoactivity in response to feed restriction
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > no spontaneous movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior > increased stereotypic behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal nocifensive behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception > abnormal pain threshold
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception > abnormal pain threshold > hyperalgesia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception > abnormal pain threshold > hypoalgesia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > hyperresponsive
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal aggression towards conspecific
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal parental behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent > abnormal seizure response to electrical stimulation
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent > abnormal seizure response to electrical stimulation > abnormal kindling response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent > abnormal seizure response to electrical stimulation > abnormal kindling response > decreased kindling response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent > abnormal seizure response to electrical stimulation > abnormal kindling response > increased kindling response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent > abnormal seizure response to electrical stimulation > maximal tonic hindlimb extension seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > abnormal seizure response to inducing agent > environmentally induced seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > convulsive seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > convulsive seizures > clonic seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > convulsive seizures > myoclonus
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > convulsive seizures > tonic clonic seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > convulsive seizures > tonic seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > sporadic seizures
+mammalian phenotype > cardiovascular system phenotype
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > eye hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > eye hemorrhage > retina hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > gastrointestinal hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > gastrointestinal hemorrhage > intestinal hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > gastrointestinal hemorrhage > intestinal hemorrhage > large intestine hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > gastrointestinal hemorrhage > intestinal hemorrhage > large intestine hemorrhage > rectal hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > heart hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > hemarthrosis
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > hemoperitoneum
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > intracranial hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > intracranial hemorrhage > brainstem hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > intracranial hemorrhage > cerebellum hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > intracranial hemorrhage > intracerebral hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > intracranial hemorrhage > subarachnoid hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > kidney hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > subcutaneous hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > placenta hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > skin hemorrhage
+mammalian phenotype > craniofacial phenotype
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology > abnormal forehead skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology > abnormal forehead skin morphology > abnormal forehead pigmentation
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology > abnormal forehead skin morphology > abnormal forehead pigmentation > decreased forehead pigmentation
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal outer ear morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal outer ear morphology > abnormal outer ear skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal outer ear morphology > abnormal outer ear skin morphology > abnormal ear pigmentation
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal outer ear morphology > abnormal outer ear skin morphology > abnormal ear pigmentation > decreased ear pigmentation
+mammalian phenotype > digestive alimentary phenotype
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > intestinal edema
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system physiology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system physiology > abnormal defecation
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system physiology > abnormal digestion
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system physiology > abnormal digestion > abnormal digestive secretion
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system physiology > abnormal digestion > abnormal digestive secretion > abnormal intestinal secretion
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system physiology > aerophagia
+mammalian phenotype > endocrine exocrine gland phenotype
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal exocrine gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal exocrine gland physiology > abnormal mucous gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal exocrine gland physiology > abnormal mucous gland physiology > abnormal submucosal gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal exocrine gland physiology > abnormal mucous gland physiology > abnormal submucosal gland physiology > abnormal submucosal gland secretion
+mammalian phenotype > growth size body region phenotype
+mammalian phenotype > growth size body region phenotype > abnormal body composition
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal body water content
+mammalian phenotype > hearing vestibular ear phenotype
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear morphology
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear morphology > abnormal inner ear morphology
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear morphology > abnormal inner ear morphology > abnormal inner ear canal morphology
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear morphology > abnormal inner ear morphology > abnormal inner ear canal morphology > abnormal semicircular canal morphology
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear morphology > abnormal inner ear morphology > abnormal inner ear canal morphology > abnormal semicircular canal morphology > absent semicircular canals
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear physiology
+mammalian phenotype > hearing vestibular ear phenotype > abnormal ear physiology > abnormal vestibular system physiology
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > cerebral edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > generalized edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > lymphedema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > pulmonary edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > skin edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > subcutaneous edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal carbon dioxide level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal carbon dioxide level > hypercapnia
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal carbon dioxide level > hypocapnia
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal oxygen consumption
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal oxygen consumption > decreased oxygen consumption
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal oxygen consumption > increased oxygen consumption
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal gas homeostasis > abnormal oxygen level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal ph regulation
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal ph regulation > acidosis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal ph regulation > acidosis > respiratory acidosis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal ph regulation > alkalosis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > photosensitivity
+mammalian phenotype > homeostasis metabolism phenotype > abnormal physiological response to xenobiotic
+mammalian phenotype > homeostasis metabolism phenotype > abnormal physiological response to xenobiotic > decreased physiological sensitivity to xenobiotic
+mammalian phenotype > homeostasis metabolism phenotype > abnormal physiological response to xenobiotic > increased physiological sensitivity to xenobiotic
+mammalian phenotype > immune system phenotype
+mammalian phenotype > immune system phenotype > abnormal immune system physiology
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > eye inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > respiratory system inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > respiratory system inflammation > bronchitis
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > abnormal agouti pigmentation
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > abnormal agouti pigmentation > darkened coat color
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > irregular coat pigmentation
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > irregular coat pigmentation > variegated coat color
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > irregular coat pigmentation > variegated coat color > mottled coat
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > eye swellings
+mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > blotchy skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin lesions
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal dermal pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal digit pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal digit pigmentation > decreased digit pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal epidermal pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal foot pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal foot pigmentation > decreased foot pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal foot pigmentation > decreased foot pigmentation > reduced foot pad pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal tail pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal tail pigmentation > decreased tail pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > decreased skin pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > increased skin pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > pigment incontinence
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > variable depigmentation
+mammalian phenotype > integument phenotype > abnormal skin physiology
+mammalian phenotype > integument phenotype > abnormal skin physiology > abnormal pruritus
+mammalian phenotype > integument phenotype > abnormal skin physiology > abnormal pruritus > increased pruritus
+mammalian phenotype > muscle phenotype
+mammalian phenotype > muscle phenotype > abnormal muscle physiology
+mammalian phenotype > muscle phenotype > abnormal muscle physiology > abnormal facial muscle physiology
+mammalian phenotype > muscle phenotype > abnormal muscle physiology > abnormal facial muscle physiology > facial muscle spasm
+mammalian phenotype > muscle phenotype > abnormal muscle physiology > muscle twitch
+mammalian phenotype > muscle phenotype > abnormal muscle physiology > muscle twitch > muscle spasm
+mammalian phenotype > muscle phenotype > abnormal muscle physiology > muscle twitch > muscle spasm > muscle tetany
+mammalian phenotype > nervous system phenotype
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response intensity
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response intensity > increased nerve fiber response intensity
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response threshold
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response threshold > increased nerve fiber response threshold
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal sensorimotor gating
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal sensorimotor gating > reduced sensorimotor gating
+mammalian phenotype > pigmentation phenotype
+mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation
+mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation > abnormal eye pigmentation
+mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation > abnormal eye pigmentation > decreased eye pigmentation
+mammalian phenotype > pigmentation phenotype > abnormal melanogenesis
+mammalian phenotype > pigmentation phenotype > abnormal pigmentation pattern
+mammalian phenotype > pigmentation phenotype > hyperpigmentation
+mammalian phenotype > pigmentation phenotype > hypopigmentation
+mammalian phenotype > respiratory system phenotype
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal tidal volume
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal tidal volume > decreased tidal volume
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal tidal volume > increased tidal volume
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > abnormal pulmonary respiratory rate response
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > decreased pulmonary respiratory rate
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > increased pulmonary respiratory rate
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > increased pulmonary respiratory rate > tachypnea
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > hyperpnea
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > hypopnea
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > respiratory distress
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal lung compliance
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > decreased pulmonary ventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > decreased pulmonary ventilation > hypoventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > increased pulmonary ventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > increased pulmonary ventilation > hyperventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory sounds
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory transport
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory transport > abnormal pulmonary gas exchange
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > decreased respiration
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > decreased respiration > respiratory failure
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > increased respiration
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal sputum production
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > choking
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > coughing
+mammalian phenotype > vision eye phenotype
+mammalian phenotype > vision eye phenotype > abnormal eye morphology
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye distance position
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye distance position > enophthalmos
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye distance position > exophthalmos
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye size

@@ -1,7 +1,7 @@
 # OECD Test Guideline 403: Acute Inhalation Toxicity
 
-**Generated:** 2026-02-25
-**Source PDF:** `Documentation/OECD Guidelines/403.pdf`
+**Generated:** 2024-06-25
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/403.pdf`
 
 ## Summary
 
@@ -10,43 +10,33 @@
 | Guideline Number | 403 |
 | Title | Acute Inhalation Toxicity |
 | Adoption Date | 07 September 2009 (Corrected: 25 June 2024) |
-| Preferred Species | Rat (preferred); justification required if other species used |
-| Study Duration | 14 days observation period (typically 4-hour inhalation exposure) |
-| Animals per Dose Level | Traditional main study: 5 males + 5 females per concentration; Limit test: 3 males + 3 females; C x t protocol: 1 animal/sex per concentration/time point |
-| Dose Groups | At least 3 concentration levels (Traditional main study); or multiple concentrations x multiple durations (C x t protocol) |
-| Route of Administration | Inhalation (nose-only preferred; whole-body with justification) |
+| Preferred Species | Rat (justification required for other species) |
+| Study Duration | Usually 4 hours (Traditional); multiple durations up to 6 hours (C x t) |
+| Animals per Dose Level | Traditional Main: 5 males + 5 females; Sighting: 3 males + 3 females; Limit: 3 males + 3 females; C x t: 1-2 animals/sex/concentration/time |
+| Dose Groups | At least 3 concentrations (Traditional Main); Single limit concentration (Limit test); Multiple concentrations/durations (C x t) |
+| Route of Administration | Inhalation (Nose-only preferred; Whole-body possible with justification) |
 
 ## Purpose and Scope
 
-This guideline provides information on the acute inhalation toxicity of a test article to enable its classification and to provide lethality data (e.g., LC50, LC01, and slope) for quantitative risk assessment. It offers two test methods: a Traditional protocol with fixed-duration exposure (generally 4 hours) and a Concentration x Time (C x t) protocol for multiple concentrations over multiple durations, used particularly for emergency response planning (e.g., deriving AEGL, ERPG, or AETL values) or land-use planning.
+This guideline provides two protocols (Traditional LC50 and Concentration x Time) to obtain sufficient information on the acute toxicity of a test article to enable its classification according to GHS and to provide lethality data (e.g., LC50, LC01, slope) for quantitative risk assessment. It is designed to be flexible, reduce animal usage, and identify possible sex susceptibility. The guideline enables test article characterization and allows ranking/classification under the UN GHS system.
 
 ## Key Observations
 
 ### Clinical Observations
-- Clinical observations frequently during the exposure period
-- At least twice on the day of exposure post-exposure, then at least once daily for 14 days
-- Changes in skin and fur, eyes and mucous membranes
-- Respiratory, circulatory, autonomic and central nervous system effects
-- Somatomotor activity and behaviour patterns
-- Tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma
-- Differentiation between local and systemic effects when possible
-- Rectal temperature measurement may provide supportive evidence of reflex bradypnea or hypo/hyperthermia
-- Body weights recorded during acclimatization, on day 0, and at least on days 1, 3, 7 (weekly thereafter)
-- Animals with sustained body weight decrement of >20% closely monitored
+*   Observation for signs of toxicity, pain, or distress (continuous monitoring during exposure and post-exposure).
+*   Identification of moribund animals or those in severe distress (humane endpoints).
+*   Mortality recording.
+*   Body weight measurement (pre-test and post-exposure intervals as appropriate).
 
 ### Haematology
-- Not applicable for this guideline (acute inhalation toxicity test)
+*   *Not explicitly mandated as a standard endpoint in this specific guideline text.* (Acute inhalation studies focus primarily on mortality and clinical signs).
 
 ### Clinical Biochemistry
-- Not applicable for this guideline (acute inhalation toxicity test)
+*   *Not explicitly mandated as a standard endpoint in this specific guideline text.*
 
 ### Pathology
-- Gross necropsy of all test animals (including those that die during test or euthanized for welfare)
-- All gross pathological changes recorded with particular attention to respiratory tract changes
-- Necropsies performed as soon as possible, normally within a day or two
-- Lung weight measurement of surviving rats may be considered
-- Microscopic examination of respiratory tract may provide useful information, especially for reactive test articles (acids, hygroscopic materials)
-- Examined organs may include those showing evidence of gross pathology in animals surviving 24+ hours
+*   **Gross Necropsy:** All surviving animals must undergo gross necropsy.
+*   **Histopathology:** Tissues from animals that die or are killed humanely during the study, and from survivors at termination, should be examined microscopically if there are signs of toxicity or if required by regulatory authorities. Specific tissues of interest include respiratory tract (nose, larynx, trachea, lungs), eyes, and other organs showing gross lesions.
 
 ## Endpoints
 
@@ -57,27 +47,62 @@ This guideline provides information on the acute inhalation toxicity of a test a
 
 | Category | Required | Optional |
 |----------|----------|----------|
-| Clinical Observations | 5 | 1 |
+| Mortality & Survival | 1 | 0 |
+| Clinical Signs | 1 | 0 |
 | Body Weight | 1 | 0 |
-| Pathology | 2 | 3 |
-| Lethality Estimates | 1 | 1 |
-| **Total** | **9** | **5** |
+| Gross Necropsy | 1 | 0 |
+| Histopathology | 1 | 0 |
+| Exposure Characterization | 3 | 0 |
+| **Total** | **8** | **0** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
 |----------|----------|-------------------|--------|-----------|
-| Clinical Observations | Mortality/lethality | Required | Guideline text | Number of animals found dead or killed for humane reasons per test group (par. 41, 46) |
-| Clinical Observations | Clinical observations during exposure | Required | Guideline text | Animals should be clinically observed frequently during the exposure period (par. 41) |
-| Clinical Observations | Clinical observations post-exposure | Required | Guideline text | At least twice on day of exposure; at least once daily for 14 days total (par. 41) |
-| Clinical Observations | Cage-side observations | Required | Guideline text | Skin/fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, somatomotor activity, behaviour (par. 42) |
-| Clinical Observations | Time of death | Required | Guideline text | Should be recorded as precisely as possible when animals killed for humane reasons or found dead (par. 41) |
-| Clinical Observations | Rectal temperature | Optional | Guideline text | May provide supportive evidence of reflex bradypnea or hypo/hyperthermia (par. 42) |
-| Body Weight | Body weight | Required | Guideline text | Recorded during acclimatization, day 0, days 1, 3, 7, weekly thereafter, and at death/euthanasia (par. 43) |
-| Pathology | Gross necropsy | Required | Guideline text | All test animals subjected to gross necropsy; particular attention to respiratory tract (par. 44) |
-| Pathology | Gross pathological changes | Required | Guideline text | All changes recorded for each animal with emphasis on respiratory tract (par. 44) |
-| Pathology | Lung weight | Optional | Guideline text | May be considered to extend interpretive value of the study (par. 45) |
-| Pathology | Microscopic examination of respiratory tract | Optional | Guideline text | May provide useful information especially for reactive/hygroscopic test articles (par. 45) |
-| Pathology | Histopathological findings | Optional | Guideline text | Organs showing gross pathology in animals surviving 24+ hours; reported if available (par. 45, 47) |
-| Lethality Estimates | LC50 with 95% CI and slope | Required | Guideline text | Lethality estimates including confidence limits and slope; only actual concentrations used (par. 7, 47) |
-| Lethality Estimates | LC01 | Optional | Guideline text | Non-lethal threshold concentration; listed as example alongside LC50 (par. 7) |
+| Mortality & Survival | Mortality/Moribundity count | Required | Guideline text | Moribund animals considered same as death; humane killing criteria apply. |
+| Clinical Signs | Clinical observations (toxicity, pain, distress) | Required | Guideline text | Continuous monitoring during exposure and post-exposure. |
+| Body Weight | Body weight | Required | Guideline text | Pre-test weights; post-exposure weights as appropriate. |
+| Gross Necropsy | Gross necropsy examination | Required | Guideline text | Mandatory for all animals (deceased and survivors). |
+| Histopathology | Microscopic examination of tissues | Required | Guideline text | Mandatory for animals dying/killed early; recommended for survivors if toxicity observed. |
+| Exposure Characterization | Particle size distribution (MMAD, GSD) | Required | Guideline text | MMAD 1-4 µm, GSD 1.5-3.0 recommended for aerosols. |
+| Exposure Characterization | Chamber temperature and humidity | Required | Guideline text | Temp 22±3°C; Humidity 30-70% monitored. |
+| Exposure Characterization | Actual concentration analysis | Required | Guideline text | Measured at breathing zone; used for statistical analysis. |
+
+### Footnotes
+
+*   **Moribundity:** Criteria for making the decision to kill moribund animals are subject to OECD Guidance Document No. 19 on Humane Endpoints.
+*   **Species:** Justification is required if species other than rats are used.
+*   **Exposure Duration:** Nose-only exposures generally not exceeding 6 hours for rats; 4 hours for mice.
+*   **Particle Size:** Expert judgment required if standard MMAD/GSD cannot be achieved (e.g., metal fumes, fibers).
+
+--- (Continued from next segment) ---
+
+## Key Observations
+
+*Note: The provided text segment covers mathematical analysis procedures and does not list specific clinical observation requirements.*
+
+- **Statistical Analysis**: Calculation of C x t relationship using probit analysis or response functions.
+- **LC50 Determination**: Calculation of Lethal Concentration 50% (LC50) for specific time periods (e.g., 4h, 1h, 30 min).
+- **Haber's Rule Application**: Verification of applicability where n = 1.
+
+## Endpoints
+
+**Source:** None (in provided text segment)
+**Column Convention:** N/A
+
+This specific text segment contains only methodological descriptions for data analysis (C x t calculations) and does not list specific biological endpoints (e.g., body weight, organ weights, histopathology) to be measured. These would typically be found in the "Observations" or "Pathology" sections of the full guideline, which were not included in this input chunk.
+
+### Endpoint Summary
+
+| Category | Required | Optional |
+|----------|----------|----------|
+| N/A | 0 | 0 |
+| **Total** | **0** | **0** |
+
+### Detailed Endpoints
+
+*No endpoints extracted from this text segment.*
+
+### Footnotes
+
+None applicable to this segment.

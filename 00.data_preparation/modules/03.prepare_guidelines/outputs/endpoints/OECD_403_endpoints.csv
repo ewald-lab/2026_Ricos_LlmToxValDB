@@ -1,15 +1,38 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-403,Clinical Observations,Mortality/lethality,Required,Guideline text,Number of animals found dead or killed for humane reasons per test group (par. 41 and 46)
-403,Clinical Observations,Clinical observations during exposure,Required,Guideline text,Animals should be clinically observed frequently during the exposure period (par. 41)
-403,Clinical Observations,Clinical observations post-exposure,Required,Guideline text,At least twice on day of exposure; at least once daily for 14 days total (par. 41)
-403,Clinical Observations,Cage-side observations,Required,Guideline text,"Skin/fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, somatomotor activity, behaviour (par. 42)"
-403,Clinical Observations,Time of death,Required,Guideline text,Should be recorded as precisely as possible when animals killed for humane reasons or found dead (par. 41)
-403,Clinical Observations,Rectal temperature,Optional,Guideline text,May provide supportive evidence of reflex bradypnea or hypo/hyperthermia (par. 42)
-403,Body Weight,Body weight,Required,Guideline text,"Recorded during acclimatization, day 0, days 1, 3, 7, weekly thereafter, and at death/euthanasia (par. 43)"
-403,Pathology,Gross necropsy,Required,Guideline text,All test animals subjected to gross necropsy; particular attention to respiratory tract (par. 44)
-403,Pathology,Gross pathological changes,Required,Guideline text,All changes recorded for each animal with emphasis on respiratory tract (par. 44)
-403,Pathology,Lung weight,Optional,Guideline text,May be considered to extend interpretive value of the study (par. 45)
-403,Pathology,Microscopic examination of respiratory tract,Optional,Guideline text,May provide useful information especially for reactive/hygroscopic test articles (par. 45)
-403,Pathology,Histopathological findings,Optional,Guideline text,"Organs showing gross pathology in animals surviving 24+ hours; reported if available (par. 45, 47)"
-403,Lethality Estimates,LC50 with 95% CI and slope,Required,Guideline text,"Lethality estimates including confidence limits and slope; only actual concentrations used (par. 7, 47)"
-403,Lethality Estimates,LC01,Optional,Guideline text,Non-lethal threshold concentration; listed as example alongside LC50 (par. 7)
+403,Mortality & Survival,Mortality/Moribundity count,Required,Guideline text,"Moribund animals considered same as death; humane killing criteria apply."
+403,Clinical Signs,Clinical observations (toxicity, pain, distress),Required,Guideline text,Continuous monitoring during exposure and post-exposure.
+403,Body Weight,Body weight,Required,Guideline text,Pre-test weights; post-exposure weights as appropriate.
+403,Gross Necropsy,Gross necropsy examination,Required,Guideline text,Mandatory for all animals (deceased and survivors).
+403,Histopathology,Microscopic examination of tissues,Required,Guideline text,"Mandatory for animals dying/killed early; recommended for survivors if toxicity observed."
+403,Exposure Characterization,Particle size distribution (MMAD, GSD),Required,Guideline text,"MMAD 1-4 µm, GSD 1.5-3.0 recommended for aerosols."
+403,Exposure Characterization,Chamber temperature and humidity,Required,Guideline text,"Temp 22±3°C; Humidity 30-70% monitored."
+403,Exposure Characterization,Actual concentration analysis,Required,Guideline text,Measured at breathing zone; used for statistical analysis.
+403,Clinical Observations,Changes in skin and fur,Required,Guideline text,
+403,Clinical Observations,Changes in eyes,Required,Guideline text,
+403,Clinical Observations,Changes in mucous membranes,Required,Guideline text,
+403,Clinical Observations,Respiratory system signs,Required,Guideline text,
+403,Clinical Observations,Circulatory system signs,Required,Guideline text,
+403,Clinical Observations,Autonomic nervous system signs,Required,Guideline text,
+403,Clinical Observations,Central nervous system signs,Required,Guideline text,
+403,Clinical Observations,Somatomotor activity,Required,Guideline text,
+403,Clinical Observations,Behaviour patterns,Required,Guideline text,
+403,Clinical Observations,Tremors,Required,Guideline text,
+403,Clinical Observations,Convulsions,Required,Guideline text,
+403,Clinical Observations,Salivation,Required,Guideline text,
+403,Clinical Observations,Diarrhoea,Required,Guideline text,
+403,Clinical Observations,Lethargy,Required,Guideline text,
+403,Clinical Observations,Sleep,Required,Guideline text,
+403,Clinical Observations,Coma,Required,Guideline text,
+403,Clinical Observations,Rectal temperature,Optional,Guideline text,"May provide supportive evidence of reflex bradypnea or hypo/hyperthermia"
+403,Clinical Observations,Time of death,Required,Guideline text,"Recorded as precisely as possible for animals found dead or killed for humane reasons"
+403,Body Weights,Individual body weight (acclimatization),Required,Guideline text,
+403,Body Weights,Individual body weight (Day 0),Required,Guideline text,
+403,Body Weights,Individual body weight (Days 1, 3, 7, weekly),Required,Guideline text,
+403,Body Weights,Individual body weight (Death/Euthanasia),Required,Guideline text,
+403,Pathology,Gross necropsy findings,Required,Guideline text,"Performed on all test animals"
+403,Pathology,Respiratory tract gross pathology,Required,Guideline text,"Particular attention required"
+403,Pathology,Lung weight,Optional,Guideline text,"Considered to extend interpretive value of the study"
+403,Pathology,Microscopic examination of respiratory tract,Optional,Guideline text,"Useful for reactive test articles (e.g., acids, hygroscopic)"
+403,Pathology,Organ weight (organs with gross pathology),Optional,Guideline text,"For animals surviving 24+ hours"
+403,Pathology,Organ weight (expected affected organs),Optional,Guideline text,
+403,Pathology,Histopathology (respiratory tract),Optional,Guideline text,"Microscopic examination of entire respiratory tract"

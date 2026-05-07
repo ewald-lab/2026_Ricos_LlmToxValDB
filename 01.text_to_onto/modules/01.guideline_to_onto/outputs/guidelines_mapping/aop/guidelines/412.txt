@@ -1,0 +1,51 @@
+cellular
+cellular > hepatocytotoxicity
+cellular > hepatotoxicity
+cellular > increased triglyceride
+cellular > platelet activation increased
+individual
+individual > decreased locomotion
+individual > decreased mortality
+individual > impaired lung function
+individual > increase incomplete ecdysis
+individual > increase mortality
+individual > increase seizure
+individual > increased epilepsy
+individual > increased seizure
+individual > induction sustained hepatotoxicity
+individual > locomotor activity decreased
+individual > occurrence epileptic seizure
+individual > reduced swimming performance
+individual > reduced swimming speed
+individual > status epilepticus
+individual > thrombosis and disseminated intravascular coagulation
+molecular
+molecular > decreased extracellular chloride
+molecular > vitellogenin
+organ
+organ > airway inflammation
+organ > altered brain morphology
+organ > altered neuroanatomy
+organ > altered neurophysiology
+organ > cardiac hypertrophy
+organ > coagulation
+organ > increased serum creatinine
+organ > liver dysfunction
+organ > liver injury
+organ > pulmonary inflammation
+organ > uterine adenocarcinoma
+organ > vascular remodeling
+population
+population > decreased survival
+population > increased kidney failure
+population > increased mortality
+tissue
+tissue > fibroproliferative airway lesions
+tissue > helicobacter pylori infection
+tissue > hemostasis depletion from blood of fully functional carboxylated clotting factors
+tissue > increase respiratory or squamous metaplasia
+tissue > increased accumulation of alpha2u microglobulin
+tissue > increased histomorphological alteration of testis
+tissue > n a hepatotoxicity hepatopathy including a constellation of observable effects
+tissue > neuroinflammation
+tissue > reduction eggshell thickness

@@ -1,80 +1,47 @@
-# OECD Test Guideline 407: Repeated Dose 28-Day Oral Toxicity Study in Rodents
 
-**Generated:** 2026-02-25
-**Source PDF:** `Documentation/OECD Guidelines/407.pdf`
 
-## Summary
-
-| Field | Value |
-|-------|-------|
-| Guideline Number | 407 |
-| Title | Repeated Dose 28-Day Oral Toxicity Study in Rodents |
-| Adoption Date | 25 June 2025 |
-| Preferred Species | Rat (preferred); other rodent species may be used with justification |
-| Study Duration | 28 days |
-| Animals per Dose Level | At least 10 per dose level (5 female + 5 male) |
-| Dose Groups | At least 3 test groups + 1 control group |
-| Route of Administration | Oral (gavage, diet, or drinking water) |
-
-## Purpose and Scope
-
-This TG is intended to investigate effects on a very broad variety of potential targets of toxicity from repeated oral exposure over a relatively limited period of time, including effects on the nervous, immune and endocrine systems. It provides information on the possible health hazards likely to arise from repeated exposure and allows certain endocrine mediated effects to be put into context with other toxicological effects.
+--- (Continued from next segment) ---
 
 ## Key Observations
 
 ### Clinical Observations
-- General clinical observations at least once daily, considering peak period of anticipated effects after dosing
-- At least twice daily observation of all animals for morbidity and mortality
-- Detailed clinical observations at least once weekly outside the home cage in a standard arena
-- Signs include changes in skin, fur, eyes, mucous membranes, secretions/excretions, autonomic activity (lacrimation, piloerection, pupil size, respiratory pattern)
-- Changes in gait, posture, response to handling, clonic or tonic movements, stereotypies, bizarre behaviour
-- Sensory reactivity assessment in the fourth exposure week (auditory, visual, proprioceptive stimuli)
-- Grip strength assessment in the fourth exposure week
-- Motor activity assessment in the fourth exposure week
-- Body weight measured at least once weekly
-- Food consumption measured at least weekly; water consumption if test chemical administered via drinking water
-- Oestrus cycle determination by vaginal smears at necropsy (optional)
+- Signs of toxicity (onset, duration, severity)
+- Sensory activity assessments
+- Grip strength assessments
+- Motor activity assessments
+- Body weight changes
+- Food consumption
+- Water consumption (if applicable)
 
 ### Haematology
-- Haematocrit
-- Haemoglobin concentration
-- Erythrocyte count
-- Reticulocyte count
-- Total and differential leucocyte count
-- Platelet count
-- Measure of blood clotting time/potential
-- Methaemoglobin concentration and Heinz bodies (if oxidising properties suspected)
+- Full haematological tests with relevant baseline values
+- Specific parameters inferred from standard practice (though not explicitly listed in this snippet, the report requires "haematological tests")
 
 ### Clinical Biochemistry
-- Sodium, potassium, glucose, total cholesterol, urea, creatinine, total protein, albumin
-- At least two enzymes indicative of hepatocellular effects (e.g. alanine aminotransferase, aspartate aminotransferase, alkaline phosphatase, gamma-glutamyl transpeptidase, glutamate dehydrogenase)
-- Bile acids
-- Additional enzymes and bilirubin as appropriate
-- Optional urinalysis: appearance, volume, osmolality/specific gravity, pH, protein, glucose, blood/blood cells
-- Optional: calcium, phosphate, triglycerides, specific hormones, cholinesterase (case-by-case)
-- Optional: T3, T4, TSH plasma/serum samples (retained for triggered analysis based on thyroid histopathology)
+- Full clinical biochemistry tests with relevant baseline values
+- Parameters linked with endocrine disrupter detection (for historical control comparison)
 
 ### Pathology
-- Full detailed gross necropsy of all animals (external surface, all orifices, cranial/thoracic/abdominal cavities)
-- Mandatory organ weights: liver, kidneys, adrenals, testes, epididymides, prostate + seminal vesicles with coagulating glands, thymus, spleen, brain, heart
-- Optional organ weights: paired ovaries, uterus including cervix, thyroid (after fixation)
-- Tissue preservation for histopathology: all gross lesions, brain, spinal cord, eye, stomach, small and large intestines (including Peyer's patches), liver, kidneys, adrenals, spleen, heart, thymus, thyroid, trachea and lungs, gonads, accessory sex organs, vagina, urinary bladder, lymph nodes, peripheral nerve, skeletal muscle, bone with bone marrow
-- Full histopathology on control and high dose groups; extended to other groups if treatment-related changes observed
-- Optional sample cryopreservation for omics investigations
+- **Gross Lesions:** All gross lesions shall be examined (Mandatory).
+- **Histopathology (High Dose & Control):** Full histopathology on preserved organs/tissues of all animals in control and high dose groups.
+- **Histopathology (Other Groups):** Extended to other dosage groups if treatment-related changes are observed in the high dose group.
+- **Satellite Groups:** Histopathology performed on tissues/organs identified as showing effects in treated groups.
+- **Organ Weights:** Body weight at euthanasia and organ weight data required.
+- **Necropsy Findings:** Detailed description required.
 
 ## Endpoints
 
-**Source:** Annex: ANNEX 2: RECOMMENDED FOR THE DETECTION OF ENDOCRINE DISRUPTERS (EDS) IN TG 407
+**Source:** Annex: "ANNEX 2: RECOMMENDED FOR THE DETECTION OF ENDOCRINE DISRUPTERS (EDS) IN TG 407"
 **Column Convention:** Mandatory endpoints | Optional endpoints
 
 ### Endpoint Summary
 
 | Category | Required | Optional |
 |----------|----------|----------|
-| Weight | 4 | 3 |
-| Histopathology | 8 | 3 |
-| Hormones measurement | 0 | 2 |
-| **Total** | **12** | **8** |
+| Weight | 7 | 0 |
+| Histopathology | 9 | 3 |
+| Hormones measurement | 3 | 0 |
+| **Total** | **19** | **3** |
 
 ### Detailed Endpoints
 
@@ -84,19 +51,23 @@ This TG is intended to investigate effects on a very broad variety of potential 
 | Weight | Epididymides | Required | Annex | |
 | Weight | Adrenals | Required | Annex | |
 | Weight | Prostate + seminal vesicles with coagulating glands | Required | Annex | |
-| Weight | Ovaries | Optional | Annex | |
-| Weight | Uterus, including cervix | Optional | Annex | |
-| Weight | Thyroid | Optional | Annex | |
-| Histopathology | Testes | Required | Annex | |
-| Histopathology | Ovaries | Required | Annex | |
-| Histopathology | Epididymides | Required | Annex | |
-| Histopathology | Prostate + seminal vesicle with coagulating glands | Required | Annex | |
-| Histopathology | Uterus, including cervix | Required | Annex | |
+| Weight | Ovaries | Required | Annex | |
+| Weight | Uterus, including cervix | Required | Annex | |
+| Weight | Thyroid | Required | Annex | |
+| Histopathology | Gonads: Testes | Required | Annex | |
+| Histopathology | Gonads: Ovaries | Required | Annex | |
+| Histopathology | Accessory sex organs: Epididymides | Required | Annex | |
+| Histopathology | Accessory sex organs: Prostate + seminal vesicle with coagulating glands | Required | Annex | |
+| Histopathology | Accessory sex organs: Uterus, including cervix | Required | Annex | |
 | Histopathology | Adrenal | Required | Annex | |
 | Histopathology | Thyroid | Required | Annex | |
 | Histopathology | Vagina | Required | Annex | |
-| Histopathology | Vaginal smears | Optional | Annex | |
 | Histopathology | Male mammary glands | Optional | Annex | |
 | Histopathology | Pituitary | Optional | Annex | |
-| Hormones measurement | Circulating levels of T3, T4 | Optional | Annex | |
-| Hormones measurement | Circulating levels of TSH | Optional | Annex | |
+| Histopathology | Vaginal smears | Optional | Annex | |
+| Hormones measurement | Circulating levels of T3 | Required | Annex | |
+| Hormones measurement | Circulating levels of T4 | Required | Annex | |
+| Hormones measurement | Circulating levels of TSH | Required | Annex | |
+
+### Footnotes
+No specific footnotes were attached to individual endpoints in the provided table text, though general notes exist regarding sample cryopreservation for omics (Paragraph 51) and the use of historical control data (Paragraph 55).

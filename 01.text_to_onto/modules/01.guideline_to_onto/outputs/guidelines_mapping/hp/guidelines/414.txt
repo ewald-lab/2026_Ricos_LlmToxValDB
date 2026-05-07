@@ -1,0 +1,80 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the head
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue
+phenotypic abnormality > abnormality of limbs
+phenotypic abnormality > abnormality of limbs > abnormality of limb bone
+phenotypic abnormality > abnormality of limbs > abnormality of limb bone > abnormal limb bone morphology
+phenotypic abnormality > abnormality of limbs > abnormality of limb bone > abnormal limb bone morphology > abnormal diaphysis morphology
+phenotypic abnormality > abnormality of limbs > abnormality of limb bone > abnormal limb bone morphology > abnormal diaphysis morphology > bowing of the long bones
+phenotypic abnormality > abnormality of limbs > localized soft tissue swelling on extremity
+phenotypic abnormality > abnormality of prenatal development or birth
+phenotypic abnormality > abnormality of prenatal development or birth > fetal anomaly
+phenotypic abnormality > abnormality of prenatal development or birth > fetal anomaly > abnormal fetal morphology
+phenotypic abnormality > abnormality of prenatal development or birth > fetal anomaly > abnormal fetal morphology > abnormal fetal skeletal morphology
+phenotypic abnormality > abnormality of the endocrine system
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t3 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology > abnormal tsh response to thyrotrophin releasing hormone stimulation test
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology > abnormal tsh response to thyrotrophin releasing hormone stimulation test > absent tsh response to thyrotrophin releasing hormone stimulation test
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal scrotum morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal scrotum morphology > ectopic scrotum
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology > cryptorchidism
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology > cryptorchidism > bilateral cryptorchidism
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology > cryptorchidism > unilateral cryptorchidism
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology > ectopic testis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > ambiguous genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > ambiguous genitalia > gonadal tissue inappropriate for external genitalia or chromosomal sex
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormality of the male genitalia
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule > cafe au lait spot
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule > cafe au lait spot > few cafe au lait spots
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > cutaneous necrosis
+phenotypic abnormality > abnormality of the musculoskeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormal musculoskeletal physiology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormal musculoskeletal physiology > abnormality of skeletal maturation
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue > abnormal fascia morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal appendicular skeleton morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal appendicular skeleton morphology > abnormal long bone morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal appendicular skeleton morphology > abnormal long bone morphology > crumpled long bones
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal axial skeleton morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal bone structure
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal bone structure > abnormal trabecular bone morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal joint morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal joint morphology > periarticular soft tissue mass
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > aplasia hypoplasia involving the skeleton
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > skeletal dysplasia
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > skeletal dysplasia > multiple skeletal anomalies
+phenotypic abnormality > abnormality of the nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal drinking behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal drinking behavior > polydipsia
+phenotypic abnormality > neoplasm
+phenotypic abnormality > neoplasm > neoplasm by anatomical site
+phenotypic abnormality > neoplasm > neoplasm by anatomical site > soft tissue neoplasm
+phenotypic abnormality > neoplasm > neoplasm by anatomical site > soft tissue neoplasm > myofibromatosis

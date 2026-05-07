@@ -1,0 +1,58 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of the breast
+phenotypic abnormality > abnormality of the breast > abnormal breast morphology
+phenotypic abnormality > abnormality of the breast > abnormal breast morphology > gynecomastia
+phenotypic abnormality > abnormality of the endocrine system
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t3 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t3 concentration > decreased circulating free t3
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t3 concentration > increased circulating free t3
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t4 concentration > decreased circulating free t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating free t4 concentration > increased circulating free t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating t4 concentration > decreased circulating t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > abnormal circulating t4 concentration > increased circulating t4 concentration
+phenotypic abnormality > abnormality of the endocrine system > abnormal circulating hormone concentration > abnormal circulating thyroid hormone concentration > elevated circulating rt3 t3 ratio
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal hemorrhage
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal xanthomatosis
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenocortical abnormality
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenocortical abnormality > adrenocortical hyperplasia
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenocortical abnormality > pigmented micronodular adrenocortical disease
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > neoplasm of the adrenal gland
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the adrenal glands
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormal posterior pituitary morphogenesis
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormal posterior pituitary morphogenesis > neoplasm of the posterior pituitary
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary > pituitary adenoma
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary > pituitary adenoma > pituitary prolactin cell adenoma
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary > pituitary adenoma > pituitary prolactin cell adenoma > macroprolactinoma
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary > pituitary adenoma > pituitary prolactin cell adenoma > microprolactinoma
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary > pituitary carcinoma
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > neoplasm of the pituitary gland
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology > abnormal tsh response to thyrotrophin releasing hormone stimulation test
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology > abnormal tsh response to thyrotrophin releasing hormone stimulation test > absent tsh response to thyrotrophin releasing hormone stimulation test
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology > abnormality of the testis size
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal testis morphology > abnormality of the testis size > aplasia hypoplasia of the testes
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal epididymis morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal epididymis morphology > enlarged epididymis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal epididymis morphology > epididymitis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > genital neoplasm
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > genital neoplasm > gonadal neoplasm
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > genital neoplasm > gonadal neoplasm > epididymal neoplasm

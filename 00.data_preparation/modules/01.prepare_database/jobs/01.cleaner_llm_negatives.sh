@@ -17,7 +17,7 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 # Input: The specific file for negatives
-PREPROCESSED_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_01_negatives.tsv"
+PREPROCESSED_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_01.tsv"
 # Output: A new file for negatives (03_negatives)
 OUTPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_negatives.tsv"
 REASONING_FILE="${REPO_ROOT}/outputs/llm_clean_reasoning_negatives.json"

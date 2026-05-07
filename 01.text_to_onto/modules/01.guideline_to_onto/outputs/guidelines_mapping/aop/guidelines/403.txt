@@ -1,0 +1,19 @@
+individual
+individual > decreased body weight
+individual > decreased locomotion
+individual > increase seizure
+individual > increased epilepsy
+individual > increased locomotion
+individual > increased seizure
+individual > locomotor activity decreased
+individual > obesity
+individual > occurrence epileptic seizure
+individual > reduced swimming performance
+individual > reduced swimming speed
+individual > status epilepticus
+organ
+organ > altered visual function
+population
+population > increased mortality
+tissue
+tissue > fibroproliferative airway lesions

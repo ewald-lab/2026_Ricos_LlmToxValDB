@@ -1,0 +1,1002 @@
+[
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 40,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 45,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 50,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 55,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.2,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.25,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.3,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.35,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.3,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.35,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.4,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.45,
+        "GRF": 1.0
+    },
+    {
+        "embedding_model": "Qwen/Qwen3-Embedding-8B",
+        "top_k_rag": 60,
+        "threshold_rag": 0.4,
+        "use_reranker": true,
+        "threshold_reranker": 0.5,
+        "GRF": 1.0
+    }
+]

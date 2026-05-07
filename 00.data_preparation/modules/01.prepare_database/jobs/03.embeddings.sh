@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --time=4:00:00
+#SBATCH --time=24:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
@@ -9,7 +9,7 @@
 #SBATCH -J "toxval_embed_prep"
 #SBATCH -o "logs/out_embed_%A_%a.out"
 #SBATCH -e "logs/err_embed_%A_%a.err"
-#SBATCH --array=3
+#SBATCH --array=0-3%2
 
 MODELS_KEYS=("qwen" "nemotron" "harrier" "kalm")
 
@@ -39,7 +39,7 @@ TASK_ID=$SLURM_ARRAY_TASK_ID
 EMBED_MODEL="${MODELS_KEYS[$TASK_ID]}"
 
 RAG_CONFIG="${REPO_ROOT}/config/rag/embeddings.json"
-INPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03_merged.tsv"
+INPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv"
 OUTPUT_DB="${REPO_ROOT}/outputs/embeddings_db/tox_effects_${EMBED_MODEL}.db"
 
 echo "=========================================================="

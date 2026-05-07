@@ -1,7 +1,7 @@
 # OECD Test Guideline 402: Acute Dermal Toxicity: Fixed Dose Procedure
 
-**Generated:** 2026-02-25
-**Source PDF:** `Documentation/OECD Guidelines/402.pdf`
+**Generated:** 2023-10-27
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/402.pdf`
 
 ## Summary
 
@@ -10,44 +10,62 @@
 | Guideline Number | 402 |
 | Title | Acute Dermal Toxicity: Fixed Dose Procedure |
 | Adoption Date | 9 October 2017 |
-| Preferred Species | Adult rat (preferred); females normally used |
-| Study Duration | 14 days observation (24-hour dermal exposure) |
-| Animals per Dose Level | 1 animal per dose in range-finding; 2 animals per dose in main study (single sex) |
-| Dose Groups | Fixed doses (50, 200, 1000, 2000 mg/kg bw) in stepwise procedure |
-| Route of Administration | Dermal application (to at least 10% of total body surface area) |
+| Preferred Species | Rat (Adult female preferred; males if justified) |
+| Study Duration | At least 14 days (observation period) |
+| Animals per Dose Level | Sequential single animals; generally 2 animals per dose level in main study |
+| Dose Groups | Stepwise procedure using fixed doses (50, 200, 1000, 2000 mg/kg bw); range-finding may use 1 animal |
+| Route of Administration | Dermal (applied to at least 10% of total body surface area for 24 hours) |
 
 ## Purpose and Scope
 
-This test guideline describes an acute dermal toxicity study using a fixed dose procedure to classify test chemicals according to the Globally Harmonised System (GHS) for hazard classification. The test chemical is applied dermally to groups of animals at fixed dose levels in a stepwise procedure. The primary objective is to determine the GHS hazard category for acute dermal toxicity based on mortality and morbidity outcomes, rather than to calculate a precise LD50. Prior to conducting this study, all available data relevant to the potential dermal toxicity of the test chemical should be evaluated in a weight-of-evidence analysis, and waiver criteria (OECD Guidance Document 237) should be reviewed to limit new animal testing to exceptional circumstances with compelling scientific justification.
+This guideline describes a method for determining the acute dermal toxicity of chemicals using a stepwise procedure with fixed doses. It is designed to classify chemicals according to the Globally Harmonized System (GHS) while minimizing animal use. The test involves applying the chemical to the skin of adult rats (preferably females) for 24 hours and observing them for signs of toxicity and mortality over a 14-day period.
 
 ## Key Observations
 
 ### Clinical Observations
-- Animals observed immediately after dosing at least once during the first 30 minutes, periodically during the first 24 hours, with special attention during the first 2 to 6 hours after beginning of exposure, and daily thereafter for a total of 14 days
-- Observation duration determined by nature and time of onset of clinical signs and length of recovery period
-- Changes in skin and fur, eyes and mucous membranes recorded
-- Respiratory, circulatory, autonomic and central nervous systems assessed
-- Somatomotor activity and behaviour pattern monitored
-- Specific attention to tremors, convulsions, salivation, diarrhoea, lethargy, sleep and coma
-- Treatment site may be observed at 24, 48 and 72 hours after removal of test chemical using the Draize criteria (may inform skin irritation potential and waive separate irritation study)
-- Individual body weights determined on day of (or immediately prior to) dosing and at least weekly thereafter; surviving animals weighed and humanely killed at end of test
-- Moribund animals or animals showing severe pain/enduring distress shall be humanely killed; time of death recorded as precisely as possible
-- All observations systematically recorded with individual records maintained for each animal
+- Immediate observation within 30 minutes post-dosing.
+- Periodic observations during the first 24 hours (especially 2–6 hours).
+- Daily observations thereafter for 14 days.
+- Specific focus on: changes in skin and fur, eyes, mucous membranes, respiratory/circulatory/CNS systems, somatomotor activity, behavior patterns, tremors, convulsions, salivation, diarrhoea, lethargy, sleep, and coma.
+- Treatment site observation at 24, 48, and 72 hours using Draize criteria (optional but recommended for waiving separate irritation studies).
 
 ### Haematology
-- Not required in this guideline
+- *Not required.* (No haematological examinations are mandated in this acute study protocol).
 
 ### Clinical Biochemistry
-- Not required in this guideline
+- *Not required.* (No clinical biochemistry determinations are mandated in this acute study protocol).
 
 ### Pathology
-- All test animals (including those that die during the test or are removed for animal welfare reasons) should be subjected to gross necropsy
-- All gross pathological changes should be recorded for each animal
-- Microscopic examination of organs showing evidence of gross pathology, or of the treatment site, in animals surviving 24 or more hours after initial dosing may also be considered (optional)
+- **Gross Necropsy:** Required for all test animals (including those that die during the test or are killed for humane reasons). All gross pathological changes must be recorded.
+- **Histopathology:** Microscopic examination of organs showing evidence of gross pathology or of the treatment site is **optional** ("may also be considered") for animals surviving 24 or more hours.
 
 ## Endpoints
 
-**Source:** None
-**Column Convention:** N/A
+**Source:** Guideline body text
+**Column Convention:** Inferred from guideline language
 
-This guideline does not contain extractable endpoints. It is an acute dermal toxicity test focused on classifying chemicals into GHS hazard categories based on mortality outcomes at fixed dose levels (50, 200, 1000, 2000 mg/kg bw). The guideline does not include organ weights, haematology panels, clinical biochemistry panels, or histopathology endpoint lists. Observations are limited to general clinical signs, body weight, gross necropsy findings, and optional Draize scoring of the treatment site.
+### Endpoint Summary
+
+| Category | Required | Optional |
+|----------|----------|----------|
+| Clinical Observations | 1 | 1 |
+| Body Weight | 1 | 0 |
+| Pathology (Gross) | 1 | 0 |
+| Pathology (Histopathology) | 0 | 1 |
+| **Total** | **3** | **2** |
+
+### Detailed Endpoints
+
+| Category | Endpoint | Requirement Level | Source | Footnotes |
+|----------|----------|-------------------|--------|-----------|
+| Clinical Observations | General clinical signs (skin, fur, eyes, mucous membranes, CNS, behavior, etc.) | Required | Guideline text | Must be systematically recorded for each animal. |
+| Clinical Observations | Treatment site assessment (Draize criteria) | Optional | Guideline text | Conducted at 24, 48, and 72 hours; useful for waiving separate irritation studies. |
+| Body Weight | Individual body weight | Required | Guideline text | Measured on day of dosing, weekly thereafter, and at death/euthanasia. |
+| Pathology (Gross) | Gross necropsy findings | Required | Guideline text | All gross pathological changes recorded for every animal. |
+| Pathology (Histopathology) | Microscopic examination of affected organs/treatment site | Optional | Guideline text | Considered only for animals surviving 24+ hours; yields useful information but not mandatory. |
+
+### Footnotes
+
+- *General clinical signs:* Includes specific attention to tremors, convulsions, salivation, diarrhoea, lethargy, sleep, and coma.
+- *Treatment site assessment:* Uses Draize criteria; data may support waiving a separate in vivo skin irritation study.
+- *Microscopic examination:* Recommended for organs with gross pathology or the application site if the animal survives at least 24 hours.

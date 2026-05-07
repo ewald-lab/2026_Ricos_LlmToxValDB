@@ -1,0 +1,27 @@
+cellular
+cellular > increase androgen receptor protein expression abundance
+cellular > increased lactotroph hyperplasia and hypertrophy
+cellular > plasma estradiol increased
+individual
+individual > prostate cancer
+molecular
+molecular > displacement serum thyroxine from carrier protein
+molecular > displacement serum thyroxine from transthyretin
+molecular > inhibition deiodinase 1
+molecular > inhibition deiodinase 2
+molecular > inhibition deiodinase 3
+organ
+organ > increased thyroxine in serum
+organ > uterine adenocarcinoma
+tissue
+tissue > decreased triiodothyronine
+tissue > decreased triiodothyronine in tissues
+tissue > hyperplasia mammary gland
+tissue > increase thyroid stimulating hormone
+tissue > increased free serum thyroxine
+tissue > increased histomorphological alteration of testis
+tissue > increased plasma low density lipoprotein cholesterol
+tissue > increased thyroid stimulating hormone
+tissue > increased triiodothyronine in tissues
+tissue > prostatic intraepithelial neoplasia
+tissue > thyroxine in serum decreased

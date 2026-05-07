@@ -1,0 +1,368 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of blood and blood forming tissues
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > bleeding requiring red cell transfusion
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > gastrointestinal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > gastrointestinal hemorrhage > hematochezia
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > gastrointestinal hemorrhage > intestinal bleeding
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye > choroid hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye > retinal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye > retinal hemorrhage > subretinal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > cerebellar hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > cerebral hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > cerebral hemorrhage > antenatal intracerebral hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > cerebral hemorrhage > recurrent cerebral hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > epidural hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > fetal intracranial hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > fetal intracranial hemorrhage > fetal cerebral parenchymal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > fetal intracranial hemorrhage > fetal posterior fossa hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > fetal intracranial hemorrhage > fetal posterior fossa hemorrhage > fetal cerebellar hemisphere hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > intraventricular hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > subarachnoid hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage > subdural hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > joint hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > muscle hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > pulmonary hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > pulmonary hemorrhage > localized pulmonary hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > persistent bleeding after trauma
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > subcutaneous hemorrhage
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the head
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema > palpebral edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema > palpebral edema > lower eyelid edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema > palpebral edema > upper eyelid edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal lip morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal lip morphology > abnormal lip pigmentation
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal oral mucosa morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal oral mucosa morphology > abnormal pigmentation of the oral mucosa
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal oral mucosa morphology > abnormal pigmentation of the oral mucosa > reticulate pigmentation of oral mucosa
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal palate morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral morphology > abnormal oral cavity morphology > abnormal palate morphology > palatal edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormality of the tongue
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormality of the tongue > tongue edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival hyperpigmentation
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal eyelid morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal eyelid morphology > hyperpigmentation of eyelids
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the periorbital region
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the periorbital region > periorbital hyperpigmentation
+phenotypic abnormality > abnormality of limbs
+phenotypic abnormality > abnormality of limbs > abnormality of the lower limb
+phenotypic abnormality > abnormality of limbs > abnormality of the lower limb > pedal edema
+phenotypic abnormality > abnormality of metabolism homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration > abnormal blood inorganic cation concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration > abnormal blood inorganic cation concentration > abnormal circulating calcium concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration > abnormal blood inorganic cation concentration > abnormal circulating calcium concentration > hypocalcemia
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration > abnormal blood inorganic cation concentration > abnormal circulating calcium concentration > hypocalcemia > hypocalcemic seizures
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal blood ion concentration > abnormal blood cation concentration > abnormal blood inorganic cation concentration > abnormal circulating calcium concentration > hypocalcemia > hypocalcemic tetany
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal circulating metabolite concentration > abnormal circulating organic compound concentration
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > acidosis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > acidosis > chronic acidosis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > acidosis > chronic acidosis > chronic respiratory acidosis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > acidosis > respiratory acidosis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > alkalosis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of acid base homeostasis > alkalosis > respiratory alkalosis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > angioedema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > cerebral edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > fetal skin edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > generalized edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > genital edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > intestinal edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > lymphedema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > muscular edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > peripheral edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > pharyngeal edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > pulmonary edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of temperature regulation
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of temperature regulation > fever
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal stool composition
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal stool composition > mucus in stool
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormality of urine homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormality of urine homeostasis > abnormal macroscopic urine appearance
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormality of urine homeostasis > abnormal macroscopic urine appearance > increased urinary mucus
+phenotypic abnormality > abnormality of the digestive system
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > fecolith
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > aerophagia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > feeding difficulties
+phenotypic abnormality > abnormality of the ear
+phenotypic abnormality > abnormality of the ear > abnormal ear physiology
+phenotypic abnormality > abnormality of the ear > abnormal ear physiology > functional abnormality of the inner ear
+phenotypic abnormality > abnormality of the ear > abnormal ear physiology > functional abnormality of the inner ear > abnormal vestibular function
+phenotypic abnormality > abnormality of the ear > abnormal ear physiology > functional abnormality of the inner ear > abnormal vestibular function > vestibular hyporeflexia
+phenotypic abnormality > abnormality of the ear > abnormal ear physiology > functional abnormality of the inner ear > abnormal vestibular function > vestibular hyporeflexia > absent vestibular function
+phenotypic abnormality > abnormality of the endocrine system
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the parathyroid gland
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the parathyroid gland > abnormality of the parathyroid physiology
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the parathyroid gland > abnormality of the parathyroid physiology > hypoparathyroidism
+phenotypic abnormality > abnormality of the eye
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal fundus pigmentation
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal fundus pigmentation > fundus hyperpigmentation
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal retinal morphology
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal retinal morphology > abnormal macular morphology
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal retinal morphology > abnormal macular morphology > abnormal macular pigmentation
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal retinal morphology > abnormal macular morphology > abnormal macular pigmentation > macular hyperpigmentation
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > abnormal retinal morphology > retinal edema
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal posterior eye segment morphology > abnormal fundus morphology > fundus hemorrhage
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormality of globe location
+phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormality of globe location > proptosis
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal genital pigmentation
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal genital pigmentation > hyperpigmented genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal genital pigmentation > hypopigmented genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal scrotum morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal scrotum morphology > scrotal hyperpigmentation
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormal skin adnexa morphology
+phenotypic abnormality > abnormality of the integument > abnormal skin adnexa morphology > abnormal hair morphology
+phenotypic abnormality > abnormality of the integument > abnormal skin adnexa morphology > abnormal hair morphology > abnormality of hair pigmentation
+phenotypic abnormality > abnormality of the integument > abnormal skin adnexa morphology > abnormal hair morphology > abnormality of hair pigmentation > hypopigmentation of hair
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > blotching pigmentation of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > depigmentation hyperpigmentation of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > freckling
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > generalized hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > hyperpigmentation in sun exposed areas
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule > cafe au lait spot
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule > macular hyperpigmented dermopathy
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hypermelanotic macule > multiple lentigines
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > hyperpigmented streaks
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > irregular hyperpigmentation of back
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > progressive reticulate hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > reticular hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > irregular hyperpigmentation > spotty hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > melasma
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > mixed hypo and hyperpigmentation of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > mixed hypo and hyperpigmentation of the skin > areas of hypopigmentation and hyperpigmentation that follow blaschko lines
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > mixed hypo and hyperpigmentation of the skin > hyperpigmented hypopigmented macules
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > mixed hypo and hyperpigmentation of the skin > patchy hypo and hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hyperpigmentation of the skin > progressive hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > generalized hypopigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > hypomelanotic macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > hypopigmented skin patches
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > hypopigmented skin patches > hypopigmented skin patches on arms
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > hypopigmented skin patches > spotty hypopigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > hypopigmented streaks
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > hypopigmentation of the skin > piebald skin depigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > melanocytic nevus
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > melanocytic nevus > hyperpigmented nevi
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > mottled pigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > mottled pigmentation > mottled pigmentation of photoexposed areas
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > mottled pigmentation > mottled pigmentation of the trunk and proximal extremities
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > numerous pigmented freckles
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > perioral hyperpigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > pigmentation anomalies of sun exposed skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > profuse pigmented skin lesions
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > reticulated skin pigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > macule > hypopigmented macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > papule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > papule > hyperpigmented papule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > pigment incontinence
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > poikiloderma
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormality of skin physiology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormality of skin physiology > pruritus
+phenotypic abnormality > abnormality of the musculoskeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal muscle physiology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal muscle physiology > functional motor deficit
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal muscle physiology > functional motor deficit > frequent falls
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal muscle physiology > muscle hyperirritability
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal muscle physiology > muscle spasm
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal muscle physiology > tetany
+phenotypic abnormality > abnormality of the nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > ataxia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > ataxia > gait ataxia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > ataxia > gait ataxia > abasia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > ataxia > truncal ataxia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of extrapyramidal motor function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of extrapyramidal motor function > exaggerated startle response
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > chvostek sign
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > action tremor
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > action tremor > titubation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > action tremor > titubation > head titubation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > tremor by anatomical site
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > tremor by anatomical site > head tremor
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal affect regulation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal affect regulation > emotional hypersensitivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal emotional state
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal emotional state > dysregulated negative emotional state
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal emotional state > dysregulated negative emotional state > irritability
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition > abulia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition > apathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition > lethargy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > agitation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > disinhibition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > disinhibition > hyperactivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > restlessness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal interpretation of external stimuli
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal interpretation of external stimuli > disturbed perception with a stimulus
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal judgment
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal judgment > maladaptive fear related cognitions
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal judgment > maladaptive fear related cognitions > intrusion symptom
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal judgment > maladaptive fear related cognitions > intrusion symptom > physiological reactivity to cues
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior > amplification of social interactions
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior > amplification of social interactions > amplification of emotional responsiveness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior > diminishment of social interactions
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior > diminishment of social interactions > diminishment of emotional expression
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior > diminishment of social interactions > diminishment of emotional responsiveness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal social development
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal social development > reduced social responsiveness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal social development > reduced social responsiveness > reduced responsiveness to social cues
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > echophenomenon
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > echophenomenon > motor stereotypy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > echophenomenon > motor stereotypy > stereotypic movements of face and head
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > tachyphagia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > self injurious behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > self injurious behavior > skin picking
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory hypersensitivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory hypersensitivity > auditory hypersensitivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory hypersensitivity > tactile hypersensitivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory hyposensitivity unexplained by sensory deficit
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory seeking
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory seeking > tactile sensory seeking
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory seeking > tactile sensory seeking > hyperorality
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > reduced consciousness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal head movements
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex > abnormal postural reflex
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex > abnormal postural reflex > impaired neck righting reflex
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex > hyperreflexia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex > hyperreflexia > brisk reflexes
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex > reduced tendon reflexes
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal reflex > reduced tendon reflexes > hyporeflexia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > diminished movement
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > diminished movement > hypokinesia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > gait disturbance
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > gait disturbance > unsteady gait
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > postural instability
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > bilateral tonic clonic seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > bilateral tonic clonic seizure > bilateral tonic clonic seizure with generalized onset
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > bilateral tonic clonic seizure > bilateral tonic clonic seizure with generalized onset > generalized convulsive status epilepticus
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > bilateral tonic clonic seizure > convulsive status epilepticus
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal aware seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal aware seizure > focal aware non motor seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal aware seizure > focal aware non motor seizure > focal aware autonomic seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal aware seizure > focal aware non motor seizure > focal aware autonomic seizure > focal aware autonomic seizure with hypoventilation hyperventilation altered respiration
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure > focal autonomic seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure > focal autonomic seizure > focal autonomic seizure with hypoventilation hyperventilation altered respiration
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > motor seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > motor seizure > clonic seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > motor seizure > epileptic spasm
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > status epilepticus
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > status epilepticus > status epilepticus with prominent motor symptoms
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > symptomatic seizures
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > abnormal exteroceptive sensation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > abnormal exteroceptive sensation > abnormality of pain sensation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > abnormal exteroceptive sensation > abnormality of pain sensation > impaired pain sensation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > abnormal exteroceptive sensation > abnormality of pain sensation > impaired pain sensation > pain insensitivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > abnormal exteroceptive sensation > hyperesthesia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > abnormal exteroceptive sensation > hypoesthesia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > impaired proprioception
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > somatic sensory dysfunction > impaired proprioception > sensory ataxia
+phenotypic abnormality > abnormality of the respiratory system
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology > respiratory tract infection
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology > respiratory tract infection > bronchitis
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology > respiratory tract infection > bronchitis > acute bronchitis
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology > respiratory tract infection > bronchitis > chronic bronchitis
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal sputum
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal sputum > increased sputum production
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal blood gas level
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal blood gas level > abnormal blood carbon dioxide level
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal blood gas level > abnormal blood carbon dioxide level > hypocapnia
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal nasal mucus secretion
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal nasal mucus secretion > rhinorrhea
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > bradypnea
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > dyspnea
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > dyspnea > respiratory distress
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > dyspnea > respiratory distress > intercostal retractions
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hyperventilation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hyperventilation > intermittent hyperventilation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hyperventilation > intermittent hyperventilation > intermittent hyperpnea at rest
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hypopnea
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hypoventilation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hypoventilation > central hypoventilation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hypoventilation > episodic hypoventilation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > hypoventilation > nocturnal hypoventilation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > irregular respiration
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > night gasping
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > paradoxical respiration
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > abnormal pattern of respiration > tachypnea
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > breathing dysregulation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > breathing dysregulation > neonatal breathing dysregulation
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > cough
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > cough > barking cough
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > cough > chronic cough
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > cough > nonproductive cough
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > cough > productive cough
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > cough > recurrent coughing spasms
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory failure
+phenotypic abnormality > constitutional symptom
+phenotypic abnormality > constitutional symptom > difficulty floating in water

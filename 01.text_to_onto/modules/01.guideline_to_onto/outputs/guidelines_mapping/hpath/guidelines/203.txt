@@ -1,0 +1,42 @@
+abnormal fluid distribution
+accumulation abnormal fluid
+accumulation blood
+deposition pigment no otherwise specified
+edema extracellular
+extravasation of blood in a cavity
+extravasation of blood in a tissue
+fluid within tissue
+hematoma
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy mucous cell > hypertrophy goblet cells
+morphologic change > cell adaptation injury death > deposition accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material > pigment
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material > pigment > lipofuscin accumulation
+morphologic change > cell adaptation injury death > metabolic derangement
+morphologic change > cell adaptation injury death > metabolic derangement > tinctorial change
+morphologic change > hemodynamic disorders
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema intercellular
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial > edema dermal
+morphologic change > hemodynamic disorders > extravasation of blood
+morphologic change > hemodynamic disorders > extravasation of blood > hemorrhage
+morphologic change > hemodynamic disorders > extravasation of blood > hemorrhage > hemorrhage pulmonary
+morphologic change > hemodynamic disorders > extravasation of blood > hemorrhage > microhemorrhages
+morphologic change > hemodynamic disorders > extravasation of blood > hemorrhage agonal
+morphologic change > neoplasia
+morphologic change > neoplasia > malignant tumor
+morphologic change > neoplasia > malignant tumor > melanoma malignant
+morphologic change > normal altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased mucification
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > secretory activity increased

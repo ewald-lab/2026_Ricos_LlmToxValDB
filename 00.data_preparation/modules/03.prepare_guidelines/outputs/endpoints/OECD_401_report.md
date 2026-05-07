@@ -1,7 +1,7 @@
 # OECD Test Guideline 401: Acute Oral Toxicity
 
-**Generated:** 2026-02-24
-**Source PDF:** `Documentation/OECD Guidelines/401.pdf`
+**Generated:** 2023-10-27
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/401.pdf`
 
 ## Summary
 
@@ -9,34 +9,50 @@
 |-------|-------|
 | Guideline Number | 401 |
 | Title | Acute Oral Toxicity |
-| Adoption Date | Deleted 17 December 2002 |
-| Preferred Species | N/A (guideline deleted) |
-| Study Duration | N/A (guideline deleted) |
-| Animals per Dose Level | N/A (guideline deleted) |
-| Dose Groups | N/A (guideline deleted) |
-| Route of Administration | Oral |
+| Adoption Date | N/A (Deleted 17 Dec 2002) |
+| Preferred Species | N/A |
+| Study Duration | N/A |
+| Animals per Dose Level | N/A |
+| Dose Groups | N/A |
+| Route of Administration | Oral (Historical) |
 
 ## Purpose and Scope
 
-OECD Test Guideline 401 "Acute Oral Toxicity" was deleted by the OECD Council on 17 December 2002. The PDF contains only a deletion notice. The guideline has been replaced by alternative acute oral toxicity methods (OECD 420, 423, and 425) that use fewer animals.
+This document represents a historical version of OECD Test Guideline 401. It was officially **deleted** on 17 December 2002 following an OECD Council decision. It is no longer valid for generating new toxicological data. Current acute oral toxicity testing should utilize TG 420, TG 423, or TG 425.
 
 ## Key Observations
 
+*Note: As this guideline is deleted, no current observation requirements apply.*
+
 ### Clinical Observations
-- Not applicable (guideline deleted)
+N/A
 
 ### Haematology
-- Not applicable (guideline deleted)
+N/A
 
 ### Clinical Biochemistry
-- Not applicable (guideline deleted)
+N/A
 
 ### Pathology
-- Not applicable (guideline deleted)
+N/A
 
-## Endocrine Endpoint Annex
+## Endpoints
 
-**Annex Name:** No endpoint annex found
+**Source:** None
 **Column Convention:** N/A
 
-This guideline does not contain an endocrine endpoint annex.
+This guideline does not contain extractable endpoints because the test method was deleted in 2002.
+
+### Endpoint Summary
+
+| Category | Required | Optional |
+|----------|----------|----------|
+| Total | **0** | **0** |
+
+### Detailed Endpoints
+
+No endpoints were extracted as the guideline is obsolete.
+
+### Footnotes
+
+None.

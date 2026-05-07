@@ -12,7 +12,7 @@ Return ONLY a valid JSON object:
   "effects": ["list", "of", "terms"]
 }
 
-TASK: Re-evaluate and filter final list for true negative toxicological relevance.
+TASK: Re-evaluate and filter the list of effects for true negative toxicological relevance.
 1. NEGATIVE FINDINGS: Ensure the list contains only negative biological findings (absence of effect).
 2. REMOVE POSITIVES: If any positive findings or metadata remains, remove them.
 3. EMPTY LIST: If the list is empty because no negative findings were found, mark is_negative_tox_effect: false.
@@ -20,3 +20,5 @@ TASK: Re-evaluate and filter final list for true negative toxicological relevanc
 EXAMPLES:
 Input: ["no systemic toxicity"] -> is_negative_tox_effect: true, effects: ["no systemic toxicity"]
 Input: ["increased weight"] -> is_negative_tox_effect: false, effects: []
+Input: ["no mortality", "no clinical signs", "no gross findings", "no hematological changes", "no histopathological findings"] -> is_negative_tox_effect: true, effects: ["no mortality", "no clinical signs", "no gross findings", "no hematological changes", "no histopathological findings"]
+Input: ["liver hypertrophy", "no systemic toxicity"] -> is_negative_tox_effect: true, effects: ["no systemic toxicity"]

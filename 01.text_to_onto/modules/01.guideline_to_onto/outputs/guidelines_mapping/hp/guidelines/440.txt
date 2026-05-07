@@ -1,0 +1,18 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal morphology of female internal genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal morphology of female internal genitalia > abnormality of the uterus
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal morphology of female internal genitalia > abnormality of the uterus > abnormal uterus morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal morphology of female internal genitalia > abnormality of the uterus > abnormal uterus morphology > abnormal endometrium morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal morphology of female internal genitalia > abnormality of the uterus > abnormal uterus morphology > abnormal endometrium morphology > endometrial carcinoma
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index > increased body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > overweight

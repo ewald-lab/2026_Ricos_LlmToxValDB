@@ -1,0 +1,11 @@
+abnormal fluid distribution
+cell injury not otherwise specified
+edema extracellular
+fluid within tissue
+morphologic change
+morphologic change > general observation
+morphologic change > general observation > microscopic overall diagnosis
+morphologic change > hemodynamic disorders
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema
+morphologic change > neoplasia

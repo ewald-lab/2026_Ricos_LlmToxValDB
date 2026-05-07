@@ -1,0 +1,13 @@
+mammalian phenotype
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > generalized edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > lymphedema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > subcutaneous edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > phototoxicity
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > reddish skin
