@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --time=24:00:00
+#SBATCH --time=7:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
@@ -25,7 +25,7 @@ EMBED_DIR="${2:-qwen}"
 MODEL="${3:-Qwen3.5-122B-A10B-FP8}"
 MODE="${4:-1}"
 CONSENSU_RUNS="${5:-3}"
-BASE_URL="${BASE_URL:-http://codon-gpu-001.ebi.ac.uk:8003/v1}"
+BASE_URL="${BASE_URL:-http://codon-gpu-003.ebi.ac.uk:8003/v1}"
 
 ENDPOINTS_FILE="${DATA_PREP_ROOT}/modules/03.prepare_guidelines/outputs/endpoints/normalized_endpoint_list.csv"
 OUTPUT_DIR="${MODULE_ROOT}/outputs"

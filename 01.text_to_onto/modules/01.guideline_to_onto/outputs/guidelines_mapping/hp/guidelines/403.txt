@@ -28,6 +28,7 @@ phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abno
 phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal anterior eye segment morphology > abnormality iris morphology > abnormal iris pigmentation > asymmetry of iris pigmentation
 phenotypic abnormality > abnormality of the eye > abnormal eye morphology > abnormal anterior eye segment morphology > abnormality iris morphology > abnormal iris pigmentation > asymmetry of iris pigmentation > heterochromia iridis
 phenotypic abnormality > abnormality of the eye > abnormal eye physiology
+phenotypic abnormality > abnormality of the eye > abnormal eye physiology > staring gaze
 phenotypic abnormality > abnormality of the integument
 phenotypic abnormality > abnormality of the nervous system
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
@@ -35,6 +36,7 @@ phenotypic abnormality > abnormality of the nervous system > abnormal nervous sy
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > tremor by anatomical site
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > involuntary movements > tremor > tremor by anatomical site > limb tremor
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect
 phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state
@@ -75,6 +77,8 @@ phenotypic abnormality > growth abnormality > abnormality of body weight
 phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
 phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index > increased body mass index
 phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > small for gestational age
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > large for gestational age
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > overweight

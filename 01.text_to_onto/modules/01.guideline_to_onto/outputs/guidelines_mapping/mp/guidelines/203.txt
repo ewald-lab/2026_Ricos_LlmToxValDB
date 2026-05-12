@@ -12,6 +12,7 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal seizure response to pharmacological agent
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal seizure response to pharmacological agent > increased susceptibility to pharmacologically induced seizures
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal sensitization to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > enhanced behavioral response to xenobiotic
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal associative learning
@@ -36,6 +37,7 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal anxiety related response
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal anxiety related response > increased anxiety related response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal anxiety related response > increased anxiety related response > increased thigmotaxis
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal fear related response
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal fear anxiety related behavior > abnormal fear related response > decreased fear related response
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal grooming behavior
@@ -58,6 +60,7 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > unresponsive to tactile stimuli
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex > decreased startle reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex > hyperekplexia
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal startle reflex > increased startle reflex
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > tremors
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance
@@ -82,13 +85,16 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity > hyperactivity elicited by feed restriction
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity > nervous
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > bradykinesia
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > hypoactivity in response to feed restriction
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > slow movement
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > no spontaneous movement
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior > increased stereotypic behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal nocifensive behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal rhythmic behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception > abnormal pain threshold
@@ -117,6 +123,7 @@ mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular 
 mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation
 mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage
 mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > ear hemorrhage
 mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > eye hemorrhage
 mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > eye hemorrhage > retina hemorrhage
 mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > internal hemorrhage > gastrointestinal hemorrhage
@@ -213,6 +220,7 @@ mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > a
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > abnormal agouti pigmentation
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > abnormal agouti pigmentation > darkened coat color
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > abnormal dorsoventral coat patterning
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > irregular coat pigmentation
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > irregular coat pigmentation > variegated coat color
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > abnormal coat hair pigmentation > irregular coat pigmentation > variegated coat color > mottled coat
@@ -221,7 +229,9 @@ mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > s
 mammalian phenotype > integument phenotype > abnormal skin morphology
 mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
 mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > blotchy skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > pallor
 mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin lesions
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > translucent skin
 mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration
 mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation
 mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal dermal pigmentation
@@ -249,17 +259,23 @@ mammalian phenotype > muscle phenotype > abnormal muscle physiology > muscle twi
 mammalian phenotype > muscle phenotype > abnormal muscle physiology > muscle twitch > muscle spasm > muscle tetany
 mammalian phenotype > nervous system phenotype
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal autonomic nervous system physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal autonomic nervous system physiology > abnormal sympathetic nervous system physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal autonomic nervous system physiology > abnormal sympathetic nervous system physiology > abnormal sympathetic neuron physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal brain physiology
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response
-mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response intensity
-mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response intensity > increased nerve fiber response intensity
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response threshold
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal nervous system electrophysiology > abnormal nerve fiber response > abnormal nerve fiber response threshold > increased nerve fiber response threshold
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal neuron physiology
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal neuron physiology > abnormal sensory neuron physiology
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal sensorimotor gating
 mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal sensorimotor gating > reduced sensorimotor gating
+mammalian phenotype > nervous system phenotype > abnormal nervous system physiology > abnormal somatic nervous system physiology
 mammalian phenotype > pigmentation phenotype
 mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation
 mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation > abnormal eye pigmentation
+mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation > abnormal eye pigmentation > abnormal iris pigmentation
 mammalian phenotype > pigmentation phenotype > abnormal extracutaneous pigmentation > abnormal eye pigmentation > decreased eye pigmentation
 mammalian phenotype > pigmentation phenotype > abnormal melanogenesis
 mammalian phenotype > pigmentation phenotype > abnormal pigmentation pattern
@@ -269,16 +285,20 @@ mammalian phenotype > respiratory system phenotype
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal residual volume
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal tidal volume
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal tidal volume > decreased tidal volume
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal tidal volume > increased tidal volume
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal lung volume > abnormal vital capacity
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal airway resistance
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > abnormal pulmonary respiratory rate response
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > decreased pulmonary respiratory rate
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > increased pulmonary respiratory rate
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > increased pulmonary respiratory rate > tachypnea
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > apnea
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > hyperpnea
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > hypopnea
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > respiratory distress
@@ -290,6 +310,7 @@ mammalian phenotype > respiratory system phenotype > abnormal respiratory system
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > increased pulmonary ventilation
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > increased pulmonary ventilation > hyperventilation
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory sounds
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory sounds > stridor
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory transport
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory transport > abnormal pulmonary gas exchange
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > decreased respiration
@@ -300,6 +321,8 @@ mammalian phenotype > respiratory system phenotype > abnormal respiratory system
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > coughing
 mammalian phenotype > vision eye phenotype
 mammalian phenotype > vision eye phenotype > abnormal eye morphology
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal anterior eye segment morphology
+mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye development
 mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye distance position
 mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye distance position > enophthalmos
 mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal eye distance position > exophthalmos

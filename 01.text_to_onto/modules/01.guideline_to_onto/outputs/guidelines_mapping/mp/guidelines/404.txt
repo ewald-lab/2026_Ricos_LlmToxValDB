@@ -5,6 +5,7 @@ mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > 
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > generalized edema
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > lymphedema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > skin edema
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > subcutaneous edema
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > phototoxicity
 mammalian phenotype > integument phenotype

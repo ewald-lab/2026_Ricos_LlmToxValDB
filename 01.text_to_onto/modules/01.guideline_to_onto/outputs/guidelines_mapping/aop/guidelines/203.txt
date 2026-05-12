@@ -16,6 +16,7 @@ individual > increased epilepsy
 individual > increased locomotion
 individual > increased or inappropriate mantel display
 individual > increased seizure
+individual > inhibit agitation
 individual > locomotor activity decreased
 individual > occurrence epileptic seizure
 individual > reduced swimming performance
@@ -38,10 +39,10 @@ organ > reduced anterior swim bladder inflation
 organ > reduced posterior swim bladder inflation
 organ > reduced tidal volume
 tissue
-tissue > cerebellar hypoplasia
 tissue > chronic mucus hypersecretion
 tissue > hemostasis depletion from blood of fully functional carboxylated clotting factors
 tissue > increase body fluid overload
+tissue > increase in inflammation
 tissue > reduction in melanin lead to decrease of pigmentation
 tissue > reduction of melanosome level
 tissue > vascular barrier disruption

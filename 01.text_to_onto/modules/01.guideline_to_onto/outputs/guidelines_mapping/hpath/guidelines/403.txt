@@ -23,8 +23,6 @@ morphologic change > normal altered physiological condition
 morphologic change > normal altered physiological condition > altered physiological condition
 morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
 morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased mucification
-morphologic change > normal altered physiological condition > altered physiological condition > secretory activity
-morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion
 morphologic change > structural alteration
 morphologic change > structural alteration > organ specific entities changes
 morphologic change > structural alteration > organ specific entities changes > phthisis bulbi

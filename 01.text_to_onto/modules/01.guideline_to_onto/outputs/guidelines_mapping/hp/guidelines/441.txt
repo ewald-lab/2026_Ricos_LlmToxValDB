@@ -12,6 +12,7 @@ phenotypic abnormality > abnormality of head or neck > abnormality of the head >
 phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival icterus
 phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctival membrane
 phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctivitis
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal conjunctiva morphology > conjunctivitis > keratoconjunctivitis
 phenotypic abnormality > abnormality of the digestive system
 phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology
 phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly
@@ -38,13 +39,7 @@ phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacr
 phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > epiphora > increased tear production > increased basal tear production
 phenotypic abnormality > abnormality of the eye > abnormal eye physiology > lacrimation abnormality > hemolacria
 phenotypic abnormality > abnormality of the integument
-phenotypic abnormality > abnormality of the nervous system
-phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
-phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure
-phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure
-phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure
-phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure > focal autonomic seizure
-phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > focal onset seizure > focal non motor seizure > focal autonomic seizure > focal autonomic seizure with lacrimation
 phenotypic abnormality > growth abnormality
 phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight

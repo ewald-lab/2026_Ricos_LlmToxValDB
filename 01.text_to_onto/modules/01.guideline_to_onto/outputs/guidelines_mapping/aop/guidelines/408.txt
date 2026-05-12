@@ -7,8 +7,6 @@ individual > prostate cancer
 molecular
 molecular > displacement serum thyroxine from carrier protein
 molecular > displacement serum thyroxine from transthyretin
-molecular > inhibition deiodinase 1
-molecular > inhibition deiodinase 2
 molecular > inhibition deiodinase 3
 organ
 organ > increased thyroxine in serum

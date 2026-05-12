@@ -2,6 +2,8 @@ mammalian phenotype
 mammalian phenotype > behavior neurological phenotype
 mammalian phenotype > behavior neurological phenotype > abnormal behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal alcohol consumption
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal alcohol consumption > increased alcohol consumption
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol > enhanced behavioral response to alcohol
@@ -10,7 +12,10 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to amphetamine > abnormal behavioral response to methylenedioxymethamphetamine
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to cocaine
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to morphine
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > impaired behavioral response to addictive substance
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal habituation to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > impaired behavioral response to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > preference for addictive substance
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal drinking behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior
@@ -28,3 +33,5 @@ mammalian phenotype > growth size body region phenotype > abnormal body composit
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight gain
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight loss

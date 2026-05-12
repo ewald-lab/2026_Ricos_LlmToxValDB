@@ -36,6 +36,9 @@ morphologic change > cell adaptation injury death > cellular adaptation of growt
 morphologic change > cell adaptation injury death > cellular adaptation of growth > increased blood cell formation
 morphologic change > cell adaptation injury death > cellular adaptation of growth > increased blood cell formation > increased activity red blood cell precursor
 morphologic change > cell adaptation injury death > cellular adaptation of growth > increased blood cell formation > increased activity red blood cell precursor > increased erythropoiesis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia respiratory olfactory glandular epithelium
 morphologic change > hemodynamic disorders
 morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma
 morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema
@@ -52,13 +55,10 @@ morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma follicu
 morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma rete testis
 morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma squamous cell
 morphologic change > neoplasia > malignant tumor > carcinoma > urothelial carcinoma
-morphologic change > normal altered physiological condition
-morphologic change > normal altered physiological condition > altered physiological condition
-morphologic change > normal altered physiological condition > altered physiological condition > secretory activity
-morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion
 myocardiofiber degeneration
 myocardiofiber degeneration replacement by fibrosis
 myocardiofiber degenerationreplacement by fibrosis
 necrosis chronic with bone marrow stromal reaction
+thrombosis and hemostasis
 tubular glomerular alteration
 vacuolation tubular epithelium

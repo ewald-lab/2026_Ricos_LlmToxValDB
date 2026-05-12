@@ -48,4 +48,3 @@ tissue > increased accumulation of alpha2u microglobulin
 tissue > increased histomorphological alteration of testis
 tissue > n a hepatotoxicity hepatopathy including a constellation of observable effects
 tissue > neuroinflammation
-tissue > reduction eggshell thickness

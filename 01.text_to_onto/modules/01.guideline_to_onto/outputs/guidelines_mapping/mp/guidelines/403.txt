@@ -80,6 +80,8 @@ mammalian phenotype > growth size body region phenotype > abnormal body composit
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight gain
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight loss
 mammalian phenotype > growth size body region phenotype > organomegaly
 mammalian phenotype > growth size body region phenotype > organomegaly > enlarged lung
 mammalian phenotype > growth size body region phenotype > organomegaly > enlarged lung > increased lung weight
@@ -105,6 +107,7 @@ mammalian phenotype > respiratory system phenotype > abnormal respiratory system
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology > abnormal lung size > abnormal lung weight > abnormal wet to dry lung weight ratio > increased wet to dry lung weight ratio
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology > abnormal lung size > abnormal lung weight > decreased lung weight
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > coughing
 mammalian phenotype > vision eye phenotype
 mammalian phenotype > vision eye phenotype > abnormal eye morphology
 mammalian phenotype > vision eye phenotype > abnormal eye physiology

@@ -18,6 +18,7 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior > increased aggression
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal emotion affect behavior > abnormal aggression related behavior > increased aggression > increased aggression towards inanimate objects
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal sexual interaction
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal social conspecific interaction behavior > abnormal sexual interaction > abnormal copulation behavior
@@ -146,7 +147,6 @@ mammalian phenotype > renal urinary system phenotype > abnormal renal urinary sy
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal kidney morphology > abnormal kidney size > abnormal kidney weight
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal kidney morphology > abnormal kidney size > abnormal kidney weight > decreased kidney weight
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology
-mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology > abnormal foreskin morphology
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology > phimosis
 mammalian phenotype > reproductive system phenotype
 mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology

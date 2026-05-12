@@ -28,6 +28,7 @@ phenotypic abnormality > abnormality of the endocrine system > abnormality of th
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormal posterior pituitary morphogenesis
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormal posterior pituitary morphogenesis > neoplasm of the posterior pituitary
+phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormal posterior pituitary morphogenesis > neoplasm of the posterior pituitary > pituicytoma
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the hypothalamus pituitary axis > abnormal pituitary gland morphology > abnormality of the anterior pituitary > neoplasm of the anterior pituitary > pituitary adenoma
@@ -39,7 +40,6 @@ phenotypic abnormality > abnormality of the endocrine system > abnormality of th
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology
 phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology > abnormal tsh response to thyrotrophin releasing hormone stimulation test
-phenotypic abnormality > abnormality of the endocrine system > abnormality of the thyroid gland > abnormality of thyroid physiology > abnormal tsh response to thyrotrophin releasing hormone stimulation test > absent tsh response to thyrotrophin releasing hormone stimulation test
 phenotypic abnormality > abnormality of the genitourinary system
 phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system
 phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology

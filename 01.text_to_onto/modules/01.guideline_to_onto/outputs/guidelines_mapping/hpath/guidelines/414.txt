@@ -19,6 +19,9 @@ morphologic change > cell adaptation injury death > cellular adaptation of growt
 morphologic change > general observation
 morphologic change > general observation > cause of death moribund condition
 morphologic change > general observation > macroscopic comment
+morphologic change > healing and repair
+morphologic change > healing and repair > granulation tissue
+morphologic change > inflammatory processes
 morphologic change > neoplasia
 morphologic change > neoplasia > malignant tumor
 morphologic change > neoplasia > malignant tumor > carcinoma
@@ -39,6 +42,9 @@ morphologic change > structural alteration > abnormal growth differentiation > a
 morphologic change > structural alteration > architectural anomalies
 morphologic change > structural alteration > developmental errors
 morphologic change > structural alteration > developmental errors > cryptorchidism
+morphologic change > structural alteration > developmental errors > hypoplasia
 morphologic change > structural alteration > developmental errors > malformation
+morphologic change > structural alteration > organ specific entities changes
 morphologic change > structural alteration > structural injury
+morphologic change > structural alteration > structural injury > fracture
 tissue remodelling

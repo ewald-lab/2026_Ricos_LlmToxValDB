@@ -13,6 +13,8 @@ phenotypic abnormality > growth abnormality > abnormality of body weight
 phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
 phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index > increased body mass index
 phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > small for gestational age
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > large for gestational age
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity
 phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > overweight

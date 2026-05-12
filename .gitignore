@@ -194,6 +194,8 @@ __marimo__/
 *.db
 *.parquet
 *.csv
+*.xlsx
+*.zip
 !requirements*.txt
 !/00.data_preparation/modules/03.prepare_guidelines/**/*.csv
 **/inputs/raw_*/

@@ -5,11 +5,13 @@ individual > decreased locomotion
 individual > increase sex ratio
 individual > increased locomotion
 individual > locomotor activity decreased
-individual > reproductive failure
 individual > viable offspring decreased
 molecular
 molecular > displacement serum thyroxine from carrier protein
 molecular > displacement serum thyroxine from transthyretin
+molecular > inhibition deiodinase 1
+molecular > inhibition deiodinase 2
+molecular > inhibition deiodinase 3
 molecular > ovary
 organ
 organ > altered brain morphology
@@ -17,7 +19,6 @@ organ > impaired inguinoscrotal testicular descent phase
 organ > increased ataxia paralysis or hyperactivity
 organ > increased thyroxine in serum
 organ > malformation cryptorchidism maldescended testis
-organ > notochord distortion or malformations
 population
 population > decreased survival
 population > increased male biased sex ratio

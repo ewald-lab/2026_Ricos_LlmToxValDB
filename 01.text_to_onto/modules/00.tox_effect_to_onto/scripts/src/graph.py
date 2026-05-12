@@ -103,6 +103,7 @@ class TextToOntoGraph:
         
         self.nodes = {}
         self.parent_map = {}
+        self.children_map = {}  # name -> list[child_name]
         self.prompt_map = {}
         
         # URI to name map for global definitions
@@ -123,6 +124,7 @@ class TextToOntoGraph:
             parent_name = item.get('parent')
             if parent_name:
                 self.parent_map[name] = parent_name
+                self.children_map.setdefault(parent_name, []).append(name)
 
         # Optionally load global definitions (overrides default ones)
         if global_definitions_db and os.path.exists(global_definitions_db):
@@ -433,6 +435,18 @@ class TextToOntoGraph:
                         if curr in self.categories:
                             results[curr] = 1 # Store only hits
                         curr = self.parent_map.get(curr)
+                    # Enqueue unasked children of the accepted node
+                    for child_name in self.children_map.get(name, []):
+                        if child_name not in verified_nodes and child_name not in evaluated_nodes and child_name not in next_round_candidates_map:
+                            child_info = self.nodes.get(child_name)
+                            if child_info:
+                                next_round_candidates_map[child_name] = {
+                                    'name': child_name,
+                                    'sanitized_name': child_info.get('sanitized_name', child_name),
+                                    'def': self.prompt_map.get(child_name, ''),
+                                    'source': f'inferior of: {name}',
+                                    'ann_score': 0.0
+                                }
                 else:
                     parent_name = self.parent_map.get(name)
                     if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes and parent_name not in next_round_candidates_map:
@@ -442,12 +456,12 @@ class TextToOntoGraph:
                                 'name': parent_name,
                                 'sanitized_name': node_info.get('sanitized_name', parent_name),
                                 'def': self.prompt_map.get(parent_name, ''),
-                                'source': f'superior of : {name}',
+                                'source': f'superior of: {name}',
                                 'ann_score': 0.0
                             }
             
             current_candidates = list(next_round_candidates_map.values())
-            # Pre-filter superior candidates with the reranker before sending to LLM
+            # Pre-filter inferior/superior candidates with the reranker before sending to LLM
             if current_candidates:
                 current_candidates = self._rerank_candidates(description, current_candidates)
             iteration += 1
@@ -577,6 +591,19 @@ class TextToOntoGraph:
                  final_selection_with_info.append(f"{name} ({source})")
             
             next_round_candidates_map = {}
+            # Enqueue unasked children of every accepted node
+            for name in final_selected_names:
+                for child_name in self.children_map.get(name, []):
+                    if child_name not in verified_nodes and child_name not in evaluated_nodes and child_name not in next_round_candidates_map:
+                        child_info = self.nodes.get(child_name)
+                        if child_info:
+                            next_round_candidates_map[child_name] = {
+                                'name': child_name,
+                                'sanitized_name': child_info.get('sanitized_name', child_name),
+                                'def': self.prompt_map.get(child_name, ''),
+                                'source': f'inferior_of_{name}',
+                                'ann_score': 0.0
+                            }
             if self.include_superiors:
                 for name in rejected_names:
                     parent_name = self.parent_map.get(name)
@@ -592,7 +619,7 @@ class TextToOntoGraph:
                             }
             
             current_candidates = list(next_round_candidates_map.values())
-            # Pre-filter superior candidates with the reranker before sending to LLM
+            # Pre-filter inferior/superior candidates with the reranker before sending to LLM
             if current_candidates:
                 current_candidates = self._rerank_candidates(description, current_candidates)
             iteration += 1

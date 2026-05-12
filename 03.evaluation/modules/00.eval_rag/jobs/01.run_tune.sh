@@ -22,10 +22,6 @@ source env-evaluation/bin/activate
 # Go to scripts dir
 cd modules/00.eval_rag/scripts
 
-# Models to evaluate
-MODELS=("microsoft/harrier-oss-v1-27b" "tencent/KaLM-Embedding-Gemma3-12B-2511" "nvidia/llama-embed-nemotron-8b" "Qwen/Qwen3-Embedding-8B")
-MODEL_DIRS=("harrier" "kalm" "nemotron" "qwen")
-
 # Evaluation Configuration
 GROUND_TRUTH="../inputs/ground_truth_mp_jess_expanded.csv"
 EVAL_CONFIG="../config/eval_config.json"

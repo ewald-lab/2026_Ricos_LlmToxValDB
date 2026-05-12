@@ -38,6 +38,8 @@ mammalian phenotype > growth size body region phenotype > abnormal body composit
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight gain
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight loss
 mammalian phenotype > growth size body region phenotype > organomegaly
 mammalian phenotype > growth size body region phenotype > organomegaly > enlarged kidney
 mammalian phenotype > growth size body region phenotype > organomegaly > enlarged kidney > increased kidney weight
@@ -60,6 +62,7 @@ mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic sy
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hematocrit > increased hematocrit
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hemoglobin
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hemoglobin > abnormal hemoglobin content
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hemoglobin > abnormal hemoglobin content > decreased hemoglobin content
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hemoglobin > abnormal hemoglobin content > increased hemoglobin content
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hemoglobin > abnormal mean corpuscular hemoglobin concentration
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal hemoglobin > abnormal mean corpuscular hemoglobin concentration > decreased mean corpuscular hemoglobin concentration
@@ -135,6 +138,7 @@ mammalian phenotype > integument phenotype
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology
 mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal coat hair morphology > abnormal coat appearance > disheveled coat
 mammalian phenotype > liver biliary system phenotype
 mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology
 mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology > abnormal liver morphology
@@ -156,6 +160,11 @@ mammalian phenotype > renal urinary system phenotype > abnormal renal urinary sy
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system physiology
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system physiology > abnormal kidney physiology
 mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system physiology > abnormal kidney physiology > kidney failure
+mammalian phenotype > skeleton phenotype
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal bone mineralization
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal bone mineralization > rickets
 mammalian phenotype > vision eye phenotype
 mammalian phenotype > vision eye phenotype > abnormal eye morphology
 mammalian phenotype > vision eye phenotype > abnormal eye morphology > abnormal anterior eye segment morphology

@@ -1,4 +1,4 @@
-alterations in blood flow and tissue perfusion
+accumulation neutrophils intact or degenerating with necrotic myocytes
 atrophy adrenal cortex
 atrophy with degeneration and fibrosis
 degeneration loss myelin sheath
@@ -74,6 +74,7 @@ morphologic change > inflammatory processes
 morphologic change > inflammatory processes > inflammation
 morphologic change > inflammatory processes > inflammation > cholecystitis
 morphologic change > inflammatory processes > inflammation > inflammation lymphohistioplasmacytic
+morphologic change > inflammatory processes > inflammation > inflammation lymphohistioplasmacytic > inflammation lymphocytic
 morphologic change > neoplasia
 morphologic change > neoplasia > benign tumor
 morphologic change > neoplasia > benign tumor > adenoma

@@ -46,4 +46,3 @@ tissue > increased accumulation of alpha2u microglobulin
 tissue > increased ductal hyperplasia
 tissue > increased histomorphological alteration of testis
 tissue > prostatic intraepithelial neoplasia
-tissue > reduction eggshell thickness

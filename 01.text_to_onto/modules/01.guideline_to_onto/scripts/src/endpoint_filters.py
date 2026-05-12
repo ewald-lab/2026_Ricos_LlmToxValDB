@@ -338,6 +338,12 @@ class EndpointOntologyFilterBuilder:
                                 "reason": f"Selected via RAG matching {name}. {candidate_reasoning[name][0] if candidate_reasoning[name] else ''}"
                             })
                         curr = curr_node.parent if curr_node else None
+                    # Enqueue unasked direct children of the accepted node
+                    for child_name in self.tree.get_children(name):
+                        if child_name not in verified_nodes and child_name not in evaluated_nodes:
+                            child_info = self.tree.nodes.get(child_name)
+                            if child_info and child_info not in next_round_candidates:
+                                next_round_candidates.append(child_info)
                 else:
                     parent_name = cand.parent
                     if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
@@ -450,6 +456,12 @@ class EndpointOntologyFilterBuilder:
                                 "reason": f"Selected via Batch RAG matching {name}"
                             })
                         curr = curr_node.parent if curr_node else None
+                    # Enqueue unasked direct children of the accepted node
+                    for child_name in self.tree.get_children(name):
+                        if child_name not in verified_nodes and child_name not in evaluated_nodes:
+                            child_info = self.tree.nodes.get(child_name)
+                            if child_info and child_info not in next_round_candidates:
+                                next_round_candidates.append(child_info)
                 else:
                     parent_name = cand.parent
                     if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:

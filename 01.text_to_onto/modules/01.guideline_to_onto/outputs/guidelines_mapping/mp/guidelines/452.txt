@@ -19,6 +19,7 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to electrical stimuli > hyperresponsive to electrical stimuli
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > hyperresponsive to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > tremors
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > jerky movement
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal physical strength
@@ -26,6 +27,7 @@ mammalian phenotype > behavior neurological phenotype > abnormal behavior > abno
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal physical strength > abnormal grip strength > decreased grip strength
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal physical strength > abnormal grip strength > increased grip strength
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal posture
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal posture > titubation
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior
 mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor coordination
@@ -98,10 +100,6 @@ mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology 
 mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal nose morphology > abnormal nasal mucosa morphology
 mammalian phenotype > digestive alimentary phenotype
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology
-mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal digestive organ placement
-mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal digestive organ placement > abnormal intestine placement
-mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal digestive organ placement > abnormal intestine placement > abnormal small intestine placement
-mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal digestive organ placement > abnormal intestine placement > abnormal small intestine placement > abnormal duodenum topology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal intestinal mucosa morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal intestinal mucosa morphology > abnormal crypts of lieberkuhn morphology
@@ -111,12 +109,12 @@ mammalian phenotype > digestive alimentary phenotype > abnormal digestive system
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal large intestine morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal large intestine morphology > abnormal cecum morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal large intestine morphology > abnormal rectum morphology
-mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal large intestine morphology > abnormal rectum morphology > abnormal perirectal tissue morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal duodenum morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal duodenum morphology > duodenal lesions
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal ileum morphology
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal jejunum morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal jejunum morphology > absent jejunum
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal jejunum morphology > distended jejunum
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal jejunum morphology > jejunum atresia
 mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal salivary gland morphology
@@ -153,9 +151,11 @@ mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morpho
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal gland weight > increased adrenal gland weight
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal medulla morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal medulla morphology > abnormal adrenal chromaffin cell morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal adrenal gland morphology > abnormal adrenal medulla morphology > abnormal adrenal chromaffin cell morphology > abnormal adrenergic chromaffin cell morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal neuroendocrine gland morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal neuroendocrine gland morphology > abnormal pituitary gland morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal neuroendocrine gland morphology > abnormal pituitary gland morphology > abnormal adenohypophysis morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal neuroendocrine gland morphology > abnormal pituitary gland morphology > abnormal adenohypophysis morphology > abnormal folliculo stellate cell morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal parathyroid gland morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal parathyroid gland morphology > abnormal parathyroid gland chief cell morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal parathyroid gland morphology > enlarged parathyroid gland
@@ -165,9 +165,11 @@ mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morpho
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus epithelium morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus epithelium morphology > vacuolated thymus epithelium
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus lobule morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus lobule morphology > abnormal thymus cortex morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus size
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus size > enlarged thymus
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > abnormal thymus topology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thymus morphology > athymia
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > enlarged thyroid gland
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > enlarged thyroid gland > increased thyroid gland weight
@@ -182,6 +184,7 @@ mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morpho
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal apocrine gland morphology > abnormal mammary gland morphology > abnormal mammary gland lobule morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal apocrine gland morphology > abnormal mammary gland morphology > abnormal mammary gland lobule morphology > abnormal mammary gland alveolus morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal apocrine gland morphology > abnormal mammary gland morphology > abnormal mammary gland lobule morphology > abnormal mammary gland alveolus morphology > mammary gland alveolar hyperplasia
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal apocrine gland morphology > abnormal mammary gland morphology > abnormal mammary gland stroma morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal apocrine gland morphology > abnormal mammary gland morphology > increased mammary gland tumor incidence
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal apocrine gland morphology > abnormal mammary gland morphology > mammary gland hyperplasia
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal lacrimal gland morphology
@@ -210,6 +213,7 @@ mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morpho
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal mucous gland morphology > abnormal urethral gland morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal mucous gland morphology > abnormal urethral gland morphology > squamous metaplasia of urethral gland
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal gallbladder morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal gallbladder morphology > abnormal gallbladder epithelium morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal pancreas morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology
 mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology
@@ -244,6 +248,8 @@ mammalian phenotype > growth size body region phenotype > abnormal body composit
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size
 mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight gain
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight > abnormal susceptibility to weight loss
 mammalian phenotype > growth size body region phenotype > organomegaly
 mammalian phenotype > growth size body region phenotype > organomegaly > enlarged kidney
 mammalian phenotype > growth size body region phenotype > organomegaly > enlarged kidney > increased kidney weight
@@ -282,9 +288,16 @@ mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic sy
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal red blood cell distribution width
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal red blood cell distribution width > increased red blood cell distribution width
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > abnormal red blood cell distribution width > increased red blood cell distribution width > anisocytosis
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > acanthocytosis
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > anisopoikilocytosis
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > echinocytosis
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > elliptocytosis
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > increased number of heinz bodies
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > poikilocytosis
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > poikilocytosis > schistocytosis
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > polychromatophilia
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > spherocytosis
+mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal erythrocyte morphology > stomatocytosis
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal platelet morphology
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal platelet morphology > abnormal platelet cell number
 mammalian phenotype > hematopoietic system phenotype > abnormal hematopoietic system morphology development > abnormal hematopoietic cell morphology > abnormal blood cell morphology > abnormal platelet morphology > abnormal platelet cell number > thrombocytopenia
@@ -354,7 +367,6 @@ mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > 
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > cyanosis
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal enzyme coenzyme level
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal enzyme coenzyme level > abnormal cholinesterase level
-mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal enzyme coenzyme level > abnormal liver enzyme coenzyme level
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
 mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > endoneurial edema
@@ -388,6 +400,7 @@ mammalian phenotype > immune system phenotype > abnormal immune system physiolog
 mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > reproductive system inflammation > seminal vesiculitis
 mammalian phenotype > integument phenotype
 mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin physiology
 mammalian phenotype > liver biliary system phenotype
 mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology
 mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system morphology > abnormal liver morphology
@@ -402,6 +415,7 @@ mammalian phenotype > muscle phenotype > abnormal muscle morphology
 mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle fiber morphology
 mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle fiber morphology > abnormal skeletal muscle fiber morphology
 mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > rhabdomyolysis
 mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > skeletal muscle degeneration
 mammalian phenotype > muscle phenotype > abnormal muscle physiology
 mammalian phenotype > muscle phenotype > abnormal muscle physiology > abnormal muscle tone
@@ -486,10 +500,15 @@ mammalian phenotype > respiratory system phenotype > abnormal respiratory system
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > decreased pulmonary respiratory rate
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > increased pulmonary respiratory rate
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > abnormal pulmonary respiratory rate > increased pulmonary respiratory rate > tachypnea
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > apnea
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > hyperpnea
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > hypopnea
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory function > abnormal breathing pattern > respiratory distress
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > increased pulmonary ventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory mechanics > abnormal pulmonary ventilation > increased pulmonary ventilation > hyperventilation
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > abnormal respiratory transport
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > decreased respiration
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > decreased respiration > respiratory failure
 mammalian phenotype > respiratory system phenotype > abnormal respiratory system physiology > abnormal respiration > increased respiration
@@ -498,6 +517,10 @@ mammalian phenotype > skeleton phenotype > abnormal skeleton morphology
 mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology
 mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology
 mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal bone mineralization
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal bone mineralization > rickets
 mammalian phenotype > taste olfaction phenotype
 mammalian phenotype > taste olfaction phenotype > abnormal olfactory system morphology
 mammalian phenotype > vision eye phenotype

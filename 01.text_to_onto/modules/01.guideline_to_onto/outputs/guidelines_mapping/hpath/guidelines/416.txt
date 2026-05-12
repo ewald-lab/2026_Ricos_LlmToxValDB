@@ -27,6 +27,9 @@ morphologic change > neoplasia > malignant tumor > adenocarcinoma > adenocarcino
 morphologic change > neoplasia > malignant tumor > carcinoma
 morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma rete testis
 morphologic change > neoplasia > malignant tumor > carcinosarcoma
+morphologic change > neoplasia > malignant tumor > sarcoma
+morphologic change > neoplasia > malignant tumor > sarcoma > adenosarcoma
+morphologic change > neoplasia > malignant tumor > sarcoma > sarcoma nos
 morphologic change > normal altered physiological condition
 morphologic change > normal altered physiological condition > altered physiological condition
 morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle

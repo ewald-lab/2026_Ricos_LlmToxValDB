@@ -13,3 +13,4 @@ phenotypic abnormality > abnormality of the cardiovascular system > abnormality 
 phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality
 phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema
 phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > facial erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > perianal erythema

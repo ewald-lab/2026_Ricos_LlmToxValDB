@@ -3,6 +3,7 @@ cellular > androgen receptor nuclear transcriptional activity in genital tubercl
 cellular > increase androgen receptor protein expression abundance
 cellular > increase gonadotropins concentration in plasma
 cellular > increase luteinizing hormone
+cellular > reduction testosterone synthesis in leydig cells
 individual
 individual > altered reproductive behaviour
 individual > decreased body weight
@@ -10,13 +11,10 @@ individual > decreased locomotion
 individual > increase incomplete ecdysis
 individual > increased locomotion
 individual > locomotor activity decreased
-individual > obesity
 molecular
 molecular > antagonism androgen receptor
 molecular > displacement serum thyroxine from carrier protein
 molecular > displacement serum thyroxine from transthyretin
-molecular > inhibition deiodinase 1
-molecular > inhibition deiodinase 2
 molecular > inhibition deiodinase 3
 organ
 organ > increased thyroxine in serum
