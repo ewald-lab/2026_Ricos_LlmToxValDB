@@ -12,3 +12,5 @@ pandas
 tqdm
 openai
 tiktoken
+
+accelerate
