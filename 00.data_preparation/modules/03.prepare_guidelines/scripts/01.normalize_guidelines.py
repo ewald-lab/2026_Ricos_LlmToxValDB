@@ -7,11 +7,13 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.append(str(SCRIPT_DIR))
 
 from src.endpoint_normalization import (
+    ALL_ENDPOINT_FIELDS,
     CATEGORY_NORMALIZATION_FIELDS,
     DEFAULT_ENDPOINTS_DIR,
     DEFAULT_OUTPUT_DIR,
     NORMALIZED_ROW_FIELDS,
     UNIQUE_ENDPOINT_FIELDS,
+    build_all_endpoint_list,
     build_category_normalization,
     build_normalized_rows,
     build_unique_endpoint_list,
@@ -53,13 +55,18 @@ def main():
 
     normalized_rows = build_normalized_rows(csv_paths)
     unique_endpoints = build_unique_endpoint_list(normalized_rows)
+    all_endpoints = build_all_endpoint_list(normalized_rows)
     category_normalization = build_category_normalization(normalized_rows)
-
 
     unique_path = write_csv(
         output_dir / "normalized_endpoint_list.csv",
         UNIQUE_ENDPOINT_FIELDS,
         unique_endpoints,
+    )
+    all_path = write_csv(
+        output_dir / "all_endpoints_list.csv",
+        ALL_ENDPOINT_FIELDS,
+        all_endpoints,
     )
     categories_path = write_csv(
         output_dir / "category_normalization.csv",
@@ -74,7 +81,8 @@ def main():
 
     print(f"Read {len(csv_paths)} endpoint CSV files.")
 
-    print(f"Wrote {len(unique_endpoints)} unique endpoint rows: {unique_path}")
+    print(f"Wrote {len(unique_endpoints)} required endpoint rows: {unique_path}")
+    print(f"Wrote {len(all_endpoints)} all endpoint rows (required + optional): {all_path}")
     print(f"Wrote {len(category_normalization)} category mappings: {categories_path}")
     print(
         f"Normalized categories ({len(normalized_categories)}): "

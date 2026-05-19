@@ -175,6 +175,17 @@ NORMALIZED_ROW_FIELDS = [
 UNIQUE_ENDPOINT_FIELDS = [
     "normalized_category",
     "normalized_endpoint",
+    "requirement_level",
+    "guideline_numbers",
+    "occurrence_count",
+    "original_categories",
+    "original_endpoints",
+]
+
+ALL_ENDPOINT_FIELDS = [
+    "normalized_category",
+    "normalized_endpoint",
+    "requirement_level",
     "guideline_numbers",
     "occurrence_count",
     "original_categories",
@@ -325,10 +336,16 @@ def sort_guideline_numbers(values: set[str]) -> list[str]:
 
 
 def build_unique_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
-    """Collapse row-level records to one row per normalized category/endpoint pair."""
+    """Collapse row-level records to one row per normalized category/endpoint pair.
+
+    Only Required endpoints are included; Optional endpoints are dropped so the
+    downstream ontology-mapping pipeline focuses on mandatory measurements.
+    """
     grouped: dict[tuple[str, str], dict[str, set[str] | int]] = {}
 
     for row in rows:
+        if row.get("requirement_level", "").strip().lower() != "required":
+            continue
         key = (row["normalized_category"], row["normalized_endpoint"])
         if key not in grouped:
             grouped[key] = {
@@ -350,6 +367,7 @@ def build_unique_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str,
             {
                 "normalized_category": category,
                 "normalized_endpoint": endpoint,
+                "requirement_level": "Required",
                 "guideline_numbers": "|".join(sort_guideline_numbers(payload["guideline_numbers"])),  # type: ignore[arg-type]
                 "occurrence_count": str(payload["occurrence_count"]),
                 "original_categories": "|".join(sorted(payload["original_categories"])),  # type: ignore[arg-type]
@@ -359,6 +377,67 @@ def build_unique_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str,
 
     return sorted(
         unique_rows,
+        key=lambda row: (row["normalized_category"].lower(), row["normalized_endpoint"].lower()),
+    )
+
+
+def build_all_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
+    """Collapse row-level records to one row per normalized category/endpoint pair,
+    including both Required and Optional endpoints.
+
+    The ``requirement_level`` field is set to:
+    - ``"Required"`` if the endpoint is Required in every guideline it appears in.
+    - ``"Optional"`` if Optional in every guideline.
+    - ``"Required/Optional"`` if it appears as both across different guidelines.
+    """
+    grouped: dict[tuple[str, str], dict] = {}
+
+    for row in rows:
+        key = (row["normalized_category"], row["normalized_endpoint"])
+        if key not in grouped:
+            grouped[key] = {
+                "guideline_numbers": set(),
+                "occurrence_count": 0,
+                "original_categories": set(),
+                "original_endpoints": set(),
+                "requirement_levels": set(),
+            }
+
+        grouped_row = grouped[key]
+        grouped_row["guideline_numbers"].add(row["guideline_number"])
+        grouped_row["occurrence_count"] = int(grouped_row["occurrence_count"]) + 1
+        grouped_row["original_categories"].add(row["original_category"])
+        grouped_row["original_endpoints"].add(row["original_endpoint"])
+        level = row.get("requirement_level", "").strip()
+        if level:
+            grouped_row["requirement_levels"].add(level)
+
+    all_rows = []
+    for (category, endpoint), payload in grouped.items():
+        levels = payload["requirement_levels"]
+        if "Required" in levels and "Optional" in levels:
+            requirement_level = "Required/Optional"
+        elif "Required" in levels:
+            requirement_level = "Required"
+        elif "Optional" in levels:
+            requirement_level = "Optional"
+        else:
+            requirement_level = "|".join(sorted(levels))
+
+        all_rows.append(
+            {
+                "normalized_category": category,
+                "normalized_endpoint": endpoint,
+                "requirement_level": requirement_level,
+                "guideline_numbers": "|".join(sort_guideline_numbers(payload["guideline_numbers"])),  # type: ignore[arg-type]
+                "occurrence_count": str(payload["occurrence_count"]),
+                "original_categories": "|".join(sorted(payload["original_categories"])),  # type: ignore[arg-type]
+                "original_endpoints": "|".join(sorted(payload["original_endpoints"])),  # type: ignore[arg-type]
+            }
+        )
+
+    return sorted(
+        all_rows,
         key=lambda row: (row["normalized_category"].lower(), row["normalized_endpoint"].lower()),
     )
 
