@@ -54,4 +54,6 @@ if __name__ == "__main__":
             all_summary.extend(get_top_configs(path, name))
     
     df = pl.DataFrame(all_summary)
-    df.write_csv("top_configs_summary.csv")
+    output_path = "../outputs/tables/top_configs_summary.csv"
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    df.write_csv(output_path)

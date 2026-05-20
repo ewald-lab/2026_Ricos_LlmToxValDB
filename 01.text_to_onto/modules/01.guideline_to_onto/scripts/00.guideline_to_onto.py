@@ -192,14 +192,19 @@ def main():
     with open(args.rag_config, 'r', encoding='utf-8') as f:
         rag_config = json.load(f)
     
-    if isinstance(rag_config, dict):
-        key = args.embeddings_model_id or rag_config.get("embedding_model", "")
-        rag_config_lower = {k.lower(): v for k, v in rag_config.items()}
-        model_config_block = rag_config_lower.get(key.lower())
-        if not model_config_block:
-            model_config_block = next((v for v in rag_config.values() if v.get("embedding_model") == key), None)
-        if model_config_block:
-            rag_config = model_config_block
+    # If it's a nested dictionary (e.g. keyed by model name), look up by embeddings_model_id
+    if isinstance(rag_config, dict) and "embedding_model" not in rag_config:
+        key = args.embeddings_model_id
+        if key:
+            # Case-insensitive key lookup
+            rag_config_lower = {k.lower(): v for k, v in rag_config.items()}
+            model_config_block = rag_config_lower.get(key.lower())
+            if not model_config_block:
+                # Fallback scan for embedding_model match if key was not found
+                model_config_block = next((v for v in rag_config.values() if isinstance(v, dict) and v.get("embedding_model") == key), None)
+            
+            if model_config_block:
+                rag_config = model_config_block
 
     embedding_model = rag_config.get("embedding_model", "Qwen/Qwen3-Embedding-8B")
     top_k_rag = rag_config.get("top_k_rag", 15)

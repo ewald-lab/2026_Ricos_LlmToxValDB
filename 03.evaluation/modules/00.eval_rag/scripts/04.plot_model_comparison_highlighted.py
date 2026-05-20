@@ -78,4 +78,8 @@ def plot_comparison_with_highlights(summary_csv, output_name):
     print(f"Perfected comparison plot saved to {output_name}")
 
 if __name__ == "__main__":
-    plot_comparison_with_highlights("top_configs_summary.csv", "model_comparison_highlighted.png")
+    input_csv = "../outputs/tables/top_configs_summary.csv"
+    output_path = "../outputs/figures/model_comparison_highlighted.png"
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    plot_comparison_with_highlights(input_csv, output_path)

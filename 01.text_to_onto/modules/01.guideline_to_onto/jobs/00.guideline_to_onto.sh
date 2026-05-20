@@ -31,7 +31,7 @@ ENDPOINTS_FILE="${DATA_PREP_ROOT}/modules/03.prepare_guidelines/outputs/endpoint
 OUTPUT_DIR="${MODULE_ROOT}/outputs"
 MODEL_CONFIG="${MODULE_ROOT}/config/models/${MODEL}.json"
 SYSTEM_PROMPT="${MODULE_ROOT}/config/system_prompt_endpoint_filter.txt"
-RAG_CONFIG="${MODULE_ROOT}/config/rag/embeddings.json"
+RAG_CONFIG="${MODULE_ROOT}/config/rag/best_config.json"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"

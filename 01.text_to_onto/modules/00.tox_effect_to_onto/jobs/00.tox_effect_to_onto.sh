@@ -21,7 +21,7 @@ JOBS_DIR="$SLURM_SUBMIT_DIR"
 REPO_ROOT="$(cd "${JOBS_DIR}/.." && pwd)"
 PROJECT_ROOT="$(cd "${REPO_ROOT}/../.." && pwd)"
 GIT_ROOT="$(cd "${PROJECT_ROOT}/.." && pwd)"
-RAG_CONFIG="${REPO_ROOT}/config/rag/embeddings.json"
+RAG_CONFIG="${REPO_ROOT}/config/rag/best_config.json"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
