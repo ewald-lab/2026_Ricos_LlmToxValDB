@@ -1,0 +1,62 @@
+original_category,normalized_category
+Aerosol Characterization,Aerosol Characterization
+Assay Models,Assay Models
+BALF,BALF
+BALF Analysis,BALF Analysis
+Body Weight,Clinical Observations
+Body Weights,Body Weights
+Chemical Analysis,Chemical Analysis
+Clinical Biochemistry,Clinical Biochemistry
+Clinical Chemistry,Clinical Biochemistry
+Clinical Observations,Clinical Observations
+Clinical Pathology,Clinical Pathology
+Clinical Signs,Clinical Signs
+Developmental,Developmental
+Developmental/Pup Data,Developmental/Pup Data
+Environmental Parameters,Environmental Parameters
+Exposure Protocol,Exposure Protocol
+Fetal Alterations (External),Fetal Alterations (External)
+Fetal Alterations (Skeletal),Fetal Alterations (Skeletal)
+Fetal Alterations (Soft Tissue),Fetal Alterations (Soft Tissue)
+Fetal Measurements,Developmental
+Fish Measurements,Fish Measurements
+Food Consumption,Food Consumption
+Food/Water,Food/Water
+General Toxicity,General Toxicity
+Gross Pathology,Gross Pathology
+Haematology,Haematology
+Hematology,Hematology
+Histopathology,Histopathology
+Hormones,Hormones
+Hormones (Dams),Hormones (Dams)
+Hormones measurement,Hormones
+Immunotoxicity,Immunotoxicity
+Lung Burden,Lung Burden
+Maternal Weights & Consumption,Maternal Weights & Consumption
+Mortality,Mortality
+Mortality/Morbidity,Mortality/Morbidity
+Necropsy,Necropsy
+Neurotoxicity,Neurotoxicity
+Nutrition,Nutrition
+Ophthalmology,Ophthalmology
+Organ Weights,Organ Weights
+Other,Other
+Pathology,Histopathology
+Pathology (Gross),Pathology (Gross)
+Pathology (Histopathology),Pathology (Histopathology)
+Physiological Measures,Physiological Measures
+Post-Exposure Recovery,Post-Exposure Recovery
+Pulmonary Function,Pulmonary Function
+Reproductive,Reproductive
+Reproductive Indices,Reproductive Indices
+Serum/Plasma Biochemistry,Clinical Biochemistry
+Serum/Plasma Hormone Analyses,Hormones
+Sperm Measures,Reproductive
+Statistical Analysis,Statistical Analysis
+Systemic Toxicity,Systemic Toxicity
+Temperature,Temperature
+Urinalysis,Urinalysis
+Uterine Contents,Uterine Contents
+Uterine Weight,Uterine Weight
+Vaginal Status,Vaginal Status
+Weight,Organ Weights

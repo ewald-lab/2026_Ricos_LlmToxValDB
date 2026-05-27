@@ -1,5 +1,4 @@
 import argparse
-import glob
 import os
 import networkx as nx
 import pandas as pd
@@ -162,7 +161,7 @@ def main():
         df["All_Terms_Str"] = df["All_Terms"].apply(lambda x: "|".join(sorted(x)))
 
         out_df = df[["Index", "Phrase", "All_Terms_Str"]]
-        
+
         # Save in the same subdirectory as the source file to preserve model subfolders
         src_dir = os.path.dirname(f)
         out_path = os.path.join(src_dir, f"Expanded_{fname}")

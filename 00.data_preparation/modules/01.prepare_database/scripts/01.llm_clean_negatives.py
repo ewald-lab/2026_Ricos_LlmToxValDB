@@ -62,7 +62,7 @@ def load_pipeline_prompts(directory_path: str) -> list:
     if not p_dir.is_dir():
         logger.warning(f"Pipeline directory {directory_path} not found.")
         return []
-    
+
     files = sorted([f for f in p_dir.glob("*.txt") if f.is_file()])
     for f in files:
         with open(f, "r", encoding="utf-8") as file:
@@ -120,49 +120,49 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
             current_effects = [desc]
             full_reasoning = {}
             is_negative_tox = True
-            
+
             for i, (fname, sys_prompt) in enumerate(prompts):
                 user_message = (
                     f'Original entry: "{desc}"\n'
                     f'Current cleaned effects: {current_effects}'
                 )
-                
+
                 messages = [
                     {"role": "system", "content": sys_prompt},
                     {"role": "user", "content": user_message},
                 ]
-                
+
                 success = False
                 for attempt in range(5):
                     try:
                         response = await llm.ainvoke(messages)
                         result = parse_llm_result(response.content)
-                        
+
                         if result.get("parse_error"):
                             raise ValueError(result.get("reasoning", "Parse error"))
-                        
+
                         step_name = fname.replace("system_prompt_clean_", "").replace(".txt", "").split("_", 1)[-1]
                         step_data = {"reasoning": result.get("reasoning")}
                         if "effects" in result:
                             step_data["effects"] = result.get("effects")
                         full_reasoning[step_name] = step_data
-                        
+
                         if "effects" in result:
                             current_effects = result.get("effects", [])
-                        
+
                         # Step-by-step logging as requested
                         print(f"[{counter}] Step: {step_name} | Effects: {current_effects} | Reasoning: {result.get('reasoning')}", flush=True)
-                            
+
                         if "is_negative_tox_effect" in result:
                             is_negative_tox = result.get("is_negative_tox_effect", True)
                             if not is_negative_tox:
                                 current_effects = []
                                 break
-                                
+
                         if i > 0 and len(current_effects) == 0:
                             is_negative_tox = False
                             break
-                        
+
                         success = True
                         break
                     except Exception as e:
@@ -170,7 +170,7 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
                             logger.error(f"LLM error for '{desc[:30]}' at step {fname}: {e}")
                             break
                         await asyncio.sleep(1)
-                
+
                 if not is_negative_tox or not success:
                     break
 
@@ -218,10 +218,10 @@ async def process_positivize_batch(llm, system_prompt: str, effects: list, max_c
                         result = json.loads(cleaned)
                     except json.JSONDecodeError:
                         raise ValueError("Invalid JSON returned by LLM")
-                        
+
                     if "positive_name" not in result:
                         raise ValueError("Missing 'positive_name' in JSON")
-                        
+
                     cache[effect] = result
                     counter += 1
                     print(f"{counter}: LLM Positivize | Neg: '{effect}' -> Pos: {result['positive_name']}", flush=True)
@@ -267,10 +267,10 @@ async def process_standardize_batch(llm, system_prompt: str, effects: list, max_
                         result = json.loads(cleaned)
                     except json.JSONDecodeError:
                         raise ValueError("Invalid JSON returned by LLM")
-                        
+
                     if "standard_name" not in result:
                         raise ValueError("Missing 'standard_name' in JSON")
-                        
+
                     cache[effect] = result
                     counter += 1
                     print(f"{counter}: LLM Std | Orig: '{effect}' -> Pos: {result['standard_name']}", flush=True)
@@ -339,7 +339,7 @@ async def process_clean_exceptions_batch(llm, system_prompt: str, effects: list,
 
 def main():
     args = arg_parser()
-    
+
     global logger
     logger = setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -350,7 +350,7 @@ def main():
     # --- Setup default paths for prompts ---
     if args.pipeline_dir is None:
         args.pipeline_dir = str(project_root / "config" / "clean_prompts_negatives" / "pipeline")
-    
+
     if args.system_prompt_positivize_file is None:
         args.system_prompt_positivize_file = str(project_root / "config" / "clean_prompts_negatives" / "system_prompt_positivize.txt")
 
@@ -359,7 +359,7 @@ def main():
 
     if args.system_prompt_exceptions_file is None:
         args.system_prompt_exceptions_file = str(project_root / "config" / "clean_prompts_negatives" / "system_prompt_clean_exceptions.txt")
-    
+
     # --- Model ---
     with open(args.model_config, "r", encoding="utf-8") as f:
         model_config = json.load(f)
@@ -387,13 +387,13 @@ def main():
     unique_descs = df[col].dropna().unique().tolist()
     # Allow "-" as a valid description for this specific script
     unique_descs = [d for d in unique_descs if isinstance(d, str) and (len(d.strip()) >= 4 or d.strip() == "-")]
-    
+
     if args.debug:
         import random
         random.seed(45)
         random.shuffle(unique_descs)
         unique_descs = unique_descs[:100]
-        logger.info(f"DEBUG MODE: Selected 100 random unique descriptions.")
+        logger.info("DEBUG MODE: Selected 100 random unique descriptions.")
 
     # --- Phase 1: Pipeline Cleaning (Negatives) ---
     prompts = load_pipeline_prompts(args.pipeline_dir)
@@ -451,7 +451,7 @@ def main():
     # --- Phase 1.9: Exceptions ---
     if os.path.exists(args.system_prompt_exceptions_file):
         sys_prompt_exceptions = load_system_prompt(args.system_prompt_exceptions_file)
-        
+
         def needs_cleanup(effect: str) -> bool:
             if not isinstance(effect, str) or effect == "-": return False
             if effect.count(":") > 1: return True
@@ -480,7 +480,7 @@ def main():
         sys_prompt_pos = load_system_prompt(args.system_prompt_positivize_file)
         cleaned_neg_effects = result_df[temp_neg_col].dropna().unique().tolist()
         pos_cache = asyncio.run(process_positivize_batch(llm, sys_prompt_pos, cleaned_neg_effects, max_concurrency))
-        
+
         result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'] = result_df[temp_neg_col].apply(
             lambda e: pos_cache.get(e, {"positive_name": e})["positive_name"] if isinstance(e, str) else e
         )
@@ -494,7 +494,7 @@ def main():
         sys_prompt_std = load_system_prompt(args.system_prompt_standardize_file)
         positivized_effects = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'].dropna().unique().tolist()
         std_cache = asyncio.run(process_standardize_batch(llm, sys_prompt_std, positivized_effects, max_concurrency))
-        
+
         result_df['TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED'] = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'].apply(
             lambda e: std_cache.get(e, {"standard_name": e})["standard_name"] if isinstance(e, str) else e
         )
@@ -509,11 +509,11 @@ def main():
     # 2. NEGATIVE (Boolean True)
     # 3. TOXICOLOGICAL_EFFECT_LLM_CLEANED (Positivized text)
     # 4. TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED (Standardized text)
-    
+
     target_cols = ['TOXICOLOGICAL_EFFECT', 'NEGATIVE', 'TOXICOLOGICAL_EFFECT_LLM_CLEANED', 'TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED']
     cols_to_keep = [c for c in result_df.columns if c not in target_cols and c != temp_neg_col]
     final_cols = target_cols + cols_to_keep
-    
+
     # Check if columns exist
     existing_cols = [c for c in final_cols if c in result_df.columns]
     result_df[existing_cols].to_csv(args.output, sep="\t", index=False)

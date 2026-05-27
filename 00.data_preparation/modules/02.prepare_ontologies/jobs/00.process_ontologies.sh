@@ -12,20 +12,24 @@
 #SBATCH --array=0-19
 
 ONTOLOGIES=("hp" "mp" "aop" "hpath" "txpo")
-LLM_MODEL="gpt-oss-120b"
+LLM_MODEL="Qwen3.5-122B-A10B-FP8"
+MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${LLM_MODEL}.json"
+CODON_NODE="${1:-${CODON_NODE:-}}"
+if [ -z "$CODON_NODE" ]; then
+    echo "Error: CODON_NODE is required. Pass it as the first argument or set the CODON_NODE env variable."
+    echo "Usage: sbatch $0 <codon-node>  (e.g. sbatch $0 codon-gpu-004)"
+    exit 1
+fi
+BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
 
 MODELS_KEYS=("qwen" "nemotron" "harrier" "kalm")
-declare -A MODELS
-MODELS=(
-    ["qwen"]="Qwen/Qwen3-Embedding-8B"
-    ["nemotron"]="nvidia/llama-embed-nemotron-8b"
-    ["harrier"]="microsoft/harrier-oss-v1-27b"
-    ["kalm"]="tencent/KaLM-Embedding-Gemma3-12B-2511"
-)
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+SCRIPT_PATH=$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PROJECT_ROOT="$(cd "${REPO_ROOT}/.." && pwd)"
-PREP_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
@@ -50,7 +54,6 @@ MODEL_IDX=$(( TASK_ID % NUM_MODELS ))
 
 ONTOLOGY="${ONTOLOGIES[$ONTOLOGY_IDX]}"
 EMBED_DIR="${MODELS_KEYS[$MODEL_IDX]}"
-EMBED_MODEL="${MODELS[$EMBED_DIR]}"
 
 RAG_CONFIG="${REPO_ROOT}/config/rag/embeddings.json"
 
@@ -77,10 +80,10 @@ if [ $MODEL_IDX -eq 0 ]; then
         --ontology_db "${REPO_ROOT}/inputs/ontology_dbs/${EMBED_DIR}/${ONTOLOGY}.db" \
         --rag_config "${RAG_CONFIG}" \
         --embeddings_model_id "${EMBED_DIR}" \
-        --global_definitions_db "${REPO_ROOT}/inputs/ontology_dbs/definitions_${ONTOLOGY}_${LLM_MODEL}.db" \
+        --global_definitions_db "${REPO_ROOT}/inputs/ontology_dbs/definitions_${ONTOLOGY}.db" \
         --prompt_template "${REPO_ROOT}/config/tools/create_description_prompt.txt" \
-        --model_config "${REPO_ROOT}/config/models/${LLM_MODEL}.json" \
-        --base_url "http://codon-gpu-004.ebi.ac.uk:8004/v1"
+        --model_config "${MODEL_CONFIG}" \
+        --base_url "${BASE_URL}"
 
     if [ $? -eq 0 ]; then
         touch "$SYNC_FILE"
@@ -112,6 +115,6 @@ else
         --embeddings_model_id "${EMBED_DIR}" \
         --global_definitions_db "${REPO_ROOT}/inputs/ontology_dbs/definitions_${ONTOLOGY}_${LLM_MODEL}.db" \
         --prompt_template "${REPO_ROOT}/config/tools/create_description_prompt.txt" \
-        --model_config "${REPO_ROOT}/config/models/${LLM_MODEL}.json" \
-        --base_url "http://codon-gpu-004.ebi.ac.uk:8004/v1"
+        --model_config "${MODEL_CONFIG}" \
+        --base_url "${BASE_URL}"
 fi

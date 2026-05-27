@@ -1,14 +1,15 @@
 #!/bin/bash
 
-#SBATCH --time=7:00:00
+#SBATCH --time=24:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:a100:1
 #SBATCH --mem=80G
 #SBATCH -J "endpoint_to_phenotype"
-#SBATCH -o "logs/out_endpoint_to_phenotype_%j.out"
-#SBATCH -e "logs/err_endpoint_to_phenotype_%j.err"
+#SBATCH --array=0-4
+#SBATCH -o "logs/out_endpoint_to_phenotype_%A_%a.out"
+#SBATCH -e "logs/err_endpoint_to_phenotype_%A_%a.err"
 
 # --- Configuration ---
 JOBS_DIR="${SLURM_SUBMIT_DIR:-$(cd "$(dirname "$0")" && pwd)}"
@@ -21,15 +22,16 @@ echo "Job started at: $(date)"
 echo "Module Root: ${MODULE_ROOT}"
 echo "Data Prep Root: ${DATA_PREP_ROOT}"
 
-EMBED_DIR="${2:-qwen}"
+CODON_NODE="${1:-${CODON_NODE:-hl-codon-gpu-020}}"
+EMBED_DIR="${2:-kalm}"
 MODEL="${3:-Qwen3.5-122B-A10B-FP8}"
 MODE="${4:-1}"
 CONSENSU_RUNS="${5:-3}"
-BASE_URL="${BASE_URL:-http://codon-gpu-003.ebi.ac.uk:8003/v1}"
+BASE_URL="${BASE_URL:-http://${CODON_NODE}.ebi.ac.uk:8003/v1}"
 
-ENDPOINTS_FILE="${DATA_PREP_ROOT}/modules/03.prepare_guidelines/outputs/endpoints/normalized_endpoint_list.csv"
+ENDPOINTS_FILE="${DATA_PREP_ROOT}/modules/03.prepare_guidelines/outputs/normalized_endpoint_list.csv"
 OUTPUT_DIR="${MODULE_ROOT}/outputs"
-MODEL_CONFIG="${MODULE_ROOT}/config/models/${MODEL}.json"
+MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
 SYSTEM_PROMPT="${MODULE_ROOT}/config/system_prompt_endpoint_filter.txt"
 RAG_CONFIG="${MODULE_ROOT}/config/rag/best_config.json"
 
@@ -47,34 +49,39 @@ source "${DATA_PREP_ROOT}/env-data-prep/bin/activate"
 export PYTHONPATH="${MODULE_ROOT}/scripts:${PYTHONPATH:-}"
 
 mkdir -p "${OUTPUT_DIR}"
-mkdir -p "${OUTPUT_DIR}/guidelines_mapping"
 
-# --- Ontology Loop ---
-# We loop over all ontologies to generate mappings and then apply them to the DB
-for ONTOLOGY in mp hpath aop hp txpo; do
-    echo "--- Processing Ontology: ${ONTOLOGY} ---"
-    
-    CONTEXT_FILE="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
-    ONTOLOGY_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
-    DEFINITIONS_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}_gpt-oss-120b.db"
+# --- Ontology Setup (SLURM Array) ---
+ONTOLOGIES=(mp hpath aop hp txpo)
+TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
 
-    if [ ! -f "${ONTOLOGY_DB}" ]; then
-        ONTOLOGY_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_dbs/${EMBED_DIR}/${ONTOLOGY}.db"
-        DEFINITIONS_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_dbs/definitions_${ONTOLOGY}_gpt-oss-120b.db"
-    fi
+if [ -z "${TASK_ID}" ] || [ "${TASK_ID}" -lt 0 ] || [ "${TASK_ID}" -ge "${#ONTOLOGIES[@]}" ]; then
+    echo "Error: Invalid Task ID '${TASK_ID}'. Must be between 0 and $((${#ONTOLOGIES[@]} - 1))"
+    exit 1
+fi
 
-    python "${MODULE_ROOT}/scripts/00.guideline_to_onto.py" \
-        --input_endpoints "${ENDPOINTS_FILE}" \
-        --output_dir "${OUTPUT_DIR}" \
-        --ontology "${ONTOLOGY}" \
-        --ontology_embedding_db "${ONTOLOGY_DB}" \
-        --global_definitions_db "${DEFINITIONS_DB}" \
-        --model_config "${MODEL_CONFIG}" \
-        --base_url "${BASE_URL}" \
-        --system_prompt_file "${SYSTEM_PROMPT}" \
-        --context_ontology "${CONTEXT_FILE}" \
-        --rag_config "${RAG_CONFIG}" \
-        --embeddings_model_id "${EMBED_DIR}" \
-        --mode "${MODE}" \
-        --consensus_runs "${CONSENSU_RUNS}"
-done
+ONTOLOGY="${ONTOLOGIES[$TASK_ID]}"
+echo "--- Processing Ontology: ${ONTOLOGY} (Task ID: ${TASK_ID}) ---"
+
+CONTEXT_FILE="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
+ONTOLOGY_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
+DEFINITIONS_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
+
+if [ ! -f "${ONTOLOGY_DB}" ]; then
+    ONTOLOGY_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_dbs/${EMBED_DIR}/${ONTOLOGY}.db"
+    DEFINITIONS_DB="${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_dbs/definitions_${ONTOLOGY}.db"
+fi
+
+python "${MODULE_ROOT}/scripts/00.guideline_to_onto.py" \
+    --input_endpoints "${ENDPOINTS_FILE}" \
+    --output_dir "${OUTPUT_DIR}" \
+    --ontology "${ONTOLOGY}" \
+    --ontology_embedding_db "${ONTOLOGY_DB}" \
+    --global_definitions_db "${DEFINITIONS_DB}" \
+    --model_config "${MODEL_CONFIG}" \
+    --base_url "${BASE_URL}" \
+    --system_prompt_file "${SYSTEM_PROMPT}" \
+    --context_ontology "${CONTEXT_FILE}" \
+    --rag_config "${RAG_CONFIG}" \
+    --embeddings_model_id "${EMBED_DIR}" \
+    --mode "${MODE}" \
+    --consensus_runs "${CONSENSU_RUNS}"

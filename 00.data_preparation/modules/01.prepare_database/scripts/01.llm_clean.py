@@ -63,7 +63,7 @@ def load_pipeline_prompts(directory_path: str) -> list:
     if not p_dir.is_dir():
         logger.warning(f"Pipeline directory {directory_path} not found.")
         return []
-    
+
     # Get all .txt files, sorted by name
     files = sorted([f for f in p_dir.glob("*.txt") if f.is_file()])
     for f in files:
@@ -120,53 +120,53 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
             current_effects = [desc]
             full_reasoning = {}
             is_tox = True
-            
+
             for i, (fname, sys_prompt) in enumerate(prompts):
                 # Construct user message providing both original context and current cleaned state
                 user_message = (
                     f'Original entry: "{desc}"\n'
                     f'Current cleaned effects: {current_effects}'
                 )
-                
+
                 messages = [
                     {"role": "system", "content": sys_prompt},
                     {"role": "user", "content": user_message},
                 ]
-                
+
                 success = False
                 for attempt in range(5):
                     try:
                         response = await llm.ainvoke(messages)
                         result = parse_llm_result(response.content)
-                        
+
                         if result.get("parse_error"):
                             raise ValueError(result.get("reasoning", "Parse error"))
-                        
+
                         # Store step results using descriptive part of filename
                         step_name = fname.replace("system_prompt_clean_", "").replace(".txt", "").split("_", 1)[-1]
                         step_data = {"reasoning": result.get("reasoning")}
                         if "effects" in result:
                             step_data["effects"] = result.get("effects")
                         full_reasoning[step_name] = step_data
-                        
+
                         # Update state for next step ONLY if effects are provided
                         if "effects" in result:
                             current_effects = result.get("effects", [])
-                            
+
                         print(f"[{counter}] Step: {step_name} | Effects: {current_effects} | Reasoning: {result.get('reasoning')}", flush=True)
-                        
+
                         # Early exit if a step determines it's not a tox effect
                         if "is_tox_effect" in result:
                             is_tox = result.get("is_tox_effect", True)
                             if not is_tox:
                                 current_effects = []
                                 break # Exit prompt loop for this description
-                                
+
                         # Speedy exit: if the effects list becomes empty mid-pipeline, there's no point running the rest
                         if i > 0 and len(current_effects) == 0:
                             is_tox = False
                             break
-                        
+
                         success = True
                         break # Exit retry loop
                     except Exception as e:
@@ -174,7 +174,7 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
                             logger.error(f"LLM error for '{desc[:30]}' at step {fname}: {e}")
                             break
                         await asyncio.sleep(1)
-                
+
                 if not is_tox or not success:
                     break # Stop pipeline
 
@@ -185,7 +185,7 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
                 "reasoning": full_reasoning
             }
             cache[desc] = final_result
-            
+
             counter += 1
             status_tag = "NOT-TOX" if not is_tox else "Cleaned"
             print(f"{counter}: LLM Pipeline | Orig: '{desc}' -> {status_tag}: {current_effects}", flush=True)
@@ -218,17 +218,17 @@ async def process_standardize_batch(llm, system_prompt: str, effects: list, max_
                         result = json.loads(cleaned)
                     except json.JSONDecodeError:
                         raise ValueError("Invalid JSON returned by LLM")
-                        
+
                     if "standard_name" not in result:
                         raise ValueError("Missing 'standard_name' in JSON")
-                        
+
                     cache[effect] = result
-                    
+
                     counter += 1
                     is_changed = result['standard_name'] != effect
                     status = "Changed" if is_changed else "Not Changed"
                     print(f"{counter}: LLM Std | Orig: '{effect}' -> ({status}): {result['standard_name']}", flush=True)
-                        
+
                     return
                 except Exception as e:
                     if attempt == 4:
@@ -296,7 +296,7 @@ async def process_clean_exceptions_batch(llm, system_prompt: str, effects: list,
 
 def main():
     args = arg_parser()
-    
+
     global logger
     logger = setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -334,7 +334,7 @@ def main():
 
     if args.system_prompt_exceptions_file is None:
         args.system_prompt_exceptions_file = str(project_root / "inputs" / "clean_prompts" / "system_prompt_clean_exceptions.txt")
-    
+
     # --- Model ---
     with open(args.model_config, "r", encoding="utf-8") as f:
         model_config = json.load(f)
@@ -356,12 +356,12 @@ def main():
     # --- Data ---
     logger.info(f"Loading data from: {args.input}")
     df = pd.read_csv(args.input, sep="\t", low_memory=False)
-    
+
     # Fallback to comma if the file has a .tsv extension but is actually comma-separated
     if len(df.columns) == 1 and "," in df.columns[0]:
         logger.warning(f"File {args.input} appears to be comma-separated. Retrying with sep=','")
         df = pd.read_csv(args.input, sep=",", low_memory=False)
-        
+
     logger.info(f"Input shape: {df.shape}")
 
     if args.debug_rows:
@@ -372,13 +372,13 @@ def main():
     col = args.target_column
     unique_descs = df[col].dropna().unique().tolist()
     unique_descs = [d for d in unique_descs if isinstance(d, str) and len(d.strip()) >= 4]
-    
+
     if args.debug:
         import random
         random.seed(45)  # For reproducibility during debug
         random.shuffle(unique_descs)
         unique_descs = unique_descs[:100]
-        logger.info(f"DEBUG MODE: Selected 100 random unique descriptions to evaluate.")
+        logger.info("DEBUG MODE: Selected 100 random unique descriptions to evaluate.")
     else:
         logger.info(f"Found {len(unique_descs)} unique descriptions to evaluate.")
 
@@ -441,7 +441,7 @@ def main():
             continue
 
         logger.info(f"Row {idx} | Orig: '{desc}' -> Cleaned: {effects}")
-        
+
         if len(effects) == 1:
             row_dict = row.to_dict()
             row_dict['TOXICOLOGICAL_EFFECT_LLM_CLEANED'] = effects[0].strip()
@@ -485,12 +485,12 @@ def main():
 
         if effects_to_fix:
             exceptions_cache = asyncio.run(process_clean_exceptions_batch(llm, sys_prompt_exceptions, effects_to_fix, max_concurrency))
-            
+
             def apply_exceptions(effect):
                 if not isinstance(effect, str): return effect
                 res = exceptions_cache.get(effect)
                 return res["corrected"] if res else effect
-            
+
             result_df[cleaned_col] = result_df[cleaned_col].apply(apply_exceptions)
 
             # Update reasoning JSON with fixed effects
@@ -520,7 +520,7 @@ def main():
     if not os.path.exists(args.system_prompt_standardize_file):
         logger.error(f"Standardize system prompt not found: {args.system_prompt_standardize_file}")
         return
-        
+
     sys_prompt_std = load_system_prompt(args.system_prompt_standardize_file)
     logger.info(f"Loaded standardize system prompt from: {args.system_prompt_standardize_file}")
 

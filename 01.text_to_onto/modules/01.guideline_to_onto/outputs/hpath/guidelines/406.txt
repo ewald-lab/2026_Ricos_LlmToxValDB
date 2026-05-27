@@ -1,0 +1,21 @@
+congestion and hyperemia
+inflammation induced tissue alteration
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > degeneration
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration vacuolar
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration vacuolar > edema intracellular epidermal
+morphologic change > hemodynamic disorders
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema intercellular
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema intercellular > edema intercellular epidermal
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial > edema dermal
+morphologic change > inflammatory processes
+morphologic change > inflammatory processes > inflammation
+morphologic change > inflammatory processes > inflammation > inflammation neutrophilic
+morphologic change > inflammatory processes > inflammation > inflammation neutrophilic > microabscess
+morphologic change > inflammatory processes > inflammation > inflammation neutrophilic > microabscess > pustule
+necrosis acute with inflammation

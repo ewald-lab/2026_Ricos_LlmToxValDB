@@ -74,22 +74,22 @@ def clean_llm_name(name: str) -> str:
     parts = name.split("_ontology_")
     if len(parts) < 2:
         return name.replace("_", " ")
-    
+
     model_part = parts[0]
     rest = parts[1]
-    
+
     # Rest contains: mp_mode_1_consensus_1_with_defs or similar
     mode = "M1" if "mode_1" in rest else "M2"
-    
+
     consensus = "C1"
     for c in ["10", "5", "3", "1"]:
         if f"consensus_{c}" in rest:
             consensus = f"C{c}"
             break
-            
+
     defs = "with_defs" in rest
     defs_str = "defs" if defs else "no defs"
-    
+
     return f"{model_part} ({mode}, {consensus}, {defs_str})"
 
 
@@ -144,12 +144,6 @@ def count_valid_terms(term_str) -> int:
     return len(valid_t)
 
 
-def orig_count_per_row(row) -> int:
-    t1 = str(row["Selected_Candidates"]).split("|") if pd.notna(row["Selected_Candidates"]) else []
-    t2 = str(row["Manual_Terms"]).split("|") if pd.notna(row["Manual_Terms"]) else []
-    all_t = [t.strip().lower() for t in t1 + t2]
-    valid_t = set(t for t in all_t if t not in ["none", "-", "unknown", ""])
-    return len(valid_t)
 
 
 def main():
@@ -192,6 +186,12 @@ def main():
             else:
                 df_orig = pd.read_csv(orig_path)
 
+            # Add Not_My_Expertise column to df_exp for downstream use (depth & similarity)
+            if df_orig is not None and "Not_My_Expertise" in df_orig.columns:
+                df_exp["Not_My_Expertise"] = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).values
+            else:
+                df_exp["Not_My_Expertise"] = 0
+
             df_exp["Max_Depth"] = df_exp["All_Terms_Set"].apply(
                 lambda x: get_max_depth(x, depth_map)
             )
@@ -214,17 +214,28 @@ def main():
                 pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).sum()
                 if df_orig is not None and "Not_My_Expertise" in df_orig.columns else 0
             )
-            avg_orig_terms = (
-                df_orig.apply(orig_count_per_row, axis=1).mean()
-                if df_orig is not None else 0
-            )
+            if df_orig is not None:
+                if "Not_My_Expertise" in df_orig.columns:
+                    not_exp_mask = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0) == 1
+                    filtered_df_exp = df_exp[~not_exp_mask]
+                else:
+                    filtered_df_exp = df_exp
+                avg_orig_terms = (
+                    filtered_df_exp["All_Terms_Set"].apply(len).mean()
+                    if not filtered_df_exp.empty else 0
+                )
+            else:
+                avg_orig_terms = df_exp["All_Terms_Set"].apply(len).mean()
+
+            filtered_for_depth = df_exp[df_exp["Not_My_Expertise"] != 1]
+            mean_max_depth = filtered_for_depth["Max_Depth"].mean() if not filtered_for_depth.empty else 0
 
             expert_metrics.append(
                 {
                     "LLM_ID": expert_id,
                     "LLM": clean_expert_name(expert_id),
                     "Avg_Orig_Num_Terms": avg_orig_terms,
-                    "Mean_Max_Depth": df_exp["Max_Depth"].mean(),
+                    "Mean_Max_Depth": mean_max_depth,
                     "Selected_Terms": selected_count_total,
                     "Manual_Terms": manual_count_total,
                     "Nonsense_Flags": nonsense_count,
@@ -238,7 +249,7 @@ def main():
     if not exp_files:
         # Fallback to broader matching
         exp_files = glob.glob(os.path.join(args.expanded_dir, "**", "Expanded_ToxValLlm_llm_*.csv"), recursive=True)
-        
+
     if not exp_files:
         print(f"No Expanded_ToxValLlm_llm_*.csv files found in: {args.expanded_dir}")
         return
@@ -255,10 +266,10 @@ def main():
         model_groups[model_name].append(f)
 
     for model_name, files in model_groups.items():
-        print(f"\n========================================================")
+        print("\n========================================================")
         print(f"Generating plots for LLM: {model_name} ({len(files)} configurations)")
-        print(f"========================================================")
-        
+        print("========================================================")
+
         model_output_dir = os.path.join(args.output_dir, model_name)
         os.makedirs(model_output_dir, exist_ok=True)
 
@@ -292,6 +303,12 @@ def main():
             else:
                 df_orig = pd.read_csv(orig_path)
 
+            # Add Not_My_Expertise column to df_exp for downstream use (depth & similarity)
+            if df_orig is not None and "Not_My_Expertise" in df_orig.columns:
+                df_exp["Not_My_Expertise"] = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).values
+            else:
+                df_exp["Not_My_Expertise"] = 0
+
             # Depth metric
             df_exp["Max_Depth"] = df_exp["All_Terms_Set"].apply(
                 lambda x: get_max_depth(x, depth_map)
@@ -315,10 +332,18 @@ def main():
                 pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).sum()
                 if df_orig is not None and "Not_My_Expertise" in df_orig.columns else 0
             )
-            avg_orig_terms = (
-                df_orig.apply(orig_count_per_row, axis=1).mean()
-                if df_orig is not None else 0
-            )
+            if df_orig is not None:
+                if "Not_My_Expertise" in df_orig.columns:
+                    not_exp_mask = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0) == 1
+                    filtered_df_exp = df_exp[~not_exp_mask]
+                else:
+                    filtered_df_exp = df_exp
+                avg_orig_terms = (
+                    filtered_df_exp["All_Terms_Set"].apply(len).mean()
+                    if not filtered_df_exp.empty else 0
+                )
+            else:
+                avg_orig_terms = df_exp["All_Terms_Set"].apply(len).mean()
 
             # Load token metrics from _tokens.txt file
             tokens_path = os.path.join(os.path.dirname(f), f"{llm_id}_tokens.txt")
@@ -332,12 +357,15 @@ def main():
                 except Exception as re:
                     print(f"  WARNING: Error reading tokens from {tokens_path}: {re}")
 
+            filtered_for_depth = df_exp[df_exp["Not_My_Expertise"] != 1]
+            mean_max_depth = filtered_for_depth["Max_Depth"].mean() if not filtered_for_depth.empty else 0
+
             llm_metrics.append(
                 {
                     "LLM_ID": llm_id,
                     "LLM": clean_llm_name(llm_id),
                     "Avg_Orig_Num_Terms": avg_orig_terms,
-                    "Mean_Max_Depth": df_exp["Max_Depth"].mean(),
+                    "Mean_Max_Depth": mean_max_depth,
                     "Selected_Terms": selected_count_total,
                     "Manual_Terms": manual_count_total,
                     "Nonsense_Flags": nonsense_count,
@@ -362,13 +390,18 @@ def main():
             for j, id2 in enumerate(llm_ids):
                 scores = []
                 for k in range(num_phrases):
+                    # Check if either entity has Not_My_Expertise == 1 for this phrase
+                    not_exp1 = llms_data[id1].iloc[k].get("Not_My_Expertise", 0) == 1
+                    not_exp2 = llms_data[id2].iloc[k].get("Not_My_Expertise", 0) == 1
+                    if not_exp1 or not_exp2:
+                        continue
                     s1 = llms_data[id1].iloc[k]["All_Terms_Set"]
                     s2 = llms_data[id2].iloc[k]["All_Terms_Set"]
                     u = s1.union(s2)
                     inter = s1.intersection(s2)
                     score = len(inter) / len(u) if len(u) > 0 else 1.0
                     scores.append(score)
-                pairwise_overlap[i, j] = np.mean(scores)
+                pairwise_overlap[i, j] = np.mean(scores) if scores else 1.0
 
         print("Generating plots...")
 
@@ -377,7 +410,7 @@ def main():
         heatmap_width = max(10, num_llms * 0.5 + 4)
         heatmap_height = max(8, num_llms * 0.5 + 2)
         plt.figure(figsize=(heatmap_width, heatmap_height))
-        
+
         annot_font_size = max(5, 10 - num_llms // 5)
         tick_font_size = max(6, 11 - num_llms // 6)
 
@@ -394,7 +427,7 @@ def main():
         plt.xticks(rotation=90, fontsize=tick_font_size)
         plt.yticks(rotation=0, fontsize=tick_font_size)
         plt.tight_layout()
-        plt.savefig(os.path.join(model_output_dir, "pairwise_overlap_heatmap.png"))
+        plt.savefig(os.path.join(model_output_dir, "pairwise_overlap_heatmap.png"), dpi=300)
         plt.close()
 
         # Plot 2: Avg Terms per LLM
@@ -408,10 +441,11 @@ def main():
             hue="LLM",
             legend=False,
         )
-        plt.title(f"Average Number of Original Terms per Phrase - {model_name}")
+        plt.title(f"Average Number of Terms per Phrase (including Hierarchy) - {model_name}")
+        plt.ylabel("Average Number of Terms")
         plt.xticks(rotation=90, fontsize=tick_font_size)
         plt.tight_layout()
-        plt.savefig(os.path.join(model_output_dir, "avg_terms_per_llm.png"))
+        plt.savefig(os.path.join(model_output_dir, "avg_terms_per_llm.png"), dpi=300)
         plt.close()
 
         # Plot 3: Max Depth per LLM
@@ -427,7 +461,7 @@ def main():
         plt.title(f"Average Maximum Depth of Terms per Phrase - {model_name}")
         plt.xticks(rotation=90, fontsize=tick_font_size)
         plt.tight_layout()
-        plt.savefig(os.path.join(model_output_dir, "max_depth_per_llm.png"))
+        plt.savefig(os.path.join(model_output_dir, "max_depth_per_llm.png"), dpi=300)
         plt.close()
 
 
@@ -448,7 +482,7 @@ def main():
                 plt.title(f"Dendrogram of Similarity - {model_name} (Ward Linkage)")
                 plt.ylabel("Distance (1 - Jaccard)")
                 plt.tight_layout()
-                plt.savefig(os.path.join(model_output_dir, "llm_dendrogram.png"))
+                plt.savefig(os.path.join(model_output_dir, "llm_dendrogram.png"), dpi=300)
                 plt.close()
             except Exception as de:
                 print(f"  WARNING: Could not generate dendrogram for {model_name}: {de}")
@@ -457,9 +491,11 @@ def main():
             print("Skipping dendrogram: less than 2 configurations found.")
 
         # Plot 7: Average Completion Tokens per LLM Invocation
-        plt.figure(figsize=(bar_width, 6))
+        llm_only_metrics = metrics_df[~metrics_df["LLM_ID"].isin(expert_data.keys())]
+        bar_width_llm_only = max(12, len(llm_only_metrics) * 0.4 + 2)
+        plt.figure(figsize=(bar_width_llm_only, 6))
         sns.barplot(
-            data=metrics_df,
+            data=llm_only_metrics,
             x="LLM",
             y="Avg_Completion_Tokens",
             palette="viridis",
@@ -470,7 +506,7 @@ def main():
         plt.title(f"Average Completion Tokens per Candidate Evaluation - {model_name}")
         plt.ylabel("Average Completion Tokens")
         plt.tight_layout()
-        plt.savefig(os.path.join(model_output_dir, "tokens_used_per_llm.png"))
+        plt.savefig(os.path.join(model_output_dir, "tokens_used_per_llm.png"), dpi=300)
         plt.close()
 
         print(f"All plots for {model_name} saved successfully to: {model_output_dir}")

@@ -11,7 +11,6 @@ from src.endpoint_normalization import (
     CATEGORY_NORMALIZATION_FIELDS,
     DEFAULT_ENDPOINTS_DIR,
     DEFAULT_OUTPUT_DIR,
-    NORMALIZED_ROW_FIELDS,
     UNIQUE_ENDPOINT_FIELDS,
     build_all_endpoint_list,
     build_category_normalization,

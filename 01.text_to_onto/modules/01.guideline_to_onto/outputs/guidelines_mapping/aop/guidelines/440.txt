@@ -1,9 +1,0 @@
-individual
-individual > decreased body weight
-individual > decreased locomotion
-individual > increased locomotion
-organ
-organ > uterine adenocarcinoma
-population
-population > increased mortality
-population > reduced survival

@@ -7,7 +7,7 @@
     "consensus_runs": 3,
     "ontology_definitions": false,
     "include_superiors": true,
-    "rag_config": "./inputs/embeddings.json",
+    "rag_config": "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/01.text_to_onto/modules/00.tox_effect_to_onto/config/rag/best_config.json",
     "global_definitions_db": "./inputs/ontology_dbs/definitions_shared.db",
     "num_backups": 10,
     "context_ontology": "General biological ontology context",

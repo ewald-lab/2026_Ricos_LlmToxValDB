@@ -1,0 +1,89 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of limbs
+phenotypic abnormality > abnormality of limbs > abnormality of the upper limb
+phenotypic abnormality > abnormality of limbs > abnormality of the upper limb > abnormality of the hand
+phenotypic abnormality > abnormality of limbs > abnormality of the upper limb > abnormality of the hand > abnormal palm morphology
+phenotypic abnormality > abnormality of limbs > abnormality of the upper limb > abnormality of the hand > abnormal palm morphology > abnormal skin morphology of the palm
+phenotypic abnormality > abnormality of the cardiovascular system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > vasculitis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > vasculitis > vasculitis by anatomical site
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > vasculitis > vasculitis by anatomical site > vasculitis in the skin
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > vasculitis > vasculitis by anatomical site > vasculitis in the skin > punctate vasculitis skin lesions
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > cutis marmorata
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > erythema marginatum
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > erythema migrans
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > facial erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > migratory erythematous plaque
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > palmoplantar erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > perianal erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > perioral erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > shawl sign
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > prominent superficial blood vessels
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > telangiectasia
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > telangiectasia > telangiectasia of the skin
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > telangiectasia > telangiectasia of the skin > telangiectasia of extensor surfaces
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > urticaria
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > urticaria > darier s sign
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > urticaria > physical urticaria
+phenotypic abnormality > abnormality of the immune system
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > crusting erythematous dermatitis
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > eczematoid dermatitis
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > eczematoid dermatitis > contact dermatitis
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > erythroderma
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > perifolliculitis
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > pseudo chilblain
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > pustule
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > bull s eye rash
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > discoid lupus rash
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > exanthem
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > exanthem > maculopapular exanthema
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > exanthem > morbilliform rash
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > heliotrope rash
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > malar rash
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > papulovesicular eruption
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash > vesicular eruption
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal blistering of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal blistering of the skin > blistering by anatomical location
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal blistering of the skin > skin vesicle
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology > scaling skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology > scaling skin > generalized scaling
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology > scaling skin > scaling skin on fingertip
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology > scaling skin > white scaling skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > flushing
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > lichenification
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > annular cutaneous lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > kerion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > macule > erythematous macule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > papule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > papule > erythematous papule
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > papule > intermittent generalized erythematous papular rash
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > perioral radial furrowing
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > skin erosion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > skin plaque
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > skin plaque > erythematous plaque
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > skin plaque > urticarial plaque
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > maceration
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > regional abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > thickened skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > thickened skin > epidermal thickening
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > thickened skin > epidermal thickening > hyperkeratosis
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > thickened skin > epidermal thickening > hyperkeratosis > hyperkeratosis with erythema
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormality of skin physiology

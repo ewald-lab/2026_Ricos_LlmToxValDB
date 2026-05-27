@@ -1,9 +1,8 @@
 import csv
 import json
-import re
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, List, Dict, Literal
+from typing import Any, List, Literal
 import torch
 
 from langchain_core.prompts import ChatPromptTemplate
@@ -99,12 +98,12 @@ class EndpointOntologyFilterBuilder:
         self.max_concurrency = max_concurrency
         self.top_k_rag = top_k_rag
         self.threshold_rag = threshold_rag
-        
+
         self.mode = mode
         self.consensus_runs = consensus_runs
         self.max_retries = max_retries
         self.consensus_threshold = 1 if self.consensus_runs == 2 else (self.consensus_runs // 2) + 1
-        
+
         self.threshold_reranker = threshold_reranker
         self.reranker_batch_size = reranker_batch_size
         self.reranker_model = None
@@ -131,14 +130,14 @@ class EndpointOntologyFilterBuilder:
                 self.reranker_instruction = "Find candidates that perfectly match the described endpoint."
 
         self.embedder = EmbeddingModel(embedding_model_name)
-        
+
         self.node_list = []
         vectors = []
         for name, node in self.tree.nodes.items():
             if getattr(node, "vector", None) is not None:
                 self.node_list.append(node)
                 vectors.append(torch.frombuffer(bytearray(node.vector), dtype=torch.float32))
-        
+
         if vectors:
             self._ontology_matrix = torch.stack(vectors)
         else:
@@ -155,18 +154,18 @@ class EndpointOntologyFilterBuilder:
             ("system", prompt + "\n\n{format_instructions}"),
             ("user", "Endpoint category: {endpoint_category}\nEndpoint: {endpoint}\nOriginal endpoint labels: {original_endpoints}\nGuideline numbers: {guideline_numbers}\n\nCandidate to evaluate: {candidate_name}\nCandidate Hierarchy: {candidate_hierarchy}\nCandidate Definition: {candidate_definition}")
         ])
-        
+
         self._mode2_prompt = ChatPromptTemplate.from_messages([
             ("system", prompt + "\n\n{format_instructions}"),
             ("user", "Endpoint category: {endpoint_category}\nEndpoint: {endpoint}\nOriginal endpoint labels: {original_endpoints}\nGuideline numbers: {guideline_numbers}\n\nCandidates:\n{candidates}\n\nDescription to evaluate: {endpoint}")
         ])
 
         self._clean_llm_runner = RunnableLambda(clean_llm_output)
-        
+
     def _rerank_candidates(self, description: str, candidates: list) -> list:
         if self.threshold_reranker <= 0.0 or not candidates or self.reranker_model_hf is None:
             return candidates
-        
+
         pairs = []
         for c in candidates:
             doc = c.sanitized_name
@@ -174,10 +173,10 @@ class EndpointOntologyFilterBuilder:
             doc = f"{doc}\n<Hierarchy>: {hierarchy}"
             pair_text = f"<Instruct>: {self.reranker_instruction}\n<Query>: {description}\n<Document>: {doc}"
             pairs.append(pair_text)
-        
+
         batch_size = self.reranker_batch_size
         scores = []
-        
+
         with torch.no_grad():
             for i in range(0, len(pairs), batch_size):
                 batch_pairs = pairs[i:i+batch_size]
@@ -189,7 +188,7 @@ class EndpointOntologyFilterBuilder:
                     inputs['input_ids'][j] = self.reranker_prefix_tokens + ele + self.reranker_suffix_tokens
                 inputs = self.reranker_tokenizer.pad(inputs, padding=True, return_tensors="pt")
                 inputs = {k: v.to(self.reranker_device) for k, v in inputs.items()}
-                
+
                 batch_logits = self.reranker_model_hf(**inputs).logits[:, -1, :]
                 true_vector = batch_logits[:, self.token_true_id]
                 false_vector = batch_logits[:, self.token_false_id]
@@ -197,7 +196,7 @@ class EndpointOntologyFilterBuilder:
                 batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
                 batch_probs = batch_scores[:, 1].exp().tolist()
                 scores.extend(batch_probs)
-        
+
         passed_candidates = []
         for score, cand in zip(scores, candidates):
             if score >= self.threshold_reranker:
@@ -209,7 +208,7 @@ class EndpointOntologyFilterBuilder:
         from tqdm import tqdm
         endpoint_rows = []
         reasoning = {}
-        
+
         # Use tqdm for a proper progress bar
         pbar = tqdm(endpoints, desc=f"Endpoints ({self.ontology})", smoothing=0.0)
         for index, endpoint in enumerate(pbar, start=1):
@@ -217,7 +216,7 @@ class EndpointOntologyFilterBuilder:
             result = self.traverse_endpoint(llm, endpoint)
             reasoning[endpoint_key] = result["reasoning"]
             endpoint_rows.extend(self.filter_rows_for_endpoint(endpoint, result["filters"]))
-            
+
             # Update tqdm postfix with current status
             pbar.set_postfix({"filters": len(result['filters']), "last": endpoint.get('normalized_endpoint', '')[:20]})
 
@@ -235,7 +234,7 @@ class EndpointOntologyFilterBuilder:
         traversal_steps = []
         if self._ontology_matrix is None:
             return {"filters": filters, "reasoning": {"endpoint": endpoint, "final_filters": [], "traversal": []}}
-            
+
         desc = endpoint.get("normalized_endpoint", "")
         if not desc:
             return {"filters": filters, "reasoning": {"endpoint": endpoint, "final_filters": [], "traversal": []}}
@@ -244,33 +243,33 @@ class EndpointOntologyFilterBuilder:
         query_vec = torch.frombuffer(bytearray(vec_bytes), dtype=torch.float32)
         scores = torch.matmul(self._ontology_matrix, query_vec)
         _, top_indices = torch.topk(scores, k=min(self.top_k_rag, len(scores)))
-        
+
         candidates = []
         for idx in top_indices.tolist():
             if scores[idx].item() >= self.threshold_rag:
                 candidates.append(self.node_list[idx])
-        
+
         candidates = self._rerank_candidates(desc, candidates)
-        
+
         chain = self._mode1_prompt | llm | self._clean_llm_runner | self.parser1
-        
+
         verified_nodes = set()
         evaluated_nodes = set()
         current_candidates = candidates
         iteration = 1
-        
+
         while current_candidates:
             batch_inputs = []
             batch_metadata = []
             valid_candidates = []
-            
+
             for idx, cand in enumerate(current_candidates):
                 name = cand.name
                 if name not in self.tree.nodes or name in verified_nodes or name in evaluated_nodes:
                     continue
                 evaluated_nodes.add(name)
                 valid_candidates.append(cand)
-                
+
                 for run_i in range(self.consensus_runs):
                     batch_inputs.append({
                         "endpoint_category": endpoint.get("normalized_category", ""),
@@ -283,10 +282,10 @@ class EndpointOntologyFilterBuilder:
                         "format_instructions": self.parser1.get_format_instructions()
                     })
                     batch_metadata.append({"name": name, "run_i": run_i, "cand": cand})
-            
+
             if not valid_candidates:
                 break
-                
+
             batch_results = chain.batch(batch_inputs, config={"max_concurrency": self.max_concurrency}, return_exceptions=True)
             for i, result in enumerate(batch_results):
                 if isinstance(result, Exception):
@@ -296,7 +295,7 @@ class EndpointOntologyFilterBuilder:
                             break
                         except Exception:
                             pass
-            
+
             candidate_votes = defaultdict(int)
             candidate_reasoning = defaultdict(list)
             for i, meta in enumerate(batch_metadata):
@@ -308,13 +307,13 @@ class EndpointOntologyFilterBuilder:
                     if result.decision == 'ACCEPTED':
                         candidate_votes[name] += 1
                     candidate_reasoning[name].append(f"{result.decision} - {clean_reason(result.reason)}")
-            
+
             next_round_candidates = []
             for cand in valid_candidates:
                 name = cand.name
                 votes = candidate_votes[name]
                 status = "ACCEPTED" if votes >= self.consensus_threshold else "REJECTED"
-                
+
                 traversal_steps.append({
                     "candidate": name,
                     "candidate_uri": cand.uri,
@@ -323,7 +322,7 @@ class EndpointOntologyFilterBuilder:
                     "votes": f"{votes}/{self.consensus_runs}",
                     "runs": candidate_reasoning[name]
                 })
-                
+
                 if status == "ACCEPTED":
                     curr = name
                     while curr:
@@ -344,7 +343,7 @@ class EndpointOntologyFilterBuilder:
                         node_info = self.tree.nodes.get(parent_name)
                         if node_info and node_info not in next_round_candidates:
                             next_round_candidates.append(node_info)
-            
+
             current_candidates = self._rerank_candidates(desc, next_round_candidates)
             iteration += 1
 
@@ -362,7 +361,7 @@ class EndpointOntologyFilterBuilder:
         traversal_steps = []
         if self._ontology_matrix is None:
             return {"filters": filters, "reasoning": {"endpoint": endpoint, "final_filters": [], "traversal": []}}
-            
+
         desc = endpoint.get("normalized_endpoint", "")
         if not desc:
             return {"filters": filters, "reasoning": {"endpoint": endpoint, "final_filters": [], "traversal": []}}
@@ -371,31 +370,31 @@ class EndpointOntologyFilterBuilder:
         query_vec = torch.frombuffer(bytearray(vec_bytes), dtype=torch.float32)
         scores = torch.matmul(self._ontology_matrix, query_vec)
         _, top_indices = torch.topk(scores, k=min(self.top_k_rag, len(scores)))
-        
+
         candidates = []
         for idx in top_indices.tolist():
             if scores[idx].item() >= self.threshold_rag:
                 candidates.append(self.node_list[idx])
-        
+
         candidates = self._rerank_candidates(desc, candidates)
         chain = self._mode2_prompt | llm | self._clean_llm_runner | self.parser2
-        
+
         verified_nodes = set()
         evaluated_nodes = set()
         current_candidates = candidates
         iteration = 1
-        
+
         while current_candidates:
             valid_candidates = [c for c in current_candidates if c.name not in evaluated_nodes and c.name not in verified_nodes]
             if not valid_candidates:
                 break
-                
+
             for c in valid_candidates:
                 evaluated_nodes.add(c.name)
-            
+
             s2n = {c.sanitized_name: c.name for c in valid_candidates}
             candidates_str = "\n".join([f"- {c.sanitized_name} (Hierarchy: {self.tree.breadcrumbs(c.name)}): {truncate_text(c.definition)}" for c in valid_candidates])
-            
+
             invoke_inputs = [{
                 "endpoint_category": endpoint.get("normalized_category", ""),
                 "endpoint": desc,
@@ -404,7 +403,7 @@ class EndpointOntologyFilterBuilder:
                 "candidates": candidates_str,
                 "format_instructions": self.parser2.get_format_instructions()
             } for _ in range(self.consensus_runs)]
-            
+
             batch_results = chain.batch(invoke_inputs, config={"max_concurrency": self.max_concurrency}, return_exceptions=True)
             for i, result in enumerate(batch_results):
                 if isinstance(result, Exception):
@@ -414,7 +413,7 @@ class EndpointOntologyFilterBuilder:
                             break
                         except Exception:
                             pass
-                            
+
             candidate_votes = defaultdict(int)
             for run_i, result in enumerate(batch_results):
                 if isinstance(result, Exception): continue
@@ -424,19 +423,19 @@ class EndpointOntologyFilterBuilder:
                         candidate_votes[s2n[clean_sel]] += 1
                     elif clean_sel in [c.name for c in valid_candidates]:
                         candidate_votes[clean_sel] += 1
-            
+
             next_round_candidates = []
             for cand in valid_candidates:
                 name = cand.name
                 votes = candidate_votes[name]
                 status = "ACCEPTED" if votes >= self.consensus_threshold else "REJECTED"
-                
+
                 traversal_steps.append({
                     "candidate": name,
                     "decision": status,
                     "votes": f"{votes}/{self.consensus_runs}",
                 })
-                
+
                 if status == "ACCEPTED":
                     curr = name
                     while curr:
@@ -456,7 +455,7 @@ class EndpointOntologyFilterBuilder:
                         node_info = self.tree.nodes.get(parent_name)
                         if node_info and node_info not in next_round_candidates:
                             next_round_candidates.append(node_info)
-            
+
             current_candidates = self._rerank_candidates(desc, next_round_candidates)
             iteration += 1
 

@@ -37,7 +37,7 @@ def multi_label_classifier(
 
     pred_df = []
     fold = 1
-    
+
     device = f"cuda:{gpu_id}" if gpu_id >= 0 else "cpu"
     tree_method = "hist" if gpu_id >= 0 else "auto"
 
@@ -74,7 +74,7 @@ def multi_label_classifier(
         # Predict
         y_fold_prob = model.predict_proba(x_fold_val)[:, 1]
         y_fold_pred = model.predict(x_fold_val)
-        
+
         repeat_num = (fold - 1) // n_splits + 1
         fold_num = (fold - 1) % n_splits + 1
 
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     print("Merging features and labels...")
     merged = pd.merge(features, labels, on="DTXSID", how="inner")
     print(f"Total merged samples: {len(merged)}")
-    
+
     # Identify label columns (everything not Feature_ or DTXSID)
     label_cols = [c for c in labels.columns if c != "DTXSID"]
     meta_cols = ["DTXSID"]
@@ -186,7 +186,7 @@ if __name__ == "__main__":
             num_gpus = cp.cuda.runtime.getDeviceCount()
         except:
             num_gpus = 0
-    
+
     if num_gpus == 0:
         print("No GPU detected, using CPU")
         num_workers = 8

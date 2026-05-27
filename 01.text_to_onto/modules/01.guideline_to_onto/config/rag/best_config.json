@@ -8,6 +8,6 @@
     "reranker_model": "Qwen/Qwen3-Reranker-8B",
     "threshold_reranker": 0.05,
     "reranker_batch_size": 32,
-    "reranker_prompt": "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/01.text_to_onto/modules/00.tox_effect_to_onto/config/rag/reranker_prompt.txt",
-    "grf": 0.0
+    "reranker_prompt": "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/01.text_to_onto/modules/01.guideline_to_onto/config/rag/reranker_prompt.txt",
+    "grf": 1.0
 }

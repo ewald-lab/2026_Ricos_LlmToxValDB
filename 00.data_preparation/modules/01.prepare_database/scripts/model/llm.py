@@ -10,20 +10,20 @@ def get_model(model: str, model_provider: str, base_url: str = None, api_key: st
     Initializes a chat model using LangChain's init_chat_model.
     """
     logger.info(f"Initializing model: {model} (provider: {model_provider})")
-    
+
     init_args = {
         "model": model,
         "model_provider": model_provider,
         "temperature": temperature,
     }
-    
+
     if base_url:
         init_args["base_url"] = base_url
     if api_key:
         init_args["api_key"] = api_key
-        
+
     init_args.update(kwargs)
-    
+
     return init_chat_model(**init_args)
 
 def test_model(model, max_retries=10, delay=10):
@@ -38,20 +38,20 @@ def test_model(model, max_retries=10, delay=10):
         try:
             response = model.invoke("Hello")
             raw_content = response.content
-            
+
             if "</think>" in raw_content:
                 clean_content = raw_content.split("</think>")[-1].strip()
             else:
                 clean_content = raw_content.strip()
-                
+
             logger.info(f"Model test successful: {clean_content}")
             return True
-            
+
         except Exception as e:
             logger.warning(f"Attempt {attempt + 1}/{max_retries} failed connecting to {base_url}: {e}")
             if attempt < max_retries - 1:
                 logger.info(f"Retrying in {delay} seconds...")
                 time.sleep(delay)
-    
+
     logger.error("All model connectivity tests failed.")
     return False

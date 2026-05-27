@@ -111,12 +111,6 @@ def count_valid_terms(term_str) -> int:
     return len(valid_t)
 
 
-def orig_count_per_row(row) -> int:
-    t1 = str(row["Selected_Candidates"]).split("|") if pd.notna(row["Selected_Candidates"]) else []
-    t2 = str(row["Manual_Terms"]).split("|") if pd.notna(row["Manual_Terms"]) else []
-    all_t = [t.strip().lower() for t in t1 + t2]
-    valid_t = set(t for t in all_t if t not in ["none", "-", "unknown", ""])
-    return len(valid_t)
 
 
 def main():
@@ -145,7 +139,7 @@ def main():
         )
         experts_data[expert_id] = df_exp
 
-        # Load original for flags and counts
+        # Load original expert files for counts
         orig_path = os.path.join(
             args.orig_dir,
             f"ToxValLlm_expert_{expert_id}_ontology_{args.ontology}.csv",
@@ -155,6 +149,12 @@ def main():
             df_orig = None
         else:
             df_orig = pd.read_csv(orig_path)
+
+        # Add Not_My_Expertise column to df_exp for downstream use (depth & similarity)
+        if df_orig is not None and "Not_My_Expertise" in df_orig.columns:
+            df_exp["Not_My_Expertise"] = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).values
+        else:
+            df_exp["Not_My_Expertise"] = 0
 
         # Depth metric
         df_exp["Max_Depth"] = df_exp["All_Terms_Set"].apply(
@@ -180,17 +180,28 @@ def main():
             .fillna(0).sum()
             if df_orig is not None else 0
         )
-        avg_orig_terms = (
-            df_orig.apply(orig_count_per_row, axis=1).mean()
-            if df_orig is not None else 0
-        )
+        if df_orig is not None:
+            if "Not_My_Expertise" in df_orig.columns:
+                not_exp_mask = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0) == 1
+                filtered_df_exp = df_exp[~not_exp_mask]
+            else:
+                filtered_df_exp = df_exp
+            avg_orig_terms = (
+                filtered_df_exp["All_Terms_Set"].apply(len).mean()
+                if not filtered_df_exp.empty else 0
+            )
+        else:
+            avg_orig_terms = df_exp["All_Terms_Set"].apply(len).mean()
+
+        filtered_for_depth = df_exp[df_exp["Not_My_Expertise"] != 1]
+        mean_max_depth = filtered_for_depth["Max_Depth"].mean() if not filtered_for_depth.empty else 0
 
         expert_metrics.append(
             {
                 "Expert_ID": expert_id,
                 "Expert": clean_expert_name(expert_id),
                 "Avg_Orig_Num_Terms": avg_orig_terms,
-                "Mean_Max_Depth": df_exp["Max_Depth"].mean(),
+                "Mean_Max_Depth": mean_max_depth,
                 "Selected_Terms": selected_count_total,
                 "Manual_Terms": manual_count_total,
                 "Nonsense_Flags": nonsense_count,
@@ -210,13 +221,18 @@ def main():
         for j, id2 in enumerate(expert_ids):
             scores = []
             for k in range(num_phrases):
+                # Check if either expert has Not_My_Expertise == 1 for this phrase
+                not_exp1 = experts_data[id1].iloc[k].get("Not_My_Expertise", 0) == 1
+                not_exp2 = experts_data[id2].iloc[k].get("Not_My_Expertise", 0) == 1
+                if not_exp1 or not_exp2:
+                    continue
                 s1 = experts_data[id1].iloc[k]["All_Terms_Set"]
                 s2 = experts_data[id2].iloc[k]["All_Terms_Set"]
                 u = s1.union(s2)
                 inter = s1.intersection(s2)
                 score = len(inter) / len(u) if len(u) > 0 else 1.0
                 scores.append(score)
-            pairwise_overlap[i, j] = np.mean(scores)
+            pairwise_overlap[i, j] = np.mean(scores) if scores else 1.0
 
     print("Generating plots...")
 
@@ -234,7 +250,7 @@ def main():
     plt.xticks(rotation=90)
     plt.yticks(rotation=0)
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, "pairwise_overlap_heatmap.png"))
+    plt.savefig(os.path.join(args.output_dir, "pairwise_overlap_heatmap.png"), dpi=300)
     plt.close()
 
     # Plot 2: Avg Terms per Expert
@@ -247,10 +263,11 @@ def main():
         hue="Expert",
         legend=False,
     )
-    plt.title("Average Number of Original Terms per Phrase per Expert")
+    plt.title("Average Number of Terms per Phrase per Expert (including Hierarchy)")
+    plt.ylabel("Average Number of Terms")
     plt.xticks(rotation=90)
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, "avg_terms_per_expert.png"))
+    plt.savefig(os.path.join(args.output_dir, "avg_terms_per_expert.png"), dpi=300)
     plt.close()
 
     # Plot 3: Max Depth per Expert
@@ -266,7 +283,7 @@ def main():
     plt.title("Average Maximum Depth of Terms per Phrase per Expert")
     plt.xticks(rotation=90)
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, "max_depth_per_expert.png"))
+    plt.savefig(os.path.join(args.output_dir, "max_depth_per_expert.png"), dpi=300)
     plt.close()
 
     # Plot 4: Manual vs Selected
@@ -289,7 +306,7 @@ def main():
     plt.ylabel("Total Terms Used")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, "manual_vs_selected_terms.png"))
+    plt.savefig(os.path.join(args.output_dir, "manual_vs_selected_terms.png"), dpi=300)
     plt.close()
 
     # Plot 5: Expert Flags
@@ -315,7 +332,7 @@ def main():
     plt.ylabel("Count")
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, "expert_flags.png"))
+    plt.savefig(os.path.join(args.output_dir, "expert_flags.png"), dpi=300)
     plt.close()
 
     # Plot 6: Dendrogram
@@ -330,7 +347,7 @@ def main():
     plt.title("Dendrogram of Expert Similarity (Ward Linkage)")
     plt.ylabel("Distance (1 - Jaccard)")
     plt.tight_layout()
-    plt.savefig(os.path.join(args.output_dir, "expert_dendrogram.png"))
+    plt.savefig(os.path.join(args.output_dir, "expert_dendrogram.png"), dpi=300)
     plt.close()
 
     print(f"All 6 plots saved to: {args.output_dir}")

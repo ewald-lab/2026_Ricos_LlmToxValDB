@@ -1,4 +1,0 @@
-guideline_number,category,endpoint_name,requirement_level,source,footnotes
-404,Clinical Observations,Erythema score,Required,Guideline text,"Graded 0-4: No erythema, Very slight, Well defined, Moderate to severe, Severe to eschar"
-404,Clinical Observations,Oedema score,Required,Guideline text,"Graded 0-4: No oedema, Very slight, Slight, Moderate, Severe"
-404,Pathology,Histopathological examination,Optional,Guideline text,To be carried out to clarify equivocal responses

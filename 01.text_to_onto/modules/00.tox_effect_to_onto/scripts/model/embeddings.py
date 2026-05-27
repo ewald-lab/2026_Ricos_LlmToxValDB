@@ -26,15 +26,15 @@ class EmbeddingModel:
     def load(self):
         if self.model is not None:
             return
-            
+
         logger.info(f"Loading embedding model: {self.model_name}")
         try:
             # Handle specific model paths if needed, or use default HF
             self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, padding_side='left')
             self.model = AutoModel.from_pretrained(
-                self.model_name, 
-                trust_remote_code=True, 
-                device_map="auto" if torch.cuda.is_available() else None, 
+                self.model_name,
+                trust_remote_code=True,
+                device_map="auto" if torch.cuda.is_available() else None,
                 torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32
             )
             self.model.eval()
@@ -46,17 +46,17 @@ class EmbeddingModel:
         """Generates embedding for a single string and returns bytes."""
         if self.model is None:
             self.load()
-            
+
         # Some models (like Llama/Qwen) benefit from a prompt prefix for query embedding
         # but for now we follow the standard approach.
         inputs = self.tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=8192)
         inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
-        
+
         with torch.no_grad():
             outputs = self.model(**inputs)
             # Use last token pooling as requested for these decoder-only models
             embeddings = last_token_pool(outputs.last_hidden_state, inputs['attention_mask'])
             embeddings = F.normalize(embeddings, p=2, dim=1)
             vector = embeddings[0].float().cpu().numpy().astype(np.float32).tobytes()
-            
+
         return vector

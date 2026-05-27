@@ -43,11 +43,11 @@ def tune_and_classify(
     feature_cols = [c for c in dat.columns if c.startswith("Feature_")]
     x = dat[feature_cols].to_numpy()
     y = dat[label_column].astype(int).to_numpy()
-    
+
     device = f"cuda:{gpu_id}" if gpu_id >= 0 else "cpu"
     tree_method = "hist" if gpu_id >= 0 else "auto"
     rskf = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=42)
-    
+
     pos_weight = (y == 0).sum() / (y == 1).sum() if (y == 1).sum() > 0 else 1.0
 
     # 1. Baseline Performance
@@ -60,7 +60,7 @@ def tune_and_classify(
         "device": device,
         "random_state": 42
     }
-    
+
     def evaluate(params):
         cv_auprg = []
         for train_idx, val_idx in rskf.split(x, y):
@@ -71,7 +71,7 @@ def tune_and_classify(
         return np.mean(cv_auprg)
 
     baseline_score = evaluate(baseline_params)
-    
+
     # 2. Tuning with Optuna
     def objective(trial):
         params = {
@@ -91,7 +91,7 @@ def tune_and_classify(
 
     study = optuna.create_study(direction="maximize")
     study.optimize(objective, n_trials=15) # Fast but effective
-    
+
     best_score = study.best_value
     best_params = study.best_params
     best_params.update({"scale_pos_weight": pos_weight, "tree_method": tree_method, "device": device, "random_state": 42})
@@ -99,7 +99,7 @@ def tune_and_classify(
     # 3. Decision: Use Tuned if better than Baseline
     final_params = best_params if best_score > baseline_score else baseline_params
     is_tuned = best_score > baseline_score
-    
+
     # Final cross-val results with winner
     all_preds = []
     fold = 1
@@ -108,10 +108,10 @@ def tune_and_classify(
         model.fit(x[train_idx], y[train_idx])
         probs = model.predict_proba(x[val_idx])[:, 1]
         preds = model.predict(x[val_idx])
-        
+
         repeat_num = (fold - 1) // n_splits + 1
         fold_num = (fold - 1) % n_splits + 1
-        
+
         all_preds.append(pl.DataFrame({
             "DTXSID": list(meta.iloc[val_idx]["DTXSID"]),
             "y_prob": list(probs),
@@ -121,14 +121,14 @@ def tune_and_classify(
             "repeat": repeat_num,
         }))
         fold += 1
-        
+
     # Full training for persistence
     final_model = XGBClassifier(**final_params, objective="binary:logistic")
     final_model.fit(x, y)
-    
+
     safe_label = label_column.replace("/", "_").replace("\\", "_").replace(" ", "_")
     joblib.dump(final_model, os.path.join(model_dir, f"{safe_label}_model.joblib"))
-    
+
     res_df = pl.concat(all_preds, how="vertical").with_columns(
         pl.lit(label_column).alias("Metadata_Label"),
         pl.lit(int((y==1).sum())).alias("Metadata_Count_1"),
@@ -159,14 +159,14 @@ if __name__ == "__main__":
 
     features = pd.read_parquet(args.features_path)
     labels = pd.read_csv(args.labels_path)
-    
+
     if "DTXSID" not in features.columns:
         mapping = pd.read_csv(args.mapping_path)
         features = pd.merge(features, mapping, left_on="Metadata_compound", right_on="NAME", how="inner")
-        
+
     merged = pd.merge(features, labels, on="DTXSID", how="inner")
     label_cols = [c for c in labels.columns if c != "DTXSID"]
-    
+
     # Simple GPU detection
     gpu_id = 0
     model_dir = os.path.join(os.path.dirname(args.output), "models_tuned")

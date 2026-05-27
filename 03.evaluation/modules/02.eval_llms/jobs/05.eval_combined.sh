@@ -28,6 +28,7 @@ LLM_EXPANDED_DIR="${MODULE_DIR}/outputs"
 LLM_ORIG_DIR="${MODULE_DIR}/outputs"
 
 OWL_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
+ONTOLOGY_EMBEDDING_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/kalm/${ONTOLOGY}.db"
 OUTPUT_DIR="${MODULE_DIR}/outputs/figures"
 
 # Activate environment
@@ -49,6 +50,7 @@ python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --output_dir           "${OUTPUT_DIR}" \
     --ontology             "${ONTOLOGY}" \
     --root_term            "${ROOT_TERM}" \
+    --ontology_embedding_db "${ONTOLOGY_EMBEDDING_DB}" \
     --exclude_average_human
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"

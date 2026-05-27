@@ -1,0 +1,177 @@
+cellular
+cellular > abnormal lipid metabolism
+cellular > activation of steroidogenesis
+cellular > alteration lipid metabolism
+cellular > apoptosis of adult leydig cells decreased testosterone by adult leydig cells
+cellular > apoptotic cell death
+cellular > decrease incorporation of active iodide into iodotyrosines
+cellular > decreased androgen and progestin
+cellular > decreased cholesterol decreased testosterone production by adult leydig cells
+cellular > decreased lh surge
+cellular > decreased lh surge from anterior pituitary
+cellular > decreased testosterone by the fetal leydig cells activation by other estradiol agonists
+cellular > decreased testosterone by the fetal leydig cells activation by other glucocorticoid receptor agonists
+cellular > decreased testosterone by the fetal leydig cells decreased coup tfii stem leydig cells
+cellular > decreased testosterone by the fetal leydig cells increased coup tfii in fetal leydig cells
+cellular > decreased testosterone by the fetal leydig cells increased estradiol
+cellular > delay ovarian maturation
+cellular > direct effects of corticosterone on steroidogenesis decreased testosterone by adult leydig cells
+cellular > disrupted initiation of meiosis of oogonia in the ovary
+cellular > endometrial squamous metaplasia increase
+cellular > glucocorticoid receptor mediated alterations in steriodogenic enzymes decreased testosterone by adult leydig cells
+cellular > granulosa cell damage
+cellular > granulosa cell proliferation of gonadotropin independent follicles reduced
+cellular > hyperplasia leydig cell
+cellular > hyperplasia ovarian stromal cells
+cellular > hypertrophy hyperplasia smooth muscle
+cellular > increase gonadotropins concentration in plasma
+cellular > increase hyperplasia
+cellular > increase hypertrophy and proliferation
+cellular > increase leydig cell tumors
+cellular > increase luteinizing hormone
+cellular > increase oocyte apoptosis
+cellular > increase ovarian somatic cell apoptosis
+cellular > increase papillomas carcinomas
+cellular > increased cell proliferation
+cellular > increased cellular proliferation hyperplasia of acinar cells
+cellular > increased estrogens
+cellular > increased hyperplasia
+cellular > increased hypertrophy and proliferation
+cellular > increased lactotroph hyperplasia and hypertrophy
+cellular > increased secrection of fsh from anterior pituitary
+cellular > increased t4 t3 catabolism
+cellular > ke1 altered steroidogenesis
+cellular > malignant transformation of cells
+cellular > occurrence cytoplasmic vacuolization
+cellular > perturbation of cholesterol
+cellular > plasma estradiol increased
+cellular > proliferation clonal expansion aberrant basal type cells
+cellular > promotion ovarian granular cell tumors
+cellular > reduction 17beta estradiol synthesis by ovarian granulosa cells
+cellular > reduction 17beta estradiol synthesis by the undifferentiated gonad
+cellular > reduction testosterone synthesis by ovarian theca cells
+cellular > reduction testosterone synthesis in leydig cells
+cellular > reduction vitellogenin accumulation into oocytes and oocyte growth development
+cellular > repressed expression of steroidogenic enzymes
+cellular > squamous metaplasia increase
+cellular > steroidogenesis dysregulation
+cellular > suppression vldl secretion
+cellular > thyroid hormone synthesis decreased
+individual
+individual > cholestasis pathology
+individual > decreased fertility in the adult decreased sperm quantity and or quality in the adult testis
+individual > disrupted ovarian cycle
+individual > growth reduction
+individual > impaired development of reproductive organs
+individual > interruption ovulation
+individual > malformed male reproductive tract
+individual > nipple retention increased
+individual > prostate cancer
+molecular
+molecular > altered cholesterol metabolism
+molecular > aromatase induction
+molecular > decreased cholesterol decreased de novo biosynthesis of choleseterol
+molecular > decreased cholesterol decreased uptake of lipoproteins
+molecular > decreased testosterone by the fetal leydig cells alterations in the fetal testis proteome
+molecular > decreased testosterone by the fetal leydig cells hypermethylation in the fetal testis
+molecular > displacement serum thyroxine from carrier protein
+molecular > displacement serum thyroxine from transthyretin
+molecular > endocrine disruption
+molecular > increase glucuronidation of t4
+molecular > inhibition deiodinase 1
+molecular > inhibition deiodinase 2
+molecular > inhibition pendrin
+molecular > metaplasia of goblet cells
+molecular > modulation unknown
+molecular > vitellogenin
+organ
+organ > decrease intratesticular testosterone levels
+organ > decrease oogenesis
+organ > decrease ovulation
+organ > decreased oocyte maturation
+organ > decreased size of the ovarian reserve
+organ > decreased spermatogenesis
+organ > decreased testosterone by fetal leydig cells dysgenesis of fetal leydig cells
+organ > decreased testosterone by the fetal leydig cells dysgenesis of fetal leydig cells
+organ > decreased testosterone by the fetal leydig cells dysgensis of fetal leydig cells
+organ > disrupted spermatogenesis and sperm quality
+organ > epididymal agenesis
+organ > feminisation or incomplete development primary and accessory male sex organs
+organ > hypothalamus pituitary gonad axis disruption
+organ > impaired blood testis barrier
+organ > impaired ovulation
+organ > impaired spermatogenesis
+organ > increase follicular atresia
+organ > increase ovarian follicle breakdown
+organ > increase tissue organ damage
+organ > increased circulating estrogen levels
+organ > increased oocyte maturation
+organ > increased systemic total cholesterol pool
+organ > increased thyroxine in serum
+organ > ke5 altered circulating reproductive hormones
+organ > ovarian retardation
+organ > premature ovarian insufficiency
+organ > promotion ovarian cancer
+organ > reduction gonadotropins circulating concentrations
+organ > reduction plasma 17beta estradiol concentrations
+organ > testicular atrophy
+organ > testicular cancer
+organ > uterine adenocarcinoma
+tissue
+tissue > alterations cellular proliferation hyperplasia
+tissue > decrease circulating testosterone levels
+tissue > decrease e2 blood concentrations at hypothalamus
+tissue > decrease serum thyroid hormone
+tissue > decreased cholesterol
+tissue > decreased gonadotropins
+tissue > decreased mucous
+tissue > decreased ovarian e2
+tissue > decreased pregnenolone levels
+tissue > decreased serum t4 t3
+tissue > decreased thyroxine in tissues
+tissue > decreased triiodothyronine
+tissue > decreased triiodothyronine in tissues
+tissue > estradiol availability increased
+tissue > hyperplasia hyperplasia
+tissue > hyperplasia mammary gland
+tissue > hyperplasia ovarian epithelium
+tissue > impaired oocyte maturation and ovulation
+tissue > increase adenomas carcinomas
+tissue > increase cancer
+tissue > increase endometrial adenocarcinomas
+tissue > increase necrosis
+tissue > increase necrotic tissue
+tissue > increase thyroid stimulating hormone
+tissue > increase tissue degeneration necrosis atrophy
+tissue > increased adenomas
+tissue > increased adenomas carcinomas
+tissue > increased adenosquamous carcinomas of endometrium
+tissue > increased apob100
+tissue > increased apoptosis adenomas carcinomas
+tissue > increased clearance of thyroxine from serum
+tissue > increased ductal hyperplasia
+tissue > increased estradiol production in ovaries
+tissue > increased free serum thyroxine
+tissue > increased histomorphological alteration of testis
+tissue > increased hyperplasia
+tissue > increased leutinizing hormone
+tissue > increased luteinizing hormone
+tissue > increased oncotic necrosis
+tissue > increased oocyte atresia
+tissue > increased plasma low density lipoprotein cholesterol
+tissue > increased thyroid stimulating hormone
+tissue > increased triiodothyronine in tissues
+tissue > increased vascular fibrosis
+tissue > infiltration inflammatory cells
+tissue > inhibition aromatase activity in plasma
+tissue > necrosis
+tissue > necrotic tissue
+tissue > persistent vaginal cornification
+tissue > promotion mesovarian leiomyomas
+tissue > promotion ovarian adenomas
+tissue > prostatic intraepithelial neoplasia
+tissue > reduced luteinizing hormone plasma
+tissue > reduced maturation inducing steroid plasma
+tissue > reduction fetal adult testosterone
+tissue > testosterone levels increased
+tissue > thyroxine in serum decreased

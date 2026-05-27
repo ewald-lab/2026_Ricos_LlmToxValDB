@@ -9,13 +9,13 @@ def load_ontology_data(ontology_db):
     if not os.path.exists(ontology_db):
         print(f"Error: Ontology DB not found at {ontology_db}")
         return {}
-    
+
     conn = sqlite3.connect(ontology_db)
     cursor = conn.cursor()
     cursor.execute("SELECT name, sanitized_name, parent, definition, is_llm_generated FROM embeddings")
     rows = cursor.fetchall()
     conn.close()
-    
+
     nodes = {}
     for name, sanitized_name, parent, definition, is_llm_generated in rows:
         # Use full name as key to avoid collisions with same sanitized_names
@@ -46,7 +46,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
         <style>
             body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f7f6; color: #333; font-size: 14px; }
             .container { width: 100%; box-sizing: border-box; }
-            
+
             /* Header & Sticky Controls */
             .header-panel {
                 position: sticky; top: 0; background: white; z-index: 1000;
@@ -54,11 +54,11 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 margin-bottom: 20px; border: 1px solid #e0e0e0;
             }
             h1 { margin: 0 0 10px 0; font-size: 1.3em; color: #333; }
-            
+
             .progress-bar-bg { width: 100%; background-color: #eee; height: 8px; border-radius: 4px; overflow: hidden; }
             .progress-bar-fill { height: 100%; background-color: #27ae60; width: 0%; transition: width 0.3s; }
             .stats { display: flex; justify-content: space-between; font-size: 0.8em; color: #7f8c8d; margin-top: 4px; }
-            
+
             .btn-group { display: flex; gap: 8px; margin-top: 10px; }
             .btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; color: white; transition: opacity 0.2s; font-size: 0.85em; }
             .btn:hover { opacity: 0.9; }
@@ -77,13 +77,13 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 padding: 10px 12px; font-size: 0.95em; font-weight: 500; color: #333;
                 margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
             }
-            .phrase-text { 
-                flex: 1; 
-                max-height: 50px; 
-                overflow-y: auto; 
+            .phrase-text {
+                flex: 1;
+                max-height: 50px;
+                overflow-y: auto;
                 padding-right: 10px;
             }
-            
+
             /* Candidates Grid */
             .candidates-grid {
                 display: flex; flex-direction: column; gap: 8px;
@@ -212,12 +212,12 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
             /* Tree View */
             .tree-modal-content { height: 80%; display: flex; flex-direction: column; width: 600px; }
-            .tree-scroll-area { 
-                flex: 1; overflow-y: auto; text-align: left; padding: 20px; 
-                border: 1px solid #eee; margin-top: 10px; background: #fff; border-radius: 4px; 
+            .tree-scroll-area {
+                flex: 1; overflow-y: auto; text-align: left; padding: 20px;
+                border: 1px solid #eee; margin-top: 10px; background: #fff; border-radius: 4px;
             }
             ul.tree-ul { list-style-type: none; padding-left: 20px; margin: 0; }
-            
+
             /* Hierarchy Lines */
             ul.tree-ul ul {
                 border-left: 1px solid #e0e0e0;
@@ -352,7 +352,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
         <div class="header-panel">
             <h1>Expert Annotation: Toxicological Effects</h1>
             <div style="margin-bottom: 10px; color: #333; font-size: 0.92em; text-align: justify; line-height: 1.5; max-height: 80px; overflow-y: auto; padding-right: 5px; border-bottom: 1px solid #f0f0f0; margin-bottom: 15px;"><strong>Context of the ontology:</strong> {context_ontology}</div>
-            
+
             <div class="expander-row">
             <details class="panel-expander">
                 <summary>Instructions</summary>
@@ -400,14 +400,14 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
         Object.values(ontologyNodes).forEach(n => {
             if(n.data && n.data.name) {
                 const nameKey = n.data.name.trim();
-                nodesByName[nameKey] = { 
-                    name: n.data.name, 
-                    sanitizedName: n.data.sanitized_name, 
-                    displayName: n.data.name, 
+                nodesByName[nameKey] = {
+                    name: n.data.name,
+                    sanitizedName: n.data.sanitized_name,
+                    displayName: n.data.name,
                     parent: n.data.parent ? n.data.parent.trim() : null,
                     definition: n.data.definition,
                     isLlmGenerated: n.data.is_llm_generated,
-                    children: [] 
+                    children: []
                 };
             }
         });
@@ -440,7 +440,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
             const name = document.getElementById('evaluatorName').value.trim();
             const inst = document.getElementById('evaluatorInstitution').value.trim();
             if (!name || !inst) { alert("Please fill in all fields."); return; }
-            
+
             evaluatorName = name;
             evaluatorInstitution = inst;
             document.getElementById('userModal').style.display = 'none';
@@ -449,7 +449,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
         function startAnnotation() {
             document.getElementById('instructionsModal').style.display = 'none';
-            
+
             loadState();
             renderTasks();
             updateProgress();
@@ -508,7 +508,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 // Candidates
                 const grid = document.createElement('div');
                 grid.className = 'candidates-grid';
-                
+
                 // Add "None of the above" logic implicitly by allowing empty selection or manual only
                 // But let's add the candidates from the pool
                 let candidatesToRender = item.candidates.slice();
@@ -524,9 +524,9 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 candidatesToRender.forEach((cand, candIdx) => {
                     const opt = document.createElement('div');
                     opt.className = 'candidate-option';
-                    
+
                     const safeCandId = cand.name.replace(/[^a-zA-Z0-9]/g, '_') + '_' + candIdx;
-                    
+
                     let pathNodes = [];
                     let curr = cand.name;
                     while (curr && nodesByName[curr]) {
@@ -539,14 +539,14 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
                     const pathContainer = document.createElement('div');
                     pathContainer.className = 'cand-path';
-                    
+
                     const nodesToRender = (SKIP_FIRST_LEVEL && pathNodes.length > 1) ? pathNodes.slice(1) : pathNodes;
-                    
+
                     nodesToRender.forEach((pn, pnIdx) => {
                         const nodeEl = document.createElement('span');
                         nodeEl.className = 'path-node';
                         if (pnIdx === nodesToRender.length - 1) nodeEl.classList.add('path-node-leaf');
-                        
+
                         nodeEl.textContent = pn.displayName;
                         const nodeData = nodesByName[pn.name];
                         let defStr = nodeData?.definition;
@@ -558,12 +558,12 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                             tooltip.className = 'custom-tooltip';
                             tooltip.innerHTML = `<span class="def-source ${sourceClass}" style="margin-bottom: 6px;">${sourceText}</span><br>${defStr}`;
                             nodeEl.appendChild(tooltip);
-                            
+
                             nodeEl.addEventListener('mouseenter', () => {
                                 tooltip.style.left = '50%';
                                 tooltip.style.right = 'auto';
                                 tooltip.style.transform = 'translateX(-50%)';
-                                
+
                                 const rect = tooltip.getBoundingClientRect();
                                 const padding = 15;
                                 if (rect.right > window.innerWidth - padding) {
@@ -582,17 +582,17 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                         nodeEl.onclick = (e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            
+
                             if (!userState[idx]) userState[idx] = { selected: [], manual: [], badDescription: false, notMyExpertise: false, comments: "" };
                             if (!userState[idx].selected) userState[idx].selected = [];
-                            
+
                             const clickedNodeName = pn.name;
                             const currentSelected = userState[idx].selected;
                             selectLineage(idx, clickedNodeName);
                         };
-                        
+
                         pathContainer.appendChild(nodeEl);
-                        
+
                         if (pnIdx < nodesToRender.length - 1) {
                             const sep = document.createElement('span');
                             sep.className = 'path-sep';
@@ -613,7 +613,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                                 }
                             });
                         }
-                        
+
                         let isPathActive = false;
                         for(let i=0; i < nodesToRender.length; i++) {
                             const el = pathContainer.children[i*2]; // nodes are at even indices
@@ -624,7 +624,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                                 el.classList.remove('selected-path');
                             }
                         }
-                        
+
                         const leafNode = pathNodes[pathNodes.length - 1];
                         if (activeNodes.has(leafNode.name)) {
                             opt.classList.add('selected');
@@ -636,7 +636,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                     const info = document.createElement('div');
                     info.className = 'cand-info';
                     info.style.marginTop = '0px';
-                    
+
                     let llmHtml = '';
                     if (DEBUG_MODE) {
                         const ragScore = cand.score !== undefined ? cand.score : 'N/A';
@@ -677,7 +677,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 // Manual Search Section
                 const manualSec = document.createElement('div');
                 manualSec.className = 'manual-section';
-                
+
                 const label = document.createElement('span');
                 label.className = 'manual-label';
                 label.innerHTML = "If <span style='color: red;'>None</span> of these terms apply or there are <span style='color: red;'>No</span> terms presented and you have a specific term in mind, browse the ontology.";
@@ -685,12 +685,12 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
                 const searchWrap = document.createElement('div');
                 searchWrap.className = 'search-wrapper';
-                
+
                 const treeBtn = document.createElement('button');
                 treeBtn.className = 'btn btn-tree';
                 treeBtn.textContent = 'Browse Ontology';
                 treeBtn.onclick = () => openTreeModal(idx);
-                
+
                 searchWrap.appendChild(treeBtn);
                 manualSec.appendChild(searchWrap);
 
@@ -698,7 +698,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 const tagsCont = document.createElement('div');
                 tagsCont.className = 'manual-tags';
                 tagsCont.id = `tags-${idx}`;
-                
+
                 // Render existing manual tags
                 if (userState[idx] && userState[idx].manual) {
                     userState[idx].manual.forEach(term => {
@@ -713,12 +713,12 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 commentWrapper.style.marginTop = '15px';
                 commentWrapper.style.borderTop = '1px solid #eee';
                 commentWrapper.style.paddingTop = '10px';
-                
+
                 const commentLabel = document.createElement('label');
                 commentLabel.className = 'manual-label';
                 commentLabel.textContent = 'Do you have any comments to add about your evaluation of this toxicological effect? (Optional)';
                 commentWrapper.appendChild(commentLabel);
-                
+
                 const commentArea = document.createElement('textarea');
                 commentArea.className = 'search-input';
                 commentArea.style.width = '100%';
@@ -727,17 +727,17 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 commentArea.style.marginTop = '5px';
                 commentArea.style.resize = 'vertical';
                 commentArea.placeholder = 'Add any notes or comments here...';
-                
+
                 if (userState[idx] && userState[idx].comments) {
                     commentArea.value = userState[idx].comments;
                 }
-                
+
                 commentArea.oninput = (e) => {
                     if (!userState[idx]) userState[idx] = { selected: [], manual: [], badDescription: false, notMyExpertise: false, comments: "" };
                     userState[idx].comments = e.target.value;
                     saveState();
                 };
-                
+
                 commentWrapper.appendChild(commentArea);
                 manualSec.appendChild(commentWrapper);
                 card.appendChild(manualSec);
@@ -751,7 +751,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
             generalCard.style.marginTop = '40px';
             generalCard.style.border = '2px solid #3498db';
             generalCard.style.backgroundColor = '#f4f9fd';
-            
+
             const generalTitle = document.createElement('h3');
             generalTitle.style.marginTop = '0';
             generalTitle.style.color = '#333';
@@ -802,13 +802,13 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
             const sortFn = (a, b) => a.name.localeCompare(b.name);
             rootsToRender.sort(sortFn);
-            
+
             function sortChildren(node) {
                 node.children.sort(sortFn);
                 node.children.forEach(sortChildren);
             }
             rootsToRender.forEach(sortChildren);
-            
+
             // 4. Render
             function createUl(nodes) {
                 if (nodes.length === 0) return null;
@@ -817,9 +817,9 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 nodes.forEach(node => {
                     const li = document.createElement('li');
                     li.className = 'tree-li';
-                    
+
                     const hasChildren = node.children.length > 0;
-                    
+
                     if (hasChildren) {
                         const span = document.createElement('span');
                         span.className = 'caret';
@@ -834,7 +834,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                         spacer.style.width = '22px';
                         li.appendChild(spacer);
                     }
-                    
+
                     const text = document.createElement('span');
                     text.className = 'tree-item';
                     text.textContent = node.displayName;
@@ -842,7 +842,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                     text.onclick = function() {
                         selectTreeTerm(node.name);
                     };
-                    
+
                     const infoBtn = document.createElement('button');
                     infoBtn.className = 'btn-toggle-def';
                     infoBtn.style.width = '18px';
@@ -859,34 +859,34 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
                     li.appendChild(text);
                     li.appendChild(infoBtn);
-                    
+
                     const defSpan = document.createElement('div');
                     defSpan.id = defId;
                     defSpan.className = 'cand-def';
                     defSpan.style.marginLeft = '25px';
                     defSpan.style.marginBottom = '5px';
-                    
+
                     const isLlm = node.isLlmGenerated;
                     const sourceClass = isLlm ? 'def-source-llm' : 'def-source-ontology';
                     const sourceText = isLlm ? 'LLM Generated Description' : 'Ontology Description';
-                    
+
                     let nodeDef = node.definition;
                     if (!nodeDef || nodeDef.toLowerCase() === 'under construction') nodeDef = 'Description Unavailable';
-                    
+
                     defSpan.innerHTML = `<span class="def-source ${sourceClass}">${sourceText}</span> ${nodeDef}`;
                     li.appendChild(defSpan);
-                    
+
                     if (hasChildren) {
                         const nestedUl = createUl(node.children);
                         nestedUl.className = 'nested tree-ul';
                         li.appendChild(nestedUl);
                     }
-                    
+
                     ul.appendChild(li);
                 });
                 return ul;
             }
-            
+
             const treeContainer = document.getElementById('ontologyTree');
             treeContainer.innerHTML = '';
             const rootUl = createUl(rootsToRender);
@@ -991,13 +991,13 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                     }
                 });
             }
-            
+
             document.querySelectorAll('.tree-item').forEach(el => {
                 const termName = el.dataset.term;
                 const li = el.parentElement;
                 if (activeNodes.has(termName)) {
                     el.classList.add('selected-in-tree');
-                    
+
                     // Auto-expand ancestors
                     const nested = li.querySelector(':scope > .nested');
                     const caret = li.querySelector(':scope > .caret');
@@ -1060,7 +1060,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                     if (isAncestorOf(clickedNodeName, existing)) return false;
                     return true;
                 });
-                
+
                 const parentName = nodesByName[clickedNodeName]?.parent;
                 if (parentName) {
                     if (!userState[idx].selected.includes(parentName) && !userState[idx].manual.includes(parentName)) {
@@ -1085,7 +1085,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                     if (isAncestorOf(clickedNodeName, existing)) return false;
                     return true;
                 });
-                
+
                 if (!isFromBrowseOntology) {
                     userState[idx].selected.push(clickedNodeName);
                 } else {
@@ -1094,14 +1094,14 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                     else userState[idx].manual.push(clickedNodeName);
                 }
             }
-            
+
             // Sync tags
             const tagContainer = document.getElementById(`tags-${idx}`);
             if (tagContainer) {
                 tagContainer.innerHTML = '';
                 userState[idx].manual.forEach(t => addTagElement(tagContainer, t, idx));
             }
-            
+
             saveState();
             if (allUpdateVisuals[idx]) {
                 allUpdateVisuals[idx].forEach(cb => cb());
@@ -1115,12 +1115,12 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 selectLineage(currentTreeTaskIdx, term, true);
             }
         }
-        
+
         // --- LOGIC ---
         function handleSelection(idx, term, isChecked, element) {
             if (!userState[idx]) userState[idx] = { selected: [], manual: [], badDescription: false, notMyExpertise: false, noMatches: false, comments: "" };
             if (userState[idx].notMyExpertise || userState[idx].noMatches) return;
-            
+
             if (isChecked) {
                 userState[idx].selected.push(term);
                 element.classList.add('selected');
@@ -1159,7 +1159,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
         function addTagElement(container, term, idx) {
             const tag = document.createElement('div');
             tag.className = 'tag';
-            
+
             let pathNodes = [];
             let curr = term;
             while (curr && nodesByName[curr]) {
@@ -1169,9 +1169,9 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
             if (pathNodes.length === 0) {
                 pathNodes = [{displayName: term}];
             }
-            
+
             const nodesToRender = (SKIP_FIRST_LEVEL && pathNodes.length > 1) ? pathNodes.slice(1) : pathNodes;
-            
+
             const pathHtml = nodesToRender.map((pn, i) => {
                 if (i === nodesToRender.length - 1) return `<strong>${pn.displayName}</strong>`;
                 return pn.displayName;
@@ -1193,7 +1193,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
         function toggleFlag(idx, flagKey, btn, activeClass) {
             if (!userState[idx]) userState[idx] = { selected: [], manual: [], badDescription: false, notMyExpertise: false, noMatches: false, comments: "" };
-            
+
             // Mutual exclusivity for skip and no matches
             if (flagKey === 'noMatches' && !userState[idx].noMatches) {
                 if (userState[idx].notMyExpertise) {
@@ -1211,7 +1211,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
             userState[idx][flagKey] = !userState[idx][flagKey];
             btn.classList.toggle(activeClass);
 
-            if ((flagKey === 'notMyExpertise' && userState[idx].notMyExpertise) || 
+            if ((flagKey === 'notMyExpertise' && userState[idx].notMyExpertise) ||
                 (flagKey === 'noMatches' && userState[idx].noMatches) ||
                 (flagKey === 'badDescription' && userState[idx].badDescription)) {
                 // Clear all selections and manual terms
@@ -1240,14 +1240,14 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
         function updateProgress() {
             const total = rawPoolData.length;
-            const completed = Object.keys(userState).filter(k => 
-                (userState[k].selected && userState[k].selected.length > 0) || 
+            const completed = Object.keys(userState).filter(k =>
+                (userState[k].selected && userState[k].selected.length > 0) ||
                 (userState[k].manual && userState[k].manual.length > 0) ||
                 userState[k].notMyExpertise ||
                 userState[k].noMatches ||
                 userState[k].badDescription
             ).length;
-            
+
             const pct = Math.round((completed / total) * 100);
             document.getElementById('progressBar').style.width = pct + '%';
             document.getElementById('progressText').innerText = `${completed} / ${total} Completed`;
@@ -1264,10 +1264,10 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
             let csv = "Index,Phrase,Selected_Candidates,Selected_URIs,Manual_Terms,Toxicological_Effect_Does_Not_Make_Sense,Not_My_Expertise,Comments\\n";
             rawPoolData.forEach((item, idx) => {
                 const state = userState[idx] || { selected: [], manual: [], badDescription: false, notMyExpertise: false, noMatches: false, comments: "" };
-                
+
                 let sel = (state.selected && state.selected.length > 0) ? state.selected.join("|") : "None";
                 if (state.noMatches) sel = "-";
-                
+
                 // Map selected names to URIs
                 let selUris = "None";
                 if (state.selected && state.selected.length > 0) {
@@ -1284,10 +1284,10 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
                 if (state.noMatches) man = "-";
 
                 const comm = (state.comments) ? state.comments.replace(/"/g, '""').replace(/\\n/g, ' ') : "";
-                
+
                 const bad = state.badDescription ? 1 : 0;
                 const skip = state.notMyExpertise ? 1 : 0;
-                
+
                 // Escape quotes
                 const phrase = item.phrase.replace(/"/g, '""');
                 csv += `${idx},"${phrase}","${sel}","${selUris}","${man}","${bad}","${skip}","${comm}"\\n`;
@@ -1307,17 +1307,17 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
             const cleanName = evaluatorName.replace(/\\s+/g, '_');
             const cleanInst = evaluatorInstitution.replace(/\\s+/g, '_');
             const ontSuffix = ONTOLOGY_NAME ? `_ontology_${ONTOLOGY_NAME}` : "";
-            
+
             const zip = new JSZip();
-            
+
             // Add CSV
             const csv = getCSVContent();
             zip.file(`ToxValLlm_expert_${cleanName}_${cleanInst}${ontSuffix}.csv`, csv);
-            
+
             // Add Feedback txt always
             const feedbackText = userState.generalFeedback ? userState.generalFeedback : "";
             zip.file(`general_feedback_${cleanName}_${cleanInst}${ontSuffix}.txt`, feedbackText);
-            
+
             // Generate zip and download
             zip.generateAsync({type:"blob"}).then(function(blob) {
                 downloadFile(blob, `ToxValLlm_expert_results_${cleanName}_${cleanInst}${ontSuffix}.zip`, 'application/zip');
@@ -1326,11 +1326,11 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
 
         function sendResults() {
             exportCSV();
-            
+
             const subject = `Expert Annotation Results - ${evaluatorName}`;
             const body = `Please find attached the annotation files.\\n\\nEvaluator: ${evaluatorName}\\nInstitution: ${evaluatorInstitution}`;
             window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
+
             alert("Files downloaded. Please attach them to the email.");
         }
         function toggleDef(defId) {
@@ -1341,7 +1341,7 @@ def generate_html(pool_data, ontology_data, output_file, contact_email, context_
     </body>
     </html>
     """
-    
+
     final_html = html_template.replace("{pool_json}", pool_json)
     final_html = final_html.replace("{ontology_json}", ontology_json)
     final_html = final_html.replace("{contact_email}", contact_email)
@@ -1384,22 +1384,22 @@ if __name__ == "__main__":
     parser.add_argument("--skip_first_level", action="store_true", help="Skip the first level of the hierarchy (e.g. 'mammalian phenotype') in the UI paths.")
     parser.add_argument("--top_reranker", type=int, default=8, help="Maximum number of candidates to show from the reranker (truncates if the pool has more). (default: 8)")
     parser.add_argument("--num_phrases", type=int, default=None, help="Maximum number of phrases (toxicological effects) to include in the test. If not set, all phrases are included.")
-    
+
     args = parser.parse_args()
-    
+
     if not os.path.exists(args.input_pool):
         sys.exit(f"Error: Input pool file {args.input_pool} not found.")
     if not os.path.exists(args.ontology_db):
         sys.exit(f"Error: Ontology DB {args.ontology_db} not found.")
-        
+
     with open(args.input_pool, 'r', encoding='utf-8') as f:
         pool_data = json.load(f)
-    
+
     if args.num_phrases is not None and args.num_phrases > 0:
         pool_data = pool_data[:args.num_phrases]
-        
+
     ontology_data = load_ontology_data(args.ontology_db)
-    
+
     # helper for hierarchy
     def get_hierarchy_path(node_name, nodes_dict):
         path = []
@@ -1422,7 +1422,7 @@ if __name__ == "__main__":
         candidates.sort(key=lambda x: x.get("rerank_score", 0), reverse=True)
         # Keep top N
         top_candidates = candidates[:args.top_reranker]
-        
+
         item["candidates"] = top_candidates
 
     generate_html(pool_data, ontology_data, args.output_file, args.email, args.context_ontology, debug=args.debug, skip_first_level=args.skip_first_level)

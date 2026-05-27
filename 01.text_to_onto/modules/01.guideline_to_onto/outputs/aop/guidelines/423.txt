@@ -1,0 +1,85 @@
+cellular
+cellular > hepatotoxicity
+cellular > increased lipid accumulation
+cellular > narcosis
+cellular > pulmonary epithelial injury
+individual
+individual > abnormal behavior
+individual > abnormal foraging activity and behavior
+individual > decrease growth
+individual > decreased body weight
+individual > decreased mortality
+individual > delayed neuropathy increased
+individual > dysfunction of respiratory system
+individual > growth reduction
+individual > impaired coordination and movement
+individual > impaired development
+individual > increase body volume of female adults
+individual > increase early life stage mortality
+individual > increase mortality
+individual > increased cardiovascular dysfunction
+individual > increased epilepsy
+individual > increased incidence of respiratory disease
+individual > increased seizure
+individual > induce neuronal dysfunctions
+individual > multi organ failure involving acute respiratory distress syndrome
+individual > obesity
+individual > sudden cardiac death
+individual > systemic inflammatory response syndrome
+organ
+organ > abnormal cardiac structure and function
+organ > altered brain morphology
+organ > altered function of the brain
+organ > altered neuroanatomy
+organ > altered visual function
+organ > blood extravasation into the lungs
+organ > cardiac hypertrophy
+organ > chronic kidney disease
+organ > colon epithelial injury
+organ > dysregulation of heart rate and vascular tone
+organ > heart failure
+organ > impaired oxygenation of the blood
+organ > increase allergic respiratory hypersensitivity response
+organ > increase fat mass
+organ > increase tissue organ damage
+organ > increased ataxia paralysis or hyperactivity
+organ > increased cholestasis
+organ > increased fat mass
+organ > increased nasal lesions
+organ > increased pulmonary edema
+organ > increased tumor growth
+organ > intestinal inflammation
+organ > liver dysfunction
+organ > liver injury
+organ > lung fibrosis
+organ > n a ataxia paralysis or hyperactivity
+organ > occurrence kidney toxicity
+organ > pulmonary fibrosis
+organ > pulmonary inflammation
+organ > respiratory distress arrest
+organ > vascular calcification
+population
+population > death failure colony
+population > decreased survival
+population > increase malformations
+population > increased incidence of vascular calcification and atherosclerosis morbidity
+population > increased kidney failure
+population > increased mortality
+population > reduced survival
+tissue
+tissue > decrease vascular integrity
+tissue > hyperplasia hyperplasia
+tissue > hyperplasia mammary gland
+tissue > increase abnormal osmoregulation
+tissue > increase body fluid overload
+tissue > increase in inflammation
+tissue > increase necrosis
+tissue > increase necrotic tissue
+tissue > increased cardiac dysregulation
+tissue > increased firbrosarcoma
+tissue > increased hemagiosarcoma
+tissue > increased hyperplasia
+tissue > increased mesotheliomas
+tissue > necrosis
+tissue > necrotic tissue
+tissue > reduced fitness or even mortality acidosis hypovolemic shock and organ dysfunction

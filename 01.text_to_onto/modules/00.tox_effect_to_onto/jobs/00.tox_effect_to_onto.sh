@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --time=4-00:00:00
+#SBATCH --time=4:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
@@ -16,6 +16,14 @@ CONSENSU_RUNS=3
 MODEL="Qwen3.5-122B-A10B-FP8"
 NUM_BACKUPS=10
 EMBED_DIR="qwen"
+MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
+CODON_NODE="${1:-${CODON_NODE:-}}"
+if [ -z "$CODON_NODE" ]; then
+    echo "Error: CODON_NODE is required. Pass it as the first argument or set the CODON_NODE env variable."
+    echo "Usage: sbatch $0 <codon-node>  (e.g. sbatch $0 codon-gpu-001)"
+    exit 1
+fi
+BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
 
 JOBS_DIR="$SLURM_SUBMIT_DIR"
 REPO_ROOT="$(cd "${JOBS_DIR}/.." && pwd)"
@@ -47,11 +55,11 @@ python "${REPO_ROOT}/scripts/00.tox_effect_to_onto.py" \
     --rag_config ${RAG_CONFIG} \
     --embeddings_model_id ${EMBED_DIR} \
     --ontology_embedding_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
-    --global_definitions_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}_gpt-oss-120b.db" \
+    --global_definitions_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
     --target_embedding_db "${GIT_ROOT}/00.data_preparation/modules/01.prepare_database/outputs/embeddings_db/tox_effects_${EMBED_DIR}.db" \
     --mode ${MODE} \
-    --model_config "${REPO_ROOT}/config/models/${MODEL}.json" \
-    --base_url http://codon-gpu-001.ebi.ac.uk:8003/v1 \
+    --model_config "${MODEL_CONFIG}" \
+    --base_url "${BASE_URL}" \
     --consensus_runs ${CONSENSU_RUNS} \
     --ontology_definitions \
     --num_backups ${NUM_BACKUPS} \

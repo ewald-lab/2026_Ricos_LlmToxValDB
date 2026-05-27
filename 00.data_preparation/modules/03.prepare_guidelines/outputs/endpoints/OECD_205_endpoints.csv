@@ -1,6 +1,0 @@
-guideline_number,category,endpoint_name,requirement_level,source,footnotes
-205,Mortality,Mortality count,Required,Guideline text,"Recorded twice on day 1, daily thereafter"
-205,Clinical Observations,Signs of intoxication and abnormal behaviour,Required,Guideline text,"Includes convulsions, lethargy, unusual interactions; observed twice on day 1, daily thereafter"
-205,Body Weight,Body weight,Required,Guideline text,"Measured on day 0, 5, 8, and end of test"
-205,Food Consumption,Food consumption,Required,Guideline text,Estimated by weigh-back method per pen
-205,Statistical Analysis,LC50 value,Required,Guideline text,Determined by probit analysis or other appropriate statistical methods

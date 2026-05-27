@@ -1,0 +1,60 @@
+mammalian phenotype
+mammalian phenotype > cardiovascular system phenotype
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal skin vasculature morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal blood circulation > hemorrhage > skin hemorrhage
+mammalian phenotype > craniofacial phenotype
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology > abnormal forehead skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal outer ear morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal outer ear morphology > abnormal outer ear skin morphology
+mammalian phenotype > growth size body region phenotype
+mammalian phenotype > growth size body region phenotype > abnormal neck morphology
+mammalian phenotype > growth size body region phenotype > abnormal neck morphology > abnormal neck skin morphology
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > skin edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > phototoxicity
+mammalian phenotype > immune system phenotype
+mammalian phenotype > immune system phenotype > abnormal immune system physiology
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal adaptive immunity
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal adaptive immunity > abnormal type iv hypersensitivity reaction
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal hypersensitivity reaction
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > decreased susceptibility to chemically induced skin inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > dermatitis
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > dermatitis > erythroderma
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > dermatitis > perioral dermatitis
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > dermatitis > perioral dermatitis > periocular dermatitis
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > increased susceptibility to chemically induced skin inflammation
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal epidermal layer morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal epidermal layer morphology > epidermal desquamation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > bleb
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > blistering
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > blotchy skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > flaky skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > petechiae
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > purpura
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > reddish skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > scaly skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin lesions
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin lesions > spontaneous skin ulceration
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > tight skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > wrinkled skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition > skin rash
+mammalian phenotype > integument phenotype > abnormal skin physiology

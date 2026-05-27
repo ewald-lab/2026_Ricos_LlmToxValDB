@@ -1,0 +1,102 @@
+mammalian phenotype
+mammalian phenotype > cardiovascular system phenotype
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal eye vasculature morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal eye vasculature morphology > abnormal conjunctival vasculature morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal eye vasculature morphology > abnormal conjunctival vasculature morphology > conjunctival hyperemia
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal skin vasculature morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal heart morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardial cavity morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardial cavity morphology > pericardial edema
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial effusion
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal vasculature physiology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal vasculature physiology > abnormal blood vessel physiology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal vasculature physiology > abnormal blood vessel physiology > abnormal vascular permeability
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > abnormal vasculature physiology > abnormal blood vessel physiology > abnormal vascular permeability > increased vascular permeability
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system physiology > congestive heart failure
+mammalian phenotype > craniofacial phenotype
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal facial skin morphology > abnormal forehead skin morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal periorbital region morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal periorbital region morphology > periorbital edema
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal periorbital region morphology > periorbital edema > eyelid edema
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal periorbital region morphology > periorbital fullness
+mammalian phenotype > digestive alimentary phenotype
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal intestine morphology > intestinal edema
+mammalian phenotype > growth size body region phenotype
+mammalian phenotype > growth size body region phenotype > abnormal neck morphology
+mammalian phenotype > growth size body region phenotype > abnormal neck morphology > abnormal nuchal region morphology
+mammalian phenotype > growth size body region phenotype > abnormal neck morphology > abnormal nuchal region morphology > nuchal edema
+mammalian phenotype > growth size body region phenotype > distended abdomen
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > cardiac edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > cerebral edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > conjunctival chemosis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > extremity edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > generalized edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > generalized edema > anasarca
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > hydrops fetalis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > joint swelling
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > lymphedema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > optic nerve swelling
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > pulmonary edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > pulmonary edema > pulmonary alveolar edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > retropharyngeal edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > retropleural edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > skin edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > skin edema > epidermal spongiosis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > subcutaneous edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > effusion
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > effusion > ascites
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > effusion > pleural effusion
+mammalian phenotype > immune system phenotype
+mammalian phenotype > immune system phenotype > abnormal immune system physiology
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > abnormal acute inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > abnormal acute inflammation > increased acute inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > dermatitis
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > dermatitis > erythroderma
+mammalian phenotype > immune system phenotype > abnormal immune system physiology > abnormal inflammatory response > increased inflammatory response > skin inflammation > increased susceptibility to chemically induced skin inflammation
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > abdomen swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > eye swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > head neck swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > tail swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > teat swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > testicular swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > thorax swellings
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings > urogenital swellings
+mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal dermal layer morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > blotchy skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > petechiae
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > purpura
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > reddish skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin lesions
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition > psoriasis
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition > skin rash
+mammalian phenotype > integument phenotype > abnormal skin physiology
+mammalian phenotype > respiratory system phenotype
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology > abnormal lung size
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology > abnormal lung size > abnormal lung weight
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology > abnormal lung size > abnormal lung weight > abnormal wet to dry lung weight ratio
+mammalian phenotype > respiratory system phenotype > abnormal respiratory system morphology > abnormal lung morphology > abnormal lung size > abnormal lung weight > abnormal wet to dry lung weight ratio > increased wet to dry lung weight ratio

@@ -7,18 +7,18 @@ def get_tier(row_data, col_idx, mammal_species, chronic_types, target_units, inh
     # Basic filters
     species = row_data[col_idx['SPECIES_COMMON']]
     if species not in mammal_species: return None
-    
+
     study_type = row_data[col_idx['STUDY_TYPE']]
     if study_type == 'acute': return None
-    
+
     toxval_type = row_data[col_idx['TOXVAL_TYPE']]
     if toxval_type in excluded_types: return None
-    
+
     try:
         units = row_data[col_idx['TOXVAL_UNITS']].lower()
         dose_raw = row_data[col_idx['TOXVAL_NUMERIC']]
         dose = float(dose_raw) if dose_raw else 0
-        
+
         is_standard_unit = any(u in units for u in target_units)
         is_inhalation = any(u in units for u in inhalation_units)
         is_chronic = study_type in chronic_types
@@ -38,7 +38,7 @@ def get_tier(row_data, col_idx, mammal_species, chronic_types, target_units, inh
             # Other units (ml/kg, etc.)
             return 'B'
     except:
-        return 'B' 
+        return 'B'
 
 def main():
     parser = argparse.ArgumentParser(description="Tiered grouping of ToxVal studies by DTXSID")
@@ -51,7 +51,7 @@ def main():
 
     # Configuration
     MAMMAL_SPECIES = {
-        'Rat', 'Mouse', 'Dog', 'Monkey', 'Rabbit', 'European Rabbit', 
+        'Rat', 'Mouse', 'Dog', 'Monkey', 'Rabbit', 'European Rabbit',
         'Guinea Pig', 'Hamster', 'Pig', 'Primate', 'rodent', 'Dog Other', 'Rhesus', 'Cynomolgus',
         'Cat', 'Cow Family', 'Sheep', 'Goat', 'Ferret', 'Gerbil', 'Mink', 'Mini-pig', 'human',
         'Swine', 'Ovine', 'Caprine'
@@ -72,37 +72,37 @@ def main():
             reader = csv.reader(f)
             header = next(reader)
             col_idx = {col: i for i, col in enumerate(header)}
-            
+
             target_col = "TOXICOLOGICAL_EFFECT_LLM_CLEANED"
             if target_col not in col_idx:
                 target_col = [c for c in header if "TOXICOLOGICAL_EFFECT_LLM_CLEANED" in c][0]
-            
+
             start_effect_idx = header.index(target_col) + 1
             effect_cols = header[start_effect_idx:]
             num_effects = len(effect_cols)
             dtxsid_idx = col_idx['DTXSID']
-            
+
             count_total = 0
             count_kept = 0
-            
+
             for row in reader:
                 count_total += 1
                 dtxsid = row[dtxsid_idx]
                 if not dtxsid: continue
-                
+
                 tier = get_tier(row, col_idx, MAMMAL_SPECIES, CHRONIC_TYPES, TARGET_UNITS, INHALATION_UNITS, EXCLUDED_TYPES)
                 if not tier: continue
-                
+
                 count_kept += 1
-                
+
                 # Update findings for this compound
                 if dtxsid not in findings:
                     findings[dtxsid] = [{'A': 0, 'B': 0} for _ in range(num_effects)]
-                
+
                 for i in range(num_effects):
                     if row[start_effect_idx + i] == '1':
                         findings[dtxsid][i][tier] += 1
-                
+
                 if count_total % 20000 == 0:
                     print(f"Processed {count_total} rows... (Kept studies: {count_kept})")
 

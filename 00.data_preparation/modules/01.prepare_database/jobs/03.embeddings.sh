@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --time=24:00:00
+#SBATCH --time=4:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
@@ -9,7 +9,7 @@
 #SBATCH -J "toxval_embed_prep"
 #SBATCH -o "logs/out_embed_%A_%a.out"
 #SBATCH -e "logs/err_embed_%A_%a.err"
-#SBATCH --array=0-3%2
+#SBATCH --array=0-3
 
 MODELS_KEYS=("qwen" "nemotron" "harrier" "kalm")
 

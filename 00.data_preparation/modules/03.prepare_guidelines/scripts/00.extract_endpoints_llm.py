@@ -12,23 +12,6 @@ from tqdm import tqdm
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from scripts.model.llm import get_model
 
-def get_unique_path(directory, base_filename):
-    """
-    Returns a non-conflicting path by adding a numeric suffix if needed.
-    Example: OECD_203_report.md -> OECD_203_report_2.md
-    """
-    path = os.path.join(directory, base_filename)
-    if not os.path.exists(path):
-        return path
-    
-    name, ext = os.path.splitext(base_filename)
-    counter = 2
-    while True:
-        new_filename = f"{name}_{counter}{ext}"
-        path = os.path.join(directory, new_filename)
-        if not os.path.exists(path):
-            return path
-        counter += 1
 
 
 def parse_llm_responses(responses, guideline_number, out_dir, summary_path):
@@ -38,7 +21,7 @@ def parse_llm_responses(responses, guideline_number, out_dir, summary_path):
     merged_report = ""
     merged_endpoints_csv_rows = []
     summary_csv_row = ""
-    
+
     for i, response_text in enumerate(responses):
         # Extract markdown report
         md_match = re.search(r'```markdown\n(.*?)\n```', response_text, re.DOTALL)
@@ -68,13 +51,13 @@ def parse_llm_responses(responses, guideline_number, out_dir, summary_path):
 
     # Save merged report
     if merged_report:
-        report_path = get_unique_path(out_dir, f"OECD_{guideline_number}_report.md")
+        report_path = os.path.join(out_dir, f"OECD_{guideline_number}_report.md")
         with open(report_path, 'w') as f:
             f.write(merged_report)
-            
+
     # Save merged endpoints CSV
     if merged_endpoints_csv_rows:
-        endpoints_path = get_unique_path(out_dir, f"OECD_{guideline_number}_endpoints.csv")
+        endpoints_path = os.path.join(out_dir, f"OECD_{guideline_number}_endpoints.csv")
         with open(endpoints_path, 'w') as f:
             f.write("guideline_number,category,endpoint_name,requirement_level,source,footnotes\n")
             # Remove duplicates (simple string comparison)
@@ -90,7 +73,7 @@ def parse_llm_responses(responses, guideline_number, out_dir, summary_path):
         if not os.path.exists(summary_path):
             with open(summary_path, 'w') as f:
                 f.write(header)
-                
+
         with open(summary_path, 'a') as f:
             lines = summary_csv_row.split('\n')
             for line in lines:
@@ -108,19 +91,19 @@ def main():
     parser.add_argument("--outputs_dir", required=True, help="Directory to save outputs")
     parser.add_argument("--model_config", help="Path to model config JSON file")
 
-    
+
     args = parser.parse_args()
-    
+
     os.makedirs(args.outputs_dir, exist_ok=True)
-    
+
     # Initialize model
     if args.model_config:
         with open(args.model_config, 'r') as f:
             model_kwargs = json.load(f)
-        
+
         # Pop parameters that are not recognized by init_chat_model/OpenAI
         model_kwargs.pop("max_concurrency", 10)
-        
+
         if args.base_url:
             model_kwargs["base_url"] = args.base_url
         # Override temperature if it was fixed before or keep from config
@@ -135,21 +118,21 @@ def main():
             temperature=0.1
         )
 
-    
+
     with open(args.skill_file, 'r') as f:
         skill_prompt = f.read()
-        
+
     # Modify prompt for LLM text output instead of agent
     modified_prompt = skill_prompt + "\n\nIMPORTANT INSTRUCTIONS FOR LOCAL LLM:\n" \
                       "You are a text-based LLM. You do not have tools. Instead of creating files, " \
                       "output the content of the Markdown Report enclosed in ```markdown ... ``` blocks. " \
                       "Output the content of the Endpoints CSV enclosed in ```csv ... ``` blocks. " \
                       "Output the content of the Summary CSV row enclosed in another ```csv ... ``` block."
-    
-    summary_path = get_unique_path(args.outputs_dir, "OECD_guideline_summary.csv")
-    
+
+    summary_path = os.path.join(args.outputs_dir, "OECD_guideline_summary.csv")
+
     pdf_files = glob.glob(os.path.join(args.inputs_dir, "*.pdf"))
-    
+
     if not pdf_files:
         print(f"No PDF files found in {args.inputs_dir}. Please check the path and ensure PDFs are present.", flush=True)
         return
@@ -159,11 +142,11 @@ def main():
 
         guideline_number = filename.replace('.pdf', '')
         print(f"Processing Guideline {guideline_number}...", flush=True)
-        
+
         loader = PyPDFLoader(pdf_path)
         pages = loader.load_and_split()
         pdf_text = "\n".join([p.page_content for p in pages])
-        
+
         # Windowing logic
         chunk_size = 30000
         overlap = 2000
@@ -173,7 +156,7 @@ def main():
                 chunks.append(pdf_text[i:i + chunk_size])
         else:
             chunks = [pdf_text]
-            
+
         responses = []
         for i, chunk in enumerate(chunks):
             print(f"  Processing chunk {i+1}/{len(chunks)}...", flush=True)
@@ -183,15 +166,15 @@ def main():
                           "In this chunk, focus ONLY on extracting NEW endpoints and key observations found in this specific text. " \
                           "Output the CSV block with any NEW endpoints. " \
                           "In the Markdown report, you can omit the header/summary table and just provide the 'Key Observations' and 'Endpoints' sections."
-            
+
             prompt += f"\n\nHere is the extracted text from this part of the PDF:\n\n{chunk}"
-            
+
             try:
                 response = llm.invoke(prompt)
                 responses.append(response.content)
             except Exception as e:
                 print(f"  Error in chunk {i+1}: {e}", flush=True)
-        
+
         if responses:
             try:
                 print(f"Merging results for {guideline_number}...", flush=True)

@@ -1,0 +1,53 @@
+cellular
+cellular > narcosis
+cellular > neuronal dysfunction
+individual
+individual > abnormal behavior
+individual > abnormal foraging activity and behavior
+individual > acute inhalation toxicity
+individual > altered reproductive behaviour
+individual > cognitive function decreased
+individual > decrease growth
+individual > decreased body weight
+individual > decreased locomotion
+individual > decreased mortality
+individual > decreased viable offspring
+individual > gastrointestinal disorders
+individual > growth reduction
+individual > impaired coordination and movement
+individual > increase body mass index
+individual > increase body volume of female adults
+individual > increase early life stage mortality
+individual > increase mortality
+individual > increased appetite and hunger
+individual > increased locomotion
+individual > increased or inappropriate mantel display
+individual > increased seizure
+individual > induce neuronal dysfunctions
+individual > inhibition feeding
+individual > locomotor activity decreased
+individual > neurological disorder
+individual > obesity
+individual > reduced feeding 1
+individual > reduced spawning behavior
+individual > sudden cardiac death
+individual > viable offspring decreased
+molecular
+molecular > increased agitation
+organ
+organ > altered function of the brain
+organ > altered neurophysiology
+organ > dysgeusia
+organ > heart failure
+organ > increase fat mass
+organ > increased ataxia paralysis or hyperactivity
+organ > increased fat mass
+organ > n a ataxia paralysis or hyperactivity
+population
+population > death failure colony
+population > decline population
+population > decreased population size
+population > decreased population trajectory
+population > decreased survival
+population > increased mortality
+population > reduced survival

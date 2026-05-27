@@ -28,7 +28,7 @@ class TokenUsageCallbackHandler(BaseCallbackHandler):
                 if usage:
                     self.completion_tokens += usage.get("completion_tokens", usage.get("output_tokens", 0))
                     return
-            
+
             # Fallback to generations check
             if hasattr(response, "generations") and response.generations:
                 for gen_list in response.generations:
@@ -53,20 +53,20 @@ def clean_llm_output(message) -> str:
     import re
     import json
     text = message.content if hasattr(message, "content") else str(message)
-    
+
     # Remove <think> blocks
     text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
     if "<think>" in text:
         text = text.split("<think>")[0].strip()
-        
+
     text = text.strip()
-    
+
     # Extract JSON object if surrounded by text
     start_idx = text.find('{')
     end_idx = text.rfind('}')
     if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
         text = text[start_idx:end_idx+1]
-        
+
     # Remove code block markers
     if text.startswith("```json"):
         text = text[7:].strip()
@@ -74,10 +74,10 @@ def clean_llm_output(message) -> str:
         text = text[3:].strip()
     if text.endswith("```"):
         text = text[:-3].strip()
-        
+
     # Remove trailing commas inside JSON objects/arrays
     text = re.sub(r',\s*([\]}])', r'\1', text)
-    
+
     try:
         data = json.loads(text)
         if isinstance(data, dict):
@@ -95,7 +95,7 @@ def clean_llm_output(message) -> str:
                             elif reason_upper.startswith("REJECTED"):
                                 item["decision"] = "REJECTED"
                                 item["reason"] = re.sub(r'^rejected[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-            
+
             # Check Mode 1 CandidateEvaluation
             elif "candidate_name" in data:
                 decision = data.get("decision")
@@ -108,7 +108,7 @@ def clean_llm_output(message) -> str:
                     elif reason_upper.startswith("REJECTED"):
                         data["decision"] = "REJECTED"
                         data["reason"] = re.sub(r'^rejected[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-                        
+
         return json.dumps(data, indent=2, ensure_ascii=False)
     except Exception:
         # Fallback to the raw string if JSON parsing/fixing fails
@@ -136,7 +136,7 @@ class BatchVerificationResult(BaseModel):
     selected_candidates: List[str] = Field(description="Step 3: The final list of exact candidate names that pass the evaluation. Return an empty list [] if none match.")
 
 class TextToOntoGraph:
-    def __init__(self, categories: List[str], 
+    def __init__(self, categories: List[str],
                 ontology_db: str, system_prompt_path: str,
                 mode: int, consensus_runs: int, ontology_definitions: bool, max_concurrency: int, max_retries: int, context_ontology: str,
                 global_definitions_db: str = None):
@@ -146,27 +146,27 @@ class TextToOntoGraph:
         self.max_retries = max_retries
         self.context_ontology = context_ontology
         self._description_counter = 0
-        
+
         self.ontology_db = ontology_db
-        
+
         self.ontology_embeddings = load_ontology_embeddings(self.ontology_db)
         self.mode = mode
         self.consensus_runs = consensus_runs
         self.max_concurrency = max_concurrency
-        
+
         self.nodes = {}
         self.parent_map = {}
         self.prompt_map = {}
-        
+
         # URI to name map for global definitions
         self._uri_to_name = {}
-        
+
         for item in self.ontology_embeddings:
             name = item['name']
             uri = item.get('uri')
             if uri:
                 self._uri_to_name[str(uri)] = name
-                
+
             self.nodes[name] = {
                 'sanitized_name': item['sanitized_name'],
                 'parent': item.get('parent'),
@@ -204,12 +204,12 @@ class TextToOntoGraph:
             self.system_prompt_content += f"\n\nContext about the ontology:\n{self.context_ontology}"
 
         self.parser = PydanticOutputParser(pydantic_object=CandidateEvaluation)
-        
+
         user_prompt = "Description: {description}\nCandidate to evaluate: {candidate_name}"
         user_prompt += "\nCandidate Hierarchy: {candidate_hierarchy}"
         if self.ontology_definitions:
             user_prompt += "\nCandidate Definition: {candidate_definition}"
-            
+
         system_suffix_mode1 = (
             "\n\n{format_instructions}\n\n"
             "*** CRITICAL INSTRUCTION ***\n"
@@ -268,10 +268,10 @@ class TextToOntoGraph:
         self._mode1_prompt = self.prompt_template
         self._mode1_prompt_clarified = self.prompt_template_clarified
         self._mode1_format_instructions = self.parser.get_format_instructions()
-        
+
         self._mode2_parser = PydanticOutputParser(pydantic_object=BatchVerificationResult)
         self._mode2_format_instructions = self._mode2_parser.get_format_instructions()
-        
+
         # Precompute constants and runners
         self.consensus_threshold = 1 if self.consensus_runs == 2 else (self.consensus_runs // 2) + 1
         self._clean_llm_runner = RunnableLambda(clean_llm_output)
@@ -307,17 +307,17 @@ class TextToOntoGraph:
             raise ValueError("direct_candidates must be provided in this evaluation pipeline.")
 
         # Optimization: return only hits to avoid massive dictionaries in memory
-        results = {} 
+        results = {}
         reasoning_trace = []
         selected_candidates = []
-        
+
         # Instantiate token usage tracker
         handler = TokenUsageCallbackHandler()
 
         # Build the evaluation chains (LangChain) dynamically with the provided llm
         chain = self._mode1_prompt | llm | self._clean_llm_runner | self.parser
         chain_clarified = self._mode1_prompt_clarified | llm | self._clean_llm_runner | self.parser
-        
+
         # Bypass RAG and Reranker
         top_k_candidates = []
         for name in direct_candidates:
@@ -328,7 +328,7 @@ class TextToOntoGraph:
                 if matched_name:
                     name = matched_name
                     node_info = self.nodes.get(name)
-            
+
             if node_info:
                 top_k_candidates.append({
                     'name': name,
@@ -353,29 +353,29 @@ class TextToOntoGraph:
         verified_nodes = set()
         evaluated_nodes = set()
         threshold = self.consensus_threshold
-        
+
         current_candidates = top_k_candidates
         iteration = 1
-        
+
         while current_candidates:
             batch_inputs = []
             batch_metadata = []
             valid_candidates = []
-            
+
             for idx, cand in enumerate(current_candidates):
                 name = cand['name']
                 if name not in self.nodes or name in verified_nodes or name in evaluated_nodes:
                     continue
-                
+
                 evaluated_nodes.add(name)
                 node_data = self.nodes[name]
                 node_sanitized_name = node_data.get('sanitized_name', name)
-                
+
                 if self.ontology_definitions and name not in self.prompt_map:
                     logger.warning(f"Definition for node '{name}' not found")
-                
+
                 valid_candidates.append((idx, cand))
-                
+
                 for run_i in range(self.consensus_runs):
                     ctx = {
                         "description": description,
@@ -387,14 +387,14 @@ class TextToOntoGraph:
                         ctx["candidate_definition"] = self.prompt_map.get(name, "No definition available.")
                     batch_inputs.append(ctx)
                     batch_metadata.append({"name": name, "run_i": run_i, "idx": idx, "cand": cand})
-            
+
             if not valid_candidates:
                 break
-                
+
             batch_results_all = [None] * len(batch_inputs)
             if batch_inputs:
                 batch_results_all = chain.batch(batch_inputs, config={"max_concurrency": self.max_concurrency, "callbacks": [handler]}, return_exceptions=True)
-            
+
             for i, result in enumerate(batch_results_all):
                 if isinstance(result, Exception):
                     meta = batch_metadata[i]
@@ -406,17 +406,17 @@ class TextToOntoGraph:
                         except Exception as retry_e:
                             if retry == self.max_retries - 1:
                                 logger.warning(f"Node {meta['name']} Run {meta['run_i']+1}: All {self.max_retries} retries failed - {retry_e}")
-            
+
             candidate_votes = {}
             candidate_reasoning = {}
             for i, meta in enumerate(batch_metadata):
                 name = meta["name"]
                 run_i = meta["run_i"]
-                
+
                 if name not in candidate_votes:
                     candidate_votes[name] = 0
                     candidate_reasoning[name] = []
-                
+
                 result = batch_results_all[i]
                 if isinstance(result, Exception):
                     candidate_reasoning[name].append(f"Run {run_i+1}: Parse error")
@@ -428,16 +428,16 @@ class TextToOntoGraph:
                     candidate_reasoning[name].append(f"Run {run_i+1}: {result.decision} - {reason_clean}")
                 else:
                     candidate_reasoning[name].append(f"Run {run_i+1}: Error")
-            
+
             next_round_candidates_map = {}
-            
+
             for idx, cand in valid_candidates:
                 name = cand['name']
                 yes_votes = candidate_votes.get(name, 0)
                 accumulated_reasoning = candidate_reasoning.get(name, [])
                 status = "ACCEPTED" if yes_votes >= threshold else "REJECTED"
                 iter_prefix = f"[Iter {iteration}] " if iteration > 1 else ""
-                
+
                 reasoning_trace.append({
                     "candidate": name,
                     "decision": status,
@@ -445,7 +445,7 @@ class TextToOntoGraph:
                     "source": cand['source'],
                     "runs": accumulated_reasoning
                 })
-                
+
                 if yes_votes >= threshold:
                     curr = name
                     while curr:
@@ -468,7 +468,7 @@ class TextToOntoGraph:
                                     'source': f'superior of : {name}',
                                     'ann_score': 0.0
                                 }
-            
+
             current_candidates = list(next_round_candidates_map.values())
             iteration += 1
 
@@ -476,15 +476,15 @@ class TextToOntoGraph:
             "avg_completion_tokens": handler.avg_completion_tokens
         }
         return results, reasoning_trace, sorted(results.keys()), token_usage
-    
+
     def _execute_mode_2(self, llm, description: str, top_k_candidates: List[Dict], direct_candidates: List[str] = None, handler=None):
         """Executes batch verification using the BatchVerificationResult model."""
         results = {}
         reasoning_trace = []
-        
+
         verified_nodes = set()
         evaluated_nodes = set()
-        
+
         current_candidates = top_k_candidates
         iteration = 1
 
@@ -494,27 +494,27 @@ class TextToOntoGraph:
         # Build the chains once
         base_chain = self._mode2_prompt | llm | self._clean_llm_runner | self._mode2_parser
         base_chain_clarified = self._mode2_prompt_clarified | llm | self._clean_llm_runner | self._mode2_parser
-        
+
         final_selection_with_info = []
-        
+
         while current_candidates:
             filtered_candidates = []
             for c in current_candidates:
                 if c['name'] not in evaluated_nodes and c['name'] not in verified_nodes:
                     filtered_candidates.append(c)
-            
+
             if not filtered_candidates:
                 break
-                
+
             candidates = filtered_candidates
             for c in candidates:
                 evaluated_nodes.add(c['name'])
-                
+
             candidate_names = [c['name'] for c in candidates]
             # O(1) position lookup instead of O(n) list.index() in the logging loop
             candidate_pos = {name: i + 1 for i, name in enumerate(candidate_names)}
             total_cands = len(candidate_names)
-            
+
             s2n = {}
             s_names = []
             for c in candidates:
@@ -523,7 +523,7 @@ class TextToOntoGraph:
                 s_name = node_data.get('sanitized_name', name)
                 s2n[s_name] = name
                 s_names.append(s_name)
-                
+
             candidate_strings = []
             for s_name, c in zip(s_names, candidates):
                 cand_str = f"- {s_name}"
@@ -531,13 +531,13 @@ class TextToOntoGraph:
                 if self.ontology_definitions:
                     cand_str += f": {self.prompt_map.get(c['name'], c.get('def', ''))}"
                 candidate_strings.append(cand_str)
-                
+
             candidates_str = "\n".join(candidate_strings)
- 
+
             chain = base_chain
             threshold = self.consensus_threshold
             candidate_votes = {name: 0 for name in candidate_names}
- 
+
             invoke_inputs = [
                 {
                     "description": description,
@@ -546,10 +546,10 @@ class TextToOntoGraph:
                 }
                 for _ in range(self.consensus_runs)
             ]
-            
+
             try:
                 batch_results = chain.batch(invoke_inputs, config={"max_concurrency": self.max_concurrency, "callbacks": [handler]}, return_exceptions=True)
-                
+
                 for i, result in enumerate(batch_results):
                     if isinstance(result, Exception):
                         for retry in range(self.max_retries):
@@ -560,7 +560,7 @@ class TextToOntoGraph:
                             except Exception as retry_e:
                                 if retry == self.max_retries - 1:
                                     logger.warning(f"Mode 2 Iter {iteration} Run {i+1}: All {self.max_retries} retries failed - {retry_e}")
-                
+
                 for run_i, result in enumerate(batch_results):
                     if isinstance(result, Exception):
                         continue
@@ -569,7 +569,7 @@ class TextToOntoGraph:
                         candidate_name_map[c['name'].strip().rstrip(':')] = c
                         if 'sanitized_name' in c:
                             candidate_name_map[c['sanitized_name'].strip().rstrip(':')] = c
-                    
+
                     for selected in result.selected_candidates:
                         clean_selected = selected.strip().rstrip(':')
                         matched_s_name = s2n.get(clean_selected)
@@ -579,16 +579,16 @@ class TextToOntoGraph:
                             candidate_votes[clean_selected] += 1
             except Exception as e:
                 logger.error(f"Mode 2 Iter {iteration} batch execution failed: {e}")
-            
+
             final_selected_names = [name for name, votes in candidate_votes.items() if votes >= threshold]
             rejected_names = [name for name, votes in candidate_votes.items() if votes < threshold]
-            
+
             iter_prefix = f"[Iter {iteration}] " if iteration > 1 else ""
             for name, votes in candidate_votes.items():
                 pos = candidate_pos[name]
                 status = "ACCEPTED" if votes >= threshold else "REJECTED"
                 reasoning_trace.append(f"{iter_prefix}- {name} ({pos}/{total_cands}): {votes} votes -> {status}")
-            
+
             for selected in final_selected_names:
                 curr = selected
                 while curr:
@@ -598,12 +598,12 @@ class TextToOntoGraph:
                     if curr in self.categories:
                         results[curr] = 1 # Store only hits
                     curr = self.parent_map.get(curr)
-            
+
             for name in final_selected_names:
                  cand_obj = next((c for c in candidates if c['name'] == name), None)
                  source = cand_obj['source'] if cand_obj else "unknown"
                  final_selection_with_info.append(f"{name} ({source})")
-            
+
             next_round_candidates_map = {}
             if self.include_superiors and direct_candidates is None:
                 for name in rejected_names:
@@ -618,7 +618,7 @@ class TextToOntoGraph:
                                 'source': f'superior_of_{name}',
                                 'ann_score': 0.0
                             }
-            
+
             current_candidates = list(next_round_candidates_map.values())
             iteration += 1
 

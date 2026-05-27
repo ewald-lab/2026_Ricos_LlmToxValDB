@@ -1,0 +1,43 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+203,Mortality,Mortality count,Required,Guideline text,Fish considered dead if no gill movement and no reaction to caudal peduncle touch.
+203,Clinical Signs,"Visible abnormalities (equilibrium, appearance, ventilation, swimming)",Required,Guideline text,Must be recorded at minimum 2 times in first 24h, then twice daily.
+203,Clinical Signs,"Sublethal clinical signs (Annex 4 list)",Optional,Guideline text,Voluntary reporting recommended to improve prediction of toxicity.
+203,Environmental Parameters,Dissolved oxygen concentration,Required,Guideline text,Must be ≥60% air saturation throughout exposure. Measured daily.
+203,Environmental Parameters,pH,Required,Guideline text,Measured daily. Range 6.0-8.5 preferred.
+203,Environmental Parameters,Temperature,Required,Guideline text,Must not vary >2°C between vessels/days. Measured daily (preferably continuously).
+203,Environmental Parameters,Salinity,Required,Guideline text,Measured daily if relevant (estuarine/marine species).
+203,Chemical Analysis,Test chemical concentration,Required,Guideline text,Analytical measurement of highest, lowest, and LC50-range concentrations is compulsory.
+203,Fish Measurements,"Wet weight and total length",Required,Guideline text,Measured on subsample of 10 fish prior to exposure.
+203,Clinical Observations,Mortality (cumulative at 24, 48, 72, 96 hours),Required,Guideline text,"Primary endpoint for LC50 calculation"
+203,Clinical Observations,Mortality in control(s),Required,Guideline text,
+203,Clinical Observations,Visible abnormalities (clinical signs),Required,Guideline text,"As listed in Annex 4, Table 1"
+203,Clinical Observations,Loss of equilibrium (abnormal horizontal/vertical orientation),Optional,Guideline text,"Sub-category of visible abnormalities; voluntary recording encouraged"
+203,Clinical Observations,Loss of buoyancy control,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Hypoactivity,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Hyperactivity,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Corkscrew swimming,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Convulsions,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Tetany,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Irritated skin behaviours,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Abnormal surface distribution/behaviour,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Abnormal bottom distribution/behaviour,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Over-reactive to stimulus,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Under-reactive to stimulus,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Loss of schooling/shoaling behaviour,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Dense schooling/shoaling behaviour,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Hyperventilation,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Hypoventilation,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Irregular ventilation,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Coughing,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Gulping,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Head shaking,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Darkened/Lightened/Mottled pigmentation,Optional,Guideline text,"Sub-categories of visible abnormalities"
+203,Clinical Observations,Exophthalmia,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Oedema,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Haemorrhage,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Mucus secretion,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Faecal (anal) casts,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Clinical Observations,Aggression and/or cannibalism,Optional,Guideline text,"Sub-category of visible abnormalities"
+203,Statistical Analysis,LC50 value (with 95% confidence limits),Required,Guideline text,"If possible based on data"
+203,Statistical Analysis,Slope of concentration-response curve,Optional,Guideline text,"If possible"
+203,Statistical Analysis,Graph of concentration-mortality curve,Optional,Guideline text,"If possible"

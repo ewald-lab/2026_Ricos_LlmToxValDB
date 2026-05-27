@@ -27,10 +27,10 @@ def main():
     print(f"  Effects meeting minimum 5 cases: {len(keep_cols)}")
 
     df_filtered = df[keep_cols]
-    
+
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    
+
     df_filtered.to_csv(output_file)
     print(f"Saved to {output_file}")
 

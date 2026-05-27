@@ -1,0 +1,21 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+440,Organ Weights,Uterine weight (absolute and relative),Required,Guideline text,Primary endpoint; assessed 24h after last dose.
+440,Clinical Observations,Body weight,Required,Guideline text,Critical for immature model correlation; variation should not exceed ±20%.
+440,Clinical Observations,Clinical signs of toxicity/distress,Required,Guideline text,Observed daily during the 3-day administration period.
+440,Histopathology,Vaginal keratinization/cornification,Optional,Guideline text,Used to analyze the possible origin of the response (e.g., distinguishing oestrogenic vs. other mechanisms).
+440,Clinical Observations,Mortality monitoring,Required,Guideline text,
+440,Clinical Observations,Morbidity monitoring,Required,Guideline text,
+440,Clinical Observations,Behavioural changes,Required,Guideline text,
+440,Clinical Observations,Skin and fur condition,Required,Guideline text,
+440,Clinical Observations,Eye and mucous membrane condition,Required,Guideline text,
+440,Clinical Observations,Secretions and excretions,Required,Guideline text,
+440,Clinical Observations,Autonomic activity (lacrimation, piloerection, pupil size, respiratory pattern),Required,Guideline text,
+440,Body Weight,Daily body weight,Required,Guideline text,Measured to nearest 0.1 g
+440,Food Consumption,Daily food consumption per cage,Optional,Guideline text,Expressed as grams per rat per day
+440,Uterine Weight,Wet uterine weight,Required,Guideline text,Measured to nearest 0.1 mg including luminal fluid
+440,Uterine Weight,Blotted uterine weight,Required,Guideline text,Measured to nearest 0.1 mg after removal of luminal fluid
+440,Vaginal Status,Vaginal opening status,Required,Guideline text,Examined before dissection in immature animals
+440,Histopathology,Uterus histopathology (H&E),Optional,Guideline text,Fixed in 10% neutral buffered formalin
+440,Histopathology,Vagina histopathology,Optional,Guideline text,Fixed in 10% neutral buffered formalin
+440,Histopathology,Morphometric measurement of endometrial epithelium,Optional,Guideline text,For quantitative comparison
+440,Necropsy,Ovarian stub examination,Required,Guideline text,Check for presence of ovarian tissue in OVX animals

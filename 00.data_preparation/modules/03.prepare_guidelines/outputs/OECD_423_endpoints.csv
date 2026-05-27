@@ -1,0 +1,6 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+423,Clinical Observations,General clinical signs (skin, fur, eyes, mucous membranes, CNS, etc.),Required,Guideline text,"Includes specific monitoring for tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma."
+423,Body Weight,Individual body weight,Required,Guideline text,Determined shortly before dosing, at least weekly thereafter, and at death/sacrifice.
+423,Gross Pathology,Gross necropsy findings,Required,Guideline text,All animals must be subjected to gross necropsy; all changes recorded.
+423,Histopathology,Microscopic examination of affected organs,Optional,Guideline text,"Only for organs showing gross pathology in animals surviving >24h; 'may also be considered'."
+423,Mortality,Time of death / Moribund status,Required,Guideline text,Critical endpoint for classification; time of death recorded precisely.

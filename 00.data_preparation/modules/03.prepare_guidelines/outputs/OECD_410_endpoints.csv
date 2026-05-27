@@ -1,0 +1,41 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+410,Clinical Observations,"Skin and fur changes",Required,Guideline text,
+410,Clinical Observations,"Eyes and mucous membranes changes",Required,Guideline text,
+410,Clinical Observations,"Respiratory/Circulatory/Autonomic/CNS effects",Required,Guideline text,
+410,Clinical Observations,"Somatomotor activity and behaviour",Required,Guideline text,
+410,Clinical Observations,"Food consumption",Required,Guideline text,Weekly
+410,Clinical Observations,"Body weight",Required,Guideline text,Weekly
+410,Haematology,"Haematocrit",Required,Guideline text,
+410,Haematology,"Haemoglobin concentration",Required,Guideline text,
+410,Haematology,"Erythrocyte count",Required,Guideline text,
+410,Haematology,"Total and differential leucocyte count",Required,Guideline text,
+410,Haematology,"Clotting potential (time/count)",Required,Guideline text,"e.g., prothrombin time, platelet count"
+410,Clinical Biochemistry,"Calcium",Required,Guideline text,
+410,Clinical Biochemistry,"Phosphorus",Required,Guideline text,
+410,Clinical Biochemistry,"Chloride",Required,Guideline text,
+410,Clinical Biochemistry,"Sodium",Required,Guideline text,
+410,Clinical Biochemistry,"Potassium",Required,Guideline text,
+410,Clinical Biochemistry,"Fasting glucose",Required,Guideline text,"With fasting appropriate to species"
+410,Clinical Biochemistry,"ALT (Serum glutamic-pyruvic transaminase)",Required,Guideline text,
+410,Clinical Biochemistry,"AST (Serum glutamic-oxaloacetic transaminase)",Required,Guideline text,
+410,Clinical Biochemistry,"Ornithine decarboxylase",Required,Guideline text,
+410,Clinical Biochemistry,"Gamma glutamyl transpeptidase",Required,Guideline text,
+410,Clinical Biochemistry,"Urea nitrogen",Required,Guideline text,
+410,Clinical Biochemistry,"Albumen",Required,Guideline text,
+410,Clinical Biochemistry,"Blood creatinine",Required,Guideline text,
+410,Clinical Biochemistry,"Total bilirubin",Required,Guideline text,
+410,Clinical Biochemistry,"Total serum protein",Required,Guideline text,
+410,Clinical Biochemistry,"Lipids",Optional,Guideline text,"Where necessary for adequate evaluation"
+410,Clinical Biochemistry,"Hormones",Optional,Guideline text,"Where necessary for adequate evaluation"
+410,Clinical Biochemistry,"Acid/base balance",Optional,Guideline text,"Where necessary for adequate evaluation"
+410,Clinical Biochemistry,"Methaemoglobin",Optional,Guideline text,"Where necessary for adequate evaluation"
+410,Clinical Biochemistry,"Cholinesterase activity",Optional,Guideline text,"Where necessary for adequate evaluation"
+410,Organ Weights,"Liver",Required,Guideline text,Wet weight
+410,Organ Weights,"Kidneys",Required,Guideline text,Wet weight
+410,Organ Weights,"Adrenals",Required,Guideline text,Wet weight
+410,Organ Weights,"Testes",Required,Guideline text,Wet weight
+410,Histopathology,"Skin (normal and treated)",Required,Guideline text,Preserved for future exam
+410,Histopathology,"Liver",Required,Guideline text,Preserved for future exam
+410,Histopathology,"Kidney",Required,Guideline text,Preserved for future exam
+410,Histopathology,"Target organs (gross lesions/size change)",Required,Guideline text,Preserved for future exam
+410,Urinalysis,"Urinalysis parameters",Optional,Guideline text,"Only when indicated by expected/observed toxicity"

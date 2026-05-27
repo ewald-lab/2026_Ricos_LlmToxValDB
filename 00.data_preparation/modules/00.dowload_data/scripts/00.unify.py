@@ -8,9 +8,9 @@ def main():
     parser = argparse.ArgumentParser(description="Unify ToxValDB Excel files into a single TSV.")
     parser.add_argument("output_path", help="Full path for the output TSV file (e.g., outputs/ToxValDB_Unified.tsv)")
     parser.add_argument("--input_folder", default="Data Excel Files", help="Folder containing the Excel files (default: 'Data Excel Files')")
-    
+
     args = parser.parse_args()
-    
+
     output_file = args.output_path
     input_folder = args.input_folder
 
@@ -37,11 +37,11 @@ def main():
         try:
             # Read Excel file
             # dtype=str ensures CAS numbers or special codes are not corrupted
-            df = pd.read_excel(f, dtype=str) 
-            
+            df = pd.read_excel(f, dtype=str)
+
             # Add source filename column for traceability
             df['source_filename'] = os.path.basename(f)
-            
+
             all_data.append(df)
         except Exception as e:
             print(f"⚠️ ERROR reading {f}: {e}")
@@ -50,7 +50,7 @@ def main():
     if all_data:
         print("--> Concatenating all tables (this may take a while)...")
         final_df = pd.concat(all_data, ignore_index=True)
-        
+
         # Ensure output directory exists
         output_dir = os.path.dirname(output_file)
         if output_dir and not os.path.exists(output_dir):
@@ -60,7 +60,7 @@ def main():
         print(f"--> Writing {len(final_df)} rows to {output_file}...")
         # Using TSV (tab-separated values) as it's safer for chemical data than CSV
         final_df.to_csv(output_file, sep='\t', index=False)
-        
+
         print("SUCCESS! File created correctly.")
     else:
         print("No data could be processed.")

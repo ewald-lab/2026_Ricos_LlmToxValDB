@@ -23,8 +23,8 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 # --- Arguments ---
-INPUT_DIR="${1:-${REPO_ROOT}/outputs/endpoints}"
-OUTPUT_DIR="${2:-${REPO_ROOT}/outputs/endpoints}"
+INPUT_DIR="${1:-${REPO_ROOT}/outputs}"
+OUTPUT_DIR="${2:-${REPO_ROOT}/outputs}"
 
 # --- Environment Setup ---
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then

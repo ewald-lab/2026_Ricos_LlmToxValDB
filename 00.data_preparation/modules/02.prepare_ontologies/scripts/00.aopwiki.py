@@ -25,15 +25,15 @@ class TextUtils:
         text = re.sub(r'\s+', ' ', text)
         text = re.sub(r'(?<=[.\]])(?=[A-Z])', ' ', text)
         return text.strip()
-    
+
     @staticmethod
     def format_class_name(text: str) -> str:
         clean = text.strip().replace(" ", "_").replace("-", "_")
         clean = re.sub(r'[^\w_]', '', clean)
-        
+
         if clean and clean[0].isdigit():
             clean = f"Event_{clean}"
-            
+
         return clean
 
 class AopScraper:
@@ -42,7 +42,7 @@ class AopScraper:
     def __init__(self):
         self.session = requests.Session()
         self.session.verify = False
-        
+
         # Add retry strategy for robustness
         retries = Retry(total=5, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
         self.session.mount('https://', HTTPAdapter(max_retries=retries))
@@ -53,12 +53,12 @@ class AopScraper:
             print("Fetching event catalog JSON...")
             response = self.session.get(f"{self.BASE_URL}/events.json")
             response.raise_for_status()
-            
+
             data = response.json()
-            
+
             with open("events_catalog_raw.json", "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
-                
+
             return data
         except Exception as e:
             print(f"Error fetching catalog: {e}")
@@ -69,7 +69,7 @@ class AopScraper:
         try:
             response = self.session.get(url)
             soup = BeautifulSoup(response.text, "html.parser")
-            
+
             header = soup.find(lambda t: t.name == "h2" and "Key Event Description" in t.get_text())
             if not header:
                 return ""
@@ -106,7 +106,7 @@ class AopWorkflow:
             org_info = item.get("biological_organization") or {}
             term = org_info.get("term", "Unknown")
             stats[term] += 1
-            
+
         print(f"Found {len(stats)} distinct groups:")
         for term, count in stats.most_common():
             print(f"  - {term}: {count} events")
@@ -129,7 +129,7 @@ class AopWorkflow:
 
             print(f"[{i}/{total_events}] Processing ID {event_id} [{term}]...")
             description = self.scraper.fetch_event_description(event_id)
-            
+
             event_obj = EventData(id=event_id, title=title, description=description)
             self.organized_events[term].append(event_obj)
 
@@ -138,16 +138,16 @@ class AopWorkflow:
         try:
             with open(filename, "r", encoding="utf-8") as f:
                 raw_data = json.load(f)
-            
+
             count = 0
             for term, events_list in raw_data.items():
                 for event_dict in events_list:
                     event_obj = EventData(**event_dict)
                     self.organized_events[term].append(event_obj)
                     count += 1
-            
+
             print(f"Successfully loaded {count} events across {len(self.organized_events)} categories.")
-            
+
         except FileNotFoundError:
             print(f"Error: File '{filename}' not found. Please check the path.")
         except Exception as e:
@@ -166,13 +166,13 @@ class AopWorkflow:
             return
 
         print(f"\nGenerating Ontology '{filename}'...")
-        
+
         onto = get_ontology("http://aopwiki.org/ontology#")
 
         with onto:
             class has_description(AnnotationProperty):
                 pass
-            
+
             class has_aop_id(AnnotationProperty):
                 pass
 
@@ -182,22 +182,22 @@ class AopWorkflow:
                     continue
 
                 parent_name = TextUtils.format_class_name(group_term)
-                if not parent_name: 
+                if not parent_name:
                     continue
 
                 ParentClass = types.new_class(parent_name, (Thing,))
-                
+
                 print(f"  > Processing Group: {parent_name}")
 
                 for event in events:
                     safe_title = TextUtils.format_class_name(event.title)
                     class_name = f"{safe_title}_{event.id}"
-                    
+
                     EventClass = types.new_class(class_name, (ParentClass,))
-                    
+
                     EventClass.label.append(event.title)
                     EventClass.has_aop_id.append(event.id)
-                    
+
                     if event.description:
                         clean_desc = event.description.replace("\x00", "")
                         EventClass.has_description.append(clean_desc)
@@ -207,11 +207,11 @@ class AopWorkflow:
 
 if __name__ == "__main__":
     workflow = AopWorkflow()
-    
+
     # --- FLUJO 1: DESCARGA (Solo ejecutar si no tienes el JSON) ---
     workflow.run()
     workflow.save_to_json("events_with_descriptions.json")
-    
+
     # --- FLUJO 2: GENERACIÓN OWL (Cargar local -> Filtrar -> OWL) ---
     workflow.load_from_json("events_with_descriptions.json")
     workflow.save_to_owl("aop_events_hierarchy.owl")

@@ -1,0 +1,244 @@
+cellular
+cellular > delay ovarian maturation
+cellular > disrupted initiation of meiosis of oogonia in the ovary
+cellular > endometrial squamous metaplasia increase
+cellular > endothelial cell death
+cellular > formation mallory body
+cellular > granulosa cell damage
+cellular > granulosa cell proliferation of gonadotropin independent follicles reduced
+cellular > hepatotoxicity
+cellular > hyperplasia ovarian stromal cells
+cellular > hypertrophy hyperplasia smooth muscle
+cellular > increase cell injury death
+cellular > increase hyperplasia
+cellular > increase mucin production
+cellular > increase necrosis
+cellular > increase oocyte apoptosis
+cellular > increase ovarian somatic cell apoptosis
+cellular > increase preneoplastic foci
+cellular > increased exocrine secretion from pancreatic acinar cells
+cellular > increased hyperplasia
+cellular > increased hypertrophy and proliferation
+cellular > malignant transformation of cells
+cellular > narcosis
+cellular > neuronal dysfunction
+cellular > occurrence cytoplasmic vacuolization
+cellular > promotion ovarian granular cell tumors
+cellular > pulmonary epithelial injury
+cellular > reduction in melanin level
+cellular > reduction vitellogenin accumulation into oocytes and oocyte growth development
+cellular > squamous metaplasia increase
+cellular > urothelial cell injury death
+individual
+individual > abnormal behavior
+individual > abnormal foraging activity and behavior
+individual > altered reproductive behaviour
+individual > autism like behavior
+individual > cognitive function decreased
+individual > decrease growth
+individual > decrease lung function
+individual > decreased anxiety
+individual > decreased body weight
+individual > decreased locomotion
+individual > decreased mortality
+individual > decreased reward
+individual > decreased seizure
+individual > decreased sheltering
+individual > decreased viable offspring
+individual > delayed sexual maturity
+individual > disrupted ovarian cycle
+individual > dysfunction of respiratory system
+individual > gastrointestinal disorders
+individual > growth reduction
+individual > impaired coordination and movement
+individual > impaired development
+individual > impaired development of reproductive organs
+individual > impaired learning and memory
+individual > impaired lung function
+individual > impaired thoracic shivering
+individual > impairment learning and memory
+individual > increase body mass index
+individual > increase body volume of female adults
+individual > increase defects in tanning of new cuticle
+individual > increase early life stage mortality
+individual > increase incomplete ecdysis
+individual > increase mortality
+individual > increase pigmentation
+individual > increase preeclampsia
+individual > increase pulmonate breathing
+individual > increase seizure
+individual > increased appetite and hunger
+individual > increased cardiovascular dysfunction
+individual > increased depression
+individual > increased disease susceptibility
+individual > increased energetic demands and therefore metabolic stress
+individual > increased epilepsy
+individual > increased incidence of respiratory disease
+individual > increased locomotion
+individual > increased nephropathy
+individual > increased or inappropriate mantel display
+individual > increased seizure
+individual > induce neuronal dysfunctions
+individual > inhibit agitation
+individual > inhibition feeding
+individual > interruption ovulation
+individual > locomotor activity decreased
+individual > memory loss
+individual > metabolically unhealthy obesity
+individual > mucociliary clearance decreased
+individual > multi organ failure involving acute respiratory distress syndrome
+individual > n a cyanosis occurs
+individual > n a sedation
+individual > neurological disorder
+individual > obesity
+individual > parkinsonian motor deficits
+individual > reduced spawning behavior
+individual > reduction fo pigmentation pattern
+individual > sexual behavior decreased
+individual > sudden cardiac death
+individual > systemic inflammatory response syndrome
+individual > thrombosis and disseminated intravascular coagulation
+individual > viable offspring decreased
+molecular
+molecular > increase mucous
+molecular > increased agitation
+molecular > metaplasia of goblet cells
+organ
+organ > abnormal cardiac structure and function
+organ > altered brain morphology
+organ > altered function of the brain
+organ > altered neuroanatomy
+organ > altered neurophysiology
+organ > altered visual function
+organ > blood extravasation into the lungs
+organ > cardiac hypertrophy
+organ > chronic kidney disease
+organ > colon epithelial injury
+organ > decrease new cuticle secretion
+organ > decrease of neuronal network function
+organ > decrease oogenesis
+organ > decreased oocyte maturation
+organ > decreased size of the ovarian reserve
+organ > dysregulation of heart rate and vascular tone
+organ > eczematous eruption
+organ > emphysema
+organ > encephalitis
+organ > heart failure
+organ > hypersecretion mucus
+organ > immune mediated hepatitis
+organ > impaired olfactory function
+organ > impaired ovulation
+organ > impaired oxygenation of the blood
+organ > increase fat mass
+organ > increase follicular atresia
+organ > increase liver and splenic hemosiderosis
+organ > increase ovarian follicle breakdown
+organ > increase pneumonia
+organ > increase renal pathology due to vtg deposition
+organ > increase the risk of acute respiratory failure
+organ > increase tissue organ damage
+organ > increased ataxia paralysis or hyperactivity
+organ > increased cardiac fibrosis
+organ > increased cardiac stress
+organ > increased cardiovascular fibrosis
+organ > increased cholestasis
+organ > increased fat mass
+organ > increased liver steatosis
+organ > increased nasal lesions
+organ > increased oocyte maturation
+organ > increased pulmonary edema
+organ > increased renal vitellogenin deposition
+organ > increased respiratory irritability and chronic cough
+organ > inflamatory events in light exposed tissues
+organ > inflammation liver
+organ > intestinal barrier disruption
+organ > intestinal inflammation
+organ > liver dysfunction
+organ > liver injury
+organ > loss of olfactory function
+organ > lung fibrosis
+organ > microcephaly
+organ > mucus viscosity increased
+organ > myocardial infarction
+organ > n a ataxia paralysis or hyperactivity
+organ > n a liver steatosis
+organ > n a steatohepatisis
+organ > neurodegeneration
+organ > occurrence abnormal vascular remodeling
+organ > occurrence cardiac arrhythmia
+organ > occurrence cytoplasmic vacuolization
+organ > occurrence kidney toxicity
+organ > occurrence of cataracts
+organ > ovarian retardation
+organ > premature ovarian insufficiency
+organ > promotion ovarian cancer
+organ > pulmonary fibrosis
+organ > pulmonary inflammation
+organ > reduced hearing
+organ > respiratory distress arrest
+organ > scaling lichenification
+organ > uterine adenocarcinoma
+population
+population > abnormal role change within caste
+population > death failure colony
+population > decline population
+population > decreased population size
+population > decreased population trajectory
+population > decreased survival
+population > impaired larval development
+population > increase malformations
+population > increased incidence of vascular calcification and atherosclerosis morbidity
+population > increased kidney failure
+population > increased morbidity of congenital heart defect
+population > increased mortality
+population > locomotor function impaired
+population > reduced survival
+tissue
+tissue > alterations cellular proliferation hyperplasia
+tissue > chronic mucus hypersecretion
+tissue > collagen deposition
+tissue > decrease vascular integrity
+tissue > decreased mucous
+tissue > fibroproliferative airway lesions
+tissue > formation liver fibrosis
+tissue > hyperinflammation
+tissue > hyperplasia hyperplasia
+tissue > hyperplasia ovarian epithelium
+tissue > impaired oocyte maturation and ovulation
+tissue > increase abnormal osmoregulation
+tissue > increase body fluid overload
+tissue > increase cancer
+tissue > increase cardiac remodelling
+tissue > increase endometrial adenocarcinomas
+tissue > increase hepatocellular adenomas and carcinomas
+tissue > increase in inflammation
+tissue > increase necrosis
+tissue > increase necrotic tissue
+tissue > increase tissue degeneration necrosis atrophy
+tissue > increased adenomas
+tissue > increased adenomas carcinomas
+tissue > increased adenosquamous carcinomas of endometrium
+tissue > increased apoptosis adenomas carcinomas
+tissue > increased cardiac dysregulation
+tissue > increased ductal hyperplasia
+tissue > increased hemagiosarcoma
+tissue > increased histomorphological alteration of testis
+tissue > increased hyperplasia
+tissue > increased inflammatory immune responses
+tissue > increased mesotheliomas
+tissue > increased oncotic necrosis
+tissue > increased oocyte atresia
+tissue > increased vascular fibrosis
+tissue > infiltration inflammatory cells
+tissue > necrosis
+tissue > necrotic tissue
+tissue > occurrence renal ischemia
+tissue > occurrence renal proximal tubular necrosis
+tissue > olfactory epithelium degeneration
+tissue > persistent vaginal cornification
+tissue > promotion mesovarian leiomyomas
+tissue > promotion ovarian adenomas
+tissue > reduced fitness or even mortality acidosis hypovolemic shock and organ dysfunction
+tissue > reduction in melanin lead to decrease of pigmentation
+tissue > reduction of melanosome level
+tissue > vascular barrier disruption

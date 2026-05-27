@@ -1,0 +1,11 @@
+cellular
+cellular > increase inflammation
+cellular > increased inflammation
+individual
+individual > n a allergic contact dermatitis on challenge
+organ
+organ > eczematous eruption
+organ > inflamatory events in light exposed tissues
+tissue
+tissue > increase in inflammation
+tissue > loss of barrier function

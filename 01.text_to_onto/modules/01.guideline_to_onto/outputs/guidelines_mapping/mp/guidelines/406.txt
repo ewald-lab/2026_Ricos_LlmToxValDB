@@ -1,4 +1,0 @@
-mammalian phenotype
-mammalian phenotype > adipose tissue phenotype
-mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology
-mammalian phenotype > integument phenotype

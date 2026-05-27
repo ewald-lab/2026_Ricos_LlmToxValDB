@@ -1,6 +1,0 @@
-guideline_number,category,endpoint_name,requirement_level,source,footnotes
-423,Mortality,Death / Moribund status,Required,Guideline text,Primary endpoint for classification; time of death recorded precisely.
-423,Clinical Signs,General clinical signs (skin, fur, eyes, CNS, etc.),Required,Guideline text,Includes specific signs: tremors, convulsions, salivation, diarrhoea, lethargy, coma.
-423,Body Weight,Individual body weight,Required,Guideline text,Measured before dosing, at least weekly, and at termination/death.
-423,Gross Necropsy,Gross pathological changes,Required,Guideline text,Mandatory for all animals (dead or killed).
-423,Histopathology,Microscopic examination of affected organs,Optional,Guideline text,Recommended for organs showing gross pathology in animals surviving >24 hours.

@@ -16,12 +16,10 @@ SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
-# Input: The specific file for negatives
 PREPROCESSED_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_01.tsv"
-# Output: A new file for negatives (03_negatives)
 OUTPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_negatives.tsv"
 REASONING_FILE="${REPO_ROOT}/outputs/llm_clean_reasoning_negatives.json"
-MODEL_CONFIG="${REPO_ROOT}/config/models/Qwen3.5-122B-A10B-FP8.json"
+MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.5-122B-A10B-FP8.json"
 
 # Prompts for negatives
 PIPELINE_DIR="${REPO_ROOT}/config/clean_prompts_negatives/pipeline"
@@ -29,7 +27,13 @@ SYSTEM_PROMPT_POSITIVIZE="${REPO_ROOT}/config/clean_prompts_negatives/system_pro
 SYSTEM_PROMPT_STANDARDIZE="${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_standardize.txt"
 SYSTEM_PROMPT_EXCEPTIONS="${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_clean_exceptions.txt"
 
-BASE_URL="http://codon-gpu-001.ebi.ac.uk:8003/v1"
+CODON_NODE="${1:-${CODON_NODE:-}}"
+if [ -z "$CODON_NODE" ]; then
+    echo "Error: CODON_NODE is required. Pass it as the first argument or set the CODON_NODE env variable."
+    echo "Usage: sbatch $0 <codon-node>  (e.g. sbatch $0 hl-codon-gpu-020)"
+    exit 1
+fi
+BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
 DEBUG_MODE="" # --debug Change to "" for full dataset run
 
 # --- Environment Setup ---

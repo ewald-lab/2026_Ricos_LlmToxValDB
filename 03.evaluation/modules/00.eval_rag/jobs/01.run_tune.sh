@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
-#SBATCH --gres=gpu:a100:1
+#SBATCH --gres=gpu:h200:1
 #SBATCH --mem=100G
 #SBATCH -J "rag_tune_fast"
 #SBATCH -o "logs/tune_rag_fast_%A_%a.out"
@@ -53,6 +53,7 @@ python3 01.precompute_eval_data.py \
     --target_embedding_db "$TARGET_DB" \
     --reranker_model "$RERANKER_MODEL" \
     --reranker_config "$RERANKER_CONFIG" \
+    --toxval_db "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.prepare_database/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
     --output "$CACHE_FILE"
 
 # Step 2: Run Fast Grid Search

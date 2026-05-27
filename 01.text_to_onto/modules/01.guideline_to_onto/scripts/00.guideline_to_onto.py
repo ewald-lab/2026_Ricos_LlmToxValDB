@@ -3,7 +3,6 @@ import json
 import os
 import sys
 import time
-from collections import defaultdict
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -15,12 +14,8 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.append(str(SCRIPT_DIR))
 
 from src.endpoint_filters import (
-    ENDPOINT_FILTER_FIELDS,
-    GUIDELINE_FILTER_FIELDS,
-    UNIQUE_FILTER_FIELDS,
     EndpointOntologyFilterBuilder,
     load_endpoint_rows,
-    write_csv,
     write_json,
 )
 from src.ontology import OntologyTree
@@ -136,8 +131,8 @@ def arg_parser():
     )
     parser.add_argument("--hf_home", default=None, help="HuggingFace cache directory.")
     parser.add_argument("--hf_transfer", default=None, help="Enable/disable HF transfer.")
-    
-    
+
+
     return parser.parse_args()
 
 
@@ -191,7 +186,7 @@ def main():
 
     with open(args.rag_config, 'r', encoding='utf-8') as f:
         rag_config = json.load(f)
-    
+
     # If it's a nested dictionary (e.g. keyed by model name), look up by embeddings_model_id
     if isinstance(rag_config, dict) and "embedding_model" not in rag_config:
         key = args.embeddings_model_id
@@ -202,7 +197,7 @@ def main():
             if not model_config_block:
                 # Fallback scan for embedding_model match if key was not found
                 model_config_block = next((v for v in rag_config.values() if isinstance(v, dict) and v.get("embedding_model") == key), None)
-            
+
             if model_config_block:
                 rag_config = model_config_block
 
@@ -275,7 +270,7 @@ def main():
         # Clean the filename
         safe_g_num = "".join(c for c in str(g_num) if c.isalnum() or c in "._-")
         output_txt = guideline_dir / f"{safe_g_num}.txt"
-        
+
         # Write unique term breadcrumbs (full tree path), one per line
         unique_paths = sorted({row["breadcrumb"] for row in rows})
         with open(output_txt, "w", encoding="utf-8") as f:

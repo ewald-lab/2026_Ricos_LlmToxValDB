@@ -26,12 +26,13 @@ source "${PREP_ROOT}/env-data-prep/bin/activate"
 
 export PYTHONPATH="${REPO_ROOT}/scripts:$PYTHONPATH"
 
-mkdir -p "${REPO_ROOT}/outputs/endpoints"
 mkdir -p "${JOBS_DIR}/logs"
 
+CODON_NODE="${1:-${CODON_NODE:-hl-codon-gpu-020}}"
+
 MODEL="Qwen3.5-122B-A10B-FP8"
-BASE_URL="http://codon-gpu-001.ebi.ac.uk:8003/v1"
-MODEL_CONFIG="${REPO_ROOT}/config/models/${MODEL}.json"
+BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
+MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
 
 python "${REPO_ROOT}/scripts/00.extract_endpoints_llm.py" \
     --model "${MODEL}" \
@@ -39,4 +40,4 @@ python "${REPO_ROOT}/scripts/00.extract_endpoints_llm.py" \
     --model_config "${MODEL_CONFIG}" \
     --skill_file "${REPO_ROOT}/inputs/SKILL.md" \
     --inputs_dir "${REPO_ROOT}/inputs/OECD Guidelines" \
-    --outputs_dir "${REPO_ROOT}/outputs/endpoints"
+    --outputs_dir "${REPO_ROOT}/outputs"

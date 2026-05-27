@@ -1,0 +1,677 @@
+abnormal fluid distribution
+accumulation blood in the heart chambers
+accumulation lymphocytes
+accumulation lymphocytes and hemopoietic cells
+accumulation lymphocytes macrophages
+accumulation lymphocytes macrophages among active fibroblasts
+accumulation macrophages
+accumulation mixed inflammatory cells
+accumulation mixed inflammatory cells around blood vessels
+accumulation neutrophils intact or degenerating with necrotic myocytes
+accumulation neutrophils lymphocytes macrophages
+accumulation neutrophils with necrosis
+accumulation spermatic fluid
+alteration in composition
+atrophy adrenal cortex
+atrophy lymphoid
+atrophy with degeneration and fibrosis
+cellular alteration not otherwise specified
+change not otherwise specified
+congestion and hyperemia
+crystal formation
+cyst epidermal
+cyst mucosal
+cyst with ciliated epithelium
+cyst with squamous ciliated epithelium
+decreased number of cells
+decreased number or absence of hair follicles
+decreased ovary size
+decreased secretion
+decreased spermatogenesis
+degeneration loss myelin sheath
+degeneration senescence erythrocytes
+degeneration with inflammation
+degeneration with loss
+degeneration with necrosis
+degeneration with regeneration
+degeneration with villous atrophy
+degenerative change
+depletion spermatids
+dilatation glandular
+dilatation heart chamber
+dilatation of epididymal ducts
+dilatation of seminiferous tubules
+dilatation of tubuli cavitation of parenchymas
+dilatation of vessel
+dilated to cystic bile duct with without mucus cellular debris with inflammatory cell infiltrate and fibrous connective tissue
+dilation acinar
+dilation blood vessels
+dilation lymphatic vessels
+diverticulum esophagus
+ectasia
+ectopic thymus
+edema extracellular
+emboli cardiac
+emboli renal
+endothelial injury
+eosinophilic granuloma
+epithelial detachment
+extravasation of blood in a tissue
+eye degeneration replacement by fibrosis
+fibrosis portal
+fibrosis uterus
+fibrosis with organ adhesion
+folding of retinal layers
+full thickness localised tissue loss in hollow organs
+full thickness tissue loss in hollow organs
+glandular degeneration with regenerative hyperplasia
+glomerular alteration
+glomerular injury
+glomerular obliteration
+glycogen accumulation
+growing development
+histiocytic proliferation
+hyperplasia acinar cellss
+hyperplasia capillaries
+hyperplasia corneal squamous cells
+hyperplasia exocrine cell
+hyperplasia goblet cells
+hyperplasia mucosal regenerative
+hyperplasia mucosal thickened squamous layer
+hyperplasia mucosal with hypertrophy
+hyperplasia reticulo endothelial cell
+hyperplasia squamous cell layers without nuclei
+hyperplasia stromal
+hyperplasia transitional cells
+immature fibrosis
+increased bone resorption
+increased size of the epithelium
+increased size of the uterus lumen
+infarct acute
+infarct chronic
+infarction
+inflammation induced tissue alteration
+inflammation perivascular
+inflammatory cell infiltration and or extramedullary hematopoietic cells
+inflammatory degenerative alterations
+inflammatory degenerative changes
+intraalveolar cell accumulation
+intracellular increase of fluids
+invagination with cyst formation
+leukemia granulocytic
+loss of neurons
+lymphocyte macrophage accumulation
+lymphohistiocytic inflammation
+lymphoid cell infiltration
+macrophage infiltration
+mature fibrosis
+metaplasia hepatocellular
+metaplasia osseous pulmonary
+mixed inflammatory cell infiltration inceased bile duct formation and fibrosis
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > apoptosis
+morphologic change > cell adaptation injury death > cell injury death > apoptosis > apoptosis cardiomyocytes
+morphologic change > cell adaptation injury death > cell injury death > apoptosis > apoptosis squamous epithelium
+morphologic change > cell adaptation injury death > cell injury death > apoptosis necrosis
+morphologic change > cell adaptation injury death > cell injury death > apoptosis necrosis > apoptosis necrosis squamous epithelium
+morphologic change > cell adaptation injury death > cell injury death > cell loss
+morphologic change > cell adaptation injury death > cell injury death > cell loss > cell loss neuronal
+morphologic change > cell adaptation injury death > cell injury death > degeneration
+morphologic change > cell adaptation injury death > cell injury death > degeneration > chromatolysis
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration atrophy tubular
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration axonal
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration cardiomyocyte
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration corpora lutea
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration ductular alveolar epithelium
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration ductular sebaceous epithelium
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration endocrine cell
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration endocrine cell > vacuolation cortical decreased diffuse
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration endocrine cell > vacuolation cortical decreased focal
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration epithelial
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration epithelial > syncytia epithelium
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration lens fiber
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration necrosis muscle
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration oocyte
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration regeneration
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration regeneration > thickening alveolar septa
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration tubule
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration tubule > basophilia tubule
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration vacuolar
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration vacuolar > edema intracellular epidermal
+morphologic change > cell adaptation injury death > cell injury death > degeneration > degeneration with crypt hyperplasia
+morphologic change > cell adaptation injury death > cell injury death > degeneration > demyelination
+morphologic change > cell adaptation injury death > cell injury death > degeneration > disorganization loss retinal layers
+morphologic change > cell adaptation injury death > cell injury death > degeneration > multinucleated giant cells
+morphologic change > cell adaptation injury death > cell injury death > erosion ulcer
+morphologic change > cell adaptation injury death > cell injury death > necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > degeneration necrosis medial or mural artery
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis cardiomyocyte
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis cardiomyocyte > necrosis inflammatory cell infiltrate cardiomyocyte
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis endometrial
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epidermal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epithelial
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epithelial > necrosis respiratory epithelium
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epithelial > necrosis squamous epithelium
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis focal multifocal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal > necrosis zonal centrilobular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal > necrosis zonal midzonal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal > necrosis zonal periportal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis inflammation vascular perivascular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis lymphocytes
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis mucosa
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis myofiber
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis myometrial
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis neuronal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis papillary
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis renal tubules
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis soft tissue
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular > necrosis leydig cell
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular > necrosis testis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular > necrosis tubular
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy axonal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy dermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy ductal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy endocrine cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy endocrine cell > atrophy corpora lutea
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy endocrine cell > atrophy cortical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy endocrine cell > atrophy follicular cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epidermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy acinar cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy acinar cell > atrophy with fibrosis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy endometrial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy mucosa
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy mucosa > atrophy villous
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy mucosa > atrophy villous > villus fusion
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy mucosa > atrophy villous > villus stunting
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy squamous epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy tubule
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy hepatocyte
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy muscle cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy muscle cell > atrophy myometrial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy myocardiocyte
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy pars distalis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy retina
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy retina > atrophy decreased number of photoreceptor
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy with lipofuscin accumulation
+morphologic change > cell adaptation injury death > cellular adaptation of growth > decreased blood cell formation
+morphologic change > cell adaptation injury death > cellular adaptation of growth > decreased blood cell formation > decreased activity erythroid precursors
+morphologic change > cell adaptation injury death > cellular adaptation of growth > decreased blood cell formation > decreased activity erythroid precursors > decreased erythropoiesis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > dysplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > epithelial alteration
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > bile duct hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > decidual reaction
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia adnexal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia adnexal > hyperplasia sebaceous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia atypical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia atypical > hyperplasia epithelial atypical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia atypical > hyperplasia mucosal atypical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia atypical > hyperplasia tubule atypical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia bronchiolo alveolar
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia bronchiolo alveolar > hyperplasia bronchiolar cells
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia bronchiolo alveolar > hyperplasia pneumocytes type ii
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia ductal cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia c cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia c cell > hyperplasia c cell diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia c cell > hyperplasia c cell focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia cortical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia cortical > hyperplasia cortical diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia cortical > hyperplasia cortical focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia follicular cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia follicular cell > hyperplasia follicular cell diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia follicular cell > hyperplasia follicular cell focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia granulosa cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia interstitial cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia islet cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia islet cell > hyperplasia islet cell diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia islet cell > hyperplasia islet cell focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia leydig cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia medullary
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia medullary > hyperplasia medullary diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia medullary > hyperplasia medullary focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia neuroendocrine cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia pars distalis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia pars distalis > hyperplasia pars distalis diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia pars distalis > hyperplasia pars distalis focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia pars intermedia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia pars intermedia > hyperplasia pars intermedia diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia pars intermedia > hyperplasia pars intermedia focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endocrine cell > hyperplasia sertoli cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endometrial diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endometrial stromal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endothelial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endothelial > hyperplasia endocardial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia endothelial > intimal thickening acellular artery
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epidermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epidermal > papillomatosis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperkeratosis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperkeratosis > hyperkeratosis adnexal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperkeratosis > hyperkeratosis epidermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia basal cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia corneal epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia lens epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa > hyperplasia diffuse mucosa
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa > hyperplasia focal mucosa
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa > hyperplasia mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa > hyperplasia mucous cell > hyperplasia metaplasia mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia squamous cell layers with nuclei retention
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia transitional epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia urothelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia gallbladder
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia acinar cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia brunner s glands
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia glandular cystic
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia glandular focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia glandular regenerative
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia lobuloalveolar
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hyperplasia reactive
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia glandular > hypertrophy hyperplasia alveolar and or ductal epithelial cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia hepatocellular
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia hepatocellular > hyperplasia hepatocellular non regenerative
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia hepatocellular > hyperplasia hepatocellular regenerative
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia mesangial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia myometrial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia oncocytic
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia pancreatic duct
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia rete ovarii
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia rete testis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia sex cord stromal mixed
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia smooth muscle
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia squamous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia stroma
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia tubule
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia with cellular atypia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > oval cell hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy cardiomyocyte
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy corpora lutea
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy cortical
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy cortical > hypertrophy cortical diffuse
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy cortical > hypertrophy cortical focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy follicular cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy follicular cell > colloid alteration
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy endocrine cell > hypertrophy with vacuolation
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy exocrine cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy exocrine cell > hypertrophy acinar cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy hepatocyte
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy islet cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy mucous cell > hypertrophy goblet cells
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy sinusoidal lining cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy smooth muscle cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy smooth muscle cell > hypertrophy medial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy smooth muscle cell > hypertrophy myometrial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy stroma
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy stroma > decidualization focal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy urothelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > increased blood cell formation
+morphologic change > cell adaptation injury death > cellular adaptation of growth > increased blood cell formation > increased activity platelet precursor
+morphologic change > cell adaptation injury death > cellular adaptation of growth > increased blood cell formation > increased activity platelet precursor > increased thrombopoiesis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > increased mitoses
+morphologic change > cell adaptation injury death > cellular adaptation of growth > increased mitoses > mitoses cornea
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > alteration harderian gland
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia acinar cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia cartilage
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia ductular
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia glandular
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia glandular > hepatocytes glandular metaplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia hepatocytic
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia intestinal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia pancreatic acinar
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia paneth cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia respiratory epithelium
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia squamous cell
+morphologic change > cell adaptation injury death > deposition accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > compartmental cell accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > compartmental cell accumulation > macrophage aggregates
+morphologic change > cell adaptation injury death > deposition accumulation > compartmental cell accumulation > macrophage aggregates > alveolar macrophage aggregation
+morphologic change > cell adaptation injury death > deposition accumulation > compartmental cell accumulation > macrophage aggregates > foamy macrophages
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > accumulation filtrate
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > accumulation filtrate > casts
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > accumulation filtrate > casts > casts hyaline
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > crystals
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > deposition endogenous material
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > deposition endogenous material > alveolar lipoproteinosis
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > deposition endogenous material > amyloidosis
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > deposition endogenous material > amyloidosis > amyloid medial mural artery
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > deposition endogenous material > amyloidosis > amyloid myocardium
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > deposition endogenous material > retention bile
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > mineralization
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > mineralization > calculi
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > mineralization > mineralization cardiomyocyte or myocardium
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > mineralization > mineralization gland secretion
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > mineralization > mineralization gland secretion > concretions
+morphologic change > cell adaptation injury death > deposition accumulation > extracellular accumulation > mineralization > mineralization medial or mural artery
+morphologic change > cell adaptation injury death > deposition accumulation > inclusions intranuclear and cytoplasmic
+morphologic change > cell adaptation injury death > deposition accumulation > inclusions intranuclear and cytoplasmic > inclusions urothelium
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material > pigment
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material > pigment > lipofuscin accumulation
+morphologic change > cell adaptation injury death > deposition accumulation > intracellular accumulation > accumulation endogenous material > pigment > pigment cardiomyocyte or myocardium
+morphologic change > cell adaptation injury death > metabolic derangement
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > phospholipidosis
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation cardiomyocyte
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation ciliary body
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation corpora lutea
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation cortical increased diffuse
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation cortical increased focal
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation granulosa cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation interstitial cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation islet cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation endocrine cell > vacuolation theca cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation acinar cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation acinar cell > autophagic vacuoles acinar cell
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation biliary epithelium
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation glandular epithelium
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation mucosa
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation squamous epithelium
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation urothelium
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation medial or adventitial artery
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation neuronal
+morphologic change > cell adaptation injury death > morphological change unspecified
+morphologic change > cell adaptation injury death > morphological change unspecified > ductal changes
+morphologic change > general observation
+morphologic change > general observation > dispositional morphology
+morphologic change > general observation > dispositional morphology > no abnormalities detected
+morphologic change > general observation > microscopic comment
+morphologic change > general observation > microscopic overall diagnosis
+morphologic change > healing and repair
+morphologic change > healing and repair > fibrosis
+morphologic change > healing and repair > fibrosis > fibrosis corneal
+morphologic change > healing and repair > fibrosis > fibrosis interstitial
+morphologic change > healing and repair > fibrosis > fibrosis iridic
+morphologic change > healing and repair > fibrosis > fibrosis myocardium
+morphologic change > healing and repair > fibrosis > fibrosis peribiliary
+morphologic change > healing and repair > fibrosis > fibrosis peribulbar
+morphologic change > healing and repair > fibrosis > fibrosis perivascular
+morphologic change > healing and repair > fibrosis > plaque siderotic
+morphologic change > healing and repair > fibrosis > pulmonary fibrosis
+morphologic change > healing and repair > fibrosis > pulmonary fibrosis > fibrosis alveolar
+morphologic change > healing and repair > neovascularization
+morphologic change > healing and repair > regeneration
+morphologic change > healing and repair > regeneration > basophilia
+morphologic change > hemodynamic disorders
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema intercellular
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema intercellular > edema intercellular epidermal
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial > edema dermal
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema myocardium
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema pulmonary
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > lymphangiectasis
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > lymphangiectasis > lymphatic sinus ectasia
+morphologic change > hemodynamic disorders > extravasation of blood
+morphologic change > hemodynamic disorders > extravasation of blood > hemorrhage
+morphologic change > hemodynamic disorders > extravasation of blood > hemorrhage > hemorrhage pulmonary
+morphologic change > hemodynamic disorders > locally increased intravascular blood
+morphologic change > hemodynamic disorders > locally increased intravascular blood > congestion
+morphologic change > hemodynamic disorders > locally increased intravascular blood > congestion > congestion pulmonary
+morphologic change > hemodynamic disorders > obstruction of blood flow
+morphologic change > hemodynamic disorders > obstruction of blood flow > infarct
+morphologic change > hemodynamic disorders > obstruction of blood flow > infarct > infarct myocardium
+morphologic change > immunomodulation
+morphologic change > immunomodulation > steady state of the immune system
+morphologic change > immunomodulation > steady state of the immune system > lymphoid tissue present
+morphologic change > immunomodulation > upregulation of the immune system reactive immune response
+morphologic change > immunomodulation > upregulation of the immune system reactive immune response > increased lymphoid cell number
+morphologic change > immunomodulation > upregulation of the immune system reactive immune response > increased lymphoid cell number > hyperplasia lymphoid
+morphologic change > infectious diseases
+morphologic change > infectious diseases > viruses
+morphologic change > infectious diseases > viruses > dna virus
+morphologic change > infectious diseases > viruses > dna virus > koilocytosis
+morphologic change > infectious diseases > viruses > rna virus
+morphologic change > infectious diseases > viruses > rna virus > sialodacryoadenitis
+morphologic change > inflammatory processes
+morphologic change > inflammatory processes > infiltrate inflammatory cell
+morphologic change > inflammatory processes > infiltrate inflammatory cell > granulocytic inflammatory cell infiltration
+morphologic change > inflammatory processes > infiltrate inflammatory cell > granulocytic inflammatory cell infiltration > eosinophil inflammatory cell infiltration
+morphologic change > inflammatory processes > infiltrate inflammatory cell > inflammatory cell infiltrate perivascular
+morphologic change > inflammatory processes > infiltrate inflammatory cell > lymphohistioplasmacytic inflammatory cell infiltration
+morphologic change > inflammatory processes > infiltrate inflammatory cell > lymphohistioplasmacytic inflammatory cell infiltration > histiocytic inflammatory cell infiltrate
+morphologic change > inflammatory processes > infiltrate inflammatory cell > lymphohistioplasmacytic inflammatory cell infiltration > lymphocytic inflammatory cell infiltration
+morphologic change > inflammatory processes > infiltrate inflammatory cell > lymphohistioplasmacytic inflammatory cell infiltration > lymphohistiocytic inflammatory cell infiltration
+morphologic change > inflammatory processes > infiltrate inflammatory cell > lymphohistioplasmacytic inflammatory cell infiltration > lymphoplasmacytic inflammatory cell infiltration
+morphologic change > inflammatory processes > inflammation
+morphologic change > inflammatory processes > inflammation > cholecystitis
+morphologic change > inflammatory processes > inflammation > chronic inflammatory proliferative metaplastic changes
+morphologic change > inflammatory processes > inflammation > inflammation eosinophilic
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous > granuloma cholesterin clefts
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous > granuloma giant cell
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous > inflammation lipogranulomatous
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous > sperm granuloma
+morphologic change > inflammatory processes > inflammation > inflammation lymphohistioplasmacytic
+morphologic change > inflammatory processes > inflammation > inflammation lymphohistioplasmacytic > inflammation lymphocytic
+morphologic change > inflammatory processes > inflammation > inflammation lymphohistioplasmacytic > inflammation lymphohistiocyte
+morphologic change > inflammatory processes > inflammation > inflammation mixed cell
+morphologic change > inflammatory processes > inflammation > inflammation neutrophilic
+morphologic change > inflammatory processes > inflammation > inflammation neutrophilic > pyometra
+morphologic change > inflammatory processes > inflammation > leukocytosis
+morphologic change > neoplasia
+morphologic change > neoplasia > benign tumor
+morphologic change > neoplasia > benign tumor > adenoma
+morphologic change > neoplasia > benign tumor > adenoma > adenoma acinar cells
+morphologic change > neoplasia > benign tumor > adenoma > adenoma cortical
+morphologic change > neoplasia > benign tumor > adenoma > adenoma ductal cell
+morphologic change > neoplasia > benign tumor > adenoma > adenoma endometrial
+morphologic change > neoplasia > benign tumor > adenoma > adenoma hepatocholangiocellular
+morphologic change > neoplasia > benign tumor > adenoma > adenoma islet cell
+morphologic change > neoplasia > benign tumor > adenoma > adenoma pars distalis
+morphologic change > neoplasia > benign tumor > adenoma > adenoma pars intermedia
+morphologic change > neoplasia > benign tumor > adenoma > adenoma renal tubule
+morphologic change > neoplasia > benign tumor > adenoma > adenoma rete ovarii
+morphologic change > neoplasia > benign tumor > adenoma > adenoma rete testis
+morphologic change > neoplasia > benign tumor > adenoma > hepatocellular adenoma
+morphologic change > neoplasia > benign tumor > epithelioma cystic keratinizing
+morphologic change > neoplasia > benign tumor > epithelioma nonkeratinizing
+morphologic change > neoplasia > benign tumor > keratoacanthoma
+morphologic change > neoplasia > benign tumor > leiomyoma
+morphologic change > neoplasia > benign tumor > luteoma benign
+morphologic change > neoplasia > benign tumor > myoma
+morphologic change > neoplasia > benign tumor > papilloma
+morphologic change > neoplasia > benign tumor > papilloma > papilloma squamous cell
+morphologic change > neoplasia > benign tumor > papilloma > papilloma transitional cell
+morphologic change > neoplasia > benign tumor > polyp
+morphologic change > neoplasia > benign tumor > polyp > polyp vaginal
+morphologic change > neoplasia > benign tumor > thymoma benign
+morphologic change > neoplasia > benign tumor > tumor epthelial stromal benign
+morphologic change > neoplasia > benign tumor > tumor granulosa cell benign
+morphologic change > neoplasia > malignant tumor
+morphologic change > neoplasia > malignant tumor > adenoacanthoma malignant
+morphologic change > neoplasia > malignant tumor > adenocarcinoma
+morphologic change > neoplasia > malignant tumor > adenocarcinoma > adenocarcinoma acinar cell
+morphologic change > neoplasia > malignant tumor > adenocarcinoma > adenocarcinoma endometrial
+morphologic change > neoplasia > malignant tumor > carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma adenosquamous
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma basal cell
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma bronchiolo alveolar
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma ductal
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma follicular cell
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma islet cell
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma metastasis
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma renal tubule
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma rete testis
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma squamous cell
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma undifferentiated
+morphologic change > neoplasia > malignant tumor > carcinoma > cholangiocarcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > hepatocellular carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > urothelial carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma brunner s glands
+morphologic change > neoplasia > malignant tumor > corticomedullary mixed tumor malignant
+morphologic change > neoplasia > malignant tumor > craniopharyngioma malignant
+morphologic change > neoplasia > malignant tumor > hepatoblastoma
+morphologic change > neoplasia > malignant tumor > leukemia
+morphologic change > neoplasia > malignant tumor > lymphoma
+morphologic change > neoplasia > malignant tumor > lymphoma > lymphoma immunoblastic
+morphologic change > neoplasia > malignant tumor > myoepithelioma malignant
+morphologic change > neoplasia > malignant tumor > nephroblastematosis
+morphologic change > neoplasia > malignant tumor > nephroblastoma
+morphologic change > neoplasia > malignant tumor > renal sarcoma
+morphologic change > neoplasia > malignant tumor > reticulosis malignant
+morphologic change > neoplasia > malignant tumor > sarcoma
+morphologic change > neoplasia > malignant tumor > sarcoma > sarcoma endometrial stromal
+morphologic change > neoplasia > malignant tumor > seminoma malignant
+morphologic change > neoplasia > malignant tumor > thymoma malignant
+morphologic change > neoplasia > malignant tumor > tumor basal cell malignant
+morphologic change > neoplasia > malignant tumor > tumor granular cell malignant
+morphologic change > neoplasia > malignant tumor > tumor mast cell malignant
+morphologic change > neoplasia > malignant tumor > tumor medullary malignant
+morphologic change > neoplasia > malignant tumor > tumor neuroendocrine cell malignant
+morphologic change > neoplasia > malignant tumor > tumor neuroendocrine malignant
+morphologic change > neoplasia > malignant tumor > tumor odontogenic malignant
+morphologic change > neoplasia > malignant tumor > tumor sertoli cell malignant
+morphologic change > neoplasia > malignant tumor > tumor sex cord stromal mixed malignant
+morphologic change > normal altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > atretic follicles increased number
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > follicle luteinized
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased keratinization
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased number corpora lutea
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased number of follicles
+morphologic change > normal altered physiological condition > altered physiological condition > intraluminal accumulation
+morphologic change > normal altered physiological condition > altered physiological condition > intraluminal accumulation > content exogenous material
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion > increased secretion reduced emptying
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion > increased secretion reduced emptying > bile
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > accumulation glandular secretion > proteinaceous plug
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > secretory activity decreased
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > secretory activity decreased > secretory depletion
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > secretory activity decreased > secretory depletion > secretory depletion acinar cell
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > secretory activity decreased > secretory depletion > secretory depletion acinar cell > halos peri insular decreased
+morphologic change > normal altered physiological condition > altered physiological condition > secretory activity > secretory activity increased
+morphologic change > normal altered physiological condition > normal physiological condition
+morphologic change > normal altered physiological condition > normal physiological condition > age associated effects
+morphologic change > normal altered physiological condition > normal physiological condition > age associated effects > hepatic karyocytomegaly and or multinucleated hepatocytes
+morphologic change > normal altered physiological condition > normal physiological condition > age associated effects > thymic involution
+morphologic change > structural alteration
+morphologic change > structural alteration > abnormal growth differentiation
+morphologic change > structural alteration > abnormal growth differentiation > abnormal skeletal tissue modelling remodelling
+morphologic change > structural alteration > architectural anomalies
+morphologic change > structural alteration > architectural anomalies > adenosis
+morphologic change > structural alteration > architectural anomalies > adhesion
+morphologic change > structural alteration > architectural anomalies > adhesion > synechia
+morphologic change > structural alteration > architectural anomalies > cavitation of parenchymas
+morphologic change > structural alteration > architectural anomalies > cavitation of parenchymas > porencephaly
+morphologic change > structural alteration > architectural anomalies > collapse of pre existing cavity
+morphologic change > structural alteration > architectural anomalies > collapse of pre existing cavity > atelectasis
+morphologic change > structural alteration > architectural anomalies > collapse of pre existing cavity > cribriform change
+morphologic change > structural alteration > architectural anomalies > dilation
+morphologic change > structural alteration > architectural anomalies > dilation > cyst
+morphologic change > structural alteration > architectural anomalies > dilation > cyst > cyst luteal
+morphologic change > structural alteration > architectural anomalies > dilation > cyst > cyst rete ovarii
+morphologic change > structural alteration > architectural anomalies > dilation > cyst > cyst tubular
+morphologic change > structural alteration > architectural anomalies > dilation > cyst > dilation glandular cystic
+morphologic change > structural alteration > architectural anomalies > dilation > dilatation glands
+morphologic change > structural alteration > architectural anomalies > dilation > dilatation glands > dilation acinar vesicle
+morphologic change > structural alteration > architectural anomalies > dilation > dilatation glands > dilation ductal
+morphologic change > structural alteration > architectural anomalies > dilation > dilatation glands > ectasia in submucosal glands
+morphologic change > structural alteration > architectural anomalies > dilation > dilation luminal
+morphologic change > structural alteration > architectural anomalies > dilation > dilation luminal > dilatation esophagus
+morphologic change > structural alteration > architectural anomalies > dilation > dilation tubular
+morphologic change > structural alteration > architectural anomalies > dilation > dilation tubule
+morphologic change > structural alteration > architectural anomalies > dilation > dilation tubule > dilation rete testis
+morphologic change > structural alteration > architectural anomalies > dilation > pulmonary acinar ectasia
+morphologic change > structural alteration > architectural anomalies > dislocation of an organ
+morphologic change > structural alteration > architectural anomalies > dislocation of an organ > hepatodiaphragmatic nodule
+morphologic change > structural alteration > architectural anomalies > intrahepatocellular erythrocytes
+morphologic change > structural alteration > architectural anomalies > retinal folds
+morphologic change > structural alteration > architectural anomalies > retinal rosettes
+morphologic change > structural alteration > developmental errors
+morphologic change > structural alteration > developmental errors > ectopic tissue
+morphologic change > structural alteration > developmental errors > ectopic tissue > accessory adrenal cortical tissue
+morphologic change > structural alteration > developmental errors > ectopic tissue > adenomyosis
+morphologic change > structural alteration > developmental errors > ectopic tissue > ectopic parathyroid
+morphologic change > structural alteration > developmental errors > ectopic tissue > ectopic thymic tissue
+morphologic change > structural alteration > developmental errors > ectopic tissue > heterotopic acinar pancreas
+morphologic change > structural alteration > developmental errors > ectopic tissue > heterotopic hepatocytes
+morphologic change > structural alteration > developmental errors > embryonic remnants
+morphologic change > structural alteration > developmental errors > embryonic remnants > imperforate vagina
+morphologic change > structural alteration > developmental errors > embryonic remnants > persistence rathke s pouch
+morphologic change > structural alteration > developmental errors > embryonic remnants > prostatic rudiment
+morphologic change > structural alteration > developmental errors > follicle polyovular
+morphologic change > structural alteration > developmental errors > hypoplasia
+morphologic change > structural alteration > developmental errors > hypoplasia > pulmonary hypoplasia
+morphologic change > structural alteration > developmental errors > malformation
+morphologic change > structural alteration > developmental errors > malformation > ovotestis
+morphologic change > structural alteration > organ specific entities changes
+morphologic change > structural alteration > organ specific entities changes > cardiomegaly
+morphologic change > structural alteration > organ specific entities changes > cataract
+morphologic change > structural alteration > organ specific entities changes > cholangiofibrosis
+morphologic change > structural alteration > organ specific entities changes > elastosis
+morphologic change > structural alteration > organ specific entities changes > endometriosis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > atrophy glomerular
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulonephritis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulopathy hyaline
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulopathy mesangioproliferative
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulosclerosis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > mesangiolysis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > metaplasia hyperplasia bowman s capsule
+morphologic change > structural alteration > organ specific entities changes > intravascular hepatocytes
+morphologic change > structural alteration > organ specific entities changes > mononuclear cell infiltrate fibrosis myocardium
+morphologic change > structural alteration > organ specific entities changes > nephropathy
+morphologic change > structural alteration > organ specific entities changes > nephropathy > alpha2u globulin nephropathy
+morphologic change > structural alteration > organ specific entities changes > nephropathy > chronic progressive nephropathy
+morphologic change > structural alteration > organ specific entities changes > nephropathy > nephropathy obstructive
+morphologic change > structural alteration > organ specific entities changes > nephropathy > nephropathy retrograde
+morphologic change > structural alteration > organ specific entities changes > phthisis bulbi
+morphologic change > structural alteration > organ specific entities changes > uropathy obstructive
+morphologic change > structural alteration > organ specific entities changes > valvulopathy
+morphologic change > structural alteration > organ specific entities changes > valvulopathy > degeneration myxomatous valve
+morphologic change > structural alteration > organ specific entities changes > valvulopathy > stromal proliferation valve
+morphologic change > structural alteration > organ specific entities changes > vasculopathy
+morphologic change > structural alteration > structural injury
+morphologic change > structural alteration > structural injury > aneurysm
+morphologic change > structural alteration > structural injury > bronchiectasis
+morphologic change > structural alteration > structural injury > emphysema
+morphologic change > structural alteration > structural injury > emphysema > alveolar emphysema
+morphologic change > structural alteration > structural injury > rupture
+morphologic change > structural alteration > structural injury > vesicle
+morphologic change > structural alteration > structural injury > vesicle > vesicle cornea
+myocardiofiber degeneration
+myocardiofiber degeneration replacement by fibrosis
+myocardiofiber degenerationreplacement by fibrosis
+myofiber degeneration regeneration replacement by fibrosis
+necrosis acute with inflammation
+necrosis apoptotic
+necrosis coagulative
+necrosis colliquative
+necrosis with loss
+papilloma benign
+plasma cell proliferation
+protein cast with exfoliated cells
+reduced sperm luminal
+separation keratinocytes
+stasis sperm
+thrombosis and hemostasis
+tissue remodelling
+tubular glomerular alteration
+tumor corticomedullary malignant
+vacuolation sertoli cells
+vacuolation tubular epithelium

@@ -265,7 +265,7 @@ def normalize_endpoint_name(name: str, normalized_category: str) -> str:
     normalized = re.sub(r'\d+%', '', normalized)
     # Clean up any leftover 'with  ci and slope' if present
     normalized = re.sub(r'\bwith\s+ci\s+and\s+slope\b', '', normalized)
-    
+
     # Remove extra whitespace
     normalized = " ".join(normalized.split())
 

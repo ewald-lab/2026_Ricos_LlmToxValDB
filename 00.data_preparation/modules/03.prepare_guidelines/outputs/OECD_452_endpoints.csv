@@ -1,0 +1,138 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+452,Mortality/Morbidity,Morbidity and mortality checks,Required,Guideline text,"Checked usually at beginning and end of each day"
+452,Clinical Observations,General clinical observations,Required,Guideline text,At least once a day
+452,Clinical Observations,Detailed clinical observations,Required,Guideline text,"Prior to first exposure, end of week 1, monthly thereafter"
+452,Ophthalmology,Ophthalmological examination,Required,Guideline text,"Prior to first administration; at termination (preferably all, min high dose/control)"
+452,Hematology,Haematological determinations,Required,Guideline text,Performed at termination (and interim kills if applicable)
+452,Clinical Biochemistry,Clinical biochemistry measurements,Required,Guideline text,Performed at termination (and interim kills if applicable)
+452,Organ Weights,Organ weight determination,Required,Guideline text,Standard practice for chronic studies
+452,Histopathology,Histopathological examination,Required,Guideline text,"Control and high dose groups + tissues with lesions"
+452,Clinical Observations,Skin/Fur changes,Required,Guideline text,
+452,Clinical Observations,Eyes/Mucous membranes changes,Required,Guideline text,
+452,Clinical Observations,Secretions and excretions,Required,Guideline text,
+452,Clinical Observations,Lacrimation,Required,Guideline text,
+452,Clinical Observations,Piloerection,Required,Guideline text,
+452,Clinical Observations,Pupil size,Required,Guideline text,
+452,Clinical Observations,Respiratory pattern,Required,Guideline text,
+452,Clinical Observations,Gait and posture,Required,Guideline text,
+452,Clinical Observations,Response to handling,Required,Guideline text,
+452,Clinical Observations,Clonic or tonic movements,Required,Guideline text,
+452,Clinical Observations,Stereotypies (e.g., excessive grooming),Required,Guideline text,
+452,Clinical Observations,Bizarre behaviour (e.g., self-mutilation),Required,Guideline text,
+452,Ophthalmology,Ophthalmological examination,Required,Guideline text,"Prior to first admin; at termination (all animals preferred, min high dose/control)"
+452,Neurotoxicity,Sensory reactivity to stimuli,Optional,Guideline text,"If previous tests indicated potential neurotoxicity"
+452,Neurotoxicity,Grip strength,Optional,Guideline text,"If previous tests indicated potential neurotoxicity"
+452,Neurotoxicity,Motor activity,Optional,Guideline text,"If previous tests indicated potential neurotoxicity"
+452,Immunotoxicity,Immunotoxicity investigations,Optional,Guideline text,"If previous tests indicated potential immunotoxicity"
+452,Body Weight,Body weight,Required,Guideline text,"Start, weekly (1st 13 wks), then monthly"
+452,Nutrition,Food consumption,Required,Guideline text,"Weekly (1st 13 wks), then monthly"
+452,Nutrition,Food efficiency,Required,Guideline text,"Weekly (1st 13 wks), then monthly"
+452,Nutrition,Water consumption,Required,Guideline text,"Weekly (1st 13 wks), then monthly (if in drinking water)"
+452,Hematology,Total leukocyte count,Required,Guideline text,
+452,Hematology,Differential leukocyte count,Required,Guideline text,
+452,Hematology,Erythrocyte count,Required,Guideline text,
+452,Hematology,Platelet count,Required,Guideline text,
+452,Hematology,Haemoglobin concentration,Required,Guideline text,
+452,Hematology,Haematocrit (packed cell volume),Required,Guideline text,
+452,Hematology,Mean corpuscular volume (MCV),Required,Guideline text,
+452,Hematology,Mean corpuscular haemoglobin (MCH),Required,Guideline text,
+452,Hematology,Mean corpuscular haemoglobin concentration (MCHC),Required,Guideline text,
+452,Hematology,Prothrombin time,Required,Guideline text,
+452,Hematology,Activated partial thromboplastin time,Required,Guideline text,
+452,Hematology,Heinz bodies,Optional,Guideline text,"As appropriate depending on toxicity"
+452,Hematology,Atypical erythrocyte morphology,Optional,Guideline text,"As appropriate depending on toxicity"
+452,Hematology,Methaemoglobin,Optional,Guideline text,"As appropriate depending on toxicity"
+452,Hematology,Reticulocyte counts,Optional,Guideline text,"If effect on haematopoietic system indicated"
+452,Hematology,Bone marrow cytology,Optional,Guideline text,"If effect on haematopoietic system indicated"
+452,Clinical Biochemistry,Glucose,Required,Guideline text,
+452,Clinical Biochemistry,Urea (urea nitrogen),Required,Guideline text,
+452,Clinical Biochemistry,Creatinine,Required,Guideline text,
+452,Clinical Biochemistry,Total protein,Required,Guideline text,
+452,Clinical Biochemistry,Albumin,Required,Guideline text,
+452,Clinical Biochemistry,Calcium,Required,Guideline text,
+452,Clinical Biochemistry,Sodium,Required,Guideline text,
+452,Clinical Biochemistry,Potassium,Required,Guideline text,
+452,Clinical Biochemistry,Total cholesterol,Required,Guideline text,
+452,Clinical Biochemistry,Alanine aminotransferase (ALT),Required,Guideline text,"At least two hepatocellular evaluation tests"
+452,Clinical Biochemistry,Aspartate aminotransferase (AST),Required,Guideline text,"At least two hepatocellular evaluation tests"
+452,Clinical Biochemistry,Glutamate dehydrogenase,Required,Guideline text,"At least two hepatocellular evaluation tests"
+452,Clinical Biochemistry,Total bile acids,Required,Guideline text,"At least two hepatocellular evaluation tests"
+452,Clinical Biochemistry,Alkaline phosphatase,Required,Guideline text,"At least two hepatobiliary evaluation tests"
+452,Clinical Biochemistry,Gamma glutamyl transferase,Required,Guideline text,"At least two hepatobiliary evaluation tests"
+452,Clinical Biochemistry,5'-nucleotidase,Required,Guideline text,"At least two hepatobiliary evaluation tests"
+452,Clinical Biochemistry,Total bilirubin,Required,Guideline text,"At least two hepatobiliary evaluation tests"
+452,Clinical Biochemistry,Fasting triglycerides,Optional,Guideline text,"As appropriate depending on toxicity"
+452,Clinical Biochemistry,Specific hormones,Optional,Guideline text,"As appropriate depending on toxicity"
+452,Clinical Biochemistry,Cholinesterase,Optional,Guideline text,"As appropriate depending on toxicity"
+452,Urinalysis,Appearance,Required,Guideline text,
+452,Urinalysis,Volume,Required,Guideline text,
+452,Urinalysis,Osmolality or specific gravity,Required,Guideline text,
+452,Urinalysis,pH,Required,Guideline text,
+452,Urinalysis,Total protein,Required,Guideline text,
+452,Urinalysis,Glucose,Required,Guideline text,
+452,Urinalysis,Ketone,Optional,Guideline text,
+452,Urinalysis,Urobilinogen,Optional,Guideline text,
+452,Urinalysis,Bilirubin,Optional,Guideline text,
+452,Urinalysis,Occult blood,Optional,Guideline text,
+452,Organ Weights,Adrenals,Required,Guideline text,"Wet weight; optional in mice"
+452,Organ Weights,Brain,Required,Guideline text,
+452,Organ Weights,Epididymides,Required,Guideline text,
+452,Organ Weights,Heart,Required,Guideline text,
+452,Organ Weights,Kidneys,Required,Guideline text,
+452,Organ Weights,Liver,Required,Guideline text,
+452,Organ Weights,Ovaries,Required,Guideline text,
+452,Organ Weights,Spleen,Required,Guideline text,
+452,Organ Weights,Testes,Required,Guideline text,
+452,Organ Weights,Thyroid,Required,Guideline text,"Weighed post-fixation with parathyroids"
+452,Organ Weights,Uterus,Required,Guideline text,
+452,Histopathology,All gross lesions,Required,Guideline text,"From high dose/control, deaths, and abnormalities"
+452,Histopathology,Heart,Required,Guideline text,
+452,Histopathology,Pancreas,Required,Guideline text,
+452,Histopathology,Stomach (forestomach/glandular),Required,Guideline text,
+452,Histopathology,Adrenal gland,Required,Guideline text,
+452,Histopathology,Ileum,Required,Guideline text,
+452,Histopathology,Parathyroid gland,Required,Guideline text,
+452,Histopathology,Aorta,Required,Guideline text,
+452,Histopathology,Jejunum,Required,Guideline text,
+452,Histopathology,Peripheral nerve,Required,Guideline text,
+452,Histopathology,Testis,Required,Guideline text,
+452,Histopathology,Brain (cerebrum/cerebellum/medulla/pons),Required,Guideline text,
+452,Histopathology,Kidney,Required,Guideline text,
+452,Histopathology,Pituitary,Required,Guideline text,
+452,Histopathology,Thymus,Required,Guideline text,
+452,Histopathology,Caecum,Required,Guideline text,
+452,Histopathology,Lacrimal gland (exorbital),Required,Guideline text,
+452,Histopathology,Prostate,Required,Guideline text,
+452,Histopathology,Thyroid,Required,Guideline text,
+452,Histopathology,Cervix,Required,Guideline text,
+452,Histopathology,Liver,Required,Guideline text,
+452,Histopathology,Rectum,Required,Guideline text,
+452,Histopathology,Coagulating gland,Required,Guideline text,
+452,Histopathology,Lung,Required,Guideline text,
+452,Histopathology,Salivary gland,Required,Guideline text,
+452,Histopathology,Trachea,Required,Guideline text,
+452,Histopathology,Colon,Required,Guideline text,
+452,Histopathology,Lymph nodes (superficial/deep),Required,Guideline text,
+452,Histopathology,Seminal vesicle,Required,Guideline text,
+452,Histopathology,Urinary bladder,Required,Guideline text,
+452,Histopathology,Duodenum,Required,Guideline text,
+452,Histopathology,Mammary gland,Required,Guideline text,"Obligatory for females; males if visibly dissectable"
+452,Histopathology,Skeletal muscle,Required,Guideline text,
+452,Histopathology,Uterus (including cervix),Required,Guideline text,
+452,Histopathology,Epididymis,Required,Guideline text,
+452,Histopathology,Skin,Required,Guideline text,
+452,Histopathology,Eye (including retina),Required,Guideline text,
+452,Histopathology,Oesophagus,Required,Guideline text,
+452,Histopathology,Spinal cord (cervical/mid-thoracic/lumbar),Required,Guideline text,
+452,Histopathology,Gall bladder,Required,Guideline text,"For species other than rat"
+452,Histopathology,Ovary,Required,Guideline text,
+452,Histopathology,Harderian gland,Required,Guideline text,
+452,Histopathology,Vagina,Required,Guideline text,
+452,Histopathology,Teeth,Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Tongue,Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Upper respiratory tract (nose/turbinates/sinuses),Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Ureter,Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Femur with joint,Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Olfactory bulb,Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Urethra,Optional,Guideline text,"In square brackets in source text"
+452,Histopathology,Sternum (bone marrow section/aspirate),Optional,Guideline text,"In square brackets in source text"

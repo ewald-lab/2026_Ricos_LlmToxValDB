@@ -1,0 +1,464 @@
+cellular
+cellular > aberrant dendritic morphology
+cellular > abnormal lipid metabolism
+cellular > accumulation of misfolded proteins
+cellular > activation microglia
+cellular > activation of hepatic stellate cells
+cellular > activation stellate cells
+cellular > airway epithelial injury
+cellular > alteration lipid metabolism
+cellular > altered bone cell homeostasis
+cellular > altered formation of cortical envelope
+cellular > altered photoreceptor patterning
+cellular > altered protein production
+cellular > alveolar collapse
+cellular > apoptosis
+cellular > bile accumulation pathological condition
+cellular > blood brain barrier disruption
+cellular > blood loss and development of anemia impaired oxygen delivery and nutrient delivery to tissue impaired carbon dioxide and waste product removal
+cellular > cell differentiation altered
+cellular > cilia beat frequency decreased
+cellular > cytotoxicity
+cellular > damaging red blood cells hemolysis
+cellular > decrease apoptosis of ciliated epithelial cells
+cellular > decrease glucose pool
+cellular > decrease of gabaergic interneurons
+cellular > decrease triglyceride
+cellular > decreased apoptosis
+cellular > decreased dopaminergic activity
+cellular > decreased oligodendrocyte differentiation
+cellular > decreased proliferation of cortical neural progenitor cells
+cellular > decreased radial glia cell density
+cellular > delay ovarian maturation
+cellular > demyelination increased
+cellular > disrupted energy metabolism
+cellular > disrupted initiation of meiosis of oogonia in the ovary
+cellular > disrupted lipid storage
+cellular > disturbed radial glia cell alignment and migration
+cellular > endometrial squamous metaplasia increase
+cellular > endothelial cell death
+cellular > endothelial cell dysfunction
+cellular > formation mallory body
+cellular > general apoptosis
+cellular > granulosa cell damage
+cellular > granulosa cell proliferation of gonadotropin independent follicles reduced
+cellular > hepatocyte cell apoptosis
+cellular > hepatocytotoxicity
+cellular > hepatotoxicity
+cellular > hyperplasia leydig cell
+cellular > hyperplasia ovarian stromal cells
+cellular > hypertrophy hyperplasia smooth muscle
+cellular > increase ca
+cellular > increase cell death
+cellular > increase clonal expansion of altered hepatic foci
+cellular > increase cns neural cell death
+cellular > increase goblet cell number
+cellular > increase hyperplasia
+cellular > increase leydig cell tumors
+cellular > increase lipid droplet
+cellular > increase mucin production
+cellular > increase necrosis
+cellular > increase oocyte apoptosis
+cellular > increase ovarian somatic cell apoptosis
+cellular > increase papillomas carcinomas
+cellular > increase phenotypic enzyme activity
+cellular > increase proliferation of goblet cells
+cellular > increased cellular proliferation hyperplasia of acinar cells
+cellular > increased glycolipid levels
+cellular > increased hyperplasia
+cellular > increased hypertrophy and proliferation
+cellular > increased inflammation
+cellular > increased lactotroph hyperplasia and hypertrophy
+cellular > increased lipid accumulation
+cellular > increased myocardial apoptosis
+cellular > increased neurokinin a by neuronal cells
+cellular > increased proliferation
+cellular > increased secretion of proinflammatory mediators
+cellular > increased sympathetic nerve activity
+cellular > increased triglyceride
+cellular > increased triglyceride formation
+cellular > malignant transformation of cells
+cellular > mitochondrial injury
+cellular > narcosis
+cellular > neurogenic inflammation of sensory nerves
+cellular > neuronal dysfunction
+cellular > occurrence ballooning degeneration
+cellular > occurrence cytoplasmic vacuolization
+cellular > occurrence transdifferentiation of ciliated epithelial cells
+cellular > olfactory sensory neurons decrease
+cellular > oligodendrocyte death increased
+cellular > perturbation of cholesterol
+cellular > platelet activation increased
+cellular > promotion ovarian granular cell tumors
+cellular > pulmonary epithelial injury
+cellular > reduced antibody production
+cellular > reduced number of oligodendrocytes
+cellular > reduction in melanin level
+cellular > reduction vitellogenin accumulation into oocytes and oocyte growth development
+cellular > squamous metaplasia increase
+cellular > suppression vldl secretion
+cellular > urothelial cell injury death
+individual
+individual > abnormal behavior
+individual > abnormal foraging activity and behavior
+individual > altered reproductive behaviour
+individual > atherosclerosis
+individual > autism like behavior
+individual > bronchiolitis obliterans
+individual > cholestasis pathology
+individual > chronic low grade systemic inflammation
+individual > chronic obstructive pulmonary disease
+individual > cognitive function decreased
+individual > decrease blood pressure
+individual > decrease growth
+individual > decrease lung function
+individual > decreased anxiety
+individual > decreased body weight
+individual > decreased fertility in the adult decreased sperm quantity and or quality in the adult testis
+individual > decreased locomotion
+individual > decreased lymphocytes
+individual > decreased mortality
+individual > decreased reward
+individual > decreased seizure
+individual > decreased sheltering
+individual > decreased viable offspring
+individual > disrupted ovarian cycle
+individual > dysfunction of respiratory system
+individual > formation liver tumor
+individual > gastrointestinal disorders
+individual > growth reduction
+individual > hypertension
+individual > impaired coordination and movement
+individual > impaired development
+individual > impaired development of reproductive organs
+individual > impaired learning and memory
+individual > impaired lung function
+individual > impaired thoracic shivering
+individual > impairment learning and memory
+individual > increase body mass index
+individual > increase body volume of female adults
+individual > increase early life stage mortality
+individual > increase hypertension
+individual > increase incomplete ecdysis
+individual > increase mortality
+individual > increase nerve spasm
+individual > increase pigmentation
+individual > increase pulmonate breathing
+individual > increase seizure
+individual > increase vascular disrupting effects
+individual > increased appetite and hunger
+individual > increased cardiovascular dysfunction
+individual > increased depression
+individual > increased epilepsy
+individual > increased foot detachment
+individual > increased incidence of respiratory disease
+individual > increased locomotion
+individual > increased nephropathy
+individual > increased or inappropriate mantel display
+individual > increased seizure
+individual > induce neuronal dysfunctions
+individual > induction sustained hepatotoxicity
+individual > inhibit agitation
+individual > inhibition feeding
+individual > interruption ovulation
+individual > locomotor activity decreased
+individual > mucociliary clearance decreased
+individual > multi organ failure involving acute respiratory distress syndrome
+individual > n a cyanosis occurs
+individual > n a sedation
+individual > neurological disorder
+individual > non alcoholic fatty liver disease
+individual > obesity
+individual > occurrence epileptic seizure
+individual > parkinsonian motor deficits
+individual > periventricular heterotopia formation
+individual > promotion hepatocelluar carcinoma
+individual > reduced feeding 1
+individual > reduced spawning behavior
+individual > reduction fo pigmentation pattern
+individual > sexual behavior decreased
+individual > status epilepticus
+individual > sudden cardiac death
+individual > suppression immune system
+individual > suppression inflammatory cytokines
+individual > systemic inflammatory response syndrome
+individual > thrombosis and disseminated intravascular coagulation
+individual > viable offspring decreased
+molecular
+molecular > altered cholesterol metabolism
+molecular > decrease surfactant
+molecular > decreased cholesterol decreased de novo biosynthesis of choleseterol
+molecular > decreased cholesterol decreased uptake of lipoproteins
+molecular > decreased extracellular chloride
+molecular > decreased extracellular sodium
+molecular > decreased myelin basic protein expression in oligodendrocytes
+molecular > failure in gamma glutamyl carboxylation of clotting factors ii vii ix and x under carboxylation of clotting factors
+molecular > increase mucous
+molecular > increase proinflammatory mediators
+molecular > increase surfactant
+molecular > increase vascular smooth muscle contraction
+molecular > increased agitation
+molecular > increased proinflammatory mediators
+molecular > inhibition of lung surfactant function
+molecular > insufficiency vascular
+molecular > metaplasia of goblet cells
+molecular > reduced levels of bdnf
+molecular > reduced ptgs1 function
+organ
+organ > abnormal cardiac structure and function
+organ > abnormal glucose homeostasis
+organ > activated gastric ulcer formation
+organ > activation proliferation t cells
+organ > airway inflammation
+organ > airway remodeling
+organ > altered brain morphology
+organ > altered cardiac electrical conduction
+organ > altered function of the brain
+organ > altered neuroanatomy
+organ > altered neurophysiology
+organ > altered visual function
+organ > angiogenesis disfunction
+organ > angiogenesis dysfunction
+organ > blood extravasation into the lungs
+organ > cardiac hypertrophy
+organ > cerebellar neuronal differentiation decreased
+organ > chronic kidney disease
+organ > clonal expansion cell proliferation to form altered hepatic foci
+organ > coagulation
+organ > colon epithelial injury
+organ > decrease cardiac contractility
+organ > decrease cardiac ejection fraction
+organ > decrease left ventricular function
+organ > decrease of neuronal network function
+organ > decrease oogenesis
+organ > decreased bile flow
+organ > decreased eye size
+organ > decreased neuronal network function in adult brain
+organ > decreased oocyte maturation
+organ > decreased size of the ovarian reserve
+organ > decreased spermatogenesis
+organ > degeneration of dopaminergic neurons of the nigrostriatal pathway
+organ > disrupted spermatogenesis and sperm quality
+organ > disturbed cortical architecture
+organ > dysgeusia
+organ > dysregulation of heart rate and vascular tone
+organ > eczematous eruption
+organ > emphysema
+organ > encephalitis
+organ > feminisation or incomplete development primary and accessory male sex organs
+organ > formation hepatocellular and bile duct tumors
+organ > heart failure
+organ > hypersecretion mucus
+organ > immune mediated hepatitis
+organ > impaired blood testis barrier
+organ > impaired ovulation
+organ > impaired oxygenation of the blood
+organ > impaired spermatogenesis
+organ > increase allergic respiratory hypersensitivity response
+organ > increase fat mass
+organ > increase follicular atresia
+organ > increase hemopericardium
+organ > increase liver and splenic hemosiderosis
+organ > increase lung cancer
+organ > increase ovarian follicle breakdown
+organ > increase pericardial edema
+organ > increase plasma vitellogenin concentrations
+organ > increase pneumonia
+organ > increase rbc congestion in liver
+organ > increase renal pathology due to vtg deposition
+organ > increase site of contact nasal tumors
+organ > increase the risk of acute respiratory failure
+organ > increase tissue organ damage
+organ > increased ataxia paralysis or hyperactivity
+organ > increased atrioventricular block and bradycardia
+organ > increased brain homocysteine level
+organ > increased cardiac arrthymia
+organ > increased cardiac fibrosis
+organ > increased cardiac stress
+organ > increased cardiovascular fibrosis
+organ > increased catabolism of muscle protein
+organ > increased cholestasis
+organ > increased cholinergic signaling
+organ > increased delay in heart electrical conduction
+organ > increased fat mass
+organ > increased glomerular rupture and renal hemorrhaging
+organ > increased liver steatosis
+organ > increased muscular waves in foot
+organ > increased nasal lesions
+organ > increased oocyte maturation
+organ > increased pancreatic acinar tumors
+organ > increased pulmonary edema
+organ > increased renal vitellogenin deposition
+organ > increased respiratory irritability and chronic cough
+organ > increased serum creatinine
+organ > increased stimulation of brain serotonin 5 ht1a 5 ht2c receptors
+organ > increased systemic total cholesterol pool
+organ > increased tumor growth
+organ > induced dysfunction of microcirculation
+organ > induction lung fibrosis
+organ > inflamatory events in light exposed tissues
+organ > inflammation liver
+organ > inhibit gastric ulcer formation
+organ > inhibition liver regeneration
+organ > intestinal inflammation
+organ > ke7 impaired vasodilation
+organ > ke8 increase vascular resistance
+organ > liver cancer
+organ > liver dysfunction
+organ > liver injury
+organ > lung cancer
+organ > lung fibrosis
+organ > microcephaly
+organ > mucus viscosity increased
+organ > myocardial infarction
+organ > n a ataxia paralysis or hyperactivity
+organ > n a liver fibrosis
+organ > n a liver steatosis
+organ > n a methemoglobinemia decreased hemoglobin hematocrit red blood cell number
+organ > n a steatohepatisis
+organ > neurodegeneration
+organ > occurrence abnormal vascular remodeling
+organ > occurrence cardiac arrhythmia
+organ > occurrence cytoplasmic vacuolization
+organ > occurrence kidney toxicity
+organ > occurrence of cataracts
+organ > ovarian retardation
+organ > premature ovarian insufficiency
+organ > promotion ovarian cancer
+organ > pulmonary fibrosis
+organ > pulmonary inflammation
+organ > reduced tidal volume
+organ > respiratory distress arrest
+organ > scaling lichenification
+organ > systemic acute phase response
+organ > systemic inflammation leading to hepatic steatosis
+organ > testicular atrophy
+organ > testicular cancer
+organ > thromboinflammation increased
+organ > thyroxine in neuronal tissue decreased
+organ > urothelial tumor
+organ > uterine adenocarcinoma
+organ > vascular calcification
+organ > vascular remodeling
+organ > ventricular remodeling
+population
+population > abnormal role change within caste
+population > death failure colony
+population > decline population
+population > decreased population size
+population > decreased population trajectory
+population > decreased survival
+population > increase malformations
+population > increased incidence of vascular calcification and atherosclerosis morbidity
+population > increased kidney failure
+population > increased mortality
+population > increased population
+population > locomotor function impaired
+population > reduced survival
+tissue
+tissue > airway surface liquid height decreased
+tissue > alterations cellular proliferation hyperplasia
+tissue > altered retinal layer structure
+tissue > altered white brain matter
+tissue > alveolar reopening
+tissue > cerebellar hypoplasia
+tissue > chronic mucus hypersecretion
+tissue > collagen deposition
+tissue > decrease abdominal muscle contraction
+tissue > decrease circulating crustacean cardioactive peptide
+tissue > decrease ecdysis motor program activity
+tissue > decrease neural network maturation
+tissue > decrease vascular integrity
+tissue > decreased blood plasma volume
+tissue > decreased cholesterol
+tissue > decreased glomerular filtration
+tissue > decreased mucosal blood flow
+tissue > decreased mucous
+tissue > decreased plasma sodium concentrations
+tissue > development liver cancer
+tissue > dopamine release in the brain decreased
+tissue > facial cartilage structures are reduced in size and morphologically distorted
+tissue > fibroproliferative airway lesions
+tissue > formation liver fibrosis
+tissue > helicobacter pylori infection
+tissue > hemostasis depletion from blood of fully functional carboxylated clotting factors
+tissue > hippocampal anatomy altered
+tissue > hippocampal physiology altered
+tissue > hyperinflammation
+tissue > hyperplasia hyperplasia
+tissue > hyperplasia mammary gland
+tissue > hyperplasia ovarian epithelium
+tissue > hypomyelination
+tissue > immune system inflammation
+tissue > impaired axonal insulation
+tissue > impaired oocyte maturation and ovulation
+tissue > impaired platelet aggregation
+tissue > increase abnormal neural remodeling
+tissue > increase adenomas carcinomas
+tissue > increase body fluid overload
+tissue > increase cancer
+tissue > increase cardiac remodelling
+tissue > increase endometrial adenocarcinomas
+tissue > increase endothelial dysfunction
+tissue > increase hepatocellular adenomas and carcinomas
+tissue > increase in inflammation
+tissue > increase mucosal blood flow
+tissue > increase necrosis
+tissue > increase necrotic tissue
+tissue > increase platelet aggregation
+tissue > increase pro inflammatory mediators
+tissue > increase respiratory or squamous metaplasia
+tissue > increase tissue degeneration necrosis atrophy
+tissue > increased adenomas
+tissue > increased adenomas carcinomas
+tissue > increased adenosquamous carcinomas of endometrium
+tissue > increased apoptosis adenomas carcinomas
+tissue > increased blood potassium concentration
+tissue > increased blood viscosity
+tissue > increased cardiac dysregulation
+tissue > increased ductal hyperplasia
+tissue > increased extracellular matrix deposition
+tissue > increased firbrosarcoma
+tissue > increased hemagiosarcoma
+tissue > increased histomorphological alteration of testis
+tissue > increased hyperplasia
+tissue > increased inflammatory immune responses
+tissue > increased liposarcoma
+tissue > increased mesotheliomas
+tissue > increased oncotic necrosis
+tissue > increased oocyte atresia
+tissue > increased plasma low density lipoprotein cholesterol
+tissue > increased pro inflammatory mediators
+tissue > increased recruitment of inflammatory cells
+tissue > increased uncoordinated cardiac contraction
+tissue > increased vascular endothelial dysfunction
+tissue > increased vascular fibrosis
+tissue > induction microvesicular fat
+tissue > induction somatic muscle paralysis
+tissue > infiltration inflammatory cells
+tissue > loss of alveolar capillary membrane integrity
+tissue > n a hepatotoxicity hepatopathy including a constellation of observable effects
+tissue > n a neurodegeneration
+tissue > necrosis
+tissue > necrotic tissue
+tissue > neural tube defects
+tissue > neuroinflammation
+tissue > occurrence focal seizure
+tissue > occurrence hyperplasia of goblet cells
+tissue > occurrence metaplasia of goblet cells
+tissue > occurrence renal ischemia
+tissue > occurrence renal proximal tubular necrosis
+tissue > occurrence vascular dysfunction
+tissue > olfactory epithelium degeneration
+tissue > overactivation muscle contraction
+tissue > promotion mesovarian leiomyomas
+tissue > promotion ovarian adenomas
+tissue > reduced cortical thickness
+tissue > reduced mucosal defense
+tissue > reduced platelet aggregation
+tissue > reduction in melanin lead to decrease of pigmentation
+tissue > reduction of melanosome level
+tissue > slowed heart rate
+tissue > trigeminal and or vagal nerve excitation causes airway hyper responsiveness cough dyspnea
+tissue > under carboxylated clotting factors will not assemble on cell surfaces to form clot failure of secondary hemostasis
+tissue > vascular barrier disruption

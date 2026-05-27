@@ -1,7 +1,0 @@
-inflammation induced tissue alteration
-morphologic change
-morphologic change > general observation
-morphologic change > general observation > cause of death moribund condition
-morphologic change > structural alteration
-morphologic change > structural alteration > organ specific entities changes
-morphologic change > structural alteration > organ specific entities changes > mononuclear cell infiltrate fibrosis myocardium

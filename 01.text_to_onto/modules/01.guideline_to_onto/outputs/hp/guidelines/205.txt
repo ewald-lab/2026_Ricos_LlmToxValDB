@@ -1,0 +1,179 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the head
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormal facial expression
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral physiology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral physiology > abnormality of salivation
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral physiology > abnormality of salivation > excessive salivation
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormal oral physiology > impaired mastication
+phenotypic abnormality > abnormality of metabolism homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal drug response
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal drug response > adverse drug response
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > food intolerance
+phenotypic abnormality > abnormality of the cardiovascular system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia > cardiac arrest
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia > cardiac arrest > sudden cardiac death
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > acute coronary syndrome
+phenotypic abnormality > abnormality of the digestive system
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal esophagus morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal esophagus morphology > esophageal obstruction
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > anorexia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > early satiety
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > feeding difficulties
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > malnutrition
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > poor appetite
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > postprandial fullness
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal esophagus physiology
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal esophagus physiology > dysphagia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal esophagus physiology > dysphagia > hydrophobia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal esophagus physiology > dysphagia > impaired oropharyngeal swallow response
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal esophagus physiology > dysphagia > neuromuscular dysphagia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal esophagus physiology > dysphagia > oral pharyngeal dysphagia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal gastrointestinal motility
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > abnormal gastrointestinal motility > gastrointestinal dysmotility
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > gastrointestinal obstruction
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > gastrointestinal obstruction > functional intestinal obstruction
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > odynophagia
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > gastroparesis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the gastrointestinal tract
+phenotypic abnormality > abnormality of the nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > incoordination
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > incoordination > poor fine motor coordination
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > incoordination > poor gross motor coordination
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central motor function > abnormality of coordination > incoordination > poor hand eye coordination
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormal central sensory function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal affect regulation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal emotional state
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal emotional state > dysregulated negative emotional state
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition > lethargy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormal diminished volition > lethargy > paroxysmal lethargy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > agitation
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > disinhibition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > disinhibition > social disinhibition
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > disinhibition > social disinhibition > inappropriate behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal affect > abnormal volitional state > abnormally increased volition > restlessness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal cognitive process
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal cognitive process > abnormal communication
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal cognitive process > abnormal communication > abnormal nonverbal communicative behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > abnormal experience of reality > abnormal psychotic pattern
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal demeanor
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal demeanor > inappropriate crying
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal demeanor > placidity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal demeanor > unhappy demeanor
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal interest
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal play
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal play > lack of spontaneous play
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal sexual behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal change in social behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal social development
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal social development > abnormal response to social norms
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > abnormal social behavior > abnormal social development > abnormal social emotional interactions
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > diagnostic behavioral phenotype
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > impaired executive functioning
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > impairment in personality functioning
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > impairment in personality functioning > personality changes
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > pseudobulbar affect
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal drinking behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > oral aversion
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > pica
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > pica > geophagia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > polyphagia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > restrictive eating
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal consumption behavior > abnormal eating behavior > tachyphagia
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > recurrent maladaptive behavior > abnormal fear induced behavior
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > reduced impulse control
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > atypical behavior > sensory behavioral abnormality > sensory hypersensitivity
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > cognitive impairment
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > cognitive impairment > mental deterioration
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > cognitive impairment > mental deterioration > psychomotor deterioration
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > reduced consciousness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > reduced consciousness > decreased vigilance
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > reduced consciousness > excessive daytime somnolence
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of mental function > reduced consciousness > loss of consciousness
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal head movements
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal head movements > jerky head movements
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > abnormal posturing
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > diminished movement
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > gait disturbance
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > abnormality of movement > gait disturbance > unsteady gait
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > autonomic voluntary dissociation of facial movements
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > bulbar signs
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > acute encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > hepatic encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > hepatic encephalopathy > chronic hepatic encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > necrotizing encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > progressive encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > recurrent encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > pseudobulbar signs
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > seizure > motor seizure
+phenotypic abnormality > abnormality of the nervous system > abnormality of the peripheral nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormality of the peripheral nervous system > abnormal peripheral nervous system physiology
+phenotypic abnormality > abnormality of the nervous system > abnormality of the peripheral nervous system > abnormality of the somatic nervous system
+phenotypic abnormality > abnormality of the respiratory system
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory arrest
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory arrest > cardiorespiratory arrest
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory failure
+phenotypic abnormality > constitutional symptom
+phenotypic abnormality > constitutional symptom > impairment of activities of daily living
+phenotypic abnormality > constitutional symptom > impairment of activities of daily living > impaired feeding ability
+phenotypic abnormality > constitutional symptom > malaise
+phenotypic abnormality > constitutional symptom > sudden death
+phenotypic abnormality > constitutional symptom > sudden death > sudden unexpected death in epilepsy
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index > decreased body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index > increased body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > failure to thrive in infancy
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > severe failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > small for gestational age
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss > cachexia
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > large for gestational age
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > abdominal obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > class i obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > class ii obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > class iii obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > truncal obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > overweight
+phenotypic abnormality > growth abnormality > growth delay
+phenotypic abnormality > growth abnormality > growth delay > intrauterine growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation > mild postnatal growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation > moderate postnatal growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation > severe postnatal growth retardation

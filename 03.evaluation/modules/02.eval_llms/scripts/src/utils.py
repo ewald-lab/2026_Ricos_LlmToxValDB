@@ -41,18 +41,18 @@ def load_ontology_embeddings(db_path: str) -> List[Dict]:
     if not os.path.exists(db_path):
         logging.getLogger(__name__).error(f"Ontology embeddings DB not found at {db_path}")
         return []
-    
+
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("SELECT uri, name, sanitized_name, definition, parent, is_llm_generated FROM embeddings")
     rows = cursor.fetchall()
     conn.close()
-    
+
     return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': r[3], 'parent': r[4], 'is_llm_generated': r[5]} for r in rows]
 
 def load_ontology_nodes(db_path: str) -> tuple:
     """Loads ontology node metadata from the embeddings DB.
-    
+
     Returns:
         nodes (dict): {name: {'sanitized_name': ..., 'parent': ..., 'definition': ...}}
         categories (list): list of all node names
@@ -60,13 +60,13 @@ def load_ontology_nodes(db_path: str) -> tuple:
     if not os.path.exists(db_path):
         logging.getLogger(__name__).error(f"Ontology DB not found at {db_path}")
         return {}, []
-    
+
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute("SELECT name, sanitized_name, definition, parent FROM embeddings")
     rows = cursor.fetchall()
     conn.close()
-    
+
     nodes = {}
     categories = []
     for name, sanitized_name, definition, parent in rows:
@@ -76,7 +76,7 @@ def load_ontology_nodes(db_path: str) -> tuple:
             'definition': definition or ''
         }
         categories.append(name)
-    
+
     return nodes, categories
 
 
@@ -85,14 +85,14 @@ def get_debug_rows(df: pl.DataFrame, target_column: str, random_debug_rows: Opti
     """Handles the logic of selecting unique toxic effects for debugging."""
     logger = logging.getLogger(__name__)
     random.seed(seed)
-    
+
     # 1. First, select rows based on random count if requested
     if random_debug_rows is not None and debug_rows is None:
         valid_df = df.with_row_index("orig_index").filter(
             pl.col(target_column).map_elements(is_valid_description, return_dtype=pl.Boolean)
         )
         unique_effects_df = valid_df.group_by(target_column, maintain_order=True).agg(pl.col("orig_index").first())
-        
+
         total_unique = unique_effects_df.height
         if random_debug_rows >= total_unique:
             result_rows = sorted(unique_effects_df["orig_index"].to_list())
@@ -108,12 +108,12 @@ def get_debug_rows(df: pl.DataFrame, target_column: str, random_debug_rows: Opti
     if result_rows:
         debug_df = df.select(target_column).with_row_index("orig_index").filter(pl.col("orig_index").is_in(result_rows))
         final_rows = sorted(debug_df.group_by(target_column, maintain_order=True).agg(pl.col("orig_index").first())["orig_index"].to_list())
-        
+
         # If filtering for uniqueness changed the count, we log it, otherwise one log is enough
         if len(final_rows) != len(result_rows) or not random_debug_rows:
             logger.info(f"Final debug selection: {len(final_rows)} unique toxic effects.")
         return final_rows
-        
+
     return []
 
 def get_unique_descriptions(df: pl.DataFrame, target_column: str, debug_rows: Optional[List[int]] = None) -> Tuple[List[str], Set[str]]:
@@ -148,19 +148,19 @@ def get_unique_descriptions(df: pl.DataFrame, target_column: str, debug_rows: Op
     logger.info(f"Found {len(unique_descriptions)} unique descriptions to process.")
     return unique_descriptions, seen_descriptions
 
-def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int, 
-                    categories: List[str], target_column: str, 
-                    output_file: str, reasoning_file: str, 
+def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
+                    categories: List[str], target_column: str,
+                    output_file: str, reasoning_file: str,
                     schema: Dict, is_final: bool = False, debug_rows: Optional[List[int]] = None, seen_descriptions: Optional[Set[str]] = None):
     """Saves a processed chunk of descriptions and its reasoning to disk using efficient Polars joins."""
     if not cache_chunk and not is_final: return
     logger = logging.getLogger(__name__)
-    
+
     # 1. Create a Results DataFrame from the unique descriptions processed
     # Format: {description: (hits_dict, trace)}
     results_list = []
     chunk_reasoning = {}
-    
+
     for desc, (hits, trace, selected) in cache_chunk.items():
         row_data = {target_column: desc}
         row_data.update(hits)
@@ -179,17 +179,17 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
         # Create a tiny DataFrame for joining
         # Note: categories not in 'hits' will be null after join
         results_df = pl.DataFrame(results_list)
-        
+
         # Join with the work_df
         # We only want rows whose description was in this chunk's results
         # Join order is not guaranteed by default in Polars join, so we use original index later
         chunk_df = work_df.join(results_df, on=target_column, how="inner")
-        
+
         # Fill missing categories with 0 (for nodes not in 'hits')
         chunk_df = chunk_df.with_columns([
             pl.col(cat).fill_null(0).cast(pl.Int64) for cat in categories if cat in chunk_df.columns
         ])
-        
+
         # Add missing category columns that weren't even in results_df
         missing_cats = [cat for cat in categories if cat not in chunk_df.columns]
         if missing_cats:
@@ -203,7 +203,7 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
 
     # Sort by original index to preserve order
     chunk_df = chunk_df.sort("orig_index")
-    
+
     # Ensure correct column order and schema
     # We KEEP orig_index for the merge later
     final_cols = [col for col in schema.keys() if col in chunk_df.columns]
@@ -219,23 +219,23 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
             [pl.col(target_column).str.join("|")] +
             [pl.col(c).max() for c in categories]
         )
-    
+
     out_csv = output_file.replace('.csv', f'_{backup_idx}.csv')
     chunk_df.write_csv(out_csv)
     logger.info(f"Saved backup chunk {backup_idx} to {out_csv}")
-    
+
     out_json = reasoning_file.replace('.json', f'_{backup_idx}.json')
     if chunk_reasoning:
         with open(out_json, 'w', encoding='utf-8') as f:
             json.dump(chunk_reasoning, f, indent=2, ensure_ascii=False)
 
-def merge_backups(output_file: str, reasoning_file: str, 
-                  backup_count: int, categories: List[str], 
+def merge_backups(output_file: str, reasoning_file: str,
+                  backup_count: int, categories: List[str],
                   target_column: str, schema: Dict):
     """Merges all backup CSV and JSON files into the final outputs."""
     logger = logging.getLogger(__name__)
     logger.info("Merging backups to create final results...")
-    
+
     # Merge CSVs
     backup_csv_files = [output_file.replace('.csv', f'_{i}.csv') for i in range(1, backup_count + 1)]
     dfs = []
@@ -243,14 +243,14 @@ def merge_backups(output_file: str, reasoning_file: str,
         if os.path.exists(f):
             # Read only relevant columns to save memory if needed, but schema_overrides is good
             dfs.append(pl.read_csv(f, schema_overrides=schema, ignore_errors=True))
-    
+
     if dfs:
         final_df = pl.concat(dfs)
-        
+
         # Sort ENTIRE dataframe by original index to restore strict input order
         if "orig_index" in final_df.columns:
             final_df = final_df.sort("orig_index")
-            
+
         non_group_cols = set(categories) | {target_column} | {"orig_index"}
         group_cols = [c for c in final_df.columns if c not in non_group_cols]
         if group_cols:
@@ -258,19 +258,19 @@ def merge_backups(output_file: str, reasoning_file: str,
                 [pl.col(target_column).str.join("|")] +
                 [pl.col(c).max() for c in categories]
             )
-            
+
         # Drop orig_index before final write
         if "orig_index" in final_df.columns:
             final_df = final_df.drop("orig_index")
-            
+
         logger.info(f"Saving final merged results to {output_file}")
         final_df.write_csv(output_file)
-        
+
         # Cleanup backups
-        for f in backup_csv_files if os.path.exists(f) else []: 
-            try: os.remove(f) 
+        for f in backup_csv_files if os.path.exists(f) else []:
+            try: os.remove(f)
             except: pass
-    
+
     # Merge JSON reasoning
     merged_reasoning = {}
     json_backups = [reasoning_file.replace('.json', f'_{i}.json') for i in range(1, backup_count + 1)]
@@ -280,7 +280,7 @@ def merge_backups(output_file: str, reasoning_file: str,
                 merged_reasoning.update(json.load(f))
             try: os.remove(jf)
             except: pass
-    
+
     logger.info(f"Saving final merged reasoning to {reasoning_file}")
     with open(reasoning_file, 'w', encoding='utf-8') as f:
         json.dump(merged_reasoning, f, indent=2, ensure_ascii=False)

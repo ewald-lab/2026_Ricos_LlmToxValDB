@@ -1,0 +1,271 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of blood and blood forming tissues
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > gastrointestinal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > gastrointestinal hemorrhage > intestinal bleeding
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye > retinal hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > hemorrhage of the eye > vitreous hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > intracranial hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > joint hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > muscle hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > pulmonary hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > pulmonary hemorrhage > diffuse alveolar hemorrhage
+phenotypic abnormality > abnormality of blood and blood forming tissues > abnormal bleeding > internal hemorrhage > pulmonary hemorrhage > localized pulmonary hemorrhage
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the neck > abnormal neck morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the neck > abnormal neck morphology > abnormal morphology of the musculature of the neck
+phenotypic abnormality > abnormality of the cardiovascular system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac atrium morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac atrium morphology > abnormal left atrium morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac atrium morphology > abnormal right atrium morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac atrium morphology > abnormal right atrium morphology > right atrial enlargement
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac atrium morphology > abnormal right atrium morphology > right atrial thrombus
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac ventricle morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac ventricle morphology > dilatation of the ventricular cavity
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac ventricle morphology > myocardial calcification
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal cardiac ventricle morphology > myocardial steatosis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal endocardium morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal endocardium morphology > endocardial fibroelastosis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal endocardium morphology > endocardial fibrosis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal myocardium morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal myocardium morphology > myocardial necrosis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial effusion
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial effusion > chylopericardium
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial effusion > hemopericardium
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial effusion > purulent pericardial effusion
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial effusion > serous pericardial effusion
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > abnormal pericardium morphology > pericardial lymphangiectasia
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > cardiomegaly
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > neoplasm of the heart
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal heart morphology > neoplasm of the heart > calcified amorphous tumor of the heart
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal morphology of the great vessels
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal morphology of the great vessels > abnormal aortic morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal morphology of the great vessels > abnormal aortic morphology > aortic atherosclerotic lesion
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal morphology of the great vessels > abnormal aortic morphology > aortic rupture
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal morphology of the great vessels > abnormal aortic morphology > calcification of the aorta
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal morphology of the great vessels > abnormal aortic morphology > coated aorta
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology > abnormal bronchial artery morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology > abnormal bronchial artery morphology > bronchial artery dilatation
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology > abnormal celiac artery morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology > abnormal femoral artery morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology > abnormal femoral artery morphology > femoral arterial calcification
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > abnormal vascular morphology > abnormal blood vessel morphology > abnormal systemic arterial morphology > dilatation of an abdominal artery
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system morphology > cardiovascular calcification
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the lymphatic system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the lymphatic system > abnormal lymph node morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the lymphatic system > abnormal lymph node morphology > lymph node necrosis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the lymphatic system > abnormality of the spleen
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the lymphatic system > abnormality of the spleen > abnormal spleen morphology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the lymphatic system > abnormality of the spleen > abnormal spleen morphology > splenic necrosis
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > abnormality of the pulmonary vasculature
+phenotypic abnormality > abnormality of the digestive system
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > abdominal adhesions
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > abdominal aseptic abscess
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > ascites
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > ascites > chylous ascites
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > ascites > gelatinous ascites
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > ascites > loculated ascites
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > ascites > urinary ascites
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly > hepatomegaly
+phenotypic abnormality > abnormality of the digestive system > abnormal abdomen morphology > visceromegaly > hepatomegaly > fluctuating hepatomegaly
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal anus morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal esophagus morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal esophagus morphology > acute esophageal necrosis
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > abnormal cecum morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > abnormal rectum morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > colonic fibrinopurulent exudate
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > colonic varices
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > inflammation of the large intestine
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology > lymphoid nodular hyperplasia
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal small intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal ileum morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal ileum morphology > ileitis
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal small intestine morphology > abnormal ileum morphology > ileitis > necrotizing ileitis
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal hypoplasia
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal lymphoid nodular hyperplasia
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal obstruction
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal obstruction > high intestinal obstruction
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal perforation
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal perforation > colon perforation
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intestinal perforation > rectal perforation
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > intramural intestinal gas
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > abnormal gastric mucosa morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > abnormal gastric mucosa morphology > gastric ulcer
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > enlarged gastric folds
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > gastric hypertrophy
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > gastric perforation
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > malposition of the stomach
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > microgastria
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal stomach morphology > tortuous appearance of the stomach
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > gastrointestinal atresia
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > gastrointestinal ulcer
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract > gastrointestinal infarctions
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal mesentery morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology > hemoperitoneum
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology > perihepatic adhesions
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology > peritoneal abscess
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology > peritoneal mass
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology > peritonitis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology > peritonitis > meconium peritonitis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > abnormal liver parenchyma morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > abnormal liver parenchyma morphology > abnormal liver lobulation
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > abnormal liver parenchyma morphology > hepatic cystine accumulation
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > abnormal liver parenchyma morphology > hepatic sinusoidal dilatation
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > aplasia hypoplasia of the liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > aplasia hypoplasia of the liver > hepatic agenesis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > aplasia hypoplasia of the liver > segmental hypoplasia of liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > cirrhosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > cirrhosis > macronodular cirrhosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > cirrhosis > micronodular cirrhosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > cirrhosis > mixed cirrhosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > ectopic liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic calcification
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic fibrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic infarction
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic necrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic xanthomatosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > liver abscess
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > liver rupture
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > midline liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > nodular regenerative hyperplasia of liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > scalloped appearance of liver surface
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the pancreas
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the pancreas > abnormal pancreas morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the pancreas > abnormal pancreas morphology > abnormal pancreas size
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the pancreas > abnormal pancreas morphology > pancreatic atrophy
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the pancreas > abnormal pancreas morphology > pancreatic steatosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the gastrointestinal tract
+phenotypic abnormality > abnormality of the endocrine system
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal calcification
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal cortical sclerosis
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal hemorrhage
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal hyperplasia
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenal xanthomatosis
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > adrenocortical cytomegaly
+phenotypic abnormality > abnormality of the endocrine system > abnormal endocrine morphology > abnormal adrenal morphology > discoid adrenal gland
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal renal cortex morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > abnormal renal cortex morphology > renal cortical necrosis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > renal necrosis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the urinary system > abnormality of the upper urinary tract > abnormality of the kidney > abnormal renal morphology > renal necrosis > renal papillary necrosis
+phenotypic abnormality > abnormality of the immune system
+phenotypic abnormality > abnormality of the immune system > abnormal immune system morphology
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal blistering of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal blistering of the skin > blistering by anatomical location
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormal epidermal morphology > epidermal necrosis
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > decreased skin turgor
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue > increased subcutaneous truncal adipose tissue
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue > reduced subcutaneous adipose tissue
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue > reduced subcutaneous adipose tissue > minimal subcutaneous fat
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue > reduced subcutaneous adipose tissue > minimal subcutaneous fat > lack of facial subcutaneous fat
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue > superficial blush like subcutaneous fatty lesions
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > abnormality of subcutaneous fat tissue > yellow subcutaneous tissue covered by thin scaly skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > subcutaneous calcification
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > cutaneous necrosis
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > cutaneous necrosis > eschar
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > cutaneous necrosis > slough
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > pallor
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > regional abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > skin burn
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > stiff skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > thickened skin
+phenotypic abnormality > abnormality of the musculoskeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormal musculoskeletal physiology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormal musculoskeletal physiology > avascular necrosis
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormal musculoskeletal physiology > avascular necrosis > juvenile aseptic necrosis
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue > abnormal adipose tissue morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue > abnormal adipose tissue morphology > decreased adipose tissue
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue > abnormal adipose tissue morphology > decreased adipose tissue > adipose tissue loss
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > myopathy
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > myopathy > necrotizing myopathy
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the skeletal system > abnormal skeletal morphology > abnormal appendicular skeleton morphology
+phenotypic abnormality > abnormality of the nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal brainstem morphology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal brainstem morphology > atrophy degeneration affecting the brainstem
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal brainstem morphology > enlarged brainstem
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal brainstem morphology > focal necrotic brainstem lesion
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal brainstem morphology > kinked brainstem
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology > atrophy degeneration affecting the cerebrum
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology > atrophy degeneration affecting the cerebrum > cerebral atrophy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology > atrophy degeneration affecting the cerebrum > cerebral atrophy > diffuse cerebral atrophy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology > cerebral contusion
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology > cerebral hemisphere mass lesion
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system morphology > morphological central nervous system abnormality > abnormal brain morphology > abnormal forebrain morphology > abnormal cerebral morphology > encephalomalacia
+phenotypic abnormality > abnormality of the respiratory system
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology > abnormal pulmonary interstitial morphology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system morphology > abnormal lung morphology > abnormal pulmonary interstitial morphology > pulmonary granulomatosis
+phenotypic abnormality > abnormality of the thoracic cavity
+phenotypic abnormality > abnormality of the thoracic cavity > abnormal mediastinum morphology
+phenotypic abnormality > abnormality of the thoracic cavity > abnormal mediastinum morphology > mediastinal shift
+phenotypic abnormality > abnormality of the thoracic cavity > abnormal mediastinum morphology > narrow mediastinum
+phenotypic abnormality > abnormality of the thoracic cavity > abnormal mediastinum morphology > widened mediastinum
+phenotypic abnormality > constitutional symptom
+phenotypic abnormality > constitutional symptom > gangrene
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > abnormality of body mass index
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > failure to thrive in infancy
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > severe failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss > cachexia
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > class i obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > class ii obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > obesity > class iii obesity
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight > overweight
+phenotypic abnormality > growth abnormality > growth delay
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation > mild postnatal growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation > moderate postnatal growth retardation
+phenotypic abnormality > growth abnormality > growth delay > postnatal growth retardation > severe postnatal growth retardation
