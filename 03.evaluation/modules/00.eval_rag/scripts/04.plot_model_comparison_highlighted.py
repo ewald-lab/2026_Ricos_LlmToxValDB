@@ -9,6 +9,10 @@ def plot_comparison_with_highlights(summary_csv, output_name):
         return float(range_str.split('-')[1])
 
     df['x'] = df['Burden Range'].apply(get_x)
+
+    df['Recall'] = df['Recall'].astype(float)
+    df['MAP'] = df['MAP'].astype(float)
+
     df = df.sort_values(['Model', 'x'])
 
     plt.figure(figsize=(12, 7))
@@ -41,17 +45,17 @@ def plot_comparison_with_highlights(summary_csv, output_name):
 
                 # Parameters text with Title Case and no underscores
                 params_str = (f"Best Configuration (KaLM 12B):\n"
-                             f"Top K RAG = {row['top_k_rag']}\n"
-                             f"Threshold RAG = {row['thresh_rag']}\n"
-                             f"Top K Rerank = {row['top_k_rerank']}\n"
-                             f"Threshold Rerank = {row['thresh_rerank']}")
+                              f"Top K RAG = {row['top_k_rag']}\n"
+                              f"Threshold RAG = {row['thresh_rag']}\n"
+                              f"Top K Rerank = {row['top_k_rerank']}\n"
+                              f"Threshold Rerank = {row['thresh_rerank']}")
 
                 props = dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='black', linewidth=1)
 
                 # Annotation with arrow pointing to the circle
                 ax.annotate(params_str,
                             xy=(row['x'], row['Recall']),
-                            xytext=(row['x'] + 5, 0.90), # Move box to 0.90
+                            xytext=(row['x'] + 5, 0.88), # Move box
                             bbox=props,
                             arrowprops=dict(arrowstyle='->',
                                             connectionstyle='arc3,rad=.1',

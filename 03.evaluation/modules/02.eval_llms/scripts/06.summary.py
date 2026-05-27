@@ -89,6 +89,16 @@ def main():
             "total_params": "21B", "active_params": "3.6B", "dtype": "BF16", "gpu": "1x A100 / 1x H200"
         },
         {
+            "name": "Qwen3.5-27B-FP8",
+            "id": "ToxValLlm_llm_Qwen3.5-27B-FP8_ontology_mp_mode_1_consensus_1_with_defs",
+            "total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"
+        },
+        {
+            "name": "Qwen3.6-27B-FP8",
+            "id": "ToxValLlm_llm_Qwen3.6-27B-FP8_ontology_mp_mode_2_consensus_1_with_defs",
+            "total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"
+        },
+        {
             "name": "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
             "id": "ToxValLlm_llm_NVIDIA-Nemotron-3-Nano-30B-A3B-FP8_ontology_mp_mode_2_consensus_1_no_defs",
             "total_params": "30B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"

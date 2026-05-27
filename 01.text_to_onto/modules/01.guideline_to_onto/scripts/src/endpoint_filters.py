@@ -88,7 +88,8 @@ class EndpointOntologyFilterBuilder:
         top_k_rag: int = 20, threshold_rag: float = 0.4,
         reranker_model: str = "Qwen/Qwen3-Reranker-8B", threshold_reranker: float = 0.0,
         reranker_batch_size: int = 32, reranker_prompt_file: str | None = None,
-        mode: int = 1, consensus_runs: int = 3, max_retries: int = 3
+        mode: int = 1, consensus_runs: int = 3, max_retries: int = 3,
+        top_k_reranker: int = None
     ):
         from model.embeddings import EmbeddingModel
 
@@ -105,6 +106,7 @@ class EndpointOntologyFilterBuilder:
         self.consensus_threshold = 1 if self.consensus_runs == 2 else (self.consensus_runs // 2) + 1
 
         self.threshold_reranker = threshold_reranker
+        self.top_k_reranker = top_k_reranker
         self.reranker_batch_size = reranker_batch_size
         self.reranker_model = None
         self.reranker_tokenizer = None
@@ -196,12 +198,17 @@ class EndpointOntologyFilterBuilder:
                 batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
                 batch_probs = batch_scores[:, 1].exp().tolist()
                 scores.extend(batch_probs)
-
         passed_candidates = []
         for score, cand in zip(scores, candidates):
             if score >= self.threshold_reranker:
                 setattr(cand, 'rerank_score', score)
                 passed_candidates.append(cand)
+
+        # Apply top_k_reranker limit if specified
+        if self.top_k_reranker is not None and self.top_k_reranker > 0:
+            passed_candidates.sort(key=lambda x: getattr(x, 'rerank_score', 0.0), reverse=True)
+            passed_candidates = passed_candidates[:self.top_k_reranker]
+
         return passed_candidates
 
     def build_for_endpoints(self, llm, endpoints: list[dict[str, str]]):

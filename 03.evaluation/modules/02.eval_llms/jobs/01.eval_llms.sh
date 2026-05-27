@@ -1,13 +1,12 @@
 #!/bin/bash
 
-#SBATCH --partition=short
-#SBATCH --time=4:00:00
+#SBATCH --time=7-00:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
 #SBATCH --mem=32G
 #SBATCH -J "eval_llms"
-#SBATCH --array=0-7
+#SBATCH --array=0-9
 #SBATCH -o "logs/eval_llms_%A_%a.out"
 #SBATCH -e "logs/eval_llms_%A_%a.err"
 
@@ -18,7 +17,7 @@
 CODON_NODE="${1:-${CODON_NODE:-codon-gpu-007}}"
 
 # Handle manual runs where SLURM_ARRAY_TASK_ID is not set
-INDEX="${SLURM_ARRAY_TASK_ID:-${2:-6}}"
+INDEX="${SLURM_ARRAY_TASK_ID:-${2:-8}}"
 
 # Define model mapping based on array index (0-7)
 case $INDEX in
@@ -53,6 +52,14 @@ case $INDEX in
     7)
         MODEL="NVIDIA-Nemotron-3-Nano-30B-A3B-FP8"
         PORT="8007"
+        ;;
+    8)
+        MODEL="Qwen3.5-27B-FP8"
+        PORT="8008"
+        ;;
+    9)
+        MODEL="Qwen3.6-27B-FP8"
+        PORT="8009"
         ;;
     *)
         echo "Error: Invalid index/SLURM_ARRAY_TASK_ID: $INDEX"

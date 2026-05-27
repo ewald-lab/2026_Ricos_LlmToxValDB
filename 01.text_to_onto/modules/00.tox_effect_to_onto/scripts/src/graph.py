@@ -58,7 +58,7 @@ class TextToOntoGraph:
                 reranker_model_name: str, threshold_reranker: float,
                 mode: int, consensus_runs: int, ontology_definitions: bool, max_concurrency: int, max_retries: int, context_ontology: str,
                 reranker_prompt_file: str, reranker_batch_size: int,
-                global_definitions_db: str = None):
+                global_definitions_db: str = None, top_k_reranker: int = None):
         self.categories = categories
         self.ontology_definitions = ontology_definitions
         self.include_superiors = True
@@ -76,6 +76,7 @@ class TextToOntoGraph:
         self.threshold_rag = threshold_rag
         self.reranker_model_name = reranker_model_name
         self.threshold_reranker = threshold_reranker
+        self.top_k_reranker = top_k_reranker
         self.reranker_batch_size = reranker_batch_size
         self.mode = mode
         self.consensus_runs = consensus_runs
@@ -240,6 +241,11 @@ class TextToOntoGraph:
                 passed_candidates.append(cand)
             else:
                 rejected_count += 1
+
+        # Apply top_k_reranker limit if specified
+        if self.top_k_reranker is not None and self.top_k_reranker > 0:
+            passed_candidates.sort(key=lambda x: x.get('rerank_score', 0.0), reverse=True)
+            passed_candidates = passed_candidates[:self.top_k_reranker]
 
         logger.info(f"Reranker complete: kept {len(passed_candidates)} candidates, rejected {rejected_count}.")
 

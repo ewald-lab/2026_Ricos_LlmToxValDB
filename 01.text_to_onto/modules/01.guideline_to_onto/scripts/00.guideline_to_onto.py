@@ -206,6 +206,7 @@ def main():
     threshold_rag = rag_config.get("threshold_rag", 0.5)
     reranker_model = rag_config.get("reranker_model", "Qwen/Qwen3-Reranker-8B")
     threshold_reranker = rag_config.get("threshold_reranker", 0.0)
+    top_k_reranker = rag_config.get("top_k_reranker")
     reranker_batch_size = rag_config.get("reranker_batch_size", 32)
     reranker_prompt_file = rag_config.get("reranker_prompt")
 
@@ -251,6 +252,7 @@ def main():
         mode=args.mode,
         consensus_runs=args.consensus_runs,
         max_retries=test_retries,
+        top_k_reranker=top_k_reranker
     )
 
     endpoint_rows, guideline_rows, unique_rows, reasoning = builder.build_for_endpoints(llm, endpoints)
