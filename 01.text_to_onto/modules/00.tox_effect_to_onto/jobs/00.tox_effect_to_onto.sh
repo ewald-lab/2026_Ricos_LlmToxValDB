@@ -4,63 +4,45 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
-#SBATCH --gres=gpu:a100:1
+#SBATCH --gres=gpu:h200:1
 #SBATCH --mem=80G
 #SBATCH -J "toxval_llm_production_run"
 #SBATCH -o "logs/out_tvllm_prod_%j.out"
 #SBATCH -e "logs/err_tvllm_prod_%j.err"
 
-MODE=1
-ONTOLOGY="mp"
-CONSENSU_RUNS=3
-MODEL="Qwen3.5-122B-A10B-FP8"
-NUM_BACKUPS=10
-EMBED_DIR="qwen"
-MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
 CODON_NODE="${1:-${CODON_NODE:-}}"
 if [ -z "$CODON_NODE" ]; then
     echo "Error: CODON_NODE is required. Pass it as the first argument or set the CODON_NODE env variable."
     echo "Usage: sbatch $0 <codon-node>  (e.g. sbatch $0 codon-gpu-001)"
     exit 1
 fi
-BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
 
-JOBS_DIR="$SLURM_SUBMIT_DIR"
-REPO_ROOT="$(cd "${JOBS_DIR}/.." && pwd)"
-PROJECT_ROOT="$(cd "${REPO_ROOT}/../.." && pwd)"
-GIT_ROOT="$(cd "${PROJECT_ROOT}/.." && pwd)"
-RAG_CONFIG="${REPO_ROOT}/config/rag/best_config.json"
+ONTOLOGY="mp"
+
+BASE_URL="http://${CODON_NODE}.ebi.ac.uk:PORT/v1"
+REPO_ROOT="$(cd "${SLURM_SUBMIT_DIR}/../../../../" && pwd)"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
 
-module purge
-module load cuda/12.8.0
-module load gcc
+module purge && module load cuda/12.8.0 gcc
 
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+source "${REPO_ROOT}/01.text_to_onto/env-text-to-onto/bin/activate"
 
-source "${PROJECT_ROOT}/env-text-to-onto/bin/activate"
-
-export PYTHONPATH="${REPO_ROOT}/scripts:$PYTHONPATH"
-
-python "${REPO_ROOT}/scripts/00.tox_effect_to_onto.py" \
-    --input_file "${GIT_ROOT}/00.data_preparation/modules/01.prepare_database/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
-    --output_file "${REPO_ROOT}/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
-    --reasoning_file "${REPO_ROOT}/outputs/ToxValDB_Reasoning_${ONTOLOGY}_${MODEL}.json" \
+python "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/scripts/00.tox_effect_to_onto.py" \
+    --input_file "${REPO_ROOT}/00.data_preparation/modules/01.prepare_database/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
+    --output_file "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Classified_${ONTOLOGY}_{MODEL}.csv" \
+    --reasoning_file "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Reasoning_${ONTOLOGY}_{MODEL}.json" \
     --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
     --std_column TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED \
-    --system_prompt_file "${REPO_ROOT}/config/system_prompt_${MODE}.txt" \
-    --rag_config ${RAG_CONFIG} \
-    --embeddings_model_id ${EMBED_DIR} \
-    --ontology_embedding_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
-    --global_definitions_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
-    --target_embedding_db "${GIT_ROOT}/00.data_preparation/modules/01.prepare_database/outputs/embeddings_db/tox_effects_${EMBED_DIR}.db" \
-    --mode ${MODE} \
-    --model_config "${MODEL_CONFIG}" \
+    --system_prompt_file "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/system_prompt_{MODE}.txt" \
+    --rag_config "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/rag/best_config.json" \
+    --ontology_embedding_db "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/{EMBED_DIR}/${ONTOLOGY}.db" \
+    --global_definitions_db "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
+    --target_embedding_db "${REPO_ROOT}/00.data_preparation/modules/01.prepare_database/outputs/embeddings_db/tox_effects_{EMBED_DIR}.db" \
     --base_url "${BASE_URL}" \
-    --consensus_runs ${CONSENSU_RUNS} \
-    --ontology_definitions \
-    --num_backups ${NUM_BACKUPS} \
-    --context_ontology "$(cat "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")"
+    --num_backups 10 \
+    --context_ontology "$(cat "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
+    --model_config "placeholder" \
+    --llm_config "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/llm_config.json" \
+    --descriptions_concurrency 100

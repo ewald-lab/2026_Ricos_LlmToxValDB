@@ -1,9 +1,35 @@
+from __future__ import annotations
 import csv
 import os
 import sys
 import argparse
 
-def get_tier(row_data, col_idx, mammal_species, chronic_types, target_units, inhalation_units, excluded_types):
+def get_tier(
+    row_data: list[str],
+    col_idx: dict[str, int],
+    mammal_species: set[str],
+    chronic_types: set[str],
+    target_units: set[str],
+    inhalation_units: set[str],
+    excluded_types: set[str],
+) -> str | None:
+    """
+    Description:
+    Determines the quality tier ('A', 'B', or None) of a study record based on species,
+    study type, excluded value types, dosage, and measurement units.
+
+    Args:
+        row_data (list[str]): The raw data row split into fields.
+        col_idx (dict[str, int]): Map of column names to row indexes.
+        mammal_species (set[str]): Set of allowed mammalian species names.
+        chronic_types (set[str]): Set of chronic/subchronic study types.
+        target_units (set[str]): Set of standard oral dosage unit strings.
+        inhalation_units (set[str]): Set of inhalation dosage unit strings.
+        excluded_types (set[str]): Set of excluded toxval value types.
+
+    Returns:
+        str | None: The tier string ('A' or 'B') if eligible, otherwise None.
+    """
     # Basic filters
     species = row_data[col_idx['SPECIES_COMMON']]
     if species not in mammal_species: return None
@@ -40,7 +66,18 @@ def get_tier(row_data, col_idx, mammal_species, chronic_types, target_units, inh
     except:
         return 'B'
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for tiered grouping of ToxVal studies by DTXSID. It reads the classified
+    data, applies tier filtering per compound-effect pair, and consolidates findings into the final dataset.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     parser = argparse.ArgumentParser(description="Tiered grouping of ToxVal studies by DTXSID")
     parser.add_argument("--input", required=True, help="Input classified CSV file")
     parser.add_argument("--output", required=True, help="Output grouped CSV file")

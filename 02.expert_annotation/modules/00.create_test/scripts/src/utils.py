@@ -1,15 +1,28 @@
+from __future__ import annotations
+
 import logging
-import re
 import sys
 import os
 import sqlite3
 import torch
-from typing import List, Dict
+from typing import Any, Dict, List
+
 from pathlib import Path
 from tqdm import tqdm
 
-def setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(message)s"):
-    """Configures global logging and suppresses noisy third-party loggers."""
+def setup_logging(level: int = logging.INFO, stream: Any = sys.stdout, fmt: str = "%(message)s") -> logging.Logger:
+    """
+    Description:
+    Configures global logging and suppresses noisy third-party loggers.
+
+    Args:
+        level (int): The logging level to set (e.g. logging.INFO). Defaults to logging.INFO.
+        stream (Any): The output stream to log to. Defaults to sys.stdout.
+        fmt (str): The logging format string. Defaults to "%(message)s".
+
+    Returns:
+        logging.Logger: The configured root-level or module-specific Logger instance.
+    """
     logging.basicConfig(stream=stream, level=level, format=fmt)
 
     for name, lvl in {
@@ -24,11 +37,29 @@ def setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(message)s"):
     return logging.getLogger(__name__)
 
 def is_valid_description(description: str) -> bool:
-    """Checks if a string is a valid, non-empty description."""
+    """
+    Description:
+    Checks if a string is a valid, non-empty description.
+
+    Args:
+        description (str): The text description to validate.
+
+    Returns:
+        bool: True if the description is a valid non-empty string, False otherwise.
+    """
     return description is not None and isinstance(description, str) and len(description.strip()) > 0
 
 def load_ontology_embeddings(db_path: str) -> List[Dict]:
-    """Loads all ontology embeddings into memory."""
+    """
+    Description:
+    Loads all ontology embeddings into memory from the database.
+
+    Args:
+        db_path (str): The path to the SQLite embeddings database.
+
+    Returns:
+        List[Dict]: A list of dictionaries representing the loaded ontology node embeddings.
+    """
     if not os.path.exists(db_path):
         logging.getLogger(__name__).error(f"Ontology embeddings DB not found at {db_path}")
         return []
@@ -42,7 +73,19 @@ def load_ontology_embeddings(db_path: str) -> List[Dict]:
     return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': r[3], 'parent': r[4], 'is_llm_generated': r[5], 'vector': torch.frombuffer(bytearray(r[6]), dtype=torch.float32)} for r in rows]
 
 def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, return_vectors: bool = True) -> Dict[str, torch.Tensor]:
-    """Ensures embeddings exist in the DB for the given texts. Returns {text: vector} if return_vectors is True."""
+    """
+    Description:
+    Ensures embeddings exist in the DB for the given texts. Returns {text: vector} if return_vectors is True.
+
+    Args:
+        texts (List[str]): List of texts to get or generate embeddings for.
+        model_name (str): Name/path of the embedding model to use.
+        db_path (str): Path to the SQLite embeddings database.
+        return_vectors (bool): If True, returns a dictionary mapping text to its embedding vector. Defaults to True.
+
+    Returns:
+        Dict[str, torch.Tensor]: A dictionary mapping each text to its embedding tensor, or empty dict if return_vectors is False.
+    """
     from model.embeddings import EmbeddingModel
 
     logger = setup_logging()

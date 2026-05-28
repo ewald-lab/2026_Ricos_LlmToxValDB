@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass
@@ -6,7 +8,18 @@ from pathlib import Path
 
 @dataclass
 class OntologyNode:
-    """Single ontology term as stored in the processed ontology SQLite DB."""
+    """
+    Description:
+    Single ontology term as stored in the processed ontology SQLite DB.
+
+    Attributes:
+        uri (str): The unique URI of the ontology term.
+        name (str): The name of the ontology term.
+        sanitized_name (str): The sanitized name of the ontology term.
+        definition (str): The definition of the ontology term.
+        parent (str | None): The parent ontology term name, or None if it is a root.
+        vector (bytes | None): Optional vector embedding representation. Defaults to None.
+    """
 
     uri: str
     name: str
@@ -17,9 +30,19 @@ class OntologyNode:
 
 
 class OntologyTree:
-    """In-memory ontology tree used to walk from broad terms to specific filters."""
+    """
+    Description:
+    In-memory ontology tree used to walk from broad terms to specific filters.
+    """
 
-    def __init__(self, nodes: dict[str, OntologyNode]):
+    def __init__(self, nodes: dict[str, OntologyNode]) -> None:
+        """
+        Description:
+        Initializes the in-memory ontology tree and parent-to-child mapping.
+
+        Args:
+            nodes (dict[str, OntologyNode]): Dictionary mapping node names to OntologyNode objects.
+        """
         self.nodes = nodes
         self.children: dict[str | None, list[str]] = defaultdict(list)
 
@@ -36,9 +59,18 @@ class OntologyTree:
         self._descendant_counts: dict[str, int] = {}
 
     @classmethod
-    def from_db(cls, ontology_db: str, global_definitions_db: str | None = None):
-        """Load ontology nodes from the existing embeddings DB format."""
+    def from_db(cls, ontology_db: str, global_definitions_db: str | None = None) -> OntologyTree:
+        """
+        Description:
+        Loads ontology nodes from the SQLite database.
 
+        Args:
+            ontology_db (str): Path to the SQLite ontology database.
+            global_definitions_db (str | None): Path to the SQLite global definitions database. Defaults to None.
+
+        Returns:
+            OntologyTree: An instance of OntologyTree containing the loaded nodes.
+        """
         db_path = Path(ontology_db)
         if not db_path.exists():
             raise FileNotFoundError(f"Ontology DB not found: {ontology_db}")
@@ -74,9 +106,15 @@ class OntologyTree:
         return cls(nodes)
 
     @staticmethod
-    def _apply_global_definitions(nodes: dict[str, OntologyNode], global_definitions_db: str):
-        """Replace node definitions using the optional URI-level definitions DB."""
+    def _apply_global_definitions(nodes: dict[str, OntologyNode], global_definitions_db: str) -> None:
+        """
+        Description:
+        Replaces node definitions using the global definitions database.
 
+        Args:
+            nodes (dict[str, OntologyNode]): Dictionary of ontology nodes.
+            global_definitions_db (str): Path to the global definitions database.
+        """
         db_path = Path(global_definitions_db)
         if not db_path.exists():
             return
@@ -94,8 +132,16 @@ class OntologyTree:
             return
 
     def roots(self, root_name: str | None = None) -> list[str]:
-        """Return traversal roots, optionally constrained to one configured term."""
+        """
+        Description:
+        Returns traversal roots, optionally constrained to one configured term.
 
+        Args:
+            root_name (str | None): Configured root name to filter, or None. Defaults to None.
+
+        Returns:
+            list[str]: A list of root term names.
+        """
         if root_name:
             if root_name not in self.nodes:
                 raise ValueError(f"Configured root not found in ontology DB: {root_name}")
@@ -103,13 +149,29 @@ class OntologyTree:
         return list(self.children.get(None, []))
 
     def get_children(self, name: str) -> list[str]:
-        """Return direct children for an ontology term name."""
+        """
+        Description:
+        Returns direct children for an ontology term name.
 
+        Args:
+            name (str): The name of the ontology term.
+
+        Returns:
+            list[str]: A list of child term names.
+        """
         return self.children.get(name, [])
 
     def descendant_count(self, name: str) -> int:
-        """Count all descendants under a term, caching results for prompt reuse."""
+        """
+        Description:
+        Counts all descendants under a term, caching results for prompt reuse.
 
+        Args:
+            name (str): The name of the ontology term.
+
+        Returns:
+            int: The total count of descendant terms.
+        """
         if name in self._descendant_counts:
             return self._descendant_counts[name]
 
@@ -124,8 +186,16 @@ class OntologyTree:
         return count
 
     def breadcrumbs(self, name: str) -> str:
-        """Return a readable root-to-term path for prompts and CSV outputs."""
+        """
+        Description:
+        Returns a readable root-to-term path (separated by ' > ') for prompts and CSV outputs.
 
+        Args:
+            name (str): The name of the ontology term.
+
+        Returns:
+            str: A breadcrumb string representing the hierarchy path.
+        """
         path = []
         current = name
         visited = set()
@@ -139,8 +209,18 @@ class OntologyTree:
         return " > ".join(reversed(path))
 
     def resolve_child_names(self, selected_terms: list[str], child_names: list[str]) -> list[str]:
-        """Match LLM-selected child labels back to exact ontology child names."""
+        """
+        Description:
+        Matches selected child labels (which could be names, sanitized names, or URIs)
+        back to exact ontology child names.
 
+        Args:
+            selected_terms (list[str]): Terms selected by the LLM.
+            child_names (list[str]): List of valid candidate child term names.
+
+        Returns:
+            list[str]: Matched candidate child term names in order of appearance.
+        """
         by_name = {name.lower(): name for name in child_names}
         by_sanitized = {
             self.nodes[name].sanitized_name.lower(): name

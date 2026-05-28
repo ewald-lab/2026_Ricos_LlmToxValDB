@@ -1,25 +1,33 @@
+from __future__ import annotations
 import argparse
 import pandas as pd
 import logging
+import os
 import sys
 import time
 
-def setup_logging():
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        stream=sys.stdout
-    )
-    return logging.getLogger(__name__)
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from src.utils import setup_logging
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for merging positive and negative toxicological cleaned data files
+    and saving the concatenated output.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     parser = argparse.ArgumentParser(description="Merge positive and negative toxicological cleaned data.")
     parser.add_argument("--positives", required=True, help="Path to the positives TSV file.")
     parser.add_argument("--negatives", required=True, help="Path to the negatives TSV file.")
     parser.add_argument("--output", required=True, help="Path to the output merged TSV file.")
     args = parser.parse_args()
 
-    logger = setup_logging()
+    logger = setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(asctime)s - %(levelname)s - %(message)s")
     start_time = time.time()
 
     logger.info(f"Loading positives from: {args.positives}")

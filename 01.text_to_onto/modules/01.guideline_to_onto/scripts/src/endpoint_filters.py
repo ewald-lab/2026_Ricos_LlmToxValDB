@@ -2,9 +2,9 @@ import csv
 import json
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, List, Literal
-import torch
+from typing import Any, Dict, List, Literal, Optional, Set, Tuple
 
+import torch
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
@@ -13,7 +13,18 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 from .ontology import OntologyTree
 
-def clean_llm_output(message) -> str:
+
+def clean_llm_output(message: Any) -> str:
+    """
+    Description:
+    Removes <think> tags and markdown JSON formatting from LLM output.
+
+    Args:
+        message (Any): The message object or string returned from the LLM.
+
+    Returns:
+        str: The cleaned JSON string.
+    """
     text = message.content if hasattr(message, "content") else str(message)
     if "</think>" in text:
         text = text.split("</think>")[-1].strip()
@@ -26,7 +37,18 @@ def clean_llm_output(message) -> str:
         text = text[:-3]
     return text.strip()
 
+
 def clean_reason(reason: str) -> str:
+    """
+    Description:
+    Strips prefix words like ACCEPTED or REJECTED from the reasoning text.
+
+    Args:
+        reason (str): The raw reasoning text.
+
+    Returns:
+        str: The cleaned reasoning text.
+    """
     r = reason.strip()
     if r.upper().startswith("ACCEPTED"):
         return r[8:].lstrip(" .-:")
@@ -34,15 +56,18 @@ def clean_reason(reason: str) -> str:
         return r[8:].lstrip(" .-:")
     return r
 
+
 class CandidateEvaluation(BaseModel):
     candidate_name: str = Field(description="The exact name of the candidate being evaluated.")
     reason: str = Field(description="Think step-by-step. Provide the explicit reason for the decision based on the critical rules. DO NOT write 'ACCEPTED' or 'REJECTED' in this field.")
     decision: Literal["ACCEPTED", "REJECTED"] = Field(description="Strictly 'ACCEPTED' or 'REJECTED' based on the reasoning above.")
 
+
 class BatchVerificationResult(BaseModel):
     analysis: str = Field(description="Step 1: Analyze the input description and determine its exact level of specificity.")
     evaluation: List[CandidateEvaluation] = Field(description="Step 2: Evaluate EVERY candidate individually. You MUST provide an evaluation object for ALL candidates in the list.")
     selected_candidates: List[str] = Field(description="Step 3: The final list of exact candidate names that pass the evaluation. Return an empty list [] if none match.")
+
 
 ENDPOINT_FILTER_FIELDS = [
     "ontology", "normalized_category", "normalized_endpoint", "original_endpoints", "guideline_numbers",
@@ -60,13 +85,37 @@ UNIQUE_FILTER_FIELDS = [
     "source_endpoints", "guideline_numbers", "endpoint_count", "max_confidence"
 ]
 
+
 def truncate_text(text: str, limit: int = 700) -> str:
+    """
+    Description:
+    Truncates a given text to a maximum character limit, preserving word boundaries where possible.
+
+    Args:
+        text (str): Input text to truncate.
+        limit (int): Character limit. Defaults to 700.
+
+    Returns:
+        str: The truncated text.
+    """
     text = " ".join((text or "").split())
     if len(text) <= limit:
         return text
     return text[: limit - 3].rstrip() + "..."
 
-def load_endpoint_rows(path: Path, debug_limit: int | None = None) -> list[dict[str, str]]:
+
+def load_endpoint_rows(path: Path, debug_limit: Optional[int] = None) -> list[dict[str, str]]:
+    """
+    Description:
+    Loads and parses endpoint rows from a normalized CSV file.
+
+    Args:
+        path (Path): Path to the CSV file.
+        debug_limit (Optional[int]): Limit on the number of rows to load. Defaults to None.
+
+    Returns:
+        list[dict[str, str]]: A list of dictionaries representing the loaded endpoint rows.
+    """
     with open(path, newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         rows = []
@@ -80,17 +129,46 @@ def load_endpoint_rows(path: Path, debug_limit: int | None = None) -> list[dict[
                 break
     return rows
 
+
 class EndpointOntologyFilterBuilder:
     def __init__(
         self, ontology: str, tree: OntologyTree, system_prompt: str, context_ontology: str = "",
         max_paths_per_endpoint: int = 5, max_depth: int = 12, max_concurrency: int = 10,
-        root_name: str | None = None, embedding_model_name: str = "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
+        root_name: Optional[str] = None, embedding_model_name: str = "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
         top_k_rag: int = 20, threshold_rag: float = 0.4,
         reranker_model: str = "Qwen/Qwen3-Reranker-8B", threshold_reranker: float = 0.0,
-        reranker_batch_size: int = 32, reranker_prompt_file: str | None = None,
+        reranker_batch_size: int = 32, reranker_prompt_file: Optional[str] = None,
         mode: int = 1, consensus_runs: int = 3, max_retries: int = 3,
-        top_k_reranker: int = None
-    ):
+        top_k_reranker: Optional[int] = None
+    ) -> None:
+        """
+        Description:
+        Initializes the EndpointOntologyFilterBuilder instance.
+
+        Args:
+            ontology (str): The ontology key.
+            tree (OntologyTree): The ontology tree representation.
+            system_prompt (str): System prompt string.
+            context_ontology (str): Context string about the ontology. Defaults to "".
+            max_paths_per_endpoint (int): Traversal path limit. Defaults to 5.
+            max_depth (int): Traversal depth limit. Defaults to 12.
+            max_concurrency (int): Maximum concurrent calls. Defaults to 10.
+            root_name (Optional[str]): traversal root term name. Defaults to None.
+            embedding_model_name (str): Embedding model identifier. Defaults to "Alibaba-NLP/gte-Qwen2-1.5B-instruct".
+            top_k_rag (int): Retrieval count. Defaults to 20.
+            threshold_rag (float): Score threshold for RAG candidates. Defaults to 0.4.
+            reranker_model (str): Reranker model identifier. Defaults to "Qwen/Qwen3-Reranker-8B".
+            threshold_reranker (float): Score threshold for reranking. Defaults to 0.0.
+            reranker_batch_size (int): Reranker batch size. Defaults to 32.
+            reranker_prompt_file (Optional[str]): Reranker prompt filepath. Defaults to None.
+            mode (int): Inference mode. Defaults to 1.
+            consensus_runs (int): Consensus run count. Defaults to 3.
+            max_retries (int): API retry limit. Defaults to 3.
+            top_k_reranker (Optional[int]): Limit on reranker selection output. Defaults to None.
+
+        Returns:
+            None
+        """
         from model.embeddings import EmbeddingModel
 
         self.ontology = ontology
@@ -165,6 +243,17 @@ class EndpointOntologyFilterBuilder:
         self._clean_llm_runner = RunnableLambda(clean_llm_output)
 
     def _rerank_candidates(self, description: str, candidates: list) -> list:
+        """
+        Description:
+        Reranks candidates based on score matching the query.
+
+        Args:
+            description (str): Raw text description query.
+            candidates (list): List of candidate node objects.
+
+        Returns:
+            list: Reranked and filtered candidate node list.
+        """
         if self.threshold_reranker <= 0.0 or not candidates or self.reranker_model_hf is None:
             return candidates
 
@@ -211,7 +300,18 @@ class EndpointOntologyFilterBuilder:
 
         return passed_candidates
 
-    def build_for_endpoints(self, llm, endpoints: list[dict[str, str]]):
+    def build_for_endpoints(self, llm: Any, endpoints: list[dict[str, str]]) -> Tuple[list[dict[str, str]], list[dict[str, str]], list[dict[str, str]], dict]:
+        """
+        Description:
+        Iterates over all endpoints, performs ontology mapping traversal, and builds outputs.
+
+        Args:
+            llm (Any): The LLM client instance.
+            endpoints (list[dict[str, str]]): List of endpoint rows.
+
+        Returns:
+            Tuple[list[dict[str, str]], list[dict[str, str]], list[dict[str, str]], dict]: (endpoint rows, guideline rows, unique rows, reasoning trace map)
+        """
         from tqdm import tqdm
         endpoint_rows = []
         reasoning = {}
@@ -231,12 +331,34 @@ class EndpointOntologyFilterBuilder:
         unique_rows = build_unique_rows(endpoint_rows)
         return endpoint_rows, guideline_rows, unique_rows, reasoning
 
-    def traverse_endpoint(self, llm, endpoint: dict[str, str]) -> dict[str, Any]:
+    def traverse_endpoint(self, llm: Any, endpoint: dict[str, str]) -> dict[str, Any]:
+        """
+        Description:
+        Wrapper method to call the traversal runner based on config mode.
+
+        Args:
+            llm (Any): LLM model client.
+            endpoint (dict[str, str]): Endpoint info mapping.
+
+        Returns:
+            dict[str, Any]: The traversal results containing filters and logs.
+        """
         if self.mode == 2:
             return self._traverse_mode_2(llm, endpoint)
         return self._traverse_mode_1(llm, endpoint)
 
-    def _traverse_mode_1(self, llm, endpoint: dict[str, str]) -> dict[str, Any]:
+    def _traverse_mode_1(self, llm: Any, endpoint: dict[str, str]) -> dict[str, Any]:
+        """
+        Description:
+        Executes Mode 1 individual candidate evaluation and traversal.
+
+        Args:
+            llm (Any): LLM model client.
+            endpoint (dict[str, str]): Endpoint metadata.
+
+        Returns:
+            dict[str, Any]: Filter output and execution log dict.
+        """
         filters = []
         traversal_steps = []
         if self._ontology_matrix is None:
@@ -369,7 +491,18 @@ class EndpointOntologyFilterBuilder:
             }
         }
 
-    def _traverse_mode_2(self, llm, endpoint: dict[str, str]) -> dict[str, Any]:
+    def _traverse_mode_2(self, llm: Any, endpoint: dict[str, str]) -> dict[str, Any]:
+        """
+        Description:
+        Executes Mode 2 batch candidate evaluation and traversal.
+
+        Args:
+            llm (Any): LLM model client.
+            endpoint (dict[str, str]): Endpoint metadata.
+
+        Returns:
+            dict[str, Any]: Filter output and execution log dict.
+        """
         filters = []
         traversal_steps = []
         if self._ontology_matrix is None:
@@ -487,7 +620,18 @@ class EndpointOntologyFilterBuilder:
             }
         }
 
-    def filter_rows_for_endpoint(self, endpoint: dict[str, str], filters: list[dict[str, Any]]):
+    def filter_rows_for_endpoint(self, endpoint: dict[str, str], filters: list[dict[str, Any]]) -> list[dict[str, str]]:
+        """
+        Description:
+        Maps endpoint details and filters to final schema dictionaries.
+
+        Args:
+            endpoint (dict[str, str]): Endpoint metadata.
+            filters (list[dict[str, Any]]): Traversal matches and scores.
+
+        Returns:
+            list[dict[str, str]]: Mapped filter output rows.
+        """
         rows = []
         for item in filters:
             node = item["node"]
@@ -508,13 +652,46 @@ class EndpointOntologyFilterBuilder:
             })
         return rows
 
+
 def split_pipe_values(value: str) -> list[str]:
+    """
+    Description:
+    Splits a pipe-separated string into a list of clean items.
+
+    Args:
+        value (str): The input string to split.
+
+    Returns:
+        list[str]: Split elements list.
+    """
     return [item.strip() for item in str(value or "").split("|") if item.strip()]
 
+
 def sort_guidelines(values: set[str]) -> list[str]:
+    """
+    Description:
+    Sorts a set of guideline numbers numerically and then alphabetically.
+
+    Args:
+        values (set[str]): Guideline numbers set.
+
+    Returns:
+        list[str]: Sorted guideline list.
+    """
     return sorted(values, key=lambda item: (not item.isdigit(), int(item) if item.isdigit() else item))
 
+
 def build_guideline_rows(endpoint_rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    """
+    Description:
+    Regroups endpoint matches by guideline to build guideline-level logs.
+
+    Args:
+        endpoint_rows (list[dict[str, str]]): List of generated filter rows.
+
+    Returns:
+        list[dict[str, str]]: Grouped guideline filter rows.
+    """
     grouped = {}
     for row in endpoint_rows:
         for guideline in split_pipe_values(row["guideline_numbers"]):
@@ -539,7 +716,18 @@ def build_guideline_rows(endpoint_rows: list[dict[str, str]]) -> list[dict[str, 
         })
     return sorted(rows, key=lambda row: (row["ontology"], row["guideline_number"], row["term_name"].lower()))
 
+
 def build_unique_rows(endpoint_rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    """
+    Description:
+    Collapses filter rows to unique terms with combined source information.
+
+    Args:
+        endpoint_rows (list[dict[str, str]]): List of generated filter rows.
+
+    Returns:
+        list[dict[str, str]]: Collapsed unique category filter rows.
+    """
     grouped = {}
     for row in endpoint_rows:
         key = (row["ontology"], row["term_name"])
@@ -565,7 +753,20 @@ def build_unique_rows(endpoint_rows: list[dict[str, str]]) -> list[dict[str, str
         })
     return sorted(rows, key=lambda row: (row["ontology"], row["term_name"].lower()))
 
+
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> Path:
+    """
+    Description:
+    Writes rows to a CSV file.
+
+    Args:
+        path (Path): Filepath to write to.
+        fieldnames (list[str]): CSV header fieldnames.
+        rows (list[dict[str, str]]): Data rows to write.
+
+    Returns:
+        Path: The written file Path.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -573,7 +774,19 @@ def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> 
         writer.writerows(rows)
     return path
 
+
 def write_json(path: Path, payload: dict[str, Any]) -> Path:
+    """
+    Description:
+    Writes a dictionary payload to a JSON file.
+
+    Args:
+        path (Path): Filepath to write to.
+        payload (dict[str, Any]): Data dictionary to serialize.
+
+    Returns:
+        Path: The written file Path.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2, ensure_ascii=False)

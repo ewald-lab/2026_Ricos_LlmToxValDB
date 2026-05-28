@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pandas as pd
 import polars as pl
 import matplotlib.pyplot as plt
@@ -8,7 +9,21 @@ from scipy.stats import mannwhitneyu
 import os
 import argparse
 
-def precision_recall_gain_curve(y_true, y_scores):
+def precision_recall_gain_curve(
+    y_true: np.ndarray | list[int] | list[float],
+    y_scores: np.ndarray | list[float]
+) -> tuple[list[float], list[float], list[float], list[float]]:
+    """
+    Description:
+    Computes precision, recall, and their corresponding gain metrics at various thresholds.
+
+    Args:
+        y_true (np.ndarray | list[int] | list[float]): True binary labels.
+        y_scores (np.ndarray | list[float]): Target scores/probabilities.
+
+    Returns:
+        tuple[list[float], list[float], list[float], list[float]]: A tuple containing (precisions, recalls, precision_gains, recall_gains).
+    """
     # Sort predictions and true labels by descending score
     sorted_indices = np.argsort(y_scores)[::-1]
     y_true_sorted = np.array(y_true)[sorted_indices]
@@ -42,7 +57,18 @@ def precision_recall_gain_curve(y_true, y_scores):
 
     return precisions, recalls, precision_gains, recall_gains
 
-def prg_auc(y_true, y_scores):
+def prg_auc(y_true: np.ndarray | list[int] | list[float], y_scores: np.ndarray | list[float]) -> float:
+    """
+    Description:
+    Calculates the Area Under the Precision-Recall Gain Curve (AUPRG).
+
+    Args:
+        y_true (np.ndarray | list[int] | list[float]): True binary labels.
+        y_scores (np.ndarray | list[float]): Target scores/probabilities.
+
+    Returns:
+        float: The computed area under the PR-Gain curve.
+    """
     try:
         _, _, pgs, rgs = precision_recall_gain_curve(y_true, y_scores)
         # Manual trapezoidal integration to avoid Numpy 2.0 np.trapz removal
@@ -55,7 +81,20 @@ def prg_auc(y_true, y_scores):
     except:
         return 0.0
 
-def analyze_results(input_path, output_dir, suffix=""):
+def analyze_results(input_path: str, output_dir: str, suffix: str = "") -> None:
+    """
+    Description:
+    Performs classification performance analysis (AUROC, PR-AUC, AUPRG, Mann-Whitney U test)
+    on prediction parquet files and outputs summary tables and visualization dashboards.
+
+    Args:
+        input_path (str): Path to the input Parquet file.
+        output_dir (str): Directory where output metrics and plots will be saved.
+        suffix (str): Optional string suffix for output filenames. Defaults to "".
+
+    Returns:
+        None
+    """
     # Load data
     df = pl.read_parquet(input_path).to_pandas()
 
@@ -111,7 +150,17 @@ def analyze_results(input_path, output_dir, suffix=""):
     metrics_df = pd.DataFrame(metrics_list)
 
     # Decision Labels
-    def get_decision(row):
+    def get_decision(row: pd.Series) -> str:
+        """
+        Description:
+        Determines the classification quality decision category (GOLD, SILVER, or NOISE) for a row of metrics.
+
+        Args:
+            row (pd.Series): A pandas Series containing metric scores (AUROC and AUPRG).
+
+        Returns:
+            str: The decision string ('GOLD', 'SILVER', or 'NOISE').
+        """
         if row['AUROC'] > 0.7 and row['AUPRG'] > 0.3:
             return 'GOLD'
         elif row['AUROC'] > 0.5 and row['AUPRG'] > 0:

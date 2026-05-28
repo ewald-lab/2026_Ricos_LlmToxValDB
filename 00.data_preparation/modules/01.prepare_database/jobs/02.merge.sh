@@ -9,32 +9,15 @@
 #SBATCH -o "logs/out_merge_%A.out"
 #SBATCH -e "logs/err_merge_%A.err"
 
-SCRIPT_PATH=$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)
-SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
-
+SCRIPT_DIR=$(dirname "$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)")
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
-# --- Environment Setup ---
 source "${PREP_ROOT}/env-data-prep/bin/activate"
 
-# Add scripts directory to PYTHONPATH
-export PYTHONPATH="${REPO_ROOT}/scripts:$PYTHONPATH"
-
-POSIX_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_positives.tsv"
-NEGAT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_negatives.tsv"
-OUTPUT_FILE="${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv"
-
-echo "=========================================================="
-echo "Merging Positives and Negatives"
-echo "Positives: ${POSIX_FILE}"
-echo "Negatives: ${NEGAT_FILE}"
-echo "Output:    ${OUTPUT_FILE}"
-echo "=========================================================="
-
 python "${REPO_ROOT}/scripts/02.merge_pos_neg.py" \
-    --positives "${POSIX_FILE}" \
-    --negatives "${NEGAT_FILE}" \
-    --output "${OUTPUT_FILE}"
+    --positives "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_positives.tsv" \
+    --negatives "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_negatives.tsv" \
+    --output    "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv"
 
 echo "Merge completed."

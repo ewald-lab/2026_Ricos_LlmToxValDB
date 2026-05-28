@@ -1,3 +1,4 @@
+from __future__ import annotations
 import requests
 import urllib3
 import re
@@ -6,7 +7,7 @@ import types
 from bs4 import BeautifulSoup
 from collections import defaultdict, Counter
 from dataclasses import dataclass, asdict
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any
 from owlready2 import get_ontology, Thing, AnnotationProperty
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -22,12 +23,32 @@ class EventData:
 class TextUtils:
     @staticmethod
     def clean_formatting(text: str) -> str:
+        """
+        Description:
+        Cleans whitespace and sentence spacing format of a text string.
+
+        Args:
+            text (str): The raw text to clean.
+
+        Returns:
+            str: The cleaned text.
+        """
         text = re.sub(r'\s+', ' ', text)
         text = re.sub(r'(?<=[.\]])(?=[A-Z])', ' ', text)
         return text.strip()
 
     @staticmethod
     def format_class_name(text: str) -> str:
+        """
+        Description:
+        Formats a string into a valid, safe class name by removing special characters and prefixing digits.
+
+        Args:
+            text (str): The raw string.
+
+        Returns:
+            str: The formatted class name string.
+        """
         clean = text.strip().replace(" ", "_").replace("-", "_")
         clean = re.sub(r'[^\w_]', '', clean)
 
@@ -39,7 +60,17 @@ class TextUtils:
 class AopScraper:
     BASE_URL = "https://aopwiki.org"
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        Description:
+        Initializes the AopScraper with requests session and retry strategy.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.session = requests.Session()
         self.session.verify = False
 
@@ -48,7 +79,17 @@ class AopScraper:
         self.session.mount('https://', HTTPAdapter(max_retries=retries))
         self.session.mount('http://', HTTPAdapter(max_retries=retries))
 
-    def fetch_json_catalog(self) -> List[dict]:
+    def fetch_json_catalog(self) -> list[dict[str, Any]]:
+        """
+        Description:
+        Fetches the complete catalog of key events from AopWiki in JSON format.
+
+        Args:
+            None
+
+        Returns:
+            list[dict[str, Any]]: A list of event catalogs.
+        """
         try:
             print("Fetching event catalog JSON...")
             response = self.session.get(f"{self.BASE_URL}/events.json")
@@ -65,6 +106,16 @@ class AopScraper:
             return []
 
     def fetch_event_description(self, event_id: int) -> str:
+        """
+        Description:
+        Scrapes and extracts the key event description from the AopWiki event page.
+
+        Args:
+            event_id (int): The ID of the event to scrape.
+
+        Returns:
+            str: The cleaned description text.
+        """
         url = f"{self.BASE_URL}/events/{event_id}"
         try:
             response = self.session.get(url)
@@ -95,11 +146,31 @@ class AopScraper:
             return ""
 
 class AopWorkflow:
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        Description:
+        Initializes the AopWorkflow pipeline.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.scraper = AopScraper()
         self.organized_events: Dict[str, List[EventData]] = defaultdict(list)
 
-    def _print_category_preview(self, raw_events: List[dict]):
+    def _print_category_preview(self, raw_events: list[dict[str, Any]]) -> None:
+        """
+        Description:
+        Prints a statistics preview of events grouped by biological organization category.
+
+        Args:
+            raw_events (list[dict[str, Any]]): List of raw catalog events.
+
+        Returns:
+            None
+        """
         print("\n--- Category Analysis ---")
         stats = Counter()
         for item in raw_events:
@@ -112,7 +183,17 @@ class AopWorkflow:
             print(f"  - {term}: {count} events")
         print("-------------------------\n")
 
-    def run(self):
+    def run(self) -> None:
+        """
+        Description:
+        Runs the full scraping workflow, fetching catalogs and scraping event pages.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         raw_events = self.scraper.fetch_json_catalog()
         if not raw_events: return
 
@@ -133,7 +214,17 @@ class AopWorkflow:
             event_obj = EventData(id=event_id, title=title, description=description)
             self.organized_events[term].append(event_obj)
 
-    def load_from_json(self, filename="events_with_descriptions.json"):
+    def load_from_json(self, filename: str = "events_with_descriptions.json") -> None:
+        """
+        Description:
+        Loads scraped events and their descriptions from a local JSON file.
+
+        Args:
+            filename (str): The JSON catalog filename. Defaults to "events_with_descriptions.json".
+
+        Returns:
+            None
+        """
         print(f"Loading data from '{filename}'...")
         try:
             with open(filename, "r", encoding="utf-8") as f:
@@ -153,14 +244,34 @@ class AopWorkflow:
         except Exception as e:
             print(f"Error loading JSON: {e}")
 
-    def save_to_json(self, filename="events_with_descriptions.json"):
+    def save_to_json(self, filename: str = "events_with_descriptions.json") -> None:
+        """
+        Description:
+        Saves structured events and descriptions to a local JSON file.
+
+        Args:
+            filename (str): The target JSON filename. Defaults to "events_with_descriptions.json".
+
+        Returns:
+            None
+        """
         print(f"\nSaving JSON to '{filename}'...")
         output_data = {k: [asdict(e) for e in v] for k, v in self.organized_events.items()}
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(output_data, f, indent=2)
         print("JSON Saved.")
 
-    def save_to_owl(self, filename="aop_events_hierarchy.owl"):
+    def save_to_owl(self, filename: str = "aop_events_hierarchy.owl") -> None:
+        """
+        Description:
+        Builds and saves the owlready2 ontology for the AOP events hierarchy.
+
+        Args:
+            filename (str): The output OWL filename. Defaults to "aop_events_hierarchy.owl".
+
+        Returns:
+            None
+        """
         if not self.organized_events:
             print("No data to convert to OWL.")
             return
@@ -208,10 +319,8 @@ class AopWorkflow:
 if __name__ == "__main__":
     workflow = AopWorkflow()
 
-    # --- FLUJO 1: DESCARGA (Solo ejecutar si no tienes el JSON) ---
     workflow.run()
     workflow.save_to_json("events_with_descriptions.json")
 
-    # --- FLUJO 2: GENERACIÓN OWL (Cargar local -> Filtrar -> OWL) ---
     workflow.load_from_json("events_with_descriptions.json")
     workflow.save_to_owl("aop_events_hierarchy.owl")

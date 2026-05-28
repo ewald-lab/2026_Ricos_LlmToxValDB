@@ -1,3 +1,4 @@
+from __future__ import annotations
 import traceback
 import os
 import argparse
@@ -9,8 +10,23 @@ from tqdm.contrib.concurrent import thread_map
 from xgboost import XGBClassifier
 import numpy as np
 import optuna
+from typing import Any
 
-def precision_recall_gain_curve(y_true, y_scores):
+def precision_recall_gain_curve(
+    y_true: np.ndarray | list[int] | list[float],
+    y_scores: np.ndarray | list[float]
+) -> tuple[list[float], list[float]]:
+    """
+    Description:
+    Computes precision gain and recall gain curves at various thresholds.
+
+    Args:
+        y_true (np.ndarray | list[int] | list[float]): True binary labels.
+        y_scores (np.ndarray | list[float]): Target scores/probabilities.
+
+    Returns:
+        tuple[list[float], list[float]]: A tuple containing (precision_gains, recall_gains).
+    """
     sorted_indices = np.argsort(y_scores)[::-1]
     y_true_sorted = np.array(y_true)[sorted_indices]
     baseline_precision = np.mean(y_true)
@@ -27,7 +43,18 @@ def precision_recall_gain_curve(y_true, y_scores):
         recall_gains.append(recall - baseline_recall)
     return precision_gains, recall_gains
 
-def get_auprg(y_true, y_scores):
+def get_auprg(y_true: np.ndarray | list[int] | list[float], y_scores: np.ndarray | list[float]) -> float:
+    """
+    Description:
+    Calculates the Area Under the Precision-Recall Gain Curve (AUPRG) for evaluation.
+
+    Args:
+        y_true (np.ndarray | list[int] | list[float]): True binary labels.
+        y_scores (np.ndarray | list[float]): Target scores/probabilities.
+
+    Returns:
+        float: The computed area under the PR-Gain curve.
+    """
     try:
         pgs, rgs = precision_recall_gain_curve(y_true, y_scores)
         area = 0.0
@@ -38,8 +65,31 @@ def get_auprg(y_true, y_scores):
         return 0.0
 
 def tune_and_classify(
-    dat, meta, label_column, n_splits, gpu_id, n_repeats, model_dir
-):
+    dat: pd.DataFrame,
+    meta: pd.DataFrame,
+    label_column: str,
+    n_splits: int,
+    gpu_id: int,
+    n_repeats: int,
+    model_dir: str,
+) -> pl.DataFrame:
+    """
+    Description:
+    Tunes XGBoost classifier hyperparameters using Optuna (maximizing CV-AUPRG) and trains a final model,
+    comparing it against baseline performance, and returns the validation predictions.
+
+    Args:
+        dat (pd.DataFrame): Input dataset containing features and target labels.
+        meta (pd.DataFrame): Metadata DataFrame.
+        label_column (str): Target label column name.
+        n_splits (int): Number of folds for cross-validation.
+        gpu_id (int): GPU device ID to use.
+        n_repeats (int): Number of repeats for cross-validation.
+        model_dir (str): Output directory for saved models.
+
+    Returns:
+        pl.DataFrame: Predictions Polars DataFrame containing cross-validation metrics.
+    """
     feature_cols = [c for c in dat.columns if c.startswith("Feature_")]
     x = dat[feature_cols].to_numpy()
     y = dat[label_column].astype(int).to_numpy()
@@ -61,7 +111,17 @@ def tune_and_classify(
         "random_state": 42
     }
 
-    def evaluate(params):
+    def evaluate(params: dict[str, Any]) -> float:
+        """
+        Description:
+        Helper method to evaluate specific model hyperparameters using cross-validation.
+
+        Args:
+            params (dict[str, Any]): Dictionary of model hyperparameters.
+
+        Returns:
+            float: The mean CV-AUPRG score.
+        """
         cv_auprg = []
         for train_idx, val_idx in rskf.split(x, y):
             model = XGBClassifier(**params, objective="binary:logistic")
@@ -73,7 +133,17 @@ def tune_and_classify(
     baseline_score = evaluate(baseline_params)
 
     # 2. Tuning with Optuna
-    def objective(trial):
+    def objective(trial: optuna.Trial) -> float:
+        """
+        Description:
+        Optuna trial objective function suggesting hyperparameters and evaluating them.
+
+        Args:
+            trial (optuna.Trial): The Optuna trial object.
+
+        Returns:
+            float: The cross-validated AUPRG score.
+        """
         params = {
             "n_estimators": trial.suggest_int("n_estimators", 100, 300),
             "max_depth": trial.suggest_int("max_depth", 3, 10),
@@ -137,7 +207,31 @@ def tune_and_classify(
     )
     return res_df
 
-def process_label_tuned(dat, meta, label_column, n_splits, gpu_id, n_repeats, model_dir):
+def process_label_tuned(
+    dat: pd.DataFrame,
+    meta: pd.DataFrame,
+    label_column: str,
+    n_splits: int,
+    gpu_id: int,
+    n_repeats: int,
+    model_dir: str,
+) -> pl.DataFrame | None:
+    """
+    Description:
+    Processes hyperparameter tuning and classification for a single target label if the positive count is sufficient.
+
+    Args:
+        dat (pd.DataFrame): Input features and labels dataset.
+        meta (pd.DataFrame): Metadata DataFrame.
+        label_column (str): Target label column name.
+        n_splits (int): Number of folds for cross-validation.
+        gpu_id (int): GPU device ID.
+        n_repeats (int): Number of cross-validation repeats.
+        model_dir (str): Output directory for saved models.
+
+    Returns:
+        pl.DataFrame | None: Polars DataFrame of predictions or None if skipped or on error.
+    """
     try:
         num_1 = (dat[label_column] == 1).sum()
         num_0 = (dat[label_column] == 0).sum()

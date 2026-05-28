@@ -125,7 +125,7 @@ for CONSENSUS in 1 3 5 10; do
             fi
 
             # Define system prompt based on mode
-            SYSTEM_PROMPT="${MODULE_DIR}/config/system_prompt_${MODE}_new.txt"
+            SYSTEM_PROMPT="${MODULE_DIR}/config/system_prompt_${MODE}.txt"
 
             # Outputs matching expert evaluation formats, parameterized by loop variables
             # Outputs go into a per-model subdirectory

@@ -1,19 +1,30 @@
+from __future__ import annotations
+
 import logging
-import re
 import sys
 import os
 import sqlite3
 import torch
 import polars as pl
 import json
-import random
-from typing import List, Dict, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from pathlib import Path
 from tqdm import tqdm
 
-def setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(message)s"):
-    """Configures global logging and suppresses noisy third-party loggers."""
+def setup_logging(level: int = logging.INFO, stream: Any = sys.stdout, fmt: str = "%(message)s") -> logging.Logger:
+    """
+    Description:
+    Configures global logging and suppresses noisy third-party loggers.
+
+    Args:
+        level (int): The logging level to set (e.g. logging.INFO). Defaults to logging.INFO.
+        stream (Any): The output stream to log to. Defaults to sys.stdout.
+        fmt (str): The logging format string. Defaults to "%(message)s".
+
+    Returns:
+        logging.Logger: The configured root-level or module-specific Logger instance.
+    """
     logging.basicConfig(stream=stream, level=level, format=fmt)
 
     for name, lvl in {
@@ -27,18 +38,30 @@ def setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(message)s"):
 
     return logging.getLogger(__name__)
 
-def sanitize_name(name: str) -> str:
-    """Creates a safe identifier for nodes by sanitizing a given name."""
-    name = re.sub(r'\([^)]*\)|\[[^]]*\]', '', name)
-    clean = re.sub(r'[^a-zA-Z0-9\s]', ' ', name.lower())
-    return re.sub(r'\s+', ' ', clean).strip()
-
 def is_valid_description(description: str) -> bool:
-    """Checks if a string is a valid, non-empty description."""
+    """
+    Description:
+    Checks if a string is a valid, non-empty description.
+
+    Args:
+        description (str): The text description to validate.
+
+    Returns:
+        bool: True if the description is a valid non-empty string, False otherwise.
+    """
     return description is not None and isinstance(description, str) and len(description.strip()) > 0
 
 def load_ontology_embeddings(db_path: str) -> List[Dict]:
-    """Loads all ontology embeddings into memory."""
+    """
+    Description:
+    Loads all ontology embeddings into memory from the database.
+
+    Args:
+        db_path (str): The path to the SQLite embeddings database.
+
+    Returns:
+        List[Dict]: A list of dictionaries representing the loaded ontology node embeddings.
+    """
     if not os.path.exists(db_path):
         logging.getLogger(__name__).error(f"Ontology embeddings DB not found at {db_path}")
         return []
@@ -51,12 +74,17 @@ def load_ontology_embeddings(db_path: str) -> List[Dict]:
 
     return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': r[3], 'parent': r[4], 'is_llm_generated': r[5], 'vector': torch.frombuffer(bytearray(r[6]), dtype=torch.float32)} for r in rows]
 
-def load_ontology_nodes(db_path: str, prefix: str = "") -> tuple:
-    """Loads ontology node metadata from the embeddings DB.
+def load_ontology_nodes(db_path: str, prefix: str = "") -> Tuple[dict, list]:
+    """
+    Description:
+    Loads ontology node metadata from the embeddings DB.
+
+    Args:
+        db_path (str): The path to the SQLite embeddings database.
+        prefix (str): Prefix to prepend to node names. Defaults to "".
 
     Returns:
-        nodes (dict): {name: {'sanitized_name': ..., 'parent': ..., 'definition': ...}}
-        categories (list): list of all node names (possibly prefixed)
+        Tuple[dict, list]: A tuple containing a dict of ontology node metadata and a list of category names.
     """
     if not os.path.exists(db_path):
         logging.getLogger(__name__).error(f"Ontology DB not found at {db_path}")
@@ -83,7 +111,19 @@ def load_ontology_nodes(db_path: str, prefix: str = "") -> tuple:
     return nodes, categories
 
 def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, return_vectors: bool = True) -> Dict[str, torch.Tensor]:
-    """Ensures embeddings exist in the DB for the given texts. Returns {text: vector} if return_vectors is True."""
+    """
+    Description:
+    Ensures embeddings exist in the DB for the given texts. Returns {text: vector} if return_vectors is True.
+
+    Args:
+        texts (List[str]): List of texts to get or generate embeddings for.
+        model_name (str): Name/path of the embedding model to use.
+        db_path (str): Path to the SQLite embeddings database.
+        return_vectors (bool): If True, returns a dictionary mapping text to its embedding vector. Defaults to True.
+
+    Returns:
+        Dict[str, torch.Tensor]: A dictionary mapping each text to its embedding tensor, or empty dict if return_vectors is False.
+    """
     from model.embeddings import EmbeddingModel
 
     logger = setup_logging()
@@ -130,43 +170,19 @@ def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, re
     conn.close()
     return text_to_vec if return_vectors else {}
 
-def get_debug_rows(df: pl.DataFrame, target_column: str, random_debug_rows: Optional[int] = None, debug_rows: Optional[List[int]] = None, seed: int = 43) -> List[int]:
-    """Handles the logic of selecting unique toxic effects for debugging."""
-    logger = logging.getLogger(__name__)
-    random.seed(seed)
-
-    # 1. First, select rows based on random count if requested
-    if random_debug_rows is not None and debug_rows is None:
-        valid_df = df.with_row_index("orig_index").filter(
-            pl.col(target_column).map_elements(is_valid_description, return_dtype=pl.Boolean)
-        )
-        unique_effects_df = valid_df.group_by(target_column, maintain_order=True).agg(pl.col("orig_index").first())
-
-        total_unique = unique_effects_df.height
-        if random_debug_rows >= total_unique:
-            result_rows = sorted(unique_effects_df["orig_index"].to_list())
-        else:
-            result_rows = sorted(random.sample(unique_effects_df["orig_index"].to_list(), random_debug_rows))
-        total_sampled = len(result_rows)
-        if random_debug_rows:
-            logger.info(f"Selected {total_sampled} unique random toxic effects for debugging.")
-    else:
-        result_rows = debug_rows or []
-
-    # 2. Ensure the final list only includes the FIRST occurrence of each unique toxic effect among candidates
-    if result_rows:
-        debug_df = df.select(target_column).with_row_index("orig_index").filter(pl.col("orig_index").is_in(result_rows))
-        final_rows = sorted(debug_df.group_by(target_column, maintain_order=True).agg(pl.col("orig_index").first())["orig_index"].to_list())
-
-        # If filtering for uniqueness changed the count, we log it, otherwise one log is enough
-        if len(final_rows) != len(result_rows) or not random_debug_rows:
-            logger.info(f"Final debug selection: {len(final_rows)} unique toxic effects.")
-        return final_rows
-
-    return []
-
 def get_unique_descriptions(df: pl.DataFrame, target_column: str, debug_rows: Optional[List[int]] = None) -> Tuple[List[str], Set[str]]:
-    """Extracts unique valid descriptions to process based on debug selection."""
+    """
+    Description:
+    Extracts unique valid descriptions to process based on debug selection.
+
+    Args:
+        df (pl.DataFrame): Input dataset DataFrame.
+        target_column (str): Name of the column containing descriptions.
+        debug_rows (Optional[List[int]]): Selected row indices for debugging. Defaults to None.
+
+    Returns:
+        Tuple[List[str], Set[str]]: A tuple containing the list of unique descriptions and a set of seen descriptions.
+    """
     logger = logging.getLogger(__name__)
     logger.info("Collecting unique descriptions...")
     unique_descriptions = []
@@ -200,8 +216,27 @@ def get_unique_descriptions(df: pl.DataFrame, target_column: str, debug_rows: Op
 def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
                     categories: List[str], target_column: str,
                     output_file: str, reasoning_file: str,
-                    schema: Dict, is_final: bool = False, debug_rows: Optional[List[int]] = None, seen_descriptions: Optional[Set[str]] = None):
-    """Saves a processed chunk of descriptions and its reasoning to disk using efficient Polars joins."""
+                    schema: Dict, is_final: bool = False, debug_rows: Optional[List[int]] = None, seen_descriptions: Optional[Set[str]] = None) -> None:
+    """
+    Description:
+    Saves a processed chunk of descriptions and its reasoning to disk using efficient Polars joins.
+
+    Args:
+        df (pl.DataFrame): Input dataset DataFrame.
+        cache_chunk (Dict): Dictionary cache of processed results mapping description to (hits, trace, selected).
+        backup_idx (int): The index of the backup chunk file to save.
+        categories (List[str]): List of category columns.
+        target_column (str): Column name containing raw text descriptions.
+        output_file (str): Base output CSV file path.
+        reasoning_file (str): Base reasoning JSON file path.
+        schema (Dict): Output DataFrame schema dictionary mapping column names to types.
+        is_final (bool): Whether this is the final chunk save. Defaults to False.
+        debug_rows (Optional[List[int]]): Row indices being processed for debugging. Defaults to None.
+        seen_descriptions (Optional[Set[str]]): Set of seen description strings. Defaults to None.
+
+    Returns:
+        None
+    """
     if not cache_chunk and not is_final: return
     logger = logging.getLogger(__name__)
 
@@ -237,16 +272,10 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
         # Use left join logic to identify overlaps
         chunk_df = work_df.join(results_df, on=target_column, how="inner")
 
-        # Update category columns:
-        # If LLM found it (1), set to 1.
-        # If LLM didn't find it, keep original value from work_df.
-        # If column didn't exist in work_df, fill with NaN based on LLM result.
         update_exprs = []
         for cat in categories:
             right_cat = f"{cat}_right"
             if right_cat in chunk_df.columns:
-                # Exists in both: 1 from LLM overrides anything.
-                # Otherwise keep original (NaN)
                 update_exprs.append(
                     pl.when(pl.col(right_cat).is_not_null())
                       .then(pl.col(right_cat))
@@ -254,22 +283,16 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
                       .alias(cat)
                 )
             elif cat in work_df.columns:
-                # Only in work_df: keep as is
                 continue
             elif cat in results_df.columns:
-                # Only in results_df (wasn't in work_df): already named 'cat' in chunk_df
-                # Keep nulls as is (NaN) instead of filling with 0
                 update_exprs.append(pl.col(cat).cast(pl.Float64))
             else:
-                # In neither: initialize to NaN (since it's a new column and no hits)
                 update_exprs.append(pl.lit(None).alias(cat).cast(pl.Float64))
 
         if update_exprs:
             chunk_df = chunk_df.with_columns(update_exprs)
     else:
-        # Standard final fallback or empty chunk
         if is_final:
-            # Initialize missing categories to NaN if they don't exist
             new_cols = [pl.lit(None).alias(cat).cast(pl.Float64) for cat in categories if cat not in work_df.columns]
             chunk_df = work_df.with_columns(new_cols) if new_cols else work_df
         else:
@@ -279,7 +302,6 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
     chunk_df = chunk_df.sort("orig_index")
 
     # Ensure correct column order and schema
-    # We KEEP orig_index for the merge later
     final_cols = [col for col in schema.keys() if col in chunk_df.columns]
     if "orig_index" in chunk_df.columns and "orig_index" not in final_cols:
         final_cols.append("orig_index")
@@ -305,8 +327,22 @@ def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
 
 def merge_backups(output_file: str, reasoning_file: str,
                   backup_count: int, categories: List[str],
-                  target_column: str, schema: Dict):
-    """Merges all backup CSV and JSON files into the final outputs."""
+                  target_column: str, schema: Dict) -> None:
+    """
+    Description:
+    Merges all backup CSV and JSON files into the final outputs.
+
+    Args:
+        output_file (str): The final merged output CSV file path.
+        reasoning_file (str): The final merged reasoning JSON file path.
+        backup_count (int): Total number of backup chunk files saved.
+        categories (List[str]): List of ontology categories.
+        target_column (str): Name of the raw target column.
+        schema (Dict): Target DataFrame schema mapping.
+
+    Returns:
+        None
+    """
     logger = logging.getLogger(__name__)
     logger.info("Merging backups to create final results...")
 

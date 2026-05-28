@@ -1,9 +1,21 @@
+from __future__ import annotations
 import pandas as pd
 import glob
 import os
 import argparse
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Unifies multiple ToxValDB Excel files matching a specific search pattern
+    from an input folder into a single tab-separated values (TSV) file.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     # --- ARGUMENT PARSING ---
     parser = argparse.ArgumentParser(description="Unify ToxValDB Excel files into a single TSV.")
     parser.add_argument("output_path", help="Full path for the output TSV file (e.g., outputs/ToxValDB_Unified.tsv)")
@@ -15,7 +27,6 @@ def main():
     input_folder = args.input_folder
 
     # --- CONFIGURATION ---
-    # Pattern: Search for files starting with "toxval_all_" inside the input folder
     source_pattern = os.path.join(input_folder, "toxval_all_res_toxval_v97_0_*.xlsx")
 
     print(f"--> Searching for files in: {source_pattern}")
@@ -32,11 +43,9 @@ def main():
 
     # --- PROCESSING ---
     for i, f in enumerate(files):
-        # Print progress
         print(f"[{i+1}/{len(files)}] Reading: {os.path.basename(f)} ...")
         try:
             # Read Excel file
-            # dtype=str ensures CAS numbers or special codes are not corrupted
             df = pd.read_excel(f, dtype=str)
 
             # Add source filename column for traceability
@@ -58,7 +67,6 @@ def main():
             os.makedirs(output_dir)
 
         print(f"--> Writing {len(final_df)} rows to {output_file}...")
-        # Using TSV (tab-separated values) as it's safer for chemical data than CSV
         final_df.to_csv(output_file, sep='\t', index=False)
 
         print("SUCCESS! File created correctly.")

@@ -1,7 +1,9 @@
+from __future__ import annotations
 import argparse
 import glob
 import os
 import sqlite3
+import json
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -11,9 +13,20 @@ import seaborn as sns
 from rdflib.namespace import RDFS
 from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.spatial.distance import squareform
+from typing import Any
 
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parses command-line arguments for the combined evaluation script.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: The parsed command-line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Generate combined evaluation plots comparing human experts and LLMs."
     )
@@ -71,6 +84,16 @@ def arg_parser():
 
 
 def clean_expert_name(name: str) -> str:
+    """
+    Description:
+    Cleans and formats an expert's name from their identifier.
+
+    Args:
+        name (str): The raw expert identifier.
+
+    Returns:
+        str: The cleaned, formatted expert name.
+    """
     if name == "average_human":
         return "Average Human"
     parts = name.split("_")
@@ -80,6 +103,16 @@ def clean_expert_name(name: str) -> str:
 
 
 def clean_llm_name(name: str) -> str:
+    """
+    Description:
+    Cleans and formats an LLM configuration name from its identifier.
+
+    Args:
+        name (str): The raw LLM identifier.
+
+    Returns:
+        str: The formatted LLM configuration name including mode, consensus, and definitions settings.
+    """
     name = name.replace("ToxValLlm_llm_", "")
     parts = name.split("_ontology_")
     if len(parts) < 2:
@@ -102,7 +135,17 @@ def clean_llm_name(name: str) -> str:
     return f"{model_part} ({mode}, {consensus}, {defs_str})"
 
 
-def parse_llm_metadata(llm_id: str):
+def parse_llm_metadata(llm_id: str) -> dict[str, Any] | None:
+    """
+    Description:
+    Parses metadata (model, mode, consensus runs, use of definitions) from an LLM identifier.
+
+    Args:
+        llm_id (str): The raw LLM identifier.
+
+    Returns:
+        dict[str, Any] | None: A dictionary of metadata properties, or None if the identifier is invalid.
+    """
     parts = llm_id.split("_ontology_")
     if len(parts) < 2:
         return None
@@ -134,7 +177,18 @@ def parse_llm_metadata(llm_id: str):
     }
 
 
-def calc_metrics(pred_set, ref_set):
+def calc_metrics(pred_set: set[str], ref_set: set[str]) -> tuple[float, float, float]:
+    """
+    Description:
+    Calculates precision, recall, and F1 score between a predicted set of terms and a reference set of terms.
+
+    Args:
+        pred_set (set[str]): The set of predicted terms.
+        ref_set (set[str]): The set of reference/ground truth terms.
+
+    Returns:
+        tuple[float, float, float]: A tuple containing (precision, recall, F1 score).
+    """
     if not pred_set and not ref_set:
         return 1.0, 1.0, 1.0  # True negative / complete agreement on empty
     if not pred_set or not ref_set:
@@ -149,7 +203,18 @@ def calc_metrics(pred_set, ref_set):
     return precision, recall, f1
 
 
-def build_depth_map(owl_file: str, root_term: str | None):
+def build_depth_map(owl_file: str, root_term: str | None) -> dict[str, int]:
+    """
+    Description:
+    Parses an ontology file and builds a mapping from lowercased term labels to their shortest path depth from the root term.
+
+    Args:
+        owl_file (str): The path to the ontology OWL/TTL file.
+        root_term (str | None): The label of the ontology root term.
+
+    Returns:
+        dict[str, int]: A dictionary mapping term labels to their integer depth.
+    """
     print(f"Parsing ontology: {owl_file}")
     g = rdflib.Graph()
     g.parse(owl_file, format="turtle")
@@ -185,14 +250,35 @@ def build_depth_map(owl_file: str, root_term: str | None):
     return depth_map
 
 
-def get_max_depth(term_set, depth_map):
+def get_max_depth(term_set: set[str], depth_map: dict[str, int]) -> int:
+    """
+    Description:
+    Computes the maximum depth from the ontology root across a set of terms.
+
+    Args:
+        term_set (set[str]): The set of ontology terms.
+        depth_map (dict[str, int]): A dictionary mapping terms to their depth.
+
+    Returns:
+        int: The maximum depth found, or 0 if the term set is empty.
+    """
     if not term_set:
         return 0
     depths = [depth_map.get(t, 0) for t in term_set]
     return np.max(depths)
 
 
-def count_valid_terms(term_str) -> int:
+def count_valid_terms(term_str: Any) -> int:
+    """
+    Description:
+    Counts the number of valid terms in a pipe-separated string, filtering out placeholders.
+
+    Args:
+        term_str (Any): The pipe-separated string or object representing the terms.
+
+    Returns:
+        int: The count of valid terms.
+    """
     if pd.isna(term_str):
         return 0
     terms = [t.strip().lower() for t in str(term_str).split("|")]
@@ -203,7 +289,17 @@ def count_valid_terms(term_str) -> int:
 
 
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for generating combined evaluation plots and model comparison tables.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -843,7 +939,21 @@ def main():
             os.makedirs(decisions_dir, exist_ok=True)
             import scipy.stats as stats
 
-            def generate_decision_plots(df, target_dir, title_suffix=""):
+            def generate_decision_plots(
+                df: pd.DataFrame, target_dir: str, title_suffix: str = ""
+            ) -> None:
+                """
+                Description:
+                Generates decision impact plots (definitions, mode, and consensus) for a given DataFrame of LLM runs.
+
+                Args:
+                    df (pd.DataFrame): The DataFrame containing performance metrics of LLM configurations.
+                    target_dir (str): The directory where the impact plots will be saved.
+                    title_suffix (str): An optional suffix to append to plot titles.
+
+                Returns:
+                    None
+                """
                 os.makedirs(target_dir, exist_ok=True)
                 
                 # 1. Definitions Impact Analysis
@@ -1283,6 +1393,191 @@ def main():
             print(f"Error generating PCA ontology terms plot: {e}")
     else:
         print("Skipping PCA plot: --ontology_embedding_db not provided or file not found.")
+
+    # --- Generate Model Comparison Table (previously in 06.summary.py) ---
+    print("Generating Model Comparison Table...")
+    try:
+        model_metadata_lookup = {
+            "gpt-oss-20b": {"total_params": "21B", "active_params": "3.6B", "dtype": "BF16", "gpu": "1x A100 / 1x H200"},
+            "Qwen3.5-27B-FP8": {"total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
+            "Qwen3.6-27B-FP8": {"total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
+            "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": {"total_params": "30B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
+            "Qwen3.5-35B-A3B-FP8": {"total_params": "35B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
+            "Qwen3.6-35B-A3B-FP8": {"total_params": "35B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
+            "Qwen3.5-122B-A10B-FP8": {"total_params": "122B", "active_params": "10.0B", "dtype": "FP8", "gpu": "4x A100 / 2x H200"},
+            "NVIDIA-Nemotron-3-Super-120B-A12B-FP8": {"total_params": "120B", "active_params": "12.0B", "dtype": "FP8", "gpu": "4x A100 / 2x H200"},
+            "gpt-oss-120b": {"total_params": "117B", "active_params": "5.1B", "dtype": "BF16", "gpu": "4x A100 / 2x H200"}
+        }
+
+        # Identify human experts (excluding average_human)
+        human_expert_ids = [eid for eid in all_data if not eid.startswith("ToxValLlm_llm_") and eid != "average_human"]
+
+        table_results = []
+        for model_name, best_conf in sorted(best_config_per_model.items()):
+            llm_id = best_conf["LLM_ID"]
+            df_llm = all_data[llm_id]
+
+            expert_precisions = []
+            expert_recalls = []
+            expert_f1s = []
+            expert_jaccards = []
+
+            for exp_id in human_expert_ids:
+                df_expert = all_data[exp_id]
+                precisions = []
+                recalls = []
+                f1s = []
+                jaccards = []
+
+                expert_map = {row["Index"]: row["All_Terms_Set"] for _, row in df_expert.iterrows()}
+
+                for idx, human_terms in expert_map.items():
+                    row = df_llm[df_llm["Index"] == idx]
+                    if len(row) == 0:
+                        continue
+                    not_exp_m = row.iloc[0].get("Not_My_Expertise", 0) == 1
+                    not_exp_h = df_expert[df_expert["Index"] == idx].iloc[0].get("Not_My_Expertise", 0) == 1
+                    if not_exp_m or not_exp_h:
+                        continue
+                    if not human_terms:
+                        continue
+                    llm_terms = row.iloc[0]["All_Terms_Set"]
+                    p_val, r_val, f1_val = calc_metrics(llm_terms, human_terms)
+                    precisions.append(p_val)
+                    recalls.append(r_val)
+                    f1s.append(f1_val)
+
+                    u = llm_terms.union(human_terms)
+                    inter = llm_terms.intersection(human_terms)
+                    j_val = len(inter) / len(u) if len(u) > 0 else 1.0
+                    jaccards.append(j_val)
+
+                if precisions:
+                    expert_precisions.append(np.mean(precisions))
+                if recalls:
+                    expert_recalls.append(np.mean(recalls))
+                if f1s:
+                    expert_f1s.append(np.mean(f1s))
+                if jaccards:
+                    expert_jaccards.append(np.mean(jaccards))
+
+            mean_p = np.mean(expert_precisions) if expert_precisions else 0.0
+            std_p = np.std(expert_precisions) if expert_precisions else 0.0
+            mean_r = np.mean(expert_recalls) if expert_recalls else 0.0
+            std_r = np.std(expert_recalls) if expert_recalls else 0.0
+            mean_f1 = np.mean(expert_f1s) if expert_f1s else 0.0
+            std_f1 = np.std(expert_f1s) if expert_f1s else 0.0
+            mean_j = np.mean(expert_jaccards) if expert_jaccards else 0.0
+            std_j = np.std(expert_jaccards) if expert_jaccards else 0.0
+
+            # Get token count from the metadata/run
+            # We already have Tokens in llm_perf_metrics, so let's match it by llm_id
+            avg_completion_tokens = 0.0
+            for item in llm_perf_metrics:
+                if item["LLM_ID"] == llm_id:
+                    avg_completion_tokens = item["Tokens"]
+                    break
+
+            meta_info = model_metadata_lookup.get(model_name, {"total_params": "N/A", "active_params": "N/A", "dtype": "N/A", "gpu": "N/A"})
+
+            table_results.append({
+                "Model": model_name,
+                "Precision Mean": mean_p,
+                "Precision Std": std_p,
+                "Recall Mean": mean_r,
+                "Recall Std": std_r,
+                "F1 Mean": mean_f1,
+                "F1 Std": std_f1,
+                "Jaccard Mean": mean_j,
+                "Jaccard Std": std_j,
+                "Total Params": meta_info["total_params"],
+                "Active Params": meta_info["active_params"],
+                "Data Type": meta_info["dtype"],
+                "Avg Tokens": int(avg_completion_tokens),
+                "GPU Requirements": meta_info["gpu"]
+            })
+
+        if table_results:
+            res_df = pd.DataFrame(table_results)
+            fig, ax = plt.subplots(figsize=(24, 4.0))
+            ax.axis('off')
+
+            header_color   = '#1f4e79'
+            row_even_color = '#f2f2f2'
+            row_odd_color  = '#ffffff'
+
+            table_data = []
+            for idx, row in res_df.iterrows():
+                table_data.append([
+                    row["Model"],
+                    f"{row['Precision Mean']:.2%} ± {row['Precision Std']:.2%}",
+                    f"{row['Recall Mean']:.2%} ± {row['Recall Std']:.2%}",
+                    f"{row['F1 Mean']:.2%} ± {row['F1 Std']:.2%}",
+                    f"{row['Jaccard Mean']:.2%} ± {row['Jaccard Std']:.2%}",
+                    row["Total Params"],
+                    row["Active Params"],
+                    row["Data Type"],
+                    f"{row['Avg Tokens']:,}" if row['Avg Tokens'] > 0 else "N/A",
+                    row["GPU Requirements"]
+                ])
+
+            col_labels = [
+                "Model", "Precision (Mean ± Std)", "Recall (Mean ± Std)", "F1 Score (Mean ± Std)",
+                "Jaccard Overlap (Mean ± Std)",
+                "Total Params", "Active Params", "Data Type", "Avg Tokens", "GPU Requirements"
+            ]
+
+            col_widths = [0.20, 0.10, 0.10, 0.10, 0.15, 0.08, 0.08, 0.05, 0.06, 0.11]
+
+            table = ax.table(
+                cellText=table_data,
+                colLabels=col_labels,
+                colWidths=col_widths,
+                cellLoc='center',
+                loc='upper center'
+            )
+
+            table.auto_set_font_size(False)
+            table.set_fontsize(10)
+            table.scale(1.0, 1.8)
+
+            for (row_idx, col_idx), cell in table.get_celld().items():
+                if row_idx == 0:
+                    cell.set_text_props(weight='bold', color='white')
+                    cell.set_facecolor(header_color)
+                else:
+                    if col_idx == 0:
+                        cell.set_text_props(weight='bold')
+                    if row_idx % 2 == 0:
+                        cell.set_facecolor(row_even_color)
+                    else:
+                        cell.set_facecolor(row_odd_color)
+
+            plt.title("LLM Evaluation Metrics & Hardware Requirements",
+                      fontsize=14, fontweight='bold', pad=6, color='#1f4e79')
+
+            output_path = os.path.join(args.output_dir, "model_comparison_table.png")
+            plt.savefig(output_path, dpi=300, bbox_inches='tight')
+            plt.close()
+            print(f"Saved summary table plot to: {output_path}")
+
+            # --- Find best model on a single GPU and save llm_config.json ---
+            single_gpu_results = [r for r in table_results if r["GPU Requirements"].startswith("1x")]
+            if single_gpu_results:
+                best_single_gpu = sorted(single_gpu_results, key=lambda x: x["F1 Mean"], reverse=True)[0]
+                best_json_path = os.path.join(args.llm_expanded_dir, "llm_config.json")
+                best_llm_data = {
+                    "model": best_single_gpu["Model"],
+                    "mode": 2,
+                    "consensus_runs": 1,
+                    "ontology_definitions": False,
+                    "f1_score": round(best_single_gpu["F1 Mean"], 2)
+                }
+                with open(best_json_path, "w", encoding="utf-8") as jf:
+                    json.dump(best_llm_data, jf, indent=4)
+                print(f"Saved best single GPU model configuration to: {best_json_path}")
+    except Exception as ex:
+        print(f"Error generating model comparison table: {ex}")
 
     print(f"All combined plots saved successfully to: {args.output_dir}")
 

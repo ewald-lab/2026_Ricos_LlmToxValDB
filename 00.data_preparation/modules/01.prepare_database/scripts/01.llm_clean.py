@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import json
 import os
@@ -7,6 +8,7 @@ import logging
 import time
 import asyncio
 import sys
+from typing import Any
 
 os.environ["HF_HOME"] = "/nfs/research/ewald/ricos/huggingface_cache"
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
@@ -14,12 +16,30 @@ os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 from tqdm import tqdm
 from pathlib import Path
 from model.llm import get_model, test_model
-from src.utils import setup_logging
+from src.utils import (
+    setup_logging,
+    load_pipeline_prompts,
+    load_system_prompt,
+    clean_llm_response,
+    parse_llm_result,
+    process_standardize_batch,
+    process_clean_exceptions_batch,
+    needs_cleanup,
+)
 
 logger = logging.getLogger(__name__)
 
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parses command line arguments for the LLM cleaning script.
 
-def arg_parser():
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: The parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="LLM-based cleaning of toxicological effects: validates and splits composite entries."
     )
@@ -55,66 +75,37 @@ def arg_parser():
     parser.add_argument("--keep-non-tox", action="store_true", help="If set, do not remove entries labeled as is_tox_effect: false. By default they are removed.")
     return parser.parse_args()
 
+async def process_batch(
+    llm: Any, prompts: list[tuple[str, str]], descriptions: list[str], max_concurrency: int
+) -> dict[str, Any]:
+    """
+    Description:
+    Runs the sequential prompts cleaning pipeline on a batch of toxicological effect descriptions concurrently.
 
-def load_pipeline_prompts(directory_path: str) -> list:
-    """Load all .txt files from the directory, sorted by name, and return (filename, content)."""
-    prompts = []
-    p_dir = Path(directory_path)
-    if not p_dir.is_dir():
-        logger.warning(f"Pipeline directory {directory_path} not found.")
-        return []
+    Args:
+        llm (Any): The LLM engine wrapper.
+        prompts (list[tuple[str, str]]): List of prompt tuples (filename, content) in the pipeline.
+        descriptions (list[str]): List of raw descriptions to clean.
+        max_concurrency (int): Maximum concurrent LLM requests.
 
-    # Get all .txt files, sorted by name
-    files = sorted([f for f in p_dir.glob("*.txt") if f.is_file()])
-    for f in files:
-        with open(f, "r", encoding="utf-8") as file:
-            prompts.append((f.name, file.read().strip()))
-    logger.info(f"Loaded {len(prompts)} pipeline prompts from {directory_path}")
-    return prompts
-
-
-def load_system_prompt(path: str) -> str:
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read().strip()
-
-
-def clean_llm_response(raw: str) -> str:
-    """Strip thinking tags and extract JSON from LLM response."""
-    text = raw
-    if "</think>" in text:
-        text = text.split("</think>")[-1].strip()
-    # Try to extract JSON from markdown code blocks
-    match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
-    if match:
-        return match.group(1)
-    # Try to extract raw JSON object
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if match:
-        return match.group(0)
-    return text
-
-
-def parse_llm_result(raw_content: str) -> dict:
-    """Parse the LLM response into a structured result."""
-    cleaned = clean_llm_response(raw_content)
-    try:
-        result = json.loads(cleaned)
-        # Validate structure
-        # 'effects' is now optional for steps that only classify (is_tox_effect)
-        return result
-    except (json.JSONDecodeError, ValueError) as e:
-        logger.warning(f"Failed to parse LLM response: {e}\nRaw: {raw_content[:200]}")
-        # Default: keep as-is (conservative)
-        return {"effects": [], "reasoning": f"Parse error: {e}", "parse_error": True}
-
-
-async def process_batch(llm, prompts: list, descriptions: list, max_concurrency: int) -> dict:
-    """Process a batch of descriptions concurrently using a sequence of LLM prompts."""
+    Returns:
+        dict[str, Any]: A dictionary mapping original descriptions to their cleaned effects and metadata.
+    """
     semaphore = asyncio.Semaphore(max_concurrency)
     cache = {}
     counter = 0
 
-    async def process_one(desc: str):
+    async def process_one(desc: str) -> None:
+        """
+        Description:
+        Helper coroutine to process a single description through the pipeline.
+
+        Args:
+            desc (str): The raw description string.
+
+        Returns:
+            None
+        """
         nonlocal counter
         async with semaphore:
             current_effects = [desc]
@@ -122,7 +113,6 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
             is_tox = True
 
             for i, (fname, sys_prompt) in enumerate(prompts):
-                # Construct user message providing both original context and current cleaned state
                 user_message = (
                     f'Original entry: "{desc}"\n'
                     f'Current cleaned effects: {current_effects}'
@@ -160,15 +150,14 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
                             is_tox = result.get("is_tox_effect", True)
                             if not is_tox:
                                 current_effects = []
-                                break # Exit prompt loop for this description
+                                break
 
-                        # Speedy exit: if the effects list becomes empty mid-pipeline, there's no point running the rest
                         if i > 0 and len(current_effects) == 0:
                             is_tox = False
                             break
 
                         success = True
-                        break # Exit retry loop
+                        break
                     except Exception as e:
                         if attempt == 4:
                             logger.error(f"LLM error for '{desc[:30]}' at step {fname}: {e}")
@@ -176,7 +165,7 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
                         await asyncio.sleep(1)
 
                 if not is_tox or not success:
-                    break # Stop pipeline
+                    break
 
             # Final result for the cache
             final_result = {
@@ -196,105 +185,18 @@ async def process_batch(llm, prompts: list, descriptions: list, max_concurrency:
 
     return cache
 
-async def process_standardize_batch(llm, system_prompt: str, effects: list, max_concurrency: int) -> dict:
-    """Process a batch of cleaned effects to generate standard names."""
-    semaphore = asyncio.Semaphore(max_concurrency)
-    cache = {}
-    counter = 0
+def main() -> None:
+    """
+    Description:
+    Main entry point for the LLM cleaning script. It loads input data, initializes the model,
+    runs the cleaning pipeline, standardizes cleaned terms, corrects exceptions, and saves the final result.
 
-    async def process_one(effect: str):
-        nonlocal counter
-        async with semaphore:
-            user_message = f'Provide a standard name for this toxicological effect:\n\n"{effect}"'
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message},
-            ]
-            for attempt in range(5):
-                try:
-                    response = await llm.ainvoke(messages)
-                    cleaned = clean_llm_response(response.content)
-                    try:
-                        result = json.loads(cleaned)
-                    except json.JSONDecodeError:
-                        raise ValueError("Invalid JSON returned by LLM")
+    Args:
+        None
 
-                    if "standard_name" not in result:
-                        raise ValueError("Missing 'standard_name' in JSON")
-
-                    cache[effect] = result
-
-                    counter += 1
-                    is_changed = result['standard_name'] != effect
-                    status = "Changed" if is_changed else "Not Changed"
-                    print(f"{counter}: LLM Std | Orig: '{effect}' -> ({status}): {result['standard_name']}", flush=True)
-
-                    return
-                except Exception as e:
-                    if attempt == 4:
-                        logger.error(f"LLM standardize error for '{effect[:50]}...' after 5 attempts: {e}")
-                        cache[effect] = {
-                            "standard_name": effect,
-                            "reasoning": f"LLM error: {e}",
-                        }
-                    else:
-                        await asyncio.sleep(1)
-
-    tasks = [process_one(e) for e in effects]
-    for f in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="LLM Standardizing", smoothing=0.0):
-        await f
-
-    return cache
-
-
-async def process_clean_exceptions_batch(llm, system_prompt: str, effects: list, max_concurrency: int) -> dict:
-    """Process effects with clean exceptions: multiple colons and redundant repetitions."""
-    semaphore = asyncio.Semaphore(max_concurrency)
-    cache = {}
-    counter = 0
-
-    async def process_one(effect: str):
-        nonlocal counter
-        async with semaphore:
-            user_message = f'Fix and simplify this effect:\n\n"{effect}"'
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message},
-            ]
-            for attempt in range(5):
-                try:
-                    response = await llm.ainvoke(messages)
-                    cleaned = clean_llm_response(response.content)
-                    try:
-                        result = json.loads(cleaned)
-                    except json.JSONDecodeError:
-                        raise ValueError("Invalid JSON returned by LLM")
-
-                    if "corrected" not in result:
-                        raise ValueError("Missing 'corrected' in JSON")
-
-                    corrected = result["corrected"]
-                    reasoning = result.get("reasoning", "")
-                    cache[effect] = {"corrected": corrected, "reasoning": reasoning}
-
-                    counter += 1
-                    print(f"{counter}: Exceptions | '{effect}' -> '{corrected}'", flush=True)
-                    return
-                except Exception as e:
-                    if attempt == 4:
-                        logger.error(f"Exceptions error for '{effect[:50]}...' after 5 attempts: {e}")
-                        cache[effect] = {"corrected": effect, "reasoning": f"Error: {e}"}
-                    else:
-                        await asyncio.sleep(1)
-
-    tasks = [process_one(e) for e in effects]
-    for f in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="Cleaning Exceptions", smoothing=0.0):
-        await f
-
-    return cache
-
-
-def main():
+    Returns:
+        None
+    """
     args = arg_parser()
 
     global logger
@@ -375,7 +277,7 @@ def main():
 
     if args.debug:
         import random
-        random.seed(45)  # For reproducibility during debug
+        random.seed(45)
         random.shuffle(unique_descs)
         unique_descs = unique_descs[:100]
         logger.info("DEBUG MODE: Selected 100 random unique descriptions to evaluate.")
@@ -462,21 +364,7 @@ def main():
         logger.info(f"Loading exceptions system prompt from: {args.system_prompt_exceptions_file}")
         sys_prompt_exceptions = load_system_prompt(args.system_prompt_exceptions_file)
 
-        def needs_cleanup(effect: str) -> bool:
-            if not isinstance(effect, str): return False
-            # 1. Multiple colons
-            if effect.count(":") > 1: return True
-            # 2. Redundancy context: context
-            if ":" in effect:
-                parts = effect.split(":", 1)
-                ctx = parts[0].strip().lower()
-                eff = parts[1].strip().lower()
-                # Check if ctx word is in eff words or vice versa
-                ctx_words = set(ctx.replace("/", " ").replace("-", " ").split())
-                eff_words = set(eff.replace("/", " ").replace("-", " ").split())
-                if any(len(w) > 3 and w in eff_words for w in ctx_words):
-                    return True
-            return False
+
 
         cleaned_col = 'TOXICOLOGICAL_EFFECT_LLM_CLEANED'
         all_cleaned = result_df[cleaned_col].dropna().unique().tolist()
@@ -486,7 +374,17 @@ def main():
         if effects_to_fix:
             exceptions_cache = asyncio.run(process_clean_exceptions_batch(llm, sys_prompt_exceptions, effects_to_fix, max_concurrency))
 
-            def apply_exceptions(effect):
+            def apply_exceptions(effect: Any) -> Any:
+                """
+                Description:
+                Helper mapping function to apply corrections from the exceptions cache.
+
+                Args:
+                    effect (Any): The original term value.
+
+                Returns:
+                    Any: The corrected term value or the original if unchanged.
+                """
                 if not isinstance(effect, str): return effect
                 res = exceptions_cache.get(effect)
                 return res["corrected"] if res else effect
@@ -531,7 +429,17 @@ def main():
     std_cache = asyncio.run(process_standardize_batch(llm, sys_prompt_std, cleaned_effects, max_concurrency))
 
     std_col = "TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED"
-    def get_std_name(effect):
+    def get_std_name(effect: Any) -> Any:
+        """
+        Description:
+        Helper mapping function to retrieve standard names from the standardization cache.
+
+        Args:
+            effect (Any): The cleaned term value.
+
+        Returns:
+            Any: The standardized term name.
+        """
         if not isinstance(effect, str): return effect
         res = std_cache.get(effect)
         return res.get("standard_name", effect) if res else effect

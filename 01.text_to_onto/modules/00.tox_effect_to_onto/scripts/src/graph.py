@@ -1,10 +1,12 @@
 import sqlite3
+import json
 import torch
 import os
+import threading
 from functools import lru_cache
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-from typing import List, Dict, Literal
+from typing import Any, Dict, List, Literal, Optional, Tuple
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
@@ -15,8 +17,76 @@ from .utils import setup_logging, load_ontology_embeddings
 
 logger = setup_logging()
 
-def clean_llm_output(message) -> str:
-    """Removes <think> tags and markdown JSON formatting from LLM output."""
+
+def _repair_unescaped_quotes(text: str) -> str:
+    """
+    Description:
+    Character-level scanner that escapes unescaped double quotes inside JSON string values.
+    Handles LLM outputs that contain literal double quotes (e.g. "abnormal morphology") inside string fields.
+
+    Args:
+        text (str): A JSON string that may contain unescaped double quotes inside string values.
+
+    Returns:
+        str: The repaired JSON string.
+    """
+    result = []
+    n = len(text)
+    in_string = False
+    i = 0
+    while i < n:
+        ch = text[i]
+
+        if ch == '\\' and in_string:
+            # Pass through the escape sequence as-is
+            result.append(ch)
+            if i + 1 < n:
+                result.append(text[i + 1])
+                i += 2
+            else:
+                i += 1
+            continue
+
+        if ch == '"':
+            if not in_string:
+                in_string = True
+                result.append(ch)
+            else:
+                # Peek ahead to determine if this quote closes the string or is a literal interior quote.
+                # A closing quote is followed (after optional whitespace) by one of: , } ] :
+                j = i + 1
+                while j < n and text[j] in (' ', '\t', '\r', '\n'):
+                    j += 1
+                next_structural = text[j] if j < n else ''
+                if next_structural in (',', '}', ']', ':'):
+                    in_string = False
+                    result.append(ch)
+                else:
+                    # It's an interior unescaped quote — escape it
+                    result.append('\\"')
+        elif ch == '\n' and in_string:
+            # Escape bare newlines inside string values
+            result.append('\\n')
+        elif ch == '\r' and in_string:
+            result.append('\\r')
+        else:
+            result.append(ch)
+        i += 1
+
+    return "".join(result)
+
+
+def clean_llm_output(message: Any) -> str:
+    """
+    Description:
+    Removes <think> tags and markdown JSON formatting from LLM output.
+
+    Args:
+        message (Any): The message object or string returned from the LLM.
+
+    Returns:
+        str: The cleaned JSON string.
+    """
     text = message.content if hasattr(message, "content") else str(message)
 
     if "</think>" in text:
@@ -29,9 +99,78 @@ def clean_llm_output(message) -> str:
     if text.endswith("```"):
         text = text[::-1].replace("```", "", 1)[::-1]
 
-    return text.strip()
+    text = text.strip()
+
+    try:
+        data = json.loads(text)
+        
+        def repair_eval(eval_dict: Any) -> Any:
+            """
+            Description:
+            Repairs common structural anomalies in evaluation dictionaries from the LLM.
+
+            Args:
+                eval_dict (Any): The parsed evaluation dictionary.
+
+            Returns:
+                Any: The repaired dictionary.
+            """
+            if not isinstance(eval_dict, dict):
+                return eval_dict
+            if 'decision' not in eval_dict or eval_dict['decision'] not in ('ACCEPTED', 'REJECTED'):
+                for k, v in list(eval_dict.items()):
+                    if isinstance(v, str) and v.strip().upper() in ('ACCEPTED', 'REJECTED'):
+                        eval_dict['decision'] = v.strip().upper()
+                        if k != 'decision':
+                            del eval_dict[k]
+                        break
+            if 'decision' in eval_dict and isinstance(eval_dict['decision'], str):
+                eval_dict['decision'] = eval_dict['decision'].upper()
+            if 'reason' not in eval_dict or not eval_dict['reason']:
+                for k, v in list(eval_dict.items()):
+                    if k not in ('candidate_name', 'decision') and isinstance(v, str):
+                        eval_dict['reason'] = v
+                        if k != 'reason':
+                            del eval_dict[k]
+                        break
+            return eval_dict
+
+        if isinstance(data, dict):
+            if 'evaluation' in data and isinstance(data['evaluation'], list):
+                data['evaluation'] = [repair_eval(item) for item in data['evaluation']]
+            else:
+                data = repair_eval(data)
+            text = json.dumps(data)
+    except Exception:
+        # Fallback 1: allow literal control characters (bare newlines) inside strings
+        try:
+            data = json.loads(text, strict=False)
+            text = json.dumps(data)
+        except Exception:
+            # Fallback 2: character-level repair of unescaped quotes and bare newlines
+            try:
+                repaired = _repair_unescaped_quotes(text)
+                data = json.loads(repaired, strict=False)
+                text = json.dumps(data)
+            except Exception:
+                pass  # Return the best-effort text and let the downstream parser raise
+
+    return text
+
+
+
 
 def clean_reason(reason: str) -> str:
+    """
+    Description:
+    Strips prefix words like ACCEPTED or REJECTED from the reasoning text.
+
+    Args:
+        reason (str): The raw reasoning text.
+
+    Returns:
+        str: The cleaned reasoning text.
+    """
     r = reason.strip()
     if r.upper().startswith("ACCEPTED"):
         return r[8:].lstrip(" .-:")
@@ -39,17 +178,20 @@ def clean_reason(reason: str) -> str:
         return r[8:].lstrip(" .-:")
     return r
 
+
 class CandidateEvaluation(BaseModel):
     """Structure for evaluating a single candidate."""
     candidate_name: str = Field(description="The exact name of the candidate being evaluated.")
     reason: str = Field(description="Think step-by-step. Provide the explicit reason for the decision based on the critical rules. DO NOT write 'ACCEPTED' or 'REJECTED' in this field.")
     decision: Literal["ACCEPTED", "REJECTED"] = Field(description="Strictly 'ACCEPTED' or 'REJECTED' based on the reasoning above.")
 
+
 class BatchVerificationResult(BaseModel):
     """Structure for batch evaluation (Mode 2)."""
     analysis: str = Field(description="Step 1: Analyze the input description and determine its exact level of specificity (i.e., whether it is a broad categorical system or a highly specific mechanism).")
     evaluation: List[CandidateEvaluation] = Field(description="Step 2: Evaluate EVERY candidate individually. You MUST provide an evaluation object for ALL candidates in the list.")
     selected_candidates: List[str] = Field(description="Step 3: The final list of exact candidate names that pass the evaluation. Return an empty list [] if none match.")
+
 
 class TextToOntoGraph:
     def __init__(self, categories: List[str],
@@ -58,17 +200,49 @@ class TextToOntoGraph:
                 reranker_model_name: str, threshold_reranker: float,
                 mode: int, consensus_runs: int, ontology_definitions: bool, max_concurrency: int, max_retries: int, context_ontology: str,
                 reranker_prompt_file: str, reranker_batch_size: int,
-                global_definitions_db: str = None, top_k_reranker: int = None):
+                global_definitions_db: Optional[str] = None, top_k_reranker: Optional[int] = None) -> None:
+        """
+        Description:
+        Initializes the TextToOntoGraph pipeline orchestration.
+
+        Args:
+            categories (List[str]): List of prefixed ontology category names.
+            ontology_db (str): Path to ontology SQLite database.
+            embedding_model_name (str): Embedding model identifier.
+            input_db (str): Path to input/target embedding cache database.
+            top_k_rag (int): Number of neighbors retrieved via ANN.
+            system_prompt_path (str): Path to system prompt file.
+            threshold_rag (float): Score threshold for ANN retrieval candidates.
+            reranker_model_name (str): Reranker model identifier.
+            threshold_reranker (float): Score threshold for reranking candidates.
+            mode (int): Inference mode (1 for individual, 2 for batch).
+            consensus_runs (int): Number of LLM verification runs per candidate.
+            ontology_definitions (bool): Whether to include node definitions in prompt.
+            max_concurrency (int): Maximum threads/calls in parallel.
+            max_retries (int): Retry limit for API exceptions.
+            context_ontology (str): Additional context about the ontology.
+            reranker_prompt_file (str): Path to instruction file for the reranker.
+            reranker_batch_size (int): Reranker evaluation batch size.
+            global_definitions_db (Optional[str]): Optional database of global node definitions. Defaults to None.
+            top_k_reranker (Optional[int]): Optional limit of top candidates kept after reranking. Defaults to None.
+
+        Returns:
+            None
+        """
         self.categories = categories
         self.ontology_definitions = ontology_definitions
         self.include_superiors = True
         self.max_retries = max_retries
         self.context_ontology = context_ontology
         self._description_counter = 0
+        self.db_lock = threading.Lock()
+        self.counter_lock = threading.Lock()
+        self.reranker_lock = threading.Lock()
+        self.embedder_lock = threading.Lock()
 
         self.ontology_db = ontology_db
         self.input_db = input_db
-        self._input_db_conn = sqlite3.connect(self.input_db) if self.input_db else None
+        self._input_db_conn = sqlite3.connect(self.input_db, check_same_thread=False) if self.input_db else None
 
         self.embedder = EmbeddingModel(embedding_model_name)
         self.ontology_embeddings = load_ontology_embeddings(self.ontology_db)
@@ -185,17 +359,34 @@ class TextToOntoGraph:
         self.consensus_threshold = 1 if self.consensus_runs == 2 else (self.consensus_runs // 2) + 1
         self._clean_llm_runner = RunnableLambda(clean_llm_output)
 
-    def close(self):
-        """Clean up persistent resources."""
+    def close(self) -> None:
+        """
+        Description:
+        Clean up persistent resources.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         if self._input_db_conn:
             self._input_db_conn.close()
 
     def _rerank_candidates(self, description: str, candidates: list) -> list:
-        """Applies the reranker model to filter candidates by score threshold. Returns filtered list."""
+        """
+        Description:
+        Applies the reranker model to filter candidates by score threshold. Returns filtered list.
+
+        Args:
+            description (str): The raw text description.
+            candidates (list): A list of dictionary candidates to rerank.
+
+        Returns:
+            list: The filtered list of candidates.
+        """
         if self.threshold_reranker <= 0.0 or not candidates or self.reranker_model is None:
             return candidates
-
-        logger.info(f"Applying Reranker (Threshold: {self.threshold_reranker}) to {len(candidates)} candidates...")
 
         pairs = []
         for c in candidates:
@@ -208,30 +399,31 @@ class TextToOntoGraph:
         batch_size = self.reranker_batch_size
         scores = []
 
-        with torch.no_grad():
-            for i in range(0, len(pairs), batch_size):
-                batch_pairs = pairs[i:i+batch_size]
+        with self.reranker_lock:
+            with torch.no_grad():
+                for i in range(0, len(pairs), batch_size):
+                    batch_pairs = pairs[i:i+batch_size]
 
-                inputs = self.reranker_tokenizer(
-                    batch_pairs, padding=False, truncation='longest_first',
-                    return_attention_mask=False, max_length=self._reranker_max_content_len
-                )
+                    inputs = self.reranker_tokenizer(
+                        batch_pairs, padding=False, truncation='longest_first',
+                        return_attention_mask=False, max_length=self._reranker_max_content_len
+                    )
 
-                for j, ele in enumerate(inputs['input_ids']):
-                    inputs['input_ids'][j] = self.reranker_prefix_tokens + ele + self.reranker_suffix_tokens
+                    for j, ele in enumerate(inputs['input_ids']):
+                        inputs['input_ids'][j] = self.reranker_prefix_tokens + ele + self.reranker_suffix_tokens
 
-                inputs = self.reranker_tokenizer.pad(
-                    inputs, padding=True, return_tensors="pt"
-                )
-                inputs = {k: v.to(self.reranker_device) for k, v in inputs.items()}
+                    inputs = self.reranker_tokenizer.pad(
+                        inputs, padding=True, return_tensors="pt"
+                    )
+                    inputs = {k: v.to(self.reranker_device) for k, v in inputs.items()}
 
-                batch_logits = self.reranker_model(**inputs).logits[:, -1, :]
-                true_vector = batch_logits[:, self.token_true_id]
-                false_vector = batch_logits[:, self.token_false_id]
-                batch_scores = torch.stack([false_vector, true_vector], dim=1)
-                batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
-                batch_probs = batch_scores[:, 1].exp().tolist()
-                scores.extend(batch_probs)
+                    batch_logits = self.reranker_model(**inputs).logits[:, -1, :]
+                    true_vector = batch_logits[:, self.token_true_id]
+                    false_vector = batch_logits[:, self.token_false_id]
+                    batch_scores = torch.stack([false_vector, true_vector], dim=1)
+                    batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
+                    batch_probs = batch_scores[:, 1].exp().tolist()
+                    scores.extend(batch_probs)
 
         passed_candidates = []
         rejected_count = 0
@@ -247,19 +439,33 @@ class TextToOntoGraph:
             passed_candidates.sort(key=lambda x: x.get('rerank_score', 0.0), reverse=True)
             passed_candidates = passed_candidates[:self.top_k_reranker]
 
-        logger.info(f"Reranker complete: kept {len(passed_candidates)} candidates, rejected {rejected_count}.")
-
-        rerank_list = [f"{c['sanitized_name']} ({c['rerank_score']:.3f})" for c in passed_candidates]
-        logger.info(f"Reranker Candidates (>= {self.threshold_reranker}): {rerank_list}")
-
         return passed_candidates
 
     def get_breadcrumbs(self, name: str) -> str:
-        """Constructs the hierarchical path (breadcrumbs) for a node. Cached per unique name."""
+        """
+        Description:
+        Constructs the hierarchical path (breadcrumbs) for a node. Cached per unique name.
+
+        Args:
+            name (str): Node name to build the breadcrumb path for.
+
+        Returns:
+            str: The joined breadcrumb hierarchical string path.
+        """
         return self._get_breadcrumbs_cached(name)
 
     @lru_cache(maxsize=None)
     def _get_breadcrumbs_cached(self, name: str) -> str:
+        """
+        Description:
+        LRU cached internal builder for breadcrumbs.
+
+        Args:
+            name (str): Node name to build the breadcrumb path for.
+
+        Returns:
+            str: The joined breadcrumb path.
+        """
         path = []
         curr = name
         visited = set()
@@ -270,10 +476,23 @@ class TextToOntoGraph:
             curr = self.parent_map.get(curr)
         return " > ".join(reversed(path))
 
-    def execute(self, llm, description: str, std_desc: str = None, alpha: float = None):
-        """Executes the retrieval, reranking, and verification flow."""
-        self._description_counter += 1
-        logger.info(f"{self._description_counter}. Description: {description}")
+    def execute(self, llm: Any, description: str, std_desc: Optional[str] = None, alpha: Optional[float] = None) -> Tuple[dict, list, list]:
+        """
+        Description:
+        Executes the retrieval, reranking, and verification flow.
+
+        Args:
+            llm (Any): The LLM client model instance.
+            description (str): Raw text description string.
+            std_desc (Optional[str]): Optional standardized description string. Defaults to None.
+            alpha (Optional[float]): Interpolation factor between query and std embeddings. Defaults to None.
+
+        Returns:
+            Tuple[dict, list, list]: (results dictionary mapping nodes to 1, reasoning trace log list, sorted list of hits)
+        """
+        with self.counter_lock:
+            self._description_counter += 1
+            logger.info(f"\n{self._description_counter}. Description: {description}")
 
         # Build the evaluation chain (LangChain) dynamically with the provided llm
         chain = self._mode1_prompt | llm | self._clean_llm_runner | self.parser
@@ -281,19 +500,31 @@ class TextToOntoGraph:
         reasoning_trace = []
 
         def get_vec_for_text(text: str) -> torch.Tensor:
+            """
+            Description:
+            Fetches embedding vector for text from DB cache or embedder model.
+
+            Args:
+                text (str): The text string to embed.
+
+            Returns:
+                torch.Tensor: The float32 embedding tensor.
+            """
             vec = None
             if self._input_db_conn:
                 try:
-                    cursor_in = self._input_db_conn.cursor()
-                    cursor_in.execute("SELECT vector FROM input_embeddings WHERE text = ?", (text,))
-                    row = cursor_in.fetchone()
+                    with self.db_lock:
+                        cursor_in = self._input_db_conn.cursor()
+                        cursor_in.execute("SELECT vector FROM input_embeddings WHERE text = ?", (text,))
+                        row = cursor_in.fetchone()
                     if row:
                         vec = torch.frombuffer(bytearray(row[0]), dtype=torch.float32)
                 except Exception as e:
                     logger.warning(f"Could not fetch cached embedding for {text}: {e}")
             if vec is None:
-                self.embedder.load()
-                vec_bytes = self.embedder.get_embedding(text)
+                with self.embedder_lock:
+                    self.embedder.load()
+                    vec_bytes = self.embedder.get_embedding(text)
                 vec = torch.frombuffer(bytearray(vec_bytes), dtype=torch.float32)
             return vec
 
@@ -390,6 +621,10 @@ class TextToOntoGraph:
                             if retry == self.max_retries - 1:
                                 logger.warning(f"Node {meta['name']} Run {meta['run_i']+1}: All {self.max_retries} retries failed - {retry_e}")
 
+            for result in batch_results_all:
+                if isinstance(result, Exception):
+                    raise RuntimeError(f"Failed to parse LLM response in Mode 1 after retries: {result}")
+
             candidate_votes = {}
             candidate_reasoning = {}
             for i, meta in enumerate(batch_metadata):
@@ -456,7 +691,7 @@ class TextToOntoGraph:
                             next_round_candidates_map[parent_name] = {
                                 'name': parent_name,
                                 'sanitized_name': node_info.get('sanitized_name', parent_name),
-                                'def': self.prompt_map.get(parent_name, ''),
+                                  'def': self.prompt_map.get(parent_name, ''),
                                 'source': f'superior of: {name}',
                                 'ann_score': 0.0
                             }
@@ -469,8 +704,19 @@ class TextToOntoGraph:
 
         return results, reasoning_trace, sorted(results.keys())
 
-    def _execute_mode_2(self, llm, description: str, top_k_candidates: List[Dict]):
-        """Executes batch verification using the BatchVerificationResult model."""
+    def _execute_mode_2(self, llm: Any, description: str, top_k_candidates: List[Dict]) -> Tuple[dict, list, list]:
+        """
+        Description:
+        Executes batch verification using the BatchVerificationResult model.
+
+        Args:
+            llm (Any): The LLM client model instance.
+            description (str): Raw text description string.
+            top_k_candidates (List[Dict]): Candidates retrieved from RAG retrieval.
+
+        Returns:
+            Tuple[dict, list, list]: (results, reasoning trace, final verified hits)
+        """
         results = {}
         reasoning_trace = []
 
@@ -548,6 +794,10 @@ class TextToOntoGraph:
                                 if retry == self.max_retries - 1:
                                     logger.warning(f"Mode 2 Iter {iteration} Run {i+1}: All {self.max_retries} retries failed - {retry_e}")
 
+                for result in batch_results:
+                    if isinstance(result, Exception):
+                        raise RuntimeError(f"Failed to parse LLM response in Mode 2 after retries: {result}")
+
                 for run_i, result in enumerate(batch_results):
                     if isinstance(result, Exception):
                         continue
@@ -566,6 +816,7 @@ class TextToOntoGraph:
                             candidate_votes[clean_selected] += 1
             except Exception as e:
                 logger.error(f"Mode 2 Iter {iteration} batch execution failed: {e}")
+                raise e
 
             final_selected_names = [name for name, votes in candidate_votes.items() if votes >= threshold]
             rejected_names = [name for name, votes in candidate_votes.items() if votes < threshold]

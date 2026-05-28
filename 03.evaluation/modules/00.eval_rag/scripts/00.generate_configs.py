@@ -2,10 +2,33 @@ import json
 import itertools
 import argparse
 
-def generate_grid_combinations(output_path,
-                                 embedding_models, top_k_rags,
-                                 threshold_rags, threshold_reranker,
-                                 top_k_reranks, grf_alphas):
+def generate_grid_combinations(
+    output_path: str,
+    embedding_models: list[str],
+    top_k_rags: list[int],
+    threshold_rags: list[float],
+    threshold_reranker: list[float],
+    top_k_reranks: list[int],
+    grf_alphas: list[float],
+    reranker_models: list[str]
+) -> None:
+    """
+    Description:
+    Generate a grid of tuning combinations for evaluation.
+
+    Args:
+        output_path (str): Path to write the combinations JSON file.
+        embedding_models (list[str]): List of embedding model paths/names.
+        top_k_rags (list[int]): List of top K RAG candidate retrieval values.
+        threshold_rags (list[float]): List of threshold scores for RAG.
+        threshold_reranker (list[float]): List of threshold scores for the reranker.
+        top_k_reranks (list[int]): List of top K candidates to keep after reranking.
+        grf_alphas (list[float]): List of alpha values for graph regulation filtering.
+        reranker_models (list[str]): List of reranker model paths/names.
+
+    Returns:
+        None
+    """
 
 
     # Pathway 1: No reranker
@@ -16,7 +39,7 @@ def generate_grid_combinations(output_path,
     # Pathway 2: With reranker
     rerank_combos = list(itertools.product(
         embedding_models, top_k_rags, threshold_rags, grf_alphas,
-        threshold_reranker, top_k_reranks
+        threshold_reranker, top_k_reranks, reranker_models
     ))
 
     unique_combos = []
@@ -29,7 +52,8 @@ def generate_grid_combinations(output_path,
             "use_reranker": False,
             "threshold_reranker": 0.0,
             "top_k_reranker": 0,
-            "GRF": c[3]
+            "GRF": c[3],
+            "reranker_model": "None"
         })
 
     for c in rerank_combos:
@@ -40,7 +64,8 @@ def generate_grid_combinations(output_path,
             "use_reranker": True,
             "threshold_reranker": c[4],
             "top_k_reranker": c[5],
-            "GRF": c[3]
+            "GRF": c[3],
+            "reranker_model": c[6]
         })
 
     print(f"Generated {len(unique_combos)} unique grid combinations.")
@@ -62,6 +87,9 @@ if __name__ == "__main__":
     parser.add_argument("--threshold_rerank", type=float, nargs="+", default=[0.05, 0.1, 0.15, 0.2, 0.3, 0.4], help="List of threshold_reranker values.")
     parser.add_argument("--top_k_rerank", type=int, nargs="+", default=[5, 10, 15, 20], help="List of top_k_reranker values.")
     parser.add_argument("--grf", type=float, nargs="+", default=[0.0, 0.25, 0.5, 0.75, 1.0], help="List of GRF alpha values.")
+    parser.add_argument("--reranker_models", nargs="+",
+                        default=["Qwen/Qwen3-Reranker-0.6B", "Qwen/Qwen3-Reranker-4B", "Qwen/Qwen3-Reranker-8B"],
+                        help="List of reranker models.")
 
     args = parser.parse_args()
 
@@ -72,5 +100,6 @@ if __name__ == "__main__":
         threshold_rags=args.threshold_rag,
         threshold_reranker=args.threshold_rerank,
         top_k_reranks=args.top_k_rerank,
-        grf_alphas=args.grf
+        grf_alphas=args.grf,
+        reranker_models=args.reranker_models
     )

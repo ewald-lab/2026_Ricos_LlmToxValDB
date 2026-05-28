@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import glob
 import os
@@ -8,7 +9,17 @@ import rdflib
 from rdflib.namespace import RDFS
 
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parse command line arguments for the expert expansion analysis script.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: Parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Expand expert annotation terms using an ontology hierarchy."
     )
@@ -43,7 +54,17 @@ def arg_parser():
     return parser.parse_args()
 
 
-def build_graph(owl_file: str):
+def build_graph(owl_file: str) -> tuple[nx.DiGraph, dict, dict]:
+    """
+    Description:
+    Parse an owl ontology file and build a subclass hierarchy directed graph.
+
+    Args:
+        owl_file (str): Path to the owl/ttl ontology file.
+
+    Returns:
+        tuple[nx.DiGraph, dict, dict]: (Hierarchy directed graph, name to URI dictionary, URI to name dictionary).
+    """
     print(f"Parsing ontology: {owl_file}")
     g = rdflib.Graph()
     g.parse(owl_file, format="turtle")
@@ -68,7 +89,27 @@ def build_graph(owl_file: str):
     return G, name_to_uri, uri_to_name
 
 
-def get_ancestors_names(term_name, G, name_to_uri, uri_to_name, root_uri):
+def get_ancestors_names(
+    term_name: str,
+    G: nx.DiGraph,
+    name_to_uri: dict,
+    uri_to_name: dict,
+    root_uri: rdflib.term.URIRef | None
+) -> set[str]:
+    """
+    Description:
+    Retrieve all ancestors of a term in the ontology graph.
+
+    Args:
+        term_name (str): The name of the term.
+        G (nx.DiGraph): The subclass hierarchy ontology graph.
+        name_to_uri (dict): Map of term name to URI.
+        uri_to_name (dict): Map of URI to term name.
+        root_uri (rdflib.term.URIRef | None): Optional URI of the root node to ignore.
+
+    Returns:
+        set[str]: Set of ancestor term names.
+    """
     term_name = term_name.lower().strip()
     if term_name not in name_to_uri:
         return set()
@@ -83,7 +124,27 @@ def get_ancestors_names(term_name, G, name_to_uri, uri_to_name, root_uri):
     return ancestor_names
 
 
-def process_terms(term_str, G, name_to_uri, uri_to_name, root_uri):
+def process_terms(
+    term_str: str | float,
+    G: nx.DiGraph,
+    name_to_uri: dict,
+    uri_to_name: dict,
+    root_uri: rdflib.term.URIRef | None
+) -> set[str]:
+    """
+    Description:
+    Process and expand terms from a pipe-delimited string by fetching their ancestors.
+
+    Args:
+        term_str (str | float): Pipe-delimited string of terms.
+        G (nx.DiGraph): The subclass hierarchy ontology graph.
+        name_to_uri (dict): Map of term name to URI.
+        uri_to_name (dict): Map of URI to term name.
+        root_uri (rdflib.term.URIRef | None): Optional URI of the root node to ignore.
+
+    Returns:
+        set[str]: Set of expanded term names.
+    """
     if pd.isna(term_str):
         return set()
     terms = [t.strip().lower() for t in str(term_str).split("|")]
@@ -94,7 +155,17 @@ def process_terms(term_str, G, name_to_uri, uri_to_name, root_uri):
     return expanded
 
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main execution function to load configurations, build ontology graph, and expand terms for all expert CSV files.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     os.makedirs(args.output_dir, exist_ok=True)

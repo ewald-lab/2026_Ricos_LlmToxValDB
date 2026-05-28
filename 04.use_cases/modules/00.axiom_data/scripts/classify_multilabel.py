@@ -1,3 +1,4 @@
+from __future__ import annotations
 import traceback
 import os
 import argparse
@@ -23,8 +24,24 @@ def multi_label_classifier(
     *,
     shuffle: bool = False,
     n_repeats: int = 1,
-) -> tuple:
-    """Perform a binary classification for a specific label in a multi-label context."""
+) -> tuple[XGBClassifier, pl.DataFrame]:
+    """
+    Description:
+    Performs binary classification for a specific label in a multi-label context using RepeatedStratifiedKFold
+    and XGBoost. It handles class imbalance and returns the trained final model alongside validation predictions.
+
+    Args:
+        dat (pd.DataFrame): The DataFrame containing features and target labels.
+        meta (pd.DataFrame): The metadata DataFrame corresponding to `dat`.
+        n_splits (int): Number of folds for stratified cross-validation.
+        gpu_id (int): GPU device ID (negative value to run on CPU).
+        label_column (str): Name of the target label column.
+        shuffle (bool): If True, shuffles labels to establish a random control. Defaults to False.
+        n_repeats (int): Number of cross-validation repeats. Defaults to 1.
+
+    Returns:
+        tuple[XGBClassifier, pl.DataFrame]: A tuple containing the trained final XGBClassifier and a Polars DataFrame of cross-validation predictions.
+    """
     # Features are 'Feature_' columns
     feature_cols = [c for c in dat.columns if c.startswith("Feature_")]
     x = dat[feature_cols]
@@ -104,7 +121,34 @@ def multi_label_classifier(
 
     return final_model, pl.concat(pred_df, how="vertical")
 
-def process_label(dat, meta, label_column, n_splits, gpu_id, n_repeats, shuffle, output_dir):
+def process_label(
+    dat: pd.DataFrame,
+    meta: pd.DataFrame,
+    label_column: str,
+    n_splits: int,
+    gpu_id: int,
+    n_repeats: int,
+    shuffle: bool,
+    output_dir: str,
+) -> pl.DataFrame | None:
+    """
+    Description:
+    Wrapper method to process classification for a single target label, verifying sample counts,
+    saving the trained model, and adding label metadata to predictions.
+
+    Args:
+        dat (pd.DataFrame): The features and labels DataFrame.
+        meta (pd.DataFrame): The metadata DataFrame.
+        label_column (str): Name of the target label column.
+        n_splits (int): Number of splits for cross-validation.
+        gpu_id (int): GPU device ID to use.
+        n_repeats (int): Number of cross-validation repeats.
+        shuffle (bool): Whether to shuffle labels for random control.
+        output_dir (str): Directory where models will be saved.
+
+    Returns:
+        pl.DataFrame | None: Predictions DataFrame if processed successfully, or None if skipped or on error.
+    """
     try:
         num_1 = (dat[label_column] == 1).sum()
         num_0 = (dat[label_column] == 0).sum()

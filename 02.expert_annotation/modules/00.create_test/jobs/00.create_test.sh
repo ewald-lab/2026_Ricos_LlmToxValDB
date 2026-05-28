@@ -39,7 +39,6 @@ export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
 
 source "${PROJECT_ROOT}/env-expert-annot/bin/activate"
 
-export PYTHONPATH="${GIT_ROOT}/01.text_to_onto/modules/00.text_to_onto/scripts:$PYTHONPATH"
 
 for ONTOLOGY in hpath mp; do
     echo "--- Processing ontology: ${ONTOLOGY} ---"

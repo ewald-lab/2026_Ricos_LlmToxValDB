@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import json
 import os
@@ -17,7 +18,17 @@ from src.graph import TextToOntoGraph
 
 logger = setup_logging()
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parse command line arguments for the LLM evaluation script.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: Parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(description="LLM Evaluation Pipeline for Average Human toxicological effects")
 
     # --- File I/O & Columns ---
@@ -50,8 +61,17 @@ def arg_parser():
 
     return parser.parse_args()
 
-def load_candidates_from_html(html_path):
-    """Loads candidates from an expert annotation HTML file."""
+def load_candidates_from_html(html_path: str) -> list[dict]:
+    """
+    Description:
+    Loads candidates from an expert annotation HTML file.
+
+    Args:
+        html_path (str): Path to the expert annotation HTML file.
+
+    Returns:
+        list[dict]: A list of candidate dictionaries.
+    """
     with open(html_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -75,7 +95,17 @@ def load_candidates_from_html(html_path):
     raw_js = content[start_idx:end_idx].strip()
     return json.loads(raw_js)
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main execution function to load configurations, instantiate TextToOntoGraph, run predictions, and save expert format LLM responses.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     start_time = time.time()

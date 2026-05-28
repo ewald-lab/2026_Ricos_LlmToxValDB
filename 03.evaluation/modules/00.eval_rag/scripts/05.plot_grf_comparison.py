@@ -1,16 +1,38 @@
+from __future__ import annotations
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
 import os
 
-def get_model_file_name(model_name):
+def get_model_file_name(model_name: str) -> str:
+    """
+    Description:
+    Get standard prefix file name for friendly model names.
+
+    Args:
+        model_name (str): The friendly name of the model.
+
+    Returns:
+        str: The lowercase filename prefix.
+    """
     if "Harrier" in model_name: return "harrier"
     if "KaLM" in model_name: return "kalm"
     if "Nemotron" in model_name: return "nemotron"
     if "Qwen" in model_name: return "qwen"
     return model_name.replace(" ", "_").lower()
 
-def plot_grf_comparison(summary_csv, output_name):
+def plot_grf_comparison(summary_csv: str, output_name: str) -> None:
+    """
+    Description:
+    Plot Recall Comparison of GRF 0.0 vs GRF 1.0 using top configs summary.
+
+    Args:
+        summary_csv (str): Path to the summary CSV file.
+        output_name (str): Path to save the scatter comparison plot.
+
+    Returns:
+        None
+    """
     df = pd.read_csv(summary_csv)
 
     grf0_recalls = []
@@ -22,16 +44,36 @@ def plot_grf_comparison(summary_csv, output_name):
         'Harrier 27B': '#1f77b4',
         'KaLM 12B': '#ff7f0e',
         'Nemotron 8B': '#2ca02c',
+        'Qwen 8B': '#d62728',
         'Qwen3 8B': '#d62728'
     }
 
     for _, row in df.iterrows():
         model = row['Model']
         model_file = get_model_file_name(model)
-        json_path = f"../outputs/results_tune/tuning_results_{model_file}.json"
+        reranker = row.get('Reranker', 'None')
 
-        if not os.path.exists(json_path):
-            print(f"File not found: {json_path}")
+        possible_paths = []
+        if reranker != 'None':
+            r_short = "qwen3_8b"
+            if "0.6B" in str(reranker):
+                r_short = "qwen3_0.6b"
+            elif "4B" in str(reranker):
+                r_short = "qwen3_4b"
+            possible_paths.append(f"../outputs/results_tune/tuning_results_{model_file}_{r_short}.json")
+        else:
+            for r_short in ["qwen3_0.6b", "qwen3_4b", "qwen3_8b"]:
+                possible_paths.append(f"../outputs/results_tune/tuning_results_{model_file}_{r_short}.json")
+            possible_paths.append(f"../outputs/results_tune/tuning_results_{model_file}.json")
+
+        json_path = None
+        for p in possible_paths:
+            if os.path.exists(p):
+                json_path = p
+                break
+
+        if not json_path:
+            print(f"Could not find a valid tuning results file for {model} (reranker: {reranker})")
             continue
 
         with open(json_path, 'r') as f:
@@ -66,7 +108,7 @@ def plot_grf_comparison(summary_csv, output_name):
             labels.append(f"{model} ({row['Burden Range']})")
             colors.append(color_map.get(model, 'black'))
         else:
-            print(f"Could not find matching configs for {model} {row['Burden Range']}")
+            print(f"Could not find matching configs for {model} {row['Burden Range']} in {json_path}")
 
     if not grf0_recalls:
         print("No data to plot.")

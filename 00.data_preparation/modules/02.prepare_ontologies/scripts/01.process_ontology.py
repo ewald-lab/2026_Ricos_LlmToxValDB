@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import re
 import sqlite3
@@ -7,7 +8,7 @@ import rdflib
 import json
 
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 from rdflib.namespace import RDF, RDFS, SKOS, OWL
 from tqdm import tqdm
 import os
@@ -24,7 +25,22 @@ DEFAULT_HF_TRANSFER = "1"
 logger = setup_logging()
 
 class OntologyToHierarchy:
-    def __init__(self, ontology_path: str, root_uri: Optional[str] = None, prompt_template_path: Optional[str] = None, global_definitions_db: str = "definitions.db", max_concurrency: int = 10):
+    def __init__(self, ontology_path: str, root_uri: Optional[str] = None, prompt_template_path: Optional[str] = None, 
+            global_definitions_db: str = "definitions.db", max_concurrency: int = 10,) -> None:
+        """
+        Description:
+        Initializes the OntologyToHierarchy parser.
+
+        Args:
+            ontology_path (str): Path to the input ontology file.
+            root_uri (Optional[str]): Optional root URI class for hierarchy traversal.
+            prompt_template_path (Optional[str]): Optional path to custom prompt template.
+            global_definitions_db (str): Central definition caching DB path. Defaults to "definitions.db".
+            max_concurrency (int): Maximum concurrent LLM batch requests.
+
+        Returns:
+            None
+        """
         self.graph = rdflib.Graph()
         logger.info(f"Loading ontology: {ontology_path}\n")
         self.graph.parse(ontology_path)
@@ -57,7 +73,16 @@ class OntologyToHierarchy:
             logger.info(f"Loaded {count} cached definitions from {self.global_definitions_db}")
 
     def get_label(self, uri: rdflib.URIRef) -> str:
-        """Extracts the best available label for a class."""
+        """
+        Description:
+        Extracts the best available English label or fragment name for a given class URI.
+
+        Args:
+            uri (rdflib.URIRef): The class URI.
+
+        Returns:
+            str: The extracted label.
+        """
         for prop in [SKOS.prefLabel, RDFS.label]:
             for o in self.graph.objects(uri, prop):
                 if o.language == 'en' or not o.language:
@@ -65,7 +90,16 @@ class OntologyToHierarchy:
         return str(uri).split('#')[-1].split('/')[-1]
 
     def get_definition(self, uri: rdflib.URIRef) -> str:
-        """Extracts the definition of a class."""
+        """
+        Description:
+        Extracts the definition/description of a class from common ontology properties.
+
+        Args:
+            uri (rdflib.URIRef): The class URI.
+
+        Returns:
+            str: The definition text, or empty string if not found.
+        """
         props = [
             SKOS.definition,
             RDFS.comment,
@@ -79,8 +113,17 @@ class OntologyToHierarchy:
                     return str(o)
         return ""
 
-    def get_children(self, parent_uri: rdflib.URIRef) -> List[rdflib.URIRef]:
-        """Returns sorted list of children URIs."""
+    def get_children(self, parent_uri: rdflib.URIRef) -> list[rdflib.URIRef]:
+        """
+        Description:
+        Returns sorted list of children URIs subclassing the specified parent URI.
+
+        Args:
+            parent_uri (rdflib.URIRef): The parent class URI.
+
+        Returns:
+            list[rdflib.URIRef]: Sorted list of subclass children URIs.
+        """
         children = []
         for s in self.graph.subjects(RDFS.subClassOf, parent_uri):
             if isinstance(s, rdflib.URIRef):
@@ -88,11 +131,30 @@ class OntologyToHierarchy:
         children.sort(key=lambda x: self.get_label(x).lower())
         return children
 
-    def count_total_nodes(self, current_classes: List[rdflib.URIRef]) -> int:
-        """Pre-calculates total node count for progress bar."""
+    def count_total_nodes(self, current_classes: list[rdflib.URIRef]) -> int:
+        """
+        Description:
+        Calculates the total number of unique nodes in the tree structure starting from the given classes.
+
+        Args:
+            current_classes (list[rdflib.URIRef]): Starting classes list.
+
+        Returns:
+            int: The total count of unique nodes.
+        """
         seen = set()
 
-        def _recursive_count(nodes):
+        def _recursive_count(nodes: list[rdflib.URIRef]) -> int:
+            """
+            Description:
+            Helper method to recursively count nodes.
+
+            Args:
+                nodes (list[rdflib.URIRef]): Nodes list to count.
+
+            Returns:
+                int: The node count.
+            """
             local_c = 0
             for uri in nodes:
                 if uri in seen: continue
@@ -105,8 +167,18 @@ class OntologyToHierarchy:
 
         return _recursive_count(current_classes)
 
-    def generate_definitions_batch(self, llm, labels_to_generate: List[str]) -> dict:
-        """Uses the LLM to generate short descriptions for a batch of nodes in parallel."""
+    def generate_definitions_batch(self, llm: Any, labels_to_generate: list[str]) -> dict[str, str]:
+        """
+        Description:
+        Uses the LLM in batch mode to generate short descriptions for a batch of node labels.
+
+        Args:
+            llm (Any): The LLM engine instance.
+            labels_to_generate (list[str]): List of labels needing descriptions.
+
+        Returns:
+            dict[str, str]: A dictionary mapping labels to generated description strings.
+        """
         if not labels_to_generate:
             return {}
 
@@ -138,13 +210,33 @@ class OntologyToHierarchy:
 
         return results
 
-    def pre_generate_missing_definitions(self, llm, current_classes: List[rdflib.URIRef]):
-        """Collects all classes lacking definitions and generates them in parallel."""
+    def pre_generate_missing_definitions(self, llm: Any, current_classes: list[rdflib.URIRef]) -> None:
+        """
+        Description:
+        Traverses hierarchy to identify classes lacking definitions, generates them using LLM, and caches them.
+
+        Args:
+            llm (Any): The LLM engine instance.
+            current_classes (list[rdflib.URIRef]): Hierarchy entry classes.
+
+        Returns:
+            None
+        """
         labels_to_generate = []
         uris_to_generate = []
         seen = set()
 
-        def _recursive_collect(nodes):
+        def _recursive_collect(nodes: list[rdflib.URIRef]) -> None:
+            """
+            Description:
+            Helper method to recursively collect classes lacking definitions.
+
+            Args:
+                nodes (list[rdflib.URIRef]): Nodes list to inspect.
+
+            Returns:
+                None
+            """
             for uri in nodes:
                 if uri in seen: continue
                 seen.add(uri)
@@ -178,7 +270,20 @@ class OntologyToHierarchy:
                         logger.info(f"Definition generated for {uri} ({label}) -> {desc}")
                 conn.commit()
 
-    def build_hierarchy(self, current_classes: List[rdflib.URIRef], llm, pbar: Optional[tqdm] = None, parent_label: str = None) -> None:
+    def build_hierarchy(self, current_classes: list[rdflib.URIRef], llm: Any, pbar: Optional[tqdm] = None, parent_label: Optional[str] = None, ) -> None:
+        """
+        Description:
+        Recursively traverses ontology classes to build the node-parent mapping.
+
+        Args:
+            current_classes (list[rdflib.URIRef]): Ontology classes list to process.
+            llm (Any): The LLM engine.
+            pbar (Optional[tqdm]): Progress bar logger. Defaults to None.
+            parent_label (Optional[str]): Parent label string. Defaults to None.
+
+        Returns:
+            None
+        """
         valid_nodes = [uri for uri in current_classes if uri not in self.visited]
 
         if not valid_nodes:
@@ -203,7 +308,18 @@ class OntologyToHierarchy:
 
             self.node_parents[current_uri] = parent_label
 
-    def generate_embeddings(self, model_name: str, ontology_db: str):
+    def generate_embeddings(self, model_name: str, ontology_db: str) -> None:
+        """
+        Description:
+        Generates text embeddings for all processed nodes and writes them to an SQLite database.
+
+        Args:
+            model_name (str): HuggingFace embedding model ID.
+            ontology_db (str): Output database path.
+
+        Returns:
+            None
+        """
         db_path = Path(ontology_db)
         db_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -262,7 +378,17 @@ class OntologyToHierarchy:
         conn.close()
         logger.info(f"Embeddings saved: {ontology_db}")
 
-    def create(self, llm):
+    def create(self, llm: Any) -> None:
+        """
+        Description:
+        Main pipeline builder initiating root detection, definition pre-generation, and hierarchy traversal.
+
+        Args:
+            llm (Any): The LLM engine.
+
+        Returns:
+            None
+        """
         if not self.root_uri:
             subjects = set(self.graph.subjects(RDF.type, OWL.Class))
             children_with_parents = set()
@@ -293,7 +419,18 @@ class OntologyToHierarchy:
         logger.info(f"Hierarchy built: {len(self.node_parents)} nodes processed.")
 
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for processing ontology files. It parses inputs, runs the hierarchy extraction,
+    generates missing definitions, produces node embeddings, and stores them in a local SQLite DB.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     start_time = time.time()
     parser = argparse.ArgumentParser(description="Generate Hierarchy and Prompts from Ontology using LLM")
 

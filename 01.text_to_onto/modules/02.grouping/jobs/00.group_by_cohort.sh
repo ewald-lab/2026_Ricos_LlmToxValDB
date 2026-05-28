@@ -12,19 +12,14 @@
 ONTOLOGY="mp"
 MODEL="Qwen3.5-122B-A10B-FP8"
 
-JOBS_DIR="$SLURM_SUBMIT_DIR"
-REPO_ROOT="$(cd "${JOBS_DIR}/.." && pwd)"
+REPO_ROOT="$(cd "${SLURM_SUBMIT_DIR}/.." && pwd)"
 PROJECT_ROOT="$(cd "${REPO_ROOT}/../.." && pwd)"
-GIT_ROOT="$(cd "${PROJECT_ROOT}/.." && pwd)"
-
-TOX_EFFECT_MODULE="${PROJECT_ROOT}/modules/00.tox_effect_to_onto"
-GUIDELINE_MODULE="${PROJECT_ROOT}/modules/01.guideline_to_onto"
 
 source "${PROJECT_ROOT}/env-text-to-onto/bin/activate"
 
 python "${REPO_ROOT}/scripts/00.group_by_cohort.py" \
-    --input_file "${TOX_EFFECT_MODULE}/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
-    --guidelines_dir "${GUIDELINE_MODULE}/outputs/guidelines_mapping/${ONTOLOGY}/guidelines" \
+    --input_file "${PROJECT_ROOT}/modules/00.tox_effect_to_onto/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
+    --guidelines_dir "${PROJECT_ROOT}/modules/01.guideline_to_onto/outputs/guidelines_mapping/${ONTOLOGY}/guidelines" \
     --output_file "${REPO_ROOT}/outputs/ToxValDB_Cohort_${ONTOLOGY}_${MODEL}.csv" \
     --concentration_col TOXVAL_NUMERIC \
     --toxval_type_col TOXVAL_TYPE \

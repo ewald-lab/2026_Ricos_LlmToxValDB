@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import glob
 import os
@@ -12,7 +13,17 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.spatial.distance import squareform
 
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parse command line arguments for the LLM evaluation plot generator.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: Parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Generate evaluation plots from expanded LLM responses."
     )
@@ -60,6 +71,16 @@ def arg_parser():
 
 
 def clean_expert_name(name: str) -> str:
+    """
+    Description:
+    Clean and format the human expert name for plot labels.
+
+    Args:
+        name (str): The raw expert identifier.
+
+    Returns:
+        str: The cleaned expert name.
+    """
     if name == "average_human":
         return "Average Human"
     parts = name.split("_")
@@ -69,6 +90,16 @@ def clean_expert_name(name: str) -> str:
 
 
 def clean_llm_name(name: str) -> str:
+    """
+    Description:
+    Clean and format the LLM configuration name for plot labels.
+
+    Args:
+        name (str): The raw LLM identifier.
+
+    Returns:
+        str: The formatted LLM configuration name with mode, consensus, and definitions.
+    """
     # Example input: ToxValLlm_llm_Qwen3.6-35B-A3B-FP8_ontology_mp_mode_1_consensus_1_with_defs
     name = name.replace("ToxValLlm_llm_", "")
     parts = name.split("_ontology_")
@@ -93,7 +124,18 @@ def clean_llm_name(name: str) -> str:
     return f"{model_part} ({mode}, {consensus}, {defs_str})"
 
 
-def build_depth_map(owl_file: str, root_term: str | None):
+def build_depth_map(owl_file: str, root_term: str | None) -> dict:
+    """
+    Description:
+    Parse the ontology OWL file and construct a dictionary mapping term names to hierarchy depth.
+
+    Args:
+        owl_file (str): Path to the owl/ttl ontology file.
+        root_term (str | None): Label of the root node of the ontology.
+
+    Returns:
+        dict: A dictionary mapping term names to depth values.
+    """
     print(f"Parsing ontology: {owl_file}")
     g = rdflib.Graph()
     g.parse(owl_file, format="turtle")
@@ -129,14 +171,35 @@ def build_depth_map(owl_file: str, root_term: str | None):
     return depth_map
 
 
-def get_max_depth(term_set, depth_map):
+def get_max_depth(term_set: set[str], depth_map: dict) -> int | float:
+    """
+    Description:
+    Get the maximum hierarchy depth within a set of terms.
+
+    Args:
+        term_set (set[str]): A set of term names.
+        depth_map (dict): A map from term names to depth integers.
+
+    Returns:
+        int | float: The maximum depth value found.
+    """
     if not term_set:
         return 0
     depths = [depth_map.get(t, 0) for t in term_set]
     return np.max(depths)
 
 
-def count_valid_terms(term_str) -> int:
+def count_valid_terms(term_str: str | float) -> int:
+    """
+    Description:
+    Count the number of valid terms (excluding none, -, unknown) in a pipe-delimited string.
+
+    Args:
+        term_str (str | float): A pipe-delimited string of terms.
+
+    Returns:
+        int: Number of valid terms.
+    """
     if pd.isna(term_str):
         return 0
     terms = [t.strip().lower() for t in str(term_str).split("|")]
@@ -146,7 +209,17 @@ def count_valid_terms(term_str) -> int:
 
 
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main execution function to build the depth map, calculate metrics, and generate comparison plots for each LLM model.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     os.makedirs(args.output_dir, exist_ok=True)

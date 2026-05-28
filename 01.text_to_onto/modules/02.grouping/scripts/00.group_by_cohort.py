@@ -41,7 +41,7 @@ import os
 import re
 import polars as pl
 from pathlib import Path
-from typing import Dict, Set, Tuple, Optional
+from typing import Dict, Set, Tuple, Optional, Union
 
 
 # ---------------------------------------------------------------------------
@@ -78,7 +78,17 @@ EXPERIMENT_COHORT = [
 # Helpers
 # ---------------------------------------------------------------------------
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
+    """
+    Description:
+    Parse command line arguments for the grouping script.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: Parsed command-line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Group ToxValDB classified data by experiment cohort."
     )
@@ -116,7 +126,9 @@ def parse_args():
 
 
 def load_guideline_terms(guidelines_dir: str) -> Dict[str, Set[str]]:
-    """Load guideline → set of ontology term names from the breadcrumb txt files.
+    """
+    Description:
+    Load guideline → set of ontology term names from the breadcrumb txt files.
 
     Each file is named <guideline_number>.txt and contains breadcrumb paths like:
         mammalian phenotype > cellular phenotype > abnormal cell morphology
@@ -124,8 +136,11 @@ def load_guideline_terms(guidelines_dir: str) -> Dict[str, Set[str]]:
     store all intermediate nodes so that any ancestor covered by the guideline
     is also considered "in guideline".
 
+    Args:
+        guidelines_dir (str): Path to the guidelines directory.
+
     Returns:
-        Dict mapping guideline number (str) to set of term names.
+        Dict[str, Set[str]]: A dictionary mapping guideline numbers to sets of term names.
     """
     guideline_terms: Dict[str, Set[str]] = {}
     guidelines_path = Path(guidelines_dir)
@@ -151,7 +166,16 @@ def load_guideline_terms(guidelines_dir: str) -> Dict[str, Set[str]]:
 
 
 def extract_guideline_number(guideline_str: str) -> str:
-    """Extract the numeric guideline number from strings like 'OECD 408'."""
+    """
+    Description:
+    Extract the numeric guideline number from strings like 'OECD 408'.
+
+    Args:
+        guideline_str (str): The raw guideline string.
+
+    Returns:
+        str: The extracted numeric guideline number.
+    """
     if not guideline_str or guideline_str == "-":
         return ""
     match = re.search(r'(\d+)', str(guideline_str))
@@ -159,7 +183,16 @@ def extract_guideline_number(guideline_str: str) -> str:
 
 
 def classify_family(toxval_type: str) -> Optional[str]:
-    """Return 'N', 'L', or None depending on which family the type belongs to."""
+    """
+    Description:
+    Return 'N', 'L', or None depending on which family the type belongs to.
+
+    Args:
+        toxval_type (str): The toxval type to classify.
+
+    Returns:
+        Optional[str]: 'N', 'L', or None.
+    """
     if toxval_type in FAM_N_SET:
         return "N"
     elif toxval_type in FAM_L_SET:
@@ -173,15 +206,23 @@ def pick_representative_row(
     conc_col: str,
     family: str,
 ) -> Tuple[Optional[float], Optional[float]]:
-    """Pick the representative concentration and effect value for a family.
+    """
+    Description:
+    Pick the representative concentration and effect value for a family.
 
     Effect columns contain 1 (hit) or NaN (no hit).
 
     For N-family: highest concentration with a 1, else highest concentration.
     For L-family: lowest concentration with a 1, else lowest concentration.
 
-    Returns (effect_value, concentration).
-        effect_value is 1.0 when the row is a hit, None otherwise.
+    Args:
+        sub_df (pl.DataFrame): The sub-dataframe containing family rows.
+        effect_col (str): The column name for the effect.
+        conc_col (str): The column name for the concentration.
+        family (str): The family type ('N' or 'L').
+
+    Returns:
+        Tuple[Optional[float], Optional[float]]: A tuple of (effect_value, concentration).
     """
     if sub_df.is_empty():
         return None, None
@@ -212,8 +253,17 @@ def pick_representative_row(
     return best.get(effect_col), best.get(conc_col)
 
 
-def is_negative_row(row_val) -> bool:
-    """Check if the NEGATIVE column indicates a negative finding."""
+def is_negative_row(row_val: Union[bool, str, int, float, None]) -> bool:
+    """
+    Description:
+    Check if the NEGATIVE column indicates a negative finding.
+
+    Args:
+        row_val (Union[bool, str, int, float, None]): The value to check.
+
+    Returns:
+        bool: True if indicating a negative finding, False otherwise.
+    """
     if row_val is None:
         return False
     if isinstance(row_val, bool):
@@ -226,7 +276,18 @@ def is_negative_row(row_val) -> bool:
 # Main
 # ---------------------------------------------------------------------------
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main execution function to load data, process cohorts, apply decision rules,
+    and output the grouped results.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = parse_args()
 
     print(f"Loading classified data from: {args.input_file}")

@@ -1,8 +1,20 @@
+from __future__ import annotations
 import pandas as pd
 import os
 import argparse
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Loads a grouped dataset, applies a 5% positive cases (minimum 5 cases) prevalence filter
+    on columns, and saves the finalized filtered dataset.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     parser = argparse.ArgumentParser(description="Finalize ToxVal dataset with 5% prevalence filtering")
     parser.add_argument("--input", required=True, help="Input grouped CSV file")
     parser.add_argument("--output", required=True, help="Output filtered CSV file")

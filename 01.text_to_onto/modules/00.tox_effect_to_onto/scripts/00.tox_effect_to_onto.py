@@ -1,28 +1,76 @@
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
-import polars as pl
-import logging
+from pathlib import Path
+import re
 import time
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+import polars as pl
 import torch
-
-# Environment defaults (can be overridden by CLI or environment variables)
-DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
-DEFAULT_HF_TRANSFER = "1"
-
 from tqdm import tqdm
 
-from src.utils import (
-    setup_logging, is_valid_description, get_or_create_embeddings,
-    load_ontology_nodes, get_debug_rows, get_unique_descriptions,
-    save_backup_chunk, merge_backups
-)
 from model.llm import get_model, test_model
 from src.graph import TextToOntoGraph
+from src.utils import (
+    get_or_create_embeddings,
+    get_unique_descriptions,
+    is_valid_description,
+    load_ontology_nodes,
+    merge_backups,
+    save_backup_chunk,
+    setup_logging,
+)
+
+# --- Global Constants ---
+DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
+DEFAULT_HF_TRANSFER = "1"
+MODEL_CONFIG_TEMPLATE = "/nfs/research/ewald/ricos/code/playground/models/config/{model}.json"
+
+MODEL_PORTS = {
+    "GLM-5.1": "8000",
+    "gpt-oss-20b": "8001",
+    "NVIDIA-Nemotron-3-Super-120B-A12B-FP8": "8002",
+    "Qwen3.5-122B-A10B-FP8": "8003",
+    "gpt-oss-120b": "8004",
+    "Qwen3.5-35B-A3B-FP8": "8005",
+    "Qwen3.6-35B-A3B-FP8": "8006",
+    "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": "8007",
+    "Qwen3.5-27B-FP8": "8008",
+    "Qwen3.6-27B-FP8": "8009"
+}
 
 logger = setup_logging()
 
-def arg_parser():
+def replace_placeholders(text: str, key: str, value: str) -> str:
+    """
+    Description:
+    Helper to replace placeholders in format {key}, ${key}, {KEY}, ${KEY}.
+
+    Args:
+        text (str): The input text containing placeholders.
+        key (str): The placeholder key to match (e.g. 'model').
+        value (str): The value to substitute the placeholder with.
+
+    Returns:
+        str: The text with all matched placeholders replaced by the value.
+    """
+    for placeholder in (f"{{{key}}}", f"${{{key}}}", f"{{{key.upper()}}}", f"${{{key.upper()}}}"):
+        text = text.replace(placeholder, str(value))
+    return text
+
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parses command-line arguments for the Text to Onto LLM Classifier.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: The parsed command-line arguments namespace.
+    """
     parser = argparse.ArgumentParser(description="Text to Onto LLM Classifier")
 
     # --- File I/O & Columns ---
@@ -59,17 +107,101 @@ def arg_parser():
     # --- Environment & Orchestration ---
     parser.add_argument("--hf_home", default=None, help="HuggingFace cache directory.")
     parser.add_argument("--hf_transfer", default=None, help="Enable/disable HF transfer (0 or 1).")
+    parser.add_argument("--llm_config", default=None, help="Path to llm_config.json configuration file.")
+    parser.add_argument("--descriptions_concurrency", type=int, default=5, help="Number of descriptions to process in parallel.")
 
     return parser.parse_args()
 
-def main():
-    args = arg_parser()
+def load_llm_config(args: argparse.Namespace) -> None:
+    """
+    Description:
+    Loads configuration from llm_config and resolves dynamic model, mode, consensus, output paths, and ports.
+
+    Args:
+        args (argparse.Namespace): The parsed command-line arguments to be modified in-place.
+
+    Returns:
+        None
+    """
+    if not args.llm_config or not os.path.exists(args.llm_config):
+        return
+
+    logger.info(f"Loading configuration from llm_config: {args.llm_config}")
+    with open(args.llm_config, 'r', encoding='utf-8') as jf:
+        best_config = json.load(jf)
+    
+    model = best_config["model"]
+    args.mode = best_config["mode"]
+    args.consensus_runs = best_config["consensus_runs"]
+    args.ontology_definitions = best_config.get("ontology_definitions", False)
+    args.model_config = MODEL_CONFIG_TEMPLATE.format(model=model)
+    
+    # Replace placeholders in filenames
+    for attr in ('output_file', 'reasoning_file'):
+        val = getattr(args, attr)
+        if val:
+            setattr(args, attr, replace_placeholders(val, "model", model))
+
+    port = MODEL_PORTS.get(model, "8003")
+    if args.base_url:
+        args.base_url = args.base_url.replace("PORT", port)
+        args.base_url = re.sub(r':\d+/', f':{port}/', args.base_url)
+
+    if args.system_prompt_file:
+        args.system_prompt_file = replace_placeholders(args.system_prompt_file, "mode", str(args.mode))
+
+def load_rag_config(args: argparse.Namespace) -> dict:
+    """
+    Description:
+    Loads RAG configuration from a JSON file and resolves EMBED_DIR placeholders in args.
+
+    Args:
+        args (argparse.Namespace): The command-line arguments namespace to be modified in-place.
+
+    Returns:
+        dict: The loaded RAG configuration dictionary.
+    """
+    if not os.path.exists(args.rag_config):
+        raise FileNotFoundError(f"RAG config file not found: {args.rag_config}")
+    logger.info(f"Loading RAG configuration from: {args.rag_config}")
+    with open(args.rag_config, 'r', encoding='utf-8') as f:
+        rag_config = json.load(f)
+
+    embedding_model_name = rag_config.get("embedding_model", "").lower()
+    if "kalm" in embedding_model_name:
+        embed_dir = "kalm"
+    elif "qwen" in embedding_model_name:
+        embed_dir = "qwen"
+    elif "nemotron" in embedding_model_name:
+        embed_dir = "nemotron"
+    elif "harrier" in embedding_model_name:
+        embed_dir = "harrier"
+    else:
+        embed_dir = args.embeddings_model_id or "qwen"
+
+    for attr in ('ontology_embedding_db', 'target_embedding_db'):
+        val = getattr(args, attr)
+        if val:
+            resolved_val = replace_placeholders(val, "embed_dir", embed_dir)
+            setattr(args, attr, resolved_val)
+            logger.info(f"Resolved {attr} path: {resolved_val}")
+
+    return rag_config
+
+def init_env(args: argparse.Namespace) -> None:
+    """
+    Description:
+    Initializes environment variables, random seeds, and logging configuration.
+
+    Args:
+        args (argparse.Namespace): The command-line arguments containing configuration parameters.
+
+    Returns:
+        None
+    """
     seed = args.seed
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
-    logging.basicConfig(level=logging.INFO, format='%(message)s')
-
-    start_time = time.time()
 
     if args.system_prompt_file is None:
         args.system_prompt_file = f"config/prompts/system_prompt_{args.mode}.txt"
@@ -81,46 +213,34 @@ def main():
     os.environ["HF_HOME"] = hf_home
     os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = hf_transfer
 
-    logger.info(f"HuggingFace Home: {hf_home}")
+def load_input_data(input_file: str) -> pl.DataFrame:
+    """
+    Description:
+    Loads input TSV file using Polars, raising an error if it doesn't exist.
 
-    if not os.path.exists(args.input_file):
-        logger.error(f"Input file not found: {args.input_file}")
+    Args:
+        input_file (str): Path to the input TSV file.
+
+    Returns:
+        pl.DataFrame: The loaded dataset as a Polars DataFrame.
+    """
+    if not os.path.exists(input_file):
+        logger.error(f"Input file not found: {input_file}")
         logger.error(f"Current working directory: {os.getcwd()}")
-        raise FileNotFoundError(f"Input file not found: {args.input_file}")
+        raise FileNotFoundError(f"Input file not found: {input_file}")
+    return pl.read_csv(input_file, separator='\t', ignore_errors=True, quote_char=None)
 
-    # Load RAG config (REQUIRED)
-    logger.info(f"Loading RAG configuration from: {args.rag_config}")
-    with open(args.rag_config, 'r', encoding='utf-8') as f:
-        rag_config = json.load(f)
+def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
+    """
+    Description:
+    Initializes and returns the LLM model and test retries config.
 
-    # If it's a nested dictionary (e.g. keyed by model name), look up by embeddings_model_id
-    if isinstance(rag_config, dict) and "embedding_model" not in rag_config:
-        key = args.embeddings_model_id
-        if key:
-            # Case-insensitive key lookup
-            rag_config_lower = {k.lower(): v for k, v in rag_config.items()}
-            model_config_block = rag_config_lower.get(key.lower())
-            if not model_config_block:
-                # Fallback scan for embedding_model match if key was not found
-                model_config_block = next((v for v in rag_config.values() if isinstance(v, dict) and v.get("embedding_model") == key), None)
+    Args:
+        args (argparse.Namespace): The command-line arguments containing configuration.
 
-            if model_config_block:
-                logger.info(f"Using RAG configuration block for: {key}")
-                rag_config = model_config_block
-            else:
-                logger.warning(f"No specific RAG configuration found for '{key}'. Using default values.")
-
-    # Extract RAG parameters
-    embedding_model = rag_config.get("embedding_model", "Qwen/Qwen3-Embedding-8B")
-    top_k_rag = rag_config.get("top_k_rag", 15)
-    threshold_rag = rag_config.get("threshold_rag", 0.5)
-    reranker_model = rag_config.get("reranker_model", "Qwen/Qwen3-Reranker-8B")
-    threshold_reranker = rag_config.get("threshold_reranker", 0.0)
-    top_k_reranker = rag_config.get("top_k_reranker")
-    reranker_batch_size = rag_config.get("reranker_batch_size", 32)
-    reranker_prompt_file = rag_config.get("reranker_prompt")
-    grf_alpha = rag_config.get("grf")
-
+    Returns:
+        Tuple[Any, int]: A tuple containing the initialized LLM client object and the maximum number of retries.
+    """
     with open(args.model_config, 'r', encoding='utf-8') as f:
         model_config = json.load(f)
 
@@ -142,92 +262,191 @@ def main():
     if not test_model(llm, max_retries=test_retries):
         raise RuntimeError("Model connectivity test failed. Please check your configuration.")
 
-    ontology_db_path = args.ontology_embedding_db
+    args.max_concurrency = max_concurrency
+    return llm, test_retries
 
+def extract_rag_params(rag_config: dict) -> dict:
+    """
+    Description:
+    Extracts RAG and Reranker parameters from the config block.
+
+    Args:
+        rag_config (dict): The loaded RAG configuration dictionary.
+
+    Returns:
+        dict: A dictionary of RAG parameters including embedding and reranker model configurations.
+    """
+    return {
+        "embedding_model": rag_config.get("embedding_model", "Qwen/Qwen3-Embedding-8B"),
+        "top_k_rag": rag_config.get("top_k_rag", 15),
+        "threshold_rag": rag_config.get("threshold_rag", 0.5),
+        "reranker_model": rag_config.get("reranker_model", "Qwen/Qwen3-Reranker-8B"),
+        "threshold_reranker": rag_config.get("threshold_reranker", 0.0),
+        "top_k_reranker": rag_config.get("top_k_reranker"),
+        "reranker_batch_size": rag_config.get("reranker_batch_size", 32),
+        "reranker_prompt_file": rag_config.get("reranker_prompt"),
+        "grf_alpha": rag_config.get("grf")
+    }
+
+def init_graph(args: argparse.Namespace, categories: list, test_retries: int, rag_params: dict) -> TextToOntoGraph:
+    """
+    Description:
+    Initializes the TextToOntoGraph pipeline object.
+
+    Args:
+        args (argparse.Namespace): The command-line arguments configuration.
+        categories (list): List of category names from the ontology.
+        test_retries (int): Number of retries for testing connectivity.
+        rag_params (dict): Dictionary containing the extracted RAG parameters.
+
+    Returns:
+        TextToOntoGraph: The initialized TextToOntoGraph pipeline instance.
+    """
+    ontology_db_path = args.ontology_embedding_db
     if not os.path.exists(ontology_db_path):
         logger.warning(f"Ontology DB not found at {ontology_db_path}. Please ensure you ran process_ontology or check the path.")
 
-    # Derive prefix from ontology DB name (e.g., mp.db -> MP:)
-    db_filename = os.path.basename(ontology_db_path)
-    onto_name = db_filename.split('.')[0].upper()
-    prefix = f"{onto_name}:"
-    logger.info(f"Using ontology prefix: {prefix}")
-
-    nodes, categories = load_ontology_nodes(ontology_db_path, prefix=prefix)
-
-
-    graph = TextToOntoGraph(
+    return TextToOntoGraph(
         categories,
-        ontology_db=ontology_db_path, embedding_model_name=embedding_model,
-        input_db=args.target_embedding_db, top_k_rag=top_k_rag,
+        ontology_db=ontology_db_path,
+        embedding_model_name=rag_params["embedding_model"],
+        input_db=args.target_embedding_db,
+        top_k_rag=rag_params["top_k_rag"],
         system_prompt_path=args.system_prompt_file,
-        threshold_rag=threshold_rag,
-        reranker_model_name=reranker_model, threshold_reranker=threshold_reranker,
+        threshold_rag=rag_params["threshold_rag"],
+        reranker_model_name=rag_params["reranker_model"],
+        threshold_reranker=rag_params["threshold_reranker"],
         mode=args.mode,
         consensus_runs=args.consensus_runs,
         ontology_definitions=args.ontology_definitions,
-        max_concurrency=max_concurrency,
+        max_concurrency=args.max_concurrency,
         max_retries=test_retries,
         context_ontology=args.context_ontology,
-        reranker_prompt_file=reranker_prompt_file,
-        reranker_batch_size=reranker_batch_size,
+        reranker_prompt_file=rag_params["reranker_prompt_file"],
+        reranker_batch_size=rag_params["reranker_batch_size"],
         global_definitions_db=args.global_definitions_db,
-        top_k_reranker=top_k_reranker
+        top_k_reranker=rag_params["top_k_reranker"]
     )
 
-    try:
-        logger.info(f"Loading data from {args.input_file}")
-        df = pl.read_csv(args.input_file, separator='\t', ignore_errors=True, quote_char=None)
 
-        # Determine the exact schema for chunks to avoid any read/write/concat inference errors
-        target_schema = dict(df.schema)
-        for cat in categories:
-            # If the category column already exists (from _03 file), keep its current type or ensure it's compatible
-            if cat in target_schema:
-                # We might have floats (NaN) or ints (0/1). Float64 is safer for NaN support.
-                target_schema[cat] = pl.Float64
-            else:
-                target_schema[cat] = pl.Float64
+def setup_target_schema_and_embeddings(
+    df: pl.DataFrame,
+    categories: list,
+    target_column: str,
+    std_column: str,
+    embedding_model: str,
+    target_embedding_db: str,
+    use_std: bool
+) -> dict:
+    """
+    Description:
+    Determines target schema and ensures embeddings exist for target and standard columns.
 
-        unique_descs = df.select(args.target_column).unique().drop_nulls().to_series().to_list()
-        unique_descs = [d for d in unique_descs if is_valid_description(d)]
-        logger.info(f"Checking embeddings for CLEANED column '{args.target_column}' ({len(unique_descs)} unique texts)...")
-        get_or_create_embeddings(unique_descs, embedding_model, args.target_embedding_db, return_vectors=False)
+    Args:
+        df (pl.DataFrame): Input dataset DataFrame.
+        categories (list): List of ontology categories.
+        target_column (str): Name of the column containing the raw description.
+        std_column (str): Name of the column containing the standardized description.
+        embedding_model (str): Name or identifier of the embedding model.
+        target_embedding_db (str): Path to the target embedding database.
+        use_std (bool): Whether to generate embeddings for the standardized column as well.
 
-        use_std = grf_alpha is not None and grf_alpha != 1.0 and args.std_column in df.columns
-        if use_std:
-            unique_stds = df.select(args.std_column).unique().drop_nulls().to_series().to_list()
-            unique_stds = [d for d in unique_stds if is_valid_description(d)]
-            logger.info(f"Checking embeddings for STANDARDIZED column '{args.std_column}' ({len(unique_stds)} unique texts)...")
-            get_or_create_embeddings(unique_stds, embedding_model, args.target_embedding_db, return_vectors=False)
+    Returns:
+        dict: A dictionary mapping column names to their Polars types representing the output schema.
+    """
+    target_schema = dict(df.schema)
+    for cat in categories:
+        target_schema[cat] = pl.Float64
 
-        args.debug_rows = get_debug_rows(df, args.target_column, args.random_debug_rows, args.debug_rows, args.seed)
+    unique_descs = df.select(target_column).unique().drop_nulls().to_series().to_list()
+    unique_descs = [d for d in unique_descs if is_valid_description(d)]
+    logger.info(f"Checking embeddings for CLEANED column '{target_column}' ({len(unique_descs)} unique texts)...")
+    get_or_create_embeddings(unique_descs, embedding_model, target_embedding_db, return_vectors=False)
+
+    if use_std:
+        unique_stds = df.select(std_column).unique().drop_nulls().to_series().to_list()
+        unique_stds = [d for d in unique_stds if is_valid_description(d)]
+        logger.info(f"Checking embeddings for STANDARDIZED column '{std_column}' ({len(unique_stds)} unique texts)...")
+        get_or_create_embeddings(unique_stds, embedding_model, target_embedding_db, return_vectors=False)
+
+    return target_schema
 
 
-        gpu_id_str = f"GPU:{os.environ.get('CUDA_VISIBLE_DEVICES', 'N/A')}"
-        unique_descriptions, seen_descriptions = get_unique_descriptions(df, args.target_column, args.debug_rows)
+def run_inference(
+    args: argparse.Namespace,
+    df: pl.DataFrame,
+    categories: list,
+    target_schema: dict,
+    graph: TextToOntoGraph,
+    llm: Any,
+    use_std: bool,
+    grf_alpha: Optional[float]
+) -> None:
+    """
+    Description:
+    Executes the concurrent description classification flow.
 
-        desc_to_std = {}
-        if use_std:
-            # Create a mapping from target_column to std_column
-            mapping_df = df.select([args.target_column, args.std_column]).drop_nulls().group_by(args.target_column, maintain_order=True).agg(pl.col(args.std_column).first())
-            desc_to_std = dict(zip(mapping_df[args.target_column], mapping_df[args.std_column]))
+    Args:
+        args (argparse.Namespace): Command-line arguments namespace.
+        df (pl.DataFrame): Input dataset DataFrame.
+        categories (list): List of ontology categories.
+        target_schema (dict): The output schema mapping.
+        graph (TextToOntoGraph): The ontology graph pipeline helper.
+        llm (Any): The initialized LLM client instance.
+        use_std (bool): Whether to use standardized descriptions.
+        grf_alpha (Optional[float]): Optional alpha parameter for GRF.
 
-        description_cache = {}
-        total_descs = len(unique_descriptions)
-        num_backups = args.num_backups
-        backup_interval = (total_descs + num_backups - 1) // num_backups if num_backups > 0 else total_descs + 1
-        backup_count = 1
+    Returns:
+        None
+    """
+    unique_descriptions, seen_descriptions = get_unique_descriptions(df, args.target_column, args.debug_rows)
 
-        for idx, desc in enumerate(tqdm(unique_descriptions, desc=f"Worker {gpu_id_str} (Unique)", smoothing=0.0)):
+    desc_to_std = {}
+    if use_std:
+        # Create a mapping from target_column to std_column
+        mapping_df = df.select([args.target_column, args.std_column]).drop_nulls().group_by(args.target_column, maintain_order=True).agg(pl.col(args.std_column).first())
+        desc_to_std = dict(zip(mapping_df[args.target_column], mapping_df[args.std_column]))
+
+    description_cache = {}
+    total_descs = len(unique_descriptions)
+    num_backups = args.num_backups
+    backup_interval = (total_descs + num_backups - 1) // num_backups if num_backups > 0 else total_descs + 1
+    backup_count = 1
+
+    def process_description(desc: str) -> Tuple[str, dict, str, list]:
+        """
+        Description:
+        Processes a single description through the graph pipeline.
+
+        Args:
+            desc (str): The description text to process.
+
+        Returns:
+            Tuple[str, dict, str, list]: A tuple of (description, row result values, reasoning, selected categories).
+        """
+        std_desc = desc_to_std.get(desc) if use_std else None
+        max_attempts = 3
+        last_err = None
+        for attempt in range(1, max_attempts + 1):
             try:
-                logger.info("\n--------------------------------------------------------")
-                logger.info(f"{gpu_id_str} | Processing unique description")
-
-                std_desc = desc_to_std.get(desc) if use_std else None
                 row_result_values, reasoning, selected = graph.execute(llm, desc, std_desc=std_desc, alpha=grf_alpha)
+                return desc, row_result_values, reasoning, selected
+            except Exception as e:
+                last_err = e
+                logger.warning(f"Attempt {attempt}/{max_attempts} failed for description '{desc}': {e}")
+                if attempt < max_attempts:
+                    time.sleep(1.0)
+        raise RuntimeError(f"All {max_attempts} attempts failed for description '{desc}'. Last error: {last_err}")
 
-                description_cache[desc] = (row_result_values, reasoning, selected)
+
+    with ThreadPoolExecutor(max_workers=args.descriptions_concurrency) as executor:
+        futures = {executor.submit(process_description, desc): desc for desc in unique_descriptions}
+
+        for idx, future in enumerate(tqdm(as_completed(futures), total=total_descs, smoothing=0.0)):
+            desc = futures[future]
+            try:
+                desc_res, row_result_values, reasoning, selected = future.result()
+                description_cache[desc_res] = (row_result_values, reasoning, selected)
             except Exception as e:
                 logger.error(f"Error processing description '{desc[:50]}...': {e}")
 
@@ -241,24 +460,72 @@ def main():
                                     debug_rows=args.debug_rows, seen_descriptions=seen_descriptions)
                     description_cache.clear()
                     if not is_fin:
-                        backup_count = backup_count + 1
+                        backup_count += 1
 
-        if num_backups > 0:
-            merge_backups(args.output_file, args.reasoning_file, backup_count,
-                        categories, args.target_column, target_schema)
-        else:
-            logger.info("Applying results to rows and saving...")
-            # Fallback for when no backups are used
-            save_backup_chunk(df, description_cache, 0, categories, args.target_column,
-                             args.output_file, args.reasoning_file, target_schema,
-                             is_final=True, debug_rows=args.debug_rows, seen_descriptions=seen_descriptions)
-            # Rename backup 0 to final
-            os.rename(args.output_file.replace('.csv', '_0.csv'), args.output_file)
-            os.rename(args.reasoning_file.replace('.json', '_0.json'), args.reasoning_file)
+    if num_backups > 0:
+        merge_backups(args.output_file, args.reasoning_file, backup_count,
+                    categories, args.target_column, target_schema)
+    else:
+        logger.info("Applying results to rows and saving...")
+        save_backup_chunk(df, description_cache, 0, categories, args.target_column,
+                         args.output_file, args.reasoning_file, target_schema,
+                         is_final=True, debug_rows=args.debug_rows, seen_descriptions=seen_descriptions)
+        # Rename backup 0 to final safely using Path
+        out_path = Path(args.output_file)
+        reason_path = Path(args.reasoning_file)
+        
+        backup_out_file = out_path.with_name(f"{out_path.stem}_0{out_path.suffix}")
+        backup_reason_file = reason_path.with_name(f"{reason_path.stem}_0{reason_path.suffix}")
+        
+        os.rename(backup_out_file, out_path)
+        os.rename(backup_reason_file, reason_path)
 
-        logger.info(f"Total execution time: {time.time() - start_time:.2f}s")
+def main() -> None:
+    """
+    Description:
+    The main execution entry point for the text-to-ontology script.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
+    args = arg_parser()
+
+    rag_config = load_rag_config(args)
+
+    load_llm_config(args)
+
+    init_env(args)
+
+    start_time = time.time()
+
+    df = load_input_data(args.input_file)
+
+    rag_params = extract_rag_params(rag_config)
+
+    llm, test_retries = init_llm(args)
+
+    prefix = f"{Path(args.ontology_embedding_db).name.split('.')[0].upper()}:"
+    logger.info(f"Using ontology prefix: {prefix}")
+    nodes, categories = load_ontology_nodes(args.ontology_embedding_db, prefix=prefix)
+
+    use_std = args.std_column in df.columns if args.std_column else False
+
+    target_schema = setup_target_schema_and_embeddings(
+        df, categories, args.target_column, args.std_column, 
+        rag_params["embedding_model"], args.target_embedding_db, use_std)
+
+    graph = init_graph(args, categories, test_retries, rag_params)
+
+    try:
+        run_inference(args, df, categories, target_schema, graph, llm, use_std, rag_params["grf_alpha"])
     finally:
         graph.close()
+
+    logger.info(f"Total execution time: {time.time() - start_time:.2f}s")
+
 
 if __name__ == "__main__":
     main()

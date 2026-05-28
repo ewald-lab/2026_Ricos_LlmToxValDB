@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sys
 import os
 import argparse
@@ -14,7 +15,18 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 logger = setup_logging()
 
-def load_ground_truth(csv_path: str, toxval_path: str):
+def load_ground_truth(csv_path: str, toxval_path: str) -> list[dict]:
+    """
+    Description:
+    Load ground truth data from the specified CSV file and join it with ToxValDB metadata.
+
+    Args:
+        csv_path (str): Path to the ground truth CSV file.
+        toxval_path (str): Path to the ToxValDB database/TSV file.
+
+    Returns:
+        list[dict]: A list of dictionaries containing original, cleaned, standardized text and matches.
+    """
     # Load mapping from ToxValDB
     tox_df = pl.read_csv(toxval_path, separator='\t', null_values=["", "NA", "null"])
     # Create mapping: original -> {cleaned, standardized}
@@ -51,7 +63,19 @@ def load_ground_truth(csv_path: str, toxval_path: str):
     return gt_data
 
 class Precomputer:
-    def __init__(self, ground_truth, ontology_db, target_db):
+    def __init__(self, ground_truth: list[dict], ontology_db: str, target_db: str) -> None:
+        """
+        Description:
+        Initialize the Precomputer class.
+
+        Args:
+            ground_truth (list[dict]): The ground truth list of dictionaries.
+            ontology_db (str): Path to the ontology database file.
+            target_db (str): Path to the target embeddings database file.
+
+        Returns:
+            None
+        """
         self.ground_truth = ground_truth
         self.ontology_db = ontology_db
         self.target_db = target_db
@@ -64,7 +88,17 @@ class Precomputer:
         # Load ontology
         self._load_ontology()
 
-    def _load_query_embeddings(self):
+    def _load_query_embeddings(self) -> None:
+        """
+        Description:
+        Load or generate query embeddings for cleaned and standardized texts.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         logger.info(f"Loading query embeddings from {self.target_db}...")
         text_to_vec = {}
         with sqlite3.connect(self.target_db) as conn:
@@ -77,7 +111,17 @@ class Precomputer:
         # We need embedding model to generate on the fly if missing
         embed_model = None
 
-        def get_vec(text):
+        def get_vec(text: str) -> torch.Tensor | None:
+            """
+            Description:
+            Get the embedding vector for the given text, generating it on the fly if missing.
+
+            Args:
+                text (str): The input text to embed.
+
+            Returns:
+                torch.Tensor | None: The embedding vector as a torch Tensor, or None if text is empty.
+            """
             if not text: return None
             if text in text_to_vec:
                 return text_to_vec[text]
@@ -111,13 +155,32 @@ class Precomputer:
         q_std_fixed = [v if v is not None else q_cleaned[i] for i, v in enumerate(q_std)]
         self.q_std_mat = torch.stack(q_std_fixed).to(self.q_cleaned_mat.device)
 
-    def _load_ontology(self):
+    def _load_ontology(self) -> None:
+        """
+        Description:
+        Load ontology embeddings and construct the ontology matrix.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         logger.info(f"Loading ontology matrix from {self.ontology_db}")
         self.ontology_embeddings = load_ontology_embeddings(self.ontology_db)
         self._ontology_matrix = torch.stack([item['vector'] for item in self.ontology_embeddings]).to(self.q_cleaned_mat.device)
 
-    def get_top_k_candidates(self, top_k=150):
-        """Computes top K candidates for each query using cosine similarity, for each GRF alpha."""
+    def get_top_k_candidates(self, top_k: int = 150) -> dict[str, list]:
+        """
+        Description:
+        Computes top K candidates for each query using cosine similarity, for each GRF alpha.
+
+        Args:
+            top_k (int): Number of top candidates to retrieve. Defaults to 150.
+
+        Returns:
+            dict[str, list]: A dictionary mapping each GRF alpha value to the list of candidates.
+        """
         logger.info(f"Computing Top {top_k} candidates for {len(self.ground_truth)} queries for each GRF...")
 
         alphas = [0.0, 0.25, 0.5, 0.75, 1.0]
@@ -144,7 +207,24 @@ class Precomputer:
 
         return results_by_grf
 
-    def compute_reranker_scores(self, results_by_grf, reranker_model_name, reranker_config_path):
+    def compute_reranker_scores(
+        self,
+        results_by_grf: dict[str, list],
+        reranker_model_name: str,
+        reranker_config_path: str
+    ) -> dict[str, list]:
+        """
+        Description:
+        Compute reranker scores for all unique candidate-query pairs across all GRF lists.
+
+        Args:
+            results_by_grf (dict[str, list]): The dictionary mapping GRF alpha to candidate lists.
+            reranker_model_name (str): The name/path of the reranker model.
+            reranker_config_path (str): The path to the reranker instruction file.
+
+        Returns:
+            dict[str, list]: The updated dictionary with reranker scores filled in.
+        """
         logger.info(f"Loading Reranker Model: {reranker_model_name}")
         tokenizer = AutoTokenizer.from_pretrained(reranker_model_name, padding_side='left')
         model = AutoModelForCausalLM.from_pretrained(
@@ -212,6 +292,7 @@ if __name__ == "__main__":
     parser.add_argument("--ground_truth", required=True)
     parser.add_argument("--ontology_db", required=True)
     parser.add_argument("--target_embedding_db", required=True)
+    parser.add_argument("--embedding_model", default="Qwen/Qwen3-Embedding-8B")
     parser.add_argument("--reranker_model", default="Qwen/Qwen3-Reranker-8B")
     parser.add_argument("--reranker_config", required=True)
     parser.add_argument("--output", required=True)
@@ -229,6 +310,8 @@ if __name__ == "__main__":
 
     # 3. Save to Master Cache
     output_data = {
+        "embedding_model": args.embedding_model,
+        "reranker_model": args.reranker_model,
         "ground_truth": gt_data,
         "precomputed_results_by_grf": full_data_by_grf
     }

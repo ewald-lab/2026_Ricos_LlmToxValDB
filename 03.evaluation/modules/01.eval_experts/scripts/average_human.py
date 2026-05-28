@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import glob
 import os
@@ -5,7 +6,17 @@ import pandas as pd
 from collections import Counter
 
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parse command line arguments for the average human profile generator.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: Parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Create an average human/expert profile from expanded expert CSV files."
     )
@@ -28,7 +39,17 @@ def arg_parser():
     return parser.parse_args()
 
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main execution function to load expert expanded term CSV files, compute consensus terms, and save the averaged human profile.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     # Locate all Expanded_*.csv files in the input directory, excluding any average files

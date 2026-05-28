@@ -19,6 +19,16 @@ DEFAULT_ENDPOINTS_DIR = MODULE_ROOT / "outputs" / "endpoints"
 DEFAULT_OUTPUT_DIR = MODULE_ROOT / "outputs" / "endpoints"
 
 def load_category_map() -> dict[str, str]:
+    """
+    Description:
+    Loads original-to-normalized category mappings from the CSV config file.
+
+    Args:
+        None
+
+    Returns:
+        dict[str, str]: A dictionary mapping original category strings to normalized category strings.
+    """
     map_path = MODULE_ROOT / "config" / "category_normalization.csv"
     mapping = {}
     if map_path.exists():
@@ -30,6 +40,7 @@ def load_category_map() -> dict[str, str]:
                 if original:
                     mapping[original] = normalized
     return mapping
+
 
 CATEGORY_MAP = load_category_map()
 
@@ -196,7 +207,16 @@ CATEGORY_NORMALIZATION_FIELDS = ["original_category", "normalized_category"]
 
 
 def guideline_sort_key(path: Path) -> tuple[int, str]:
-    """Sort OECD endpoint files by guideline number, with a name fallback."""
+    """
+    Description:
+    Sort OECD endpoint files by guideline number, with a name fallback.
+
+    Args:
+        path (Path): The path to the OECD endpoint file.
+
+    Returns:
+        tuple[int, str]: A tuple containing the guideline number and the file name for sorting.
+    """
     match = re.search(r"OECD_(\d+)_endpoints", path.name)
     if match:
         return (int(match.group(1)), path.name)
@@ -204,12 +224,30 @@ def guideline_sort_key(path: Path) -> tuple[int, str]:
 
 
 def discover_endpoint_csvs(endpoints_dir: Path = DEFAULT_ENDPOINTS_DIR) -> list[Path]:
-    """Find all OECD endpoint CSV files."""
+    """
+    Description:
+    Find all OECD endpoint CSV files in the specified directory.
+
+    Args:
+        endpoints_dir (Path): The directory path to search. Defaults to DEFAULT_ENDPOINTS_DIR.
+
+    Returns:
+        list[Path]: A sorted list of Paths to the discovered CSV files.
+    """
     return sorted(endpoints_dir.glob("OECD_*_endpoints*.csv"), key=guideline_sort_key)
 
 
 def load_endpoint_csv(path: Path) -> list[dict[str, str]]:
-    """Load an endpoint CSV, accepting files with or without a source column."""
+    """
+    Description:
+    Load an endpoint CSV, accepting files with or without a source column.
+
+    Args:
+        path (Path): Path to the CSV file to load.
+
+    Returns:
+        list[dict[str, str]]: A list of dictionaries representing the rows in the CSV.
+    """
     rows: list[dict[str, str]] = []
     with open(path, newline="", encoding="utf-8") as handle:
         reader = csv.reader(handle)
@@ -235,13 +273,32 @@ def load_endpoint_csv(path: Path) -> list[dict[str, str]]:
 
 
 def normalize_category(original: str) -> str:
-    """Map an original category name to the transfer-normalized category."""
+    """
+    Description:
+    Map an original category name to the transfer-normalized category.
+
+    Args:
+        original (str): The original category name.
+
+    Returns:
+        str: The normalized category name.
+    """
     original = original.strip()
     return CATEGORY_MAP.get(original, original)
 
 
 def reclassify_pathology_endpoints(normalized_category: str, endpoint_name: str) -> str:
-    """Move pathology sub-endpoints that are really weights or histopathology."""
+    """
+    Description:
+    Move pathology sub-endpoints that are really weights or histopathology.
+
+    Args:
+        normalized_category (str): The current normalized category name.
+        endpoint_name (str): The endpoint name to check for reclassification.
+
+    Returns:
+        str: The updated normalized category name.
+    """
     name_lower = endpoint_name.lower().strip()
     if normalized_category != "Pathology":
         return normalized_category
@@ -253,7 +310,17 @@ def reclassify_pathology_endpoints(normalized_category: str, endpoint_name: str)
 
 
 def normalize_endpoint_name(name: str, normalized_category: str) -> str:
-    """Normalize endpoint names using synonym tables and category suffixes."""
+    """
+    Description:
+    Normalize endpoint names using synonym tables and category suffixes.
+
+    Args:
+        name (str): The original endpoint name.
+        normalized_category (str): The normalized category to which the endpoint belongs.
+
+    Returns:
+        str: The normalized endpoint name.
+    """
     name_lower = name.strip().lower()
     normalized = ENDPOINT_SYNONYMS.get(name_lower, ORGAN_SYNONYMS.get(name_lower, name_lower))
 
@@ -292,7 +359,16 @@ def normalize_endpoint_name(name: str, normalized_category: str) -> str:
 
 
 def build_normalized_rows(csv_paths: Iterable[Path]) -> list[dict[str, str]]:
-    """Build row-level normalized endpoint records."""
+    """
+    Description:
+    Build row-level normalized endpoint records from multiple CSV files.
+
+    Args:
+        csv_paths (Iterable[Path]): An iterable of paths to the endpoint CSV files.
+
+    Returns:
+        list[dict[str, str]]: A list of dictionaries representing normalized rows.
+    """
     rows: list[dict[str, str]] = []
     seq_counters: dict[str, int] = defaultdict(int)
 
@@ -331,15 +407,31 @@ def build_normalized_rows(csv_paths: Iterable[Path]) -> list[dict[str, str]]:
 
 
 def sort_guideline_numbers(values: set[str]) -> list[str]:
-    """Sort guideline numbers numerically where possible."""
+    """
+    Description:
+    Sort guideline numbers numerically where possible.
+
+    Args:
+        values (set[str]): A set of guideline numbers.
+
+    Returns:
+        list[str]: Sorted guideline numbers as a list of strings.
+    """
     return sorted(values, key=lambda value: (not value.isdigit(), int(value) if value.isdigit() else value))
 
 
 def build_unique_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
-    """Collapse row-level records to one row per normalized category/endpoint pair.
-
+    """
+    Description:
+    Collapse row-level records to one row per normalized category/endpoint pair.
     Only Required endpoints are included; Optional endpoints are dropped so the
     downstream ontology-mapping pipeline focuses on mandatory measurements.
+
+    Args:
+        rows (Iterable[dict[str, str]]): An iterable of normalized row dictionaries.
+
+    Returns:
+        list[dict[str, str]]: A list of dictionaries containing unique required endpoints.
     """
     grouped: dict[tuple[str, str], dict[str, set[str] | int]] = {}
 
@@ -382,13 +474,20 @@ def build_unique_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str,
 
 
 def build_all_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
-    """Collapse row-level records to one row per normalized category/endpoint pair,
+    """
+    Description:
+    Collapse row-level records to one row per normalized category/endpoint pair,
     including both Required and Optional endpoints.
+    The requirement_level field is set to:
+    - "Required" if the endpoint is Required in every guideline it appears in.
+    - "Optional" if Optional in every guideline.
+    - "Required/Optional" if it appears as both across different guidelines.
 
-    The ``requirement_level`` field is set to:
-    - ``"Required"`` if the endpoint is Required in every guideline it appears in.
-    - ``"Optional"`` if Optional in every guideline.
-    - ``"Required/Optional"`` if it appears as both across different guidelines.
+    Args:
+        rows (Iterable[dict[str, str]]): An iterable of normalized row dictionaries.
+
+    Returns:
+        list[dict[str, str]]: A list of dictionaries containing all unique endpoints.
     """
     grouped: dict[tuple[str, str], dict] = {}
 
@@ -443,7 +542,16 @@ def build_all_endpoint_list(rows: Iterable[dict[str, str]]) -> list[dict[str, st
 
 
 def build_category_normalization(rows: Iterable[dict[str, str]]) -> list[dict[str, str]]:
-    """Return one row per original-to-normalized category mapping."""
+    """
+    Description:
+    Return one row per original-to-normalized category mapping.
+
+    Args:
+        rows (Iterable[dict[str, str]]): An iterable of normalized row dictionaries.
+
+    Returns:
+        list[dict[str, str]]: A list of dictionaries mapping original categories to normalized categories.
+    """
     category_pairs = {
         (row["original_category"], row["normalized_category"])
         for row in rows
@@ -456,7 +564,18 @@ def build_category_normalization(rows: Iterable[dict[str, str]]) -> list[dict[st
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: Iterable[dict[str, str]]) -> Path:
-    """Write dictionaries to CSV, creating parent directories."""
+    """
+    Description:
+    Write dictionaries to CSV, creating parent directories.
+
+    Args:
+        path (Path): Path to the target CSV file.
+        fieldnames (list[str]): List of headers for the CSV file.
+        rows (Iterable[dict[str, str]]): The rows of data to write.
+
+    Returns:
+        Path: The path to the written CSV file.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)

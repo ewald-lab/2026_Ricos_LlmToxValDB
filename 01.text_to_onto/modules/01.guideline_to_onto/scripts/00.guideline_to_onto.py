@@ -30,9 +30,17 @@ DEFAULT_ENDPOINTS = (
 )
 
 
-def arg_parser():
-    """Define CLI arguments for endpoint-to-ontology filter generation."""
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Define CLI arguments for endpoint-to-ontology filter generation.
 
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: The parsed command-line arguments namespace.
+    """
     parser = argparse.ArgumentParser(
         description="Build endpoint-derived ontology subtree filters."
     )
@@ -131,14 +139,22 @@ def arg_parser():
     )
     parser.add_argument("--hf_home", default=None, help="HuggingFace cache directory.")
     parser.add_argument("--hf_transfer", default=None, help="Enable/disable HF transfer.")
-
+    parser.add_argument("--llm_config", default=None, help="Path to llm_config.json configuration file.")
 
     return parser.parse_args()
 
 
 def load_text_or_file(value: str) -> str:
-    """Accept either literal context text or a path to a context text file."""
+    """
+    Description:
+    Accept either literal context text or a path to a context text file.
 
+    Args:
+        value (str): The context string or path to the context file.
+
+    Returns:
+        str: The loaded context text content.
+    """
     if not value:
         return ""
     try:
@@ -150,11 +166,79 @@ def load_text_or_file(value: str) -> str:
     return value
 
 
-def main():
-    """Run the endpoint-to-phenotype filter pipeline."""
+def main() -> None:
+    """
+    Description:
+    Run the endpoint-to-phenotype filter pipeline.
 
+    Args:
+        None
+
+    Returns:
+        None
+    """
     start_time = time.time()
     args = arg_parser()
+
+    # Load RAG config first to deduce EMBED_DIR and resolve database paths
+    if not os.path.exists(args.rag_config):
+        raise FileNotFoundError(f"RAG config file not found: {args.rag_config}")
+    with open(args.rag_config, 'r', encoding='utf-8') as f:
+        rag_config_raw = json.load(f)
+
+    # Resolve embedding model from rag_config
+    if isinstance(rag_config_raw, dict) and "embedding_model" not in rag_config_raw:
+        first_block = next(iter(rag_config_raw.values())) if rag_config_raw else {}
+        embedding_model_name = first_block.get("embedding_model", "").lower()
+    else:
+        embedding_model_name = rag_config_raw.get("embedding_model", "").lower()
+
+    if "kalm" in embedding_model_name:
+        embed_dir = "kalm"
+    elif "qwen" in embedding_model_name:
+        embed_dir = "qwen"
+    else:
+        embed_dir = "kalm"
+
+    if args.ontology_embedding_db:
+        args.ontology_embedding_db = args.ontology_embedding_db.replace("{EMBED_DIR}", embed_dir).replace("{embed_dir}", embed_dir).replace("${EMBED_DIR}", embed_dir).replace("${embed_dir}", embed_dir)
+    if args.global_definitions_db:
+        args.global_definitions_db = args.global_definitions_db.replace("{EMBED_DIR}", embed_dir).replace("{embed_dir}", embed_dir).replace("${EMBED_DIR}", embed_dir).replace("${embed_dir}", embed_dir)
+    args.embeddings_model_id = embed_dir
+
+    # Check if the DB exists in outputs, otherwise fallback to inputs
+    if args.ontology_embedding_db and not os.path.exists(args.ontology_embedding_db):
+        args.ontology_embedding_db = args.ontology_embedding_db.replace("outputs", "inputs/ontology_dbs")
+        if args.global_definitions_db:
+            args.global_definitions_db = args.global_definitions_db.replace("outputs", "inputs/ontology_dbs")
+
+    if args.llm_config and os.path.exists(args.llm_config):
+        print(f"Loading configuration from llm_config: {args.llm_config}")
+        with open(args.llm_config, 'r', encoding='utf-8') as jf:
+            best_config = json.load(jf)
+        
+        model = best_config["model"]
+        args.mode = best_config["mode"]
+        args.consensus_runs = best_config["consensus_runs"]
+        args.model_config = f"/nfs/research/ewald/ricos/code/playground/models/config/{model}.json"
+        
+        model_ports = {
+            "GLM-5.1": "8000",
+            "gpt-oss-20b": "8001",
+            "NVIDIA-Nemotron-3-Super-120B-A12B-FP8": "8002",
+            "Qwen3.5-122B-A10B-FP8": "8003",
+            "gpt-oss-120b": "8004",
+            "Qwen3.5-35B-A3B-FP8": "8005",
+            "Qwen3.6-35B-A3B-FP8": "8006",
+            "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": "8007",
+            "Qwen3.5-27B-FP8": "8008",
+            "Qwen3.6-27B-FP8": "8009"
+        }
+        port = model_ports.get(model, "8003")
+        if args.base_url:
+            args.base_url = args.base_url.replace("PORT", port)
+            import re
+            args.base_url = re.sub(r':\d+/', f':{port}/', args.base_url)
 
     # The LLM wrapper is imported after sys.path setup so this new module can
     # share the existing text_to_onto model implementation.
@@ -289,10 +373,7 @@ def main():
     print(f"Wrote {len(by_guideline)} guideline-specific CSV files to {guideline_dir}")
     print(f"Wrote reasoning trace: {reasoning_path}")
 
-
     print(f"Completed in {elapsed:.2f}s")
-
-
 
 
 if __name__ == "__main__":

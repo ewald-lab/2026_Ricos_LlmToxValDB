@@ -9,35 +9,25 @@
 #SBATCH -o "logs/out_extract_endpoints_%j.out"
 #SBATCH -e "logs/err_extract_endpoints_%j.err"
 
-JOBS_DIR="${SLURM_SUBMIT_DIR:-$(cd "$(dirname "$0")" && pwd)}"
-REPO_ROOT="$(cd "${JOBS_DIR}/.." && pwd)"
-PREP_ROOT="$(cd "${REPO_ROOT}/../.." && pwd)"
+SCRIPT_DIR=$(dirname "$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)")
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+
+CODON_NODE="${1:-${CODON_NODE:-hl-codon-gpu-020}}"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
 
-module purge
-module load gcc
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+module purge && module load gcc
 
 source "${PREP_ROOT}/env-data-prep/bin/activate"
 
-export PYTHONPATH="${REPO_ROOT}/scripts:$PYTHONPATH"
-
-mkdir -p "${JOBS_DIR}/logs"
-
-CODON_NODE="${1:-${CODON_NODE:-hl-codon-gpu-020}}"
-
-MODEL="Qwen3.5-122B-A10B-FP8"
-BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
-MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
+mkdir -p "${SCRIPT_DIR}/logs"
 
 python "${REPO_ROOT}/scripts/00.extract_endpoints_llm.py" \
-    --model "${MODEL}" \
-    --base_url "${BASE_URL}" \
-    --model_config "${MODEL_CONFIG}" \
+    --model "Qwen3.5-122B-A10B-FP8" \
+    --base_url "http://${CODON_NODE}.ebi.ac.uk:8003/v1" \
+    --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.5-122B-A10B-FP8.json" \
     --skill_file "${REPO_ROOT}/inputs/SKILL.md" \
     --inputs_dir "${REPO_ROOT}/inputs/OECD Guidelines" \
     --outputs_dir "${REPO_ROOT}/outputs"

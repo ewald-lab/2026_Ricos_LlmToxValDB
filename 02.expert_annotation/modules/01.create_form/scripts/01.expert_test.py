@@ -4,8 +4,17 @@ import os
 import sys
 import sqlite3
 
-def load_ontology_data(ontology_db):
-    """Extracts ontology nodes from the embeddings database for the tree interface."""
+def load_ontology_data(ontology_db: str) -> dict:
+    """
+    Description:
+    Extracts ontology nodes from the embeddings database for the tree interface.
+
+    Args:
+        ontology_db (str): Path to the ontology database file.
+
+    Returns:
+        dict: A dictionary mapping node IDs to node data.
+    """
     if not os.path.exists(ontology_db):
         print(f"Error: Ontology DB not found at {ontology_db}")
         return {}
@@ -31,7 +40,31 @@ def load_ontology_data(ontology_db):
         }
     return nodes
 
-def generate_html(pool_data, ontology_data, output_file, contact_email, context_ontology, debug=False, skip_first_level=False):
+def generate_html(
+    pool_data: list,
+    ontology_data: dict,
+    output_file: str,
+    contact_email: str,
+    context_ontology: str,
+    debug: bool = False,
+    skip_first_level: bool = False
+) -> None:
+    """
+    Description:
+    Generate HTML form for expert annotation, embedding the pool and ontology data.
+
+    Args:
+        pool_data (list): List of candidate pool phrases.
+        ontology_data (dict): Dictionary of ontology nodes.
+        output_file (str): Path to write the generated HTML file.
+        contact_email (str): Email for sending results.
+        context_ontology (str): Context of the ontology.
+        debug (bool): If True, renders extra debugging RAG scores. Defaults to False.
+        skip_first_level (bool): If True, skips the root node in paths. Defaults to False.
+
+    Returns:
+        None
+    """
     # Convert data to JSON strings for embedding in JS
     pool_json = json.dumps(pool_data)
     ontology_json = json.dumps(ontology_data)
@@ -1401,7 +1434,18 @@ if __name__ == "__main__":
     ontology_data = load_ontology_data(args.ontology_db)
 
     # helper for hierarchy
-    def get_hierarchy_path(node_name, nodes_dict):
+    def get_hierarchy_path(node_name: str, nodes_dict: dict) -> str:
+        """
+        Description:
+        Helper function to generate the hierarchy path string for a node.
+
+        Args:
+            node_name (str): The name of the node.
+            nodes_dict (dict): A dictionary containing ontology nodes.
+
+        Returns:
+            str: The hierarchy path string.
+        """
         path = []
         curr = node_name
         visited = set()

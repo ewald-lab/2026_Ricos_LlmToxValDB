@@ -1,19 +1,31 @@
+from __future__ import annotations
+
 import logging
 import re
 import sys
 import os
+import asyncio
 import sqlite3
 import torch
-import polars as pl
 import json
-import random
-from typing import List, Dict, Optional, Set, Tuple
+from typing import Any, Dict, List
 
 from pathlib import Path
 from tqdm import tqdm
 
-def setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(message)s"):
-    """Configures global logging and suppresses noisy third-party loggers."""
+def setup_logging(level: int = logging.INFO, stream: Any = sys.stdout, fmt: str = "%(message)s") -> logging.Logger:
+    """
+    Description:
+    Configures global logging and suppresses noisy third-party loggers.
+
+    Args:
+        level (int): The logging level to set (e.g. logging.INFO). Defaults to logging.INFO.
+        stream (Any): The output stream to log to. Defaults to sys.stdout.
+        fmt (str): The logging format string. Defaults to "%(message)s".
+
+    Returns:
+        logging.Logger: The configured root-level or module-specific Logger instance.
+    """
     logging.basicConfig(stream=stream, level=level, format=fmt)
 
     for name, lvl in {
@@ -27,61 +39,35 @@ def setup_logging(level=logging.INFO, stream=sys.stdout, fmt="%(message)s"):
 
     return logging.getLogger(__name__)
 
-def sanitize_name(name: str) -> str:
-    """Creates a safe identifier for nodes by sanitizing a given name."""
-    name = re.sub(r'\([^)]*\)|\[[^]]*\]', '', name)
-    clean = re.sub(r'[^a-zA-Z0-9\s]', ' ', name.lower())
-    return re.sub(r'\s+', ' ', clean).strip()
 
 def is_valid_description(description: str) -> bool:
-    """Checks if a string is a valid, non-empty description."""
-    return description is not None and isinstance(description, str) and len(description.strip()) > 0
+    """
+    Description:
+    Checks if a string is a valid, non-empty description.
 
-def load_ontology_embeddings(db_path: str) -> List[Dict]:
-    """Loads all ontology embeddings into memory."""
-    if not os.path.exists(db_path):
-        logging.getLogger(__name__).error(f"Ontology embeddings DB not found at {db_path}")
-        return []
-
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute("SELECT uri, name, sanitized_name, definition, parent, is_llm_generated, vector FROM embeddings")
-    rows = cursor.fetchall()
-    conn.close()
-
-    return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': r[3], 'parent': r[4], 'is_llm_generated': r[5], 'vector': torch.frombuffer(bytearray(r[6]), dtype=torch.float32)} for r in rows]
-
-def load_ontology_nodes(db_path: str) -> tuple:
-    """Loads ontology node metadata from the embeddings DB.
+    Args:
+        description (str): The text description to validate.
 
     Returns:
-        nodes (dict): {name: {'sanitized_name': ..., 'parent': ..., 'definition': ...}}
-        categories (list): list of all node names
+        bool: True if the description is a valid non-empty string, False otherwise.
     """
-    if not os.path.exists(db_path):
-        logging.getLogger(__name__).error(f"Ontology DB not found at {db_path}")
-        return {}, []
+    return description is not None and isinstance(description, str) and len(description.strip()) > 0
 
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute("SELECT name, sanitized_name, definition, parent FROM embeddings")
-    rows = cursor.fetchall()
-    conn.close()
-
-    nodes = {}
-    categories = []
-    for name, sanitized_name, definition, parent in rows:
-        nodes[name] = {
-            'sanitized_name': sanitized_name,
-            'parent': parent,
-            'definition': definition or ''
-        }
-        categories.append(name)
-
-    return nodes, categories
 
 def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, return_vectors: bool = True) -> Dict[str, torch.Tensor]:
-    """Ensures embeddings exist in the DB for the given texts. Returns {text: vector} if return_vectors is True."""
+    """
+    Description:
+    Ensures embeddings exist in the DB for the given texts. Returns {text: vector} if return_vectors is True.
+
+    Args:
+        texts (List[str]): List of texts to get or generate embeddings for.
+        model_name (str): Name/path of the embedding model to use.
+        db_path (str): Path to the SQLite embeddings database.
+        return_vectors (bool): If True, returns a dictionary mapping text to its embedding vector. Defaults to True.
+
+    Returns:
+        Dict[str, torch.Tensor]: A dictionary mapping each text to its embedding tensor, or empty dict if return_vectors is False.
+    """
     from model.embeddings import EmbeddingModel
 
     logger = setup_logging()
@@ -128,206 +114,257 @@ def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, re
     conn.close()
     return text_to_vec if return_vectors else {}
 
-def get_debug_rows(df: pl.DataFrame, target_column: str, random_debug_rows: Optional[int] = None, debug_rows: Optional[List[int]] = None, seed: int = 43) -> List[int]:
-    """Handles the logic of selecting unique toxic effects for debugging."""
+
+def load_pipeline_prompts(directory_path: str) -> list[tuple[str, str]]:
+    """
+    Description:
+    Loads all .txt prompt files from a directory, sorted by file name.
+
+    Args:
+        directory_path (str): Path to the directory containing prompt text files.
+
+    Returns:
+        list[tuple[str, str]]: A list of tuples containing (filename, file_content).
+    """
     logger = logging.getLogger(__name__)
-    random.seed(seed)
+    prompts = []
+    p_dir = Path(directory_path)
+    if not p_dir.is_dir():
+        logger.warning(f"Pipeline directory {directory_path} not found.")
+        return []
 
-    # 1. First, select rows based on random count if requested
-    if random_debug_rows is not None and debug_rows is None:
-        valid_df = df.with_row_index("orig_index").filter(
-            pl.col(target_column).map_elements(is_valid_description, return_dtype=pl.Boolean)
-        )
-        unique_effects_df = valid_df.group_by(target_column, maintain_order=True).agg(pl.col("orig_index").first())
+    # Get all .txt files, sorted by name
+    files = sorted([f for f in p_dir.glob("*.txt") if f.is_file()])
+    for f in files:
+        with open(f, "r", encoding="utf-8") as file:
+            prompts.append((f.name, file.read().strip()))
+    logger.info(f"Loaded {len(prompts)} pipeline prompts from {directory_path}")
+    return prompts
 
-        total_unique = unique_effects_df.height
-        if random_debug_rows >= total_unique:
-            result_rows = sorted(unique_effects_df["orig_index"].to_list())
-        else:
-            result_rows = sorted(random.sample(unique_effects_df["orig_index"].to_list(), random_debug_rows))
-        total_sampled = len(result_rows)
-        if random_debug_rows:
-            logger.info(f"Selected {total_sampled} unique random toxic effects for debugging.")
-    else:
-        result_rows = debug_rows or []
 
-    # 2. Ensure the final list only includes the FIRST occurrence of each unique toxic effect among candidates
-    if result_rows:
-        debug_df = df.select(target_column).with_row_index("orig_index").filter(pl.col("orig_index").is_in(result_rows))
-        final_rows = sorted(debug_df.group_by(target_column, maintain_order=True).agg(pl.col("orig_index").first())["orig_index"].to_list())
+def load_system_prompt(path: str) -> str:
+    """
+    Description:
+    Reads and returns the contents of a system prompt file.
 
-        # If filtering for uniqueness changed the count, we log it, otherwise one log is enough
-        if len(final_rows) != len(result_rows) or not random_debug_rows:
-            logger.info(f"Final debug selection: {len(final_rows)} unique toxic effects.")
-        return final_rows
+    Args:
+        path (str): The absolute or relative path to the prompt file.
 
-    return []
+    Returns:
+        str: The content of the prompt file, stripped of leading/trailing whitespace.
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read().strip()
 
-def get_unique_descriptions(df: pl.DataFrame, target_column: str, debug_rows: Optional[List[int]] = None) -> Tuple[List[str], Set[str]]:
-    """Extracts unique valid descriptions to process based on debug selection."""
+
+def clean_llm_response(raw: str) -> str:
+    """
+    Description:
+    Cleans raw LLM response by stripping out reasoning/thinking tags and extracting the raw JSON string.
+
+    Args:
+        raw (str): The raw response string from the LLM.
+
+    Returns:
+        str: The extracted JSON string or cleaned text.
+    """
+    text = raw
+    if "</think>" in text:
+        text = text.split("</think>")[-1].strip()
+    # Try to extract JSON from markdown code blocks
+    match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
+    if match:
+        return match.group(1)
+    # Try to extract raw JSON object
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if match:
+        return match.group(0)
+    return text
+
+
+def parse_llm_result(raw_content: str) -> dict[str, Any]:
+    """
+    Description:
+    Parses the cleaned LLM response into a structured dictionary result, handling JSON parsing errors gracefully.
+
+    Args:
+        raw_content (str): The raw content string from the LLM.
+
+    Returns:
+        dict[str, Any]: A dictionary containing parsed effects/conclusions or error information.
+    """
     logger = logging.getLogger(__name__)
-    logger.info("Collecting unique descriptions...")
-    unique_descriptions = []
-    seen_descriptions = set()
+    cleaned = clean_llm_response(raw_content)
+    try:
+        result = json.loads(cleaned)
+        return result
+    except (json.JSONDecodeError, ValueError) as e:
+        logger.warning(f"Failed to parse LLM response: {e}\nRaw: {raw_content[:200]}")
+        return {"effects": [], "reasoning": f"Parse error: {e}", "parse_error": True}
 
-    if debug_rows:
-        for i, row in enumerate(df.iter_rows(named=True)):
-            if i in debug_rows:
-                desc = row.get(target_column)
-                if is_valid_description(desc) and desc not in seen_descriptions:
-                    unique_descriptions.append(desc)
-                    seen_descriptions.add(desc)
-    else:
-        try:
-            descs = df.select(pl.col(target_column)).unique(maintain_order=True).drop_nulls()
-            for desc in descs[target_column].to_list():
-                if is_valid_description(desc) and desc not in seen_descriptions:
-                    unique_descriptions.append(desc)
-                    seen_descriptions.add(desc)
-        except Exception as e:
-            logger.warning(f"Polars unique extraction failed, falling back to iteration: {e}")
-            for row in df.iter_rows(named=True):
-                desc = row.get(target_column)
-                if is_valid_description(desc) and desc not in seen_descriptions:
-                    unique_descriptions.append(desc)
-                    seen_descriptions.add(desc)
 
-    logger.info(f"Found {len(unique_descriptions)} unique descriptions to process.")
-    return unique_descriptions, seen_descriptions
+async def process_standardize_batch(
+    llm: Any, system_prompt: str, effects: list[str], max_concurrency: int
+) -> dict[str, Any]:
+    """
+    Description:
+    Processes standardization for a batch of cleaned toxicological effects.
 
-def save_backup_chunk(df: pl.DataFrame, cache_chunk: Dict, backup_idx: int,
-                    categories: List[str], target_column: str,
-                    output_file: str, reasoning_file: str,
-                    schema: Dict, is_final: bool = False, debug_rows: Optional[List[int]] = None, seen_descriptions: Optional[Set[str]] = None):
-    """Saves a processed chunk of descriptions and its reasoning to disk using efficient Polars joins."""
-    if not cache_chunk and not is_final: return
+    Args:
+        llm (Any): The LLM engine wrapper.
+        system_prompt (str): The standardization system prompt instructions.
+        effects (list[str]): List of cleaned effect terms to standardize.
+        max_concurrency (int): Maximum concurrent LLM requests.
+
+    Returns:
+        dict[str, Any]: A dictionary mapping cleaned effect terms to standardized names.
+    """
     logger = logging.getLogger(__name__)
+    semaphore = asyncio.Semaphore(max_concurrency)
+    cache = {}
+    counter = 0
 
-    # 1. Create a Results DataFrame from the unique descriptions processed
-    # Format: {description: (hits_dict, trace)}
-    results_list = []
-    chunk_reasoning = {}
+    async def process_one(effect: str) -> None:
+        nonlocal counter
+        async with semaphore:
+            if effect == "-":
+                cache[effect] = {"standard_name": "-", "reasoning": "Preserved '-'"}
+                counter += 1
+                return
 
-    for desc, (hits, trace, selected) in cache_chunk.items():
-        row_data = {target_column: desc}
-        row_data.update(hits)
-        results_list.append(row_data)
-        # Store reasoning and selected nodes once per unique description
-        chunk_reasoning[desc] = {"reasoning": trace, "selected": selected}
+            user_message = f'Provide a standard name for this toxicological effect:\n\n"{effect}"'
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message},
+            ]
+            for attempt in range(5):
+                try:
+                    response = await llm.ainvoke(messages)
+                    cleaned = clean_llm_response(response.content)
+                    try:
+                        result = json.loads(cleaned)
+                    except json.JSONDecodeError:
+                        raise ValueError("Invalid JSON returned by LLM")
 
-    if not results_list and not is_final: return
+                    if "standard_name" not in result:
+                        raise ValueError("Missing 'standard_name' in JSON")
 
-    # 2. Add row index to original DF to track order and filter relevant rows
-    work_df = df.with_row_index("orig_index")
-    if debug_rows:
-        work_df = work_df.filter(pl.col("orig_index").is_in(debug_rows))
+                    cache[effect] = result
 
-    if results_list:
-        # Create a tiny DataFrame for joining
-        # Note: categories not in 'hits' will be null after join
-        results_df = pl.DataFrame(results_list)
+                    counter += 1
+                    is_changed = result['standard_name'] != effect
+                    status = "Changed" if is_changed else "Not Changed"
+                    print(f"{counter}: LLM Std | Orig: '{effect}' -> ({status}): {result['standard_name']}", flush=True)
 
-        # Join with the work_df
-        # We only want rows whose description was in this chunk's results
-        # Join order is not guaranteed by default in Polars join, so we use original index later
-        chunk_df = work_df.join(results_df, on=target_column, how="inner")
+                    return
+                except Exception as e:
+                    if attempt == 4:
+                        logger.error(f"LLM standardize error for '{effect[:50]}...' after 5 attempts: {e}")
+                        cache[effect] = {
+                            "standard_name": effect,
+                            "reasoning": f"LLM error: {e}",
+                        }
+                    else:
+                        await asyncio.sleep(1)
 
-        # Fill missing categories with 0 (for nodes not in 'hits')
-        chunk_df = chunk_df.with_columns([
-            pl.col(cat).fill_null(0).cast(pl.Int64) for cat in categories if cat in chunk_df.columns
-        ])
+    tasks = [process_one(e) for e in effects]
+    for f in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="LLM Standardizing", smoothing=0.0):
+        await f
 
-        # Add missing category columns that weren't even in results_df
-        missing_cats = [cat for cat in categories if cat not in chunk_df.columns]
-        if missing_cats:
-            chunk_df = chunk_df.with_columns([pl.lit(0).alias(cat).cast(pl.Int64) for cat in missing_cats])
-    else:
-        # Standard final fallback or empty chunk
-        if is_final:
-            chunk_df = work_df.with_columns([pl.lit(0).alias(cat).cast(pl.Int64) for cat in categories])
-        else:
-            return
+    return cache
 
-    # Sort by original index to preserve order
-    chunk_df = chunk_df.sort("orig_index")
 
-    # Ensure correct column order and schema
-    # We KEEP orig_index for the merge later
-    final_cols = [col for col in schema.keys() if col in chunk_df.columns]
-    if "orig_index" in chunk_df.columns and "orig_index" not in final_cols:
-        final_cols.append("orig_index")
-    chunk_df = chunk_df.select(final_cols)
+async def process_clean_exceptions_batch(
+    llm: Any, system_prompt: str, effects: list[str], max_concurrency: int
+) -> dict[str, Any]:
+    """
+    Description:
+    Processes structural cleaning corrections for a batch of effects (e.g. multiple colons, redundancies).
 
-    # Optional aggregation
-    non_group_cols = set(categories) | {target_column}
-    group_cols = [c for c in chunk_df.columns if c not in non_group_cols]
-    if group_cols:
-        chunk_df = chunk_df.group_by(group_cols, maintain_order=True).agg(
-            [pl.col(target_column).str.join("|")] +
-            [pl.col(c).max() for c in categories]
-        )
+    Args:
+        llm (Any): The LLM engine wrapper.
+        system_prompt (str): The exceptions cleaning system prompt instructions.
+        effects (list[str]): List of effect terms needing structural cleanup.
+        max_concurrency (int): Maximum concurrent LLM requests.
 
-    out_csv = output_file.replace('.csv', f'_{backup_idx}.csv')
-    chunk_df.write_csv(out_csv)
-    logger.info(f"Saved backup chunk {backup_idx} to {out_csv}")
-
-    out_json = reasoning_file.replace('.json', f'_{backup_idx}.json')
-    if chunk_reasoning:
-        with open(out_json, 'w', encoding='utf-8') as f:
-            json.dump(chunk_reasoning, f, indent=2, ensure_ascii=False)
-
-def merge_backups(output_file: str, reasoning_file: str,
-                  backup_count: int, categories: List[str],
-                  target_column: str, schema: Dict):
-    """Merges all backup CSV and JSON files into the final outputs."""
+    Returns:
+        dict[str, Any]: A dictionary mapping original terms to corrected terms.
+    """
     logger = logging.getLogger(__name__)
-    logger.info("Merging backups to create final results...")
+    semaphore = asyncio.Semaphore(max_concurrency)
+    cache = {}
+    counter = 0
 
-    # Merge CSVs
-    backup_csv_files = [output_file.replace('.csv', f'_{i}.csv') for i in range(1, backup_count + 1)]
-    dfs = []
-    for f in backup_csv_files:
-        if os.path.exists(f):
-            # Read only relevant columns to save memory if needed, but schema_overrides is good
-            dfs.append(pl.read_csv(f, schema_overrides=schema, ignore_errors=True))
+    async def process_one(effect: str) -> None:
+        nonlocal counter
+        async with semaphore:
+            if effect == "-":
+                cache[effect] = {"corrected": "-", "reasoning": "Preserved '-'"}
+                counter += 1
+                return
 
-    if dfs:
-        final_df = pl.concat(dfs)
+            user_message = f'Fix and simplify this effect:\n\n"{effect}"'
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message},
+            ]
+            for attempt in range(5):
+                try:
+                    response = await llm.ainvoke(messages)
+                    cleaned = clean_llm_response(response.content)
+                    try:
+                        result = json.loads(cleaned)
+                    except json.JSONDecodeError:
+                        raise ValueError("Invalid JSON returned by LLM")
 
-        # Sort ENTIRE dataframe by original index to restore strict input order
-        if "orig_index" in final_df.columns:
-            final_df = final_df.sort("orig_index")
+                    if "corrected" not in result:
+                        raise ValueError("Missing 'corrected' in JSON")
 
-        non_group_cols = set(categories) | {target_column} | {"orig_index"}
-        group_cols = [c for c in final_df.columns if c not in non_group_cols]
-        if group_cols:
-            final_df = final_df.group_by(group_cols, maintain_order=True).agg(
-                [pl.col(target_column).str.join("|")] +
-                [pl.col(c).max() for c in categories]
-            )
+                    corrected = result["corrected"]
+                    reasoning = result.get("reasoning", "")
+                    cache[effect] = {"corrected": corrected, "reasoning": reasoning}
 
-        # Drop orig_index before final write
-        if "orig_index" in final_df.columns:
-            final_df = final_df.drop("orig_index")
+                    counter += 1
+                    print(f"{counter}: Exceptions | '{effect}' -> '{corrected}'", flush=True)
+                    return
+                except Exception as e:
+                    if attempt == 4:
+                        logger.error(f"Exceptions error for '{effect[:50]}...' after 5 attempts: {e}")
+                        cache[effect] = {"corrected": effect, "reasoning": f"Error: {e}"}
+                    else:
+                        await asyncio.sleep(1)
 
-        logger.info(f"Saving final merged results to {output_file}")
-        final_df.write_csv(output_file)
+    tasks = [process_one(e) for e in effects]
+    for f in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="Cleaning Exceptions", smoothing=0.0):
+        await f
 
-        # Cleanup backups
-        for f in backup_csv_files if os.path.exists(f) else []:
-            try: os.remove(f)
-            except: pass
+    return cache
 
-    # Merge JSON reasoning
-    merged_reasoning = {}
-    json_backups = [reasoning_file.replace('.json', f'_{i}.json') for i in range(1, backup_count + 1)]
-    for jf in json_backups:
-        if os.path.exists(jf):
-            with open(jf, 'r', encoding='utf-8') as f:
-                merged_reasoning.update(json.load(f))
-            try: os.remove(jf)
-            except: pass
 
-    logger.info(f"Saving final merged reasoning to {reasoning_file}")
-    with open(reasoning_file, 'w', encoding='utf-8') as f:
-        json.dump(merged_reasoning, f, indent=2, ensure_ascii=False)
+def needs_cleanup(effect: str) -> bool:
+    """
+    Description:
+    Checks if a toxicological effect term requires structural exceptions cleanup.
+
+    Args:
+        effect (str): The term to check.
+
+    Returns:
+        bool: True if cleanup is needed, False otherwise.
+    """
+    if not isinstance(effect, str) or effect == "-":
+        return False
+    # 1. Multiple colons
+    if effect.count(":") > 1:
+        return True
+    # 2. Redundancy context: context
+    if ":" in effect:
+        parts = effect.split(":", 1)
+        ctx = parts[0].strip().lower()
+        eff = parts[1].strip().lower()
+        # Check if ctx word is in eff words or vice versa
+        ctx_words = set(ctx.replace("/", " ").replace("-", " ").split())
+        eff_words = set(eff.replace("/", " ").replace("-", " ").split())
+        if any(len(w) > 3 and w in eff_words for w in ctx_words):
+            return True
+    return False

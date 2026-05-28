@@ -1,8 +1,9 @@
+from __future__ import annotations
 import sqlite3
 import os
 from functools import lru_cache
 
-from typing import List, Dict, Literal
+from typing import List, Dict, Literal, Any, Optional, Union, Tuple, Set
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
@@ -14,12 +15,33 @@ from .utils import setup_logging, load_ontology_embeddings
 logger = setup_logging()
 
 class TokenUsageCallbackHandler(BaseCallbackHandler):
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        Description:
+        Initializes the TokenUsageCallbackHandler instance.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         super().__init__()
         self.completion_tokens = 0
         self.num_calls = 0
 
-    def on_llm_end(self, response, **kwargs):
+    def on_llm_end(self, response: Any, **kwargs: Any) -> None:
+        """
+        Description:
+        Callback method triggered when the LLM finishes execution, extracting and accumulating completion tokens.
+
+        Args:
+            response (Any): The LLM response object.
+            **kwargs (Any): Additional keyword arguments.
+
+        Returns:
+            None
+        """
         try:
             self.num_calls += 1
             # Check llm_output first
@@ -44,12 +66,31 @@ class TokenUsageCallbackHandler(BaseCallbackHandler):
 
     @property
     def avg_completion_tokens(self) -> float:
+        """
+        Description:
+        Calculates the average completion tokens consumed per LLM invocation.
+
+        Args:
+            None
+
+        Returns:
+            float: The average completion tokens count.
+        """
         if self.num_calls == 0:
             return 0.0
         return self.completion_tokens / self.num_calls
 
-def clean_llm_output(message) -> str:
-    """Removes <think> tags and markdown JSON formatting from LLM output."""
+def clean_llm_output(message: Any) -> str:
+    """
+    Description:
+    Removes <think> tags, markdown code blocks, and fixes formatting in the LLM's raw response to ensure a valid JSON output.
+
+    Args:
+        message (Any): The raw response message from the LLM.
+
+    Returns:
+        str: The sanitized and formatted JSON string.
+    """
     import re
     import json
     text = message.content if hasattr(message, "content") else str(message)
@@ -116,6 +157,16 @@ def clean_llm_output(message) -> str:
 
 
 def clean_reason(reason: str) -> str:
+    """
+    Description:
+    Cleans a reasoning string by removing leading 'ACCEPTED' or 'REJECTED' indicators.
+
+    Args:
+        reason (str): The raw reasoning string.
+
+    Returns:
+        str: The cleaned reasoning string.
+    """
     r = reason.strip()
     if r.upper().startswith("ACCEPTED"):
         return r[8:].lstrip(" .-:")
@@ -136,10 +187,38 @@ class BatchVerificationResult(BaseModel):
     selected_candidates: List[str] = Field(description="Step 3: The final list of exact candidate names that pass the evaluation. Return an empty list [] if none match.")
 
 class TextToOntoGraph:
-    def __init__(self, categories: List[str],
-                ontology_db: str, system_prompt_path: str,
-                mode: int, consensus_runs: int, ontology_definitions: bool, max_concurrency: int, max_retries: int, context_ontology: str,
-                global_definitions_db: str = None):
+    def __init__(
+        self,
+        categories: List[str],
+        ontology_db: str,
+        system_prompt_path: str,
+        mode: int,
+        consensus_runs: int,
+        ontology_definitions: bool,
+        max_concurrency: int,
+        max_retries: int,
+        context_ontology: str,
+        global_definitions_db: Optional[str] = None,
+    ) -> None:
+        """
+        Description:
+        Initializes the TextToOntoGraph verification processor.
+
+        Args:
+            categories (List[str]): List of categories to extract ontology terms for.
+            ontology_db (str): Path to the SQLite ontology/embeddings database.
+            system_prompt_path (str): Path to the text file containing the system prompt template.
+            mode (int): Evaluation mode (1 for individual term verification, 2 for batch verification).
+            consensus_runs (int): Number of consensus voting runs to perform.
+            ontology_definitions (bool): Whether to include definitions of terms in LLM context prompts.
+            max_concurrency (int): Maximum concurrent LLM requests.
+            max_retries (int): Maximum formatting/parsing retry attempts for LLM errors.
+            context_ontology (str): Additional domain context to append to the system prompt.
+            global_definitions_db (Optional[str]): Optional path to an external DB overriding standard definitions. Defaults to None.
+
+        Returns:
+            None
+        """
         self.categories = categories
         self.ontology_definitions = ontology_definitions
         self.include_superiors = True
@@ -276,18 +355,46 @@ class TextToOntoGraph:
         self.consensus_threshold = 1 if self.consensus_runs == 2 else (self.consensus_runs // 2) + 1
         self._clean_llm_runner = RunnableLambda(clean_llm_output)
 
-    def close(self):
-        """Clean up persistent resources."""
+    def close(self) -> None:
+        """
+        Description:
+        Cleans up any open resources/handlers.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         pass
 
 
 
     def get_breadcrumbs(self, name: str) -> str:
-        """Constructs the hierarchical path (breadcrumbs) for a node. Cached per unique name."""
+        """
+        Description:
+        Retrieves the hierarchical path (breadcrumbs string) for a given term name, utilizing a cache.
+
+        Args:
+            name (str): The term name.
+
+        Returns:
+            str: The breadcrumbs string (e.g. 'root > parent > child').
+        """
         return self._get_breadcrumbs_cached(name)
 
     @lru_cache(maxsize=None)
     def _get_breadcrumbs_cached(self, name: str) -> str:
+        """
+        Description:
+        Helper method that builds and caches the breadcrumbs string for a term.
+
+        Args:
+            name (str): The term name.
+
+        Returns:
+            str: The breadcrumbs string.
+        """
         path = []
         curr = name
         visited = set()
@@ -298,8 +405,28 @@ class TextToOntoGraph:
             curr = self.parent_map.get(curr)
         return " > ".join(reversed(path))
 
-    def execute(self, llm, description: str, std_desc: str = None, alpha: float = None, direct_candidates: List[str] = None):
-        """Executes the retrieval, reranking, and verification flow."""
+    def execute(
+        self,
+        llm: Any,
+        description: str,
+        std_desc: Optional[str] = None,
+        alpha: Optional[float] = None,
+        direct_candidates: Optional[List[str]] = None,
+    ) -> Tuple[Dict[str, int], List[Any], List[str], Dict[str, float]]:
+        """
+        Description:
+        Executes the retrieval, reranking, and verification pipeline for a given toxic effect description.
+
+        Args:
+            llm (Any): The LLM engine or wrapper to invoke.
+            description (str): The raw toxic effect description.
+            std_desc (Optional[str]): The standardized description, if available. Defaults to None.
+            alpha (Optional[float]): The alpha retrieval weight parameter, if applicable. Defaults to None.
+            direct_candidates (Optional[List[str]]): List of candidate names to evaluate directly.
+
+        Returns:
+            Tuple[Dict[str, int], List[Any], List[str], Dict[str, float]]: A tuple containing (hits map, reasoning trace, sorted list of verified term names, token usage summary).
+        """
         self._description_counter += 1
         logger.info(f"{self._description_counter}. Description: {description}")
 
@@ -477,8 +604,28 @@ class TextToOntoGraph:
         }
         return results, reasoning_trace, sorted(results.keys()), token_usage
 
-    def _execute_mode_2(self, llm, description: str, top_k_candidates: List[Dict], direct_candidates: List[str] = None, handler=None):
-        """Executes batch verification using the BatchVerificationResult model."""
+    def _execute_mode_2(
+        self,
+        llm: Any,
+        description: str,
+        top_k_candidates: List[Dict[str, Any]],
+        direct_candidates: Optional[List[str]] = None,
+        handler: Optional[Any] = None,
+    ) -> Tuple[Dict[str, int], List[str], List[str], Dict[str, float]]:
+        """
+        Description:
+        Executes batch verification (Mode 2) for the given candidates and description.
+
+        Args:
+            llm (Any): The LLM engine or wrapper to invoke.
+            description (str): The raw toxic effect description.
+            top_k_candidates (List[Dict[str, Any]]): List of candidate dictionary objects.
+            direct_candidates (Optional[List[str]]): Optional list of candidates. Defaults to None.
+            handler (Optional[Any]): Optional token usage callback handler. Defaults to None.
+
+        Returns:
+            Tuple[Dict[str, int], List[str], List[str], Dict[str, float]]: A tuple containing (hits map, reasoning trace logs, sorted list of verified term names, token usage summary).
+        """
         results = {}
         reasoning_trace = []
 

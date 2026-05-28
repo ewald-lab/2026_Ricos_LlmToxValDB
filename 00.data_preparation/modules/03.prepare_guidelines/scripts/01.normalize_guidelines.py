@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
@@ -21,7 +22,17 @@ from src.endpoint_normalization import (
 )
 
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parses command line arguments for the guidelines normalization script.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: The parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(
         description="Prepare normalized OECD guideline endpoint tables."
     )
@@ -38,7 +49,18 @@ def arg_parser():
     return parser.parse_args()
 
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for preparing OECD guideline endpoint tables. It reads endpoint CSV files,
+    standardizes, groups them by required and category normalization lists, and writes normalized CSVs.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     input_dir = Path(args.input_dir)

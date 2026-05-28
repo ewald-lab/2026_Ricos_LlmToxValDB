@@ -2,35 +2,41 @@ import argparse
 import json
 import os
 import sys
+from typing import Any, Dict, Literal, Optional, Set, Tuple, Union
 
-# Prevent torchvision from loading to avoid CUDA version mismatch RuntimeError in transformers
 sys.modules['torchvision'] = None
 
-import torch
-
-# Environment defaults (can be overridden by CLI or environment variables)
-DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
-DEFAULT_HF_TRANSFER = "1"
-import polars as pl
-from tqdm import tqdm
 import matplotlib.pyplot as plt
-
-from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans
-from transformers import AutoTokenizer, AutoModelForCausalLM
-
-from langchain_core.prompts import ChatPromptTemplate
+import polars as pl
+import torch
 from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
-from typing import Literal
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from tqdm import tqdm
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from src.utils import setup_logging, is_valid_description, get_or_create_embeddings, load_ontology_embeddings
 from model.llm import get_model
+from src.utils import get_or_create_embeddings, is_valid_description, load_ontology_embeddings, setup_logging
+
+DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
+DEFAULT_HF_TRANSFER = "1"
 
 logger = setup_logging()
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parse command line arguments for generating the test dataset with candidate pools.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: Parsed command-line arguments.
+    """
     parser = argparse.ArgumentParser(description="Generate Test Dataset with Candidate Pools")
 
     parser.add_argument("--input_file", required=True, help="Path to input TSV file.")
@@ -72,8 +78,17 @@ def arg_parser():
 
     return parser.parse_args()
 
-def clean_llm_output(message) -> str:
-    """Removes <think> tags and markdown JSON formatting from LLM output."""
+def clean_llm_output(message: Any) -> str:
+    """
+    Description:
+    Removes <think> tags and markdown JSON formatting from LLM output.
+
+    Args:
+        message (Any): The message or string to clean.
+
+    Returns:
+        str: The cleaned message content.
+    """
     text = message.content if hasattr(message, "content") else str(message)
     if "</think>" in text:
         text = text.split("</think>")[-1].strip()
@@ -86,6 +101,16 @@ def clean_llm_output(message) -> str:
     return text.strip()
 
 def clean_reason(reason: str) -> str:
+    """
+    Description:
+    Cleans candidate evaluation reasoning string by removing leading ACCEPTED/REJECTED.
+
+    Args:
+        reason (str): The reasoning string.
+
+    Returns:
+        str: The cleaned reasoning string.
+    """
     r = reason.strip()
     if r.upper().startswith("ACCEPTED"):
         return r[8:].lstrip(" .-:")
@@ -99,7 +124,18 @@ class CandidateEvaluation(BaseModel):
     reason: str = Field(description="Think step-by-step. Provide a self-contained biological or phenotypic justification for the decision. DO NOT cite rules by number (e.g., avoid 'Rule 1'); instead, explain the underlying logic so it is understandable without the prompt. DO NOT write 'ACCEPTED' or 'REJECTED' in this field.")
     decision: Literal["ACCEPTED", "REJECTED"] = Field(description="Strictly 'ACCEPTED' or 'REJECTED' based on the reasoning above.")
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main execution function to load descriptions and embeddings, run PCA and K-Means,
+    retrieve and evaluate candidates, and output the selected phrases.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     import numpy as np
@@ -303,7 +339,18 @@ def main():
     nodes_map = {item['name']: item for item in ontology_data}
 
     # Helper for hierarchy breadcrumbs
-    def get_breadcrumbs(name, nodes_map):
+    def get_breadcrumbs(name: str, nodes_map: dict) -> str:
+        """
+        Description:
+        Generate breadcrumbs path for a given node name.
+
+        Args:
+            name (str): The node name.
+            nodes_map (dict): A map from node names to node dictionaries.
+
+        Returns:
+            str: The breadcrumbs path string.
+        """
         path = []
         curr = name
         visited = set()
@@ -313,7 +360,18 @@ def main():
             curr = nodes_map[curr].get('parent')
         return " > ".join(reversed(path))
 
-    def evaluate_candidates(phrase, phrase_vec):
+    def evaluate_candidates(phrase: str, phrase_vec: torch.Tensor) -> list[dict]:
+        """
+        Description:
+        Evaluate and rerank candidates for a given phrase and its vector.
+
+        Args:
+            phrase (str): The input phrase.
+            phrase_vec (torch.Tensor): The embedding vector of the phrase.
+
+        Returns:
+            list[dict]: A list of dictionary candidates with scores and hierarchy.
+        """
         scores = torch.matmul(ontology_matrix, phrase_vec)
         rag_vals, rag_idxs = torch.topk(scores, k=min(args.top_k_rag, len(ontology_data)))
 

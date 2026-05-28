@@ -23,7 +23,6 @@ module load gcc
 
 source "${PROJECT_ROOT}/env-expert-annot/bin/activate"
 
-export PYTHONPATH="${GIT_ROOT}/01.text_to_onto/modules/00.text_to_onto/scripts:$PYTHONPATH"
 
 python "${MODULE_ROOT}/scripts/01.expert_test.py" \
     --input_pool "${GIT_ROOT}/02.expert_annotation/modules/00.create_test/outputs/test_pool_${ONTOLOGY}.json" \

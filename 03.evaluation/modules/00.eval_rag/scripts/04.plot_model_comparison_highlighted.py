@@ -1,11 +1,33 @@
+from __future__ import annotations
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-def plot_comparison_with_highlights(summary_csv, output_name):
+def plot_comparison_with_highlights(summary_csv: str, output_name: str) -> None:
+    """
+    Description:
+    Plot model recall comparison across different max context burdens and add a highlight for the best KaLM 12B config at context burden 20.
+
+    Args:
+        summary_csv (str): Path to the summary CSV file containing configurations.
+        output_name (str): Path to save the generated comparison plot.
+
+    Returns:
+        None
+    """
     df = pd.read_csv(summary_csv)
 
-    def get_x(range_str):
+    def get_x(range_str: str) -> float:
+        """
+        Description:
+        Extract the upper bound of a range string as a float.
+
+        Args:
+            range_str (str): The range string (e.g., '15-20').
+
+        Returns:
+            float: The upper bound value.
+        """
         return float(range_str.split('-')[1])
 
     df['x'] = df['Burden Range'].apply(get_x)
@@ -13,67 +35,92 @@ def plot_comparison_with_highlights(summary_csv, output_name):
     df['Recall'] = df['Recall'].astype(float)
     df['MAP'] = df['MAP'].astype(float)
 
-    df = df.sort_values(['Model', 'x'])
+    df = df.sort_values(['Model', 'Reranker', 'x'])
 
-    plt.figure(figsize=(12, 7))
+    plt.figure(figsize=(14, 8))
 
     models = df['Model'].unique()
-    markers = ['o', 's', '^', 'D']
-    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+    colors = {
+        "Harrier 27B": "#1f77b4",
+        "KaLM 12B": "#ff7f0e",
+        "Nemotron 8B": "#2ca02c",
+        "Qwen 8B": "#d62728"
+    }
+
+    reranker_styles = {
+        "Qwen/Qwen3-Reranker-0.6B": {"linestyle": ":", "marker": "v", "label_suffix": "(0.6B Reranker)"},
+        "Qwen/Qwen3-Reranker-4B": {"linestyle": "--", "marker": "s", "label_suffix": "(4B Reranker)"},
+        "Qwen/Qwen3-Reranker-8B": {"linestyle": "-", "marker": "o", "label_suffix": "(8B Reranker)"}
+    }
 
     ax = plt.gca()
 
-    for i, model in enumerate(models):
+    for model in models:
         model_df = df[df['Model'] == model]
-        # Only plot unique x values to avoid duplicate points
-        model_df = model_df.drop_duplicates('x')
+        color = colors.get(model, '#7f7f7f')
 
-        ax.plot(model_df['x'], model_df['Recall'],
-                 marker=markers[i % len(markers)],
-                 label=model,
-                 linewidth=2,
-                 markersize=8,
-                 color=colors[i % len(colors)])
+        for reranker_model, style in reranker_styles.items():
+            sub_df = model_df[model_df['Reranker'] == reranker_model]
+            if sub_df.empty:
+                continue
 
-        # Highlight KaLM 12B at Context 20
-        if model == "KaLM 12B":
-            match = model_df[model_df['x'] == 20]
-            if not match.empty:
-                row = match.iloc[0]
-                # Draw the highlight circle
-                ax.scatter(row['x'], row['Recall'], s=350, facecolors='none', edgecolors='black', linewidth=1.5, zorder=10)
+            # Sort by x to draw the line correctly
+            sub_df = sub_df.sort_values('x').drop_duplicates('x')
 
-                # Parameters text with Title Case and no underscores
-                params_str = (f"Best Configuration (KaLM 12B):\n"
-                              f"Top K RAG = {row['top_k_rag']}\n"
-                              f"Threshold RAG = {row['thresh_rag']}\n"
-                              f"Top K Rerank = {row['top_k_rerank']}\n"
-                              f"Threshold Rerank = {row['thresh_rerank']}")
+            label_name = f"{model} {style['label_suffix']}"
+            ax.plot(sub_df['x'], sub_df['Recall'],
+                     linestyle=style['linestyle'],
+                     marker=style['marker'],
+                     label=label_name,
+                     linewidth=1.8,
+                     markersize=6,
+                     color=color)
 
-                props = dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='black', linewidth=1)
+    # Highlight the best overall KaLM 12B configuration at Context 20
+    kalm_df = df[df['Model'] == "KaLM 12B"]
+    kalm_20 = kalm_df[kalm_df['x'] == 20]
+    if not kalm_20.empty:
+        # Find the one with highest Recall (then MAP)
+        best_row = kalm_20.sort_values(['Recall', 'MAP'], ascending=[False, False]).iloc[0]
+        
+        # Draw the highlight circle
+        ax.scatter(best_row['x'], best_row['Recall'], s=350, facecolors='none', edgecolors='black', linewidth=1.5, zorder=10)
 
-                # Annotation with arrow pointing to the circle
-                ax.annotate(params_str,
-                            xy=(row['x'], row['Recall']),
-                            xytext=(row['x'] + 5, 0.88), # Move box
-                            bbox=props,
-                            arrowprops=dict(arrowstyle='->',
-                                            connectionstyle='arc3,rad=.1',
-                                            color='black',
-                                            linewidth=1.5,
-                                            shrinkB=12),
-                            fontsize=8,
-                            fontweight='bold',
-                            zorder=20)
+        # Get the reranker name
+        reranker_name = best_row.get('Reranker', 'None')
+        if reranker_name != 'None' and '/' in str(reranker_name):
+            reranker_name = str(reranker_name).split('/')[-1]
+
+        # Parameters text with Title Case and no underscores
+        params_str = (f"Best Configuration (KaLM 12B):\n"
+                      f"Top K RAG = {best_row['top_k_rag']}\n"
+                      f"Threshold RAG = {best_row['thresh_rag']}\n"
+                      f"Reranker = {reranker_name}\n"
+                      f"Top K Rerank = {best_row['top_k_rerank']}\n"
+                      f"Threshold Rerank = {best_row['thresh_rerank']}")
+
+        props = dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='black', linewidth=1)
+
+        # Annotation with arrow pointing to the circle
+        ax.annotate(params_str,
+                    xy=(best_row['x'], best_row['Recall']),
+                    xytext=(best_row['x'] + 5, 0.86), # Move box
+                    bbox=props,
+                    arrowprops=dict(arrowstyle='->',
+                                    connectionstyle='arc3,rad=.1',
+                                    color='black',
+                                    linewidth=1.5,
+                                    shrinkB=12),
+                    fontsize=8,
+                    fontweight='bold',
+                    zorder=20)
 
     plt.xlabel('Max Context Burden', fontsize=12)
     plt.ylabel('Mean Recall', fontsize=12)
-    # No title as requested
     plt.grid(True, linestyle=':', alpha=0.7)
-    plt.legend(loc='lower right', framealpha=1.0, fontsize=10)
+    plt.legend(loc='lower right', framealpha=1.0, fontsize=8, ncol=2) # two columns legend to fit all 12 lines nicely
 
     plt.ylim(0.85, 1.0)
-    # Exact requested ticks
     plt.xticks([5, 10, 15, 20, 30, 40, 50])
     plt.yticks([0.85, 0.90, 0.95, 1.00])
     plt.xlim(0, 55)

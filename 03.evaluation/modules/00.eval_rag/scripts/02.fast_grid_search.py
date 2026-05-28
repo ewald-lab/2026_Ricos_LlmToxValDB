@@ -1,9 +1,26 @@
+from __future__ import annotations
 import json
 import os
 import argparse
 from tqdm import tqdm
 
-def calculate_metrics(retrieved_candidates, ground_truth_matches, parent_map=None):
+def calculate_metrics(
+    retrieved_candidates: list[dict],
+    ground_truth_matches: list[str] | set[str],
+    parent_map: dict[str, str] | None = None
+) -> tuple[float, float, int]:
+    """
+    Description:
+    Calculate precision/recall metrics for retrieved candidates compared to ground truth.
+
+    Args:
+        retrieved_candidates (list[dict]): The list of candidates retrieved.
+        ground_truth_matches (list[str] | set[str]): The ground truth matches.
+        parent_map (dict[str, str] | None): A map of node names to parent names. Defaults to None.
+
+    Returns:
+        tuple[float, float, int]: A tuple of (recall, ap, context_burden).
+    """
     retrieved_names = []
     seen = set()
     for c in retrieved_candidates:
@@ -35,7 +52,19 @@ def calculate_metrics(retrieved_candidates, ground_truth_matches, parent_map=Non
 
     return recall, ap, context_burden
 
-def run_evaluation(precomputed_data, config, parent_map):
+def run_evaluation(precomputed_data: dict, config: dict, parent_map: dict[str, str]) -> dict:
+    """
+    Description:
+    Run evaluation on all queries for a given configuration using precomputed candidates.
+
+    Args:
+        precomputed_data (dict): The precomputed candidate data dictionary.
+        config (dict): The configuration dictionary containing evaluation parameters.
+        parent_map (dict[str, str]): A map of node names to parent names.
+
+    Returns:
+        dict: A dictionary of evaluation metrics and the configuration parameters.
+    """
     gt_data = precomputed_data["ground_truth"]
     all_precomputed_by_grf = precomputed_data["precomputed_results_by_grf"]
 
@@ -102,10 +131,19 @@ if __name__ == "__main__":
         for name, parent in cursor:
             if parent: parent_map[name] = parent
 
+    target_embedding = precomputed_data.get("embedding_model")
+    target_reranker = precomputed_data.get("reranker_model")
+
     results = []
     for cfg in tqdm(all_configs, desc="Evaluating Configurations"):
-        # We only evaluate configs that match the model used for precomputation
-        # (Though in this fast version we assume the precomputed data IS for this model)
+        # Filter configs that match the model used for precomputation
+        if target_embedding and cfg.get("embedding_model") != target_embedding:
+            continue
+        # Filter configs by reranker model
+        if cfg.get("use_reranker"):
+            if target_reranker and cfg.get("reranker_model") != target_reranker:
+                continue
+
         res = run_evaluation(precomputed_data, cfg, parent_map)
         results.append(res)
 

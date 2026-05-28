@@ -1,19 +1,27 @@
+from __future__ import annotations
 import argparse
 import json
 import os
 import polars as pl
 
-# Add the script directory to the path so we can import from src and model
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from src.utils import (
-    setup_logging, is_valid_description, get_or_create_embeddings
-)
+from src.utils import (setup_logging, is_valid_description, get_or_create_embeddings)
 
 logger = setup_logging()
 
-def arg_parser():
+def arg_parser() -> argparse.Namespace:
+    """
+    Description:
+    Parses command line arguments for the target embeddings preparation script.
+
+    Args:
+        None
+
+    Returns:
+        argparse.Namespace: The parsed command line arguments.
+    """
     parser = argparse.ArgumentParser(description="Prepare Target Embeddings")
 
     # --- File I/O & Columns ---
@@ -31,7 +39,18 @@ def arg_parser():
 
     return parser.parse_args()
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for generating embeddings of unique descriptions and standardized descriptions
+    using a model specified in the RAG configuration, and saving them to the embeddings database.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     args = arg_parser()
 
     # Set environment variables

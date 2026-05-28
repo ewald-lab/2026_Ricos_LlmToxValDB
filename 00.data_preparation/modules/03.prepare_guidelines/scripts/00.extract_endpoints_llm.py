@@ -1,3 +1,4 @@
+from __future__ import annotations
 import argparse
 import json
 import os
@@ -14,9 +15,22 @@ from scripts.model.llm import get_model
 
 
 
-def parse_llm_responses(responses, guideline_number, out_dir, summary_path):
+def parse_llm_responses(
+    responses: list[str], guideline_number: str, out_dir: str, summary_path: str
+) -> None:
     """
-    Parses multiple LLM responses (from chunks) and merges them.
+    Description:
+    Parses multiple LLM response segments, extracts markdown reports and CSV tables,
+    and merges them into consolidated guidelines documentation files.
+
+    Args:
+        responses (list[str]): List of raw response strings from LLM chunk runs.
+        guideline_number (str): The OECD guideline number identifier.
+        out_dir (str): Output directory where consolidated files are written.
+        summary_path (str): File path to append summary data rows to.
+
+    Returns:
+        None
     """
     merged_report = ""
     merged_endpoints_csv_rows = []
@@ -80,7 +94,18 @@ def parse_llm_responses(responses, guideline_number, out_dir, summary_path):
                 if not line.startswith("guideline_number"):
                     f.write(line + "\n")
 
-def main():
+def main() -> None:
+    """
+    Description:
+    Main entry point for OECD guideline endpoints extraction. It loads PDF manuals, splits
+    them into text chunks, invokes the LLM with formatting prompts, and merges extraction outputs.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
 
     parser = argparse.ArgumentParser(description="Extract endpoints from OECD guidelines using LLM")
     parser.add_argument("--model", required=True, help="Model name")
