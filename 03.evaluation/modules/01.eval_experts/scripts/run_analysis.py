@@ -195,19 +195,22 @@ def main() -> None:
         print(f"Processing: {fname}")
         df = pd.read_csv(f)
 
+        # Ensure the columns exist, fill with 0 if missing
+        if "Not_My_Expertise" not in df.columns:
+            df["Not_My_Expertise"] = 0
+        if "Toxicological_Effect_Does_Not_Make_Sense" not in df.columns:
+            df["Toxicological_Effect_Does_Not_Make_Sense"] = 0
+
+        # Cast to numeric to handle any formatting issues
+        df["Not_My_Expertise"] = pd.to_numeric(df["Not_My_Expertise"], errors="coerce").fillna(0).astype(int)
+        df["Toxicological_Effect_Does_Not_Make_Sense"] = pd.to_numeric(df["Toxicological_Effect_Does_Not_Make_Sense"], errors="coerce").fillna(0).astype(int)
+
         df["Selected_Candidates_Expanded"] = df["Selected_Candidates"].apply(
             lambda x: process_terms(x, G, name_to_uri, uri_to_name, root_uri)
         )
-        df["Manual_Terms_Expanded"] = df["Manual_Terms"].apply(
-            lambda x: process_terms(x, G, name_to_uri, uri_to_name, root_uri)
-        )
-
-        df["All_Terms"] = df.apply(
-            lambda row: row["Selected_Candidates_Expanded"].union(
-                row["Manual_Terms_Expanded"]
-            ),
-            axis=1,
-        )
+        # Manual_Terms come from browse-ontology additions and are excluded from
+        # all downstream evaluation/plots.
+        df["All_Terms"] = df["Selected_Candidates_Expanded"]
         if root_name:
             df["All_Terms"] = df["All_Terms"].apply(
                 lambda x: x - {root_name} if root_name in x else x
@@ -215,7 +218,13 @@ def main() -> None:
 
         df["All_Terms_Str"] = df["All_Terms"].apply(lambda x: "|".join(sorted(x)))
 
-        out_df = df[["Index", "Phrase", "All_Terms_Str"]]
+        out_df = df[[
+            "Index",
+            "Phrase",
+            "All_Terms_Str",
+            "Not_My_Expertise",
+            "Toxicological_Effect_Does_Not_Make_Sense",
+        ]]
         out_path = os.path.join(args.output_dir, f"Expanded_{expert_name}.csv")
         out_df.to_csv(out_path, index=False)
         print(f"  Saved: {out_path}")

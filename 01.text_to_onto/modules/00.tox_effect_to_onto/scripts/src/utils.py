@@ -343,43 +343,103 @@ def merge_backups(output_file: str, reasoning_file: str,
     Returns:
         None
     """
+    import csv
+    import heapq
     logger = logging.getLogger(__name__)
-    logger.info("Merging backups to create final results...")
+    logger.info("Merging backups to create final results using streaming K-way merge...")
 
     # Merge CSVs
     backup_csv_files = [output_file.replace('.csv', f'_{i}.csv') for i in range(1, backup_count + 1)]
-    dfs = []
-    for f in backup_csv_files:
-        if os.path.exists(f):
-            # Read only relevant columns to save memory if needed, but schema_overrides is good
-            dfs.append(pl.read_csv(f, schema_overrides=schema, ignore_errors=True))
+    files = []
+    readers = []
+    for f_path in backup_csv_files:
+        if os.path.exists(f_path):
+            f = open(f_path, 'r', encoding='utf-8')
+            files.append(f)
+            readers.append(csv.reader(f))
 
-    if dfs:
-        final_df = pl.concat(dfs)
+    if readers:
+        headers = []
+        for r in readers:
+            headers.append(next(r))
 
-        # Sort ENTIRE dataframe by original index to restore strict input order
-        if "orig_index" in final_df.columns:
-            final_df = final_df.sort("orig_index")
+        # Find the index of orig_index in the header
+        try:
+            orig_idx_col = headers[0].index("orig_index")
+        except ValueError:
+            logger.error("Could not find 'orig_index' in backup CSV header.")
+            orig_idx_col = -1
 
-        non_group_cols = set(categories) | {target_column} | {"orig_index"}
-        group_cols = [c for c in final_df.columns if c not in non_group_cols]
-        if group_cols:
-            final_df = final_df.group_by(group_cols, maintain_order=True).agg(
-                [pl.col(target_column).str.join("|")] +
-                [pl.col(c).max() for c in categories]
-            )
+        # The final header should exclude orig_index
+        if orig_idx_col == -1 or orig_idx_col == len(headers[0]) - 1:
+            final_header = headers[0][:-1]
+        else:
+            final_header = headers[0][:orig_idx_col] + headers[0][orig_idx_col+1:]
 
-        # Drop orig_index before final write
-        if "orig_index" in final_df.columns:
-            final_df = final_df.drop("orig_index")
+        logger.info(f"Creating final output file: {output_file}")
+        out_f = open(output_file, 'w', encoding='utf-8', newline='')
+        writer = csv.writer(out_f)
+        writer.writerow(final_header)
 
-        logger.info(f"Saving final merged results to {output_file}")
-        final_df.write_csv(output_file)
+        def get_next_valid_row(reader, file_idx):
+            while True:
+                try:
+                    row = next(reader)
+                    if not row or len(row) == 0:
+                        continue
+                    if all(val.strip() == '' for val in row):
+                        continue
+                    
+                    orig_idx_str = row[orig_idx_col].strip()
+                    if not orig_idx_str:
+                        continue
+                    try:
+                        return int(orig_idx_str), row
+                    except ValueError:
+                        continue
+                except StopIteration:
+                    return None
+
+        # Initialize heap
+        heap = []
+        for file_idx, reader in enumerate(readers):
+            res = get_next_valid_row(reader, file_idx)
+            if res is not None:
+                orig_index, row = res
+                heapq.heappush(heap, (orig_index, file_idx, row))
+
+        count = 0
+        while heap:
+            orig_index, file_idx, row = heapq.heappop(heap)
+            
+            # Reconstruct the row excluding orig_index
+            if orig_idx_col == -1 or orig_idx_col == len(row) - 1:
+                cleaned_row = row[:-1]
+            else:
+                cleaned_row = row[:orig_idx_col] + row[orig_idx_col+1:]
+                
+            writer.writerow(cleaned_row)
+            count += 1
+            if count % 50000 == 0:
+                logger.info(f"Merged {count} rows...")
+                
+            res = get_next_valid_row(readers[file_idx], file_idx)
+            if res is not None:
+                next_orig_index, next_row = res
+                heapq.heappush(heap, (next_orig_index, file_idx, next_row))
+
+        for f in files:
+            f.close()
+        out_f.close()
+        logger.info(f"Finished merging {count} CSV rows.")
 
         # Cleanup backups
-        for f in backup_csv_files if os.path.exists(f) else []:
-            try: os.remove(f)
-            except: pass
+        for f in backup_csv_files:
+            if os.path.exists(f):
+                try: os.remove(f)
+                except: pass
+    else:
+        logger.warning("No CSV backup files found to merge.")
 
     # Merge JSON reasoning
     merged_reasoning = {}

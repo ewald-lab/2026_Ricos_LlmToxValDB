@@ -52,6 +52,7 @@ python3 "${MODULE_DIR}/scripts/generate_plots.py" \
     --owl_file     "${OWL_FILE}" \
     --output_dir   "${OUTPUT_DIR}" \
     --ontology     "${ONTOLOGY}" \
-    --root_term    "${ROOT_TERM}"
+    --root_term    "${ROOT_TERM}" \
+    --expert_equivalence_file "${MODULE_DIR}/inputs/expert_equivalence.txt"
 
 echo "Done. Plots written to: ${OUTPUT_DIR}"

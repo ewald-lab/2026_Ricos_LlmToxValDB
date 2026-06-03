@@ -61,7 +61,38 @@ def arg_parser() -> argparse.Namespace:
         default=None,
         help="Label of the ontology root node (e.g. 'mammalian phenotype').",
     )
+    parser.add_argument(
+        "--expert_equivalence_file",
+        default=None,
+        help="Path to the TXT file containing expert name equivalences.",
+    )
     return parser.parse_args()
+
+
+EXPERT_MAP = {
+    "Alexander_Cole_Dynanet_Corporation": r"$\mathbf{Expert\ 1}$",
+    "Chelsea_Weitekamp_ULRI_Chemical_Insights": r"$\mathbf{Expert\ 2}$",
+    "Joshua_Harrill_Corteva": r"$\mathbf{Expert\ 3}$",
+    "Liz_McInnes_Syngenta": r"$\mathbf{Expert\ 4}$",
+    "Lucie_Ford_Recursion": r"$\mathbf{Expert\ 5}$",
+    "Sean_Watford_ULRI": r"$\mathbf{Expert\ 6}$",
+}
+
+
+def load_expert_map(filepath: str) -> dict[str, str]:
+    expert_map = {}
+    if not filepath or not os.path.exists(filepath):
+        return expert_map
+    import re
+    pattern = re.compile(r"Expert\s+(\d+):.*?\((.*?)\)")
+    with open(filepath, "r", encoding="utf-8") as f:
+        for line in f:
+            match = pattern.search(line)
+            if match:
+                num = match.group(1)
+                expert_id = match.group(2).strip()
+                expert_map[expert_id] = f"$\\mathbf{{Expert\\ {num}}}$"
+    return expert_map
 
 
 def clean_expert_name(name: str) -> str:
@@ -75,6 +106,11 @@ def clean_expert_name(name: str) -> str:
     Returns:
         str: The cleaned expert name.
     """
+    if name in EXPERT_MAP:
+        return EXPERT_MAP[name]
+    for k, v in EXPERT_MAP.items():
+        if k.lower() in name.lower() or name.lower() in k.lower():
+            return v
     parts = name.split("_")
     if len(parts) >= 2:
         return f"{parts[0]} {parts[1]}"
@@ -179,12 +215,21 @@ def main() -> None:
     """
     args = arg_parser()
 
+    if args.expert_equivalence_file:
+        loaded_map = load_expert_map(args.expert_equivalence_file)
+        if loaded_map:
+            EXPERT_MAP.clear()
+            EXPERT_MAP.update(loaded_map)
+
     os.makedirs(args.output_dir, exist_ok=True)
 
     depth_map = build_depth_map(args.owl_file, args.root_term)
 
-    # Load expanded files
-    exp_files = glob.glob(os.path.join(args.expanded_dir, "Expanded_*.csv"))
+    # Load expanded files (exclude the synthetic average_human file)
+    exp_files = sorted([
+        f for f in glob.glob(os.path.join(args.expanded_dir, "Expanded_*.csv"))
+        if "average" not in os.path.basename(f).lower()
+    ])
     if not exp_files:
         print(f"No Expanded_*.csv files found in: {args.expanded_dir}")
         return
@@ -213,9 +258,11 @@ def main() -> None:
         else:
             df_orig = pd.read_csv(orig_path)
 
-        # Add Not_My_Expertise column to df_exp for downstream use (depth & similarity)
-        if df_orig is not None and "Not_My_Expertise" in df_orig.columns:
-            df_exp["Not_My_Expertise"] = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).values
+        # Add Not_My_Expertise column to df_exp (treating both Not_My_Expertise and Toxicological_Effect_Does_Not_Make_Sense as exclusion criteria)
+        if df_orig is not None:
+            not_exp = pd.to_numeric(df_orig.get("Not_My_Expertise", 0), errors="coerce").fillna(0)
+            nonsense = pd.to_numeric(df_orig.get("Toxicological_Effect_Does_Not_Make_Sense", 0), errors="coerce").fillna(0)
+            df_exp["Not_My_Expertise"] = ((not_exp == 1) | (nonsense == 1)).astype(int).values
         else:
             df_exp["Not_My_Expertise"] = 0
 
@@ -228,10 +275,7 @@ def main() -> None:
             df_orig["Selected_Candidates"].apply(count_valid_terms).sum()
             if df_orig is not None else 0
         )
-        manual_count_total = (
-            df_orig["Manual_Terms"].apply(count_valid_terms).sum()
-            if df_orig is not None else 0
-        )
+        manual_count_total = 0
         nonsense_count = (
             pd.to_numeric(
                 df_orig["Toxicological_Effect_Does_Not_Make_Sense"], errors="coerce"
@@ -349,23 +393,16 @@ def main() -> None:
     plt.savefig(os.path.join(args.output_dir, "max_depth_per_expert.png"), dpi=300)
     plt.close()
 
-    # Plot 4: Manual vs Selected
+    # Plot 4: Selected candidates only (manual browse-ontology terms excluded)
     plt.figure(figsize=(10, 6))
     plt.bar(
         metrics_df["Expert"],
         metrics_df["Selected_Terms"],
-        label="Selected Candidates (LLM)",
+        label="Selected Candidates",
         color="skyblue",
     )
-    plt.bar(
-        metrics_df["Expert"],
-        metrics_df["Manual_Terms"],
-        bottom=metrics_df["Selected_Terms"],
-        label="Manual Terms",
-        color="salmon",
-    )
     plt.xticks(rotation=90)
-    plt.title("Usage of Selected Candidates vs Manual Terms")
+    plt.title("Usage of Selected Candidate Terms (Manual Terms Excluded)")
     plt.ylabel("Total Terms Used")
     plt.legend()
     plt.tight_layout()

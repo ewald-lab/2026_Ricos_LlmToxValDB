@@ -142,6 +142,7 @@ for CONSENSUS in 1 3 5 10; do
             echo "  Definitions       : ${DEFS}"
             echo "  System Prompt     : ${SYSTEM_PROMPT}"
             echo "  Output File       : ${OUTPUT_FILE}"
+            echo "  Manual Terms      : none; LLM outputs only Selected_Candidates"
             echo "================================================================================"
 
             CANDIDATE_POOL_FILE="${EVAL_DIR}/../02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
@@ -163,7 +164,8 @@ for CONSENSUS in 1 3 5 10; do
                 --ontology_embedding_db "${ONTOLOGY_DB}" \
                 --target_embedding_db "${TARGET_EMBEDDING_DB}" \
                 --global_definitions_db "${GLOBAL_DEFINITIONS_DB}" \
-                --candidate_pool_file "${CANDIDATE_POOL_FILE}"
+                --candidate_pool_file "${CANDIDATE_POOL_FILE}" \
+                --descriptions_concurrency 10
         done
     done
 done

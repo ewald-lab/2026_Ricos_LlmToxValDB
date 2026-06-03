@@ -38,8 +38,9 @@ echo "  OWL file     : ${OWL_FILE}"
 echo "  Expanded dir : ${EXPANDED_DIR}"
 echo "  Original dir : ${ORIG_DIR}"
 echo "  Figures dir  : ${OUTPUT_DIR}"
+echo "  Manual terms : excluded from evaluation/plots"
 
-python3 "${MODULE_DIR}/scripts/03.generate_llm_plots.py" \
+python3 "${MODULE_DIR}/scripts/04.generate_llm_plots.py" \
     --expanded_dir        "${EXPANDED_DIR}" \
     --orig_dir            "${ORIG_DIR}" \
     --owl_file            "${OWL_FILE}" \

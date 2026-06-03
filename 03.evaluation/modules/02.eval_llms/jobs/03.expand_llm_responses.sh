@@ -34,8 +34,9 @@ echo "  Ontology  : ${ONTOLOGY}"
 echo "  OWL file  : ${OWL_FILE}"
 echo "  Input dir : ${INPUT_DIR}"
 echo "  Output dir: ${OUTPUT_DIR}"
+echo "  Manual terms: excluded from expanded All_Terms_Str"
 
-python3 "${MODULE_DIR}/scripts/02.expand_llm_responses.py" \
+python3 "${MODULE_DIR}/scripts/03.expand_llm_responses.py" \
     --input_dir  "${INPUT_DIR}" \
     --owl_file   "${OWL_FILE}" \
     --output_dir "${OUTPUT_DIR}" \

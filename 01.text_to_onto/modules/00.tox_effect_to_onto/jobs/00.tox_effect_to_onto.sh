@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --time=4:00:00
+#SBATCH --time=7-00:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
@@ -45,4 +45,4 @@ python "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/scripts/00.to
     --context_ontology "$(cat "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
     --model_config "placeholder" \
     --llm_config "${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/llm_config.json" \
-    --descriptions_concurrency 100
+    --descriptions_concurrency 100 \

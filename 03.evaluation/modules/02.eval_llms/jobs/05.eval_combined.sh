@@ -43,6 +43,8 @@ echo "  OWL file           : ${OWL_FILE}"
 echo "  Expert Expanded dir: ${EXPERT_EXPANDED_DIR}"
 echo "  LLM Expanded dir   : ${LLM_EXPANDED_DIR}"
 echo "  Figures dir        : ${OUTPUT_DIR}"
+echo "  Manual terms       : excluded from evaluation/plots"
+echo "  Jaccard boxplot    : skipped"
 
 python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --expert_expanded_dir "${EXPERT_EXPANDED_DIR}" \
@@ -54,6 +56,8 @@ python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --ontology             "${ONTOLOGY}" \
     --root_term            "${ROOT_TERM}" \
     --ontology_embedding_db "${ONTOLOGY_EMBEDDING_DB}" \
-    --exclude_average_human
+    --exclude_average_human \
+    --skip_inter_annotator_agreement_boxplot \
+    --expert_equivalence_file "${EVAL_DIR}/modules/01.eval_experts/inputs/expert_equivalence.txt"
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"

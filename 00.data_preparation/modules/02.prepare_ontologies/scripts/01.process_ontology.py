@@ -26,7 +26,8 @@ logger = setup_logging()
 
 class OntologyToHierarchy:
     def __init__(self, ontology_path: str, root_uri: Optional[str] = None, prompt_template_path: Optional[str] = None, 
-            global_definitions_db: str = "definitions.db", max_concurrency: int = 10,) -> None:
+            global_definitions_db: str = "definitions.db", max_concurrency: int = 10, evaluate_prompt_template_path: Optional[str] = None,
+            definitions_report_path: Optional[str] = None) -> None:
         """
         Description:
         Initializes the OntologyToHierarchy parser.
@@ -46,6 +47,10 @@ class OntologyToHierarchy:
         self.graph.parse(ontology_path)
         self.root_uri = rdflib.URIRef(root_uri) if root_uri else None
         self.prompt_template_path = prompt_template_path
+        self.evaluate_prompt_template_path = evaluate_prompt_template_path
+        self.definitions_report_path = definitions_report_path
+        if not self.evaluate_prompt_template_path and self.prompt_template_path:
+            self.evaluate_prompt_template_path = str(Path(self.prompt_template_path).parent / "evaluate_description_prompt.txt")
 
         self.prompt_template_content = None
         if self.prompt_template_path:
@@ -167,7 +172,7 @@ class OntologyToHierarchy:
 
         return _recursive_count(current_classes)
 
-    def generate_definitions_batch(self, llm: Any, labels_to_generate: list[str]) -> dict[str, str]:
+    def generate_definitions_batch(self, llm: Any, labels_to_generate: list[str], hierarchies_to_generate: list[str]) -> dict[str, str]:
         """
         Description:
         Uses the LLM in batch mode to generate short descriptions for a batch of node labels.
@@ -175,6 +180,7 @@ class OntologyToHierarchy:
         Args:
             llm (Any): The LLM engine instance.
             labels_to_generate (list[str]): List of labels needing descriptions.
+            hierarchies_to_generate (list[str]): List of hierarchy breadcrumbs for each label.
 
         Returns:
             dict[str, str]: A dictionary mapping labels to generated description strings.
@@ -188,7 +194,7 @@ class OntologyToHierarchy:
         prompt = ChatPromptTemplate.from_messages(messages)
         chain = prompt | llm | StrOutputParser()
 
-        inputs = [{"label": label} for label in labels_to_generate]
+        inputs = [{"label": label, "hierarchy": hierarchy} for label, hierarchy in zip(labels_to_generate, hierarchies_to_generate)]
 
         # Process in chunks to show progress via tqdm
         chunk_size = self.max_concurrency * 2
@@ -210,10 +216,67 @@ class OntologyToHierarchy:
 
         return results
 
+    def evaluate_definitions_batch(self, llm: Any, batch_data: list[dict]) -> list[str]:
+        """
+        Description:
+        Uses the LLM in batch mode to evaluate if existing descriptions are good or bad.
+
+        Args:
+            llm (Any): The LLM engine instance.
+            batch_data (list[dict]): List of dicts with keys 'label', 'hierarchy', 'definition'.
+
+        Returns:
+            list[str]: List of decisions ('GOOD' or 'BAD') for each definition.
+        """
+        if not batch_data:
+            return []
+
+        with open(self.evaluate_prompt_template_path, "r", encoding="utf-8") as f:
+            eval_tmpl = f.read().strip()
+
+        messages = [("user", eval_tmpl)]
+        prompt = ChatPromptTemplate.from_messages(messages)
+        chain = prompt | llm | StrOutputParser()
+
+        # Process in chunks
+        chunk_size = self.max_concurrency * 2
+        generated_results = []
+
+        for i in tqdm(range(0, len(batch_data), chunk_size), desc="LLM Evaluating Definitions", leave=False, smoothing=0.0):
+            chunk = batch_data[i:i + chunk_size]
+            chunk_results = chain.batch(chunk, config={"max_concurrency": self.max_concurrency})
+            generated_results.extend(chunk_results)
+
+        decisions = []
+        for res in generated_results:
+            text = res.strip()
+            if "</think>" in text:
+                text = text.split("</think>")[-1].strip()
+
+            decision = "BAD"
+            try:
+                json_match = re.search(r'\{.*\}', text, re.DOTALL)
+                if json_match:
+                    data = json.loads(json_match.group(0))
+                    decision = data.get("decision", "BAD").strip().upper()
+                else:
+                    if "GOOD" in text.upper():
+                        decision = "GOOD"
+            except Exception:
+                if "GOOD" in text.upper() and "BAD" not in text.upper():
+                    decision = "GOOD"
+            
+            if decision not in ("GOOD", "BAD"):
+                decision = "BAD"
+            decisions.append(decision)
+
+        return decisions
+
     def pre_generate_missing_definitions(self, llm: Any, current_classes: list[rdflib.URIRef]) -> None:
         """
         Description:
-        Traverses hierarchy to identify classes lacking definitions, generates them using LLM, and caches them.
+        Traverses hierarchy to identify classes lacking definitions or having bad ones,
+        evaluates/generates them using LLM, and caches them.
 
         Args:
             llm (Any): The LLM engine instance.
@@ -222,17 +285,18 @@ class OntologyToHierarchy:
         Returns:
             None
         """
-        labels_to_generate = []
-        uris_to_generate = []
+        missing_to_generate = []  # list of (uri, label, hierarchy_str)
+        to_evaluate = []          # list of (uri, label, hierarchy_str, definition)
         seen = set()
 
-        def _recursive_collect(nodes: list[rdflib.URIRef]) -> None:
+        def _recursive_collect(nodes: list[rdflib.URIRef], parent_path: list[str]) -> None:
             """
             Description:
-            Helper method to recursively collect classes lacking definitions.
+            Helper method to recursively collect classes lacking definitions or needing evaluation.
 
             Args:
                 nodes (list[rdflib.URIRef]): Nodes list to inspect.
+                parent_path (list[str]): Hierarchy path labels leading to current nodes.
 
             Returns:
                 None
@@ -243,32 +307,174 @@ class OntologyToHierarchy:
 
                 label = self.get_label(uri)
                 definition = self.get_definition(uri)
+                if definition:
+                    words = definition.split()
+                    if len(words) > 1500:
+                        definition = " ".join(words[:1500]) + "..."
+
+                hierarchy_str = " > ".join(parent_path + [label])
 
                 if uri not in self.prompt_cache:
                     if not definition or len(definition.split()) < 5:
-                        labels_to_generate.append(label)
-                        uris_to_generate.append(uri)
+                        missing_to_generate.append((uri, label, hierarchy_str))
+                    else:
+                        to_evaluate.append((uri, label, hierarchy_str, definition))
 
                 children = self.get_children(uri)
                 if children:
-                    _recursive_collect(children)
+                    _recursive_collect(children, parent_path + [label])
 
-        _recursive_collect(current_classes)
+        _recursive_collect(current_classes, [])
+        total_terms = len(seen)
 
-        if labels_to_generate:
-            logger.info(f"Pre-generating {len(labels_to_generate)} descriptions in parallel...")
-            generated_defs = self.generate_definitions_batch(llm, labels_to_generate)
+        bad_to_generate = []  # list of (uri, label, hierarchy_str)
+        good_to_cache = []    # list of (uri, label, definition)
+
+        if to_evaluate:
+            logger.info(f"Evaluating {len(to_evaluate)} existing definitions using LLM...")
+            eval_batch_data = [
+                {"label": item[1], "hierarchy": item[2], "definition": item[3]}
+                for item in to_evaluate
+            ]
+            decisions = self.evaluate_definitions_batch(llm, eval_batch_data)
+
+            for (uri, label, hierarchy_str, definition), decision in zip(to_evaluate, decisions):
+                if decision == "BAD":
+                    logger.info(f"Definition evaluated as BAD for {label} (URI: {uri}). Existing: {definition}")
+                    bad_to_generate.append((uri, label, hierarchy_str))
+                else:
+                    logger.info(f"Definition evaluated as GOOD for {label} (URI: {uri}). Existing: {definition}")
+                    good_to_cache.append((uri, label, definition))
+
+        # Cache the good definitions
+        if good_to_cache:
+            with sqlite3.connect(self.global_definitions_db) as conn:
+                cursor = conn.cursor()
+                for uri, label, definition in good_to_cache:
+                    self.prompt_cache[uri] = definition
+                    cursor.execute("INSERT OR REPLACE INTO global_definitions VALUES (?, ?)", (str(uri), definition))
+                conn.commit()
+            logger.info(f"Cached {len(good_to_cache)} good ontology definitions.")
+
+        # Combine all to generate
+        combined_to_generate = missing_to_generate + bad_to_generate
+        num_missing_generated = 0
+        num_bad_generated = 0
+
+        if combined_to_generate:
+            logger.info(f"Pre-generating {len(combined_to_generate)} descriptions in parallel ({len(missing_to_generate)} missing, {len(bad_to_generate)} bad)...")
+            
+            labels_to_generate = [item[1] for item in combined_to_generate]
+            hierarchies_to_generate = [item[2] for item in combined_to_generate]
+            
+            generated_defs = self.generate_definitions_batch(llm, labels_to_generate, hierarchies_to_generate)
 
             with sqlite3.connect(self.global_definitions_db) as conn:
                 cursor = conn.cursor()
-                for label, uri in zip(labels_to_generate, uris_to_generate):
+                
+                # Process missing
+                for uri, label, hierarchy_str in missing_to_generate:
                     desc = generated_defs.get(label)
                     if desc:
                         self.prompt_cache[uri] = desc
                         self.llm_generated_labels.add(uri)
                         cursor.execute("INSERT OR REPLACE INTO global_definitions VALUES (?, ?)", (str(uri), desc))
-                        logger.info(f"Definition generated for {uri} ({label}) -> {desc}")
+                        logger.info(f"Definition generated (missing) for {uri} ({label}) -> {desc}")
+                        num_missing_generated += 1
+                        
+                # Process bad
+                for uri, label, hierarchy_str in bad_to_generate:
+                    desc = generated_defs.get(label)
+                    if desc:
+                        self.prompt_cache[uri] = desc
+                        self.llm_generated_labels.add(uri)
+                        cursor.execute("INSERT OR REPLACE INTO global_definitions VALUES (?, ?)", (str(uri), desc))
+                        logger.info(f"Definition generated (bad original) for {uri} ({label}) -> {desc}")
+                        num_bad_generated += 1
+                        
                 conn.commit()
+
+        total_created = num_missing_generated + num_bad_generated
+        self.total_terms = total_terms
+        self.num_missing_generated = num_missing_generated
+        self.num_bad_generated = num_bad_generated
+        self.total_created = total_created
+
+
+
+    def save_definitions_report(self, report_path: str) -> None:
+        """
+        Description:
+        Generates and saves a JSON report showing every node, its original definition,
+        whether it was GOOD, BAD, or MISSING, and the final/new definition.
+
+        Args:
+            report_path (str): File path to save the JSON report.
+
+        Returns:
+            None
+        """
+        report = []
+        seen = set()
+
+        def _traverse_report(nodes: list[rdflib.URIRef], parent_path: list[str]) -> None:
+            for uri in nodes:
+                if uri in seen: continue
+                seen.add(uri)
+
+                label = self.get_label(uri)
+                ontology_definition = self.get_definition(uri)
+                hierarchy_str = " > ".join(parent_path + [label])
+                cached_definition = self.prompt_cache.get(uri, "")
+
+                old_definition = ontology_definition if ontology_definition else None
+                new_definition = None
+
+                if not ontology_definition or len(ontology_definition.split()) < 5:
+                    status = "MISSING"
+                    new_definition = cached_definition if cached_definition else None
+                else:
+                    if cached_definition and cached_definition != ontology_definition:
+                        status = "BAD"
+                        new_definition = cached_definition
+                    else:
+                        status = "GOOD"
+
+                report.append({
+                    "uri": str(uri),
+                    "label": label,
+                    "hierarchy": hierarchy_str,
+                    "old_definition": old_definition,
+                    "status": status,
+                    "new_definition": new_definition
+                })
+
+                children = self.get_children(uri)
+                if children:
+                    _traverse_report(children, parent_path + [label])
+
+        if not self.root_uri:
+            subjects = set(self.graph.subjects(RDF.type, OWL.Class))
+            children_with_parents = set()
+            for s, p, o in self.graph.triples((None, RDFS.subClassOf, None)):
+                if isinstance(o, rdflib.URIRef) and o != OWL.Thing:
+                    children_with_parents.add(s)
+            roots = list(subjects - children_with_parents)
+            roots = [r for r in roots if isinstance(r, rdflib.URIRef)]
+            top_level_classes = sorted(roots, key=lambda x: self.get_label(x))
+        else:
+            top_level_classes = [self.root_uri]
+
+        _traverse_report(top_level_classes, [])
+
+        try:
+            report_file = Path(report_path)
+            report_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(report_file, "w", encoding="utf-8") as f:
+                json.dump(report, f, indent=2, ensure_ascii=False)
+            logger.info(f"Definitions report saved to: {report_path}")
+        except Exception as e:
+            logger.error(f"Failed to save definitions report to {report_path}: {e}")
 
     def build_hierarchy(self, current_classes: list[rdflib.URIRef], llm: Any, pbar: Optional[tqdm] = None, parent_label: Optional[str] = None, ) -> None:
         """
@@ -296,7 +502,7 @@ class OntologyToHierarchy:
                 pbar.update(1)
 
             label = self.get_label(current_uri)
-            logger.info(f"Processing node: {label}")
+            logger.debug(f"Processing node: {label}")
             definition = self.get_definition(current_uri)
 
             children = self.get_children(current_uri)
@@ -354,13 +560,13 @@ class OntologyToHierarchy:
             label = self.get_label(rdflib.URIRef(uri))
             label_safe = sanitize_name(label)
             ontology_definition = self.get_definition(rdflib.URIRef(uri))
+            cached_definition = self.prompt_cache.get(rdflib.URIRef(uri), "")
             is_llm_generated = 0
-            if not ontology_definition or len(ontology_definition.split()) < 5:
-                definition = self.prompt_cache.get(rdflib.URIRef(uri), "")
-                if rdflib.URIRef(uri) in self.llm_generated_labels:
-                    is_llm_generated = 1
+            if cached_definition and (not ontology_definition or len(ontology_definition.split()) < 5 or cached_definition != ontology_definition):
+                definition = cached_definition
+                is_llm_generated = 1
             else:
-                definition = ontology_definition
+                definition = ontology_definition if ontology_definition else cached_definition
 
             embed_text = label_safe
 
@@ -418,6 +624,9 @@ class OntologyToHierarchy:
 
         logger.info(f"Hierarchy built: {len(self.node_parents)} nodes processed.")
 
+        if self.definitions_report_path:
+            self.save_definitions_report(self.definitions_report_path)
+
 
 def main() -> None:
     """
@@ -437,6 +646,8 @@ def main() -> None:
     parser.add_argument("--ontology_file", required=True, help="Path to input .ttl ontology file")
     parser.add_argument("--root_uri", help="URI of the root class to start traversal (optional)")
     parser.add_argument("--prompt_template", help="Path to custom prompt template file (optional)")
+    parser.add_argument("--evaluate_prompt_template", help="Path to evaluation prompt template file (optional)")
+    parser.add_argument("--definitions_report", help="Path to save the JSON report of definitions (optional)")
 
     parser.add_argument("--embedding_model", default="Qwen/Qwen3-Embedding-8B", help="HuggingFace model for node embeddings")
     parser.add_argument("--embeddings_model_id", default=None, help="Identifier for the model configuration in RAG config (e.g., qwen, nemotron)")
@@ -503,7 +714,7 @@ def main() -> None:
 
     llm = get_model(**model_config)
 
-    generator = OntologyToHierarchy(args.ontology_file, args.root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency)
+    generator = OntologyToHierarchy(args.ontology_file, args.root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency, evaluate_prompt_template_path=args.evaluate_prompt_template, definitions_report_path=args.definitions_report)
 
     if not test_model(llm):
         raise RuntimeError("Model connectivity test failed. Please check your configuration.")
@@ -516,6 +727,20 @@ def main() -> None:
     minutes = int(elapsed // 60)
     seconds = elapsed % 60
     logger.info(f"Total execution time: {minutes}m {seconds:.2f}s")
+
+    if hasattr(generator, "total_terms"):
+        pct_missing = (generator.num_missing_generated / generator.total_terms) * 100 if generator.total_terms > 0 else 0.0
+        pct_bad = (generator.num_bad_generated / generator.total_terms) * 100 if generator.total_terms > 0 else 0.0
+        pct_total = (generator.total_created / generator.total_terms) * 100 if generator.total_terms > 0 else 0.0
+        
+        logger.info("=========================================\n"
+                    "FINAL SUMMARY OF DEFINITION GENERATION:\n"
+                    f"Total ontology terms: {generator.total_terms}\n"
+                    f"Created because missing: {generator.num_missing_generated} ({pct_missing:.2f}% of total)\n"
+                    f"Created because bad: {generator.num_bad_generated} ({pct_bad:.2f}% of total)\n"
+                    f"Total created: {generator.total_created} ({pct_total:.2f}% of total)\n"
+                    "=========================================")
+
 
 if __name__ == "__main__":
     main()

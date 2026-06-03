@@ -10,27 +10,18 @@
 #SBATCH -e "logs/err_expert_gen_%j.err"
 
 ONTOLOGY="hpath"
-TOP_CANDIDATES=10
-NUM_PHRASES=50
+REPO_ROOT="$(cd "${SLURM_SUBMIT_DIR}/../../../../" && pwd)"
 
-JOBS_DIR="$SLURM_SUBMIT_DIR"
-MODULE_ROOT="$(cd "${JOBS_DIR}/.." && pwd)"
-PROJECT_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
-GIT_ROOT="$(cd "${PROJECT_ROOT}/.." && pwd)"
+module purge && module load gcc
 
-module purge
-module load gcc
+source "${REPO_ROOT}/02.expert_annotation/env-expert-annot/bin/activate"
 
-source "${PROJECT_ROOT}/env-expert-annot/bin/activate"
-
-
-python "${MODULE_ROOT}/scripts/01.expert_test.py" \
-    --input_pool "${GIT_ROOT}/02.expert_annotation/modules/00.create_test/outputs/test_pool_${ONTOLOGY}.json" \
-    --ontology_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/qwen/${ONTOLOGY}.db" \
-    --output_file "${MODULE_ROOT}/outputs/expert_annotation_${ONTOLOGY}.html" \
+python "${REPO_ROOT}/02.expert_annotation/modules/01.create_form/scripts/01.expert_test.py" \
+    --input_pool "${REPO_ROOT}/02.expert_annotation/modules/00.create_test/outputs/test_pool_${ONTOLOGY}.json" \
+    --ontology_db "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/qwen/${ONTOLOGY}.db" \
+    --output_file "${REPO_ROOT}/02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html" \
     --email "ricos@ebi.ac.uk" \
-    --context_ontology "$(cat "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
-    --top_reranker ${TOP_CANDIDATES} \
-    --num_phrases ${NUM_PHRASES} \
-    --skip_first_level \
-    #--debug
+    --context_ontology "$(cat "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
+    --top_reranker 10 \
+    --num_phrases 50 \
+    --skip_first_level

@@ -1,0 +1,20 @@
+You are an expert computational biologist and ontology curator.
+Your task is to evaluate whether the existing definition/description for the ontology term "{label}" is of high quality and biologically accurate.
+
+Context:
+- Ontology term: {label}
+- Hierarchical path: {hierarchy}
+- Existing definition: {definition}
+
+Requirements for a GOOD definition:
+1. It must be biologically or medically accurate and relevant to the term.
+2. It should define the concept clearly, explaining the general condition, symptoms, or biological mechanisms.
+3. It must not be too vague, trivial, or containing placeholder/uninformative text (e.g., "none", "no definition", "TBD").
+4. It should be written in clear English.
+
+Based on the above requirements, evaluate the existing definition.
+Output your response in the following JSON format:
+{{
+  "reasoning": "A brief explanation of why the definition is good or bad.",
+  "decision": "GOOD" or "BAD"
+}}

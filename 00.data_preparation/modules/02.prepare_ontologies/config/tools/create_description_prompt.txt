@@ -3,6 +3,7 @@ Your task is to create a short description to define the ontology term "{label}"
 
 Context:
 - Ontology term: {label}
+- Hierarchical path: {hierarchy}
 
 Requirements:
 1. Provide a brief definition (max 2 sentences) for the given term.

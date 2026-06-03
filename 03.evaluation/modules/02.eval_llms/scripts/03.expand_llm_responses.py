@@ -214,16 +214,9 @@ def main() -> None:
         df["Selected_Candidates_Expanded"] = df["Selected_Candidates"].apply(
             lambda x: process_terms(x, G, name_to_uri, uri_to_name, root_uri)
         )
-        df["Manual_Terms_Expanded"] = df["Manual_Terms"].apply(
-            lambda x: process_terms(x, G, name_to_uri, uri_to_name, root_uri)
-        )
-
-        df["All_Terms"] = df.apply(
-            lambda row: row["Selected_Candidates_Expanded"].union(
-                row["Manual_Terms_Expanded"]
-            ),
-            axis=1,
-        )
+        # Manual_Terms come from browse-ontology additions and are excluded from
+        # all downstream evaluation/plots.
+        df["All_Terms"] = df["Selected_Candidates_Expanded"]
         if root_name:
             df["All_Terms"] = df["All_Terms"].apply(
                 lambda x: x - {root_name} if root_name in x else x

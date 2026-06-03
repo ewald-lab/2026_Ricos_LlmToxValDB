@@ -24,7 +24,7 @@ if [ -z "$CODON_NODE" ]; then
     echo "Usage: sbatch $0 <codon-node>  (e.g. sbatch $0 codon-gpu-004)"
     exit 1
 fi
-BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8003/v1"
+BASE_URL="http://${CODON_NODE}.ebi.ac.uk:8006/v1"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
@@ -35,10 +35,6 @@ source "${PREP_ROOT}/env-data-prep/bin/activate"
 
 ONTOLOGY="${ONTOLOGIES[$(( SLURM_ARRAY_TASK_ID / ${#MODELS_KEYS[@]} ))]}"
 EMBED_DIR="${MODELS_KEYS[$(( SLURM_ARRAY_TASK_ID % ${#MODELS_KEYS[@]} ))]}"
-
-echo "=========================================================="
-echo "Task ID: $SLURM_ARRAY_TASK_ID | Processing Ontology: $ONTOLOGY | Model: $EMBED_DIR"
-echo "=========================================================="
 
 SYNC_FILE="${REPO_ROOT}/outputs/${ONTOLOGY}_definitions_done.flag"
 
@@ -55,12 +51,14 @@ if [ $(( SLURM_ARRAY_TASK_ID % ${#MODELS_KEYS[@]} )) -eq 0 ]; then
     python "${REPO_ROOT}/scripts/01.process_ontology.py" \
         $ROOT_FLAG \
         --ontology_file "${REPO_ROOT}/inputs/owl_files/${ONTOLOGY}.ttl" \
-        --ontology_db "${REPO_ROOT}/inputs/ontology_dbs/${EMBED_DIR}/${ONTOLOGY}.db" \
+        --ontology_db "${REPO_ROOT}/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
         --rag_config "${REPO_ROOT}/config/rag/embeddings.json" \
         --embeddings_model_id "${EMBED_DIR}" \
-        --global_definitions_db "${REPO_ROOT}/inputs/ontology_dbs/definitions_${ONTOLOGY}.db" \
+        --global_definitions_db "${REPO_ROOT}/outputs/definitions_${ONTOLOGY}.db" \
         --prompt_template "${REPO_ROOT}/config/tools/create_description_prompt.txt" \
-        --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.5-122B-A10B-FP8.json" \
+        --evaluate_prompt_template "${REPO_ROOT}/config/tools/evaluate_description_prompt.txt" \
+        --definitions_report "${REPO_ROOT}/outputs/${ONTOLOGY}_definitions_report.json" \
+        --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.6-35B-A3B-FP8.json" \
         --base_url "${BASE_URL}"
 
     if [ $? -eq 0 ]; then
@@ -81,11 +79,13 @@ else
     python "${REPO_ROOT}/scripts/01.process_ontology.py" \
         $ROOT_FLAG \
         --ontology_file "${REPO_ROOT}/inputs/owl_files/${ONTOLOGY}.ttl" \
-        --ontology_db "${REPO_ROOT}/inputs/ontology_dbs/${EMBED_DIR}/${ONTOLOGY}.db" \
+        --ontology_db "${REPO_ROOT}/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
         --rag_config "${REPO_ROOT}/config/rag/embeddings.json" \
         --embeddings_model_id "${EMBED_DIR}" \
-        --global_definitions_db "${REPO_ROOT}/inputs/ontology_dbs/definitions_${ONTOLOGY}_Qwen3.5-122B-A10B-FP8.db" \
+        --global_definitions_db "${REPO_ROOT}/outputs/definitions_${ONTOLOGY}.db" \
         --prompt_template "${REPO_ROOT}/config/tools/create_description_prompt.txt" \
-        --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.5-122B-A10B-FP8.json" \
+        --evaluate_prompt_template "${REPO_ROOT}/config/tools/evaluate_description_prompt.txt" \
+        --definitions_report "${REPO_ROOT}/outputs/${ONTOLOGY}_definitions_report.json" \
+        --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.6-35B-A3B-FP8.json" \
         --base_url "${BASE_URL}"
 fi

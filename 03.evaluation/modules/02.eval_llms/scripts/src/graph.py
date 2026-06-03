@@ -174,15 +174,28 @@ def clean_reason(reason: str) -> str:
         return r[8:].lstrip(" .-:")
     return r
 
+def load_analysis_instruction() -> str:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(current_dir, "..", "..", "config", "analysis_instruction.txt")
+    if os.path.exists(config_path):
+        with open(config_path, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    return "Step 1: Analyze the input description and determine its exact level of specificity (i.e., whether it is a broad categorical system or a highly specific mechanism)."
+
+
+ANALYSIS_INSTRUCTION = load_analysis_instruction()
+
+
 class CandidateEvaluation(BaseModel):
     """Structure for evaluating a single candidate."""
     candidate_name: str = Field(description="The exact name of the candidate being evaluated.")
     reason: str = Field(description="Think step-by-step. Provide the explicit reason for the decision based on the critical rules. DO NOT write 'ACCEPTED' or 'REJECTED' in this field.")
     decision: Literal["ACCEPTED", "REJECTED"] = Field(description="Strictly 'ACCEPTED' or 'REJECTED' based on the reasoning above.")
 
+
 class BatchVerificationResult(BaseModel):
     """Structure for batch evaluation (Mode 2)."""
-    analysis: str = Field(description="Step 1: Analyze the input description and determine its exact level of specificity (i.e., whether it is a broad categorical system or a highly specific mechanism).")
+    analysis: str = Field(description=ANALYSIS_INSTRUCTION)
     evaluation: List[CandidateEvaluation] = Field(description="Step 2: Evaluate EVERY candidate individually. You MUST provide an evaluation object for ALL candidates in the list.")
     selected_candidates: List[str] = Field(description="Step 3: The final list of exact candidate names that pass the evaluation. Return an empty list [] if none match.")
 
@@ -284,7 +297,12 @@ class TextToOntoGraph:
 
         self.parser = PydanticOutputParser(pydantic_object=CandidateEvaluation)
 
-        user_prompt = "Description: {description}\nCandidate to evaluate: {candidate_name}"
+        self.description_analysis_prompt = ChatPromptTemplate.from_messages([
+            ("system", self.system_prompt_content),
+            ("user", f"{ANALYSIS_INSTRUCTION}\n\nDescription: {{description}}")
+        ])
+
+        user_prompt = "Description: {description}\nDescription Analysis: {description_analysis}\nCandidate to evaluate: {candidate_name}"
         user_prompt += "\nCandidate Hierarchy: {candidate_hierarchy}"
         if self.ontology_definitions:
             user_prompt += "\nCandidate Definition: {candidate_definition}"
@@ -441,6 +459,18 @@ class TextToOntoGraph:
         # Instantiate token usage tracker
         handler = TokenUsageCallbackHandler()
 
+        description_analysis = ""
+        if self.mode == 1:
+            analysis_chain = self.description_analysis_prompt | llm | self._clean_llm_runner
+            try:
+                description_analysis = analysis_chain.invoke({"description": description}, config={"callbacks": [handler]})
+                if hasattr(description_analysis, 'content'):
+                    description_analysis = description_analysis.content
+                description_analysis = str(description_analysis).strip()
+            except Exception as e:
+                logger.warning(f"Failed to generate specificity analysis: {e}")
+                description_analysis = "Analysis failed or unavailable."
+
         # Build the evaluation chains (LangChain) dynamically with the provided llm
         chain = self._mode1_prompt | llm | self._clean_llm_runner | self.parser
         chain_clarified = self._mode1_prompt_clarified | llm | self._clean_llm_runner | self.parser
@@ -506,6 +536,7 @@ class TextToOntoGraph:
                 for run_i in range(self.consensus_runs):
                     ctx = {
                         "description": description,
+                        "description_analysis": description_analysis,
                         "candidate_name": node_sanitized_name,
                         "format_instructions": self._mode1_format_instructions
                     }

@@ -6,6 +6,7 @@ import sys
 import time
 import polars as pl
 from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Add scripts directory to sys.path to resolve local packages
 sys.path.insert(0, os.path.dirname(__file__))
@@ -57,6 +58,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--global_definitions_db", default=None, help="Path to global definitions database (URI to definition).")
 
     # --- Debugging & Seed ---
+    parser.add_argument("--descriptions_concurrency", type=int, default=5, help="Number of descriptions to process in parallel.")
     parser.add_argument("--seed", type=int, default=43, help="Random seed for reproducibility.")
 
     return parser.parse_args()
@@ -180,14 +182,12 @@ def main() -> None:
         reasoning_cache = {}
         phrase_avg_tokens = []
 
-        # Iterate over each row and match precisely
-        for row in tqdm(df.iter_rows(named=True), total=df.height, desc="Worker"):
+        def process_row(row):
             index = row.get("Index")
             phrase = row.get(args.target_column)
 
             if not is_valid_description(phrase):
-                # Empty or invalid phrase
-                results_list.append({
+                return {
                     "Index": index,
                     "Phrase": phrase,
                     "Selected_Candidates": "None",
@@ -196,13 +196,9 @@ def main() -> None:
                     "Toxicological_Effect_Does_Not_Make_Sense": "0",
                     "Not_My_Expertise": "0",
                     "Comments": ""
-                })
-                continue
+                }, None, None
 
             try:
-                logger.info("\n--------------------------------------------------------")
-                logger.info(f"Evaluating Phrase: {phrase}")
-
                 # Execute graph logic
                 candidates_list = None
                 if args.candidate_pool_file:
@@ -222,7 +218,7 @@ def main() -> None:
                 selected_candidates_str = "|".join(selected) if selected else "None"
                 selected_uris_str = "|".join(selected_uris) if selected_uris else "None"
 
-                results_list.append({
+                result = {
                     "Index": index,
                     "Phrase": phrase,
                     "Selected_Candidates": selected_candidates_str,
@@ -231,17 +227,17 @@ def main() -> None:
                     "Toxicological_Effect_Does_Not_Make_Sense": "0",
                     "Not_My_Expertise": "0",
                     "Comments": ""
-                })
-
-                reasoning_cache[phrase] = {
+                }
+                reasoning_val = {
                     "reasoning": reasoning,
                     "selected": selected
                 }
-                phrase_avg_tokens.append(token_usage.get("avg_completion_tokens", 0.0))
+                avg_tokens = token_usage.get("avg_completion_tokens", 0.0)
+                return result, (phrase, reasoning_val), avg_tokens
 
             except Exception as e:
                 logger.error(f"Error processing phrase '{phrase}': {e}")
-                results_list.append({
+                return {
                     "Index": index,
                     "Phrase": phrase,
                     "Selected_Candidates": "None",
@@ -250,7 +246,23 @@ def main() -> None:
                     "Toxicological_Effect_Does_Not_Make_Sense": "0",
                     "Not_My_Expertise": "0",
                     "Comments": f"Error during processing: {str(e)}"
-                })
+                }, None, None
+
+        rows = df.iter_rows(named=True)
+        with ThreadPoolExecutor(max_workers=args.descriptions_concurrency) as executor:
+            futures = {executor.submit(process_row, row): row for row in rows}
+
+            for future in tqdm(as_completed(futures), total=len(futures), desc="Worker", smoothing=0.0):
+                result, reasoning_data, avg_tokens = future.result()
+                results_list.append(result)
+                if reasoning_data is not None:
+                    phrase, reasoning_val = reasoning_data
+                    reasoning_cache[phrase] = reasoning_val
+                if avg_tokens is not None:
+                    phrase_avg_tokens.append(avg_tokens)
+
+        # Sort results by Index to maintain original order
+        results_list.sort(key=lambda x: x["Index"])
 
         # Save output CSV in expert format
         output_df = pl.DataFrame(results_list)

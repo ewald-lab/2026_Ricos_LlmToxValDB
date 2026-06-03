@@ -15,7 +15,6 @@ ONTOLOGIES=(mp hpath aop hp txpo)
 
 MODULE_ROOT="$(cd "${SLURM_SUBMIT_DIR}/.." && pwd)"
 DATA_PREP_ROOT="$(cd "${MODULE_ROOT}/../../00.data_preparation" && pwd)"
-TEXT_TO_ONTO_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
 
 CODON_NODE="${1:-${CODON_NODE:-hl-codon-gpu-020}}"
 BASE_URL="http://${CODON_NODE}.ebi.ac.uk:PORT/v1"

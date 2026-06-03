@@ -2,6 +2,7 @@ from __future__ import annotations
 import argparse
 import glob
 import os
+import math
 import pandas as pd
 from collections import Counter
 
@@ -85,9 +86,15 @@ def main() -> None:
             print(f"Warning: File {files[i]} does not perfectly match the first file in Index/Phrase order. Aligning on Index and Phrase.")
 
     # To be extremely safe and robust, let's use a dictionary-based aggregation:
-    # key: (Index, Phrase), value: list of sets of terms
+    # key: (Index, Phrase), value: list of dicts {'terms': set, 'active': bool}
     data_dict = {}
+    total_experts = len(dfs)
+
     for df in dfs:
+        # Check if the exclusion columns are present
+        not_exp_col = "Not_My_Expertise" if "Not_My_Expertise" in df.columns else None
+        nonsense_col = "Toxicological_Effect_Does_Not_Make_Sense" if "Toxicological_Effect_Does_Not_Make_Sense" in df.columns else None
+
         for _, row in df.iterrows():
             idx = row["Index"]
             phrase = row["Phrase"]
@@ -97,24 +104,45 @@ def main() -> None:
             else:
                 terms = set(t.strip() for t in terms_str.split("|") if t.strip())
 
+            # Determine if this expert is active for this row
+            is_not_exp = int(row[not_exp_col]) == 1 if not_exp_col is not None and not pd.isna(row[not_exp_col]) else False
+            is_nonsense = int(row[nonsense_col]) == 1 if nonsense_col is not None and not pd.isna(row[nonsense_col]) else False
+            active = not (is_not_exp or is_nonsense)
+
             key = (idx, phrase)
             if key not in data_dict:
                 data_dict[key] = []
-            data_dict[key].append(terms)
+            data_dict[key].append({"terms": terms, "active": active})
 
     # Now compute the average human terms for each key
     aggregated_rows = []
-    for (idx, phrase), term_sets in data_dict.items():
-        # Count term frequencies across experts for this phrase
-        term_counts = Counter()
-        for t_set in term_sets:
-            term_counts.update(t_set)
+    for (idx, phrase), expert_data in data_dict.items():
+        # Count active experts
+        active_experts = [item for item in expert_data if item["active"]]
+        n_active = len(active_experts)
 
-        # Select terms with count >= min_experts
-        selected_terms = [
-            term for term, count in term_counts.items()
-            if count >= args.min_experts
-        ]
+        if n_active == 0:
+            selected_terms = []
+        else:
+            # Count term frequencies across active experts for this phrase
+            term_counts = Counter()
+            for item in active_experts:
+                term_counts.update(item["terms"])
+
+            # Calculate dynamic consensus threshold
+            # e.g., if total_experts=6 and min_experts=2, ratio=1/3.
+            # For n_active=3, threshold = max(2, ceil(3 * 2/6)) = 2.
+            # For n_active=1, threshold = max(2, ceil(1 * 2/6)) = 2 (which cannot be reached).
+            threshold = max(
+                args.min_experts,
+                math.ceil(n_active * (args.min_experts / total_experts))
+            )
+
+            # Select terms with count >= threshold
+            selected_terms = [
+                term for term, count in term_counts.items()
+                if count >= threshold
+            ]
 
         # Sort them for consistency and reproducibility
         selected_terms_sorted = sorted(selected_terms)

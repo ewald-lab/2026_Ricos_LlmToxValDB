@@ -12,7 +12,6 @@
 
 EMBED_DIR="kalm"
 
-MODEL="Qwen3.5-122B-A10B-FP8"
 MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
 CODON_NODE="${1:-${CODON_NODE:-}}"
 if [ -z "$CODON_NODE" ]; then

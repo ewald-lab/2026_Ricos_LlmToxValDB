@@ -179,6 +179,18 @@ def clean_reason(reason: str) -> str:
     return r
 
 
+def load_analysis_instruction() -> str:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(current_dir, "..", "..", "config", "analysis_instruction.txt")
+    if os.path.exists(config_path):
+        with open(config_path, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    return "Step 1: Analyze the input description and determine its exact level of specificity (i.e., whether it is a broad categorical system or a highly specific mechanism)."
+
+
+ANALYSIS_INSTRUCTION = load_analysis_instruction()
+
+
 class CandidateEvaluation(BaseModel):
     """Structure for evaluating a single candidate."""
     candidate_name: str = Field(description="The exact name of the candidate being evaluated.")
@@ -188,7 +200,7 @@ class CandidateEvaluation(BaseModel):
 
 class BatchVerificationResult(BaseModel):
     """Structure for batch evaluation (Mode 2)."""
-    analysis: str = Field(description="Step 1: Analyze the input description and determine its exact level of specificity (i.e., whether it is a broad categorical system or a highly specific mechanism).")
+    analysis: str = Field(description=ANALYSIS_INSTRUCTION)
     evaluation: List[CandidateEvaluation] = Field(description="Step 2: Evaluate EVERY candidate individually. You MUST provide an evaluation object for ALL candidates in the list.")
     selected_candidates: List[str] = Field(description="Step 3: The final list of exact candidate names that pass the evaluation. Return an empty list [] if none match.")
 
@@ -230,6 +242,11 @@ class TextToOntoGraph:
             None
         """
         self.categories = categories
+        self.prefix = ""
+        if categories:
+            first_cat = categories[0]
+            if ":" in first_cat:
+                self.prefix = first_cat.split(":")[0] + ":"
         self.ontology_definitions = ontology_definitions
         self.include_superiors = True
         self.max_retries = max_retries
@@ -332,7 +349,12 @@ class TextToOntoGraph:
 
         self.parser = PydanticOutputParser(pydantic_object=CandidateEvaluation)
 
-        user_prompt = "Description: {description}\nCandidate to evaluate: {candidate_name}"
+        self.description_analysis_prompt = ChatPromptTemplate.from_messages([
+            ("system", self.system_prompt_content),
+            ("user", f"{ANALYSIS_INSTRUCTION}\n\nDescription: {{description}}")
+        ])
+
+        user_prompt = "Description: {description}\nDescription Analysis: {description_analysis}\nCandidate to evaluate: {candidate_name}"
         user_prompt += "\nCandidate Hierarchy: {candidate_hierarchy}"
         if self.ontology_definitions:
             user_prompt += "\nCandidate Definition: {candidate_definition}"
@@ -494,6 +516,18 @@ class TextToOntoGraph:
             self._description_counter += 1
             logger.info(f"\n{self._description_counter}. Description: {description}")
 
+        description_analysis = ""
+        if self.mode == 1:
+            analysis_chain = self.description_analysis_prompt | llm | self._clean_llm_runner
+            try:
+                description_analysis = analysis_chain.invoke({"description": description})
+                if hasattr(description_analysis, 'content'):
+                    description_analysis = description_analysis.content
+                description_analysis = str(description_analysis).strip()
+            except Exception as e:
+                logger.warning(f"Failed to generate specificity analysis: {e}")
+                description_analysis = "Analysis failed or unavailable."
+
         # Build the evaluation chain (LangChain) dynamically with the provided llm
         chain = self._mode1_prompt | llm | self._clean_llm_runner | self.parser
         results = {}
@@ -594,6 +628,7 @@ class TextToOntoGraph:
                 for run_i in range(self.consensus_runs):
                     ctx = {
                         "description": description,
+                        "description_analysis": description_analysis,
                         "candidate_name": node_sanitized_name,
                         "format_instructions": self._mode1_format_instructions
                     }
@@ -668,8 +703,9 @@ class TextToOntoGraph:
                         if curr in verified_nodes:
                             break
                         verified_nodes.add(curr)
-                        if curr in self.categories:
-                            results[curr] = 1 # Store only hits
+                        prefixed_curr = f"{self.prefix}{curr}"
+                        if prefixed_curr in self.categories:
+                            results[prefixed_curr] = 1 # Store only hits
                         curr = self.parent_map.get(curr)
                     # Enqueue unasked children of the accepted node
                     for child_name in self.children_map.get(name, []):
@@ -798,9 +834,30 @@ class TextToOntoGraph:
                     if isinstance(result, Exception):
                         raise RuntimeError(f"Failed to parse LLM response in Mode 2 after retries: {result}")
 
+                runs_details = []
                 for run_i, result in enumerate(batch_results):
-                    if isinstance(result, Exception):
+                    if isinstance(result, Exception) or result is None:
+                        runs_details.append({
+                            "run": run_i + 1,
+                            "error": str(result) if result is not None else "Unknown error"
+                        })
                         continue
+
+                    evals_details = []
+                    for ev in result.evaluation:
+                        evals_details.append({
+                            "candidate": ev.candidate_name,
+                            "decision": ev.decision,
+                            "reason": ev.reason
+                        })
+
+                    runs_details.append({
+                        "run": run_i + 1,
+                        "analysis": result.analysis,
+                        "evaluations": evals_details,
+                        "selected_candidates": result.selected_candidates
+                    })
+
                     candidate_name_map = {}
                     for c in candidates:
                         candidate_name_map[c['name'].strip().rstrip(':')] = c
@@ -821,11 +878,23 @@ class TextToOntoGraph:
             final_selected_names = [name for name, votes in candidate_votes.items() if votes >= threshold]
             rejected_names = [name for name, votes in candidate_votes.items() if votes < threshold]
 
-            iter_prefix = f"[Iter {iteration}] " if iteration > 1 else ""
+            iteration_summary = []
             for name, votes in candidate_votes.items():
                 pos = candidate_pos[name]
                 status = "ACCEPTED" if votes >= threshold else "REJECTED"
-                reasoning_trace.append(f"{iter_prefix}- {name} ({pos}/{total_cands}): {votes} votes -> {status}")
+                iteration_summary.append({
+                    "candidate": name,
+                    "position": f"{pos}/{total_cands}",
+                    "votes": f"{votes}/{self.consensus_runs}",
+                    "decision": status
+                })
+
+            reasoning_trace.append({
+                "iteration": iteration,
+                "candidates_sent": candidate_names,
+                "runs": runs_details,
+                "summary": iteration_summary
+            })
 
             for selected in final_selected_names:
                 curr = selected
@@ -833,8 +902,9 @@ class TextToOntoGraph:
                     if curr in verified_nodes:
                         break
                     verified_nodes.add(curr)
-                    if curr in self.categories:
-                        results[curr] = 1 # Store only hits
+                    prefixed_curr = f"{self.prefix}{curr}"
+                    if prefixed_curr in self.categories:
+                        results[prefixed_curr] = 1 # Store only hits
                     curr = self.parent_map.get(curr)
 
             for name in final_selected_names:

@@ -259,9 +259,11 @@ def main() -> None:
             else:
                 df_orig = pd.read_csv(orig_path)
 
-            # Add Not_My_Expertise column to df_exp for downstream use (depth & similarity)
-            if df_orig is not None and "Not_My_Expertise" in df_orig.columns:
-                df_exp["Not_My_Expertise"] = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).values
+            # Add Not_My_Expertise column to df_exp (treating both Not_My_Expertise and Toxicological_Effect_Does_Not_Make_Sense as exclusion criteria)
+            if df_orig is not None:
+                not_exp = pd.to_numeric(df_orig.get("Not_My_Expertise", 0), errors="coerce").fillna(0)
+                nonsense = pd.to_numeric(df_orig.get("Toxicological_Effect_Does_Not_Make_Sense", 0), errors="coerce").fillna(0)
+                df_exp["Not_My_Expertise"] = ((not_exp == 1) | (nonsense == 1)).astype(int).values
             else:
                 df_exp["Not_My_Expertise"] = 0
 
@@ -273,10 +275,7 @@ def main() -> None:
                 df_orig["Selected_Candidates"].apply(count_valid_terms).sum()
                 if df_orig is not None and "Selected_Candidates" in df_orig.columns else 0
             )
-            manual_count_total = (
-                df_orig["Manual_Terms"].apply(count_valid_terms).sum()
-                if df_orig is not None and "Manual_Terms" in df_orig.columns else 0
-            )
+            manual_count_total = 0
             nonsense_count = (
                 pd.to_numeric(
                     df_orig["Toxicological_Effect_Does_Not_Make_Sense"], errors="coerce"
@@ -376,9 +375,11 @@ def main() -> None:
             else:
                 df_orig = pd.read_csv(orig_path)
 
-            # Add Not_My_Expertise column to df_exp for downstream use (depth & similarity)
-            if df_orig is not None and "Not_My_Expertise" in df_orig.columns:
-                df_exp["Not_My_Expertise"] = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).values
+            # Add Not_My_Expertise column to df_exp (treating both Not_My_Expertise and Toxicological_Effect_Does_Not_Make_Sense as exclusion criteria)
+            if df_orig is not None:
+                not_exp = pd.to_numeric(df_orig.get("Not_My_Expertise", 0), errors="coerce").fillna(0)
+                nonsense = pd.to_numeric(df_orig.get("Toxicological_Effect_Does_Not_Make_Sense", 0), errors="coerce").fillna(0)
+                df_exp["Not_My_Expertise"] = ((not_exp == 1) | (nonsense == 1)).astype(int).values
             else:
                 df_exp["Not_My_Expertise"] = 0
 
@@ -391,10 +392,7 @@ def main() -> None:
                 df_orig["Selected_Candidates"].apply(count_valid_terms).sum()
                 if df_orig is not None and "Selected_Candidates" in df_orig.columns else 0
             )
-            manual_count_total = (
-                df_orig["Manual_Terms"].apply(count_valid_terms).sum()
-                if df_orig is not None and "Manual_Terms" in df_orig.columns else 0
-            )
+            manual_count_total = 0
             nonsense_count = (
                 pd.to_numeric(
                     df_orig["Toxicological_Effect_Does_Not_Make_Sense"], errors="coerce"
