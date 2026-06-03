@@ -12,10 +12,12 @@ from src.endpoint_normalization import (
     CATEGORY_NORMALIZATION_FIELDS,
     DEFAULT_ENDPOINTS_DIR,
     DEFAULT_OUTPUT_DIR,
+    EXCLUDED_ENDPOINT_FIELDS,
+    QC_REPORT_FIELDS,
     UNIQUE_ENDPOINT_FIELDS,
     build_all_endpoint_list,
     build_category_normalization,
-    build_normalized_rows,
+    build_normalization_result,
     build_unique_endpoint_list,
     discover_endpoint_csvs,
     write_csv,
@@ -74,7 +76,8 @@ def main() -> None:
     if not csv_paths:
         raise FileNotFoundError(f"No OECD endpoint CSV files found in {input_dir}")
 
-    normalized_rows = build_normalized_rows(csv_paths)
+    result = build_normalization_result(csv_paths)
+    normalized_rows = result.rows
     unique_endpoints = build_unique_endpoint_list(normalized_rows)
     all_endpoints = build_all_endpoint_list(normalized_rows)
     category_normalization = build_category_normalization(normalized_rows)
@@ -94,6 +97,16 @@ def main() -> None:
         CATEGORY_NORMALIZATION_FIELDS,
         category_normalization,
     )
+    excluded_path = write_csv(
+        output_dir / "excluded_endpoint_list.csv",
+        EXCLUDED_ENDPOINT_FIELDS,
+        result.excluded_rows,
+    )
+    qc_path = write_csv(
+        output_dir / "normalization_qc_report.csv",
+        QC_REPORT_FIELDS,
+        result.qc_rows,
+    )
 
     normalized_categories = sorted(
         {row["normalized_category"] for row in normalized_rows},
@@ -105,6 +118,8 @@ def main() -> None:
     print(f"Wrote {len(unique_endpoints)} required endpoint rows: {unique_path}")
     print(f"Wrote {len(all_endpoints)} all endpoint rows (required + optional): {all_path}")
     print(f"Wrote {len(category_normalization)} category mappings: {categories_path}")
+    print(f"Wrote {len(result.excluded_rows)} excluded endpoint audit rows: {excluded_path}")
+    print(f"Wrote {len(result.qc_rows)} normalization QC rows: {qc_path}")
     print(
         f"Normalized categories ({len(normalized_categories)}): "
         f"{', '.join(normalized_categories)}"
