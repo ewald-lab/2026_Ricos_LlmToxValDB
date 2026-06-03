@@ -1,6 +1,5 @@
 # Development tooling for all lab repos
 ruff
 pre-commit
-pytest
 
 accelerate
