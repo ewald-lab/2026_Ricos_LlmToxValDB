@@ -262,6 +262,10 @@ Maternal Weights & Consumption,body weight change corrected for gravid uterine w
 Mortality,moribund status,Required,423,1,Mortality,Time of death / Moribund status
 Necropsy,all gross lesions,Required,407|408,2,Necropsy|Pathology,All gross lesions
 Neurotoxicity,sensory reactivity to stimuli,Optional,452,1,Neurotoxicity,Sensory reactivity to stimuli
+Ophthalmology,conjunctiva morphology,Required,412,1,Ophthalmology,Conjunctivae examination
+Ophthalmology,fundus morphology,Required,412,1,Ophthalmology,Fundus examination
+Ophthalmology,iris morphology,Required,412,1,Ophthalmology,Iris examination
+Ophthalmology,refractive media transparency,Required,412,1,Ophthalmology,Refractive media examination
 Organ Weights,adrenal glands weight,Required/Optional,407|408|410|412|416|441|452,7,Organ Weights|Weight,Adrenal glands|Adrenals
 Organ Weights,blotted uterine weight,Required,440,1,Uterine Weight,Blotted uterine weight
 Organ Weights,bone marrow weight,Required,412,1,Organ Weights,Bone marrow

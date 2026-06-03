@@ -63,10 +63,6 @@ EP_408_046,408,Haematology,Haematology,Haematological tests,haematological tests
 EP_408_047,408,Clinical Biochemistry,Clinical Biochemistry,Clinical biochemistry tests,clinical biochemistry tests,Required,Guideline text,with relevant baseline values,method_or_activity_level_endpoint
 EP_408_050,408,Organ Weights,Organ Weights,Organ weights,organ weights,Required,Guideline text,,method_or_activity_level_endpoint
 EP_410_046,410,Histopathology,Histopathology,Target organs (gross lesions/size change),target organs histopathology,Required,Guideline text,Preserved for future exam,method_or_activity_level_endpoint
-EP_412_023,412,Ophthalmology,Ophthalmology,Fundus examination,fundus examination,Required,Guideline text,Prior to administration and at termination (high/control),method_or_activity_level_endpoint
-EP_412_024,412,Ophthalmology,Ophthalmology,Refractive media examination,refractive media examination,Required,Guideline text,Prior to administration and at termination (high/control),method_or_activity_level_endpoint
-EP_412_025,412,Ophthalmology,Ophthalmology,Iris examination,iris examination,Required,Guideline text,Prior to administration and at termination (high/control),method_or_activity_level_endpoint
-EP_412_026,412,Ophthalmology,Ophthalmology,Conjunctivae examination,conjunctivae examination,Required,Guideline text,Prior to administration and at termination (high/control),method_or_activity_level_endpoint
 EP_412_118,412,Histopathology,Histopathology,All gross lesions,all gross lesions histopathology,Required,Guideline text,Examination of any identified lesions,method_or_activity_level_endpoint
 EP_412_125,412,Clinical Observations,Clinical Observations,"Clinical observations (signs of toxicity, mortality, severity, onset, duration)",clinical observations,Required,Guideline text,Tabulation of response data for each animal,method_or_activity_level_endpoint
 EP_412_129,412,Clinical Pathology,Clinical Pathology,Clinical pathology data (Haematology/Clinical Biochemistry),clinical pathology data,Required,Guideline text,Includes standard parameters for inhalation studies,method_or_activity_level_endpoint

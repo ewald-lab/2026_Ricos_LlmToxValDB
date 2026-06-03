@@ -220,6 +220,10 @@ Hormones,thyroxine,Required,407|408|414,3,Hormones (Dams)|Hormones measurement|S
 Hormones,triiodothyronine,Required,407|408|414,3,Hormones (Dams)|Hormones measurement|Serum/Plasma Hormone Analyses,Circulating levels of T3|T3|Triiodothyronine (T3)
 Mortality,moribund status,Required,423,1,Mortality,Time of death / Moribund status
 Necropsy,all gross lesions,Required,407|408,2,Necropsy|Pathology,All gross lesions
+Ophthalmology,conjunctiva morphology,Required,412,1,Ophthalmology,Conjunctivae examination
+Ophthalmology,fundus morphology,Required,412,1,Ophthalmology,Fundus examination
+Ophthalmology,iris morphology,Required,412,1,Ophthalmology,Iris examination
+Ophthalmology,refractive media transparency,Required,412,1,Ophthalmology,Refractive media examination
 Organ Weights,adrenal glands weight,Required,407|408|410|412|416|452,6,Organ Weights|Weight,Adrenal glands|Adrenals
 Organ Weights,blotted uterine weight,Required,440,1,Uterine Weight,Blotted uterine weight
 Organ Weights,bone marrow weight,Required,412,1,Organ Weights,Bone marrow

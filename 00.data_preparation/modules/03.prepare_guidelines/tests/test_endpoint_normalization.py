@@ -133,3 +133,27 @@ def test_context_aware_duplicate_resolution(tmp_path: Path) -> None:
     assert "serum total protein" in unique_endpoints
     assert "urine protein" in unique_endpoints
     assert len(unique_endpoints) == len(set(unique_endpoints))
+
+
+def test_keeps_target_specific_ophthalmology_examinations(tmp_path: Path) -> None:
+    path = tmp_path / "OECD_412_endpoints.csv"
+    write_endpoint_csv(
+        path,
+        endpoint_rows(
+            ("412", "Ophthalmology", "Iris examination"),
+            ("412", "Ophthalmology", "Conjunctivae examination"),
+            ("412", "Ophthalmology", "Fundus examination"),
+            ("412", "Ophthalmology", "Refractive media examination"),
+            ("452", "Ophthalmology", "Ophthalmological examination"),
+        ),
+    )
+
+    result = build_normalization_result([path])
+    accepted = {row["normalized_endpoint"] for row in result.rows}
+    excluded = {row["normalized_endpoint"]: row["exclusion_reason"] for row in result.excluded_rows}
+
+    assert "iris morphology" in accepted
+    assert "conjunctiva morphology" in accepted
+    assert "fundus morphology" in accepted
+    assert "refractive media transparency" in accepted
+    assert excluded["ophthalmological examination"] == "method_or_activity_level_endpoint"

@@ -81,12 +81,8 @@ EP_416_070,416,Histopathology,weanling reproductive organ histopathology,exclude
 EP_203_001,203,Mortality,mortality count,excluded_endpoint,outside_oecd_section_4,Review excluded_endpoint_list.csv if this row should be rescued.,Mortality,Mortality count
 EP_205_005,205,Mortality,number of deaths at each treatment level,excluded_endpoint,outside_oecd_section_4,Review excluded_endpoint_list.csv if this row should be rescued.,Mortality,Number of deaths at each treatment level
 EP_440_024,440,Necropsy,ovarian stub examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Necropsy,Ovarian stub examination
-EP_412_026,412,Ophthalmology,conjunctivae examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Ophthalmology,Conjunctivae examination
-EP_412_023,412,Ophthalmology,fundus examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Ophthalmology,Fundus examination
-EP_412_025,412,Ophthalmology,iris examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Ophthalmology,Iris examination
 EP_452_005,452,Ophthalmology,ophthalmological examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Ophthalmology,Ophthalmological examination
 EP_452_027,452,Ophthalmology,ophthalmological examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Ophthalmology,Ophthalmological examination
-EP_412_024,412,Ophthalmology,refractive media examination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Ophthalmology,Refractive media examination
 EP_416_066,416,Organ Weights,absolute organ weights,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Organ Weights,Absolute organ weights (parental)
 EP_452_008,452,Organ Weights,organ weight determination,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Organ Weights,Organ weight determination
 EP_408_050,408,Organ Weights,organ weights,excluded_endpoint,method_or_activity_level_endpoint,Review excluded_endpoint_list.csv if this row should be rescued.,Organ Weights,Organ weights
