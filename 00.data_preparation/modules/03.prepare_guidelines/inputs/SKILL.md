@@ -48,6 +48,52 @@ Also extract key observation details as bullet lists from these sections (sectio
 
 This is the MOST IMPORTANT extraction step. Endpoints are extracted from two possible sources: a structured annex table (Step 3a) or the guideline body text (Step 3b).
 
+### Endpoint Eligibility Test
+
+Before adding any endpoint row, apply this eligibility test:
+
+1. The endpoint MUST be a specific measurable, scorable, countable, weighable, or recordable parameter.
+2. The endpoint MUST be parameter-level, not method-level or activity-level.
+3. The endpoint MUST belong to OECD Section 4 health-effects guideline content. Do not extract ecotoxicology or non-health-effects endpoints.
+4. If a phrase names a procedure, assay model, analysis, test battery, observation activity, broad examination activity, monitoring activity, generic necropsy, generic pathology finding, generic histopathology, or generic organ-weight determination, do NOT extract that phrase as an endpoint. Instead, extract the specific parameters listed under it, if the guideline provides them.
+5. A target-specific examination CAN be an endpoint when it names the biological target or observable readout that could support phenotype discovery. For example, extract `iris examination`, `conjunctivae examination`, `fundus examination`, or `refractive media examination`; do not extract broad labels such as `ophthalmological examination`.
+6. If a phrase combines multiple independent parameters with "/", "or", or "and", split it into separate endpoint rows when each part is individually measurable. Keep a combined label only when the OECD guideline defines one combined anatomical measurement, such as "prostate and seminal vesicles with coagulating glands".
+
+Reject these method/activity-level labels as endpoints:
+- `clinical biochemistry tests`
+- `clinical biochemistry measurements`
+- `adult intact male assay`
+- `female pubertal assay`
+- `male pubertal assay`
+- `bronchoalveolar lavage fluid analysis`
+- `detailed clinical examination`
+- `detailed clinical observations`
+- `general clinical observation`
+- `general clinical observations`
+- `ophthalmological examination`
+- `clinical observations`
+- `gross necropsy`
+- `gross necropsy findings`
+- `gross pathology findings`
+- `haematological tests`
+- `haematological determinations`
+- `histopathology`
+- `full histopathology`
+- `organ weight determination`
+- `organ weights`
+- `morbidity monitoring`
+- `mortality monitoring`
+
+Keep or split these concrete parameter-level endpoints:
+- Keep `alanine aminotransferase` and `aspartate aminotransferase` as separate endpoints, not "clinical biochemistry tests".
+- Keep `erythrocyte count`, `haemoglobin concentration`, and `platelet count` as separate endpoints, not "haematological tests".
+- Keep `liver weight`, `kidneys weight`, and `testes weight` as separate endpoints, not "organ weights".
+- Keep `liver histopathology`, `kidneys histopathology`, and `testes histopathology` as separate endpoints, not generic "histopathology".
+- Keep target-specific ophthalmology endpoints such as `iris examination`, `conjunctivae examination`, `fundus examination`, and `refractive media examination`, but do not keep broad `ophthalmological examination`.
+- Keep `sperm motility`, `sperm morphology`, and `sperm count` as separate endpoints.
+- Split `total protein or albumin` into `total protein` and `albumin`.
+- Split `stillbirths/live births` into `stillbirths` and `live births`.
+
 ### Step 3a: Search for Structured Annex Table
 
 Search the PDF for an annex containing endocrine-related endpoints organized in a two-column table.
@@ -125,6 +171,7 @@ Extract each parameter as a **separate endpoint**. For example:
 - "ALT" and "AST" are two separate endpoints, not "liver enzymes"
 - "Testes" and "Ovaries" are two separate organ weight endpoints, not "gonads"
 - "Erythrocyte count" and "Haemoglobin concentration" are two separate haematology endpoints
+- "Gross necropsy", "clinical observations", "haematological tests", and "organ weights" are section or method labels, not endpoints
 
 #### Output
 
