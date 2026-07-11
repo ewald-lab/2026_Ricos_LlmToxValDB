@@ -1,8 +1,6 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-205,Clinical Observations,"Signs of intoxication and abnormal behaviour",Required,Guideline text,"Recorded twice on day 1, daily thereafter"
-205,Clinical Observations,Mortality,Required,Guideline text,"Recorded twice on day 1, daily thereafter"
-205,Clinical Observations,Body weights,Required,Guideline text,"Day 0, 5, 8, and end of test"
-205,Clinical Observations,Food consumption,Required,Guideline text,"Days 0-5, 5-8, and 8-end of test"
-205,Mortality,"Number of deaths at each treatment level",Required,Guideline text,Used for LC50 calculation
-205,Body Weight,"Average body weights for live birds",Required,Guideline text,"Beginning, end of exposure, end of test"
-205,Food Consumption,"Estimated food consumption per pen",Required,Guideline text,By weigh-back method
+205,Clinical Observations,Signs of intoxication,Required,Guideline text,Recorded twice on day 1, daily thereafter
+205,Clinical Observations,Abnormal behaviour,Required,Guideline text,Recorded twice on day 1, daily thereafter
+205,Clinical Observations,Mortality,Required,Guideline text,Recorded twice on day 1, daily thereafter
+205,Body Weight,Body weights,Required,Guideline text,Measured on day 0, 5, 8, and end of test
+205,Food Consumption,Food consumption,Required,Guideline text,Estimated by weigh-back method for periods 0-5, 5-8, and 8-end of test

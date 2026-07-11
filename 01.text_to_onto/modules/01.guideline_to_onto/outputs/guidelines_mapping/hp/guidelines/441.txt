@@ -1,0 +1,32 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of the genitourinary system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal penis morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal penis morphology > absent penis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal penis morphology > hypoplasia of penis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal penis morphology > hypoplasia of penis > micropenis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal penis morphology > hypoplasia of penis > microphallus
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal external genitalia morphology > abnormal male external genitalia morphology > abnormal penis morphology > penile swelling
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal prostate morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal prostate morphology > hypoplasia of the prostate
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal seminal vesicle morphology
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal seminal vesicle morphology > seminal vesicle agenesis
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal seminal vesicle morphology > seminal vesicle cyst
+phenotypic abnormality > abnormality of the genitourinary system > abnormality of the genital system > abnormal reproductive system morphology > abnormal internal genitalia > abnormal male internal genitalia morphology > abnormal seminal vesicle morphology > seminal vesicle hypoplasia
+phenotypic abnormality > abnormality of the musculoskeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormal morphology of the pelvis musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormal morphology of the pelvis musculature > abnormality of the hip girdle musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormal morphology of the pelvis musculature > abnormality of the hip girdle musculature > pelvic girdle muscle atrophy
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormality of muscle size
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormality of muscle size > aplasia hypoplasia involving the skeletal musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormality of muscle size > aplasia hypoplasia involving the skeletal musculature > hypoplasia of the musculature
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > abnormality of muscle size > skeletal muscle hypertrophy
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of the musculature > abnormal skeletal muscle morphology > skeletal muscle atrophy
+phenotypic abnormality > growth abnormality

@@ -1,14 +1,15 @@
 {
     "embedding_model": "Qwen/Qwen3-Embedding-8B",
-    "Mean Recall": 0.95,
-    "MAP": 0.65,
-    "Context Burden": 19.88,
+    "Mean Recall": 0.97,
+    "MAP": 0.66,
+    "Context Burden": 19.3,
     "top_k_rag": 100,
     "threshold_rag": 0.1,
     "reranker_model": "Qwen/Qwen3-Reranker-0.6B",
     "top_k_reranker": 20,
-    "threshold_reranker": 0.3,
+    "threshold_reranker": 0.4,
     "reranker_batch_size": 32,
     "reranker_prompt": "",
-    "grf": 1.0
+    "grf": 1.0,
+    "data_variant": "def"
 }

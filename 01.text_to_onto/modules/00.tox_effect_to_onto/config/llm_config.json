@@ -2,6 +2,6 @@
     "model": "Qwen3.6-35B-A3B-FP8",
     "mode": 2,
     "consensus_runs": 1,
-    "ontology_definitions": false,
-    "f1_score": 0.78
+    "ontology_definitions": true,
+    "f1_score": 0.81
 }

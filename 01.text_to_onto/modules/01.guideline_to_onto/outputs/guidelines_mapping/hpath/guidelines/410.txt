@@ -1,0 +1,98 @@
+cell injury not otherwise specified
+cyst epidermal
+dilatation of tubuli cavitation of parenchymas
+dilated to cystic bile duct with without mucus cellular debris with inflammatory cell infiltrate and fibrous connective tissue
+fibrosis with organ adhesion
+glomerular alteration
+glomerular injury
+glomerular obliteration
+hyperplasia corneal squamous cells
+hyperplasia mucosal thickened squamous layer
+hyperplasia mucosal with hypertrophy
+inflammation induced tissue alteration
+metaplasia hepatocellular
+mixed inflammatory cell infiltration inceased bile duct formation and fibrosis
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > apoptosis necrosis
+morphologic change > cell adaptation injury death > cell injury death > apoptosis necrosis > apoptosis necrosis mucosa
+morphologic change > cell adaptation injury death > cell injury death > erosion ulcer
+morphologic change > cell adaptation injury death > cell injury death > erosion ulcer > ulceration
+morphologic change > cell adaptation injury death > cell injury death > necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis endometrial
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis epidermal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal > necrosis zonal centrilobular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal > necrosis zonal midzonal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis hepatocellular > necrosis zonal > necrosis zonal periportal
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis renal tubules
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis soft tissue
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy dermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epidermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy mucosa
+morphologic change > cell adaptation injury death > cellular adaptation of growth > epithelial alteration
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > bile duct hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epidermal
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epidermal > papillomatosis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperkeratosis
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa > hyperplasia mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia epithelial cell > hyperplasia mucosa > hyperplasia mucous cell > hyperplasia metaplasia mucous cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > metaplasia > metaplasia mucous cell
+morphologic change > cell adaptation injury death > metabolic derangement
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial
+morphologic change > cell adaptation injury death > metabolic derangement > vacuolation > vacuolation epithelial > vacuolation biliary epithelium
+morphologic change > healing and repair
+morphologic change > healing and repair > fibrosis
+morphologic change > inflammatory processes
+morphologic change > inflammatory processes > inflammation
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous
+morphologic change > inflammatory processes > inflammation > inflammation granulomatous > granuloma
+morphologic change > inflammatory processes > inflammation > leukocytosis
+morphologic change > neoplasia
+morphologic change > neoplasia > benign tumor
+morphologic change > neoplasia > benign tumor > adenoma
+morphologic change > neoplasia > benign tumor > adenoma > adenoma sebaceous cell
+morphologic change > neoplasia > benign tumor > adenoma > hepatocellular adenoma
+morphologic change > neoplasia > malignant tumor
+morphologic change > neoplasia > malignant tumor > carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma basal cell
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma hepatocholangiocellular
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma renal tubule
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma sebaceous cell
+morphologic change > neoplasia > malignant tumor > carcinoma > hepatocellular carcinoma
+morphologic change > neoplasia > malignant tumor > renal sarcoma
+morphologic change > normal altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased mucification
+morphologic change > normal altered physiological condition > normal physiological condition
+morphologic change > normal altered physiological condition > normal physiological condition > age associated effects
+morphologic change > normal altered physiological condition > normal physiological condition > age associated effects > hepatic karyocytomegaly and or multinucleated hepatocytes
+morphologic change > structural alteration
+morphologic change > structural alteration > organ specific entities changes
+morphologic change > structural alteration > organ specific entities changes > cholangiofibrosis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > atrophy glomerular
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulonephritis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulopathy hyaline
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulopathy mesangioproliferative
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > glomerulosclerosis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > mesangiolysis
+morphologic change > structural alteration > organ specific entities changes > glomerular changes > metaplasia hyperplasia bowman s capsule
+morphologic change > structural alteration > organ specific entities changes > nephropathy
+morphologic change > structural alteration > organ specific entities changes > nephropathy > alpha2u globulin nephropathy
+morphologic change > structural alteration > organ specific entities changes > nephropathy > chronic progressive nephropathy
+morphologic change > structural alteration > organ specific entities changes > nephropathy > nephropathy obstructive
+morphologic change > structural alteration > organ specific entities changes > nephropathy > nephropathy retrograde
+scar
+tubular glomerular alteration

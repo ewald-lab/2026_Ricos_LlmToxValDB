@@ -64,7 +64,8 @@ def get_top_configs(data: list[dict], model_name: str, target_reranker: str) -> 
             "top_k_rerank": best["params"]["top_k_reranker"],
             "thresh_rerank": best["params"]["threshold_reranker"],
             "GRF": best["params"]["GRF"],
-            "Used Reranker": best["params"].get("use_reranker", False)
+            "Used Reranker": best["params"].get("use_reranker", False),
+            "Variant": best["params"].get("data_variant", "base")
         })
     return results, best_at_20
 
@@ -100,7 +101,8 @@ def make_best_config_json(best: dict, model_name: str) -> dict:
         "threshold_reranker": p["threshold_reranker"],
         "reranker_batch_size": p.get("reranker_batch_size", 32),
         "reranker_prompt": p.get("reranker_prompt", ""),
-        "grf": p.get("GRF", p.get("grf", 1.0))
+        "grf": p.get("GRF", p.get("grf", 1.0)),
+        "data_variant": p.get("data_variant", "base")
     }
 
 
@@ -119,6 +121,7 @@ if __name__ == "__main__":
         "Qwen/Qwen3-Reranker-4B": "qwen3_4b",
         "Qwen/Qwen3-Reranker-8B": "qwen3_8b"
     }
+    variants = ["base", "def", "hier", "def_hier"]
 
     json_output_dir = "../outputs/best_configs"
     os.makedirs(json_output_dir, exist_ok=True)
@@ -127,23 +130,14 @@ if __name__ == "__main__":
         for reranker_full, r_short in rerankers_info.items():
             combined_data = []
             
-            # Read split result file
-            path = os.path.join(res_dir, f"tuning_results_{prefix}_{r_short}.json")
-            if os.path.exists(path):
-                try:
-                    with open(path, 'r') as f:
-                        combined_data.extend(json.load(f))
-                except Exception as e:
-                    print(f"Error reading {path}: {e}")
-
-            # Also try to read legacy file for fallback
-            legacy_path = os.path.join(res_dir, f"tuning_results_{prefix}.json")
-            if os.path.exists(legacy_path):
-                try:
-                    with open(legacy_path, 'r') as f:
-                        combined_data.extend(json.load(f))
-                except Exception as e:
-                    print(f"Error reading {legacy_path}: {e}")
+            for var in variants:
+                path = os.path.join(res_dir, f"tuning_results_{prefix}_{r_short}_{var}.json")
+                if os.path.exists(path):
+                    try:
+                        with open(path, 'r') as f:
+                            combined_data.extend(json.load(f))
+                    except Exception as e:
+                        print(f"Error reading {path}: {e}")
 
             if combined_data:
                 summary_rows, best_at_20 = get_top_configs(combined_data, name, reranker_full)

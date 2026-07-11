@@ -1,0 +1,431 @@
+mammalian phenotype
+mammalian phenotype > adipose tissue phenotype
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue amount
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue amount > abnormal brown adipose tissue amount
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue amount > abnormal brown adipose tissue amount > decreased brown adipose tissue amount
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue amount > abnormal brown adipose tissue amount > increased brown adipose tissue amount
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue amount > abnormal subcutaneous adipose tissue amount
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue development
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal adipose tissue distribution
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal body fat mass
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal body fat mass > increased body fat mass
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal bone marrow adipose tissue morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal brown adipose tissue morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal brown adipose tissue morphology > abnormal brown adipose tissue mass
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal brown adipose tissue morphology > whitened brown adipose tissue morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal beige fat cell morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal fat cell differentiation
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal fat cell differentiation > abnormal white fat cell differentation
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal fat cell mitochondrial morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal white fat cell morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal white fat cell morphology > abnormal white fat cell lipid droplet size
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal white fat cell morphology > abnormal white fat cell number
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > abnormal white fat cell morphology > abnormal white fat cell size
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > decreased fat cell size
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat cell morphology > increased fat cell size
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal fat pad morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal percent body fat body weight
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal white adipose tissue morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal white adipose tissue morphology > abnormal hypodermis fat layer morphology
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > abnormal white adipose tissue morphology > abnormal hypodermis fat layer morphology > subcutaneous adipose tissue degeneration
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > adipose tissue necrosis
+mammalian phenotype > adipose tissue phenotype > abnormal adipose tissue morphology > lipodystrophy
+mammalian phenotype > behavior neurological phenotype
+mammalian phenotype > behavior neurological phenotype > abnormal behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness > decreased alertness
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness > decreased alertness > lethargy
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal alertness > increased alertness
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol > enhanced behavioral response to alcohol
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal behavioral response to xenobiotic > abnormal behavioral response to addictive substance > abnormal behavioral response to alcohol > enhanced behavioral response to alcohol > hyperactivity elicited by ethanol administration
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal response to new environment
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal cognition > abnormal learning memory conditioning > abnormal response to new environment > novel environmental response related retropulsion
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > aphagia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > decreased food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > increased food intake
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal consumption behavior > abnormal eating behavior > abnormal food intake > increased food intake > polyphagia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal spinal reflex > abnormal response to tactile stimuli > unresponsive to tactile stimuli
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > abnormal vestibuloocular reflex
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > abnormal reflex > areflexia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal involuntary movement > athetotic walking movements
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > ataxia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > dysmetria
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > impaired balance
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > impaired coordination
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > impaired coordination > impaired limb coordination
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > impaired swimming
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal motor coordination balance > jumpy
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal posture
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal posture > titubation
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements > head shaking
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal stationary movement > abnormal head movements > head tossing
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor activation
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor activation > akinesia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor coordination
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor coordination > abnormal gait
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor coordination > astasia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal locomotor coordination > weaving
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal vertical activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal vertical activity > decreased vertical activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > abnormal vertical activity > increased vertical activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > behavioral arrest
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > decreased locomotor activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > increased locomotor activity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > positive geotaxis
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > abnormal locomotor behavior > retropulsion
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity > hyperactivity elicited by feed restriction
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hyperactivity > induced hyperactivity > nervous
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > bradykinesia
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > hypoactivity > slow movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > paresis
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > paresis > hemiparesis
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > paresis > hindlimb paresis
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > abnormal voluntary movement > paresis > hindlimb paresis > paraparesis
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > no spontaneous movement
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior > circling
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior > circling > unidirectional circling
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior > decreased stereotypic behavior
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal motor capabilities coordination movement > stereotypic behavior > spinning
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch escape response
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > abnormal touch nociception
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > abnormal sensory capabilities reflexes nociception > hyperresponsive
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > behavioral developmental delay
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > behavioral developmental delay > motor developmental delay
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > catalepsy
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures
+mammalian phenotype > behavior neurological phenotype > abnormal behavior > seizures > sporadic seizures
+mammalian phenotype > cardiovascular system phenotype
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal artery morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal artery morphology > abnormal systemic artery morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal artery morphology > abnormal systemic artery morphology > abnormal aorta morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal artery morphology > abnormal systemic artery morphology > abnormal aorta morphology > abnormal aorta wall morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal artery morphology > abnormal systemic artery morphology > abnormal aorta morphology > abnormal aorta wall morphology > abnormal aorta tunica media morphology
+mammalian phenotype > cardiovascular system phenotype > abnormal cardiovascular system morphology > abnormal blood vessel morphology > abnormal blood vessel elastic tissue morphology
+mammalian phenotype > cellular phenotype
+mammalian phenotype > cellular phenotype > abnormal cell morphology
+mammalian phenotype > cellular phenotype > abnormal cell morphology > abnormal intracellular organelle morphology
+mammalian phenotype > cellular phenotype > abnormal cell morphology > abnormal intracellular organelle morphology > abnormal mitochondrial morphology
+mammalian phenotype > cellular phenotype > abnormal cell morphology > abnormal intracellular organelle morphology > abnormal mitochondrial morphology > abnormal muscle fiber mitochondrial morphology
+mammalian phenotype > craniofacial phenotype
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal nose morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal nose morphology > abnormal external nares morphology
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal nose morphology > abnormal external nares morphology > absent external nares
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal nose morphology > abnormal external nares morphology > single external naris
+mammalian phenotype > craniofacial phenotype > abnormal craniofacial morphology > abnormal facial morphology > abnormal nose morphology > abnormal external nares morphology > small external nares
+mammalian phenotype > digestive alimentary phenotype
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal perineum morphology
+mammalian phenotype > digestive alimentary phenotype > abnormal digestive system morphology > abnormal perineum morphology > abnormal anogenital distance
+mammalian phenotype > embryo phenotype
+mammalian phenotype > embryo phenotype > abnormal extraembryonic tissue morphology
+mammalian phenotype > embryo phenotype > abnormal extraembryonic tissue morphology > abnormal placenta morphology
+mammalian phenotype > embryo phenotype > abnormal extraembryonic tissue morphology > abnormal placenta morphology > abnormal placenta size
+mammalian phenotype > endocrine exocrine gland phenotype
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid follicle morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid follicle morphology > abnormal thyroid follicular cell morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid follicle morphology > abnormal thyroid follicular cell morphology > absent thyroid follicular cells
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid gland development
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid gland development > abnormal thyroglossal duct morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid gland isthmus morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid gland isthmus morphology > absent thyroid gland isthmus
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid parafollicular cell morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > abnormal thyroid parafollicular cell morphology > absent thyroid parafollicular cells
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > athyroidism
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > athyroidism > absent thyroid gland
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > decreased thyroid gland lobe number
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > ectopic thyroid gland
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > enlarged thyroid gland
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > enlarged thyroid gland > increased thyroid gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > enlarged thyroid gland > thyroid gland hyperplasia
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > increased thyroid tumor incidence
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > increased thyroid tumor incidence > increased thyroid adenoma incidence
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > increased thyroid tumor incidence > increased thyroid carcinoma incidence
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > increased thyroid tumor incidence > increased thyroid carcinoma incidence > increased thyroid c cell carcinoma incidence
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > small thyroid gland
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > small thyroid gland > decreased thyroid gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > small thyroid gland > thyroid gland hypoplasia
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal endocrine gland morphology > abnormal thyroid gland morphology > thyroid gland cyst
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology > abnormal ovary morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology > abnormal ovary morphology > abnormal corpus luteum morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology > abnormal ovary morphology > abnormal corpus luteum morphology > absent corpus luteum
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology > abnormal ovary morphology > abnormal corpus luteum morphology > decreased corpora lutea number
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal sex gland morphology > abnormal female reproductive gland morphology > abnormal ovary morphology > abnormal corpus luteum morphology > increased corpora lutea number
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal endocrine gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal endocrine gland physiology > abnormal thyroid gland physiology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland physiology > abnormal endocrine gland physiology > abnormal thyroid gland physiology > thyroid gland inflammation
+mammalian phenotype > growth size body region phenotype
+mammalian phenotype > growth size body region phenotype > abnormal birth body size
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > abnormal birth weight
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > abnormal birth weight > decreased birth weight
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > abnormal birth weight > increased birth weight
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > decreased birth body size
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > increased birth body size
+mammalian phenotype > growth size body region phenotype > abnormal body composition
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass > decreased body weight
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass > decreased body weight > slow postnatal weight gain
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass > decreased body weight > weight loss
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > increased total tissue mass
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > increased total tissue mass > increased body weight
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size > abnormal fetal size
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size > abnormal fetal size > decreased fetal size
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size > abnormal fetal size > decreased fetal size > decreased fetal weight
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size > abnormal fetal size > increased fetal size
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size > abnormal fetal size > increased fetal size > increased fetal weight
+mammalian phenotype > growth size body region phenotype > abnormal prenatal growth weight body size > abnormal fetal growth weight body size > fetal growth retardation
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > abnormal circulating thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > abnormal circulating thyroxine level > decreased circulating thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > abnormal circulating thyroxine level > increased circulating thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > decreased thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid derivative level > abnormal thyroxine level > increased thyroxine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > abnormal circulating triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > abnormal circulating triiodothyronine level > decreased circulating triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > abnormal circulating triiodothyronine level > increased circulating triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > decreased triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal amino acid level > abnormal triiodothyronine level > increased triiodothyronine level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating pituitary hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating pituitary hormone level > decreased circulating pituitary hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating pituitary hormone level > decreased circulating pituitary hormone level > decreased circulating thyroid stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating pituitary hormone level > increased circulating pituitary hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > abnormal circulating pituitary hormone level > increased circulating pituitary hormone level > increased circulating thyroid stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > decreased circulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > decreased circulating hormone level > decreased circulating levels of thyroid hormone
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > increased circulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal blood homeostasis > abnormal circulating hormone level > increased circulating hormone level > increased circulating levels of thyroid hormone
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal thyroid stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal thyroid stimulating hormone level > decreased thyroid stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal pituitary hormone level > abnormal thyroid stimulating hormone level > increased thyroid stimulating hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > abnormal thyroid hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > decreased hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal hormone level > increased hormone level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal protein level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal protein level > abnormal collagen level
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > multiple organ failure
+mammalian phenotype > homeostasis metabolism phenotype > abnormal physiological response to xenobiotic
+mammalian phenotype > homeostasis metabolism phenotype > abnormal physiological response to xenobiotic > abnormal xenobiotic induced morbidity mortality
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal hypodermis morphology
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal hypodermis morphology > abnormal hypodermis muscle layer morphology
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal hypodermis morphology > thick hypodermis
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > abnormal hypodermis morphology > thin hypodermis
+mammalian phenotype > integument phenotype > abnormal skin adnexa morphology > swellings
+mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal dermal layer morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal dermal layer morphology > abnormal dermis reticular layer morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > blistering
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > dry skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > flaky skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > loose skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > petechiae
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin detachment
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin lesions
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > skin ridges
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance > wrinkled skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal dermal pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > abnormal epidermal pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin coloration > abnormal skin pigmentation > increased skin pigmentation
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition > skin rash
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin condition > thick skin
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin development
+mammalian phenotype > integument phenotype > abnormal skin morphology > skin atrophy
+mammalian phenotype > integument phenotype > abnormal skin morphology > skin fibrosis
+mammalian phenotype > liver biliary system phenotype
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system physiology
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system physiology > abnormal liver physiology
+mammalian phenotype > liver biliary system phenotype > abnormal hepatobiliary system physiology > abnormal liver physiology > liver failure
+mammalian phenotype > mortality aging
+mammalian phenotype > mortality aging > abnormal survival
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > prenatal lethality
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > prenatal lethality > prenatal lethality prior to heart atrial septation
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > prenatal lethality > prenatal lethality prior to heart atrial septation > embryonic lethality
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > prenatal lethality > prenatal lethality prior to heart atrial septation > embryonic lethality > embryonic lethality prior to tooth bud stage
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > prenatal lethality > prenatal lethality prior to heart atrial septation > embryonic lethality > embryonic lethality prior to tooth bud stage > embryonic lethality prior to organogenesis
+mammalian phenotype > mortality aging > abnormal survival > preweaning lethality > prenatal lethality > prenatal lethality prior to heart atrial septation > embryonic lethality > embryonic lethality prior to tooth bud stage > embryonic lethality prior to organogenesis > embryonic lethality at implantation
+mammalian phenotype > muscle phenotype
+mammalian phenotype > muscle phenotype > abnormal muscle morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle fiber morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle fiber morphology > abnormal sarcolemma morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > muscle degeneration
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > muscle hypoplasia
+mammalian phenotype > reproductive system phenotype
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal external female genitalia morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal external female genitalia morphology > abnormal clitoris morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal external female genitalia morphology > abnormal labium morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > abnormal uterus weight
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > abnormal uterus weight > decreased uterus weight
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > abnormal uterus weight > increased uterus weight
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal sex determination
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology > abnormal ovulation cycle
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology > abnormal ovulation cycle > impaired luteinization
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology > abnormal pregnancy
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology > abnormal pregnancy > abnormal embryo implantation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology > abnormal pregnancy > abnormal embryo implantation > failure of embryo implantation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal female reproductive system physiology > abnormal pregnancy > abnormal embryo implantation > impaired embryo implantation
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal fertility fecundity
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal fertility fecundity > abnormal litter size
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal fertility fecundity > abnormal litter size > decreased litter size
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system physiology > abnormal fertility fecundity > abnormal litter size > increased litter size
+mammalian phenotype > skeleton phenotype
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal long bone morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology > abnormal sternebra morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology > abnormal sternebra morphology > abnormal sternebra number
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology > abnormal sternebra morphology > abnormal sternebra number > decreased sternebra number
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology > abnormal sternebra morphology > abnormal sternebra number > increased sternebra number
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal appendicular skeleton morphology > abnormal pectoral girdle bone morphology > abnormal sternum morphology > abnormal sternum body morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology > abnormal costal cartilage morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology > abnormal rib joint morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology > abnormal rib joint morphology > abnormal costovertebral joint morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology > abnormal rib morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology > abnormal thoracic vertebrae morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal thoracic cage morphology > small thoracic cage
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal coccyx morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal intervertebral disk morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal sacrum morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal spine curvature
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal spine curvature > kyphosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal spine curvature > kyphosis > kyphoscoliosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal spine curvature > kyphosis > lordokyphosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal spine curvature > lordosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal spine curvature > scoliosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal presacral vertebrae morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal presacral vertebrae morphology > abnormal cervical vertebrae morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal presacral vertebrae morphology > abnormal cervical vertebrae morphology > abnormal cervical atlas morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal presacral vertebrae morphology > abnormal cervical vertebrae morphology > abnormal cervical atlas morphology > fusion of atlas and odontoid process
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal presacral vertebrae morphology > abnormal cervical vertebrae morphology > cervical vertebral fusion
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal presacral vertebrae morphology > abnormal cervical vertebrae morphology > cervical vertebral transformation
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal sacral vertebrae morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae development
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae development > abnormal vertebral arch development
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae development > abnormal vertebral body development
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae development > abnormal vertebral epiphyseal plate morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae number
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae shape
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae shape > abnormal wedge shaped vertebrae
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae shape > platyspondylia
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae shape > split vertebrae
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebrae shape > vertebral compression
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral articular process morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral lamina morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral pedicle morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral pedicle morphology > absent vertebral pedicles
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral spinous process morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral spinous process morphology > absent vertebral spinous process
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral transverse process morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > abnormal vertebral transverse process morphology > absent vertebral transverse processes
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral arch morphology > fusion of vertebral arches
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral body morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral body morphology > fusion of vertebral bodies
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral body morphology > small vertebral body
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral body morphology > small vertebral body > short vertebral body
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > abnormal vertebral body morphology > small vertebral body > vertebral body hypoplasia
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > absent vertebrae
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > hemivertebra
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > small vertebrae
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > vertebral fusion
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > abnormal vertebrae morphology > vertebral transformation
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > elongated vertebral column
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > short vertebral column
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > spinal stenosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > spondylolisthesis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > abnormal vertebral column morphology > spondylolysis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal axial skeleton morphology > axial skeleton hypoplasia
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal bone structure
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal bone structure > abnormal bone stroma morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal bone structure > exostosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal bone structure > osteosclerosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal cartilage morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal cartilage morphology > abnormal elastic cartilage morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal cartilage morphology > abnormal fibrocartilage morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal joint morphology
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal skeleton development
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal skeleton development > abnormal skeletal maturation
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > abnormal skeleton development > abnormal skeletal maturation > abnormal ossification involved in bone maturation
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > ectopic bone
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > hyperostosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton morphology > synostosis
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal bone mineralization
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal endochondral bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal endochondral bone ossification > abnormal sternum ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal endochondral bone ossification > abnormal sternum ossification > failure of sternum ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal endochondral bone ossification > delayed endochondral bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal endochondral bone ossification > failure of endochondral bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal intramembranous bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal intramembranous bone ossification > delayed intramembranous bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > abnormal intramembranous bone ossification > failure of intramembranous bone ossification
+mammalian phenotype > skeleton phenotype > abnormal skeleton physiology > abnormal bone ossification > decreased bone ossification

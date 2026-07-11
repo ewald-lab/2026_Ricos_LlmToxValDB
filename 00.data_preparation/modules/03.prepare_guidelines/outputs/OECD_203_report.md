@@ -1,6 +1,6 @@
 # OECD Test Guideline 203: Fish, Acute Toxicity Testing
 
-**Generated:** 2025-10-24
+**Generated:** 2024-05-22
 **Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/203.pdf`
 
 ## Summary
@@ -10,36 +10,34 @@
 | Guideline Number | 203 |
 | Title | Fish, Acute Toxicity Testing |
 | Adoption Date | 25 June 2025 |
-| Preferred Species | Freshwater, estuarine, and marine fish species (e.g., Zebrafish, Fathead minnow, Rainbow trout) |
+| Preferred Species | Danio rerio (Zebrafish), Pimephales promelas (Fathead minnow), Cyprinus carpio (Carp), Oryzias latipes (Japanese Medaka), Poecilia reticulata (Guppy), Lepomis macrochirus (Bluegill), Oncorhynchus mykiss (Rainbow trout), Gasterosteus aculeatus (Three-spined stickleback), Cyprinodon variegatus (Sheepshead minnow), Dicentrarchus labrax (European sea bass), Pagrus major (Red sea bream) |
 | Study Duration | 96 hours |
-| Animals per Dose Level | Minimum of 7 fish |
-| Dose Groups | At least 5 concentrations in a geometric series (plus control(s)) |
-| Route of Administration | Waterborne exposure (Static, Semi-static, or Flow-through) |
+| Animals per Dose Level | Minimum of 7 fish per test concentration and in the control(s) |
+| Dose Groups | At least five concentrations in a geometric series + control(s) |
+| Route of Administration | Aqueous exposure (static, semi-static, or flow-through conditions) |
 
 ## Purpose and Scope
 
-This guideline describes procedures for determining the acute toxicity of chemicals to freshwater, estuarine, and marine fish. The test involves exposing fish to a range of chemical concentrations for 96 hours to determine the concentration that kills 50% of the test population (LC50). It emphasizes animal welfare, the use of alternative methods where possible, and the recording of sublethal clinical signs.
+This guideline describes the procedure for determining the acute toxicity of chemicals to fish by exposing them to various concentrations for 96 hours. It is designed to provide data on lethal effects (LC50) and sublethal clinical signs to support chemical safety assessment and regulatory requirements. The guideline emphasizes animal welfare, encouraging the use of alternative methods where possible and the systematic recording of visible abnormalities as humane endpoints.
 
 ## Key Observations
 
 ### Clinical Observations
-- Mortality (no visible movement, no reaction to touch).
-- Visible abnormalities related to appearance (e.g., loss of balance, dark pigmentation, exophthalmia).
-- Ventilatory behaviour (e.g., hyper/hypo ventilation, coughing).
-- Swimming behaviour (e.g., hyper/hypo activity, immobility, convulsions, loss of schooling).
-- Sublethal clinical signs listed in Annex 4 (voluntary reporting).
+*   **Frequency:** Minimum of 2 observations within the first 24 hours; twice daily on days 2–4.
+*   **Mortality:** Recorded continuously; dead fish removed immediately. Defined as no visible movement (e.g., gill movements) and no reaction to caudal peduncle touch.
+*   **Visible Abnormalities (Mandatory):** Equilibrium (loss of balance, floating/sinking), appearance (pigmentation changes, exophthalmia), ventilatory behaviour (hyper/hypoventilation, coughing), and swimming behaviour (activity levels, immobility, convulsions).
+*   **Additional Clinical Signs (Optional/Voluntary):** Comprehensive list provided in Annex 4 (Table 1), including specific behaviors like corkscrew swimming, flashing, mucus secretion, etc.
 
 ### Haematology
-- *Not applicable.* This is an acute aquatic toxicity study; haematological analysis is not a standard endpoint.
+*   Not applicable for this acute toxicity guideline. No haematological parameters are required or recommended in the standard protocol.
 
 ### Clinical Biochemistry
-- *Not applicable.* Standard protocol does not include blood biochemistry.
+*   Not applicable for this acute toxicity guideline. No clinical biochemistry determinations are required or recommended in the standard protocol.
 
 ### Pathology
-- Gross observation of abnormalities during the test.
-- Measurement of individual size (wet weight and total length) prior to exposure (subsample).
-- Euthanasia of surviving treatment group fish at 96 hours.
-- Optional: Cryopreservation of plasma/tissues for omics investigations.
+*   **Necropsy:** Not routinely required for all fish unless investigating mode of action or specific toxic effects. Surviving fish are euthanized at the end of the exposure.
+*   **Histopathology:** Not part of the standard acute toxicity test.
+*   **Sample Cryopreservation:** Optional. Plasma and excess tissues or whole organisms may be preserved from surviving fish at 96 hours for omics investigations (Annex 4, §30).
 
 ## Endpoints
 
@@ -50,106 +48,35 @@ This guideline describes procedures for determining the acute toxicity of chemic
 
 | Category | Required | Optional |
 |----------|----------|----------|
-| Mortality | 1 | 0 |
-| Clinical Signs | 1 | 1 |
-| Environmental Parameters | 4 | 0 |
-| Chemical Analysis | 1 | 0 |
-| Fish Measurements | 1 | 0 |
-| **Total** | **8** | **1** |
+| Mortality/Lethality | 1 | 0 |
+| Clinical Observations | 4 | 15+ |
+| Water Quality Parameters | 4 | 0 |
+| Physicochemical Measurements | 2 | 0 |
+| Sample Preservation | 0 | 1 |
+| **Total** | **11** | **16+** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
 |----------|----------|-------------------|--------|-----------|
-| Mortality | Mortality count | Required | Guideline text | Fish considered dead if no gill movement and no reaction to caudal peduncle touch. |
-| Clinical Signs | Visible abnormalities (equilibrium, appearance, ventilation, swimming) | Required | Guideline text | Must be recorded at minimum 2 times in first 24h, then twice daily. |
-| Clinical Signs | Sublethal clinical signs (Annex 4 list) | Optional | Guideline text | Voluntary reporting recommended to improve prediction of toxicity. |
-| Environmental Parameters | Dissolved oxygen concentration | Required | Guideline text | Must be ≥60% air saturation throughout exposure. Measured daily. |
-| Environmental Parameters | pH | Required | Guideline text | Measured daily. Range 6.0-8.5 preferred. |
-| Environmental Parameters | Temperature | Required | Guideline text | Must not vary >2°C between vessels/days. Measured daily (preferably continuously). |
-| Environmental Parameters | Salinity | Required | Guideline text | Measured daily if relevant (estuarine/marine species). |
-| Chemical Analysis | Test chemical concentration | Required | Guideline text | Analytical measurement of highest, lowest, and LC50-range concentrations is compulsory. |
-| Fish Measurements | Wet weight and total length | Required | Guideline text | Measured on subsample of 10 fish prior to exposure. |
+| Mortality/Lethality | Cumulative mortality at 24, 48, 72, and 96 hours | Required | Guideline text | LC50 values with 95% confidence limits should be estimated if possible |
+| Mortality/Lethality | Control mortality | Required | Guideline text | Must not exceed 10% (or one fish if fewer than 10 controls) |
+| Clinical Observations | Loss of equilibrium | Required | Guideline text | Includes abnormal horizontal/vertical orientation, loss of buoyancy |
+| Clinical Observations | Swimming behaviour abnormalities | Required | Guideline text | Includes hypo/hyperactivity, immobility, convulsions, near surface/bottom |
+| Clinical Observations | Ventilatory behaviour abnormalities | Required | Guideline text | Includes hyper/hypo/irregular ventilation, coughing |
+| Clinical Observations | Appearance abnormalities | Required | Guideline text | Includes weak/dark pigmentation, exophthalmia |
+| Clinical Observations | Additional sublethal clinical signs (Annex 4 Table 1) | Optional | Guideline text | Voluntary reporting to enhance data on mode of action and welfare |
+| Water Quality Parameters | Dissolved oxygen concentration | Required | Guideline text | Must be ≥60% of air saturation value throughout exposure |
+| Water Quality Parameters | Temperature | Required | Guideline text | Measured daily; variation ≤2°C between vessels/days |
+| Water Quality Parameters | pH | Required | Guideline text | Measured daily; maintained within species-specific range (typically 6.0-8.5) |
+| Water Quality Parameters | Salinity (if relevant) | Required | Guideline text | Measured daily for estuarine/marine species |
+| Physicochemical Measurements | Test chemical concentration (measured) | Required | Guideline text | Analysis of highest/lowest and expected LC50 concentrations compulsory |
+| Physicochemical Measurements | Fish size (wet weight and total length) | Required | Guideline text | Measured prior to exposure in subsample; control fish measured at end if >1 week prior |
+| Sample Preservation | Plasma/tissue cryopreservation | Optional | Guideline text | For omics investigations; procedures in OECD GD 409 |
+| Clinical Observations | Humane killing criteria (Moribundity) | Optional | Guideline text | Recording signs predictive of death to allow early humane endpoints |
 
 ### Footnotes
 
-- **Mortality:** Dead fish must be removed as soon as observed.
-- **Chemical Analysis:** For static tests, measure at start and end. For semi-static, measure before and after renewal. For flow-through, measure before initiation and ensure stability (≥80% of nominal).
-- **Temperature:** Specific ranges depend on the species selected (see Annex 2).
-- **Sublethal Signs:** Reporting signs in Annex 4 is voluntary but encouraged.
-
---- (Continued from next segment) ---
-
-## Key Observations
-
-### Clinical Observations
-- **Mortality**: Cumulative mortality recorded at 24, 48, 72, and 96 hours.
-- **Control Mortality**: Must be recorded.
-- **Visible Abnormalities**: Systematic recording of sublethal clinical signs is encouraged to identify humane endpoints. These include:
-  - Loss of equilibrium (abnormal orientation, buoyancy issues).
-  - Abnormal swimming behaviors (hypo/hyperactivity, corkscrew, convulsions, tetany).
-  - Respiratory distress (hyperventilation, hypoventilation, coughing, gulping).
-  - Skin changes (pigmentation, mucus, haemorrhage, exophthalmia, oedema).
-  - Behavioral changes (schooling loss, aggression, response to stimuli).
-
-### Haematology
-- Not a standard requirement for OECD TG 203.
-
-### Clinical Biochemistry
-- Not a standard requirement for OECD TG 203.
-
-### Pathology
-- No necropsy or histopathology is mandated for the standard LC50 determination.
-- The primary endpoint is death (mortality).
-- Sublethal signs act as proxies for moribundity to allow for early humane killing.
-
-## Endpoints
-
-**Source:** Guideline body text (Annex 4 Table 1 & Paragraph 35)
-**Column Convention:** Inferred from guideline language ("shall" vs "encouraged/voluntary")
-
-### Endpoint Summary
-
-| Category | Required | Optional |
-|----------|----------|----------|
-| Clinical Observations | 2 | 28 |
-| Statistical Analysis | 1 | 2 |
-| **Total** | **3** | **30** |
-
-### Detailed Endpoints
-
-| Category | Endpoint | Requirement Level | Source | Footnotes |
-|----------|----------|-------------------|--------|-----------|
-| Clinical Observations | Mortality (cumulative at 24, 48, 72, 96 hours) | Required | Guideline text | Primary endpoint for LC50 calculation |
-| Clinical Observations | Mortality in control(s) | Required | Guideline text | |
-| Clinical Observations | Visible abnormalities (clinical signs) | Required | Guideline text | As listed in Annex 4, Table 1 |
-| Clinical Observations | Loss of equilibrium (abnormal horizontal/vertical orientation) | Optional | Guideline text | Sub-category of visible abnormalities; voluntary recording encouraged |
-| Clinical Observations | Loss of buoyancy control | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Hypoactivity | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Hyperactivity | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Corkscrew swimming | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Convulsions | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Tetany | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Irritated skin behaviours | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Abnormal surface distribution/behaviour | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Abnormal bottom distribution/behaviour | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Over-reactive to stimulus | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Under-reactive to stimulus | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Loss of schooling/shoaling behaviour | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Dense schooling/shoaling behaviour | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Hyperventilation | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Hypoventilation | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Irregular ventilation | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Coughing | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Gulping | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Head shaking | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Darkened/Lightened/Mottled pigmentation | Optional | Guideline text | Sub-categories of visible abnormalities |
-| Clinical Observations | Exophthalmia | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Oedema | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Haemorrhage | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Mucus secretion | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Faecal (anal) casts | Optional | Guideline text | Sub-category of visible abnormalities |
-| Clinical Observations | Aggression and/or cannibalism | Optional | Guideline text | Sub-category of visible abnormalities |
-| Statistical Analysis | LC50 value (with 95% confidence limits) | Required | Guideline text | If possible based on data |
-| Statistical Analysis | Slope of concentration-response curve | Optional | Guideline text | If possible |
-| Statistical Analysis | Graph of concentration-mortality curve | Optional | Guideline text | If possible |
+*   **§27:** Reporting of clinical signs listed in paragraph 27 is mandatory whilst reporting signs as listed in Annex 4, Tables 1 and 2 is voluntary.
+*   **§30:** Decisions on whether to include optional parameters (cryopreservation) should reflect existing knowledge for the test chemical or similar chemicals, as well as the needs of various regulatory authorities.
+*   **Annex 4:** Provides a comprehensive list of sublethal clinical signs that may be recorded on a voluntary basis.

@@ -30,6 +30,7 @@ python3 00.generate_configs.py \
     --threshold_rerank 0.05 0.1 0.15 0.2 0.3 0.4 \
     --top_k_rerank 5 10 15 20 \
     --grf 0.0 0.25 0.5 0.75 1.0 \
-    --reranker_models "Qwen/Qwen3-Reranker-0.6B" "Qwen/Qwen3-Reranker-4B" "Qwen/Qwen3-Reranker-8B"
+    --reranker_models "Qwen/Qwen3-Reranker-0.6B" "Qwen/Qwen3-Reranker-4B" "Qwen/Qwen3-Reranker-8B" \
+    --data_variants base def hier def_hier
 
 echo "Configuration generation complete. File saved to ../config/eval_rag.json"

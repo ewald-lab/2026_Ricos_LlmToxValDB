@@ -1,0 +1,1301 @@
+Integrating Semantic Retrieval, LLM-based Refinement, and Structured Expert
+Cura=on for Scalable AOP Gene Mapping
+Alexandra Schaffert1,2, Michele Fratello1
+, Kaisla Kangas1
+, Marcella Torres Maia1
+, Giusy del Giudice1,3,
+Lena Möbus1,2, Cris?na Accardi1
+, Zeyad Al-Abdulraheem1
+, Lorenzo Campini1
+, Francesco Galardo1
+,
+Antonio Federico3
+, Giorgia Ciancaleoni1
+, Hanna-Kaarina Juppi1
+, Mar?n Paparella4
+, Angela Serra1,3, Dario
+Greco1,3
+1 Finnish Hub for Development and Validation of Integrated Approaches (FHAIVE), Faculty of Medicine and
+Health Technology, Tampere University, Tampere, Finland
+2 Tampere Institute for Advanced Study, Tampere University, Tampere, Finland
+3 University of Helsinki, Division of PharmaceuFcal Biosciences, Faculty of Pharmacy, Helsinki, Finland
+4 InsFtute for Medical Biochemistry, Medical University Innsbruck, Innsbruck, Austria
+Abstract
+Toxicogenomics can support regulatory toxicology, but its use is limited by the difficulty of transla?ng
+molecular responses into mechanis?c, decision-relevant interpreta?ons. Adverse Outcome Pathways
+(AOPs) provide a framework for this transla?on, yet omics applica?ons require scalable mapping of
+Key Events (KEs) to molecular features. Here, we present an AI-assisted, mul?-step workflow for KEto-gene mapping that uses embedding-based seman?c retrieval to iden?fy candidate
+ontology/pathway terms, large language model-assisted refinement to filter these candidates, and
+double-independent expert group cura?on with rule-based consolida?on to finalize mappings and
+derive confidence scores. Compared with earlier NLP-based approaches, the workflow improves KEto-ontology/pathway mapping performance and generates candidate annota?ons that beYer align
+with expert judgment while substan?ally reducing the need for manual augmenta?on. Explicit gene
+and protein men?ons in KE ?tles were addi?onally grounded to improve specificity, and each curated
+mapping was assigned curator reason codes to support transparent, traceable, and confidence-aware
+reuse. Applied across AOP-Wiki, the workflow produced a comprehensive KE-to-gene set resource
+covering 1,254 KEs across 523 AOPs and linking 15,833 human genes. U?lity is demonstrated through
+CTD-based AOP fingerprin?ng of curated reference chemical groups, highligh?ng expanded coverage
+and confidence-informed interpreta?on of chemical-associated gene signatures in an AOP context. The
+workflow and resul?ng resource provide a prac?cal bridge between toxicogenomics and AOP-based
+mechanis?c interpreta?on and support rou?ne upda?ng and future extension to addi?onal omics
+layers within OECD Omics2AOP.
+Keywords: Adverse Outcome Pathway; annotation; semantic similarity; large language model;
+toxicogenomics
+1. Introduction
+Next-genera?on toxicology increasingly relies on high-dimensional molecular measurements,
+par?cularly transcriptomics and other omics readouts, to characterize biological perturba?ons
+induced by chemical exposures (Brockmeier et al., 2017; OECD, 2023b, 2025). However, despite clear
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+poten?al, the use of toxicogenomics-based evidence in regulatory contexts remains constrained by
+the difficulty of transla?ng complex paYerns of molecular responses into mechanis?cally transparent
+and decision-relevant interpreta?ons (Meier et al., 2024).
+AOPs provide a suitable scaffold for this transla?on, linking an ini?al molecular perturba?on through
+a series of measurable Key Events (KEs) to an Adverse Outcome (AO) relevant for human health or the
+environment (Ankley & Edwards, 2018). However, to integrate AOPs and omics data, the biological
+events described as KEs need to be linked to molecular features that can be monitored in omics
+datasets (Bakker et al., 2023; Brockmeier et al., 2017; Perkins et al., 2022; Saarimaki et al., 2023a).
+Gene sets derived from curated pathways, processes, and phenotypes offer a prac?cal and widely
+adopted solu?on, enabling approaches that integrate experimental data with AOPs (Saarimaki et al.,
+2023b). In previous work, we established a curated link between AOP-Wiki KEs and gene-level
+representa?ons (Saarimaki et al., 2023a) and showed that this enables prac?cal AOP-informed analysis
+of molecular datasets, including AOP-based mechanis?c interpreta?on, chemical grouping,
+comparison of biological experimental systems and species, and KE-anchored BMDs (Del Giudice et al.,
+2024; Maia et al., 2025; Saarimaki et al., 2023b; Serra et al., 2025).
+Since that annota?on effort, AOP-Wiki has expanded substan?ally, with many newly added AOPs and
+KEs. To remain useful as a shared framework for evidence integra?on, hypothesis genera?on, and
+mechanis?c interpreta?on, KE-to-gene mappings require systema?c upda?ng in a way that is
+opera?onally scalable and supports rou?ne expansion as the knowledge base grows (Bajard et al.,
+2023; Carusi et al., 2021).
+The previous annota?on approach (Saarimaki et al., 2023a) relied on tradi?onal Natural Language
+Processing (NLP)-driven matching that priori?zes surface-level similarity (e.g., token overlap, keyword
+proximity, or other lexical similarity signals), which is typically effec?ve when concepts are expressed
+using consistent terminology and rela?vely fixed phrasing. However, KE ?tles in AOP-Wiki frequently
+contain linguis?cally complex, highly contextual expressions and vary widely in phrasing and
+granularity (e.g., composi?onal mechanisms, implicit causal rela?onships, mul?-clause descrip?ons,
+and domain-specific phrasing). Such complexity is known to challenge classical NLP pipelines (Turchin
+et al., 2023). As a result, lexically driven matching can yield many plausible but incorrect candidates
+(reduced precision) while missing valid matches expressed using different wording (reduced recall),
+increasing the need for ?me-intensive, manual expert review, which is an obstacle to scaling and broad
+adop?on.
+Recent advances in transformer-based language modeling offer a path forward. These models
+generate context-dependent representa?ons of text, meaning that the interpreta?on of a word
+depends on the surrounding words rather than being fixed in all seings. As a result, models such as
+Bidirec?onal Encoder Representa?ons from Transformers (BERT) can capture seman?c similarity
+beyond direct word overlap (Gardazi et al., 2025). Large language models (LLMs) extend these
+capabili?es. They are large Transformer-based genera?ve models trained on massive corpora with an
+autoregressive “next-token predic?on” objec?ve, enabling them to follow natural-language
+instruc?ons and perform new tasks via promp?ng rather than task-specific model redesign (Brown et
+al., 2020; OpenAI, 2023). This capability is par?cularly relevant for AOP annota?on, where the core
+challenge is not only to retrieve seman?cally related terms, but determining whether a candidate
+pathway or ontology term is mechanis?cally consistent with a KE statement, including qualifiers such
+as direc?onality and biological context.
+At the same ?me, ambiguity cannot be fully eliminated: KE phrasing may be underspecified, ontology
+coverage is incomplete, and mul?ple interpreta?ons may be defensible. Because these mappings are
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+reused across downstream applica?ons, uncertainty should be made explicit rather than implicitly
+trea?ng all KE annota?ons as equally reliable.
+These considera?ons highlight the need for an annota?on strategy that is scalable, meaning-aware,
+and transparent about uncertainty, aligning with broader efforts to improve machine-ac?onability and
+FAIR reuse of AOP-derived resources (Mortensen et al., 2025).
+To address these needs, we developed a mul?-step workflow that couples seman?c candidate retrieval
+with expert-driven refinement and structured evalua?on. Using this approach, we generated an
+updated, AOP-wide KE-to-gene annota?on, with expanded coverage and an explicit confidence layer.
+These resources improve the scalability, consistency, and transparency of KE annota?on and support
+reuse across downstream toxicogenomic applica?ons.
+2. Methods
+2.1 Retrieval of KEs from AOP-Wiki for annotation
+An XML snapshot of AOP-Wiki was downloaded (XML version 2025-04-01) and parsed to extract AOP,
+KE, and AO records, including stable iden?fiers and ?tles. KEs cons?tuted the primary annota?on unit.
+Entries with empty ?tles were excluded from automated annota?on. The ini?al annota?on scope
+comprised 1,503 KEs spanning all 530 AOPs present in AOP-Wiki at that ?me point. KE-level annota?on
+was performed on this April 2025 snapshot because genera?on and expert cura?on of KE-to-gene
+mappings cons?tuted the ?me-intensive core task of the workflow. To ensure that the final resource
+reflects a more current AOP-Wiki structure, KE presence and KE-to-AOP membership were
+subsequently updated using the AOP-Wiki XML snapshot dated 2026-04-01. KEs no longer present in
+the newer snapshot were removed from the final released AOP-level resource, and updated KE-to-AOP
+memberships were incorporated where already annotated KEs had become linked to addi?onal AOPs.
+Because KE-level cura?on was aYached to stable KE iden?fiers, this structural update did not require
+repe??on of manual annota?on.
+2.2 Knowledgebase resources and term selection
+Ontology and pathway term names and identifiers for GO, Reactome, WikiPathways, KEGG, and HPO
+were taken from MSigDB v2024.1.Hs to define a harmonized candidate term selection for semantic
+matching to AOP-Wiki KE titles. MSigDB provides curated, standardized collections of
+pathway/ontology terms assembled from multiple sources and delivered in a consistent
+naming/identifier framework, which we used to reduce downstream cleaning, and format
+harmonization during candidate generation. MSigDB v2024.1.Hs incorporates the following source
+snapshots for the relevant collections: GO (C5:GO, go-basic.obo 2024-04-24), Reactome
+(C2:CP:Reactome, v89), WikiPathways (C2:CP:WikiPathways, 2024-07-10), Human Phenotype
+Ontology (C5:HPO, 2024-04-26), and KEGG (C2:CP:KEGG; legacy pathway set). Importantly, MSigDB
+was used only to obtain standardized term labels/identifiers for candidate generation. After
+automated matching and subsequent group-curation finalized the accepted KE-term mappings, gene
+members were retrieved directly from the primary pathway/ontology sources for each accepted
+identifier, ensuring that gene sets reflect the most current content of the underlying resources at the
+time of retrieval rather than the MSigDB distribution (section 2.6).
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+2.3 Semantic similarity candidate retrieval
+Candidate ontology/pathway terms for each KE were retrieved by assessing seman?c similarity in
+embedding space between KE ?tles and knowledgebase term labels. Both were embedded using the
+pre-trained Sentence-BERT (SBERT) (Reimers & Gurevych, 2019) model all-mpnet-base-v2 . This model
+is based on the MPNet architecture (Song et al., 2020) and further op?mized for seman?c similarity
+tasks using a large and diverse corpus of more than one billion sentence pairs. This training objec?ve
+is well aligned with the present task, which requires iden?fying seman?cally equivalent or closely
+related biological concepts between short phrases from different resources, namely KE ?tles and
+different ontology/pathway labels. Although biomedical domain specificity can be relevant, label-tolabel en?ty matching depends par?cularly on robust seman?c alignment in embedding space,
+including the ability to capture paraphrase-level similarity and varia?on in phrasing or abstrac?on. The
+chosen model is well suited to this seing because it has been extensively fine-tuned for sentencelevel similarity across diverse text sources, including scien?fic abstracts and ?tles, suppor?ng stable
+alignment between biologically meaningful phrases even when wording differs. Cosine similarity was
+computed between each KE embedding and all term embeddings, yielding a ranked candidate list per
+KE. Candidate terms with cosine similarity <0.6 were discarded, and the top 10 remaining candidates
+across all resources were passed to the subsequent refinement step. Similarity threshold choices were
+evaluated during technical valida?on (sec?on 2.5).
+2.4 LLM-based refinement
+To further refine biologically meaningful ontology matches beyond similarity-based ranking,
+filtered candidate ontology sets were evaluated using a large language model (ChatGPT; GPT-4o,
+accessed programma?cally via the OpenAI applica?on programming interface (API) (OpenAI et al.,
+2024). For each KE, the API was queried with a structured prompt containing the KE iden?fier, KE name,
+and a comma-separated list of up to 10 candidate ontology/pathway terms. The model was instructed
+to act as a biomedical expert and to evaluate the biological and mechanis?c relevance of each
+candidate term to the KE, explicitly considering both mechanis?c fit and text similarity (Zenodo). The
+output format was constrained to return only the selected ontology terms as a comma-separated list,
+with a maximum of five retained terms; if no candidate was deemed biologically appropriate, the
+model was instructed to return “None”. To improve consistency of prompt interpreta?on across
+heterogeneous KE types, the prompt included seven few-shot examples. These comprised six
+posi?ve/mixed examples, in which one or more ontology terms were retained from a list containing
+both relevant and irrelevant candidates, and one nega?ve example in which no valid ontology term
+was available and the correct output was “None”. The examples were selected to cover a range of
+common annota?on scenarios, including broad process-level KEs (e.g., inflamma?on, adipogenesis),
+receptor-/target-centric KEs (e.g., estrogen receptor agonism), phenotype-level KEs (e.g., ovula?on,
+Leydig cell dysgenesis), sparse candidate lists, and cases in which only a single candidate should be
+retained despite the presence of seman?cally related distractors. In addi?on, the prompt explicitly
+instructed the model not to assume that earlier candidates in the list were more relevant than later
+ones, minimizing posi?onal bias introduced by the SBERT ranking. Inference was performed with
+temperature = 0.35 and top_p = 1. In this seing, the low temperature reduces stochas?c varia?on in
+output selec?on, whereas top_p = 1 disables nucleus trunca?on, such that all tokens remain available
+and sampling is not addi?onally constrained by probability-mass cutoffs. Together, these seings were
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+chosen to favor stable and reproducible ontology selec?on over more variable or exploratory
+responses. The API output consisted only of the selected ontology iden?fiers, without explanatory
+text, and these were used as the final LLM-refined ontology annota?ons.
+2.5 Technical validation during pipeline development
+During workflow development, we used a random subset of 50 KEs to op?mize the mul?-step
+annota?on pipeline and to obtain an ini?al technical assessment of retrieval and refinement
+performance. For the SBERT candidate retrieval step, we compared alterna?ve candidate-selec?on
+strategies, including different similarity thresholds and top ranked candidates passed downstream.
+Retrieved candidates were manually labeled as mechanis?cally appropriate or inappropriate. Precision
+was defined as TP/(TP+FP), where TP denotes a relevant retrieved candidate and FP an irrelevant
+retrieved candidate. Recall was defined rela?ve to a KE-specific manually curated reference set of
+relevant terms, TP/(TP+FN), where FN denotes a relevant term not retrieved under the evaluated
+configura?on. Candidates below the similarity threshold were treated as not retrieved in the
+threshold-specific analysis. Based on this assessment, the final retrieval configura?on was set to cosine
+similarity ≥ 0.6 combined with the Top 10 ranked candidates. The same 50-KE subset was also used to
+refine the LLM prompt and to obtain a technical assessment of the refinement step using the same
+manually curated relevance labels. Refinement quality was evaluated with rank-based metrics: Hit@1
+(frac?on of KEs for which the top-ranked selected term was relevant), Hit@5 (frac?on of KEs for which
+at least one relevant term appeared among the top five selected terms), dynamic Hit@k (Hit@k with
+k matched to the number of relevant annota?ons per KE, bounded between 1 and 5), and MAP@k
+(mean average precision up to rank k, rewarding relevant selec?ons appearing early). Because this
+subset was used to op?mize both retrieval seings and promp?ng strategy, it should be regarded as a
+development subset rather than an independent final valida?on set.
+2.6 Construction of KE gene sets
+For each KE, the refined set of ontology/pathway terms was converted into a KE gene set by
+aggrega?ng genes across the selected terms. Specifically, gene sets associated with each selected term
+were retrieved from the precompiled knowledgebase term-to-gene tables and mapped to Ensembl
+gene IDs; the KE gene set was defined as the union of these genes across all selected terms and
+resources. Provenance was retained by storing (i) the resource(s) contribu?ng each term, (ii) the
+selected term iden?fiers per KE, and (iii) per-term gene set sizes, enabling resource-level
+decomposi?on of each KE gene set. Genes for each curated term ID were retrieved directly from the
+primary pathway/ontology sources and harmonized to human Ensembl gene IDs and gene symbols
+using Bioconductor org.Hs.eg.db v3.20.0 with Annota?onDbi v1.68.0 (Bioconductor 3.20; R 4.4.3),
+based on Ensembl and NCBI Entrez Gene annota?on sources dated release 112 and 2024-09-20,
+respec?vely. GO term gene sets were obtained from the GOA human Gene Associa?on File (GAF; GO
+release 2026-03-25) with negated (“NOT”) annota?ons excluded, and expanded using the GO gobasic.obo hierarchy (“go-basic” ontology snapshot used for propaga?on) via safe rela?ons
+(is_a/part_of) to include genes annotated to descendant terms. HPO term gene sets were derived from
+phenotype_to_genes.txt (HPO release v2026-02-16), which provides phenotype-to-gene links that
+already include ancestor classes (suppor?ng parent terms as collec?ons of child terms). KEGG,
+Reactome, and WikiPathways gene sets were retrieved from their programma?c/downloadable
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+resources (KEGG REST API, accessed April 2026; Reactome v96 released 2026-03-30; WikiPathways
+monthly GMT release 20260310) and merged into a unified term-to-gene mapping for downstream
+analysis. Across all annotated en??es, the resul?ng compendium represented 15832 unique Ensembl
+genes.
+2.7 Expert group curation and annotation scoring
+To provide a scalable human quality-control layer, a structured expert group curation procedure was
+applied to KE–term mappings refined by the LLM step. In addi?on, mappings from Saarimaki et al.
+(2023a) were included in the same group-cura?on workflow and re-curated alongside the new
+candidate annota?ons. Prior to group cura?on, Saarimäki-derived KE-term mappings were filtered to
+remove obsolete terms and to exclude KEs that were no longer present in the more recent AOP-Wiki
+release. KEs with their proposed ontology/pathway annota?ons (including both workflow-derived
+candidates and Saarimäki et al. annota?ons) were randomly assigned to 11 curators, with each KE
+evaluated independently by two curators. Each KE–term mapping was assessed using a predefined
+three-level scheme: fit (term clearly represents the KE), partial (term captures the KE only partly or
+lacks sufficient specificity), or not_fit (term does not represent the KE). For partial and not_fit, curators
+selected one of 13 predefined reason codes (Supplementary file 1, Table S1). Curators additionally
+provided a binary inclusion decision indicating whether the mapping should be accepted (yes) or
+rejected (no) for KE gene set construction. Final decisions were consolidated using a rule-based
+procedure. If both curators agreed on the inclusion decision, that decision was adopted. In case of
+disagreement, outcomes were resolved based on the qualitative labels (fit vs partial was accepted;
+partial vs not_fit was rejected), while partial vs partial, fit vs not_fit, and other unclear combinations
+were referred for adjudication by a master curator. To support confidence-aware downstream use, a
+workflow-derived KE annotation quality score was calculated from curator labels across all finally
+accepted KE-term mappings for each KE, treating each curator label as an independent vote:
+Score!"#$%&"! = 𝑛(fit) + 𝑘 ⋅ 𝑛(partial)
+𝑛(fit) + 𝑛(partial) , 𝑘 = 0.1 𝑐ℎ𝑒𝑚𝑖
+Scores ranged from 0.1 to 1.0 when at least one accepted mapping was present, with higher values
+indicating stronger curator agreement and higher annotation quality. The consolidated decision and
+score were stored alongside each KE-term mapping. In addition to workflow-derived annotations,
+curated single-gene associations derived from explicit gene/protein mentions in KE titles were
+incorporated into the final KE gene sets and treated as high-confidence evidence. To obtain a unified
+KE-level confidence measure, genes were assigned confidence values of 1.0 if supported by curated
+single-gene sources, or Scoreworkflow if supported only via workflow-derived mappings. The KE gene set
+score was then defined as the average per-gene confidence across all unique genes in the KE gene set:
+Score'()(*(+ = 𝑛,-# ⋅ 1.0 + 𝑛!% ⋅ Score!"#$%&"!
+𝑛,-# + 𝑛!%
+where ncur describes genes supported by curated single-gene evidence and nwf genes supported only
+via workflow-derived mappings. Gene set scores ranged from 0.1 to 1 and reflected the relative
+contribution of curated versus workflow-derived evidence.
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+2.8 Gene/protein identification from KE titles
+To capture explicit gene/protein/family mentions embedded in KE titles that may not be represented
+by pathway/ontology mappings, KE titles were additionally processed using Gilda for biomedical
+named entity recognition and grounding (Gyori et al., 2022). Dictionary-based string matching using
+HGNC symbols and synonyms was evaluated but found unreliable due to ambiguity and synonym
+overlap; therefore, Gilda was used to identify candidate text spans and link them to standardized
+entities. Input consisted of only KE titles. The entity types for genes (HGNC), proteins (UniProt), and
+protein families/complexes (FamPlex) were selected for gene retrieval. Candidates with grounding
+score ≥0.5 were retained and subsequently manually reviewed to remove spurious matches and
+confirm correct grounding. Curated grounded entities were used to augment KE gene sets, particularly
+for KEs referring to specific genes or proteins, where pathway- or ontology-based annotation was
+often not feasible or insufficiently specific. Genes added through this procedure were explicitly labeled
+as derived from FamPlex, HCGNC or UniProt in the final annotation.
+2.9 AOP-level hazard class and regulatory endpoint categorization
+To support a more regulatory-relevant interpretation of the AOP framework, AO/AOPs were mapped
+to regulatory hazard endpoint classes using a predefined endpoint vocabulary spanning Classification,
+Labeling, and Packaging (CLP) health hazards, CLP environmental hazards, the new CLP endocrine
+disruption hazard classes (ED HH/ED ENV; 2023/707), OECD emerging health hazards, and
+OECD/REACH terrestrial ecotoxicology (non-CLP) endpoints (plant, soil invertebrate, pollinator, bird,
+soil microorganism/STP inhibition). Neurotoxicity, immunotoxicity and developmental neurotoxicity
+were retained as separate OECD emerging health hazard annotation categories to preserve
+mechanistic and biological resolution, rather than being collapsed into STOT or reproductive toxicity.
+Endpoints were assigned according to the regulatory domain and biological interpretation of the AO:
+human health AOs were mapped to CLP health hazards (e.g., carcinogenicity, germ cell mutagenicity,
+STOT RE/SE) and/or OECD emerging health hazards when the AO reflects functional impairment in
+those domains, consistent with CLP’s health-hazard framing of target-organ toxicity as adverse
+functional effects not covered by other health hazard classes. Environmental AOs were mapped to
+CLP Hazardous to the aquatic environment when effects pertain to aquatic organisms (including
+algae/aquatic plants as part of aquatic hazard assessment) and to ED ENV where an endocrine mode
+of action plausibly drives adverse effects in environmental organisms, reflecting CLP’s separation of
+endocrine disruption hazards for humans versus the environment. Terrestrial-specific effects were
+mapped to OECD/REACH terrestrial ecotoxicology endpoint classes (plants, soil invertebrates,
+pollinators, birds, soil microorganisms/STP) when the AOP evidence or applicability indicated these
+organism groups. Taxonomic applicability information from AOP-Wiki was used, where available, as
+supporting evidence for assigning the regulatory domain of each AOP/AO. However, because
+taxonomic applicability was sometimes missing, incomplete, overly broad, or not fully aligned with the
+regulatory interpretation of the AO, endpoint assignments were not based on taxonomy alone. In such
+cases, biological plausibility, the identity of the AOP KEs, organism-specific biology, and the intended
+regulatory meaning of the endpoint class were considered. Thus, AOPs were mapped to human-health
+or environmental endpoints based on the combined interpretation of taxonomic applicability,
+mechanistic plausibility, and adverse outcome context. AOPs with evidence restricted to rats or mice
+were not automatically considered human-relevant. For these AOPs, human relevance was evaluated
+based on the biological plausibility of cross-species transferability of the underlying mode of action,
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+distinguishing rodent-specific tumour mechanisms or apical readouts from pathways in which
+upstream molecular, cellular, or endocrine perturbations are conserved across mammals. Where
+human relevance was uncertain or limited, AOPs were annotated with “not assigned - taxonomic AD
+outside of mapping scope”. No endpoint was assigned when an AO represented a non-adverse
+pharmacological effect (e.g., analgesia) or when evidence did not support any class. Multi-label
+assignments were allowed.
+2.10 AO-to-MeSH mapping for disease and literature context
+To support disease-oriented interpretation and literature retrieval, AOs were mapped to MeSH
+descriptors using a semantic similarity-based approach. AO titles and MeSH term names were
+embedded in a common vector space with the all-mpnet-base-v2 sentence-embedding model
+(Reimers & Gurevych, 2019; Song et al., 2020) and SapBert (Liu et al., 2020), and candidate MeSH
+terms were ranked for each AO using cosine similarity for both models. The top 5 scoring candidates
+of both models were then manually curated to define the final MeSH annotations, allowing retention
+of multiple complementary MeSH terms where appropriate. Manual expert evaluations provided
+additional MeSH annotations in some cases.
+2.11 CTD-derived AOP fingerprint
+To demonstrate practical use of the KE-gene set annotation in a chemical prioritization setting, we
+reproduced the reference chemical groups introduced by Saarimaki et al. (2023a) by taking the
+chemical lists directly from their Supplementary File 1 (hepatotoxicants, thyroid-active chemicals, sex
+hormone receptor agonists (SHR), and carcinogens). For each chemical, we then constructed a
+chemical-associated gene set using CTD curated chemical-gene/protein interactions retrieved from
+the CTD bulk file CTD_chem_gene_ixns (downloaded March 31, 2026, 13:30:48 EDT), which provides
+curated interactions together with organism labels, NCBI GeneIDs, and CAS identifiers where available.
+AOP fingerprints were computed following the same general strategy as Saarimaki et al. (2023a).
+Briefly, for each chemical-associated gene set, we performed enrichment against AOP-level gene sets
+(defined as the union of genes across KEs within an AOP) and KE-level gene sets. Enrichment was
+performed using a one-sided Fisher’s exact test with Benjamini-Hochberg correction. Significant
+enrichments were summarized as an AOP “fingerprint” by ranking enriched AOPs/KEs by adjusted pvalue and reporting top N results (as in Saarimaki et al. (2023a)).
+3. Results and discussion
+3.1. Semantic retrieval and LLM-assisted refinement improve KE
+mapping performance
+We developed an AI-assisted, mul?-step annota?on workflow to generate an updated KE-to-gene
+mapping across all KEs represented in AOP-Wiki at the ?me of annota?on, improving both coverage
+and precision compared with previous efforts (Saarimaki et al., 2023a). In contrast to the single-step
+NLP-based annota?on used by Saarimaki et al. (2023a), our approach is mul?-step and leverages (i)
+Sentence-BERT's (SBERT) ability to retrieve seman?cally related ontology/pathway terms at high recall
+and (ii) an LLM’s ability to perform meaning-oriented filtering of those candidates (Figure 1).
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+In the first stage, KE ?tles are matched to pathway and ontology term names using SBERT, retrieving
+the top candidates per KE (Fig. 1). SBERT generates seman?cally meaningful vector representa?ons of
+short texts, known as embeddings, allowing KE ?tles and ontology/pathway terms to be compared
+based on meaning rather than exact word overlap, for example using cosine similarity (Reimers &
+Gurevych, 2019). Because AOP-Wiki KE ?tles are typically short but seman?cally dense, we
+hypothesized that embedding-based retrieval would capture paraphrase-level similarity more robustly
+than earlier NLP-based lexical matching approaches.
+Figure 1: Comparison of annota3on approaches between Saarimäki et al. 2023 and the updated annota3on.
+To quan?fy and op?mize the first step, we calibrated the SBERT configura?on (including the candidate
+subset forwarded downstream) using a manually curated valida?on subset of 50 randomly chosen KEs,
+labeled as true/false KE-term matches. On this valida?on set, SBERT candidate genera?on achieves
+precision = 0.26 and recall = 0.75, consistent with high coverage but low exactness (Tab. 1). This
+suggests that SBERT retrieval effec?vely captures seman?cally related candidates but requires further
+refinement to remove mechanis?cally inaccurate candidates.
+In the second step, the top scoring SBERT candidates are submiYed to the API-accessed LLM ChatGPT
+4.o to determine whether each candidate term truly matches the KE ?tle in meaning and mechanis?c
+intent, and to retain only the most appropriate mappings (up to five, Fig. 1). This LLM filtering step
+yields strong performance on the same curated valida?on subset, achieving hit@5 = 0.97, indica?ng
+that the correct term was almost always retained within the final set of up to five candidates.
+Importantly, the 50 KE valida?on subset was used not only to assess technical performance, but also
+to refine the LLM prompt and genera?on seings. This process is cri?cal because LLM outputs are well
+documented to be sensi?ve to prompt formula?on, including meaning-preserving varia?ons in
+formaing and instruc?on phrasing that can lead to substan?al differences in measured performance
+(Chen et al., 2025; He et al., 2024). Dedicated frameworks for analyzing prompt sensi?vity demonstrate
+that LLM robustness varies across tasks and datasets, and that instance-level prompt varia?on can
+materially affect both objec?ve performance and subjec?ve evalua?ons, underscoring the need for
+systema?c prompt assessment (Zhuo et al., 2024). Notably, the 50 KE subset used during workflow
+refinement did not fully reflect the final annota?on standard, because final expert cura?on applied a
+more refined cura?on and consolida?on logic than the ini?al development stage. To quan?fy the
+performance under the final annota?on standard, we therefore evaluated retrieval performance
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+against the final expert-curated reference annota?ons and compared these results to the Saarimaki et
+al. (2023a) annota?ons (Tab. 1). To disentangle the contribu?ons of the individual components, we
+specifically compare (i) the SBERT retrieval step alone, (ii) the full SBERT + LLM pipeline, and (iii) the
+earlier NLP-based approach of Saarimaki et al. (2023a). This enables us to separately quan?fy
+improvements arising from seman?c retrieval, and from the combined mul?-step workflow based on
+SBERT and subsequent LLM filtering. Across all metrics, performance improves markedly from the
+SBERT candidate retrieval step to the LLM filtering step, with the most pronounced improvements
+observed in precision. This paYern indicates that the LLM step is effec?vely ac?ng as a seman?c
+verifica?on layer that removes incorrect or only loosely related candidates. Related work in
+informa?on retrieval and biomedical normaliza?on similarly emphasizes that downstream reranking
+or refinement can substan?ally improve the quality of candidate sets produced by an ini?al high-recall
+retrieval step (Borchert et al., 2024). We also observe a small decrease in recall and Hit@k a{er LLM
+filtering, sugges?ng that in rare cases the LLM rejects candidates that human experts ul?mately
+considered acceptable. This trade-off is expected when moving from a retrieval-oriented stage
+(designed for coverage) to a stricter seman?c filtering stage (designed for precision).
+Both Step 1 SBERT retrieval and Step 2 SBERT+LLM filtering achieve consistently higher performance
+across all reported metrics than the earlier Saarimaki et al. (2023a) NLP-based approach (Tab. 1).
+Importantly, this advantage was observed even though the 2023 approach used a much larger
+candidate list (Top 100), whereas our workflow used only the Top 10 SBERT-ranked candidates for
+downstream refinement. This indicates that SBERT retrieval already provides stronger seman?c
+matching than lexical/NLP-style ranking alone, and that subsequent LLM filtering further improves
+precision. This is consistent with findings from other biomedical mapping tasks showing that
+embedding-based seman?c approaches substan?ally outperform string-based approaches for
+ontology/term mapping, par?cularly when terminology varies and concepts are expressed
+heterogeneously (Liu et al., 2023).
+Table 1: Retrieval performance of ontology-term matching methods for 2023 NLP: Saarimäki et al. 2023 NLP ranked
+predic3ons (Top100), 2026 Step 1 - SBERT: Novel annota3on approach’s SBERT candidate retrieval (Top10), and 2026 Step 2 -
+LLM: Novel annota3on approach’s LLM-filtered selec3ons from SBERT candidates. Metrics were computed per KE and
+averaged across evaluable KEs. k: cutoff rank; metrics computed using only the top k predicted terms per KE. Precision@k =
+(# correct among top k) / (# returned among top k), for the LLM (C), which outputs variable-length lists up to 5, the
+denominator is the number of returned predic3ons up to k. Recall@k = (# correct among top k) / (# curated correct terms for
+that KE). Hit@k: frac3on of KEs with ≥1 correct term in the top k. Blank entries for A, B at k 100 reflect that for SBERT/LLM
+only outputs up to a given rank were used, whereas the NLP pipeline from Saarimäki et al. 2023 used Top 100.
+k Precision Recall Hit
+2023 NLP
+2026
+Step 1:
+SBERT
+2026
+Step 2:
+SBERT +
+LLM
+2023 NLP
+2026
+Step 1:
+SBERT
+2026
+Step 2:
+SBERT +
+LLM
+2023 NLP
+2026
+Step 1:
+SBERT
+2026
+Step 2:
+SBERT +
+LLM
+1 0.429 0.568 0.724 0.152 0.322 0.414 0.429 0.568 0.724
+10 0.153 0.294 0.558 0.474 0.838 0.817 0.627 0.889 0.879
+100 0.017 0.544 0.688
+Although direct comparison across studies is limited by differences in task defini?on and evalua?on
+setup, the Step 2 LLM-refined outputs are broadly consistent with reported performance paYerns in
+related ontology/en?ty mapping tasks, where lexical baselines tend to perform substan?ally worse
+than seman?c retrieval methods, and an addi?onal reranking or refinement step can further improve
+final selec?on (Borchert et al., 2024; Liu et al., 2023; Son Do et al., 2024).
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Because the final annota?on was determined through expert group cura?on, differences in the
+number of annotated terms per KE reflect curator decisions about which candidate terms were
+sufficiently mechanis?cally appropriate to retain. Under this final cura?on, the number of annotated
+terms per KE is lower in the updated annota?on with roughly one-third fewer terms per KE compared
+to Saarimaki et al. (2023a) (Fig. 2A), indica?ng a more selec?ve final mapping. This reduc?on is not
+driven by the automa?c retrieval step alone, but by expert decisions to exclude or assign lower
+confidence to terms judged less appropriate representa?ons of the KE. Notably, this reduc?on in terms
+per KE does not translate into increased gene-level specificity as measured by the number of KEs per
+gene (Supplementary file 1, Fig. S1). This suggests that annota?on selec?vity at the term level does
+not automa?cally yield a more discrimina?ve gene-to-KE annota?on, likely reflec?ng that many genes
+are mul?func?onal and pleiotropic, contribu?ng to mul?ple processes, ?ssues, and phenotypes, so
+their recurrence across KEs is expected rather than necessarily indica?ve of nonspecific annota?on
+(Barbitoff et al., 2025; Pritykin et al., 2015). Importantly, such gene recurrence does not diminish their
+relevance for any given KE, but instead reflects the shared molecular architecture underlying many
+biological and toxicological processes (Espinosa-Cantu et al., 2020).
+Figure 2: Annota3on density, retrieval rank, and cura3on acceptance across annota3on versions. (A) Distribu3on of the
+number of annotated terms per KE for Saarimäki et al. (2023) and the novel annota3on. Boxplots summarize the median and
+interquar3le range; points represent individual KEs. (B) Distribu3on of per KE median retrieval ranks based on score (log10
+scale; lower is beber) for three secngs: Saarimäki et al. (2023) NLP Top 100, novel annota3on approach SBERT Top 10, and
+overlapping KEs/terms evaluated with SBERT Top 10. In each workflow, candidate terms were ranked by their respec3ve
+retrieval score (NLP-based matching score in Saarimäki et al. (2023); cosine similarity in the SBERT workflow), and each point
+represents the median rank of the accepted terms for one KE. (C) Cura3on acceptance rate (percentage of candidate
+annota3ons accepted) for Saarimäki et al. (2023), the novel annota3on, and the overlap subset. Overlap refers to KEs/terms
+present in both annota3on sets (shared subset), and ranks are computed with respect to each method’s corresponding
+candidate list (Top 100 for NLP, Top 10 for SBERT).
+Because the final expert cura?on re-curated and integrated mappings from Saarimaki et al. (2023a),
+we next compare how candidate annota?ons from each source were treated during expert group
+cura?on. Overall, candidates proposed by the novel mul?-step workflow are accepted more frequently
+(50%) than those origina?ng from the Saarimäki et al. set (40%), while candidates assigned by both
+approaches show the highest acceptance (70%, Fig. 2C). Both the Saarimaki et al. (2023a) NLP-based
+matching and the Step 1 SBERT-based matching generate ranked candidate KE-term lists, in which
+higher-ranked (closer to rank 1) candidates received stronger matching scores from the respec?ve
+retrieval method. Interes?ngly, overlapping candidates also tend to be ranked more favorably, i.e., they
+have closer to 1 (beYer) mean ranks than candidates unique to either approach (Fig. 2B). This paYern
+is informa?ve in two aspects. First, it suggests that the novel mul?-step pipeline produces candidates
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+that align more consistently with curator expecta?ons for mechanis?c plausibility. This is par?cularly
+notable given that these Saarimäki et al. annota?ons already contained extensive manual cura?on and
+augmenta?on (50% of terms annotated manually), whereas the updated annota?on candidate pool
+was not manually curated or augmented at the candidate-genera?on stage and required very few
+curator-added terms during final cura?on (≈2% of the final annota?on). This suggests that the updated
+annota?on workflow produces candidate annota?ons that are already more o{en judged biologically
+meaningful by expert curators, thereby reducing the need for manual augmenta?on during cura?on
+substan?ally. Second, the elevated acceptance of overlapping terms (Fig. 2C) suggests that agreement
+between independent retrieval strategies provides a prac?cal robustness signal, consistent with
+informa?on retrieval data-fusion findings that consensus across systems correlates with relevance
+(“chorus effect”) (Lillis, 2020).
+3.2. Expanded KE coverage and biologically coherent gene sets in the
+updated annotation
+To assess the prac?cal u?lity of the updated annota?on, we first quan?fy coverage across KEs and
+AOPs. The AI-assisted, mul?-step annota?on approach produced gene set representa?ons for 1,254
+KEs, which together span 523 AOPs, leaving only 7 AOPs without KE-level gene set coverage (Fig. 3).
+Compared with the previous annota?on by Saarimaki et al. (2023a), we annotated 385 addi?onal KEs,
+while 52 previously proposed KE annota?ons were rejected during re-cura?on (Supplementary file 1,
+Tab. S1) and 49 KEs from the prior set were no longer present in the current AOP-Wiki snapshot
+(Supplementary file 1, Tab. S1). To extend coverage beyond pathway- and ontology-based mappings,
+we added a complementary annota?on stream that captures explicit gene/protein/family men?ons
+embedded directly in KE ?tles. Such KEs o{en refer to a specific molecular target (e.g., receptor,
+transcrip?on factor, enzyme, complex), where pathway-level gene sets can be too diffused or where
+no suitable ontology term exists that is both specific and mechanis?cally aligned. This procedure
+produced 463 candidate grounded en??es a{er score filtering, of which 398 were confirmed by
+manual review, resul?ng in curated single-gene (or gene-family/protein) iden?fica?ons across 335 KEs.
+Together with retained ?tle-derived gene annota?ons from Saarimaki et al. (2023a), a total of 340 KEs
+were ul?mately supported by ?tle-derived gene evidence. Of these, 112 KEs were supported
+exclusively by ?tle-derived gene evidence, as no pathway/ontology term annota?on was ul?mately
+accepted for those KEs (Fig. 3). Importantly, we track gene provenance (HGNC, UniProt, FamPlex)
+explicitly, allowing users to dis?nguish ?tle-derived iden?fica?ons from pathway/ontology-derived
+gene sets and to interpret or filter these evidence types separately when appropriate.
+Despite this broad coverage, 266 KEs remained unannotated (Fig. 3). Of these, 171 received no
+candidate pathway/ontology terms or ?tle-derived single-gene annota?ons from either the novel
+annota?on workflow or the re-curated Saarimaki et al. (2023a) annota?on. The remaining 95 KEs had
+such candidate term annota?ons, but all were rejected during expert cura?on. In most cases, these
+represent events that are currently difficult to translate into gene sets in a biologically meaningful way,
+for example because the KE descrip?on is (i) too unspecific (e.g., Event:1239 Altered, Gene Expression,
+Event:2007 Non-coding RNA expression profile alteraAon, Event:2302 Increase, MalformaAons) (ii)
+framed at a level not captured by the used pathway/ontology terms (e.g., Event:1036 Increased,
+liposarcoma, Event:2233 Decreased, ERαβ heterodimers, Event:245 AcAvaAon, PXR/SXR), or (iii) not
+sufficiently mechanis?cally resolved to support a gene-based representa?on (e.g., Event:1550
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+DeposiAon of Ionizing Energy; Event:961 Increased, Clearance of thyroxine from serum; Event:947
+Increase, Early Life Stage Mortality, Event:829 Damage, Lipid bilayer). In other words, these KEs
+highlight the present boundary of what can be “annotated” into gene sets using exis?ng
+knowledgebases and controlled vocabularies.
+Across biological levels reported in the AOP-Wiki, KEs differ systema?cally in the types of resources
+that support their gene annota?ons. GO terms contribute the largest share to molecular and cellular
+KEs, with declining contribu?ons toward ?ssue/organ/individual/popula?on levels and a similar
+gradient is observed for curated pathway resources (Reactome, WikiPathways and KEGG) (Fig. 3B). This
+paYern is biologically coherent because lower-level KEs o{en describe discrete molecular ac?vi?es or
+proximal cellular processes that align naturally with mechanis?c ontologies and pathway models. In
+line with GO’s organiza?on, GO Molecular Func?on annota?ons are concentrated at molecular/cellular
+levels, consistent with the prevalence of MIE-like KEs describing receptor, enzyme or transcrip?on
+factor binding and ac?vity changes, whereas GO Cellular Component becomes par?cularly appropriate
+when KEs are fundamentally about localiza?on or transloca?on events. When KEs describe broader
+processes or states, such as ac?va?on of a pathway, coordinated stress responses or changes in cell
+state, GO Biological Process and curated pathway databases provide a more appropriate
+representa?on than molecular-func?on terms, because they encode mul?-step or mul?-component
+biology more directly. In contrast, HPO contributes propor?onally more to higher-level KEs, which
+matches its design as an ontology of phenotypic abnormali?es and therefore its closer alignment with
+integrated organ- and organism-level events than with narrowly mechanis?c molecular descrip?ons.
+This shi{ from GO/pathway annota?ons at lower levels to HPO at higher levels is consistent with
+ontology structure and biological organiza?on, suppor?ng appropriate KE granularity and mapping
+plausibility. Although this alignment was not explicitly imposed in the automated workflow, it emerged
+naturally from the meaning-aware annota?on and subsequent cura?on. Based on this paYern, future
+KE-to-gene annota?on efforts, par?cularly when extending the workflow to addi?onal KEs or AOPs,
+may benefit from aligning the biological level and mechanis?c scope of the KE with the resource type
+best suited to represent it: GO Molecular Func?on for direct molecular ac?vi?es, GO Cellular
+Component for localiza?on/transloca?on, GO Biological Process and pathway knowledgebases for
+process-level effects, and phenotype ontologies like HPO for higher-level outcomes. This alignment
+helps preserve mechanis?c intent, reduces category mismatches (e.g., forcing higher-level outcomes
+into overly granular mechanis?c terms), and provides an addi?onal plausibility check for mapping
+quality when the dominant resource type matches the KE’s biological scale.
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Figure 3: Coverage and characteris3cs of KE gene set annota3ons. (A) Number of AOPs covered by at least one annotated KE
+versus AOPs without coverage and counts of KEs, showing annotated KEs by Saarimäki et al. 2023, annotated KEs by the
+present updated annota3on, and non-annotatable KE. (B) Number of KEs annotated per knowledgebase source (GO, HPO,
+WikiPathways, Reactome, KEGG) stra3fied by biological level. (C) Distribu3on of gene set sizes (genes per KE; log10 scale)
+across event categories (MIE/KE/AO) and KE biological levels.
+Across the annotated KEs, gene set size shows a clear upward shi{ with increasing biological level
+(molecular, cellular, ?ssue, organ, individual, popula?on) (Fig. 3C). A similar paYern is observed for
+MIE, KE, AO distribu?ons (Fig. 3C), which o{en corresponds to these biological levels of organiza?on.
+This trend is biologically plausible: higher-level phenotypes and outcomes integrate perturba?ons
+across mul?ple pathways, cell types, and regulatory circuits, whereas lower-level molecular events are
+typically mediated by more constrained molecular events, aligning with a systems and network biology
+perspec?ve in which higher-order phenotypes emerge from interac?ons across mul?ple biological
+scales. Consequently, higher-level KEs may be beYer represented by broader, integra?ve gene sets
+reflec?ng coordinated ac?vity across pathways, cell types, and cellular systems, whereas lower-level
+molecular KEs are more o{en captured by smaller and more mechanis?cally constrained gene sets
+(Fischer et al., 2025; Parikshak et al., 2015). Importantly, this biological hierarchy is more pronounced
+in the present annota?on than in the previous approach, driven by smaller gene set sizes at lower
+biological levels, especially molecular and cellular KEs (Fig. 3C). This paYern is consistent with
+improved annota?on robustness at the lower biological levels, where narrowly defined events are less
+likely to be inflated by overly broad matches.
+A further improvement is the disappearance of previously extreme outlier gene sets, e.g., 1259 Event:
+Narcosis and Event:169 DisrupAon of membrane integrity, previously mapped to very large gene sets,
+including ~4,000 genes for membrane disrup?on, which are not observed at comparable magnitudes
+in the current annota?on (Fig. 3C, Supplement 1 Fig. S2). This likely reflects reduced suscep?bility to
+generic term annota?on under surface-level matching. In the updated workflow, clearly inconsistent
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+terms for narcosis (GOCC plasma membrane, GOBP regula?on of plasma membrane organiza?on)
+were discarded by the curators, and ambiguous membrane-related terms (e.g., GOCC plasma
+membrane, GOBP membrane disrup?on in other organism) were replaced by more mechanis?cally
+appropriate process terms iden?fied by the LM-approach (GOBP regula?on of plasma membrane
+repair, GOBP regula?on of membrane permeability). Large gene sets do remain, over 30 KEs exceed
+1,000 genes, but these are predominantly higher-level events (organ/individual level), where
+broadness is expected because such KEs summarize integrated physiology rather than discrete
+molecular mechanisms. One prominent excep?on occurs for broadly defined cellular inflamma?on KEs
+(e.g., Increase/Increased, inflamma?on), which exceed ~1,800 genes. In these cases, mul?ple
+ontology/pathway terms from GO, WikiPathways, and HPO match well by name and defini?on, but
+because “inflamma?on” is itself a highly general biological event, the union of these matched terms
+spans a very broad gene space. This breadth is consistent with the biology of inflamma?on, which is a
+core response that can be triggered by diverse insults including toxic compounds, and it encompasses
+mul?ple pathways, mediators, and cell types (e.g., cytokine signaling, inflammasome ac?va?on,
+immune recruitment) (Chen et al., 2018). However, the magnitude of this effect compared to other
+KEs highlights a prac?cal gap in the current AOP-Wiki event space: inflamma?on-related KEs are o{en
+under-granular, collapsing dis?nct inflammatory processes into a single broad KE label. Given the
+centrality of inflamma?on in toxicant responses and downstream pathology, increased granularity
+(e.g., separa?ng acute vs chronic inflamma?on, innate vs adap?ve components, inflammasome-driven
+vs cytokine-dominant mechanisms, ?ssue-specific inflammatory contexts) would likely improve
+mechanis?c resolu?on and reduce ambiguity in KE-level gene set interpreta?on (Bender et al., 2025;
+Chen et al., 2018).
+Comparing KE-specific gene memberships between the previous and current releases reveals
+substan?al divergence among KEs shared with Saarimaki et al. (2023a). Using the Jaccard index (JI) to
+quan?fy overlap, 58% of shared KEs showed low similarity at the gene set level (JI < 0.3)
+(Supplementary file 1; Fig. S3). In contrast, similarity was higher at the level of annotated term
+iden?fiers, where 40% of KEs had JI < 0.3. Together, these results indicate that gene set divergence is
+o{en driven by changes in gene membership that can occur even when term-level mappings are
+compara?vely stable, but also that term-level changes account for a substan?al frac?on of the
+observed gene set differences.
+To understand the drivers of these changes, we traced gene set differences back to the provenance of
+term assignments and term availability across knowledgebase releases. In most cases, changes in gene
+set composi?on co-occurred with changes in annotated term iden?fiers (i.e., terms added and/or
+removed) (Supplementary file 1, Tab. S2). We observed two prominent, conceptually dis?nct causes
+behind term-level changes. First, a considerable frac?on of KEs was affected by terms that were
+introduced into the MSigDB-based term universe over ?me, meaning that such terms could not have
+been proposed or recovered under the older Saarimäki MSigDB term set and were therefore
+legi?mately absent from the earlier annota?on. Second, some previously used terms are now missing
+from the current MSigDB-derived term universe and therefore could not be matched by the current
+workflow (“missing in term KB”). Where appropriate, these terms were retained through re-cura?on
+of the earlier annota?on.
+Importantly, we also iden?fied a small subset of KEs where gene sets changed despite unchanged term
+iden?fiers (five KEs; Supplementary file 1, Tab. S2). This paYern is consistent with updates in the
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+underlying biological knowledgebases themselves: resources such as GO, Reactome, WikiPathways,
+and HPO are ac?vely maintained, and the gene membership associated with a stable iden?fier may
+change across releases as cura?on evolves. In prac?cal terms, this means that version-to-version
+differences in KE gene sets can reflect both (i) updated KE-term mapping decisions and (ii) changes in
+the gene membership of retained term iden?fiers, which can occur as the underlying resources are
+updated. The laYer suggests a prac?cal route for future maintenance, because gene set content could
+in principle be refreshed automa?cally for stable curated term mappings without repea?ng manual
+annota?on. This underscores the importance of explicitly repor?ng knowledgebase provenance
+(release/version) and trea?ng KE gene sets as ?me-stamped representa?ons of curated biological
+knowledge.
+Inspec?on of KEs with low Jaccard similarity between the updated annota?ons and Saarimaki et al.
+(2023a) annota?ons revealed a consistent paYern (Supplementary file 1, Tab. S3). Generic or weakly
+aligned terms from Saarimaki et al. (2023a) were o{en replaced by more mechanis?cally specific and
+context-appropriate terms, shi{ing from broad cellular responses or umbrella pathways toward
+disease-, process-, or receptor subtype-level concepts. For example, Event:1291 Hepatotoxicity was
+previously represented by the highly general GO biological process term cellular response to toxic
+substance, which describes a broad stress response rather than hepatotoxicity pathogenesis. In the
+updated annota?on, this was replaced by more specific phenotype-level terms capturing clinically and
+mechanis?cally meaningful hepa?c outcomes (e.g., hepa?c failure and hepa?c necrosis). Similarly,
+Event:1138 Uncoupling of oxidaAve phosphorylaAon, reduced ability to generate ATP moved from
+broad oxida?ve phosphoryla?on pathways toward terms explicitly capturing uncoupling as the core
+mechanis?c concept (including mitochondrial uncoupling-specific entries). In Event:1038 AcAvaAon,
+beta2 adrenergic receptor, a more generic “adrenergic receptor binding” term was refined to a beta2-
+specific molecular func?on annota?on, improving subtype specificity. Likewise, downstream
+reproduc?ve and pathology-related KEs show a systema?c shi{ toward phenotype-aligned specificity:
+Event:1515 Spermatocyte depleAon moved from generic apoptosis-related processes to terms
+explicitly referencing spermatogenesis and spermatocyte matura?on arrest; and Event:1763 Urothelial
+tumor shi{ed from broad cancer-related terms to cancer type-specific annota?ons (e.g.,
+bladder/urinary tract neoplasm and bladder cancer pathways). In addi?on to increased specificity,
+several examples indicate removal of broad or ambiguously matched terms that likely inflated gene
+sets without adding mechanis?c resolu?on. For Event:1511 Lipid peroxidaAon, the updated annota?on
+explicitly captures the lipid oxida?on component of the event, while dropping less targeted
+membrane-related terms. Event:1547 Mitochondrial injury also illustrates improved alignment: a
+loosely associated “mitochondrial uncoupling” mapping was replaced by annota?ons more consistent
+with mitochondrial dysfunc?on and apoptosis-related mitochondrial changes.
+Several low-overlap examples reflect not only revised mapping decisions but also changes in the
+available term universe over ?me. For instance, Event:1044 PromoAon, mesovarian leiomyomas was
+previously approximated using loosely related smooth muscle growth/prolifera?on terms, whereas
+the updated annota?on assigns the direct phenotype term uterine leiomyoma, which was not
+available in the earlier input term catalog and therefore could not have been selected previously.
+Moreover, 56 KEs previously annotated in Saarimaki et al. (2023a) were rejected during re-cura?on,
+providing informa?ve examples of mismatches introduced by lexical matching (Supplementary file 1,
+Tab. S3). Several rejec?ons reflect token-level confounding, for example, Event:1686 DeposiAon of
+Energy which refers to physical energy deposi?on by a stressor (e.g., radia?on), was mapped to
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+mechanis?cally unrelated energy metabolism/homeostasis terms. Likewise, Event:1913 Endothelial
+cell dysfuncAon was mapped to the GO term for endothelial cell ac?va?on, and Event:1421 AcAvated,
+LXR was linked to the PPAR signaling pathway, sugges?ng manual supplementa?on in the absence of
+suitable lexical candidates by the NLP-based approach of Saarimaki et al. (2023a). In these cases, the
+updated approach assigned low confidence and did not retain the mappings, consistent with improved
+seman?c specificity.
+Together, these changes suggest that low gene set overlap frequently reflects meaningful refinement,
+shi{ing from broad, loosely associated representa?ons toward terms that more directly encode the
+KE’s mechanis?c intent, and, in some cases, the removal of previously assigned mappings that expert
+re-cura?on judged to be mechanis?cally mismatched.
+3.3. Expert-derived confidence scores expose annotation uncertainty
+Rather than trea?ng KE-gene set annotations as uniformly reliable, we encoded expert judgement as
+an explicit confidence layer attached to each KE mapping, implemented through double-independent
+expert review and rule-based consolidation. Curators provided qualitative assessments (fit, partial,
+not_fit), enabling derivation of a quan?ta?ve quality score for each KE annota?on. This score provides
+an explicit confidence layer that reflects curator agreement and annota?on specificity and can be
+propagated to the gene set level. In practice, this enables confidence-aware downstream analyses,
+such as AOP fingerprinting, where users can identify, weight, or even filter KE gene sets based on
+annotation quality, improving transparency and interpretability compared to unscored gene set
+resources.
+Across all scored KEs, 57% of KEs achieved high scores (≥ 0.7), and an addi?onal 31% fell in the
+intermediate range (0.3-0.7), indica?ng that for the majority of KEs, the final retained mappings were
+judged by curators to be biologically relevant (Fig. 4A). At the same ?me, a smaller subset showed
+substan?al uncertainty, including 12% with low scores (< 0.3). These low-score cases are informa?ve
+because they iden?fy KEs for which available ontology/pathway terms do not provide a well-aligned
+representa?on, or for which the KE itself is intrinsically difficult to capture as a gene set.
+As the previously published Saarimaki et al. (2023a) annota?ons were re-curated within the same
+expert-review framework used for the present study (Fig. 1), this enables a direct comparison of KEterm curator assessment. Under this common scoring scheme, the earlier annota?on was rated
+systema?cally lower than the final updated annota?on: only 40% of KEs achieved a high score when
+based on Saarimäki-derived mappings, and 21% of KEs had no retained mappings a{er re-cura?on
+(i.e., all previously assigned mappings for that KE were rejected). Together, these results indicate that
+the updated workflow yields final KE mappings that are more frequently endorsed by expert review.
+To understand sources of uncertainty among retained mappings, we analyzed curator reason codes
+assigned to partial-fit inclusions (Supplementary file 1, Tab. 1; Fig. 4B). These codes captured why a
+candidate term is biologically related but still insufficient to represent the KE as written. The most
+frequent reasons are partly_missing_specificity (21%), too_broad (19%), too_specific (19%), and
+related_but_not_same (17%), followed by lacks_abnormality (7%) and causal-placement mismatches
+(downstream_event 7%, upstream_event 7%). Collectively, these patterns show that low scores are
+most often driven by granularity mismatch (terms broader or narrower than the KE) and by conceptual
+proximity without full equivalence (related but not the same).
+Across reasons for exclusions (rejected candidate terms, summarized separately in Supplementary file
+1, Fig. S4), too_broad and related_but_not_same are again prominent, indicating that many
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+candidates were biologically adjacent but still not acceptable as KE representations at the level
+required for gene set modeling.
+Figure 4: Cura3on-derived annota3on confidence scores and reasons for uncertainty. (A) Distribu3on of KE annota3on scores
+(range 0.1–1.0) for Saarimäki et al. 2023 annota3ons (re-curated) and full updated annota3on set, binned into three intervals
+with the corresponding KE counts shown above each bar. (B) Most frequent curator reason codes contribu3ng to par3al KEterm inclusions, highligh3ng common sources of uncertainty.
+The confidence score differen?ates KEs that are straighorward to represent from KEs that remain
+difficult to annotate (Tab. 2). High-scoring KEs (Tab. 2; score = 1.0) typically correspond to events for
+which well-aligned terms exist in the knowledgebases used in this study, and curators therefore
+converge on clear mappings (e.g., estrogen receptor ac?vity, PPARα ac?va?on, adipogenesis,
+programmed cell death). In contrast, low-scoring KEs (Tab. 2; score = 0.1) tend to fall into recurring
+categories: (i) very specific or context-dependent events (e.g., life-stage or disease-context specificity
+such as infant leukemia, pancrea?c acinar cell tumors, granulosa cell prolifera?on of gonadotropinindependent follicles), (ii) highly granular molecular statements for which no close ontology/pathway
+term was available in our sources (e.g., AHR/ARNT dimeriza?on), (iii) events that are hard to represent
+as gene sets overall (e.g., physiologic readouts such as decreased mucosal blood flow or membrane
+integrity disrup?on), and (iv) composite KE phrasing that combines mul?ple concepts into a single KE
+?tle (e.g., systemic inflamma?on leading to hepa?c steatosis), which makes it difficult to find a single
+term that matches the whole statement.
+Two examples highlight different “resolution limits” of ontology/pathway-based representation. First,
+mitochondrial dysfunction is a central toxicology concept but is often used as an umbrella label; within
+the pathway/ontology sources used here, no single term captured the concept at the resolution
+implied by the KE, and candidate matches were either too specific or only related but not equivalent.
+Second, the contrast between PPARα and PPARγ shows the opposite situation: the KE is
+mechanistically precise, but the knowledgebases available for mapping in this study do not provide
+terms at the required resolution. Activation, PPARα received a perfect score because PPARα-specific
+pathway/ontology terms were available and could be matched directly. In contrast, PPARγ-related KEs
+scored low because our knowledgebases did not provide sufficiently PPARγ-specific pathway/ontology
+terms; the closest candidates were broader PPAR signaling terms that cover multiple isoforms. This
+matters biologically because different PPARs regulate overlapping but distinct gene processes and
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+have distinct functions, so a broad PPAR pathway mapping for a PPARγ-specific KE should be
+interpreted cautiously (Wagner & Wagner, 2020).
+Table 2: Examples for KEs with top (score = 1.0) and with the lowest annota3on scores (score = 0.1).
+KE ID KE name Annotation
+score
+Reason for decreased score, annotated term
+is:
+Event:149 Increase, Inflammation 1 -
+Event:1060 Alteration, lipid metabolism 1 -
+Event:1864 Increase, Programmed cell death 1 -
+Event:1029 Increased, adipogenesis 1 -
+Event:1395 Liver Cancer 1 -
+Event:1276 Lung fibrosis 1 -
+Event:227 Activation, PPARα 1 -
+Event:1541 Mitochondrial Complex I inhibition 1 -
+Event:948 reduced production, VEGF 1 -
+Event:1606 Activation of hepatic stellate cells 1 -
+Event:748 Increased, Estrogen receptor (ER) activity 1 -
+Event:193 Decreased, Nitric Oxide 0.1 downstream_event
+Event:1254 Infant leukaemia 0.1 partly_missing_specificity,
+related_but_not_same
+Event:177 Mitochondrial dysfunction 0.1 too_specific, related_but_not_same
+Event:944 dimerization, AHR/ARNT 0.1 partly_missing_specificity
+Event:1270 Inactivation of PPARγ 0.11 too_broad, partly_missing_specificity
+Event:1800 Granulosa cell proliferation of
+gonadotropin-independent follicles,
+Reduced
+0.1 too_broad, partly_missing_specificity
+Event:1404 Decreased, mucosal blood flow 0.1 too_broad, partly_missing_specificity
+Event:486 systemic inflammation leading to hepatic
+steatosis
+0.1 partly_missing_specificity,
+related_but_not_same
+Event:2005 Altered neurotransmission in
+development
+0.1 partly_missing_specificity,
+related_but_not_same, too_broad
+Event:169 Disruption, Membrane integrity 0.1 lacks_abnormality, related_but_not_same,
+downstream_event
+Event:1725 Pancreatic acinar cell tumors 0.1 too_broad, partly_missing_specificity,
+context_missing
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+The distribution of partial-fit and rejection reasons points to improvement opportunities across three
+layers. 1) AOP-Wiki/KE development: frequent “too broad”, “partly missing specificity”, and “context
+missing” cases suggest that some KEs are under-specified or combine multiple concepts. Clearer
+separation of causal steps, explicit context qualifiers, and more consistent KE phrasing would improve
+interoperability. The OECD AOP Developers’ Handbook already emphasizes structured KE description
+and transparent evidence assembly (OECD, 2018), stronger recommendations for ontology-aware KE
+phrasing could further improve machine-actionability and interoperability (Mortensen et al., 2025).
+2) Ontologies/pathways: cases such as missing isoform-level receptor biology indicate that controlled
+vocabularies can lack resolution for some toxicology-relevant mechanisms, motivating targeted
+pathway curation and expansion, including community-driven resources such as WikiPathways that
+support ongoing content growth and community contribution (Agrawal et al., 2024). 3) AI-assisted
+workflow: the partial-fit and rejection patterns show that automated matching alone is not sufficient
+at AOP-Wiki scale. KE titles often encode mechanistic and other contextual constraints that are not
+reliably captured from term names alone. Resolving these cases requires toxicology and AOP-specific
+understanding, so expert review remains necessary. Thus, we conclude that large-scale KE gene set
+validity cannot be assessed objectively without human judgment.
+These results also highlight the prac?cal value of the AI-assisted, mul?-step annota?on design.
+Automa?on is effec?ve for genera?ng a manageable candidate selec?on at scale, while structured
+expert review provides the final mechanis?c decision and the accompanying confidence score layer.
+The annota?on score can support weighted and transparent evidence summaries, which is o{en what
+is needed in regulatory-relevant contexts (OECD, 2021). Specifically, the score can be used to
+dis?nguish between high-certainty KE mappings that can be emphasized as robust mechanis?c
+evidence and lower-certainty mappings that can s?ll be reported but clearly flagged as more
+ambiguous or context-dependent. This makes the AOP fingerprint easier to communicate as a
+structured summary of mechanis?c evidence, while remaining explicit about uncertainty and
+provenance. Such confidence-aware repor?ng aligns with OECD guidance that emphasizes structured
+and transparent evidence assembly in AOP development and evalua?on (OECD, 2018, 2021), and it
+supports broader community efforts toward machine-ac?onable and FAIR-oriented AOP resources
+where quality signals and provenance metadata facilitate responsible reuse (Mortensen et al., 2025).
+In the same spirit, it complements ongoing OECD efforts to improve the transparency and
+reproducibility of omics evidence used in regulatory seings, where repor?ng frameworks aim to
+standardize how omics analyses are documented and interpreted (OECD, 2023b).
+Overall, the score is not only a confidence indicator for AOP/KE enrichment analyses, but also a
+diagnostic signal that identifies KEs whose current wording is difficult to translate into gene sets
+without added context or decomposition and areas where pathway/ontology resources may need
+more targeted terms to represent toxicology-relevant mechanisms.
+3.4. Regulatory endpoint and MeSH mapping place annotated AOPs in
+a broad toxicological and disease context
+In addi?on to the KE-level gene set annota?on, we assigned AOP-level contextual descriptors to
+support interpreta?on of downstream analyses. Specifically, we mapped AOP adverse outcomes to
+regulatory hazard/endpoint classes and assigned MeSH descriptors for disease-oriented and literatureoriented contextualiza?on. These mappings were generated at the AOP/AO level and are therefore
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+conceptually dis?nct from the KE-level gene set annota?ons described above. The regulatory endpoint
+mapping provides a structured summary of the annotated AOP landscape in terms of toxicological and
+regulatory relevance. Viewed across the full annotated AOP space, the regulatory endpoint mapping
+indicates that the current AOP landscape spans a broad set of toxicologically relevant domains. Among
+human-relevant categories, the largest numbers of AOPs map to STOT SE/RE, followed by endocrine
+disrup?on – human health, toxicity for reproduc?on, and carcinogenicity, while substan?al numbers
+also cover emerging or increasingly priori?zed regulatory domains such as adult neurotoxicity,
+developmental neurotoxicity (DNT), and immunotoxicity (Fig. 5). This breadth is consistent with the
+growing use of AOPs in regulatory toxicology and new approach methodologies across mul?ple
+endpoint domains, including endocrine disrup?on, neurotoxicity, developmental neurotoxicity, and
+immunotoxicity (European Food Safety et al., 2024; OECD, 2023a).
+The MeSH assignments provide an addi?onal disease- and phenotype-oriented view of these AOPs.
+Some endpoint classes show highly intui?ve profiles: carcinogenicity is dominated by Neoplasms, toxic
+for reproduc?on is overrepresented for urogenital and congenital/hereditary disease categories, and
+adult neurotoxicity and DNT show strong representa?on of Nervous System Diseases, with DNT also
+showing a substan?al contribu?on from Mental Disorders, consistent with the long-recognized
+developmental and func?onal consequences of perturbing neurodevelopmental processes (Pitzer et
+al., 2023). By contrast, STOT SE/RE and endocrine disrup?on – human health are associated with a
+more diverse MeSH space, which is biologically plausible because these hazard classes cut across
+mul?ple organ systems and disease areas rather than corresponding to a single disease family. The
+endocrine-disrup?on paYern is also compa?ble with the broad systemic roles of endocrine signaling
+across metabolism, development, reproduc?on, and ?ssue homeostasis. A notable paYern is that
+acute toxicity is enriched for non-disease or broader physiological MeSH categories. This is
+unsurprising, because adverse outcomes in AOPs are not restricted to formal diseases and o{en
+include func?onal or apical biological effects relevant to risk assessment. MeSH itself also contains
+hierarchical branches for physiological phenomena and other non-disease concepts, so mapping to
+such categories can be valid. However, the recurrence of “Other (non-disease)” categories across
+several endpoint classes also reflects that some AOP adverse outcomes are currently phrased in ways
+that are biologically meaningful but not harmonized with disease-oriented controlled vocabularies.
+This points to a broader opportunity for future AOP development: more systema?c AO naming and
+explicit disease-oriented annota?on could improve interoperability with external resources such as
+Compara?ve Toxicogenomics Database (CTD), which relies on controlled disease vocabularies
+integra?ng MeSH, and could strengthen literature linkage and regulatory interpretability.
+Overall, the combined endpoint and MeSH analysis suggest that the current AOP landscape comprises
+a diverse and increasingly regulatory-relevant set of biological outcome domains. The KE-level gene
+set annota?on developed here therefore supports not only mechanis?c enrichment, but also
+interpreta?on across a broad spectrum of human-health and environmental endpoint contexts.
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Figure 5: MeSH pa/erns and AOP counts across human-relevant hazard/regulatory endpoint classes. Dots show the
+percentage of AOPs in each hazard/regulatory endpoint that contains an AO mapped to the MeSH category. Bars show the
+count of AOPs per hazard/regulatory endpoint. Mul3ple assignments per AOP are possible. STOT SE/RE = Specific target organ
+toxicity single exposure/repeated exposure.
+3.5. Expanded annotation supports confidence-aware and endpointinformed interpretation of omics data in an AOP context
+To demonstrate downstream u?lity of the newly developed annota?ons, we inves?gated the AOP
+fingerprint using the reference chemical groups defined previously (Saarimaki et al., 2023a):
+carcinogens, hepatotoxicants, thyroid-ac?ve chemicals, and sex hormone receptor agonists (SHR).
+Using curated CTD chemical-gene interac?ons as input, we performed enrichment analysis against
+gene sets defined at both the AOP and KE levels. Compared to the Saarimaki et al. (2023a) annota?on,
+the present annota?on yields a higher number of significantly enriched terms per chemical across all
+tested categories, with the increase being more pronounced at the AOP level than at the KE level
+(Fig. 6A). This is consistent with the increased KE coverage achieved by the novel approach, which
+expands the number of KE gene sets available to contribute evidence to AOP-level enrichment.
+Despite this overall increase in enriched terms, the endpoint-level interpretability remains comparable
+or improves depending on the chemical class. When inves?ga?ng if the top 5 contain at least one
+expected AOP, the updated annota?on shows an improved frac?on of correct hits for carcinogenic
+chemicals, while liver and SHR categories remain high and similar between annota?ons; thyroid
+chemicals remain challenging in both annota?ons (Fig. 6). The persistent difficulty for thyroid
+chemicals suggests that limited performance is not solely an annota?on coverage issue, but also
+reflects limits in specificity of CTD-derived chemical-gene signatures for thyroid-ac?ve compounds
+and/or remaining gaps in mechanis?c AOP/KE representa?on for thyroid-relevant biology, despite
+ongoing progress in developing and assembling thyroid AOP networks in recent years (Noyes et al.,
+2019; Wiklund et al., 2023).
+To assess regulatory relevance beyond hit counts, we examined the hazard classes and regulatory
+endpoints associated with adverse outcomes of the top-ranked AOPs (Fig. 6C). For carcinogenic
+chemicals, the largest share of top 5-ranked AOPs is expectedly annotated with the hazard category of
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Carcinogenicity. Notably, STOT SE/RE and Endocrine disrup?on - human health (ED HH) also appear
+prominently among the top categories. Chemical carcinogenic outcomes frequently arise through
+cytotoxicity-induced regenera?ve prolifera?on and endocrine modula?on, which promote sustained
+prolifera?ve signaling and tumorigenic processes across mul?ple ?ssues (Cohen, 2024; Del Pup et al.,
+2016; Strupp et al., 2023). For the thyroid-ac?ve group, ED HH is among the dominant categories,
+which is coherent with the endocrine nature of thyroid hormone system disrup?on. This disrup?on
+can have an impact on mul?ple different organ systems (Noyes et al., 2019; Wiklund et al., 2023),
+explaining the prominent enrichment of STOT-related AOPs. The addi?onal presence of
+aqua?c/environmental hazard categories in this group is also mechanis?cally plausible because thyroid
+hormone signaling is highly conserved across vertebrates and thyroid-related AOP networks explicitly
+integrate endpoints spanning aqua?c taxa (e.g., amphibian and fish developmental outcomes) (Haigis
+et al., 2023; Zwahlen et al., 2024). For liver-ac?ve chemicals, the enrichment profile is dominated by
+ED HH together with substan?al STOT representa?on. This combina?on is biologically coherent
+because liver toxicity frequently involves endocrine-regulated metabolic processes and nuclear
+receptor modula?on, including PPAR signaling, and many liver-relevant AOPs connect metabolic
+dysregula?on, inflamma?on, and ?ssue remodeling to adverse outcomes such as steatosis, fibrosis,
+and tumor development (Monroy-Ramirez et al., 2021). Mechanis?cally, PPARs are central
+transcrip?onal regulators of hepa?c lipid metabolism and inflammatory responses, and dysregula?on
+of these processes is ?ghtly coupled to liver disease that is frequently represented in AOP landscape
+(Monroy-Ramirez et al., 2021; Pawlak et al., 2015). From a hazard-class perspec?ve, the appearance
+of STOT among top categories is consistent with the CLP systemic toxicity context that includes organ
+toxicity classifica?ons. The SHR (sex hormone receptor agonist) chemical group shows a major share
+of top-ranked AOPs falling under Carcinogenicity and addi?onal contribu?ons from STOT, ED HH, and
+Toxic for reproduc?on. This paYern is mechanis?cally plausible because estrogen and androgen
+receptor signaling modulates transcrip?onal processes that are directly implicated in hormonedependent cancers (most prominently breast and prostate cancer), and sex hormone signaling also
+underlies reproduc?ve development and fer?lity endpoints (Kim et al., 2025). Taken together,
+top-ranked AOP fingerprints for each chemical group are connected to endpoint domains that are
+mechanis?cally aligned with the intended groups, while also showing plausible cross-domain
+connec?ons (e.g., endocrine-metabolic-tumor interac?on for liver and SHR).
+Finally, we illustrate confidence-aware interpreta?on at the KE level using the SHR group (Fig. 6D). The
+top results include endocrine-relevant mechanisms, such as modula?on of steroidogenesis and
+steroidogenic protein expression, 5α-reductase, and Leydig-cell steroidogenesis related events, which
+aligns well with the expected mechanisms of sex-hormone receptor agonists. The SHR fingerprint also
+contains a small set of low-confidence KEs (score ≤ 0.3), including InhibiAon 5α-reductase, Abnormal
+lipid metabolism, and several KEs with narrow or ambiguous phrasing such as Increase, Nuclear
+receptor E75b gene expression, Increase, Androgen receptor protein expression/abundance, and
+Decreased steroidogenesis, AlteraAons in the Leydig Cell Cytoskeleton. These cases illustrate three
+recurring limita?ons already visible in the cura?on reason overview (Fig. 4B): Granularity mismatch
+(candidate terms are broader or narrower than the KE), related-but-not-equivalent matches, and
+context or phrasing constraints that are difficult to represent with the knowledgebases used for
+mapping in this study. Moderate-confidence KEs (0.3-0.7) include mechanis?cally plausible endocrine
+and transcrip?onal readouts such as AcAvaAon of specific nuclear receptors, TranscripAonal change,
+Agonism, ReAnoic acid receptor, and general ?ssue remodeling processes. These typically reflect
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+situa?ons where mul?ple pathway/ontology candidates are plausible but differ in scope or context,
+producing less curator consensus. In contrast, many endocrine-relevant KEs central to SHR
+mechanisms (e.g., androgen receptor ac?va?on/agonism and steroidogenesis-related events) are
+enriched with high confidence, indica?ng that for core mechanisms the mapping is both biologically
+aligned and curator-consistent.
+Figure 6: CTD-based AOP fingerprin3ng benchmark and confidence-aware interpreta3on. (A) Mean difference in the number
+of significantly enriched AOPs and KEs per chemical for each chemical group (Carcinogenic, Thyroid, Liver, SHR), computed as
+novel annota3on − Saarimäki et al. 2023 (padj < 0.05). Points indicate the mean difference across chemicals, horizontal bars
+show 95% confidence intervals, leo ver3cal line marks no change. (B) Frac3on of CTD chemicals whose top 5 enriched results
+include at least one expected endpoint-relevant AOP, comparing the novel annota3on to the Saarimäki 2023 annota3on. (C)
+Regulatory endpoints and their distribu3on across the top 5 enriched AOPs for each chemical group using the new annota3on.
+(D) Example KE-level fingerprint of the top 20 enriched KEs for the sex hormone receptor (SHR) group using the new
+annota3on.
+3.6. Recommendations for use, interpretation and future extensions
+The aim of this annota?on is to provide, for each KE, a gene set representa?on that captures the
+molecular pathways and biological programs conceptually underlying the KE. Importantly, these gene
+sets are designed to be broadly applicable across experimental contexts, reflec?ng mechanis?c
+content that may generalize across systems rather than being tailored to a single study design, ?ssue,
+or exposure scenario. As such, the resource is best viewed as a founda?onal mapping that enables
+AOP-informed analysis of transcriptomics (and other omics) data, suppor?ng tasks such as mechanis?c
+interpreta?on, KE-anchored enrichment analyses, and cross-system comparisons. Because KEs are
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+used in diverse biological contexts, users may wish to refine mappings for specific applica?ons. For
+example, in a targeted case study, one might restrict a KE gene set to genes expressed in a relevant cell
+type, modulate memberships based on ?ssue specificity, integrate exposure- or ?me-resolved
+expression paYerns, or priori?ze pathway branches that are most consistent with the AOP context. In
+other words, this annota?on is intended to provide a mechanis?cally grounded star?ng point.
+Cri?cally, this resource is not intended to directly define biomarkers for tes?ng or regulatory decisionmaking on its own. In par?cular, biomarkers are typically quan?ta?ve measures, whereas the present
+AOP-based annota?on provides qualita?ve mechanis?c associa?ons and does not, at its current stage,
+specify the magnitude, direc?on, or threshold of change required for biomarker defini?on (FDA-NIH,
+2016). Biomarker development therefore requires addi?onal downstream steps, such as model-based
+feature selec?on, evalua?on of predic?ve performance, and experimental confirma?on, along with
+explicit considera?on of confounders, assay constraints, and reproducibility (NRC, 2007). The value of
+the present annota?on in that workflow is that it provides a basis for mechanis?c hypothesis
+genera?on that can then be refined for biomarker selec?on using empirical data.
+Several limita?ons should be considered when interpre?ng enrichment or AOP/KE fingerprints. The
+current implementa?on is restricted to a human gene space, even though annotated KEs par?cipate
+in a broad range of AOPs. This means that KEs outside a strictly human toxicology context are currently
+represented through human-centered molecular annota?ons, which is useful for many conserved
+processes but should be interpreted accordingly. Pathway- and ontology-derived gene sets may also
+include genes associated with the broader process surrounding a KE, rather than only direct drivers of
+the event itself. Conversely, for KEs explicitly referring to individual genes or proteins, the incorpora?on
+of ?tle-derived molecular en??es improves specificity where pathway- or ontology-based matching
+alone would be insufficient.
+Moreover, in most cases, the gene set representa?on does not encode the direc?on of a KE
+(increase/decrease; ac?va?on/inhibi?on). This reflects a general limita?on of pathway/ontology gene
+sets, which typically define membership of genes associated with a process rather than the sign of
+regula?on under a specific perturba?on. Consequently, enrichment of a KE gene set should be
+interpreted as evidence that the molecular response involves genes linked to the KE’s biology, but not
+as direct evidence that the KE is increased vs decreased. Direc?onality, when needed, must be inferred
+from the omics data itself (e.g., sign of differen?al expression, signed enrichment sta?s?cs, or genelevel paYerns). This remains non-trivial, because ac?va?on of a biological event may involve both upand down-regula?on across different components (e.g., inhibitors vs ac?vators), similar to the
+interpreta?on challenges encountered in standard pathway enrichment workflows (Wang et al., 2024;
+Zhao & Rhee, 2023). This makes the annota?on especially useful for compara?ve and integra?ve
+analyses, where the goal is to detect whether molecular profiles are consistent with the biology
+represented by that KE.
+Even under the meaning-aware workflow presented here, some KEs remain challenging to translate
+into gene sets. This limita?on reflects the boundary condi?ons of gene set representability given
+current controlled vocabularies and knowledgebases. In prac?ce, KEs can be difficult to represent
+when they are (i) underspecified or highly context-dependent (e.g., missing relevant ?ssue/cell type
+or direc?onality), (ii) framed at a biological level not captured well by pathway/ontology terms, or (iii)
+not sufficiently mechanis?cally resolved to support a gene-based abstrac?on. Making these difficultmade available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+to-map KEs visible through our scored annota?on is valuable, because it indicates where addi?onal
+mechanis?c clarifica?on of the KE and improved ontology coverage may be required.
+A promising direc?on for improving scalability and precision in the future may be to incorporate
+defini?ons (not only ?tles) into the annota?on process. Sentence-level models can benefit from richer
+context, and pathway/ontology resources o{en provide concise defini?ons that describe the scope of
+the term. Integra?ng these defini?ons alongside term names could improve seman?c alignment and
+reduce ambiguity during candidate retrieval and filtering. However, a key limita?on on the KE side is
+that AOP-Wiki typically provides a KE descrip?on, but this text rarely provides a concise defini?on.
+These descrip?ons o{en include background informa?on, related biology, examples, or narra?ve
+context, which dilutes the informa?on needed for machine-ac?onable seman?c matching. A simple
+but poten?ally high-impact improvement would be the addi?on of a concise “defini?on” field for KEs
+(and ideally AOPs) that captures the mechanis?c essence in one or two sentences. Such structured
+defini?ons would not only support more robust language-model operability, but also improve
+interpretability, consistency, and FAIR reuse (Vogt et al., 2025). The observa?on that some KEs cannot
+be captured cleanly by exis?ng ontologies suggests that such free text may be an essen?al complement
+to controlled vocabularies for represen?ng complex biological events. Rather than trea?ng free text as
+an obstacle, future AOP-Wiki evolu?on could embrace it as a structured resource: defini?ons and
+constrained textual fields can be opera?onalized via language models to improve annota?on quality
+while acknowledging that not all mechanis?c concepts are currently covered by formal ontologies
+(Lucy Lu Wang et al., 2018; Peng et al., 2023).
+Overall, the annota?on is best used as a confidence-aware framework for mechanis?c interpreta?on.
+Its strongest value lies in enabling structured, transparent, and mechanis?cally broad interpreta?on of
+omics data across many KEs and AOPs at once, while preserving provenance and confidence
+informa?on to guide context-appropriate use.
+Conclusion
+In this work, we introduce a scalable AI-assisted, mul?-step workflow for annota?ng AOP-Wiki KEs with
+mechanis?cally meaningful gene set representa?ons, enabling AOP knowledge to be used directly in
+toxicogenomics. By combining seman?c retrieval, LLM-assisted refinement, and structured expert
+group cura?on, the workflow translates heterogeneous KE phrasing into analysis-ready gene sets while
+aYaching an explicit confidence layer grounded in expert judgment. This directly addresses a central
+obstacle for AOP-guided omics at scale: achieving broad coverage across an expanding KE landscape
+while making uncertainty transparent, par?cularly when KEs differ in granularity, context dependence,
+and feasibility of gene set representa?on.
+A key contribution of this study is the demonstration that meaning-aware AI components outperform
+traditional lexical/NLP-based matching for KE-to-term mapping by producing candidates that are more
+consistently mechanistically plausible and more frequently accepted by experts. At the same time, the
+results reaffirm an essential point: AOP annotation fundamentally requires toxicological expert
+assessment to adjudicate mechanistic appropriateness, resolve ambiguity, and ensure that mappings
+remain biologically defensible. Importantly, our workflow substantially reduces manual curation effort
+by narrowing the candidate space and increasing candidate quality, thereby shifting expert time from
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+exhaustive search to high-value review and consolidation while improving the overall annotation
+quality.
+To maximize reuse and enable continuous improvement, we release the resulting annotation resource
+and associated metadata (including confidence scores, curator reason codes, and provenance). The
+workflow is explicitly designed to support routine updates, allowing the resource to evolve with AOPWiki growth and with changing pathway/ontology knowledgebases. Beyond immediate utility for KEand AOP-level enrichment and fingerprinting, the approach provides a general, reusable blueprint for
+future AOP annotation efforts. In particular, it establishes a practical foundation for the OECD
+Omics2AOP (workshop in proof-stage at Archives of Toxicology), where the same multi-step approach
+and scoring concepts can be extended beyond transcriptomics to additional molecular layers (e.g.,
+proteins and metabolites) and translated into community tools that support transparent, confidenceaware AOP-guided interpretation. Together, these contributions strengthen the connection between
+mechanistic AOP knowledge, multi-omics data integration, and regulatory-relevant evidence
+generation.
+Competing Interests
+The authors declare no competing interests.
+Acknowledgements
+This study was funded by the Horizon Europe Framework research and innova?on programme
+(HORIZON), INSIGHT (grant number 101137742), and the European Research Council (ERC)
+programme, Consolidator project ARCHIMEDES (grant number 101043848). A. Schaffert, L. Möbus,
+and G. del Giudice were funded by the Tampere Ins?tute of Advanced Study (IAS). The work of M.
+Paparella at the Medical University of Innsbruck is funded by the Austrian Federal Ministry for Climate
+Ac?on, Environment, Energy, Mobility, Innova?on and Technology, Department V/5 – Chemicals Policy
+and Biocides.
+References
+Agrawal, A., Balci, H., Hanspers, K., Coort, S. L., Martens, M., Slenter, D. N., Ehrhart, F., Digles, D.,
+Waagmeester, A., Wassink, I., Abbassi-Daloii, T., Lopes, E. N., Iyer, A., Acosta, J. M., Willighagen,
+L. G., Nishida, K., RiuYa, A., Basaric, H., Evelo, C. T.,…Pico, A. R. (2024). WikiPathways 2024:
+next genera?on pathway database. Nucleic Acids Res, 52(D1), D679-D689.
+hYps://doi.org/10.1093/nar/gkad960
+Ankley, G. T., & Edwards, S. W. (2018). The Adverse Outcome Pathway: A Mul?faceted Framework
+Suppor?ng 21(st) Century Toxicology. Curr Opin Toxicol, 9, 1-7.
+hYps://doi.org/10.1016/j.cotox.2018.03.004
+Bajard, L., Adamovsky, O., Audouze, K., Baken, K., Barouki, R., Beltman, J. B., Beronius, A., BonefeldJorgensen, E. C., Cano-Sancho, G., de Baat, M. L., Di Tillio, F., Fernandez, M. F., FitzGerald, R.
+E., Gundacker, C., Hernandez, A. F., Hilscherova, K., Karakitsios, S., Kuchovska, E., Long,
+M.,…Blaha, L. (2023). Applica?on of AOPs to assist regulatory assessment of chemical risks -
+Case studies, needs and recommenda?ons. Environ Res, 217, 114650.
+hYps://doi.org/10.1016/j.envres.2022.114650
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Bakker, R., Ellers, J., Roelofs, D., Vooijs, R., Dijkstra, T., van Gestel, C. A. M., & Hoedjes, K. M. (2023).
+Combining ?me-resolved transcriptomics and proteomics data for Adverse Outcome Pathway
+refinement in ecotoxicology. Sci Total Environ, 869, 161740.
+hYps://doi.org/10.1016/j.scitotenv.2023.161740
+Barbitoff, Y. A., Bogaichuk, P. M., Pavlova, N. S., Malysheva, P. V., & Predeus, A. V. (2025). Func?onal
+Determinants and Evolu?onary Consequences of Pleiotropy in Complex and Mendelian Traits.
+Molecular Biology and EvoluAon, 42(10). hYps://doi.org/10.1093/molbev/msaf232
+Bender, E. C., Tareq, H. S., & Suggs, L. J. (2025). Inflamma?on: a maYer of immune cell life and death.
+npj Biomedical InnovaAons, 2(1). hYps://doi.org/10.1038/s44385-025-00010-4
+Borchert, F., Llorca, I., & Schapranow, M. P. (2024). Improving biomedical en?ty linking for complex
+en?ty men?ons with LLM-based text simplifica?on. Database (Oxford), 2024.
+hYps://doi.org/10.1093/database/baae067
+Brockmeier, E. K., Hodges, G., Hutchinson, T. H., Butler, E., Hecker, M., Tollefsen, K. E., Garcia-Reyero,
+N., Kille, P., Becker, D., Chipman, K., Colbourne, J., ColleYe, T. W., Cossins, A., Cronin, M.,
+Graystock, P., Gutsell, S., Knapen, D., Katsiadaki, I., Lange, A.,…Falciani, F. (2017). The Role of
+Omics in the Applica?on of Adverse Outcome Pathways for Chemical Risk Assessment. Toxicol
+Sci, 158(2), 252-262. hYps://doi.org/10.1093/toxsci/kfx097
+Carusi, A., WiYwehr, C., & Whelan, M. (2021). Addressing evidence needs in chemicals policy and
+regulaAon (JRC126724). P. O. o. t. E. Union.
+hYps://publica?ons.jrc.ec.europa.eu/repository/handle/JRC126724
+Chen, B., Zhang, Z., Langrené, N., & Zhu, S. (2025). Unleashing the poten?al of prompt engineering for
+large language models. Paaerns, 6(6), 101260.
+hYps://doi.org/hYps://doi.org/10.1016/j.paYer.2025.101260
+Chen, L., Deng, H., Cui, H., Fang, J., Zuo, Z., Deng, J., Li, Y., Wang, X., & Zhao, L. (2018). Inflammatory
+responses and inflamma?on-associated diseases in organs. Oncotarget, 9(6), 7204-7218.
+hYps://doi.org/10.18632/oncotarget.23208
+Cohen, S. M. (2024). Cell prolifera?on and carcinogenesis: an approach to screening for poten?al
+human carcinogens. Front Oncol, 14, 1394584. hYps://doi.org/10.3389/fonc.2024.1394584
+Del Giudice, G., Serra, A., Pavel, A., Torres Maia, M., Saarimaki, L. A., Fratello, M., Federico, A., Alenius,
+H., Fadeel, B., & Greco, D. (2024). A Network Toxicology Approach for Mechanis?c Modelling
+of Nanomaterial Hazard and Adverse Outcomes. Adv Sci (Weinh), e2400389.
+hYps://doi.org/10.1002/advs.202400389
+Del Pup, L., Mantovani, A., Cavaliere, C., Facchini, G., Luce, A., Sperlongano, P., Caraglia, M., & BerreYa,
+M. (2016). Carcinogene?c mechanisms of endocrine disruptors in female cancers (Review).
+Oncol Rep, 36(2), 603-612. hYps://doi.org/10.3892/or.2016.4886
+Espinosa-Cantu, A., Cruz-Bonilla, E., Noda-Garcia, L., & DeLuna, A. (2020). Mul?ple Forms of
+Mul?func?onal Proteins in Health and Disease. Front Cell Dev Biol, 8, 451.
+hYps://doi.org/10.3389/fcell.2020.00451
+European Food Safety, A., Cro{on, K. M., Paparella, M., Price, A., Mangas, I., Mar?no, L., Terron, A., &
+Hernandez-Jerez, A. (2024). A developmental neurotoxicity adverse outcome pathway (DNTAOP) with voltage gate sodium channel (VGSC) inhibi?on as a molecular ini?a?ng event (MiE).
+EFSA J, 22(8), e8954. hYps://doi.org/10.2903/j.efsa.2024.8954
+FDA-NIH, B. W. G.-. (2016). BEST (Biomarkers, EndpointS, and other Tools) Resource In. Food and Drug
+Administra?on (US). hYps://www.ncbi.nlm.nih.gov/books/NBK326791/
+Fischer, D. S., Villanueva, M. A., Winter, P. S., & Shalek, A. K. (2025). Adap?ng systems biology to address
+the complexity of human disease in the single-cell era. Nat Rev Genet.
+hYps://doi.org/10.1038/s41576-025-00821-6
+Gardazi, N. M., Daud, A., Malik, M. K., Bukhari, A., Alsahfi, T., & Alshemaimri, B. (2025). BERT
+applica?ons in natural language processing: a review. ArAficial Intelligence Review, 58(6).
+hYps://doi.org/10.1007/s10462-025-11162-5
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Gyori, B. M., Hoyt, C. T., & Steppi, A. (2022). Gilda: biomedical en?ty text normaliza?on with machinelearned disambigua?on as a service. Bioinform Adv, 2(1), vbac034.
+hYps://doi.org/10.1093/bioadv/vbac034
+Haigis, A. C., Vergauwen, L., LaLone, C. A., Villeneuve, D. L., O'Brien, J. M., & Knapen, D. (2023). Crossspecies applicability of an adverse outcome pathway network for thyroid hormone system
+disrup?on. Toxicol Sci, 195(1), 1-27. hYps://doi.org/10.1093/toxsci/kfad063
+He, J., Rungta, M., Koleczek, D., Sekhon, A., Wang, F. X., & Hasan, S. (2024). Does Prompt Formaing
+Have Any Impact on LLM Performance? Retrieved November 01, 2024, from
+hYps://arxiv.org/pdf/2411.10541
+Kim, J., Bang, H., Seong, C., Kim, E. S., & Kim, S. Y. (2025). Transcrip?on factors and hormone receptors:
+Sex-specific targets for cancer therapy (Review). Oncol Lea, 29(2), 93.
+hYps://doi.org/10.3892/ol.2024.14839
+Lillis, D. (2020). On the EvaluaAon of Data Fusion for InformaAon Retrieval Forum for Informa?on
+Retrieval Evalua?on,
+Liu, F., Shareghi, E., Meng, Z., Basaldella, M., & Collier, N. (2020). Self-Alignment Pretraining for
+Biomedical En?ty Representa?ons. Retrieved October 01, 2020, from
+hYps://arxiv.org/pdf/2010.11784
+Liu, Y., Elsworth, B. L., & Gaunt, T. R. (2023). Using language models and ontology topology to perform
+seman?c mapping of traits between biomedical datasets. BioinformaAcs, 39(4).
+hYps://doi.org/10.1093/bioinforma?cs/btad169
+Lucy Lu Wang, Chandra Bhagavatula, Mark Neumann, Kyle Lo, Chris Wilhelm, & Ammar, W. (2018).
+Ontology alignment in the biomedical domain using en?ty defini?ons and context.
+Proceedings of the BioNLP 2018 workshop,
+Maia, M. T., Fratello, M., del Giudice, G., Saarimäki, L. A., Möbus, L., Serra, A., & Greco, D. (2025).
+Nanomaterial grouping: Unraveling the rela?onship of induced mechanisms and potency at a
+temporal scale. Nano Today, 61. hYps://doi.org/10.1016/j.nantod.2025.102639
+Meier, M. J., Harrill, J., Johnson, K., Thomas, R. S., Tong, W., Rager, J. E., & Yauk, C. L. (2024). Progress
+in toxicogenomics to protect human health. Nat Rev Genet. hYps://doi.org/10.1038/s41576-
+024-00767-1
+Monroy-Ramirez, H. C., Galicia-Moreno, M., Sandoval-Rodriguez, A., Meza-Rios, A., Santos, A., &
+Armendariz-Borunda, J. (2021). PPARs as Metabolic Sensors and Therapeu?c Targets in Liver
+Diseases. Int J Mol Sci, 22(15). hYps://doi.org/10.3390/ijms22158298
+Mortensen, H. M., Gromelski, M., Hench, G., Martens, M., WiYwehr, C., Kumar, S., Kumar, V., Audouze,
+K., Virvilis, V., Nymark, P., Angrish, M., Lynch, I., Edwards, S., Magagna, B., Wojewodzic, M. W.,
+& Group, F. A. C. W. (2025). The FAIR AOP roadmap for 2025: Advancing findability,
+accessibility, interoperability, and re-usability of adverse outcome pathways. Comput Toxicol,
+35, 100368. hYps://doi.org/10.1016/j.comtox.2025.100368
+Noyes, P. D., Friedman, K. P., Browne, P., Haselman, J. T., Gilbert, M. E., Hornung, M. W., Barone, S., Jr.,
+Cro{on, K. M., Laws, S. C., Stoker, T. E., Simmons, S. O., Tietge, J. E., & Degitz, S. J. (2019).
+Evalua?ng Chemicals for Thyroid Disrup?on: Opportuni?es and Challenges with in Vitro
+Tes?ng and Adverse Outcome Pathway Approaches. Environ Health Perspect, 127(9), 95001.
+hYps://doi.org/10.1289/EHP5297
+NRC, N. R. C. U. C. o. A. o. T. T. t. P. T.-U. (2007). Applica?ons of Toxicogenomic Technologies to Predic?ve
+Toxicology and Risk Assessment. In (Vol. 9, Valida?on). Na?onal Academies Press (US).
+hYps://www.ncbi.nlm.nih.gov/sites/books/NBK10226/
+OECD. (2018). Users' Handbook supplement to the Guidance Document for developing and assessing
+Adverse Outcome Pathways. OECD Publishing, No. 1(OECD Series on Adverse Outcome
+Pathways). hYps://doi.org/10.1787/5jlv1m9d1g32-en
+OECD. (2021). Guidance Document for the scienAfic review of Adverse Outcome Pathways. Paris: OECD
+Publishing
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+OECD. (2023a). IniAal RecommendaAons on EvaluaAon of Data from the Developmental Neurotoxicity
+(DNT) In-Vitro TesAng Baaery. Paris: OECD Publishing
+OECD. (2023b). OECD Omics ReporAng Framework (OORF): Guidance on reporAng elements for the
+regulatory use of omics data from laboratory-based toxicology studies.
+hYps://doi.org/10.1787/6bb2e6ce-en
+OECD. (2025). Guidance on Good Prac?ces and Standardisa?on of Sample Collec?on for Omics
+Analysis. In E. D. C. A. B. COMMITTEE (Ed.), (Vol. Series on Tes?ng and Assessment ). OECD.
+hYps://one.oecd.org/document/ENV/CBC/MONO%282025%298/en/pdf
+OpenAI, Hurst, A., Lerer, A., Goucher, A. P., Perelman, A., Ramesh, A., Clark, A., Ostrow, A., Welihinda,
+A., Hayes, A., Radford, A., Mądry, A., Baker-Whitcomb, A., Beutel, A., Borzunov, A., Carney, A.,
+Chow, A., Kirillov, A., Nichol, A.,…Kim, J. W. (2024). GPT-4o System Card. Retrieved October 01,
+2024, from hYps://arxiv.org/pdf/2410.21276
+Parikshak, N. N., Gandal, M. J., & Geschwind, D. H. (2015). Systems biology and gene networks in
+neurodevelopmental and neurodegenera?ve disorders. Nat Rev Genet, 16(8), 441-458.
+hYps://doi.org/10.1038/nrg3934
+Pawlak, M., Lefebvre, P., & Staels, B. (2015). Molecular mechanism of PPARalpha ac?on and its impact
+on lipid metabolism, inflamma?on and fibrosis in non-alcoholic faYy liver disease. J Hepatol,
+62(3), 720-733. hYps://doi.org/10.1016/j.jhep.2014.10.039
+Peng, Y., Alam, M., & Bonald, T. (2023). Ontology Matching using Textual Class Descrip?ons. The 18th
+Interna?onal Workshop on Ontology Matching collocated with the 22nd Interna?onal
+Seman?c Web Conference Athens, Greece.
+Perkins, E. J., Woolard, E. A., & Garcia-Reyero, N. (2022). Integra?on of Adverse Outcome Pathways,
+Causal Networks and 'Omics to Support Chemical Hazard Assessment. Front Toxicol, 4, 786057.
+hYps://doi.org/10.3389/{ox.2022.786057
+Pitzer, E. M., Shafer, T. J., & Herr, D. W. (2023). Iden?fica?on of neurotoxicology (NT)/developmental
+neurotoxicology (DNT) adverse outcome pathways and key event linkages with in vitro DNT
+screening assays. NeuroToxicology. hYps://doi.org/10.1016/j.neuro.2023.10.007
+Pritykin, Y., Ghersi, D., & Singh, M. (2015). Genome-Wide Detec?on and Analysis of Mul?func?onal
+Genes. PLoS Comput Biol, 11(10), e1004467. hYps://doi.org/10.1371/journal.pcbi.1004467
+Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERTNetworks. Retrieved August 01, 2019, from hYps://arxiv.org/pdf/1908.10084
+Saarimaki, L. A., Fratello, M., Pavel, A., Korpilahde, S., Leppanen, J., Serra, A., & Greco, D. (2023a). A
+curated gene and biological system annota?on of adverse outcome pathways related to
+human health. Sci Data, 10(1), 409. hYps://doi.org/10.1038/s41597-023-02321-w
+Saarimaki, L. A., Morikka, J., Pavel, A., Korpilahde, S., Del Giudice, G., Federico, A., Fratello, M., Serra,
+A., & Greco, D. (2023b). Toxicogenomics Data for Chemical Safety Assessment and
+Development of New Approach Methodologies: An Adverse Outcome Pathway-Based
+Approach. Adv Sci (Weinh), 10(2), e2203984. hYps://doi.org/10.1002/advs.202203984
+Serra, A., Fratello, M., Migliaccio, G., Di Lieto, E., Maia, M. T., Saarimaki, L. A., Pavel, A., Schaffert, A.,
+Tsoumanis, A., Afan??s, A., Morikka, J., Del Giudice, G., & Greco, D. (2025). BMDx2: A Tool for
+Integra?ng Toxicogenomics-Based Dose-Dependency Analysis and AOP-Based Mechanis?c
+Insights. Small Methods, e01728. hYps://doi.org/10.1002/smtd.202501728
+Son Do, T., Hier, D. B., & Obafemi-Ajayi, T. (2024). Mapping Biomedical Ontology Terms to IDs: Effect of
+Domain Prevalence on Predic?on Accuracy. arXiv:2409.13746. Retrieved September 01, 2024,
+from hYps://arxiv.org/pdf/2409.13746
+Song, K., Tan, X., Qin, T., Lu, J., & Liu, T.-Y. (2020). MPNet: masked and permuted pre-training for
+language understanding Proceedings of the 34th Interna?onal Conference on Neural
+Informa?on Processing Systems, Vancouver, BC, Canada.
+Strupp, C., Corvaro, M., Cohen, S. M., Corton, J. C., Ogawa, K., Richert, L., & Jacobs, M. N. (2023).
+Increased Cell Prolifera?on as a Key Event in Chemical Carcinogenesis: Applica?on in an
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint
+Integrated Approach for the Tes?ng and Assessment of Non-Genotoxic Carcinogenesis. Int J
+Mol Sci, 24(17). hYps://doi.org/10.3390/ijms241713246
+Turchin, A., Masharsky, S., & Zitnik, M. (2023). Comparison of BERT implementa?ons for natural
+language processing of narra?ve medical documents. InformaAcs in Medicine Unlocked, 36.
+hYps://doi.org/10.1016/j.imu.2022.101139
+Vogt, L., Stromert, P., Matentzoglu, N., Karam, N., Konrad, M., Prinz, M., & Baum, R. (2025). Sugges?ons
+for extending the FAIR Principles based on a linguis?c perspec?ve on seman?c interoperability.
+Sci Data, 12(1), 688. hYps://doi.org/10.1038/s41597-025-05011-x
+Wagner, N., & Wagner, K. D. (2020). The Role of PPARs in Disease. Cells, 9(11).
+hYps://doi.org/10.3390/cells9112367
+Wang, B., Kloet, F. v. d., Kes, M. B. M. J., Luirink, J., & Hamoen, L. W. (2024). Improving gene set
+enrichment analysis (GSEA) by using regula?on direc?onality. Microbiology Spectrum, 12(3),
+e03456-03423. hYps://doi.org/doi:10.1128/spectrum.03456-23
+Wiklund, L., Caccia, S., Pipal, M., Nymark, P., & Beronius, A. (2023). Development of a data-driven
+approach to Adverse Outcome Pathway network genera?on: a case study on the EATSmodali?es. Front Toxicol, 5, 1183824. hYps://doi.org/10.3389/{ox.2023.1183824
+Zhao, K., & Rhee, S. Y. (2023). Interpre?ng omics data with pathway enrichment analysis. Trends in
+GeneAcs, 39(4), 308-319. hYps://doi.org/10.1016/j.?g.2023.01.003
+Zhuo, J., Zhang, S., Fang, X., Duan, H., Lin, D., & Chen, K. (2024). ProSA: Assessing and Understanding
+the Prompt Sensi?vity of LLMs. Retrieved October 01, 2024, from
+hYps://arxiv.org/pdf/2410.12405
+Zwahlen, J., Gairin, E., Vianello, S., Mercader, M., Roux, N., & Laudet, V. (2024). The ecological func?on
+of thyroid hormones. Philos Trans R Soc Lond B Biol Sci, 379(1898), 20220511.
+hYps://doi.org/10.1098/rstb.2022.0511
+made available under a CC-BY 4.0 International license.
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is
+bioRxiv preprint doi: https://doi.org/10.64898/2026.06.25.734475; this version posted June 30, 2026. The copyright holder for this preprint

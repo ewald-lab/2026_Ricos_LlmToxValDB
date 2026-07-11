@@ -237,7 +237,7 @@ def main():
 
     if table_results:
         res_df = pd.DataFrame(table_results)
-        fig, ax = plt.subplots(figsize=(24, 3.2))
+        fig, ax = plt.subplots(figsize=(18, 3.2))
         ax.axis('off')
 
         header_color   = '#1f4e79'
@@ -252,20 +252,15 @@ def main():
                 f"{row['Recall Mean']:.2%} ± {row['Recall Std']:.2%}",
                 f"{row['F1 Mean']:.2%} ± {row['F1 Std']:.2%}",
                 f"{row['Jaccard Mean']:.2%} ± {row['Jaccard Std']:.2%}",
-                row["Total Params"],
-                row["Active Params"],
-                row["Data Type"],
-                f"{row['Avg Tokens']:,}" if row['Avg Tokens'] > 0 else "N/A",
-                row["GPU Requirements"]
+                f"{row['Avg Tokens']:,}" if row['Avg Tokens'] > 0 else "N/A"
             ])
 
         col_labels = [
             "Model", "Precision (Mean ± Std)", "Recall (Mean ± Std)", "F1 Score (Mean ± Std)",
-            "Jaccard Overlap (Mean ± Std)",
-            "Total Params", "Active Params", "Data Type", "Avg Tokens", "GPU Requirements"
+            "Jaccard Overlap (Mean ± Std)", "Avg Tokens"
         ]
 
-        col_widths = [0.20, 0.10, 0.10, 0.10, 0.15, 0.08, 0.08, 0.05, 0.06, 0.11]
+        col_widths = [0.30, 0.14, 0.14, 0.14, 0.18, 0.10]
 
         table = ax.table(
             cellText=table_data,
@@ -291,8 +286,8 @@ def main():
                 else:
                     cell.set_facecolor(row_odd_color)
 
-        plt.title("FP8 vs No Quantization Evaluation Metrics & Hardware Requirements",
-                  fontsize=14, fontweight='bold', pad=6, color='#1f4e79')
+        # plt.title("FP8 vs No Quantization Evaluation Metrics & Hardware Requirements",
+        #           fontsize=14, fontweight='bold', pad=6, color='#1f4e79')
 
         output_path = os.path.join(args.output_dir, "quantization_comparison_table.png")
         plt.savefig(output_path, dpi=300, bbox_inches='tight')

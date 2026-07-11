@@ -66,11 +66,12 @@ def load_ontology_embeddings(db_path: str) -> List[Dict]:
 
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT uri, name, sanitized_name, definition, parent, is_llm_generated, vector FROM embeddings")
+    cursor.execute("SELECT uri, name, sanitized_name, parent, vector FROM embeddings")
     rows = cursor.fetchall()
     conn.close()
 
-    return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': r[3], 'parent': r[4], 'is_llm_generated': r[5], 'vector': torch.frombuffer(bytearray(r[6]), dtype=torch.float32)} for r in rows]
+    import json
+    return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': '', 'parents': json.loads(r[3]) if r[3] and r[3].startswith('[') else ([r[3]] if r[3] else []), 'is_llm_generated': 0, 'vector': torch.frombuffer(bytearray(r[4]), dtype=torch.float32)} for r in rows]
 
 def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, return_vectors: bool = True) -> Dict[str, torch.Tensor]:
     """

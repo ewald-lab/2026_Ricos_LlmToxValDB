@@ -1,0 +1,92 @@
+guideline_number,category,endpoint_name,requirement_level,source,footnotes
+409,Clinical Observations,General clinical observation,Required,Guideline text,At least once daily
+409,Body Weight/Food/Water,Body weight measurement,Required,Guideline text,At least once weekly
+409,Body Weight/Food/Water,Food consumption measurement,Required,Guideline text,At least weekly
+409,Body Weight/Food/Water,Water consumption measurement,Required,Guideline text,At least weekly (if administered via drinking water)
+409,Ophthalmology,Ophthalmological examination,Required,Guideline text,Prior to administration and at termination; preferably all animals, at least high dose and control
+409,Haematology,Haematocrit,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Haemoglobin concentration,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Erythrocyte count,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Total leukocyte count,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Differential leukocyte count,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Platelet count,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Clotting time,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Prothrombin time,Required,Guideline text,Start, midway/monthly, end
+409,Haematology,Thromboplastin time,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Calcium,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Phosphorus,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Chloride,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Sodium,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Potassium,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Fasting glucose,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Alanine aminotransferase,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Aspartate aminotransferase,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Ornithine decarboxylase,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Gamma glutamyl transpeptidase,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Urea nitrogen,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Albumin,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Blood creatinine,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Total bilirubin,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Total serum protein,Required,Guideline text,Start, midway/monthly, end
+409,Clinical Biochemistry,Lipids analysis,Optional,Guideline text,As necessary for adequate evaluation
+409,Clinical Biochemistry,Hormones analysis,Optional,Guideline text,As necessary for adequate evaluation
+409,Clinical Biochemistry,Acid/base balance,Optional,Guideline text,As necessary for adequate evaluation
+409,Clinical Biochemistry,Methaemoglobin,Optional,Guideline text,As necessary for adequate evaluation
+409,Clinical Biochemistry,Cholinesterase inhibition,Optional,Guideline text,As necessary for adequate evaluation
+409,Urinalysis,Appearance,Required,Guideline text,Start, midway, end
+409,Urinalysis,Volume,Required,Guideline text,Start, midway, end
+409,Urinalysis,Osmolality,Required,Guideline text,Start, midway, end
+409,Urinalysis,Specific gravity,Required,Guideline text,Start, midway, end
+409,Urinalysis,pH,Required,Guideline text,Start, midway, end
+409,Urinalysis,Protein,Required,Guideline text,Start, midway, end
+409,Urinalysis,Glucose,Required,Guideline text,Start, midway, end
+409,Urinalysis,Blood/blood cells,Required,Guideline text,Start, midway, end
+409,Organ Weights,Liver weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Gall bladder weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Kidneys weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Adrenals weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Testes weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Epididymides weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Ovaries weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Uterus weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Thyroid weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Parathyroids weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Thymus weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Spleen weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Brain weight,Required,Guideline text,Wet weight after dissection
+409,Organ Weights,Heart weight,Required,Guideline text,Wet weight after dissection
+409,Histopathology/Tissue Preservation,Gross lesions preservation,Required,Guideline text,For histopathology
+409,Histopathology/Tissue Preservation,Cerebrum preservation,Required,Guideline text,Representative regions
+409,Histopathology/Tissue Preservation,Cerebellum preservation,Required,Guideline text,Representative regions
+409,Histopathology/Tissue Preservation,Medulla/pons preservation,Required,Guideline text,Representative regions
+409,Histopathology/Tissue Preservation,Spinal cord preservation,Required,Guideline text,Three levels: cervical, mid-thoracic, lumbar
+409,Histopathology/Tissue Preservation,Pituitary preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Eyes preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Thyroid preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Parathyroid preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Thymus preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Oesophagus preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Salivary glands preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Stomach preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Small intestines preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Large intestines preservation,Required,Guideline text,Including Peyer's patches
+409,Histopathology/Tissue Preservation,Liver preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Gall bladder preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Pancreas preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Kidneys preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Adrenals preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Spleen preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Heart preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Trachea preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Lungs preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Aorta preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Gonads preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Uterus preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Accessory sex organs preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Female mammary gland preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Prostate preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Urinary bladder preservation,Required,Guideline text,
+409,Histopathology/Tissue Preservation,Lymph nodes preservation,Required,Guideline text,Preferably one covering route of admin, one distant
+409,Histopathology/Tissue Preservation,Peripheral nerve preservation,Required,Guideline text,Sciatic or tibial, close to muscle
+409,Histopathology/Tissue Preservation,Bone marrow preservation,Required,Guideline text,Section and/or fresh aspirate
+409,Histopathology/Tissue Preservation,Skin preservation,Required,Guideline text,

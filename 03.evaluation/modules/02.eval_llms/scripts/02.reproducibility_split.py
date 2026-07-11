@@ -69,8 +69,7 @@ def main() -> None:
     # e.g., "- abnormal Kupffer cell morphology (1/2): 10 votes -> ACCEPTED"
     vote_pattern = re.compile(r'^-\s*(.*?)\s*\(\d+/\d+\):\s*(\d+)\s*votes\s*->\s*(ACCEPTED|REJECTED)$')
 
-    # Find all reasoning JSON files for consensus 10
-    reasoning_files = glob.glob(os.path.join(outputs_dir, "**", "*_mode_2_consensus_10_no_defs_reasoning.json"), recursive=True)
+    reasoning_files = glob.glob(os.path.join(outputs_dir, "**", "*_mode_2_consensus_10_with_defs_reasoning.json"), recursive=True)
 
     if not reasoning_files:
         print("No consensus_10_no_defs_reasoning.json files found.")
@@ -181,7 +180,7 @@ def main() -> None:
             # Save the expanded csv file for run_r
             out_df = pd.DataFrame(results)
             
-            out_filename = f"Expanded_ToxValLlm_llm_{model}_ontology_{ontology}_mode_2_consensus_1_no_defs_{run_r}.csv"
+            out_filename = f"Expanded_ToxValLlm_llm_{model}_ontology_{ontology}_mode_2_consensus_1_with_defs_{run_r}.csv"
             out_path = os.path.join(reproducibility_dir, out_filename)
             out_df.to_csv(out_path, index=False)
             print(f"  Saved run {run_r} to {out_path}")

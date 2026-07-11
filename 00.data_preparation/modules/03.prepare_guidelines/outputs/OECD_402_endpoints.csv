@@ -1,5 +1,9 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-402,Clinical Observations,General clinical signs (skin, fur, eyes, mucous membranes, CNS, respiration, etc.),Required,Guideline text,"Includes specific signs like tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma."
-402,Body Weight,Individual body weight,Required,Guideline text,Measured on day of dosing, weekly thereafter, and at termination/death.
-402,Pathology (Gross),Gross necropsy findings,Required,Guideline text,All animals must be subjected to gross necropsy; all changes recorded.
-402,Pathology (Histopathology),Microscopic examination of affected organs/treatment site,Optional,Guideline text,Recommended for animals surviving 24+ hours if gross pathology is evident.
+402,Clinical Observations,"General clinical signs (skin, fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, somatomotor, behaviour)",Required,Guideline text,Observed immediately, periodically in first 24h, then daily for 14 days
+402,Clinical Observations,"Specific toxic signs (tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma)",Required,Guideline text,Special attention in first 2-6 hours
+402,Clinical Observations,Moribund status / Impending death indicators,Required,Guideline text,Time of death recorded precisely; humane killing criteria applied
+402,Body Weight,Individual body weight,Required,Guideline text,Determined day of dosing, weekly thereafter, and at end of test/death
+402,Gross Necropsy,Gross pathological changes,Required,Guideline text,Performed on all animals including those dying during test
+402,Histopathology,Microscopic examination of organs with gross pathology,Optional,Guideline text,Considered if yielding useful information; animals surviving >24h
+402,Histopathology,Microscopic examination of treatment site,Optional,Guideline text,Considered if yielding useful information; animals surviving >24h
+402,Local Skin Effects,Draize criteria assessment at treatment site,Required,Guideline text,Observed at 24, 48, and 72 hours after removal of test chemical

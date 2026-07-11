@@ -51,8 +51,80 @@ def load_ontology_embeddings(db_path: str) -> List[Dict]:
 
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT uri, name, sanitized_name, definition, parent, is_llm_generated, vector FROM embeddings")
+
+    # Dynamically determine columns
+    cursor.execute("PRAGMA table_info(embeddings)")
+    cols = [col[1] for col in cursor.fetchall()]
+
+    query_cols = []
+    for c in ["uri", "name", "sanitized_name"]:
+        if c in cols:
+            query_cols.append(c)
+
+    has_def = "definition" in cols
+    if has_def:
+        query_cols.append("definition")
+
+    has_parents = "parents" in cols
+    has_parent = "parent" in cols
+    if has_parents:
+        query_cols.append("parents")
+    elif has_parent:
+        query_cols.append("parent")
+
+    has_llm = "is_llm_generated" in cols
+    if has_llm:
+        query_cols.append("is_llm_generated")
+
+    query_cols.append("vector")
+
+    col_str = ", ".join(query_cols)
+    cursor.execute(f"SELECT {col_str} FROM embeddings")
     rows = cursor.fetchall()
     conn.close()
 
-    return [{'uri': r[0], 'name': r[1], 'sanitized_name': r[2], 'def': r[3], 'parent': r[4], 'is_llm_generated': r[5], 'vector': torch.frombuffer(bytearray(r[6]), dtype=torch.float32)} for r in rows]
+    # Map rows to dict
+    results = []
+    import json
+    for r in rows:
+        d = {}
+        idx = 0
+        d['uri'] = r[idx]
+        idx += 1
+        d['name'] = r[idx]
+        idx += 1
+        d['sanitized_name'] = r[idx]
+        idx += 1
+
+        if has_def:
+            d['def'] = r[idx]
+            idx += 1
+        else:
+            d['def'] = ""
+
+        p_val = r[idx]
+        idx += 1
+        parents_list = []
+        if p_val:
+            if isinstance(p_val, list):
+                parents_list = p_val
+            elif isinstance(p_val, str):
+                if p_val.startswith('['):
+                    try:
+                        parents_list = json.loads(p_val)
+                    except Exception:
+                        parents_list = [p_val]
+                else:
+                    parents_list = [p_val]
+        d['parents'] = parents_list
+
+        if has_llm:
+            d['is_llm_generated'] = r[idx]
+            idx += 1
+        else:
+            d['is_llm_generated'] = 0
+
+        d['vector'] = torch.frombuffer(bytearray(r[idx]), dtype=torch.float32)
+        results.append(d)
+
+    return results

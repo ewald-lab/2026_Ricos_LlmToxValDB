@@ -1,0 +1,41 @@
+atrophy adrenal cortex
+decreased ovary size
+dilatation of epididymal ducts
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > necrosis
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular > necrosis leydig cell
+morphologic change > cell adaptation injury death > cell injury death > necrosis > necrosis testicular > necrosis testis
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia rete ovarii
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia rete testis
+morphologic change > neoplasia
+morphologic change > neoplasia > benign tumor
+morphologic change > neoplasia > benign tumor > adenoma
+morphologic change > neoplasia > benign tumor > adenoma > adenoma leydig cell
+morphologic change > neoplasia > benign tumor > adenoma > adenoma rete ovarii
+morphologic change > neoplasia > benign tumor > adenoma > adenoma rete testis
+morphologic change > neoplasia > benign tumor > polyp
+morphologic change > neoplasia > benign tumor > polyp > polyp vaginal
+morphologic change > neoplasia > malignant tumor
+morphologic change > neoplasia > malignant tumor > adenocarcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma leydig cell
+morphologic change > neoplasia > malignant tumor > carcinoma > carcinoma rete testis
+morphologic change > normal altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle
+morphologic change > normal altered physiological condition > altered physiological condition > altered estrous cycle > increased number corpora lutea
+morphologic change > structural alteration
+morphologic change > structural alteration > architectural anomalies
+morphologic change > structural alteration > architectural anomalies > dilation
+morphologic change > structural alteration > architectural anomalies > dilation > cyst
+morphologic change > structural alteration > architectural anomalies > dilation > cyst > cyst rete ovarii
+morphologic change > structural alteration > developmental errors
+morphologic change > structural alteration > developmental errors > ectopic tissue
+morphologic change > structural alteration > developmental errors > ectopic tissue > adenomyosis
+morphologic change > structural alteration > organ specific entities changes
+morphologic change > structural alteration > organ specific entities changes > endometriosis

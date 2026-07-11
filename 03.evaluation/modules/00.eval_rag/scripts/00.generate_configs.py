@@ -10,7 +10,8 @@ def generate_grid_combinations(
     threshold_reranker: list[float],
     top_k_reranks: list[int],
     grf_alphas: list[float],
-    reranker_models: list[str]
+    reranker_models: list[str],
+    data_variants: list[str] = None
 ) -> None:
     """
     Description:
@@ -23,23 +24,26 @@ def generate_grid_combinations(
         threshold_rags (list[float]): List of threshold scores for RAG.
         threshold_reranker (list[float]): List of threshold scores for the reranker.
         top_k_reranks (list[int]): List of top K candidates to keep after reranking.
-        grf_alphas (list[float]): List of alpha values for graph regulation filtering.
+        grf_alphas (list[float]): List of alpha values for GRF interpolation.
         reranker_models (list[str]): List of reranker model paths/names.
+        data_variants (list[str]): List of reranker context variants (base, def, hier, def_hier). Defaults to None.
 
     Returns:
         None
     """
 
+    if data_variants is None:
+        data_variants = ["base"]
 
     # Pathway 1: No reranker
     no_rerank_combos = list(itertools.product(
-        embedding_models, top_k_rags, threshold_rags, grf_alphas
+        embedding_models, top_k_rags, threshold_rags, grf_alphas, data_variants
     ))
 
     # Pathway 2: With reranker
     rerank_combos = list(itertools.product(
         embedding_models, top_k_rags, threshold_rags, grf_alphas,
-        threshold_reranker, top_k_reranks, reranker_models
+        threshold_reranker, top_k_reranks, reranker_models, data_variants
     ))
 
     unique_combos = []
@@ -53,7 +57,8 @@ def generate_grid_combinations(
             "threshold_reranker": 0.0,
             "top_k_reranker": 0,
             "GRF": c[3],
-            "reranker_model": "None"
+            "reranker_model": "None",
+            "data_variant": c[4]
         })
 
     for c in rerank_combos:
@@ -65,7 +70,8 @@ def generate_grid_combinations(
             "threshold_reranker": c[4],
             "top_k_reranker": c[5],
             "GRF": c[3],
-            "reranker_model": c[6]
+            "reranker_model": c[6],
+            "data_variant": c[7]
         })
 
     print(f"Generated {len(unique_combos)} unique grid combinations.")
@@ -90,6 +96,9 @@ if __name__ == "__main__":
     parser.add_argument("--reranker_models", nargs="+",
                         default=["Qwen/Qwen3-Reranker-0.6B", "Qwen/Qwen3-Reranker-4B", "Qwen/Qwen3-Reranker-8B"],
                         help="List of reranker models.")
+    parser.add_argument("--data_variants", nargs="+",
+                        default=["base", "def", "hier", "def_hier"],
+                        help="List of reranker context variants (base, def, hier, def_hier).")
 
     args = parser.parse_args()
 
@@ -101,5 +110,6 @@ if __name__ == "__main__":
         threshold_reranker=args.threshold_rerank,
         top_k_reranks=args.top_k_rerank,
         grf_alphas=args.grf,
-        reranker_models=args.reranker_models
+        reranker_models=args.reranker_models,
+        data_variants=args.data_variants
     )

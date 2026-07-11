@@ -71,14 +71,9 @@ def arg_parser() -> argparse.Namespace:
         help="Optional SQLite DB with URI-level LLM-generated definitions.",
     )
     parser.add_argument(
-        "--model_config",
-        default=str(MODULE_ROOT / "config" / "models" / "Qwen3.5-122B-A10B-FP8.json"),
-        help="Path to OpenAI-compatible chat model config JSON.",
-    )
-    parser.add_argument(
         "--base_url",
         default=None,
-        help="Base URL for the LLM API. Overrides model_config if provided.",
+        help="Base URL for the LLM API. Overrides the base_url template if provided.",
     )
     parser.add_argument(
         "--system_prompt_file",
@@ -139,7 +134,11 @@ def arg_parser() -> argparse.Namespace:
     )
     parser.add_argument("--hf_home", default=None, help="HuggingFace cache directory.")
     parser.add_argument("--hf_transfer", default=None, help="Enable/disable HF transfer.")
-    parser.add_argument("--llm_config", default=None, help="Path to llm_config.json configuration file.")
+    parser.add_argument(
+        "--llm_config",
+        required=True,
+        help="Path to llm_config.json configuration file.",
+    )
 
     return parser.parse_args()
 
@@ -212,10 +211,12 @@ def main() -> None:
         if args.global_definitions_db:
             args.global_definitions_db = args.global_definitions_db.replace("outputs", "inputs/ontology_dbs")
 
-    if args.llm_config and os.path.exists(args.llm_config):
-        print(f"Loading configuration from llm_config: {args.llm_config}")
-        with open(args.llm_config, 'r', encoding='utf-8') as jf:
-            best_config = json.load(jf)
+    if not args.llm_config or not os.path.exists(args.llm_config):
+        raise FileNotFoundError(f"llm_config file not found: {args.llm_config}")
+
+    print(f"Loading configuration from llm_config: {args.llm_config}")
+    with open(args.llm_config, 'r', encoding='utf-8') as jf:
+        best_config = json.load(jf)
         
         model = best_config["model"]
         args.mode = best_config["mode"]
@@ -232,7 +233,8 @@ def main() -> None:
             "Qwen3.6-35B-A3B-FP8": "8006",
             "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": "8007",
             "Qwen3.5-27B-FP8": "8008",
-            "Qwen3.6-27B-FP8": "8009"
+            "Qwen3.6-27B-FP8": "8009",
+            "Qwen3.6-35B-A3B": "8012"
         }
         port = model_ports.get(model, "8003")
         if args.base_url:
@@ -260,6 +262,9 @@ def main() -> None:
 
     # Model config follows the existing repository convention. max_concurrency is
     # consumed here because it controls batching, not model construction.
+    if not hasattr(args, "model_config") or not args.model_config:
+        raise ValueError("Model configuration was not initialized by llm_config.")
+
     with open(args.model_config, "r", encoding="utf-8") as handle:
         model_config = json.load(handle)
 

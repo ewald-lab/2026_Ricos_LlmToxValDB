@@ -1,5 +1,8 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-404,Clinical Observations,Erythema score,Required,Guideline text,"Graded 0-4: 0=None, 1=Very slight, 2=Well defined, 3=Moderate to severe, 4=Severe to eschar"
-404,Clinical Observations,Oedema score,Required,Guideline text,"Graded 0-4: 0=None, 1=Very slight, 2=Slight, 3=Moderate (~1mm), 4=Severe (>1mm)"
-404,Pathology,Histopathological examination,Optional,Guideline text,"To clarify equivocal responses"
-404,Pathology,Reversibility assessment,Required,Guideline text,"Evaluate persistence of lesions up to 14 days"
+404,Clinical Observations,Erythema score,Required,Guideline text,Scored at 60 min, 24h, 48h, 72h
+404,Clinical Observations,Oedema score,Required,Guideline text,Scored at 60 min, 24h, 48h, 72h
+404,Clinical Observations,Defatting of skin,Required,Guideline text,Local toxic effect description
+404,Clinical Observations,Systemic adverse effects,Required,Guideline text,e.g., clinical signs, body weight
+404,Pathology/Histopathology,Skin lesion grading (Erythema/Eschar),Required,Guideline text,Based on Table in Section 404
+404,Pathology/Histopathology,Skin lesion grading (Oedema),Required,Guideline text,Based on Table in Section 404
+404,Pathology/Histopathology,Histopathological examination,Optional,Guideline text,Considered to clarify equivocal responses

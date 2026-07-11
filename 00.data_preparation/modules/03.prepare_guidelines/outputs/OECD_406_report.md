@@ -1,6 +1,6 @@
 # OECD Test Guideline 406: Skin Sensitisation Guinea Pig Maximisation Test and Buehler Test
 
-**Generated:** 2023-10-27
+**Generated:** 2024-05-22
 **Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/406.pdf`
 
 ## Summary
@@ -10,33 +10,35 @@
 | Guideline Number | 406 |
 | Title | Skin Sensitisation Guinea Pig Maximisation Test and Buehler Test |
 | Adoption Date | 17 July 1992 (Corrected 30 June 2022) |
-| Preferred Species | Guinea pig (Male and/or female healthy young adult animals; females should be nulliparous and non-pregnant) |
-| Study Duration | Induction period (10-14 days) + Challenge observation (approx. 3 days); Total approx. 3-4 weeks |
-| Animals per Dose Level | GPMT: Min 10 treated, 5 control; Buehler: Min 20 treated, 10 control |
-| Dose Groups | At least 1 test group and 1 control group (Vehicle only). Pilot studies recommended for dose selection. |
-| Route of Administration | Intradermal injection and/or Epidermal (topical) application |
+| Preferred Species | Guinea pig (healthy young adult animals) |
+| Study Duration | Induction period of 10-14 days; Challenge at Day 20-22 (GPMT) or Day 27-29 (Buehler); Observations up to 72 hours post-challenge |
+| Animals per Dose Level | GPMT: Min 10 treated, 5 control. Buehler: Min 20 treated, 10 control |
+| Dose Groups | 1 treated group + 1 control group (vehicle/sham) |
+| Route of Administration | Intradermal injection and/or topical application (induction); Topical application (challenge) |
 
 ## Purpose and Scope
 
-This guideline describes two methods for detecting skin sensitisation potential in guinea pigs: the Guinea Pig Maximisation Test (GPMT), which uses an adjuvant to potentiate the response, and the Buehler Test, a non-adjuvant method. These tests are intended as a last resort for animal welfare reasons when other in chemico or in vitro methods are not applicable. The tests provide qualitative data on sensitisation potential and limited quantitative potency information.
+This guideline describes two in vivo methods for assessing the skin sensitisation potential of chemicals: the Guinea Pig Maximisation Test (GPMT), which uses Freund’s Complete Adjuvant to potentiate the immune response, and the non-adjuvant Buehler Test. These tests are intended for use when other in chemico, in vitro, or alternative in vivo methods are not applicable, as they should be considered a last resort due to animal welfare concerns. The tests provide data on whether a substance is a sensitizer and limited information on quantitative potency.
 
 ## Key Observations
 
 ### Clinical Observations
-- Observation of all skin reactions (erythema, oedema) at specific time points post-challenge (approx. 30 hours and 54 hours for Buehler; 48 hours and 72 hours for GPMT).
-- Recording of systemic reactions and unusual findings.
+- All skin reactions resulting from induction and challenge procedures must be observed and recorded.
+- Any unusual findings, including systemic reactions, must be recorded.
+- Skin reactions are graded using the Magnusson and Kligman scale (0-3): No visible change, Discrete/patchy erythema, Moderate/confluent erythema, Intense erythema and swelling.
+- Observations are made approximately 48 hours and 72 hours after removing the challenge patch (GPMT) or 30 hours and 54 hours after challenge application (Buehler).
 - Blind reading of test and control animals is encouraged.
-- Measurement of skin fold thickness may be carried out to clarify doubtful reactions.
 
 ### Haematology
-- *Not specified as a standard requirement in this guideline.* (Focus is on dermal reaction).
+- Not specified as a standard requirement in this guideline.
 
 ### Clinical Biochemistry
-- *Not specified as a standard requirement in this guideline.*
+- Not specified as a standard requirement in this guideline.
 
 ### Pathology
 - Histopathological examination may be carried out to clarify doubtful reactions.
-- Any histopathological findings must be reported if performed.
+- Measurement of skin fold thickness may be carried out to clarify doubtful reactions.
+- Individual weights of animals at start and conclusion are recorded.
 
 ## Endpoints
 
@@ -48,17 +50,17 @@ This guideline describes two methods for detecting skin sensitisation potential 
 | Category | Required | Optional |
 |----------|----------|----------|
 | Clinical Observations | 1 | 0 |
-| Pathology | 0 | 1 |
-| **Total** | **1** | **1** |
+| Pathology/Other Measures | 0 | 2 |
+| **Total** | **1** | **2** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
 |----------|----------|-------------------|--------|-----------|
-| Clinical Observations | Skin reaction grading (Erythema/Oedema) | Required | Guideline text | Graded according to Table 1 (0-3 scale) at specific intervals post-challenge. |
-| Pathology | Histopathological examination | Optional | Guideline text | May be carried out to clarify doubtful reactions. |
+| Clinical Observations | Skin reaction grading (Magnusson and Kligman scale) | Required | Guideline text | Graded 0-3 based on erythema and edema |
+| Pathology/Other Measures | Histopathological examination | Optional | Guideline text | To clarify doubtful reactions |
+| Pathology/Other Measures | Skin fold thickness measurement | Optional | Guideline text | To clarify doubtful reactions |
 
 ### Footnotes
 
-*   **Table 1 Grading Scale:** 0 = No visible change; 1 = Discrete or patchy erythema; 2 = Moderate and confluent erythema; 3 = Intense erythema and swelling.
-*   **Rechallenge:** A second challenge may be considered approximately one week after the first if results need clarification.
+None

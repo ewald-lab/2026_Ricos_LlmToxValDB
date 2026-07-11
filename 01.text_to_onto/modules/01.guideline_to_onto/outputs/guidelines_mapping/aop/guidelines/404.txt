@@ -1,0 +1,9 @@
+cellular
+cellular > increased inflammation
+organ
+organ > eczematous eruption
+organ > inflamatory events in light exposed tissues
+organ > sensitisation skin
+tissue
+tissue > increase body fluid overload
+tissue > increase in inflammation

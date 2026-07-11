@@ -1,363 +1,302 @@
 normalized_category,normalized_endpoint,requirement_level,guideline_numbers,occurrence_count,original_categories,original_endpoints
-Aerosol Characterization,degree of nanoparticle agglomeration,Required,412,1,Aerosol Characterization,Degree of NP agglomeration
-Aerosol Characterization,particle fraction under 100 nm,Required,412,1,Aerosol Characterization,Particle fraction <100 nm
-Aerosol Characterization,particle size distribution,Required,412,2,Aerosol Characterization|Other,"Particle size distribution (MMAD, σg)|Particle size distribution (MMAD/GSD)"
-Aerosol Characterization,thermodynamic equivalent diameter,Required,412,1,Aerosol Characterization,"Thermodynamic equivalent diameter (CMD, σg)"
+Body Weight/Food/Water,body weight measurement,Required,409,1,Body Weight/Food/Water,Body weight measurement
+Body Weight/Food/Water,food consumption measurement,Required,409,1,Body Weight/Food/Water,Food consumption measurement
+Body Weight/Food/Water,water consumption measurement,Required,409,1,Body Weight/Food/Water,Water consumption measurement
 Bronchoalveolar Lavage,balf albumin,Required,412,1,BALF Analysis,Total protein or albumin
 Bronchoalveolar Lavage,balf lactate dehydrogenase,Required,412,1,BALF Analysis,Lactate dehydrogenase (LDH)
 Bronchoalveolar Lavage,balf total protein,Required,412,1,BALF Analysis,Total protein or albumin
-Bronchoalveolar Lavage,cell counts and differentials,Required,412,1,BALF Analysis,"Cell counts and differentials (macrophages, lymphocytes, neutrophils, eosinophils)"
-Clinical Biochemistry,5 nucleotidase,Required,452,1,Clinical Biochemistry,5'-nucleotidase
-Clinical Biochemistry,acid / base balance,Optional,410,1,Clinical Biochemistry,Acid/base balance
-Clinical Biochemistry,alanine aminotransferase,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,ALT (Serum glutamic-pyruvic transaminase)|Alanine aminotransferase|Alanine aminotransferase (ALT)
+Bronchoalveolar Lavage,cell counts and differentials,Required,412,1,BALF Analysis,Cell counts and differentials
+Clinical Biochemistry,5 nucleotidase,Required,452,1,Clinical Biochemistry,5'-Nucleotidase
+Clinical Biochemistry,acid / base balance,Optional,409|410,2,Clinical Biochemistry,Acid/base balance
+Clinical Biochemistry,alanine aminotransferase,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Alanine Aminotransferase (ALT)|Alanine aminotransferase|Alanine aminotransferase (ALT)
 Clinical Biochemistry,albumen,Required,410,1,Clinical Biochemistry,Albumen
-Clinical Biochemistry,albumin,Required,412|452,2,Clinical Biochemistry|Clinical Chemistry,Albumin
-Clinical Biochemistry,alkaline phosphatase,Required,412|452,2,Clinical Biochemistry|Clinical Chemistry,Alkaline phosphatase
-Clinical Biochemistry,aspartate aminotransferase,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,AST (Serum glutamic-oxaloacetic transaminase)|Aspartate aminotransferase|Aspartate aminotransferase (AST)
-Clinical Biochemistry,blood glucose,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Fasting glucose|Glucose
-Clinical Biochemistry,calcium,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Calcium
-Clinical Biochemistry,chloride,Required,410|412,2,Clinical Biochemistry|Clinical Chemistry,Chloride
+Clinical Biochemistry,albumin,Required,409|412|452,3,Clinical Biochemistry|Clinical Chemistry,Albumin
+Clinical Biochemistry,alkaline phosphatase,Required,412|452,2,Clinical Biochemistry|Clinical Chemistry,Alkaline Phosphatase (ALP)|Alkaline phosphatase
+Clinical Biochemistry,aspartate aminotransferase,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Aspartate Aminotransferase (AST)|Aspartate aminotransferase|Aspartate aminotransferase (AST)
+Clinical Biochemistry,blood glucose,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Fasting glucose|Glucose
+Clinical Biochemistry,calcium,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Calcium
+Clinical Biochemistry,chloride,Required,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Chloride
 Clinical Biochemistry,cholinesterase,Optional,452,1,Clinical Biochemistry,Cholinesterase
 Clinical Biochemistry,cholinesterase activity,Optional,410,1,Clinical Biochemistry,Cholinesterase activity
-Clinical Biochemistry,creatinine,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Blood creatinine|Creatinine
-Clinical Biochemistry,gamma glutamyl transferase,Required,410|452,2,Clinical Biochemistry,Gamma glutamyl transferase|Gamma glutamyl transpeptidase
+Clinical Biochemistry,cholinesterase inhibition,Optional,409,1,Clinical Biochemistry,Cholinesterase inhibition
+Clinical Biochemistry,creatinine,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Blood creatinine|Creatinine
+Clinical Biochemistry,gamma glutamyl transferase,Required,409|410|452,3,Clinical Biochemistry,Gamma Glutamyl Transferase (GGT)|Gamma glutamyl transpeptidase
 Clinical Biochemistry,globulin,Required,412,1,Clinical Chemistry,Globulin
-Clinical Biochemistry,glutamate dehydrogenase,Required,452,1,Clinical Biochemistry,Glutamate dehydrogenase
+Clinical Biochemistry,glutamate dehydrogenase,Required,452,1,Clinical Biochemistry,Glutamate Dehydrogenase
 Clinical Biochemistry,high density lipoprotein cholesterol,Required,408,1,Serum/Plasma Biochemistry,HDL
 Clinical Biochemistry,hormones,Optional,410,1,Clinical Biochemistry,Hormones
+Clinical Biochemistry,hormones analysis,Optional,409,1,Clinical Biochemistry,Hormones analysis
 Clinical Biochemistry,lipids,Optional,410,1,Clinical Biochemistry,Lipids
+Clinical Biochemistry,lipids analysis,Optional,409,1,Clinical Biochemistry,Lipids analysis
 Clinical Biochemistry,low density lipoprotein cholesterol,Required,408,1,Serum/Plasma Biochemistry,LDL
-Clinical Biochemistry,methaemoglobin,Optional,410|452,2,Clinical Biochemistry|Hematology,Methaemoglobin
-Clinical Biochemistry,ornithine decarboxylase,Required,410,1,Clinical Biochemistry,Ornithine decarboxylase
-Clinical Biochemistry,phosphorus,Required,410|412,2,Clinical Biochemistry|Clinical Chemistry,Phosphorus
-Clinical Biochemistry,potassium,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Potassium
-Clinical Biochemistry,serum total protein,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Total protein|Total serum protein
-Clinical Biochemistry,sodium,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Sodium
-Clinical Biochemistry,specific hormones,Optional,452,1,Clinical Biochemistry,Specific hormones
-Clinical Biochemistry,total bile acids,Required,452,1,Clinical Biochemistry,Total bile acids
-Clinical Biochemistry,total bilirubin,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Total bilirubin
-Clinical Biochemistry,total cholesterol,Required,408|412|452,3,Clinical Biochemistry|Clinical Chemistry|Serum/Plasma Biochemistry,Total cholesterol
-Clinical Biochemistry,triglycerides,Required/Optional,412|452,2,Clinical Biochemistry|Clinical Chemistry,Fasting triglycerides|Triglycerides
-Clinical Biochemistry,urea nitrogen,Required,410|412|452,3,Clinical Biochemistry|Clinical Chemistry,Blood urea nitrogen|Urea (urea nitrogen)|Urea nitrogen
-Clinical Observations,autonomic activity,Required,440|441,2,Clinical Observations,"Autonomic activity (lacrimation, piloerection, pupil size, respiratory pattern)"
-Clinical Observations,autonomic effects,Required,410,1,Clinical Observations,Respiratory/Circulatory/Autonomic/CNS effects
-Clinical Observations,autonomic system signs,Required,403,1,Clinical Observations,Autonomic system signs
-Clinical Observations,behavior patterns,Required,403,1,Clinical Observations,Behavior patterns
-Clinical Observations,behaviour,Required,410,1,Clinical Observations,Somatomotor activity and behaviour
-Clinical Observations,behaviour patterns,Required,412,1,Clinical Observations,Behaviour patterns
-Clinical Observations,behavioural changes,Required,414|440|441,3,Clinical Observations,Behavioural changes
-Clinical Observations,biomonitoring,Optional,412,1,Clinical Observations,Biomonitoring (urine/faeces)
-Clinical Observations,bizarre behaviour,Required,452,1,Clinical Observations,"Bizarre behaviour (e.g., self-mutilation)"
-Clinical Observations,body weight,Required,408|410|414|416|440|441|452,8,Body Weight|Clinical Observations,Body weight|Body weight (Offspring)|Body weight (Parental)|Body weight and changes
-Clinical Observations,body weight gain,Required,408|416,2,Clinical Observations|General Toxicity,Body weight and changes|Body weight gain (food efficiency)
-Clinical Observations,central nervous system effects,Required,410,1,Clinical Observations,Respiratory/Circulatory/Autonomic/CNS effects
-Clinical Observations,central nervous system signs,Required,403,1,Clinical Observations,Central nervous system signs
-Clinical Observations,circulatory effects,Required,410,1,Clinical Observations,Respiratory/Circulatory/Autonomic/CNS effects
-Clinical Observations,circulatory system changes,Required,412,1,Clinical Observations,Circulatory system changes
-Clinical Observations,circulatory system signs,Required,403,1,Clinical Observations,Circulatory system signs
-Clinical Observations,clinical signs of distress,Required,440,1,Clinical Observations,Clinical signs of toxicity/distress
-Clinical Observations,clinical signs of toxicity,Required,440,1,Clinical Observations,Clinical signs of toxicity/distress
-Clinical Observations,clonic movements,Required,452,1,Clinical Observations,Clonic or tonic movements
-Clinical Observations,coma,Required,403|412,2,Clinical Observations,Coma
-Clinical Observations,convulsions,Required,403|412,2,Clinical Observations,Convulsions
-Clinical Observations,daily body weight,Required,440|441,2,Body Weight,Daily body weight
-Clinical Observations,daily food consumption per cage,Optional,440,1,Food Consumption,Daily food consumption per cage
-Clinical Observations,diarrhoea,Required,403|412,2,Clinical Observations,Diarrhoea
+Clinical Biochemistry,methaemoglobin,Optional,409|410,2,Clinical Biochemistry,Methaemoglobin
+Clinical Biochemistry,ornithine decarboxylase,Required,409|410,2,Clinical Biochemistry,Ornithine decarboxylase
+Clinical Biochemistry,phosphorus,Required,409|410|412,3,Clinical Biochemistry|Clinical Chemistry,Phosphorus
+Clinical Biochemistry,potassium,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Potassium
+Clinical Biochemistry,serum total protein,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Total Protein|Total protein|Total serum protein
+Clinical Biochemistry,sodium,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Sodium
+Clinical Biochemistry,specific hormones,Optional,452,1,Clinical Biochemistry,Specific Hormones
+Clinical Biochemistry,total bile acids,Required,452,1,Clinical Biochemistry,Total Bile Acids
+Clinical Biochemistry,total bilirubin,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Total Bilirubin|Total bilirubin
+Clinical Biochemistry,total cholesterol,Required,408|412|452,3,Clinical Biochemistry|Clinical Chemistry|Serum/Plasma Biochemistry,Total Cholesterol|Total cholesterol
+Clinical Biochemistry,triglycerides,Required/Optional,412|452,2,Clinical Biochemistry|Clinical Chemistry,Fasting Triglycerides|Triglycerides
+Clinical Biochemistry,urea nitrogen,Required,409|410|412|452,4,Clinical Biochemistry|Clinical Chemistry,Blood urea nitrogen|Urea (Urea Nitrogen)|Urea nitrogen
+Clinical Observations,autonomic activity,Required,452,1,Clinical Observations,"Autonomic Activity (Lacrimation, Piloerection, etc.)"
+Clinical Observations,behavioural changes,Required,416,1,Clinical Observations,Behavioural changes
+Clinical Observations,clinical examination,Required,410,1,Clinical Observations,Clinical examination (daily)
+Clinical Observations,clinical signs of toxicity,Required,403|412,2,Clinical Observations,"Clinical signs of toxicity|Clinical signs of toxicity (skin, fur, eyes, mucous membranes, respiratory, CNS, etc.)"
+Clinical Observations,daily body weight,Required,440,1,Body Weight,Daily body weight
+Clinical Observations,defatting of skin,Required,404,1,Clinical Observations,Defatting of skin
 Clinical Observations,erythema score,Required,404,1,Clinical Observations,Erythema score
-Clinical Observations,excretions,Required,440|441|452,3,Clinical Observations,Secretions and excretions
-Clinical Observations,eye changes,Required,410|412|441|452,4,Clinical Observations,Eyes and mucous membranes changes|Eyes/Mucous membranes changes|Skin/Fur/Eyes/Mucous membrane changes
-Clinical Observations,eye condition,Required,403|440,2,Clinical Observations,Eye and mucous membrane condition|Eyes and mucous membranes
-Clinical Observations,food consumption,Required,408|410|412|414|416|452,8,Clinical Observations|Food/Water|General Toxicity|Nutrition,Food consumption
-Clinical Observations,food consumption per cage,Optional,441,1,Food Consumption,Food consumption per cage
-Clinical Observations,food efficiency,Required,452,1,Nutrition,Food efficiency
-Clinical Observations,functional observations,Optional,416,1,Clinical Observations,Functional observations
-Clinical Observations,fur changes,Required,403|410|412|441|452,5,Clinical Observations,Skin and fur changes|Skin/Fur changes|Skin/Fur/Eyes/Mucous membrane changes
-Clinical Observations,fur condition,Required,440,1,Clinical Observations,Skin and fur condition
-Clinical Observations,gait,Required,452,1,Clinical Observations,Gait and posture
-Clinical Observations,general clinical signs,Required,402|423,2,Clinical Observations,"General clinical signs (skin, fur, eyes, mucous membranes, CNS, etc.)|General clinical signs (skin, fur, eyes, mucous membranes, CNS, respiration, etc.)"
-Clinical Observations,grip strength,Optional,407|408|452,3,Clinical Observations|Neurotoxicity,Grip strength
-Clinical Observations,individual animal body weight,Required,403,1,Body Weight,Individual animal body weight
-Clinical Observations,individual animal body weight measurements,Required,412,1,Body Weight,Individual animal body weight measurements
-Clinical Observations,individual animal weight,Required,412,1,Body Weights,Individual animal weight
+Clinical Observations,eye changes,Required,452,1,Clinical Observations,Skin/Fur/Eyes/Mucous Membrane Changes
+Clinical Observations,final body weight at necropsy,Required,441,1,Body Weight,Final body weight at necropsy
+Clinical Observations,food consumption,Optional,441,1,Food Consumption,Food consumption
+Clinical Observations,fur changes,Required,452,1,Clinical Observations,Skin/Fur/Eyes/Mucous Membrane Changes
+Clinical Observations,gait / posture / response to handling,Required,452,1,Clinical Observations,Gait/Posture/Response to Handling
+Clinical Observations,general clinical signs,Required,402|423|440,3,Clinical Observations,"General clinical signs (behaviour, skin, fur, eyes, etc.)|General clinical signs (skin, fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, motor, behavior)|General clinical signs (skin, fur, eyes, mucous membranes, respiratory, circulatory, autonomic, CNS, somatomotor, behaviour)"
+Clinical Observations,immunotoxicity investigation,Optional,452,1,Clinical Observations,Immunotoxicity Investigation
+Clinical Observations,individual animal body weight,Required,412,1,Body Weight,Individual animal body weight
+Clinical Observations,individual animal body weights,Required,403,1,Body Weights,Individual animal body weights
 Clinical Observations,individual body weight,Required,402|423,2,Body Weight,Individual body weight
-Clinical Observations,lacrimation,Required,452,1,Clinical Observations,Lacrimation
-Clinical Observations,lethargy,Required,403|412,2,Clinical Observations,Lethargy
-Clinical Observations,lung function assessment,Optional,412,1,Clinical Observations,Lung function assessment
-Clinical Observations,morbidity,Required,403|416|452,3,Clinical Observations|Mortality|Mortality/Morbidity,Death / Morbidity|Morbidity and mortality check|Morbidity and mortality checks
-Clinical Observations,moribundity,Required,414,1,Clinical Observations,Mortality/Moribundity
-Clinical Observations,mortality,Required,403|414|416|452,4,Clinical Observations|Mortality|Mortality/Morbidity,Death / Morbidity|Morbidity and mortality check|Morbidity and mortality checks|Mortality/Moribundity
-Clinical Observations,motor activity,Optional,408|452,2,Clinical Observations|Neurotoxicity,Motor activity
-Clinical Observations,motor activity assessments,Optional,407,1,Clinical Observations,Motor activity assessments
-Clinical Observations,mucous membrane changes,Required,410|412|441|452,4,Clinical Observations,Eyes and mucous membranes changes|Eyes/Mucous membranes changes|Skin/Fur/Eyes/Mucous membrane changes
-Clinical Observations,mucous membrane condition,Required,403|440,2,Clinical Observations,Eye and mucous membrane condition|Eyes and mucous membranes
-Clinical Observations,nervous system changes,Required,412,1,Clinical Observations,Nervous system changes
-Clinical Observations,noael values,Required,416,1,General Toxicity,NOAEL values
+Clinical Observations,morbidity / mortality check,Required,452,1,Clinical Observations,Morbidity/Mortality Check
+Clinical Observations,morbidity and mortality,Required,416,1,Clinical Observations,Morbidity and mortality
+Clinical Observations,moribund status / impending death indicators,Required,402,1,Clinical Observations,Moribund status / Impending death indicators
+Clinical Observations,mucous membrane changes,Required,452,1,Clinical Observations,Skin/Fur/Eyes/Mucous Membrane Changes
+Clinical Observations,neurotoxicity assessment,Optional,452,1,Clinical Observations,Neurotoxicity Assessment (Sensory/Grip/Motor)
 Clinical Observations,oedema score,Required,404,1,Clinical Observations,Oedema score
-Clinical Observations,oestrous cycle length,Required,416,1,Clinical Observations,Oestrous cycle length/normality
-Clinical Observations,oestrous cycle normality,Required,416,1,Clinical Observations,Oestrous cycle length/normality
-Clinical Observations,physical development parameters,Optional,416,1,Clinical Observations,Physical development parameters
-Clinical Observations,piloerection,Required,452,1,Clinical Observations,Piloerection
-Clinical Observations,posture,Required,452,1,Clinical Observations,Gait and posture
-Clinical Observations,pupil size,Required,452,1,Clinical Observations,Pupil size
-Clinical Observations,rectal temperature,Required/Optional,403|412,2,Clinical Observations,Rectal temperature
-Clinical Observations,respiratory effects,Required,410,1,Clinical Observations,Respiratory/Circulatory/Autonomic/CNS effects
-Clinical Observations,respiratory pattern,Required,452,1,Clinical Observations,Respiratory pattern
-Clinical Observations,respiratory system changes,Required,412,1,Clinical Observations,Respiratory system changes
-Clinical Observations,respiratory system signs,Required,403,1,Clinical Observations,Respiratory system signs
-Clinical Observations,response to handling,Required,452,1,Clinical Observations,Response to handling
-Clinical Observations,salivation,Required,403|412,2,Clinical Observations,Salivation
-Clinical Observations,secretions,Required,440|441|452,3,Clinical Observations,Secretions and excretions
-Clinical Observations,sensory activity,Optional,407|408,2,Clinical Observations,Sensory activity
-Clinical Observations,signs of overt toxicity,Required,414,1,Clinical Observations,Signs of overt toxicity
-Clinical Observations,signs of toxicity,Required,407|408,2,Clinical Observations,Signs of toxicity
-Clinical Observations,skin changes,Required,403|410|412|441|452,5,Clinical Observations,Skin and fur changes|Skin/Fur changes|Skin/Fur/Eyes/Mucous membrane changes
-Clinical Observations,skin condition,Required,440,1,Clinical Observations,Skin and fur condition
-Clinical Observations,skin reaction grading,Required,406,1,Clinical Observations,Skin reaction grading (Erythema/Oedema)
-Clinical Observations,sleep,Required,403|412,2,Clinical Observations,Sleep
-Clinical Observations,somatomotor activity,Required,403|410|412,3,Clinical Observations,Somatomotor activity|Somatomotor activity and behaviour
-Clinical Observations,stereotypies,Required,452,1,Clinical Observations,"Stereotypies (e.g., excessive grooming)"
-Clinical Observations,terminal vaginal cytology,Required,408,1,Clinical Observations,Terminal vaginal cytology
-Clinical Observations,time of death,Required,403|423,2,Clinical Observations|Mortality,Time of death|Time of death / Moribund status
-Clinical Observations,tonic movements,Required,452,1,Clinical Observations,Clonic or tonic movements
-Clinical Observations,tremors,Required,403|412,2,Clinical Observations,Tremors
-Clinical Observations,water consumption,Required/Optional,408|412|414|416|452,7,Clinical Observations|Food/Water|General Toxicity|Maternal Weights & Consumption|Nutrition,Water consumption
-Developmental,age at vaginal opening,Required,416,1,Developmental,Age at vaginal opening
-Developmental,anogenital distance,Required/Optional,414|416,3,Developmental|Fetal Measurements,Anogenital Distance (AGD)|Anogenital distance|Anogenital distance (AGD)
-Developmental,corpora lutea count,Required,414,1,Uterine Contents,Corpora lutea count
-Developmental,cryptorchidism,Required,414,1,Fetal Alterations (Soft Tissue),Cryptorchidism
-Developmental,embryonic deaths,Required,414,1,Uterine Contents,Embryonic/Fetal deaths
-Developmental,external alterations,Required,414,1,Fetal Alterations (External),External alterations/malformations
-Developmental,external malformations,Required,414,2,Developmental|Fetal Alterations (External),External Malformations|External alterations/malformations
-Developmental,fetal body weight,Required,414,2,Developmental|Fetal Measurements,Fetal Body Weight|Fetal body weight
-Developmental,fetal deaths,Required,414,1,Uterine Contents,Embryonic/Fetal deaths
-Developmental,fetal sex ratio,Required,414,1,Developmental,Fetal Sex Ratio
-Developmental,gross anomalies,Required,416,1,Developmental,Gross anomalies (pups)
-Developmental,implantation sites,Required,414,1,Uterine Contents,Implantation sites
-Developmental,litter size,Required,414|416,2,Developmental|Developmental/Pup Data,Litter Size|Litter size
-Developmental,live births,Required,416,1,Developmental,Stillbirths/Live births
-Developmental,number of corpora lutea,Required,416,1,Developmental/Pup Data,Number of corpora lutea
-Developmental,number of implantations,Required,416,1,Developmental/Pup Data,Number of implantations
-Developmental,number of pups,Required,416,1,Developmental,Number and sex of pups
-Developmental,number of resorptions,Required,414,1,Developmental,Number of Resorptions
-Developmental,post-implantation loss,Required,416,1,Developmental/Pup Data,Post-implantation loss
-Developmental,preputial separation age,Required,416,1,Developmental,Preputial separation age
-Developmental,pup sex,Required,416,1,Developmental,Number and sex of pups
-Developmental,pups with grossly visible abnormalities,Required,416,1,Developmental/Pup Data,Pups with grossly visible abnormalities
-Developmental,sexual maturation timing,Optional,416,1,Developmental,Sexual maturation timing
-Developmental,skeletal alterations,Required,414,1,Fetal Alterations (Skeletal),Skeletal alterations
-Developmental,skeletal malformations,Required,414,1,Developmental,Skeletal Malformations
-Developmental,skeletal variations,Required,414,1,Developmental,Skeletal Variations
-Developmental,soft tissue alterations,Required,414,1,Fetal Alterations (Soft Tissue),Soft tissue alterations
-Developmental,stillbirths,Required,416,1,Developmental,Stillbirths/Live births
-Developmental,vaginal opening status,Required,440,1,Vaginal Status,Vaginal opening status
-Developmental,viable fetuses,Required,414,1,Uterine Contents,Viable fetuses
-Developmental,visceral malformations,Required,414,1,Developmental,Visceral Malformations
-Exposure Protocol,concentration adjustment factor,Required,403,1,Exposure Protocol,Concentration Adjustment Factor
-Exposure Protocol,maximum exposure duration,Required,403,1,Exposure Protocol,Maximum Exposure Duration
-Exposure Protocol,minimum exposure duration,Required,403,1,Exposure Protocol,Minimum Exposure Duration
-Haematology,activated partial thromboplastin time,Required,452,1,Hematology,Activated partial thromboplastin time
-Haematology,atypical erythrocyte morphology,Optional,452,1,Hematology,Atypical erythrocyte morphology
-Haematology,bone marrow cytology,Optional,452,1,Hematology,Bone marrow cytology
-Haematology,clotting potential,Required,410,1,Haematology,Clotting potential (time/count)
-Haematology,clotting time,Required,412,1,Haematology,Clotting time
-Haematology,differential leukocyte count,Required,410|412|452,3,Haematology|Hematology,Differential leukocyte count|Total and differential leucocyte count
-Haematology,erythrocyte count,Required,410|412|452,3,Haematology|Hematology,Erythrocyte count
-Haematology,haematocrit,Required,410|412|452,3,Haematology|Hematology,Haematocrit|Haematocrit (packed cell volume)|Hematocrit
-Haematology,haemoglobin concentration,Required,410|412|452,3,Haematology|Hematology,Haemoglobin concentration|Hemoglobin concentration
-Haematology,heinz bodies,Optional,452,1,Hematology,Heinz bodies
-Haematology,mean corpuscular haemoglobin,Required,412|452,2,Haematology|Hematology,Mean corpuscular haemoglobin (MCH)|Mean corpuscular hemoglobin
-Haematology,mean corpuscular haemoglobin concentration,Required,412|452,2,Haematology|Hematology,Mean corpuscular haemoglobin concentration (MCHC)|Mean corpuscular hemoglobin concentration
-Haematology,mean corpuscular volume,Required,412|452,2,Haematology|Hematology,Mean corpuscular volume|Mean corpuscular volume (MCV)
+Clinical Observations,signs of toxicity,Required,416,1,Clinical Observations,Signs of toxicity
+Clinical Observations,skin changes,Required,452,1,Clinical Observations,Skin/Fur/Eyes/Mucous Membrane Changes
+Clinical Observations,skin reaction grading,Required,406,1,Clinical Observations,Skin reaction grading (Magnusson and Kligman scale)
+Clinical Observations,specific toxic signs,Required,402|423,2,Clinical Observations,"Specific toxic signs (tremors, convulsions, salivation, diarrhoea, lethargy, sleep, coma)"
+Clinical Observations,stereotypies / bizarre behaviour,Required,452,1,Clinical Observations,Stereotypies/Bizarre Behaviour
+Clinical Observations,systemic adverse effects,Required,404,1,Clinical Observations,Systemic adverse effects
+Clinical Observations,weekly food consumption,Required,412,1,Food Consumption,Weekly food consumption
+Corpora Lutea Count,number of corpora lutea,Required,414,1,Corpora Lutea Count,Number of Corpora Lutea
+Cryptorchidism,cryptorchidism,Required,414,1,Cryptorchidism,Cryptorchidism
+Dam Thyroid Histopathology,thyroid gland histopathology,Required,414,1,Dam Thyroid Histopathology,Thyroid Gland Histopathology
+Dam Thyroid Hormones,thyroid stimulating hormone,Required,407|408|414,3,Dam Thyroid Hormones|Hormones measurement|Serum/Plasma Hormone Analyses,Circulating levels of TSH|TSH|Thyroid Stimulating Hormone (TSH)
+Dam Thyroid Hormones,thyroxine,Required,408|414,2,Dam Thyroid Hormones|Serum/Plasma Hormone Analyses,Thyroxine (T4)
+Dam Thyroid Hormones,triiodothyronine,Required/Optional,408|414|441,3,Dam Thyroid Hormones|Hormones|Serum/Plasma Hormone Analyses,T3|Triiodothyronine (T3)
+Dam Thyroid Weight,thyroid gland weight,Required,414,1,Dam Thyroid Weight,Thyroid Gland Weight
+Developmental,preputial separation incidence,Optional,441,1,Developmental,Preputial separation (PPS) incidence
+Fetal Anogenital Distance (AGD),anogenital distance,Required,414,1,Fetal Anogenital Distance (AGD),Anogenital Distance (AGD)
+Fetal Body Weight,fetal body weight,Required,414,1,Fetal Body Weight,Fetal Body Weight
+Fetal External Alterations,external alterations,Required,414,1,Fetal External Alterations,External Alterations
+Fetal Sex Ratio,fetal sex ratio,Required,414,1,Fetal Sex Ratio,Fetal Sex Ratio
+Fetal Skeletal Alterations,skeletal alterations,Required,414,1,Fetal Skeletal Alterations,Skeletal Alterations
+Fetal Soft Tissue Alterations,soft tissue alterations,Required,414,1,Fetal Soft Tissue Alterations,Soft Tissue Alterations
+Gross Necropsy,gross pathological changes,Required,402,1,Gross Necropsy,Gross pathological changes
+Gross Necropsy,gross pathological findings,Required,403|423,2,Gross Necropsy,Gross pathological findings|Gross pathological findings (all animals)
+Gross Necropsy,implantation sites examination,Required,416,1,Gross Necropsy,Implantation sites examination
+Gross Necropsy,macroscopic examination of structural abnormalities,Required,416,1,Gross Necropsy,Macroscopic examination of structural abnormalities
+Haematology,activated partial thromboplastin time,Required,452,1,Haematology,Activated Partial Thromboplastin Time
+Haematology,bone marrow cytology,Optional,452,1,Haematology,Bone Marrow Cytology
+Haematology,clotting time,Required,409|410|412,3,Haematology,Clotting time
+Haematology,differential leukocyte count,Required,409|410|412|452,4,Haematology,Differential Leukocyte Count|Differential leucocyte count|Differential leukocyte count
+Haematology,erythrocyte count,Required,409|410|412|452,4,Haematology,Erythrocyte Count|Erythrocyte count
+Haematology,haematocrit,Required,409|410|412|452,4,Haematology,Haematocrit|Haematocrit (Packed Cell Volume)
+Haematology,haemoglobin concentration,Required,409|410|412|452,4,Haematology,Haemoglobin Concentration|Haemoglobin concentration
+Haematology,heinz bodies / atypical morphology / methaemoglobin,Optional,452,1,Haematology,Heinz Bodies / Atypical Morphology / Methaemoglobin
+Haematology,mean corpuscular haemoglobin,Required,412|452,2,Haematology,Mean Corpuscular Haemoglobin (MCH)|Mean corpuscular haemoglobin
+Haematology,mean corpuscular haemoglobin concentration,Required,412|452,2,Haematology,Mean Corpuscular Haemoglobin Concentration (MCHC)|Mean corpuscular haemoglobin concentration
+Haematology,mean corpuscular volume,Required,412|452,2,Haematology,Mean Corpuscular Volume (MCV)|Mean corpuscular volume
 Haematology,partial thromboplastin time,Required,412,1,Haematology,Partial thromboplastin time
-Haematology,platelet count,Required,412|452,2,Haematology|Hematology,Platelet count
-Haematology,prothrombin time,Required,412|452,2,Haematology|Hematology,Prothrombin time
-Haematology,reticulocyte counts,Optional,452,1,Hematology,Reticulocyte counts
+Haematology,platelet count,Required,409|410|412|452,4,Haematology,Platelet Count|Platelet count
+Haematology,prothrombin time,Required,409|410|412|452,4,Haematology,Prothrombin Time|Prothrombin time
+Haematology,reticulocyte count,Optional,452,1,Haematology,Reticulocyte Count
 Haematology,reticulocytes,Required,412,1,Haematology,Reticulocytes
-Haematology,total leukocyte count,Required,410|412|452,3,Haematology|Hematology,Total and differential leucocyte count|Total leukocyte count
-Histopathology,adrenal gland histopathology,Required,452,1,Histopathology,Adrenal gland
-Histopathology,adrenal glands histopathology,Required,407|408|412,3,Histopathology,Adrenal|Adrenal glands|Adrenals
-Histopathology,aorta histopathology,Required,452,1,Histopathology,Aorta
-Histopathology,bone marrow histopathology,Required,412,1,Histopathology,Bone marrow
-Histopathology,brain histopathology,Required,412|452,2,Histopathology,Brain|Brain (cerebrum/cerebellum/medulla/pons)
-Histopathology,caecum histopathology,Required,452,1,Histopathology,Caecum
-Histopathology,cervix histopathology,Required,408|452,2,Histopathology,Cervix
-Histopathology,coagulating gland histopathology,Required,416|452,2,Histopathology,Coagulating gland
-Histopathology,colon histopathology,Required,452,1,Histopathology,Colon
-Histopathology,duodenum histopathology,Required,452,1,Histopathology,Duodenum
-Histopathology,epididymides histopathology,Required,407|408|416|452,4,Histopathology,Epididymides|Epididymis
+Haematology,thromboplastin time,Required,409|410,2,Haematology,Thromboplastin time
+Haematology,total leukocyte count,Required,409|410|412|452,4,Haematology,Total Leukocyte Count|Total leucocyte count|Total leukocyte count
+Histopathology,accessory sex organs: epididymides histopathology,Required,407,1,Histopathology,Accessory sex organs: Epididymides
+Histopathology,accessory sex organs: prostate + seminal vesicle with coagulating glands histopathology,Required,407,1,Histopathology,Accessory sex organs: Prostate + seminal vesicle with coagulating glands
+Histopathology,"accessory sex organs: uterus, including cervix histopathology",Required,407,1,Histopathology,"Accessory sex organs: Uterus, including cervix"
+Histopathology,adrenal glands histopathology,Required,407|408,2,Histopathology,Adrenal|Adrenal glands
+Histopathology,cervix histopathology,Required,408,1,Histopathology,Cervix
+Histopathology,coagulating gland histopathology,Required,416,1,Histopathology,Coagulating gland histopathology
+Histopathology,endometrial epithelium morphometry histopathology,Optional,440,1,Histopathology,Endometrial epithelium morphometry
+Histopathology,epididymides histopathology,Required,408,1,Histopathology,Epididymides
 Histopathology,epididymis histopathology,Required,416,1,Histopathology,Epididymis histopathology
-Histopathology,eye histopathology,Required,452,1,Histopathology,Eye (including retina)
-Histopathology,eyes histopathology,Optional,412,1,Histopathology,Eyes
-Histopathology,femur with joint histopathology,Optional,452,1,Histopathology,Femur with joint
-Histopathology,gall bladder histopathology,Required,452,1,Histopathology,Gall bladder
-Histopathology,harderian gland histopathology,Required,452,1,Histopathology,Harderian gland
-Histopathology,heart histopathology,Required,412|452,2,Histopathology,Heart
-Histopathology,ileum histopathology,Required,452,1,Histopathology,Ileum
-Histopathology,jejunum histopathology,Required,452,1,Histopathology,Jejunum
-Histopathology,kidneys histopathology,Required,410|412|452,3,Histopathology,Kidney|Kidneys
-Histopathology,lacrimal gland histopathology,Required,452,1,Histopathology,Lacrimal gland (exorbital)
-Histopathology,larynx histopathology,Required,412,1,Histopathology,Larynx
-Histopathology,liver histopathology,Required,410|412|452,3,Histopathology,Liver
-Histopathology,lung histopathology,Required,412|452,2,Histopathology,Lung
-Histopathology,lymph nodes histopathology,Required/Optional,412|452,3,Histopathology,Lymph nodes (distal)|Lymph nodes (hilar)|Lymph nodes (superficial/deep)
-Histopathology,male mammary glands histopathology,Optional,407,1,Histopathology,Male mammary glands
-Histopathology,mammary gland histopathology,Required,452,1,Histopathology,Mammary gland
+Histopathology,gonads: ovaries histopathology,Required,407,1,Histopathology,Gonads: Ovaries
+Histopathology,gonads: testes histopathology,Required,407,1,Histopathology,Gonads: Testes
+Histopathology,histopathological evaluation,Required,412,1,Histopathology,Histopathological evaluation
+Histopathology,kidneys histopathology,Required,410,1,Histopathology,Kidney
+Histopathology,liver histopathology,Required,410,1,Histopathology,Liver
+Histopathology,male mammary glands histopathology,Required,407,1,Histopathology,Male mammary glands
 Histopathology,mammary glands histopathology,Required,408,1,Histopathology,Mammary glands (female and male)
 Histopathology,microscopic examination of affected organs histopathology,Optional,423,1,Histopathology,Microscopic examination of affected organs
-Histopathology,morphometric measurement of endometrial epithelium histopathology,Optional,440,1,Histopathology,Morphometric measurement of endometrial epithelium
-Histopathology,nasopharyngeal tissues histopathology,Required,412,1,Histopathology,Nasopharyngeal tissues
-Histopathology,oesophagus histopathology,Required,412|452,2,Histopathology,Oesophagus
-Histopathology,olfactory bulb histopathology,Required/Optional,412|452,2,Histopathology,Olfactory bulb
-Histopathology,ovaries histopathology,Required,407|408|412|416|452,5,Histopathology,Ovaries|Ovary
-Histopathology,ovary histopathology,Required,416,1,Histopathology,Ovary histopathology (primordial follicles)
-Histopathology,pancreas histopathology,Required,452,1,Histopathology,Pancreas
+Histopathology,microscopic examination of other affected organs histopathology,Optional,403,1,Histopathology,Microscopic examination of other affected organs
+Histopathology,microscopic examination of respiratory tract histopathology,Optional,403,1,Histopathology,Microscopic examination of respiratory tract
+Histopathology,microscopic examination of treatment site histopathology,Optional,402,1,Histopathology,Microscopic examination of treatment site
+Histopathology,ovaries histopathology,Required,408|416,2,Histopathology,Ovaries|Ovaries histopathology
 Histopathology,pancreatic islets histopathology,Required,408,1,Histopathology,Pancreatic islets
-Histopathology,parathyroid gland histopathology,Required,452,1,Histopathology,Parathyroid gland
-Histopathology,peripheral nerve histopathology,Required,452,1,Histopathology,Peripheral nerve
-Histopathology,pituitary histopathology,Required/Optional,407|408|452,3,Histopathology,Pituitary|Pituitary gland
-Histopathology,primordial follicle count,Optional,416,1,Histopathology,Primordial follicle count
-Histopathology,prostate and seminal vesicle with coagulating glands histopathology,Required,407,1,Histopathology,Prostate + seminal vesicle with coagulating glands
-Histopathology,prostate histopathology,Required,416|452,2,Histopathology,Prostate
-Histopathology,rectum histopathology,Required,452,1,Histopathology,Rectum
-Histopathology,respiratory tract microscopic examination histopathology,Optional,403,1,Histopathology,Respiratory tract microscopic examination
-Histopathology,salivary gland histopathology,Required,452,1,Histopathology,Salivary gland
-Histopathology,seminal vesicle histopathology,Required,452,1,Histopathology,Seminal vesicle
+Histopathology,pituitary histopathology,Required,407|408,2,Histopathology,Pituitary|Pituitary gland
+Histopathology,primordial follicle enumeration histopathology,Optional,416,1,Histopathology,Primordial follicle enumeration (F1 females)
+Histopathology,prostate histopathology,Required,416,1,Histopathology,Prostate histopathology
 Histopathology,seminal vesicles and coagulating glands histopathology,Required,408,1,Histopathology,Seminal vesicles and coagulating glands
-Histopathology,seminal vesicles histopathology,Required,412|416,2,Histopathology,Seminal vesicles
-Histopathology,skeletal muscle histopathology,Required,452,1,Histopathology,Skeletal muscle
-Histopathology,skin histopathology,Required,410|452,2,Histopathology,Skin|Skin (normal and treated)
-Histopathology,spinal cord histopathology,Required,412|452,2,Histopathology,Spinal cord|Spinal cord (cervical/mid-thoracic/lumbar)
-Histopathology,spleen histopathology,Required,412,1,Histopathology,Spleen
-Histopathology,sternum histopathology,Optional,452,1,Histopathology,Sternum (bone marrow section/aspirate)
-Histopathology,stomach histopathology,Required,412|452,2,Histopathology,Stomach|Stomach (forestomach/glandular)
-Histopathology,teeth histopathology,Optional,452,1,Histopathology,Teeth
-Histopathology,testes histopathology,Required,407|408|412|416|452,5,Histopathology,Testes|Testis
-Histopathology,thymus histopathology,Required,412|452,2,Histopathology,Thymus
+Histopathology,seminal vesicles histopathology,Required,416,1,Histopathology,Seminal vesicles histopathology
+Histopathology,skin histopathology,Required,410,1,Histopathology,Skin (normal and treated)
+Histopathology,testes histopathology,Required,408,1,Histopathology,Testis
+Histopathology,testis histopathology,Required,416,1,Histopathology,Testis histopathology
 Histopathology,thyroid and parathyroid glands histopathology,Required,408,1,Histopathology,Thyroid and parathyroid glands
-Histopathology,thyroid histopathology,Required,407|412|452,3,Histopathology,Thyroid
-Histopathology,tongue histopathology,Optional,452,1,Histopathology,Tongue
-Histopathology,trachea histopathology,Required,412|452,2,Histopathology,Trachea
-Histopathology,upper respiratory tract histopathology,Optional,452,1,Histopathology,Upper respiratory tract (nose/turbinates/sinuses)
-Histopathology,ureter histopathology,Optional,452,1,Histopathology,Ureter
-Histopathology,urethra histopathology,Optional,452,1,Histopathology,Urethra
-Histopathology,urinary bladder histopathology,Required,412|452,2,Histopathology,Urinary bladder
-Histopathology,uterus histopathology,Required/Optional,408|412|440|452,4,Histopathology,Uterus|Uterus (including cervix)|Uterus histopathology (H&E)
-Histopathology,uterus with cervix histopathology,Required,407|416,2,Histopathology,"Uterus with cervix|Uterus, including cervix"
-Histopathology,vagina histopathology,Required/Optional,407|408|416|440|452,5,Histopathology,Vagina|Vagina histopathology
-Histopathology,vaginal keratinization / cornification histopathology,Optional,440,1,Histopathology,Vaginal keratinization/cornification
-Histopathology,vaginal smear,Required/Optional,407|408,2,Histopathology,Vaginal smear (collected at necropsy)|Vaginal smears
+Histopathology,thyroid histopathology,Required,407,1,Histopathology,Thyroid
+Histopathology,uterus histopathology,Optional,440,1,Histopathology,Uterus histopathology (H&E staining)
+Histopathology,uterus with cervix histopathology,Required,416,1,Histopathology,Uterus with cervix histopathology
+Histopathology,vagina histopathology,Required/Optional,407|408|416|440,4,Histopathology,Vagina|Vagina histopathology
+Histopathology,vaginal smear,Required,407|408,2,Histopathology,Vaginal smear (collected at necropsy) to determine stage of oestrus cycle|Vaginal smears
 Histopathology,ventral and dorsolateral prostate histopathology,Required,408,1,Histopathology,Ventral and dorsolateral prostate
-Hormones,follicle stimulating hormone,Required,408,1,Serum/Plasma Hormone Analyses,FSH
-Hormones,follicular stimulating hormone,Optional,441,1,Hormones,Follicular stimulating hormone (FSH)
-Hormones,luteinising hormone,Required/Optional,408|441,2,Hormones|Serum/Plasma Hormone Analyses,LH|Luteinising hormone (LH)
-Hormones,oestradiol,Required,408,1,Serum/Plasma Hormone Analyses,Oestradiol
-Hormones,other hormones,Optional,414,1,Hormones (Dams),Other hormones
-Hormones,testosterone,Required/Optional,408|441,2,Hormones|Serum/Plasma Hormone Analyses,Testosterone|Testosterone (T)
-Hormones,thyroid stimulating hormone,Required,407|408|414,3,Hormones (Dams)|Hormones measurement|Serum/Plasma Hormone Analyses,Circulating levels of TSH|TSH|Thyroid Stimulating Hormone (TSH)
-Hormones,thyroxine,Required/Optional,407|408|414|441,4,Hormones|Hormones (Dams)|Hormones measurement|Serum/Plasma Hormone Analyses,Circulating levels of T4|Thyroxine (T4)
-Hormones,triiodothyronine,Required/Optional,407|408|414|441,4,Hormones|Hormones (Dams)|Hormones measurement|Serum/Plasma Hormone Analyses,Circulating levels of T3|T3|Triiodothyronine (T3)
-Immunotoxicity,immunotoxicity investigations,Optional,452,1,Immunotoxicity,Immunotoxicity investigations
-Lung Burden,lung burden measurement,Optional,412,2,Lung Burden,Lung burden measurement
-Maternal Weights & Consumption,body weight change corrected for gravid uterine weight,Optional,414,1,Maternal Weights & Consumption,Body weight change corrected for gravid uterine weight
-Mortality,moribund status,Required,423,1,Mortality,Time of death / Moribund status
-Necropsy,all gross lesions,Required,407|408,2,Necropsy|Pathology,All gross lesions
-Neurotoxicity,sensory reactivity to stimuli,Optional,452,1,Neurotoxicity,Sensory reactivity to stimuli
-Ophthalmology,conjunctiva morphology,Required,412,1,Ophthalmology,Conjunctivae examination
-Ophthalmology,fundus morphology,Required,412,1,Ophthalmology,Fundus examination
-Ophthalmology,iris morphology,Required,412,1,Ophthalmology,Iris examination
-Ophthalmology,refractive media transparency,Required,412,1,Ophthalmology,Refractive media examination
-Organ Weights,adrenal glands weight,Required/Optional,407|408|410|412|416|441|452,7,Organ Weights|Weight,Adrenal glands|Adrenals
-Organ Weights,blotted uterine weight,Required,440,1,Uterine Weight,Blotted uterine weight
-Organ Weights,bone marrow weight,Required,412,1,Organ Weights,Bone marrow
-Organ Weights,brain weight,Required,412|416|452,3,Organ Weights,Brain
-Organ Weights,cowper's glands weight,Required,441,2,Organ Weights,Cowper's glands (COW)
-Organ Weights,epididymides weight,Required,407|408|416|452,5,Organ Weights|Weight,Epididymides|Epididymides (cauda)|Epididymides (total)
-Organ Weights,eyes weight,Optional,412,1,Organ Weights,Eyes
-Organ Weights,glans penis weight,Required,441,2,Organ Weights,Glans penis (GP)
-Organ Weights,heart weight,Required,412|452,2,Organ Weights,Heart
-Organ Weights,kidneys weight,Required/Optional,410|412|416|441|452,5,Organ Weights,Kidneys
-Organ Weights,larynx weight,Required,412,1,Organ Weights,Larynx
-Organ Weights,levator ani plus bulbocavernosus muscles weight,Required,441,1,Organ Weights,Levator ani plus bulbocavernosus muscles (LABC)
-Organ Weights,levator ani-bulbocavernosus muscle weight,Required,441,1,Organ Weights,Levator ani-bulbocavernosus (LABC) muscle
-Organ Weights,liver weight,Required/Optional,410|412|416|441|452,5,Organ Weights,Liver
-Organ Weights,lung weight,Required/Optional,403|412,3,Organ Weights,Lung|Lung weight|Lung weight (Left lung)
-Organ Weights,lymph nodes weight,Required/Optional,412,2,Organ Weights,Lymph nodes (distal)|Lymph nodes (hilar)
-Organ Weights,nasopharyngeal tissues weight,Required,412,1,Organ Weights,Nasopharyngeal tissues
-Organ Weights,oesophagus weight,Required,412,1,Organ Weights,Oesophagus
-Organ Weights,olfactory bulb weight,Required,412,1,Organ Weights,Olfactory bulb
-Organ Weights,organ to body weight ratios,Required,408,1,Organ Weights,Organ/body weight ratios
-Organ Weights,ovaries weight,Required,407|408|412|416|452,5,Organ Weights|Weight,Ovaries
-Organ Weights,pituitary weight,Required,408|416,2,Organ Weights,Pituitary|Pituitary gland
-Organ Weights,prostate and seminal vesicles with coagulating glands weight,Required,407|408,2,Organ Weights|Weight,Prostate + seminal vesicles with coagulating glands
-Organ Weights,prostate weight,Required,416,1,Organ Weights,Prostate
-Organ Weights,seminal vesicle weight,Required,441,1,Organ Weights,Seminal vesicle (SV)
-Organ Weights,seminal vesicles plus coagulating glands weight,Required,441,1,Organ Weights,Seminal vesicles plus coagulating glands (SVCG)
-Organ Weights,seminal vesicles weight,Required,412,1,Organ Weights,Seminal vesicles
-Organ Weights,seminal vesicles with coagulating glands weight,Required,416,1,Organ Weights,Seminal vesicles with coagulating glands
-Organ Weights,spinal cord weight,Required,412,1,Organ Weights,Spinal cord
-Organ Weights,spleen weight,Required,412|416|452,3,Organ Weights,Spleen
-Organ Weights,stomach weight,Required,412,1,Organ Weights,Stomach
-Organ Weights,terminal body weight,Required,408,1,Organ Weights,Terminal body weight
-Organ Weights,testes weight,Required,407|408|410|412|416|452,6,Organ Weights|Weight,Testes
-Organ Weights,thymus weight,Required,412,1,Organ Weights,Thymus
-Organ Weights,thyroid weight,Required,407|408|412|416|452,5,Organ Weights|Weight,Thyroid|Thyroid gland
-Organ Weights,trachea weight,Required,412,1,Organ Weights,Trachea
-Organ Weights,urinary bladder weight,Required,412,1,Organ Weights,Urinary bladder
-Organ Weights,uterine weight,Required,440,1,Organ Weights,Uterine weight (absolute and relative)
-Organ Weights,uterus weight,Required,408|412|416|452,4,Organ Weights,Uterus
+Histopathology/Tissue Preservation,accessory sex organs preservation,Required,409,1,Histopathology/Tissue Preservation,Accessory sex organs preservation
+Histopathology/Tissue Preservation,adrenal gland,Required,452,1,Histopathology/Tissue Preservation,Adrenal Gland
+Histopathology/Tissue Preservation,adrenals preservation,Required,409,1,Histopathology/Tissue Preservation,Adrenals preservation
+Histopathology/Tissue Preservation,aorta,Required,452,1,Histopathology/Tissue Preservation,Aorta
+Histopathology/Tissue Preservation,aorta preservation,Required,409,1,Histopathology/Tissue Preservation,Aorta preservation
+Histopathology/Tissue Preservation,bone marrow preservation,Required,409,1,Histopathology/Tissue Preservation,Bone marrow preservation
+Histopathology/Tissue Preservation,brain,Required,452,1,Histopathology/Tissue Preservation,"Brain (Cerebrum, Cerebellum, Medulla/Pons)"
+Histopathology/Tissue Preservation,caecum,Required,452,1,Histopathology/Tissue Preservation,Caecum
+Histopathology/Tissue Preservation,cerebellum preservation,Required,409,1,Histopathology/Tissue Preservation,Cerebellum preservation
+Histopathology/Tissue Preservation,cerebrum preservation,Required,409,1,Histopathology/Tissue Preservation,Cerebrum preservation
+Histopathology/Tissue Preservation,cervix,Required,452,1,Histopathology/Tissue Preservation,Cervix
+Histopathology/Tissue Preservation,coagulating gland,Required,452,1,Histopathology/Tissue Preservation,Coagulating Gland
+Histopathology/Tissue Preservation,colon,Required,452,1,Histopathology/Tissue Preservation,Colon
+Histopathology/Tissue Preservation,duodenum,Required,452,1,Histopathology/Tissue Preservation,Duodenum
+Histopathology/Tissue Preservation,eyes preservation,Required,409,1,Histopathology/Tissue Preservation,Eyes preservation
+Histopathology/Tissue Preservation,female mammary gland preservation,Required,409,1,Histopathology/Tissue Preservation,Female mammary gland preservation
+Histopathology/Tissue Preservation,gall bladder preservation,Required,409,1,Histopathology/Tissue Preservation,Gall bladder preservation
+Histopathology/Tissue Preservation,gonads preservation,Required,409,1,Histopathology/Tissue Preservation,Gonads preservation
+Histopathology/Tissue Preservation,gross lesions,Required,452,1,Histopathology/Tissue Preservation,Gross Lesions
+Histopathology/Tissue Preservation,gross lesions preservation,Required,409,1,Histopathology/Tissue Preservation,Gross lesions preservation
+Histopathology/Tissue Preservation,heart,Required,452,1,Histopathology/Tissue Preservation,Heart
+Histopathology/Tissue Preservation,heart preservation,Required,409,1,Histopathology/Tissue Preservation,Heart preservation
+Histopathology/Tissue Preservation,ileum,Required,452,1,Histopathology/Tissue Preservation,Ileum
+Histopathology/Tissue Preservation,jejunum,Required,452,1,Histopathology/Tissue Preservation,Jejunum
+Histopathology/Tissue Preservation,kidneys,Required,452,1,Histopathology/Tissue Preservation,Kidney
+Histopathology/Tissue Preservation,kidneys preservation,Required,409,1,Histopathology/Tissue Preservation,Kidneys preservation
+Histopathology/Tissue Preservation,lacrimal gland,Required,452,1,Histopathology/Tissue Preservation,Lacrimal Gland (Exorbital)
+Histopathology/Tissue Preservation,large intestines preservation,Required,409,1,Histopathology/Tissue Preservation,Large intestines preservation
+Histopathology/Tissue Preservation,liver,Required,452,1,Histopathology/Tissue Preservation,Liver
+Histopathology/Tissue Preservation,liver preservation,Required,409,1,Histopathology/Tissue Preservation,Liver preservation
+Histopathology/Tissue Preservation,lung,Required,452,1,Histopathology/Tissue Preservation,Lung
+Histopathology/Tissue Preservation,lungs preservation,Required,409,1,Histopathology/Tissue Preservation,Lungs preservation
+Histopathology/Tissue Preservation,lymph nodes,Required,452,1,Histopathology/Tissue Preservation,Lymph Nodes (Superficial and Deep)
+Histopathology/Tissue Preservation,lymph nodes preservation,Required,409,1,Histopathology/Tissue Preservation,Lymph nodes preservation
+Histopathology/Tissue Preservation,mammary gland,Required,452,1,Histopathology/Tissue Preservation,Mammary Gland
+Histopathology/Tissue Preservation,medulla / pons preservation,Required,409,1,Histopathology/Tissue Preservation,Medulla/pons preservation
+Histopathology/Tissue Preservation,oesophagus preservation,Required,409,1,Histopathology/Tissue Preservation,Oesophagus preservation
+Histopathology/Tissue Preservation,pancreas,Required,452,1,Histopathology/Tissue Preservation,Pancreas
+Histopathology/Tissue Preservation,pancreas preservation,Required,409,1,Histopathology/Tissue Preservation,Pancreas preservation
+Histopathology/Tissue Preservation,parathyroid gland,Required,452,1,Histopathology/Tissue Preservation,Parathyroid Gland
+Histopathology/Tissue Preservation,parathyroid preservation,Required,409,1,Histopathology/Tissue Preservation,Parathyroid preservation
+Histopathology/Tissue Preservation,peripheral nerve,Required,452,1,Histopathology/Tissue Preservation,Peripheral Nerve
+Histopathology/Tissue Preservation,peripheral nerve preservation,Required,409,1,Histopathology/Tissue Preservation,Peripheral nerve preservation
+Histopathology/Tissue Preservation,pituitary,Required,452,1,Histopathology/Tissue Preservation,Pituitary
+Histopathology/Tissue Preservation,pituitary preservation,Required,409,1,Histopathology/Tissue Preservation,Pituitary preservation
+Histopathology/Tissue Preservation,prostate,Required,452,1,Histopathology/Tissue Preservation,Prostate
+Histopathology/Tissue Preservation,prostate preservation,Required,409,1,Histopathology/Tissue Preservation,Prostate preservation
+Histopathology/Tissue Preservation,rectum,Required,452,1,Histopathology/Tissue Preservation,Rectum
+Histopathology/Tissue Preservation,salivary gland,Required,452,1,Histopathology/Tissue Preservation,Salivary Gland
+Histopathology/Tissue Preservation,salivary glands preservation,Required,409,1,Histopathology/Tissue Preservation,Salivary glands preservation
+Histopathology/Tissue Preservation,seminal vesicle,Required,452,1,Histopathology/Tissue Preservation,Seminal Vesicle
+Histopathology/Tissue Preservation,skin preservation,Required,409,1,Histopathology/Tissue Preservation,Skin preservation
+Histopathology/Tissue Preservation,small intestines preservation,Required,409,1,Histopathology/Tissue Preservation,Small intestines preservation
+Histopathology/Tissue Preservation,spinal cord preservation,Required,409,1,Histopathology/Tissue Preservation,Spinal cord preservation
+Histopathology/Tissue Preservation,spleen preservation,Required,409,1,Histopathology/Tissue Preservation,Spleen preservation
+Histopathology/Tissue Preservation,stomach,Required,452,1,Histopathology/Tissue Preservation,Stomach (Forestomach/Glandular)
+Histopathology/Tissue Preservation,stomach preservation,Required,409,1,Histopathology/Tissue Preservation,Stomach preservation
+Histopathology/Tissue Preservation,testes,Required,452,1,Histopathology/Tissue Preservation,Testis
+Histopathology/Tissue Preservation,thymus,Required,452,1,Histopathology/Tissue Preservation,Thymus
+Histopathology/Tissue Preservation,thymus preservation,Required,409,1,Histopathology/Tissue Preservation,Thymus preservation
+Histopathology/Tissue Preservation,thyroid,Required,452,1,Histopathology/Tissue Preservation,Thyroid
+Histopathology/Tissue Preservation,thyroid preservation,Required,409,1,Histopathology/Tissue Preservation,Thyroid preservation
+Histopathology/Tissue Preservation,trachea,Required,452,1,Histopathology/Tissue Preservation,Trachea
+Histopathology/Tissue Preservation,trachea preservation,Required,409,1,Histopathology/Tissue Preservation,Trachea preservation
+Histopathology/Tissue Preservation,urinary bladder,Required,452,1,Histopathology/Tissue Preservation,Urinary Bladder
+Histopathology/Tissue Preservation,urinary bladder preservation,Required,409,1,Histopathology/Tissue Preservation,Urinary bladder preservation
+Histopathology/Tissue Preservation,uterus preservation,Required,409,1,Histopathology/Tissue Preservation,Uterus preservation
+Hormones,follicle stimulating hormone,Optional,408,1,Serum/Plasma Hormone Analyses,FSH
+Hormones,luteinising hormone,Optional,408,1,Serum/Plasma Hormone Analyses,LH
+Hormones,oestradiol,Optional,408,1,Serum/Plasma Hormone Analyses,Oestradiol
+Hormones,serum follicle stimulating hormone,Optional,441,1,Hormones,Serum Follicle Stimulating Hormone (FSH)
+Hormones,serum luteinising hormone,Optional,441,1,Hormones,Serum Luteinising Hormone (LH)
+Hormones,serum thyroxine,Optional,441,1,Hormones,Serum Thyroxine (T4)
+Hormones,testosterone,Optional,408|441,2,Hormones|Serum/Plasma Hormone Analyses,Serum Testosterone (T)|Testosterone
+Hormones,triiodothyronine and thyroxine,Required,407,1,Hormones measurement,"Circulating levels of T3, T4"
+Local Skin Effects,draize criteria assessment at treatment site,Required,402,1,Local Skin Effects,Draize criteria assessment at treatment site
+Lung Burden,lung burden measurement,Required,412,1,Lung Burden,Lung burden measurement
+Maternal Body Weight,dam body weight,Required,414,1,Maternal Body Weight,Dam Body Weight
+Maternal Clinical Signs,moribundity,Required,414,1,Maternal Clinical Signs,Mortality/Moribundity
+Maternal Clinical Signs,mortality,Required,414,1,Maternal Clinical Signs,Mortality/Moribundity
+Maternal Clinical Signs,overt toxicity signs,Required,414,1,Maternal Clinical Signs,Overt Toxicity Signs
+Maternal Food Consumption,dam food consumption,Required,414,1,Maternal Food Consumption,Dam Food Consumption
+Offspring Development,body weight gain,Required,416,1,Offspring Development,Body weight gain
+Offspring Development,functional investigations,Optional,416,1,Offspring Development,"Functional investigations (motor activity, sensory function, reflex ontogeny)"
+Offspring Development,live births count,Required,416,1,Offspring Development,Live births count
+Offspring Development,physical landmarks,Optional,416,1,Offspring Development,"Physical landmarks (ear/eye opening, tooth eruption, hair growth)"
+Offspring Development,stillbirths count,Required,416,1,Offspring Development,Stillbirths count
+Ophthalmological Examination,conjunctiva morphology,Required,412,1,Ophthalmological Examination,Conjunctivae examination
+Ophthalmological Examination,fundus morphology,Required,412,1,Ophthalmological Examination,Fundus examination
+Ophthalmological Examination,iris morphology,Required,412,1,Ophthalmological Examination,Iris examination
+Ophthalmological Examination,refractive media transparency,Required,412,1,Ophthalmological Examination,Refractive media examination
+Optional Organ Weights,adrenal weight,Optional,441,1,Optional Organ Weights,Adrenal weight (paired)
+Optional Organ Weights,kidney weight,Optional,441,1,Optional Organ Weights,Kidney weight (paired)
+Optional Organ Weights,liver weight,Required/Optional,409|410|412|416|441|452,6,Optional Organ Weights|Organ Weights,Liver Weight|Liver weight
+Organ Weights,adrenal glands weight,Required/Optional,407|408|416|452,4,Organ Weights|Weight,Adrenal Glands Weight (Mice)|Adrenal glands|Adrenal glands weight|Adrenals
+Organ Weights,adrenals weight,Required,409|410|412|452,4,Organ Weights,Adrenals Weight|Adrenals weight
+Organ Weights,blotted uterine weight,Required,440,1,Organ Weights,Blotted uterine weight
+Organ Weights,brain weight,Required,409|412|416|452,4,Organ Weights,Brain Weight|Brain weight
+Organ Weights,epididymides weight,Required,407|408|409|416|452,5,Organ Weights|Weight,Epididymides|Epididymides Weight|Epididymides weight
+Organ Weights,gall bladder weight,Required,409,1,Organ Weights,Gall bladder weight
+Organ Weights,gravid uterine weight,Required,414,1,Uterine Weight,Gravid Uterine Weight
+Organ Weights,heart weight,Required,409|412|452,3,Organ Weights,Heart Weight|Heart weight
+Organ Weights,kidneys weight,Required,409|410|412|416|452,5,Organ Weights,Kidneys Weight|Kidneys weight
+Organ Weights,known target organs weight,Required,416,1,Organ Weights,Known target organs weight
+Organ Weights,left lung weight,Required,412,1,Organ Weights,Left Lung weight
+Organ Weights,lung weight,Optional,403,1,Organ Weights,Lung weight
+Organ Weights,nasopharyngeal tissues weight,Required,412,1,Organ Weights,Nasopharyngeal tissues weight
+Organ Weights,ovaries weight,Required,407|408|409|412|416|452,6,Organ Weights|Weight,Ovaries|Ovaries Weight|Ovaries weight
+Organ Weights,parathyroids weight,Required,409,1,Organ Weights,Parathyroids weight
+Organ Weights,pituitary weight,Required,408|416,2,Organ Weights,Pituitary gland|Pituitary weight
+Organ Weights,prostate + seminal vesicles with coagulating glands as a whole complex weight,Required,408,1,Organ Weights,Prostate + seminal vesicles with coagulating glands as a whole complex
+Organ Weights,prostate and seminal vesicles with coagulating glands weight,Required,407,1,Weight,Prostate + seminal vesicles with coagulating glands
+Organ Weights,prostate weight,Required,416,1,Organ Weights,Prostate weight
+Organ Weights,seminal vesicles weight,Required,412,1,Organ Weights,Seminal vesicles weight
+Organ Weights,seminal vesicles with coagulating glands weight,Required,416,1,Organ Weights,Seminal vesicles with coagulating glands weight
+Organ Weights,spleen weight,Required,409|412|416|452,4,Organ Weights,Spleen Weight|Spleen weight
+Organ Weights,testes weight,Required,407|408|409|410|412|416|452,7,Organ Weights|Weight,Testes|Testes Weight|Testes weight
+Organ Weights,thymus weight,Required,409|412|416,3,Organ Weights,Thymus weight|Thymus weight (offspring)
+Organ Weights,thyroid weight,Required,407|408|409|412|416|452,6,Organ Weights|Weight,Thyroid|Thyroid Weight|Thyroid gland|Thyroid weight
+Organ Weights,trachea weight,Required,412,1,Organ Weights,Trachea weight
+Organ Weights,uterus weight,Required,408|409|412|416|452,5,Organ Weights,Uterus|Uterus Weight|Uterus weight
 Organ Weights,uterus with cervix weight,Required,407,1,Weight,"Uterus, including cervix"
-Organ Weights,ventral prostate weight,Required,441,2,Organ Weights,Ventral prostate (VP)
-Organ Weights,wet uterine weight,Required,440,1,Uterine Weight,Wet uterine weight
-Other,particle shape,Required,412,1,Other,Particle shape/size (EM)
-Other,particle size,Required,412,1,Other,Particle shape/size (EM)
-Other,particle surface area,Optional,412,1,Other,Particle surface area
-Pathology,extended histopathology,Optional,407,1,Pathology,Extended histopathology (Other groups)
-Pathology,reversibility assessment,Required,404,1,Pathology,Reversibility assessment
-Pathology,sample cryopreservation for omics,Optional,407,1,Pathology,Sample cryopreservation for omics
-Pathology (Histopathology),microscopic examination of affected organs / treatment site,Optional,402,1,Pathology (Histopathology),Microscopic examination of affected organs/treatment site
-Post-Exposure Recovery,balf - satellite,Optional,412,1,Post-Exposure Recovery,BALF (Right lung) - Satellite
-Post-Exposure Recovery,histopathology - satellite,Optional,412,1,Post-Exposure Recovery,Histopathology (Left lung) - Satellite
-Post-Exposure Recovery,lung burden - satellite,Optional,412,1,Post-Exposure Recovery,Lung burden (Right lung) - Satellite
-Post-Exposure Recovery,lung weight - satellite,Optional,412,1,Post-Exposure Recovery,Lung weight (Left lung) - Satellite
-Pulmonary Function,pulmonary function data,Optional,412,1,Pulmonary Function,Pulmonary function data
-Reproductive,birth index,Required,416,1,Reproductive Indices,Birth index / Viability
-Reproductive,cauda epididymides sperm reserves,Required,416,1,Sperm Measures,Cauda epididymides sperm reserves
+Organ Weights,wet uterine weight,Required,440,1,Organ Weights,Wet uterine weight
+Other Hormones,other hormone levels,Optional,414,1,Other Hormones,Other Hormone Levels
+Ovarian Tissue Check,presence of ovarian tissue in stubs,Required,440,1,Ovarian Tissue Check,Presence of ovarian tissue in stubs
+Pathology/Histopathology,skin lesion grading,Required,404,2,Pathology/Histopathology,Skin lesion grading (Erythema/Eschar)|Skin lesion grading (Oedema)
+Pathology/Other Measures,skin fold thickness measurement,Optional,406,1,Pathology/Other Measures,Skin fold thickness measurement
+Pulmonary Function,pulmonary function measurement,Optional,412,1,Pulmonary Function,Pulmonary function measurement
 Reproductive,cauda epididymis sperm reserves,Optional,408,1,Sperm Measures,Cauda epididymis sperm reserves
-Reproductive,fertility index,Required,416,2,Reproductive|Reproductive Indices,Fertility index
-Reproductive,gestation length,Required,414|416,3,Developmental|Reproductive|Reproductive Indices,Gestation Length|Gestation length
-Reproductive,homogenisation-resistant spermatids enumeration,Required,416,1,Sperm Measures,Homogenisation-resistant spermatids enumeration
-Reproductive,lactation index,Required,416,1,Reproductive Indices,Lactation index
-Reproductive,levator ani muscle weight,Required,441,1,Physiological Measures,Levator ani muscle weight
-Reproductive,mating index,Required,416,2,Reproductive|Reproductive Indices,Mating index
-Reproductive,number of fertile animals,Required,416,1,Reproductive Indices,Number of fertile animals
-Reproductive,number of pregnant females,Required,416,1,Reproductive Indices,Number of pregnant females
-Reproductive,percent morphologically normal sperm,Required,416,1,Sperm Measures,Percent morphologically normal sperm
-Reproductive,percent of sperm with identified abnormality,Required,416,1,Sperm Measures,Percent of sperm with identified abnormality
-Reproductive,percent progressively motile sperm,Required,416,1,Sperm Measures,Percent progressively motile sperm
-Reproductive,preputial separation incidence,Optional,441,1,Reproductive,Preputial separation (PPS) incidence
-Reproductive,sperm morphology,Required/Optional,408|416,2,Sperm Measures,Sperm morphology
-Reproductive,sperm motility,Required/Optional,408|416,2,Sperm Measures,Sperm motility
-Reproductive,total cauda epididymal sperm number,Required,416,1,Sperm Measures,Total cauda epididymal sperm number
-Reproductive,viability index,Required,416,1,Reproductive Indices,Birth index / Viability
-Statistical Analysis,c x t relationship coefficient,Required,403,1,Statistical Analysis,C x t Relationship Coefficient (n)
-Statistical Analysis,lethal concentration 01,Optional,403,1,Statistical Analysis,Lethal Concentration 01 (LC01)
-Statistical Analysis,lethal concentration 50,Required,403,1,Statistical Analysis,Lethal Concentration 50 (LC50)
-Statistical Analysis,probit regression parameters,Required,403,1,Statistical Analysis,"Probit Regression Parameters (b0, b1)"
-Systemic Toxicity,cardiovascular effects assessments,Optional,412,1,Systemic Toxicity,Cardiovascular effects assessments
-Systemic Toxicity,hepatotoxicity assessments,Optional,412,1,Systemic Toxicity,Hepatotoxicity assessments
-Systemic Toxicity,immunotoxicity assessments,Optional,412,1,Systemic Toxicity,Immunotoxicity assessments
-Systemic Toxicity,neurotoxicity assessments,Optional,412,1,Systemic Toxicity,Neurotoxicity assessments
-Temperature,body temperature,Optional,412,1,Temperature,Body temperature
+Reproductive,sperm morphology,Required/Optional,408|416,2,Sperm Measures|Sperm Parameters,Sperm morphology
+Reproductive,sperm motility,Required/Optional,408|416,2,Sperm Measures|Sperm Parameters,Sperm motility
+Resorption Counts,early resorptions,Required,414,1,Resorption Counts,Early Resorptions
+Resorption Counts,late resorptions,Required,414,1,Resorption Counts,Late Resorptions
+Sperm Parameters,cauda epididymides sperm reserves enumeration,Required,416,1,Sperm Parameters,Cauda epididymides sperm reserves enumeration
+Sperm Parameters,homogenisation-resistant spermatids enumeration,Required,416,1,Sperm Parameters,Homogenisation-resistant spermatids enumeration
+Target Organ Weights,cowper's glands weight,Required,441,1,Target Organ Weights,Cowper's glands (COW) weight
+Target Organ Weights,glans penis weight,Required,441,1,Target Organ Weights,Glans penis (GP) weight
+Target Organ Weights,levator ani plus bulbocavernosus muscle weight,Required,441,1,Target Organ Weights,Levator ani plus bulbocavernosus (LABC) muscle weight
+Target Organ Weights,seminal vesicles plus coagulating glands weight,Required,441,1,Target Organ Weights,Seminal vesicles plus coagulating glands (SVCG) weight
+Target Organ Weights,ventral prostate weight,Required,441,1,Target Organ Weights,Ventral prostate (VP) weight
 Urinalysis,bilirubin,Optional,452,1,Urinalysis,Bilirubin
-Urinalysis,blood / blood cells,Optional,412,1,Urinalysis,Blood/blood cells
+Urinalysis,blood / blood cells,Required/Optional,409|412,2,Urinalysis,Blood/blood cells
 Urinalysis,ketone,Optional,452,1,Urinalysis,Ketone
-Urinalysis,occult blood,Optional,452,1,Urinalysis,Occult blood
-Urinalysis,urinalysis parameters,Optional,410,1,Urinalysis,Urinalysis parameters
-Urinalysis,urine appearance,Required/Optional,412|452,2,Urinalysis,Appearance|Appearance (colour/turbidity)
-Urinalysis,urine glucose,Required/Optional,412|452,2,Urinalysis,Glucose
-Urinalysis,urine osmolality,Required/Optional,412|452,2,Urinalysis,Osmolality or specific gravity|Specific gravity or osmolality
-Urinalysis,urine ph,Required/Optional,412|452,2,Urinalysis,pH
-Urinalysis,urine protein,Required/Optional,412|452,2,Urinalysis,Total protein
-Urinalysis,urine specific gravity,Required/Optional,412|452,2,Urinalysis,Osmolality or specific gravity|Specific gravity or osmolality
-Urinalysis,urine volume,Required/Optional,412|452,2,Urinalysis,Volume
+Urinalysis,occult blood,Optional,452,1,Urinalysis,Occult Blood
+Urinalysis,osmolality / specific gravity,Required,452,1,Urinalysis,Osmolality / Specific Gravity
+Urinalysis,urinalysis,Optional,410,1,Urinalysis,Urinalysis
+Urinalysis,urine appearance,Required/Optional,409|412|452,3,Urinalysis,Appearance|Appearance (colour and turbidity)
+Urinalysis,urine glucose,Required/Optional,409|412|452,3,Urinalysis,Glucose
+Urinalysis,urine osmolality,Required/Optional,409|412,2,Urinalysis,Osmolality|Specific gravity or osmolality
+Urinalysis,urine ph,Required/Optional,409|412|452,3,Urinalysis,pH
+Urinalysis,urine protein,Required/Optional,409|412|452,3,Urinalysis,Protein|Total Protein|Total protein
+Urinalysis,urine specific gravity,Required/Optional,409|412,2,Urinalysis,Specific gravity|Specific gravity or osmolality
+Urinalysis,urine volume,Required/Optional,409|412|452,3,Urinalysis,Volume
 Urinalysis,urobilinogen,Optional,452,1,Urinalysis,Urobilinogen
+Vaginal Examination,vaginal opening status,Required,440,1,Vaginal Examination,Vaginal opening status
+Water Consumption,water consumption,Optional,412,1,Water Consumption,Water consumption

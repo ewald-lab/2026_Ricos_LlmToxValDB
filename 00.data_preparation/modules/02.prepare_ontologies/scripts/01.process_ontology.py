@@ -58,6 +58,7 @@ class OntologyToHierarchy:
                 self.prompt_template_content = f.read()
 
         self.node_parents = {}
+        self.visited_edges = set()
         self.prompt_cache = {}
         self.llm_generated_labels = set()
         self.visited = set()
@@ -68,12 +69,16 @@ class OntologyToHierarchy:
             Path(self.global_definitions_db).parent.mkdir(parents=True, exist_ok=True)
             with sqlite3.connect(self.global_definitions_db) as conn:
                 cursor = conn.cursor()
-                cursor.execute("CREATE TABLE IF NOT EXISTS global_definitions (uri TEXT PRIMARY KEY, definition TEXT)")
-                cursor.execute("SELECT uri, definition FROM global_definitions")
+                cursor.execute("CREATE TABLE IF NOT EXISTS global_definitions (uri TEXT PRIMARY KEY, definition TEXT, is_llm_generated INTEGER DEFAULT 0)")
+                try:
+                    cursor.execute("SELECT uri, definition, is_llm_generated FROM global_definitions")
+                except sqlite3.OperationalError:
+                    cursor.execute("SELECT uri, definition, 0 as is_llm_generated FROM global_definitions")
                 count = 0
-                for ruri, rdef in cursor:
+                for ruri, rdef, is_llm_gen in cursor:
                     self.prompt_cache[rdflib.URIRef(ruri)] = rdef
-                    self.llm_generated_labels.add(rdflib.URIRef(ruri))
+                    if is_llm_gen:
+                        self.llm_generated_labels.add(rdflib.URIRef(ruri))
                     count += 1
             logger.info(f"Loaded {count} cached definitions from {self.global_definitions_db}")
 
@@ -135,6 +140,52 @@ class OntologyToHierarchy:
                 children.append(s)
         children.sort(key=lambda x: self.get_label(x).lower())
         return children
+
+    def get_direct_parents(self, uri: rdflib.URIRef) -> list[rdflib.URIRef]:
+        """
+        Description:
+        Returns direct parent URIs (rdfs:subClassOf) for a given class URI.
+
+        Args:
+            uri (rdflib.URIRef): The class URI.
+
+        Returns:
+            list[rdflib.URIRef]: List of parent URIs.
+        """
+        return [o for o in self.graph.objects(uri, RDFS.subClassOf) if isinstance(o, rdflib.URIRef)]
+
+    def get_all_paths_to_root(self, uri: rdflib.URIRef, visited: Optional[set] = None) -> list[list[str]]:
+        """
+        Description:
+        Returns all root-to-leaf paths leading to this URI as lists of human-readable labels.
+        Handles multi-parent (DAG) structures by exploring every parent branch.
+
+        Args:
+            uri (rdflib.URIRef): The class URI to get paths for.
+            visited (Optional[set]): Set of visited URIs to prevent infinite cycles.
+
+        Returns:
+            list[list[str]]: Each element is one full path from root to this node (list of labels).
+        """
+        if visited is None:
+            visited = set()
+        if uri in visited:
+            return []
+        visited = visited | {uri}
+
+        label = self.get_label(uri)
+        parents = self.get_direct_parents(uri)
+
+        if not parents:
+            return [[label]]
+
+        all_paths = []
+        for parent_uri in parents:
+            parent_paths = self.get_all_paths_to_root(parent_uri, visited)
+            for path in parent_paths:
+                all_paths.append(path + [label])
+
+        return all_paths if all_paths else [[label]]
 
     def count_total_nodes(self, current_classes: list[rdflib.URIRef]) -> int:
         """
@@ -202,7 +253,27 @@ class OntologyToHierarchy:
 
         for i in tqdm(range(0, len(inputs), chunk_size), desc="LLM Generating Definitions", leave=False, smoothing=0.0):
             chunk = inputs[i:i + chunk_size]
-            chunk_results = chain.batch(chunk, config={"max_concurrency": self.max_concurrency})
+            try:
+                chunk_results = chain.batch(chunk, config={"max_concurrency": self.max_concurrency})
+            except Exception as e:
+                logger.warning(f"Batch generation failed with error: {e}. Retrying sequentially with progressive truncation...")
+                chunk_results = []
+                for item in chunk:
+                    retries = 0
+                    current_item = dict(item)
+                    while retries < 4:
+                        try:
+                            res = chain.invoke(current_item)
+                            chunk_results.append(res)
+                            break
+                        except Exception as inner_e:
+                            retries += 1
+                            logger.warning(f"Item '{current_item['label']}' failed (retry {retries}/4): {inner_e}. Truncating hierarchy by half...")
+                            hier_words = current_item["hierarchy"].split()
+                            current_item["hierarchy"] = " ".join(hier_words[:max(1, len(hier_words)//2)]) + "..."
+                    else:
+                        logger.error(f"Failed to generate for item after retries: {item['label']}")
+                        chunk_results.append("")
             generated_descriptions.extend(chunk_results)
 
         results = {}
@@ -244,7 +315,30 @@ class OntologyToHierarchy:
 
         for i in tqdm(range(0, len(batch_data), chunk_size), desc="LLM Evaluating Definitions", leave=False, smoothing=0.0):
             chunk = batch_data[i:i + chunk_size]
-            chunk_results = chain.batch(chunk, config={"max_concurrency": self.max_concurrency})
+            try:
+                chunk_results = chain.batch(chunk, config={"max_concurrency": self.max_concurrency})
+            except Exception as e:
+                logger.warning(f"Batch evaluation failed with error: {e}. Retrying sequentially with progressive truncation...")
+                chunk_results = []
+                for item in chunk:
+                    retries = 0
+                    current_item = dict(item)
+                    while retries < 4:
+                        try:
+                            res = chain.invoke(current_item)
+                            chunk_results.append(res)
+                            break
+                        except Exception as inner_e:
+                            retries += 1
+                            logger.warning(f"Item '{current_item['label']}' failed (retry {retries}/4): {inner_e}. Truncating input by half...")
+                            if "definition" in current_item:
+                                def_words = current_item["definition"].split()
+                                current_item["definition"] = " ".join(def_words[:max(1, len(def_words)//2)]) + "..."
+                            hier_words = current_item["hierarchy"].split()
+                            current_item["hierarchy"] = " ".join(hier_words[:max(1, len(hier_words)//2)]) + "..."
+                    else:
+                        logger.error(f"Failed to evaluate item after retries: {item['label']}")
+                        chunk_results.append('{"decision": "BAD"}')
             generated_results.extend(chunk_results)
 
         decisions = []
@@ -293,6 +387,8 @@ class OntologyToHierarchy:
             """
             Description:
             Helper method to recursively collect classes lacking definitions or needing evaluation.
+            For nodes with multiple parents, all root-to-node paths are passed to the LLM as
+            additional context, one per line.
 
             Args:
                 nodes (list[rdflib.URIRef]): Nodes list to inspect.
@@ -309,10 +405,18 @@ class OntologyToHierarchy:
                 definition = self.get_definition(uri)
                 if definition:
                     words = definition.split()
-                    if len(words) > 1500:
-                        definition = " ".join(words[:1500]) + "..."
+                    if len(words) > 1000:
+                        definition = " ".join(words[:1000]) + "..."
 
-                hierarchy_str = " > ".join(parent_path + [label])
+                # Build all root-to-node paths to give the LLM full multi-parent context
+                all_paths = self.get_all_paths_to_root(uri)
+                if len(all_paths) > 1:
+                    hier_lines = [" > ".join(path) for path in all_paths[:5]]
+                    if len(all_paths) > 5:
+                        hier_lines.append("...")
+                    hierarchy_str = "\n".join(hier_lines)
+                else:
+                    hierarchy_str = " > ".join(parent_path + [label])
 
                 if uri not in self.prompt_cache:
                     if not definition or len(definition.split()) < 5:
@@ -329,6 +433,41 @@ class OntologyToHierarchy:
 
         bad_to_generate = []  # list of (uri, label, hierarchy_str)
         good_to_cache = []    # list of (uri, label, definition)
+
+        if llm is None:
+            logger.info("LLM is disabled. Using existing ontology definitions as fallbacks...")
+            combined_to_generate = missing_to_generate
+            num_missing_generated = 0
+            num_bad_generated = 0
+            
+            for uri, label, hierarchy_str, definition in to_evaluate:
+                good_to_cache.append((uri, label, definition))
+                
+            if good_to_cache:
+                with sqlite3.connect(self.global_definitions_db) as conn:
+                    cursor = conn.cursor()
+                    for uri, label, definition in good_to_cache:
+                        self.prompt_cache[uri] = definition
+                        cursor.execute("INSERT OR REPLACE INTO global_definitions (uri, definition, is_llm_generated) VALUES (?, ?, ?)", (str(uri), definition, 0))
+                    conn.commit()
+                logger.info(f"Cached {len(good_to_cache)} existing definitions.")
+                
+            if combined_to_generate:
+                logger.warning(f"No LLM provided. Using ontology fallback (label/definitions) for {len(combined_to_generate)} terms lacking cached definitions.")
+                with sqlite3.connect(self.global_definitions_db) as conn:
+                    cursor = conn.cursor()
+                    for uri, label, hierarchy_str in combined_to_generate:
+                        fallback_def = self.get_definition(uri) or f"Description for {label}."
+                        self.prompt_cache[uri] = fallback_def
+                        cursor.execute("INSERT OR REPLACE INTO global_definitions (uri, definition, is_llm_generated) VALUES (?, ?, ?)", (str(uri), fallback_def, 0))
+                        num_missing_generated += 1
+                    conn.commit()
+            
+            self.total_terms = total_terms
+            self.num_missing_generated = num_missing_generated
+            self.num_bad_generated = num_bad_generated
+            self.total_created = num_missing_generated + num_bad_generated
+            return
 
         if to_evaluate:
             logger.info(f"Evaluating {len(to_evaluate)} existing definitions using LLM...")
@@ -352,7 +491,8 @@ class OntologyToHierarchy:
                 cursor = conn.cursor()
                 for uri, label, definition in good_to_cache:
                     self.prompt_cache[uri] = definition
-                    cursor.execute("INSERT OR REPLACE INTO global_definitions VALUES (?, ?)", (str(uri), definition))
+                    is_llm = 1 if uri in self.llm_generated_labels else 0
+                    cursor.execute("INSERT OR REPLACE INTO global_definitions (uri, definition, is_llm_generated) VALUES (?, ?, ?)", (str(uri), definition, is_llm))
                 conn.commit()
             logger.info(f"Cached {len(good_to_cache)} good ontology definitions.")
 
@@ -378,7 +518,7 @@ class OntologyToHierarchy:
                     if desc:
                         self.prompt_cache[uri] = desc
                         self.llm_generated_labels.add(uri)
-                        cursor.execute("INSERT OR REPLACE INTO global_definitions VALUES (?, ?)", (str(uri), desc))
+                        cursor.execute("INSERT OR REPLACE INTO global_definitions (uri, definition, is_llm_generated) VALUES (?, ?, ?)", (str(uri), desc, 1))
                         logger.info(f"Definition generated (missing) for {uri} ({label}) -> {desc}")
                         num_missing_generated += 1
                         
@@ -388,7 +528,7 @@ class OntologyToHierarchy:
                     if desc:
                         self.prompt_cache[uri] = desc
                         self.llm_generated_labels.add(uri)
-                        cursor.execute("INSERT OR REPLACE INTO global_definitions VALUES (?, ?)", (str(uri), desc))
+                        cursor.execute("INSERT OR REPLACE INTO global_definitions (uri, definition, is_llm_generated) VALUES (?, ?, ?)", (str(uri), desc, 1))
                         logger.info(f"Definition generated (bad original) for {uri} ({label}) -> {desc}")
                         num_bad_generated += 1
                         
@@ -490,13 +630,12 @@ class OntologyToHierarchy:
         Returns:
             None
         """
-        valid_nodes = [uri for uri in current_classes if uri not in self.visited]
-
-        if not valid_nodes:
-            return
-
-        for i, current_uri in enumerate(valid_nodes):
-            self.visited.add(current_uri)
+        for i, current_uri in enumerate(current_classes):
+            edge = (parent_label, current_uri)
+            if edge in self.visited_edges:
+                continue
+            
+            self.visited_edges.add(edge)
 
             if pbar:
                 pbar.update(1)
@@ -512,7 +651,11 @@ class OntologyToHierarchy:
             if current_uri not in self.prompt_cache:
                 self.prompt_cache[current_uri] = definition
 
-            self.node_parents[current_uri] = parent_label
+            if current_uri not in self.node_parents:
+                self.node_parents[current_uri] = []
+            
+            if parent_label and parent_label not in self.node_parents[current_uri]:
+                self.node_parents[current_uri].append(parent_label)
 
     def generate_embeddings(self, model_name: str, ontology_db: str) -> None:
         """
@@ -547,33 +690,24 @@ class OntologyToHierarchy:
                 uri TEXT PRIMARY KEY,
                 name TEXT,
                 sanitized_name TEXT,
-                definition TEXT,
                 parent TEXT,
-                is_llm_generated INTEGER DEFAULT 0,
                 vector BLOB
             )
         ''')
 
         logger.info(f"Generating embeddings for {len(self.node_parents)} nodes... \n")
 
-        for uri, parent in tqdm(self.node_parents.items(), desc="Embedding nodes", smoothing=0.0):
+        for uri, parents in tqdm(self.node_parents.items(), desc="Embedding nodes", smoothing=0.0):
             label = self.get_label(rdflib.URIRef(uri))
             label_safe = sanitize_name(label)
-            ontology_definition = self.get_definition(rdflib.URIRef(uri))
-            cached_definition = self.prompt_cache.get(rdflib.URIRef(uri), "")
-            is_llm_generated = 0
-            if cached_definition and (not ontology_definition or len(ontology_definition.split()) < 5 or cached_definition != ontology_definition):
-                definition = cached_definition
-                is_llm_generated = 1
-            else:
-                definition = ontology_definition if ontology_definition else cached_definition
 
             embed_text = label_safe
 
             vector = embedder.get_embedding(embed_text)
+            parent_json = json.dumps(parents)
 
-            cursor.execute("INSERT OR REPLACE INTO embeddings VALUES (?, ?, ?, ?, ?, ?, ?)",
-                           (str(uri), label, label_safe, definition, parent, is_llm_generated, vector))
+            cursor.execute("INSERT OR REPLACE INTO embeddings (uri, name, sanitized_name, parent, vector) VALUES (?, ?, ?, ?, ?)",
+                           (str(uri), label, label_safe, parent_json, vector))
 
         del embedder.model
         del embedder.tokenizer
@@ -656,7 +790,7 @@ def main() -> None:
     parser.add_argument("--skip_embeddings", action="store_true", help="Skip embedding generation")
     parser.add_argument("--rag_config", help="Path to RAG configuration JSON file.")
 
-    parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
+    parser.add_argument("--model_config", default=None, help="Path to model config JSON file.")
     parser.add_argument("--base_url", default=None, help="Base URL for the LLM API. Overrides value in model_config if provided.")
 
     parser.add_argument("--hf_home", default=None, help="HuggingFace cache directory.")
@@ -689,13 +823,27 @@ def main() -> None:
 
         args.embedding_model = rag_config.get("embedding_model", args.embedding_model)
 
-    with open(args.model_config, 'r', encoding='utf-8') as f:
-        model_config = json.load(f)
+    llm = None
+    max_concurrency = 10
 
-    max_concurrency = model_config.pop("max_concurrency", 10)
+    if args.model_config:
+        with open(args.model_config, 'r', encoding='utf-8') as f:
+            model_config = json.load(f)
 
-    if args.base_url:
-        model_config["base_url"] = args.base_url
+        max_concurrency = model_config.pop("max_concurrency", 10)
+
+        if args.base_url:
+            model_config["base_url"] = args.base_url
+
+        logger.info(f"Loading model configuration from: {args.model_config}")
+        logger.info(f"  max_concurrency: {max_concurrency}")
+        for key, value in model_config.items():
+            if key != "api_key":
+                logger.info(f"  {key}: {value}")
+
+        llm = get_model(**model_config)
+    else:
+        logger.info("No model config provided. LLM definition generation is disabled.")
 
     hf_home = args.hf_home or os.environ.get("HF_HOME") or DEFAULT_HF_HOME
     hf_transfer = args.hf_transfer or os.environ.get("HF_HUB_ENABLE_HF_TRANSFER") or DEFAULT_HF_TRANSFER
@@ -706,18 +854,12 @@ def main() -> None:
     logger.info(f"HuggingFace Home: {hf_home}")
     logger.info(f"HF Transfer: {hf_transfer}")
 
-    logger.info(f"Loading model configuration from: {args.model_config}")
-    logger.info(f"  max_concurrency: {max_concurrency}")
-    for key, value in model_config.items():
-        if key != "api_key":
-            logger.info(f"  {key}: {value}")
-
-    llm = get_model(**model_config)
-
     generator = OntologyToHierarchy(args.ontology_file, args.root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency, evaluate_prompt_template_path=args.evaluate_prompt_template, definitions_report_path=args.definitions_report)
 
-    if not test_model(llm):
-        raise RuntimeError("Model connectivity test failed. Please check your configuration.")
+    if llm:
+        if not test_model(llm):
+            raise RuntimeError("Model connectivity test failed. Please check your configuration.")
+    
     generator.create(llm)
 
     if not args.skip_embeddings:

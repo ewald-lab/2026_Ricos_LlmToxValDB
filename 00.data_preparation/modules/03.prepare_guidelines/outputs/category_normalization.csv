@@ -1,53 +1,52 @@
 original_category,normalized_category
-Aerosol Characterization,Aerosol Characterization
 BALF Analysis,Bronchoalveolar Lavage
 Body Weight,Clinical Observations
+Body Weight/Food/Water,Body Weight/Food/Water
 Body Weights,Clinical Observations
 Clinical Biochemistry,Clinical Biochemistry
 Clinical Chemistry,Clinical Biochemistry
 Clinical Observations,Clinical Observations
+Corpora Lutea Count,Corpora Lutea Count
+Cryptorchidism,Cryptorchidism
+Dam Thyroid Histopathology,Dam Thyroid Histopathology
+Dam Thyroid Hormones,Dam Thyroid Hormones
+Dam Thyroid Weight,Dam Thyroid Weight
 Developmental,Developmental
-Developmental/Pup Data,Developmental
-Exposure Protocol,Exposure Protocol
-Fetal Alterations (External),Developmental
-Fetal Alterations (Skeletal),Developmental
-Fetal Alterations (Soft Tissue),Developmental
-Fetal Measurements,Developmental
+Fetal Anogenital Distance (AGD),Fetal Anogenital Distance (AGD)
+Fetal Body Weight,Fetal Body Weight
+Fetal External Alterations,Fetal External Alterations
+Fetal Sex Ratio,Fetal Sex Ratio
+Fetal Skeletal Alterations,Fetal Skeletal Alterations
+Fetal Soft Tissue Alterations,Fetal Soft Tissue Alterations
 Food Consumption,Clinical Observations
-Food/Water,Clinical Observations
-General Toxicity,Clinical Observations
+Gross Necropsy,Gross Necropsy
 Haematology,Haematology
-Hematology,Haematology
 Histopathology,Histopathology
+Histopathology/Tissue Preservation,Histopathology/Tissue Preservation
 Hormones,Hormones
-Hormones (Dams),Hormones
 Hormones measurement,Hormones
-Immunotoxicity,Immunotoxicity
+Local Skin Effects,Local Skin Effects
 Lung Burden,Lung Burden
-Maternal Weights & Consumption,Maternal Weights & Consumption
-Mortality,Mortality
-Mortality/Morbidity,Clinical Observations
-Necropsy,Necropsy
-Neurotoxicity,Neurotoxicity
-Nutrition,Clinical Observations
-Ophthalmology,Ophthalmology
+Maternal Body Weight,Maternal Body Weight
+Maternal Clinical Signs,Maternal Clinical Signs
+Maternal Food Consumption,Maternal Food Consumption
+Offspring Development,Offspring Development
+Ophthalmological Examination,Ophthalmological Examination
+Optional Organ Weights,Optional Organ Weights
 Organ Weights,Organ Weights
-Other,Other
-Pathology,Pathology
-Pathology (Histopathology),Pathology (Histopathology)
-Physiological Measures,Reproductive
-Post-Exposure Recovery,Post-Exposure Recovery
+Other Hormones,Other Hormones
+Ovarian Tissue Check,Ovarian Tissue Check
+Pathology/Histopathology,Pathology/Histopathology
+Pathology/Other Measures,Pathology/Other Measures
 Pulmonary Function,Pulmonary Function
-Reproductive,Reproductive
-Reproductive Indices,Reproductive
+Resorption Counts,Resorption Counts
 Serum/Plasma Biochemistry,Clinical Biochemistry
 Serum/Plasma Hormone Analyses,Hormones
 Sperm Measures,Reproductive
-Statistical Analysis,Statistical Analysis
-Systemic Toxicity,Systemic Toxicity
-Temperature,Temperature
+Sperm Parameters,Sperm Parameters
+Target Organ Weights,Target Organ Weights
 Urinalysis,Urinalysis
-Uterine Contents,Developmental
 Uterine Weight,Organ Weights
-Vaginal Status,Developmental
+Vaginal Examination,Vaginal Examination
+Water Consumption,Water Consumption
 Weight,Organ Weights

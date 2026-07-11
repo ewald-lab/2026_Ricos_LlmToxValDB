@@ -1,3 +1,4 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-406,Clinical Observations,"Skin reaction grading (Erythema/Oedema)",Required,Guideline text,"Graded according to Table 1 (0-3 scale) at specific intervals post-challenge."
-406,Pathology,Histopathological examination,Optional,Guideline text,"May be carried out to clarify doubtful reactions."
+406,Clinical Observations,Skin reaction grading (Magnusson and Kligman scale),Required,Guideline text,Graded 0-3 based on erythema and edema
+406,Pathology/Other Measures,Histopathological examination,Optional,Guideline text,To clarify doubtful reactions
+406,Pathology/Other Measures,Skin fold thickness measurement,Optional,Guideline text,To clarify doubtful reactions

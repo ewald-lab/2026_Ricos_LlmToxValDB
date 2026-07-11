@@ -1,34 +1,18 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-441,Organ Weights,Ventral prostate (VP),Required,Guideline text,Fresh weight; one of five target tissues
-441,Organ Weights,Seminal vesicle (SV),Required,Guideline text,"Includes fluids and coagulating glands"
-441,Organ Weights,Levator ani-bulbocavernosus (LABC) muscle,Required,Guideline text,Paired muscle
-441,Organ Weights,Cowper's glands (COW),Required,Guideline text,Paired glands
-441,Organ Weights,Glans penis (GP),Required,Guideline text,"Requires preputial separation (castrate at pnd 42+)"
-441,Clinical Observations,Body weight,Required,Guideline text,"Measured daily; used for randomization and statistical covariate"
-441,Clinical Observations,Mortality monitoring,Required,Guideline text,
-441,Clinical Observations,Morbidity monitoring,Required,Guideline text,
-441,Clinical Observations,Behavioural changes,Required,Guideline text,
-441,Clinical Observations,Skin/Fur/Eyes/Mucous membrane changes,Required,Guideline text,
-441,Clinical Observations,Secretions and excretions,Required,Guideline text,
-441,Clinical Observations,Autonomic activity (lacrimation, piloerection, pupil size, respiratory pattern),Required,Guideline text,
-441,Body Weight,Daily body weight,Required,Guideline text,Measured to nearest 0.1 g
-441,Food Consumption,Food consumption per cage,Optional,Guideline text,Expressed in grams per rat per day
-441,Organ Weights,Ventral prostate (VP),Required,Guideline text,Fresh weight to nearest 0.1 mg (both lobes combined)
-441,Organ Weights,Seminal vesicles plus coagulating glands (SVCG),Required,Guideline text,Paired, fresh weight to nearest 0.1 mg (including fluid)
-441,Organ Weights,Levator ani plus bulbocavernosus muscles (LABC),Required,Guideline text,Fresh weight to nearest 0.1 mg
-441,Organ Weights,Cowper's glands (COW),Required,Guideline text,Paired, fresh weight to nearest 0.1 mg
-441,Organ Weights,Glans penis (GP),Required,Guideline text,Fresh weight to nearest 0.1 mg (if prepuce separated)
-441,Organ Weights,Liver,Optional,Guideline text,Paired weight to nearest 0.1 g; provides index of systemic toxicity
-441,Organ Weights,Kidneys,Optional,Guideline text,Paired weight to nearest 0.1 mg; provides index of systemic toxicity
-441,Organ Weights,Adrenals,Optional,Guideline text,Paired weight to nearest 0.1 mg; provides index of systemic toxicity
-441,Hormones,Luteinising hormone (LH),Optional,Guideline text,ng per ml of serum; indicates hypothalamic-pituitary function
-441,Hormones,Testosterone (T),Optional,Guideline text,ng per ml of serum; useful to detect steroid metabolism induction
-441,Hormones,Follicular stimulating hormone (FSH),Optional,Guideline text,Important for spermatogenesis assessment
-441,Hormones,Thyroxine (T4),Optional,Guideline text,Supplemental information on thyroid hormone homeostasis disruption
-441,Hormones,Triiodothyronine (T3),Optional,Guideline text,Supplemental information on thyroid hormone homeostasis disruption
-441,Reproductive,Preputial separation (PPS) incidence,Optional,Guideline text,Recorded if PPS does not occur in any group; compared using Fisher Exact test
-441,Assay Models,Male pubertal assay,Required,Guideline text,Part of Level 5 framework for endocrine disrupter detection
-441,Assay Models,Female pubertal assay,Required,Guideline text,Part of Level 5 framework for endocrine disrupter detection
-441,Assay Models,Adult intact male assay (Hershberger),Required,Guideline text,Used for screening androgenic/antiandrogenic activity
-441,Physiological Measures,Levator ani muscle weight,Required,Guideline text,Index of myotrophic activity; used in castrated models
-441,Physiological Measures,Androgenic/Anti-androgenic response,Required,Guideline text,Measured via dose-response in validated assays
+441,Clinical Observations,Mortality/Morbidity monitoring,Required,Guideline text,Observe at least once daily; more frequently if signs of toxicity
+441,Body Weight,Final body weight at necropsy,Required,Guideline text,Weighed daily to nearest 0.1 g starting prior to treatment
+441,Food Consumption,Food consumption,Optional,Guideline text,Measured per cage by weighing feeders; expressed in grams/rat/day
+441,Target Organ Weights,Ventral prostate (VP) weight,Required,Guideline text,Fresh weight to nearest 0.1 mg; carefully trimmed of fat/adhering tissue
+441,Target Organ Weights,Seminal vesicles plus coagulating glands (SVCG) weight,Required,Guideline text,Fresh weight to nearest 0.1 mg; prevent fluid leakage during dissection
+441,Target Organ Weights,Levator ani plus bulbocavernosus (LABC) muscle weight,Required,Guideline text,Fresh weight to nearest 0.1 mg; trimmed of fat/adnexa
+441,Target Organ Weights,Cowper's glands (COW) weight,Required,Guideline text,Paired fresh weight to nearest 0.1 mg; careful dissection to avoid nicking capsule
+441,Target Organ Weights,Glans penis (GP) weight,Required,Guideline text,Fresh weight to nearest 0.1 mg; measured only if preputial separation has occurred
+441,Optional Organ Weights,Liver weight,Optional,Guideline text,Weighed to nearest 0.1 g; provides index of systemic toxicity
+441,Optional Organ Weights,Kidney weight (paired),Optional,Guideline text,Weighed to nearest 0.1 mg; provides index of systemic toxicity
+441,Optional Organ Weights,Adrenal weight (paired),Optional,Guideline text,Weighed to nearest 0.1 mg; provides index of systemic toxicity
+441,Hormones,Serum Luteinising Hormone (LH),Optional,Guideline text,Useful to assess hypothalamic-pituitary function; report as ng/ml serum
+441,Hormones,Serum Follicle Stimulating Hormone (FSH),Optional,Guideline text,Important for spermatogenesis assessment
+441,Hormones,Serum Testosterone (T),Optional,Guideline text,Useful to determine if test substance induces liver metabolism of testosterone
+441,Hormones,Serum Thyroxine (T4),Optional,Guideline text,Provides supplemental info on thyroid hormone homeostasis disruption
+441,Hormones,Triiodothyronine (T3),Optional,Guideline text,Provides supplemental info on thyroid hormone homeostasis disruption
+441,Developmental,Preputial separation (PPS) incidence,Optional,Guideline text,Record incidence if PPS does not occur in any group; compare statistically using Fisher Exact test

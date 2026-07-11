@@ -13,7 +13,7 @@ class OntologyNode:
     name: str
     sanitized_name: str
     definition: str
-    parent: Optional[str]
+    parents: List[str]
     vector: Optional[bytes] = None
 
 
@@ -34,11 +34,19 @@ class OntologyTree:
         self.nodes = nodes
         self.children: dict[Optional[str], List[str]] = defaultdict(list)
 
-        # Build a parent -> children index. Terms whose parent is missing from the
+        # Build a parent -> children index. Terms whose parents are missing from the
         # loaded DB are treated as roots so traversal can still start cleanly.
         for name, node in self.nodes.items():
-            parent = node.parent if node.parent in self.nodes else None
-            self.children[parent].append(name)
+            if not node.parents:
+                self.children[None].append(name)
+            else:
+                for p in node.parents:
+                    parent_key = p if p in self.nodes else None
+                    self.children[parent_key].append(name)
+
+        # Remove duplicates from children lists (since multiple unknown parents could map to None)
+        for key, child_names in self.children.items():
+            self.children[key] = list(set(child_names))
 
         # Stable ordering makes prompts and outputs reproducible across runs.
         for child_names in self.children.values():
@@ -67,20 +75,21 @@ class OntologyTree:
             cursor = conn.cursor()
             cursor.execute(
                 """
-                SELECT uri, name, sanitized_name, definition, parent, vector
+                SELECT uri, name, sanitized_name, parent, vector
                 FROM embeddings
                 """
             )
             rows = cursor.fetchall()
 
+        import json
         nodes = {
             row[1]: OntologyNode(
                 uri=row[0] or "",
                 name=row[1] or "",
                 sanitized_name=row[2] or row[1] or "",
-                definition=row[3] or "",
-                parent=row[4] or None,
-                vector=row[5] if len(row) > 5 else None,
+                definition="",
+                parents=json.loads(row[3]) if row[3] and row[3].startswith('[') else ([row[3]] if row[3] else []),
+                vector=row[4] if len(row) > 4 else None,
             )
             for row in rows
             if row[1]
@@ -196,7 +205,7 @@ class OntologyTree:
             if not node:
                 break
             path.append(node.sanitized_name or node.name)
-            current = node.parent
+            current = node.parents[0] if node.parents else None
         return " > ".join(reversed(path))
 
     def resolve_child_names(self, selected_terms: List[str], child_names: List[str]) -> List[str]:

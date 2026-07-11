@@ -1,0 +1,23 @@
+cellular
+cellular > increase leydig cell tumors
+cellular > promotion ovarian granular cell tumors
+individual
+individual > prostate cancer
+organ
+organ > decreased size of the ovarian reserve
+organ > increase ovarian follicle breakdown
+organ > increased thyroxine in serum
+organ > promotion ovarian cancer
+organ > testicular atrophy
+organ > testicular cancer
+tissue
+tissue > decrease serum thyroid hormone
+tissue > decreased serum t4 t3
+tissue > increase thyroid stimulating hormone
+tissue > increased free serum thyroxine
+tissue > increased histomorphological alteration of testis
+tissue > increased thyroid stimulating hormone
+tissue > necrosis
+tissue > persistent vaginal cornification
+tissue > spermatocyte depletion
+tissue > thyroxine in serum decreased

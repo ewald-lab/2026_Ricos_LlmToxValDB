@@ -25,9 +25,9 @@ source "${PREP_ROOT}/env-data-prep/bin/activate"
 mkdir -p "${SCRIPT_DIR}/logs"
 
 python "${REPO_ROOT}/scripts/00.extract_endpoints_llm.py" \
-    --model "Qwen3.5-122B-A10B-FP8" \
-    --base_url "http://${CODON_NODE}.ebi.ac.uk:8003/v1" \
-    --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.5-122B-A10B-FP8.json" \
+    --model "Qwen3.6-35B-A3B" \
+    --base_url "http://${CODON_NODE}.ebi.ac.uk:8012/v1" \
+    --model_config "/nfs/research/ewald/ricos/code/playground/models/config/Qwen3.6-35B-A3B.json" \
     --skill_file "${REPO_ROOT}/inputs/SKILL.md" \
     --inputs_dir "${REPO_ROOT}/inputs/OECD Guidelines" \
     --outputs_dir "${REPO_ROOT}/outputs"

@@ -1,6 +1,6 @@
 # OECD Test Guideline 414: Prenatal developmental toxicity study
 
-**Generated:** 2023-10-27
+**Generated:** 2024-05-23
 **Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/414.pdf`
 
 ## Summary
@@ -11,35 +11,42 @@
 | Title | Prenatal developmental toxicity study |
 | Adoption Date | 25 June 2018 |
 | Preferred Species | Rat (preferred rodent); Rabbit (preferred non-rodent) |
-| Study Duration | From implantation to one day prior to scheduled delivery (approx. gestation period) |
-| Animals per Dose Level | Sufficient to result in approx. 20 pregnant females with implantation sites (min 16) |
-| Dose Groups | At least 3 dose levels + 1 concurrent control group |
-| Route of Administration | Oral (usually gavage/intubation); other routes require justification |
+| Study Duration | From implantation to one day prior to scheduled humane killing (caesarean section) |
+| Animals per Dose Level | Approximately 20 female animals with implantation sites at necropsy (Groups with fewer than 16 may be inappropriate) |
+| Dose Groups | At least three dose levels + 1 concurrent control group |
+| Route of Administration | Oral (usually by intubation/gavage; other routes require justification) |
 
 ## Purpose and Scope
 
-This guideline is designed to provide general information concerning the effects of prenatal exposure on the pregnant test animal and on the developing organism, including assessment of maternal effects as well as death, structural abnormalities, or altered growth in the fetus. The 2018 update specifically includes additional endpoints (Anogenital Distance in fetuses and thyroid hormones in dams for rats) to increase the possibility of detecting endocrine disrupting chemicals. Functional deficits are not part of this guideline.
+This guideline is designed to provide general information concerning the effects of prenatal exposure on the pregnant test animal and on the developing organism, including assessment of maternal effects as well as death, structural abnormalities, or altered growth in the fetus. The 2018 update specifically includes rat-specific requirements and additional endocrine disrupter relevant endpoints (AGD in fetuses and thyroid hormones in dams). Functional deficits are not part of this guideline but may be tested separately.
 
 ## Key Observations
 
 ### Clinical Observations
-- Mortality and moribundity
-- Pertinent behavioural changes
-- Signs of overt toxicity (recorded at least once daily)
-- Body weight (Day 0/3, first dosing day, every 3 days, termination)
-- Food consumption (every 3 days)
+*   Made and recorded at least once a day, preferably at the same time(s) each day.
+*   Record condition of animals including mortality, moribundity, pertinent behavioural changes, and all signs of overt toxicity.
 
 ### Haematology
-- *Note:* Specific haematology parameters are not explicitly listed as a standard mandatory table in the main body text for dams, though blood samples are collected for hormone analysis.
+*   Not explicitly required for dams in the standard protocol, except for blood sample collection for hormone analysis in rats.
+*   Blood samples collected from all dams at termination for mandatory assessment of thyroid hormones.
 
 ### Clinical Biochemistry
-- Thyroid hormones T4, T3, and TSH (Mandatory for rat dams at termination)
-- Other hormones (Optional, if relevant)
+*   **Thyroid Hormones (Rats only):** Mandatory assessment of Thyroxine (T4), Triiodothyronine (T3), and Thyroid Stimulating Hormone (TSH) from dam blood samples collected on the morning of necropsy.
+*   Other hormones may be measured as an option if relevant.
 
 ### Pathology
-- **Macroscopic:** Examination of dams for structural abnormalities; Gravid uterine weight; Uterine contents (corpora lutea, implantations, resorptions).
-- **Microscopic/Histopathology:** Histopathological assessment of the thyroid gland in every dam.
-- **Fetal Examination:** External alterations; Skeletal alterations (approx. half of rodent litters); Soft tissue alterations (remainder of rodent litters; all non-rodent fetuses).
+*   **Dam Necropsy:** Macroscopic examination for structural abnormalities.
+*   **Thyroid Gland:** Weight and histopathological assessment taken from every dam to observe pathological changes.
+*   **Uterus:** Gravid uteri weighed; non-gravid uteri examined (e.g., ammonium sulphide staining for rodents) to confirm status.
+*   **Corpora Lutea:** Number determined for pregnant animals.
+*   **Fetal Examination:**
+    *   External alterations examined for each fetus.
+    *   Skeletal and soft tissue alterations examined (variations and malformations/anomalies).
+    *   Reproductive tract examined for signs of altered development.
+    *   External fetal sex compared with internal (gonadal) sex.
+    *   Incomplete testicular descent/cryptorchidism noted in male fetuses.
+    *   For rodents: ~1/2 litter for skeletal, remainder for soft tissue.
+    *   For rabbits: All fetuses for both soft tissue and skeletal alterations.
 
 ## Endpoints
 
@@ -50,91 +57,51 @@ This guideline is designed to provide general information concerning the effects
 
 | Category | Required | Optional |
 |----------|----------|----------|
-| Clinical Observations | 5 | 0 |
-| Maternal Weights & Consumption | 2 | 1 |
-| Hormones (Dams) | 3 | 1 |
-| Uterine Contents | 4 | 0 |
-| Fetal Measurements | 2 | 0 |
-| Fetal Alterations (External) | 1 | 0 |
-| Fetal Alterations (Skeletal) | 1 | 0 |
-| Fetal Alterations (Soft Tissue) | 1 | 0 |
-| **Total** | **19** | **2** |
+| Maternal Clinical Signs | 1 | 0 |
+| Maternal Body Weight | 1 | 0 |
+| Maternal Food Consumption | 1 | 0 |
+| Dam Thyroid Histopathology | 1 | 0 |
+| Dam Thyroid Weight | 1 | 0 |
+| Dam Thyroid Hormones (T4, T3, TSH) | 3 | 0 |
+| Uterine Weight | 1 | 0 |
+| Corpora Lutea Count | 1 | 0 |
+| Resorption Counts | 1 | 0 |
+| Fetal Sex Ratio | 1 | 0 |
+| Fetal Body Weight | 1 | 0 |
+| Fetal Anogenital Distance (AGD) | 1 | 0 |
+| Fetal External Alterations | 1 | 0 |
+| Fetal Skeletal Alterations | 1 | 0 |
+| Fetal Soft Tissue Alterations | 1 | 0 |
+| Cryptorchidism | 1 | 0 |
+| Other Hormones | 0 | 1 |
+| **Total** | **17** | **1** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
 |----------|----------|-------------------|--------|-----------|
-| Clinical Observations | Mortality/Moribundity | Required | Guideline text | Recorded at least once daily |
-| Clinical Observations | Behavioural changes | Required | Guideline text | Pertinent changes only |
-| Clinical Observations | Signs of overt toxicity | Required | Guideline text | All signs recorded |
-| Clinical Observations | Body weight | Required | Guideline text | Day 0/3, dosing start, every 3 days, termination |
-| Clinical Observations | Food consumption | Required | Guideline text | Every 3 days |
-| Maternal Weights & Consumption | Water consumption | Optional | Guideline text | If measured |
-| Maternal Weights & Consumption | Body weight change corrected for gravid uterine weight | Optional | Guideline text | If calculated |
-| Hormones (Dams) | Thyroxine (T4) | Required | Guideline text | Mandatory for rat dams at termination |
-| Hormones (Dams) | Triiodothyronine (T3) | Required | Guideline text | Mandatory for rat dams at termination |
-| Hormones (Dams) | Thyroid Stimulating Hormone (TSH) | Required | Guideline text | Mandatory for rat dams at termination |
-| Hormones (Dams) | Other hormones | Optional | Guideline text | If relevant |
-| Uterine Contents | Corpora lutea count | Required | Guideline text | For pregnant animals |
-| Uterine Contents | Implantation sites | Required | Guideline text | To determine pregnancy status |
-| Uterine Contents | Embryonic/Fetal deaths | Required | Guideline text | Including early/late resorption degree |
-| Uterine Contents | Viable fetuses | Required | Guideline text | Count per litter |
-| Fetal Measurements | Fetal body weight | Required | Guideline text | By sex and combined |
-| Fetal Measurements | Anogenital distance (AGD) | Required | Guideline text | All live rodent fetuses |
-| Fetal Alterations (External) | External alterations/malformations | Required | Guideline text | Examined in all fetuses |
-| Fetal Alterations (Skeletal) | Skeletal alterations | Required | Guideline text | Approx. half of rodent litters; all non-rodents |
-| Fetal Alterations (Soft Tissue) | Soft tissue alterations | Required | Guideline text | Remainder of rodent litters; all non-rodents |
-| Fetal Alterations (Soft Tissue) | Cryptorchidism | Required | Guideline text | Indication noted in male fetuses |
+| Maternal Clinical Signs | Mortality/Moribundity | Required | Guideline text | Recorded at least once daily |
+| Maternal Clinical Signs | Overt Toxicity Signs | Required | Guideline text | Include onset, duration, severity |
+| Maternal Body Weight | Dam Body Weight | Required | Guideline text | Weighed on day 0/3, first dosing day, every 3 days, and termination |
+| Maternal Food Consumption | Dam Food Consumption | Required | Guideline text | Recorded at three-day intervals |
+| Dam Thyroid Histopathology | Thyroid Gland Histopathology | Required | Guideline text | Taken from every dam |
+| Dam Thyroid Weight | Thyroid Gland Weight | Required | Guideline text | Taken from every dam |
+| Dam Thyroid Hormones | Thyroxine (T4) | Required | Guideline text | From dam blood at termination |
+| Dam Thyroid Hormones | Triiodothyronine (T3) | Required | Guideline text | From dam blood at termination |
+| Dam Thyroid Hormones | Thyroid Stimulating Hormone (TSH) | Required | Guideline text | From dam blood at termination |
+| Uterine Weight | Gravid Uterine Weight | Required | Guideline text | Weighed immediately after termination |
+| Corpora Lutea Count | Number of Corpora Lutea | Required | Guideline text | Determined for pregnant animals |
+| Resorption Counts | Early Resorptions | Required | Guideline text | Evidence of implantation without recognizable embryo/fetus |
+| Resorption Counts | Late Resorptions | Required | Guideline text | Dead embryo/fetus with external degenerative changes |
+| Fetal Sex Ratio | Fetal Sex Ratio | Required | Guideline text | Reported by dose for litters with live fetuses |
+| Fetal Body Weight | Fetal Body Weight | Required | Guideline text | Preferably by sex and combined |
+| Fetal Anogenital Distance (AGD) | Anogenital Distance (AGD) | Required | Guideline text | Measured in all live rodent fetuses |
+| Fetal External Alterations | External Alterations | Required | Guideline text | Examined for each fetus |
+| Fetal Skeletal Alterations | Skeletal Alterations | Required | Guideline text | Variations and malformations/anomalies |
+| Fetal Soft Tissue Alterations | Soft Tissue Alterations | Required | Guideline text | Variations and malformations/anomalies |
+| Cryptorchidism | Cryptorchidism | Required | Guideline text | Indication of incomplete testicular descent in male fetuses |
+| Other Hormones | Other Hormone Levels | Optional | Guideline text | Measured if relevant |
 
 ### Footnotes
 
-No specific footnotes were extracted as distinct reference markers in the provided text segment, though references (e.g., "see Annex for definitions") exist in the full document.
-
---- (Continued from next segment) ---
-
-## Key Observations
-
-### Clinical Observations
-- Monitoring of maternal clinical signs throughout gestation.
-- Recording of maternal mortality.
-- Assessment of food consumption and body weight gain in dams.
-
-### Haematology
-- *Not explicitly detailed in this text snippet; typically limited to maternal hematology if specified in the study design.*
-
-### Clinical Biochemistry
-- *Not explicitly detailed in this text snippet; typically limited to maternal biochemistry if specified in the study design.*
-
-### Pathology
-- **Gross Necropsy:** Examination of dams for uterine contents (implantation sites, live/dead fetuses, resorptions).
-- **Fetal Examination:**
-  - **External:** Detailed inspection for gross malformations.
-  - **Visceral:** Dissection and examination of internal organs for soft tissue anomalies.
-  - **Skeletal:** Staining and examination of the skeleton for ossification defects, malformations, and variations.
-
-## Endpoints
-
-**Source:** Guideline body text (Inferred from Definitions and References)
-**Column Convention:** Inferred from guideline language
-
-### Endpoint Summary
-
-| Category | Required | Optional |
-|----------|----------|----------|
-| Developmental | 8 | 1 |
-| **Total** | **8** | **1** |
-
-### Detailed Endpoints
-
-| Category | Endpoint | Requirement Level | Source | Footnotes |
-|----------|----------|-------------------|--------|-----------|
-| Developmental | Fetal Body Weight | Required | Guideline text | Standard parameter for assessing altered growth |
-| Developmental | Litter Size | Required | Guideline text | Derived from implantation site count minus resorptions |
-| Developmental | Number of Resorptions | Required | Guideline text | Includes both early and late resorptions |
-| Developmental | External Malformations | Required | Guideline text | Structural changes considered detrimental |
-| Developmental | Skeletal Malformations | Required | Guideline text | Detected via double staining techniques (Alcian Blue/Alizarin Red) |
-| Developmental | Skeletal Variations | Required | Guideline text | Transient structural changes occurring frequently in controls |
-| Developmental | Visceral Malformations | Required | Guideline text | Internal soft tissue anomalies detected via dissection/staining |
-| Developmental | Fetal Sex Ratio | Required | Guideline text | Determination of sex of each fetus |
-| Developmental | Gestation Length | Required | Guideline text | Duration from mating to delivery |
-| Developmental | Anogenital Distance (AGD) | Optional | Guideline text | Often measured as a sensitive indicator of endocrine disruption |
+None

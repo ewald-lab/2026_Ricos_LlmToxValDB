@@ -1,0 +1,24 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of the cardiovascular system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia > cardiac arrest
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia > cardiac arrest > sudden cardiac death
+phenotypic abnormality > abnormality of the respiratory system
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory arrest
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory arrest > cardiorespiratory arrest
+phenotypic abnormality > constitutional symptom
+phenotypic abnormality > constitutional symptom > sudden death
+phenotypic abnormality > constitutional symptom > sudden death > sudden unexpected death in epilepsy
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > failure to thrive in infancy
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > severe failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss > cachexia
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight

@@ -1,0 +1,54 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of head or neck
+phenotypic abnormality > abnormality of head or neck > abnormality of the head
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormal scalp morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormal scalp morphology > scalp edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema > palpebral edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema > palpebral edema > lower eyelid edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of facial soft tissue > facial edema > periorbital edema > palpebral edema > upper eyelid edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormality of the tongue
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the mouth > abnormality of the tongue > tongue edema
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal eyelid morphology
+phenotypic abnormality > abnormality of head or neck > abnormality of the head > abnormality of the face > abnormality of the orbital region > abnormality of the ocular adnexa > abnormal ocular adnexa morphology > abnormal eyelid morphology > eyelid erythema
+phenotypic abnormality > abnormality of limbs
+phenotypic abnormality > abnormality of limbs > abnormality of the lower limb
+phenotypic abnormality > abnormality of limbs > abnormality of the lower limb > pedal edema
+phenotypic abnormality > abnormality of limbs > abnormality of the lower limb > pedal edema > bipedal edema
+phenotypic abnormality > abnormality of limbs > abnormality of the lower limb > pedal edema > edema of the dorsum of feet
+phenotypic abnormality > abnormality of limbs > abnormality of the upper limb
+phenotypic abnormality > abnormality of limbs > abnormality of the upper limb > edema of the upper limbs
+phenotypic abnormality > abnormality of metabolism homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > corneal stromal edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > edema of the dorsum of hands
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > generalized edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > generalized edema > anasarca
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > genital edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > joint swelling
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > laryngeal edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > peau d orange
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > peripheral edema
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of fluid regulation > edema > pharyngeal edema
+phenotypic abnormality > abnormality of the cardiovascular system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > necrolytic migratory erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > perianal erythema
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > shawl sign
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature > vascular skin abnormality > erythema > v sign
+phenotypic abnormality > abnormality of the immune system
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > decreased inflammatory response
+phenotypic abnormality > abnormality of the integument

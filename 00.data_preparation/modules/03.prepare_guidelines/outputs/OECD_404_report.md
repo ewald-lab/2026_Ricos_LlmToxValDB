@@ -1,6 +1,6 @@
 # OECD Test Guideline 404: Acute Dermal Irritation/Corrosion
 
-**Generated:** 2023-10-27
+**Generated:** 2024-05-22
 **Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/404.pdf`
 
 ## Summary
@@ -11,34 +11,34 @@
 | Title | Acute Dermal Irritation/Corrosion |
 | Adoption Date | 28 July 2015 |
 | Preferred Species | Albino rabbit (healthy young adult) |
-| Study Duration | Up to 14 days observation period (exposure normally 4 hours) |
-| Animals per Dose Level | Initial test: 1 animal; Confirmatory test: up to 2 additional animals |
-| Dose Groups | Single dose application (0.5 mL liquid or 0.5 g solid/paste) |
-| Route of Administration | Dermal (topical application via gauze patch) |
+| Study Duration | Observation up to 14 days after patch removal |
+| Animals per Dose Level | Initial test: 1 animal; Confirmatory test: up to 2 additional animals (total max 3) |
+| Dose Groups | 1 test group + 1 control (untreated skin areas) |
+| Route of Administration | Dermal (patch application) |
 
 ## Purpose and Scope
 
-This guideline describes an in vivo test method for assessing the potential of a chemical to cause skin irritation or corrosion. It emphasizes a weight-of-evidence approach using existing data and in vitro methods before resorting to animal testing. The test involves applying a single dose to the skin of an albino rabbit, observing reactions over time, and grading erythema and oedema to determine reversibility.
+This guideline describes a method for testing the dermal irritation or corrosion potential of chemicals in vivo. It is intended to be used as part of an Integrated Approach to Testing and Assessment (IATA), where in vivo testing is considered only when existing data (human, in vitro, physico-chemical) are insufficient to determine corrosivity/irritation. The study evaluates reversible damage (irritation) or irreversible damage (corrosion) following single-dose application to the skin.
 
 ## Key Observations
 
 ### Clinical Observations
-- Examination for signs of erythema and oedema.
-- Scoring at 60 minutes, and then at 24, 48, and 72 hours after patch removal.
-- Immediate examination after patch removal for the initial test.
+- Examination for signs of erythema and oedema at specified intervals (60 minutes, 24, 48, 72 hours after patch removal).
+- Immediate examination after patch removal in the initial test.
+- Observation for local toxic effects (e.g., defatting of the skin).
 - Observation for systemic adverse effects (e.g., clinical signs of toxicity, body weight changes).
-- Description of local toxic effects such as defatting of the skin.
-- Assessment of reversibility of lesions up to 14 days.
+- Monitoring for severe distress or pain requiring humane killing.
 
 ### Haematology
-*Not applicable for this acute dermal study.*
+- Not applicable for this acute dermal test.
 
 ### Clinical Biochemistry
-*Not applicable for this acute dermal study.*
+- Not applicable for this acute dermal test.
 
 ### Pathology
-- Histopathological examination should be considered to clarify equivocal responses.
-- Evaluation of necrosis, ulcers, bleeding, bloody scabs, discolouration, alopecia, and scars.
+- Grading of skin reactions (erythema/eschar and oedema) according to standard tables.
+- Histopathological examination should be considered to clarify equivocal responses or questionable lesions.
+- Evaluation of reversibility of dermal lesions by day 14.
 
 ## Endpoints
 
@@ -49,21 +49,22 @@ This guideline describes an in vivo test method for assessing the potential of a
 
 | Category | Required | Optional |
 |----------|----------|----------|
-| Clinical Observations | 2 | 0 |
-| Pathology | 1 | 1 |
-| **Total** | **3** | **1** |
+| Clinical Observations | 4 | 0 |
+| Pathology/Histopathology | 2 | 1 |
+| **Total** | **6** | **1** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
 |----------|----------|-------------------|--------|-----------|
-| Clinical Observations | Erythema score | Required | Guideline text | Graded 0-4 based on severity (No erythema to severe/eschar) |
-| Clinical Observations | Oedema score | Required | Guideline text | Graded 0-4 based on severity (No oedema to severe/extending beyond area) |
-| Pathology | Histopathological examination | Optional | Guideline text | To clarify equivocal responses |
-| Pathology | Reversibility assessment | Required | Guideline text | Must evaluate if lesions persist up to 14 days |
+| Clinical Observations | Erythema score | Required | Guideline text | Scored at 60 min, 24h, 48h, 72h |
+| Clinical Observations | Oedema score | Required | Guideline text | Scored at 60 min, 24h, 48h, 72h |
+| Clinical Observations | Defatting of skin | Required | Guideline text | Local toxic effect description |
+| Clinical Observations | Systemic adverse effects | Required | Guideline text | e.g., clinical signs, body weight |
+| Pathology/Histopathology | Skin lesion grading (Erythema/Eschar) | Required | Guideline text | Based on Table in Section 404 |
+| Pathology/Histopathology | Skin lesion grading (Oedema) | Required | Guideline text | Based on Table in Section 404 |
+| Pathology/Histopathology | Histopathological examination | Optional | Guideline text | Considered to clarify equivocal responses |
 
 ### Footnotes
 
-- *Erythema Scoring:* 0=No erythema, 1=Very slight, 2=Well defined, 3=Moderate to severe, 4=Severe to eschar.
-- *Oedema Scoring:* 0=No oedema, 1=Very slight, 2=Slight (well defined), 3=Moderate (~1mm raised), 4=Severe (>1mm extending beyond area).
-- *Histopathology:* Recommended only when responses are equivocal.
+None

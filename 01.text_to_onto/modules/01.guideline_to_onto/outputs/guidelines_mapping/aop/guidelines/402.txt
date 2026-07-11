@@ -1,0 +1,6 @@
+individual
+individual > decreased body weight
+population
+population > decreased survival
+population > increased mortality
+population > reduced survival

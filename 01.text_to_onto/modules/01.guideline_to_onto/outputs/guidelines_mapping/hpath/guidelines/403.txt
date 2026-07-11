@@ -1,0 +1,16 @@
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cell injury death
+morphologic change > cell adaptation injury death > cell injury death > degeneration
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy acinar cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > atrophy > atrophy epithelial > atrophy acinar cell > atrophy with fibrosis
+morphologic change > inflammatory processes
+morphologic change > inflammatory processes > inflammation
+morphologic change > structural alteration
+morphologic change > structural alteration > abnormal growth differentiation
+morphologic change > structural alteration > developmental errors
+morphologic change > structural alteration > developmental errors > malformation
+morphologic change > structural alteration > organ specific entities changes

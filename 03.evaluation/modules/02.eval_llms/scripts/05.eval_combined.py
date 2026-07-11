@@ -6,8 +6,10 @@ import sqlite3
 import json
 import textwrap
 from io import BytesIO
+from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+from matplotlib import font_manager
 import networkx as nx
 import numpy as np
 import pandas as pd
@@ -18,6 +20,16 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.spatial.distance import squareform
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from typing import Any
+
+
+def configure_fonts() -> None:
+    font_dir = Path(__file__).resolve().parents[4] / "assets" / "fonts" / "ibm-plex-sans"
+    for font_path in font_dir.glob("*.ttf"):
+        font_manager.fontManager.addfont(str(font_path))
+    plt.rcParams.update({
+        "font.family": "sans-serif",
+        "font.sans-serif": ["IBM Plex Sans", "DejaVu Sans"],
+    })
 
 
 def arg_parser() -> argparse.Namespace:
@@ -407,6 +419,7 @@ def main() -> None:
     Returns:
         None
     """
+    configure_fonts()
     args = arg_parser()
 
     if args.expert_equivalence_file:
@@ -416,6 +429,10 @@ def main() -> None:
             EXPERT_MAP.update(loaded_map)
 
     os.makedirs(args.output_dir, exist_ok=True)
+    legacy_summary_path = os.path.join(args.output_dir, "term_variability_pattern_summary.png")
+    if os.path.exists(legacy_summary_path):
+        os.remove(legacy_summary_path)
+        print(f"Removed legacy combined summary plot: {legacy_summary_path}")
 
     depth_map = build_depth_map(args.owl_file, args.root_term)
 
@@ -681,7 +698,7 @@ def main() -> None:
                 llm_perf_metrics.append({
                     "LLM_ID": llm_id,
                     "Model": metadata["model"].replace("-fp8", "").replace("-FP8", ""),
-                    "Mode": f"Mode {metadata['mode']}" if metadata["mode"] else "Unknown",
+                    "Mode": "Single-Term" if metadata.get("mode") == 1 else "Batched" if metadata.get("mode") == 2 else "Unknown",
                     "Consensus": metadata["consensus"],
                     "Definitions": "With Defs" if metadata["definitions"] else "No Defs",
                     "Precision": mean_p,
@@ -712,9 +729,9 @@ def main() -> None:
             if not model_df.empty:
                 # Select configuration: Consensus=1, Mode 2, No Defs
                 target_rows = model_df[
-                    (model_df["Mode"] == "Mode 2") & 
+                    (model_df["Mode"] == "Batched") & 
                     (model_df["Consensus"] == 1) & 
-                    (model_df["Definitions"] == "No Defs")
+                    (model_df["Definitions"] == "With Defs")
                 ]
                 if not target_rows.empty:
                     best_row = target_rows.iloc[0]
@@ -870,7 +887,7 @@ def main() -> None:
             if label.get_text() in human_clean_names:
                 label.set_color("red")
 
-        g.fig.suptitle("Combined Pairwise Overlap (Average Jaccard Similarity) - Humans & LLMs", fontsize=max(10, 14 - num_entities_pw // 8), fontweight="bold", y=1.02)
+        # g.fig.suptitle("Combined Pairwise Overlap (Average Jaccard Similarity) - Humans & LLMs", fontsize=max(10, 14 - num_entities_pw // 8), fontweight="bold", y=1.02)
         g.savefig(os.path.join(args.output_dir, "combined_pairwise_overlap_heatmap.png"), dpi=300, bbox_inches="tight")
         plt.close()
     else:
@@ -884,7 +901,7 @@ def main() -> None:
             cmap="Blues",
             fmt=".2f",
         )
-        plt.title("Combined Pairwise Overlap (Average Jaccard Similarity) - Humans & LLMs", fontsize=max(10, 14 - num_entities_pw // 8), fontweight="bold")
+        # plt.title("Combined Pairwise Overlap (Average Jaccard Similarity) - Humans & LLMs", fontsize=max(10, 14 - num_entities_pw // 8), fontweight="bold")
 
         ax = plt.gca()
         plt.xticks(rotation=90, fontsize=tick_font_size)
@@ -956,9 +973,9 @@ def main() -> None:
                     data=agreement_df,
                     x="Type",
                     y="Jaccard",
-                    palette={"Human-Human": "skyblue", "LLM-LLM": "lightgreen", "Human-LLM": "salmon"}
+                    palette={"Human-Human": "#4C78A8", "LLM-LLM": "#34A853", "Human-LLM": "#EA4335"}
                 )
-                plt.title("Inter-Annotator Agreement (Jaccard Similarity)", fontsize=14)
+                # plt.title("Inter-Annotator Agreement (Jaccard Similarity)", fontsize=14)
                 plt.ylabel("Average Jaccard Similarity per Pair", fontsize=12)
                 plt.xlabel("Agreement Type", fontsize=12)
                 plt.tight_layout()
@@ -1152,19 +1169,19 @@ def main() -> None:
         x_indices = np.arange(len(phrases_display))
         
         # Plot 1: Human-Human
-        axes[0].bar(x_indices, var_df["Human-Human Variability"], color="skyblue", edgecolor="black", alpha=0.8)
+        axes[0].bar(x_indices, var_df["Human-Human Variability"], color="#4C78A8", edgecolor="black", alpha=0.8)
         axes[0].set_ylabel("Variability")
         axes[0].set_ylim(0.0, 1.0)
         axes[0].set_yticks([0.0, 0.5, 1.0])
         
         # Plot 2: LLM-LLM
-        axes[1].bar(x_indices, var_df["LLM-LLM Variability"], color="lightgreen", edgecolor="black", alpha=0.8)
+        axes[1].bar(x_indices, var_df["LLM-LLM Variability"], color="#34A853", edgecolor="black", alpha=0.8)
         axes[1].set_ylabel("Variability")
         axes[1].set_ylim(0.0, 1.0)
         axes[1].set_yticks([0.0, 0.5, 1.0])
         
         # Plot 3: Human-LLM
-        axes[2].bar(x_indices, var_df["Human-LLM Variability"], color="salmon", edgecolor="black", alpha=0.8)
+        axes[2].bar(x_indices, var_df["Human-LLM Variability"], color="#EA4335", edgecolor="black", alpha=0.8)
         axes[2].set_ylabel("Variability")
         axes[2].set_ylim(0.0, 1.0)
         axes[2].set_yticks([0.0, 0.5, 1.0])
@@ -1176,14 +1193,14 @@ def main() -> None:
         # Add legend to the right side
         import matplotlib.patches as mpatches
         legend_handles = [
-            mpatches.Patch(facecolor="skyblue", edgecolor="black", label="Human-Human", alpha=0.8),
-            mpatches.Patch(facecolor="lightgreen", edgecolor="black", label="LLM-LLM", alpha=0.8),
-            mpatches.Patch(facecolor="salmon", edgecolor="black", label="Human-LLM", alpha=0.8)
+            mpatches.Patch(facecolor="#4C78A8", edgecolor="black", label="Human-Human", alpha=0.8),
+            mpatches.Patch(facecolor="#34A853", edgecolor="black", label="LLM-LLM", alpha=0.8),
+            mpatches.Patch(facecolor="#EA4335", edgecolor="black", label="Human-LLM", alpha=0.8)
         ]
         fig.legend(handles=legend_handles, loc="center left", bbox_to_anchor=(1.01, 0.5),
                    title="Comparison Groups", title_fontsize=12, fontsize=11)
         
-        fig.suptitle("Term-Level Variability Comparison (Humans & LLMs)", fontsize=16, fontweight="bold")
+        # fig.suptitle("Term-Level Variability Comparison (Humans & LLMs)", fontsize=16, fontweight="bold")
         plt.tight_layout()
         plt.savefig(os.path.join(args.output_dir, "term_variability_comparison.png"), dpi=300, bbox_inches="tight")
         plt.close()
@@ -1206,8 +1223,8 @@ def main() -> None:
             delta_col = "Delta Human-LLM minus Human-Human"
             paper_df["Direction"] = np.where(
                 paper_df[delta_col] > 0,
-                "Human-LLM higher",
-                "Human-Human higher",
+                "Human-LLM ↑",
+                "Human-Human ↑",
             )
             plt.rcParams.update({
                 "font.size": 14,
@@ -1220,77 +1237,45 @@ def main() -> None:
                 "axes.spines.right": False,
             })
 
-            fig = plt.figure(figsize=(18, 18))
-            gs = fig.add_gridspec(
-                3,
-                2,
-                width_ratios=[1.0, 1.0],
-                height_ratios=[1.0, 0.9, 1.8],
-                hspace=0.35,
-                wspace=0.20,
-            )
-
-            ax_scatter = fig.add_subplot(gs[0:2, 0])
-            ax_dist = fig.add_subplot(gs[0, 1])
             import matplotlib.gridspec as gridspec
-            gs_c = gridspec.GridSpecFromSubplotSpec(
-                1,
-                3,
-                subplot_spec=gs[1, 1],
-                width_ratios=[0.89, 0.03, 0.08],
-                wspace=0.10,
-            )
-            ax_semantic = fig.add_subplot(gs_c[0, 0])
-            ax_heatmap = fig.add_subplot(gs[2, 0])
-            scatter_df = paper_df[paper_df[delta_col] != 0].copy()
+            panel_label_fontsize = 17
+            axis_label_fontsize = 15
 
-            sns.scatterplot(
-                data=scatter_df,
-                x="Human-Human Variability",
-                y="Human-LLM Variability",
-                hue="Direction",
-                hue_order=["Human-LLM higher", "Human-Human higher"],
-                palette={
-                    "Human-LLM higher": "salmon",
-                    "Human-Human higher": "skyblue",
-                },
-                s=72,
-                alpha=0.88,
-                edgecolor="black",
-                linewidth=0.45,
-                ax=ax_scatter,
-            )
-            ax_scatter.plot([0, 1], [0, 1], color="0.35", linestyle="--", linewidth=1.1)
-            ax_scatter.fill_between(
-                [0, 1],
-                [0, 1],
-                [1, 1],
-                color="salmon",
-                alpha=0.06,
-                linewidth=0,
-            )
-            ax_scatter.fill_between(
-                [0, 1],
-                [0, 0],
-                [0, 1],
-                color="skyblue",
-                alpha=0.06,
-                linewidth=0,
-            )
-            above_diag = int((paper_df["Delta Human-LLM minus Human-Human"] > 0).sum())
-            below_diag = int((paper_df["Delta Human-LLM minus Human-Human"] < 0).sum())
-            ax_scatter.set_xlim(0, 1)
-            ax_scatter.set_ylim(0, 1)
-            ax_scatter.set_xticks([0.0, 0.5, 1.0])
-            ax_scatter.set_yticks([0.0, 0.5, 1.0])
-            ax_scatter.set_xlabel("Human-Human variability")
-            ax_scatter.set_ylabel("Human-LLM variability")
-            ax_scatter.set_title("A. Disagreement trend", loc="left", fontweight="bold", fontsize=17, pad=24)
-            ax_scatter.legend(
-                loc="lower right",
-                frameon=True,
-                fontsize=11,
-            )
+            def add_panel_label(ax, label: str, x: float = -0.10, y: float = 1.04) -> None:
+                ax.text(
+                    x,
+                    y,
+                    label,
+                    transform=ax.transAxes,
+                    fontsize=panel_label_fontsize,
+                    fontweight="bold",
+                    va="bottom",
+                    ha="left",
+                )
+
+            def add_panel_label_fig(fig, ax, label: str, x: float | None = None, dx: float = 0.062, dy: float = 0.012) -> None:
+                bbox = ax.get_position()
+                fig.text(
+                    bbox.x0 - dx if x is None else x,
+                    bbox.y1 + dy,
+                    label,
+                    fontsize=panel_label_fontsize,
+                    fontweight="bold",
+                    va="bottom",
+                    ha="left",
+                )
+
+            def get_asterisks(p):
+                if p < 0.001: return "***"
+                elif p < 0.01: return "**"
+                elif p < 0.05: return "*"
+                else: return "ns"
+
+            import scipy.stats as stats
+            valid_a = paper_df[["Human-Human Variability", "LLM-LLM Variability"]].dropna()
+            hh_val = 1.0 - valid_a["Human-Human Variability"]
+            ll_val = 1.0 - valid_a["LLM-LLM Variability"]
+            r, p_val = stats.pearsonr(hh_val, ll_val)
 
             dist_df = paper_df.melt(
                 value_vars=[
@@ -1308,39 +1293,20 @@ def main() -> None:
             })
             comparison_order = ["Human-Human", "LLM-LLM", "Human-LLM"]
             comparison_palette = {
-                "Human-Human": "skyblue",
-                "LLM-LLM": "lightgreen",
-                "Human-LLM": "salmon",
+                "Human-Human": "#4C78A8",
+                "LLM-LLM": "#34A853",
+                "Human-LLM": "#EA4335",
             }
-            sns.boxplot(
-                data=dist_df,
-                x="Comparison",
-                y="Variability",
-                hue="Comparison",
-                order=comparison_order,
-                hue_order=comparison_order,
-                palette=comparison_palette,
-                showfliers=False,
-                width=0.55,
-                legend=False,
-                ax=ax_dist,
-            )
-            sns.stripplot(
-                data=dist_df,
-                x="Comparison",
-                y="Variability",
-                order=comparison_order,
-                color="0.25",
-                alpha=0.45,
-                size=3,
-                jitter=0.22,
-                ax=ax_dist,
-            )
-            ax_dist.set_ylim(0, 1.04)
-            ax_dist.set_yticks([0.0, 0.5, 1.0])
-            ax_dist.set_xlabel("")
-            ax_dist.set_ylabel("Variability")
-            ax_dist.set_title("B. Variability distributions", loc="left", fontweight="bold", fontsize=17, pad=24)
+            dist_df["Jaccard Similarity"] = 1.0 - dist_df["Variability"]
+            valid_b = paper_df[["Human-Human Variability", "LLM-LLM Variability", "Human-LLM Variability"]].dropna()
+            import scipy.stats as stats
+            _, p_hh_ll = stats.ttest_rel(valid_b["Human-Human Variability"], valid_b["LLM-LLM Variability"])
+            _, p_hh_hl = stats.ttest_rel(valid_b["Human-Human Variability"], valid_b["Human-LLM Variability"])
+            _, p_ll_hl = stats.ttest_rel(valid_b["LLM-LLM Variability"], valid_b["Human-LLM Variability"])
+            
+            def draw_bracket(ax, x1, x2, y, h, p_val):
+                ax.plot([x1, x1, x2, x2], [y, y+h, y+h, y], lw=1.2, color='black')
+                ax.text((x1+x2)/2, y+h+0.01, get_asterisks(p_val), ha='center', va='bottom', color='black', fontsize=12, fontweight='bold')
 
             correctness_df = paper_df[
                 [
@@ -1351,44 +1317,159 @@ def main() -> None:
                 ]
             ].dropna().copy()
             correctness_df = correctness_df[correctness_df["LLM Selected Terms"] > 0]
+            correctness_df["Human-LLM Jaccard Similarity"] = 1.0 - correctness_df["Human-LLM Variability"]
             norm = mpl.colors.Normalize(
                 vmin=0.0,
                 vmax=1.0,
             )
-            cmap = mpl.colors.LinearSegmentedColormap.from_list("custom", ["skyblue", "salmon"])
-            ax_semantic.scatter(
-                correctness_df["LLM Selected Term Excess"],
-                correctness_df["LLM-Average Human Ontology F1"],
-                c=correctness_df["Human-LLM Variability"],
-                cmap=cmap,
-                norm=norm,
-                s=70,
-                alpha=0.9,
-                edgecolors="black",
-                linewidths=0.35,
+            cmap = mpl.colors.LinearSegmentedColormap.from_list("custom", ["#EA4335", "#4C78A8"])
+
+            def plot_panel_a(ax):
+                ax.plot(
+                    [-0.05, 1.05],
+                    [-0.05, 1.05],
+                    color="0.35",
+                    linestyle="--",
+                    linewidth=1.2,
+                    zorder=1,
+                )
+                ax.scatter(
+                    hh_val,
+                    ll_val,
+                    alpha=0.8,
+                    edgecolor="black",
+                    s=50,
+                    c="0.45",
+                    zorder=2,
+                )
+                ax.set_xlabel("Mean Human-Human Jaccard Similarity", fontsize=axis_label_fontsize)
+                ax.set_ylabel("Mean LLM-LLM Jaccard Similarity", fontsize=axis_label_fontsize)
+                ax.set_title(f"Pearson r = {r:.3f} ({get_asterisks(p_val)})", fontsize=13, fontweight="bold")
+                ax.set_xlim(-0.05, 1.05)
+                ax.set_ylim(-0.05, 1.05)
+
+            def plot_panel_b(ax, legend_ax=None):
+                sns.boxplot(
+                    data=dist_df,
+                    x="Comparison",
+                    y="Jaccard Similarity",
+                    hue="Comparison",
+                    order=comparison_order,
+                    hue_order=comparison_order,
+                    palette=comparison_palette,
+                    showfliers=False,
+                    width=0.55,
+                    legend=False,
+                    ax=ax,
+                )
+                sns.stripplot(
+                    data=dist_df,
+                    x="Comparison",
+                    y="Jaccard Similarity",
+                    order=comparison_order,
+                    color="0.25",
+                    alpha=0.45,
+                    size=3,
+                    jitter=0.22,
+                    ax=ax,
+                )
+                max_y = 1.0
+                h = 0.03
+                draw_bracket(ax, 0, 1, max_y + 0.04, h, p_hh_ll)
+                draw_bracket(ax, 1, 2, max_y + 0.12, h, p_ll_hl)
+                draw_bracket(ax, 0, 2, max_y + 0.20, h, p_hh_hl)
+                legend_target = legend_ax if legend_ax is not None else ax
+                if legend_ax is not None:
+                    legend_ax.axis("off")
+                legend_target.text(
+                    0.98 if legend_ax is not None else 0.03,
+                    0.98,
+                    "* p < 0.05\n** p < 0.01\n*** p < 0.001",
+                    transform=legend_target.transAxes,
+                    fontsize=10,
+                    va="top",
+                    ha="right" if legend_ax is not None else "left",
+                    bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor="0.7", alpha=0.9),
+                )
+                ax.set_ylim(-0.04, max_y + 0.32)
+                ax.set_yticks([0.0, 0.5, 1.0])
+                ax.set_xlabel("")
+                ax.set_ylabel("Mean Pairwise Jaccard Similarity", fontsize=axis_label_fontsize)
+                ax.set_title("")
+                ax.tick_params(axis="x", labelsize=axis_label_fontsize)
+
+            def plot_panel_c(fig, ax, cax):
+                scatter = ax.scatter(
+                    correctness_df["LLM Selected Term Excess"],
+                    correctness_df["LLM-Average Human Ontology F1"],
+                    c=correctness_df["Human-LLM Jaccard Similarity"],
+                    cmap=cmap,
+                    norm=norm,
+                    s=70,
+                    alpha=0.9,
+                    edgecolors="black",
+                    linewidths=0.35,
+                )
+                cbar = fig.colorbar(scatter, cax=cax)
+                cbar.set_label("Human-LLM Jaccard similarity", fontsize=13)
+                cbar.set_ticks([0.0, 0.5, 1.0])
+                x_min = correctness_df["LLM Selected Term Excess"].min()
+                x_max = correctness_df["LLM Selected Term Excess"].max()
+                x_pad = max(0.5, (x_max - x_min) * 0.08)
+                ax.set_xlim(x_min - x_pad, x_max + x_pad)
+                ax.set_ylim(0, 1.04)
+                ax.set_yticks([0.0, 0.5, 1.0])
+                ax.set_xlabel("LLM selected-term excess")
+                ax.set_ylabel("F1 vs human reference")
+
+            fig_c = plt.figure(figsize=(7, 5))
+            gs_c_only = fig_c.add_gridspec(1, 2, width_ratios=[0.92, 0.08], wspace=0.08)
+            ax_c = fig_c.add_subplot(gs_c_only[0, 0])
+            cax_c = fig_c.add_subplot(gs_c_only[0, 1])
+            plot_panel_c(fig_c, ax_c, cax_c)
+            fig_c.savefig(
+                os.path.join(args.output_dir, "term_variability_pattern_summary_c.png"),
+                dpi=300,
+                bbox_inches="tight",
             )
-            cax = fig.add_subplot(gs_c[0, 1])
-            cbar = fig.colorbar(
-                mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-                cax=cax,
+            plt.close(fig_c)
+            print(
+                "Standalone term variability summary panel C saved to: "
+                f"{os.path.join(args.output_dir, 'term_variability_pattern_summary_c.png')}"
             )
-            cbar.set_label("Human-LLM variability", fontsize=13)
-            cbar.set_ticks([0.0, 0.5, 1.0])
-            x_min = correctness_df["LLM Selected Term Excess"].min()
-            x_max = correctness_df["LLM Selected Term Excess"].max()
-            x_pad = max(0.5, (x_max - x_min) * 0.08)
-            ax_semantic.set_xlim(x_min - x_pad, x_max + x_pad)
-            ax_semantic.set_ylim(0, 1.04)
-            ax_semantic.set_yticks([0.0, 0.5, 1.0])
-            ax_semantic.set_xlabel("LLM selected-term excess")
-            ax_semantic.set_ylabel("F1 vs average human")
-            ax_semantic.set_title("C. Consensus on extra LLM terms", loc="left", fontweight="bold", fontsize=17, pad=24)
 
             dist_matrix = 1 - pairwise_overlap
             np.fill_diagonal(dist_matrix, 0)
             dist_matrix = (dist_matrix + dist_matrix.T) / 2
             condensed_dist = squareform(dist_matrix)
             Z = linkage(condensed_dist, method="ward")
+
+            fig_summary = plt.figure(figsize=(17, 14), constrained_layout=False)
+            gs_summary = fig_summary.add_gridspec(
+                2,
+                2,
+                width_ratios=[1.0, 1.0],
+                height_ratios=[1.0, 1.05],
+                hspace=0.22,
+                wspace=0.16,
+            )
+            ax_scatter = fig_summary.add_subplot(gs_summary[0, 0])
+            gs_b_summary = gridspec.GridSpecFromSubplotSpec(
+                1,
+                2,
+                subplot_spec=gs_summary[0, 1],
+                width_ratios=[0.88, 0.12],
+                wspace=0.01,
+            )
+            ax_dist = fig_summary.add_subplot(gs_b_summary[0, 0])
+            ax_dist_legend = fig_summary.add_subplot(gs_b_summary[0, 1])
+            ax_heatmap = fig_summary.add_subplot(gs_summary[1, 0])
+            gs_inner = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gs_summary[1, 1], hspace=0.08)
+            ax_terms = fig_summary.add_subplot(gs_inner[0])
+            ax_depth = fig_summary.add_subplot(gs_inner[1])
+
+            plot_panel_a(ax_scatter)
+            plot_panel_b(ax_dist, legend_ax=ax_dist_legend)
 
             dendrogram_tick_size = 13
             dendrogram(
@@ -1397,7 +1478,8 @@ def main() -> None:
                 leaf_rotation=90,
                 leaf_font_size=dendrogram_tick_size,
                 color_threshold=0,
-                above_threshold_color="skyblue",
+                link_color_func=lambda _: "black",
+                above_threshold_color="black",
                 ax=ax_heatmap
             )
             ax_heatmap.set_ylabel("Distance")
@@ -1408,34 +1490,19 @@ def main() -> None:
                     label.set_color("black")
                     label.set_fontweight("bold")
 
-            # Remove top and right spines from the dendrogram
             ax_heatmap.spines["top"].set_visible(False)
             ax_heatmap.spines["right"].set_visible(False)
 
-            ax_heatmap.set_title(
-                "D. Dendrogram of Human & LLM Similarity",
-                loc="left",
-                fontweight="bold",
-                fontsize=17,
-                pad=20,
-            )
-
-            import matplotlib.gridspec as gridspec
-            gs_inner = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gs[2, 1], hspace=0.15)
-            ax_terms = fig.add_subplot(gs_inner[0])
-            ax_depth = fig.add_subplot(gs_inner[1])
-            
-            # Use same order as in Panel D dendrogram, if possible, or just default.
             sns.barplot(
                 data=metrics_df,
                 x="Entity",
                 y="Avg_Orig_Num_Terms",
                 hue="Type",
-                palette={"Human Expert": "skyblue", "LLM": "salmon"},
+                palette={"Human Expert": "#4C78A8", "LLM": "#EA4335"},
                 ax=ax_terms,
             )
-            ax_terms.set_title("E. Number of Terms and Maximum Depth", loc="left", fontweight="bold", fontsize=17, pad=20)
-            ax_terms.set_ylabel("Terms", fontsize=15)
+            ax_terms.set_ylabel("Mean No. of Terms", fontsize=15)
+            ax_terms.yaxis.set_label_coords(-0.045, 0.5)
             ax_terms.set_xlabel("")
             ax_terms.set_xticks([])
             
@@ -1447,10 +1514,11 @@ def main() -> None:
                 x="Entity",
                 y="Mean_Max_Depth",
                 hue="Type",
-                palette={"Human Expert": "skyblue", "LLM": "salmon"},
+                palette={"Human Expert": "#4C78A8", "LLM": "#EA4335"},
                 ax=ax_depth,
             )
-            ax_depth.set_ylabel("Max Depth", fontsize=15)
+            ax_depth.set_ylabel("Mean Max Depth", fontsize=15)
+            ax_depth.yaxis.set_label_coords(-0.045, 0.5)
             ax_depth.set_xlabel("")
             ax_depth.tick_params(axis='x', rotation=90, labelsize=13)
             
@@ -1462,15 +1530,21 @@ def main() -> None:
                     label.set_color("black")
                     label.set_fontweight("bold")
 
-            fig.suptitle("")
-            fig.savefig(
+            add_panel_label(ax_scatter, "A")
+            add_panel_label(ax_dist, "B", x=-0.115)
+            add_panel_label(ax_heatmap, "C")
+            add_panel_label(ax_terms, "D", x=-0.085, y=1.085)
+
+            fig_summary.subplots_adjust(left=0.075, right=0.975, top=0.965, bottom=0.18)
+            fig_summary.savefig(
                 os.path.join(args.output_dir, "term_variability_pattern_summary.png"),
                 dpi=300,
                 bbox_inches="tight",
+                pad_inches=0.18,
             )
-            plt.close(fig)
+            plt.close(fig_summary)
             print(
-                "Paper-ready term variability summary saved to: "
+                "Paper-ready term variability summary panels A-D saved to: "
                 f"{os.path.join(args.output_dir, 'term_variability_pattern_summary.png')}"
             )
         
@@ -1560,7 +1634,7 @@ def main() -> None:
 
                 ax.set_xlabel("PC1", fontsize=12)
                 ax.set_ylabel("PC2", fontsize=12)
-                ax.set_title("2D PCA of Selected Ontology Terms", fontsize=14, fontweight="bold")
+                # ax.set_title("2D PCA of Selected Ontology Terms", fontsize=14, fontweight="bold")
                 ax.legend(title="Selected by", title_fontsize=11, fontsize=10,
                           loc="upper right", framealpha=0.9)
 
@@ -1588,15 +1662,15 @@ def main() -> None:
     print("Generating Model Comparison Table...")
     try:
         model_metadata_lookup = {
-            "gpt-oss-20b": {"total_params": "21B", "active_params": "3.6B", "dtype": "BF16", "gpu": "1x A100 / 1x H200"},
-            "Qwen3.5-27B": {"total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
-            "Qwen3.6-27B": {"total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
-            "NVIDIA-Nemotron-3-Nano-30B-A3B": {"total_params": "30B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
-            "Qwen3.5-35B-A3B": {"total_params": "35B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
-            "Qwen3.6-35B-A3B": {"total_params": "35B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 / 1x H200"},
-            "Qwen3.5-122B-A10B": {"total_params": "122B", "active_params": "10.0B", "dtype": "FP8", "gpu": "4x A100 / 2x H200"},
-            "NVIDIA-Nemotron-3-Super-120B-A12B": {"total_params": "120B", "active_params": "12.0B", "dtype": "FP8", "gpu": "4x A100 / 2x H200"},
-            "gpt-oss-120b": {"total_params": "117B", "active_params": "5.1B", "dtype": "BF16", "gpu": "4x A100 / 2x H200"}
+            "gpt-oss-20b": {"total_params": "21B", "active_params": "3.6B", "dtype": "BF16", "gpu": "1x A100 80GB"},
+            "Qwen3.5-27B": {"total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 80GB"},
+            "Qwen3.6-27B": {"total_params": "27B", "active_params": "27B", "dtype": "FP8", "gpu": "1x A100 80GB"},
+            "NVIDIA-Nemotron-3-Nano-30B-A3B": {"total_params": "30B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 80GB"},
+            "Qwen3.5-35B-A3B": {"total_params": "35B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 80GB"},
+            "Qwen3.6-35B-A3B": {"total_params": "35B", "active_params": "3.0B", "dtype": "FP8", "gpu": "1x A100 80GB"},
+            "Qwen3.5-122B-A10B": {"total_params": "122B", "active_params": "10.0B", "dtype": "FP8", "gpu": "2x A100 80GB"},
+            "NVIDIA-Nemotron-3-Super-120B-A12B": {"total_params": "120B", "active_params": "12.0B", "dtype": "FP8", "gpu": "2x A100 80GB"},
+            "gpt-oss-120b": {"total_params": "117B", "active_params": "5.1B", "dtype": "BF16", "gpu": "1x A100 80GB"}
         }
 
         # Identify human experts (excluding average_human)
@@ -1702,8 +1776,11 @@ def main() -> None:
 
             meta_info = model_metadata_lookup.get(model_name, {"total_params": "N/A", "active_params": "N/A", "dtype": "N/A", "gpu": "N/A"})
 
+            display_model_name = f"{model_name} (FP8)" if meta_info.get("dtype") == "FP8" else model_name
+
             table_results.append({
-                "Model": model_name,
+                "Model": display_model_name,
+                "Original Model": model_name,
                 "Precision Mean": mean_p,
                 "Precision Std": std_p,
                 "Recall Mean": mean_r,
@@ -1720,36 +1797,87 @@ def main() -> None:
             })
 
         if table_results:
-            res_df = pd.DataFrame(table_results)
-            fig, ax = plt.subplots(figsize=(24, 4.0))
-            ax.axis('off')
-
             header_color   = '#1f4e79'
             row_even_color = '#f2f2f2'
             row_odd_color  = '#ffffff'
 
+            # Group table results by GPU requirements prefix (1x vs 2x)
+            group_1gpu = [r for r in table_results if str(r["GPU Requirements"]).startswith("1x")]
+            group_2gpus = [r for r in table_results if str(r["GPU Requirements"]).startswith("2x")]
+
+            # Precalculate best values per group for columns 2, 3, 4, 5, 6
+            group_bests = {}
+            for g_name, g_list in [("1gpu", group_1gpu), ("2gpus", group_2gpus)]:
+                if g_list:
+                    group_bests[g_name] = {
+                        2: max(r["Precision Mean"] for r in g_list),
+                        3: max(r["Recall Mean"] for r in g_list),
+                        4: max(r["F1 Mean"] for r in g_list),
+                        5: max(r["Jaccard Mean"] for r in g_list),
+                        6: min(r["Avg Tokens"] for r in g_list if r.get("Avg Tokens", 0) > 0)
+                    }
+
             table_data = []
-            for idx, row in res_df.iterrows():
+            row_selected = {}
+            row_group = {}
+            row_metric_vals = {}
+
+            # Add Group 1 (1 GPU)
+            for r in group_1gpu:
                 table_data.append([
-                    row["Model"],
-                    f"{row['Precision Mean']:.2%} ± {row['Precision Std']:.2%}",
-                    f"{row['Recall Mean']:.2%} ± {row['Recall Std']:.2%}",
-                    f"{row['F1 Mean']:.2%} ± {row['F1 Std']:.2%}",
-                    f"{row['Jaccard Mean']:.2%} ± {row['Jaccard Std']:.2%}",
-                    row["Total Params"],
-                    row["Active Params"],
-                    row["Data Type"],
-                    f"{row['Avg Tokens']:,}" if row['Avg Tokens'] > 0 else "N/A",
-                    row["GPU Requirements"]
+                    "",  # Col 0 (GPU group placeholder)
+                    r["Model"],
+                    f"{r['Precision Mean']:.2%} ± {r['Precision Std']:.2%}",
+                    f"{r['Recall Mean']:.2%} ± {r['Recall Std']:.2%}",
+                    f"{r['F1 Mean']:.2%} ± {r['F1 Std']:.2%}",
+                    f"{r['Jaccard Mean']:.2%} ± {r['Jaccard Std']:.2%}",
+                    f"{r['Avg Tokens']:,}" if r['Avg Tokens'] > 0 else "N/A",
+                    r["GPU Requirements"]
                 ])
+                row_idx = len(table_data)
+                row_selected[row_idx] = ("Qwen3.6-35B" in r["Model"])
+                row_group[row_idx] = "1gpu"
+                row_metric_vals[row_idx] = {
+                    2: r["Precision Mean"],
+                    3: r["Recall Mean"],
+                    4: r["F1 Mean"],
+                    5: r["Jaccard Mean"],
+                    6: r["Avg Tokens"]
+                }
+
+            # Add Group 2 (2 GPUs)
+            for r in group_2gpus:
+                table_data.append([
+                    "",  # Col 0 (GPU group placeholder)
+                    r["Model"],
+                    f"{r['Precision Mean']:.2%} ± {r['Precision Std']:.2%}",
+                    f"{r['Recall Mean']:.2%} ± {r['Recall Std']:.2%}",
+                    f"{r['F1 Mean']:.2%} ± {r['F1 Std']:.2%}",
+                    f"{r['Jaccard Mean']:.2%} ± {r['Jaccard Std']:.2%}",
+                    f"{r['Avg Tokens']:,}" if r['Avg Tokens'] > 0 else "N/A",
+                    r["GPU Requirements"]
+                ])
+                row_idx = len(table_data)
+                row_selected[row_idx] = ("Qwen3.6-35B" in r["Model"])
+                row_group[row_idx] = "2gpus"
+                row_metric_vals[row_idx] = {
+                    2: r["Precision Mean"],
+                    3: r["Recall Mean"],
+                    4: r["F1 Mean"],
+                    5: r["Jaccard Mean"],
+                    6: r["Avg Tokens"]
+                }
+
+            fig, ax = plt.subplots(figsize=(18, 5.0))
+            ax.axis('off')
 
             col_labels = [
-                "Model", "Precision (Mean ± Std)", "Recall (Mean ± Std)", "F1 Score (Mean ± Std)",
+                "", "Model", "Precision (Mean ± Std)", "Recall (Mean ± Std)", "F1 Score (Mean ± Std)",
                 "Jaccard Overlap (Mean ± Std)",
-                "Total Params", "Active Params", "Data Type", "Avg Tokens", "GPU Requirements"
+                "Avg Tokens", "GPU Requirements"
             ]
 
-            col_widths = [0.20, 0.10, 0.10, 0.10, 0.15, 0.08, 0.08, 0.05, 0.06, 0.11]
+            col_widths = [0.035, 0.22, 0.12, 0.12, 0.12, 0.15, 0.08, 0.12]
 
             table = ax.table(
                 cellText=table_data,
@@ -1761,22 +1889,73 @@ def main() -> None:
 
             table.auto_set_font_size(False)
             table.set_fontsize(10)
-            table.scale(1.0, 1.8)
+            table.scale(1.0, 2.2)
 
             for (row_idx, col_idx), cell in table.get_celld().items():
                 if row_idx == 0:
                     cell.set_text_props(weight='bold', color='white')
                     cell.set_facecolor(header_color)
+                elif col_idx == 0:
+                    # Column 0: GPU Group styling — hide ALL cell borders by matching edge to face
+                    group = row_group.get(row_idx)
+                    bg_color = '#d5e1ed' if group == '1gpu' else '#b9cfe7'
+                    cell.set_facecolor(bg_color)
+                    cell.set_edgecolor(bg_color)
                 else:
-                    if col_idx == 0:
+                    is_selected = row_selected.get(row_idx, False)
+                    
+                    # Bold model name (col 1)
+                    should_bold = (col_idx == 1)
+                    
+                    # Bold if it has the best score in its category for its group
+                    if col_idx in [2, 3, 4, 5, 6]:
+                        val = row_metric_vals.get(row_idx, {}).get(col_idx, -1.0)
+                        group = row_group.get(row_idx)
+                        if group and group in group_bests:
+                            best_val = group_bests[group].get(col_idx, -2.0)
+                            if abs(val - best_val) < 1e-9:
+                                should_bold = True
+                    
+                    if should_bold:
                         cell.set_text_props(weight='bold')
-                    if row_idx % 2 == 0:
+                    
+                    if is_selected:
+                        cell.set_facecolor('#d9ead3')  # Light green highlight
+                    elif row_idx % 2 == 0:
                         cell.set_facecolor(row_even_color)
                     else:
                         cell.set_facecolor(row_odd_color)
 
-            plt.title("LLM Evaluation Metrics & Hardware Requirements",
-                      fontsize=14, fontweight='bold', pad=6, color='#1f4e79')
+            # Draw outer border rectangles and group labels manually
+            fig.canvas.draw()
+            renderer = fig.canvas.get_renderer()
+
+            from matplotlib.patches import Rectangle
+
+            for grp_name, grp_color, first_row, last_row in [
+                ("Single GPU", '#d5e1ed', 1, len(group_1gpu)),
+                ("Multi GPU", '#b9cfe7', len(group_1gpu) + 1, len(table_data))
+            ]:
+                top_cell = table[first_row, 0]
+                bot_cell = table[last_row, 0]
+                top_bbox = top_cell.get_window_extent(renderer).transformed(ax.transData.inverted())
+                bot_bbox = bot_cell.get_window_extent(renderer).transformed(ax.transData.inverted())
+                
+                # Draw outer black border rectangle around the group in col 0
+                x = top_bbox.x0
+                y = bot_bbox.y0
+                w = top_bbox.x1 - top_bbox.x0
+                h = top_bbox.y1 - bot_bbox.y0
+                rect = Rectangle((x, y), w, h, linewidth=1.0, edgecolor='black',
+                                  facecolor='none', zorder=5, clip_on=False)
+                ax.add_patch(rect)
+                
+                # Draw label centered in the group
+                cx_ax = (top_bbox.x0 + top_bbox.x1) / 2
+                cy_ax = (top_bbox.y1 + bot_bbox.y0) / 2
+                ax.text(cx_ax, cy_ax, grp_name, transform=ax.transData,
+                        weight='bold', color='#1f4e79', fontsize=10,
+                        rotation=90, va='center', ha='center', zorder=6)
 
             output_path = os.path.join(args.output_dir, "model_comparison_table.png")
             plt.savefig(output_path, dpi=300, bbox_inches='tight')
@@ -1789,17 +1968,308 @@ def main() -> None:
                 best_single_gpu = sorted(single_gpu_results, key=lambda x: x["F1 Mean"], reverse=True)[0]
                 best_json_path = os.path.join(args.llm_expanded_dir, "llm_config.json")
                 best_llm_data = {
-                    "model": best_single_gpu["Model"],
+                    "model": best_single_gpu["Original Model"],
                     "mode": 2,
                     "consensus_runs": 1,
-                    "ontology_definitions": False,
+                    "ontology_definitions": True,
                     "f1_score": round(best_single_gpu["F1 Mean"], 2)
                 }
                 with open(best_json_path, "w", encoding="utf-8") as jf:
                     json.dump(best_llm_data, jf, indent=4)
                 print(f"Saved best single GPU model configuration to: {best_json_path}")
+                
+            # --- Generate Speedup Comparison Table ---
+            print("Generating Speedup Comparison Table...")
+            try:
+                log_dir = os.path.join(os.path.dirname(args.llm_expanded_dir), "jobs", "logs")
+                if os.path.exists(log_dir):
+                    speedup_files = sorted(f for f in os.listdir(log_dir) if f.startswith("eval_llms_") and f.endswith(".out"))
+                    
+                    sp_results = []
+                    import re
+                    for fname in speedup_files:
+                        path = os.path.join(log_dir, fname)
+                        with open(path) as f:
+                            content = f.read()
+                        
+                        blocks = content.split("Running evaluation (NEW prompts):")
+                        for block in blocks:
+                            if not block.strip():
+                                continue
+                            
+                            model_m = re.search(r"Model\s*:\s*(.+)", block)
+                            mode_m  = re.search(r"Mode\s*:\s*(\d+)", block)
+                            cons_m  = re.search(r"Consensus Runs\s*:\s*(\d+)", block)
+                            defs_m  = re.search(r"Definitions\s*:\s*(\w+)", block)
+                            time_m  = re.search(r"Total execution time:\s*([\d.]+)s", block)
+                            
+                            if not all([model_m, mode_m, cons_m, defs_m, time_m]):
+                                continue
+                            
+                            m_name = model_m.group(1).strip()
+                            if m_name.endswith("-FP8"):
+                                m_name = m_name[:-4] + " (FP8)"
+                            m_mode  = int(mode_m.group(1))
+                            m_cons  = int(cons_m.group(1))
+                            m_defs  = defs_m.group(1).strip().lower()
+                            m_time_s = float(time_m.group(1))
+                            
+                            if m_mode == 2 and m_defs == "true" and m_cons == 1:
+                                sp_results.append((m_name, m_time_s))
+                    
+                    if sp_results:
+                        human_time_s = 3600.0
+                        human_rate = 50.0 / human_time_s
+                        
+                        gpus_used = {
+                            "NVIDIA-Nemotron-3-Nano-30B-A3B (FP8)": "1x H200",
+                            "NVIDIA-Nemotron-3-Super-120B-A12B (FP8)": "2x H200",
+                            "Qwen3.5-122B-A10B (FP8)": "2x H200",
+                            "gpt-oss-120b": "2x H200",
+                            "Qwen3.5-35B-A3B (FP8)": "2x A100",
+                            "gpt-oss-20b": "1x A100",
+                            "Qwen3.6-35B-A3B (FP8)": "1x H200",
+                            "Qwen3.5-27B (FP8)": "2x A100",
+                            "Qwen3.6-27B (FP8)": "1x A100"
+                        }
+                        
+                        sp_table_data = []
+                        for m_name, t_s in sorted(sp_results, key=lambda x: x[1]):
+                            rate = 50.0 / t_s
+                            speedup = rate / human_rate
+                            gpu_req = gpus_used.get(m_name, "Unknown")
+                            sp_table_data.append([
+                                m_name,
+                                gpu_req,
+                                f"{t_s:.1f}s",
+                                f"{rate:.4f}",
+                                f"{speedup:.1f}x"
+                            ])
+                        
+                        sp_fig, sp_ax = plt.subplots(figsize=(14, 4.0))
+                        sp_ax.axis('off')
+                        
+                        sp_col_labels = ["Model", "GPUs Used", "Time (50 terms)", "Rate (terms/s)", "Speedup vs Human"]
+                        sp_col_widths = [0.35, 0.15, 0.15, 0.15, 0.20]
+                        
+                        sp_table = sp_ax.table(
+                            cellText=sp_table_data,
+                            colLabels=sp_col_labels,
+                            colWidths=sp_col_widths,
+                            cellLoc='center',
+                            loc='upper center'
+                        )
+                        
+                        sp_table.auto_set_font_size(False)
+                        sp_table.set_fontsize(10)
+                        sp_table.scale(1.0, 1.8)
+                        
+                        for (row_idx, col_idx), cell in sp_table.get_celld().items():
+                            if row_idx == 0:
+                                cell.set_text_props(weight='bold', color='white')
+                                cell.set_facecolor(header_color)
+                            else:
+                                is_selected = ("Qwen3.6-35B" in sp_table_data[row_idx - 1][0])
+                                if col_idx == 0 or is_selected:
+                                    cell.set_text_props(weight='bold')
+                                
+                                if is_selected:
+                                    cell.set_facecolor('#d9ead3')  # Light green highlight
+                                elif row_idx % 2 == 0:
+                                    cell.set_facecolor(row_even_color)
+                                else:
+                                    cell.set_facecolor(row_odd_color)
+                        
+                        # plt.title("LLM Annotation Speedup (Mode 2, Consensus 1, With Definitions)",
+                        #           fontsize=14, fontweight='bold', pad=6, color='#1f4e79')
+                        
+                        sp_output_path = os.path.join(args.output_dir, "speedup_comparison_table.png")
+                        plt.savefig(sp_output_path, dpi=300, bbox_inches='tight')
+                        plt.close()
+                        print(f"Saved speedup table plot to: {sp_output_path}")
+            except Exception as e_sp:
+                print(f"Error generating speedup table: {e_sp}")
     except Exception as ex:
         print(f"Error generating model comparison table: {ex}")
+
+    # --- Generate Decision Impact Plots ---
+    if not llm_perf_df.empty:
+        try:
+            import scipy.stats as stats
+
+            decisions_dir = os.path.join(args.output_dir, "decisions")
+            os.makedirs(decisions_dir, exist_ok=True)
+
+            def generate_decision_plots(df, target_dir, title_suffix=""):
+                os.makedirs(target_dir, exist_ok=True)
+
+                fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+                y_label = "F1 vs Human Consensus Reference"
+
+                # 1. Definitions Impact Analysis
+                try:
+                    pivot_defs = df.pivot(
+                        index=["Model", "Mode", "Consensus"],
+                        columns="Definitions",
+                        values="F1"
+                    ).dropna()
+
+                    if len(pivot_defs) >= 2:
+                        stat_res = stats.ttest_rel(pivot_defs["With Defs"], pivot_defs["No Defs"])
+                        p_val = stat_res.pvalue
+                        stat_name = "Paired t-test"
+                    else:
+                        p_val = np.nan
+                        stat_name = "N/A"
+
+                    sns.boxplot(
+                        data=df,
+                        x="Definitions",
+                        y="F1",
+                        ax=axes[0],
+                        palette={"No Defs": "#ff7f0e", "With Defs": "#1f77b4"},
+                        width=0.4,
+                        boxprops=dict(alpha=0.6),
+                        showfliers=False
+                    )
+                    sns.stripplot(
+                        data=df,
+                        x="Definitions",
+                        y="F1",
+                        ax=axes[0],
+                        color="black",
+                        alpha=0.5,
+                        size=6,
+                        jitter=0.1
+                    )
+                    title = f"Definitions"
+                    if pd.notna(p_val):
+                        title += f"\nP-value: {p_val:.2e}"
+                    axes[0].set_title(title, fontsize=14, fontweight="bold")
+                    axes[0].set_ylabel(y_label, fontsize=12)
+                    axes[0].set_xlabel("Configuration", fontsize=12)
+                    axes[0].set_ylim(-0.05, 1.05)
+                    axes[0].grid(False)
+                except Exception as e:
+                    print(f"Error generating definitions plot in {target_dir}: {e}")
+
+                # 2. Mode Impact Analysis
+                try:
+                    pivot_mode = df.pivot(
+                        index=["Model", "Definitions", "Consensus"],
+                        columns="Mode",
+                        values="F1"
+                    ).dropna()
+
+                    if len(pivot_mode) >= 2:
+                        stat_res = stats.ttest_rel(pivot_mode["Single-Term"], pivot_mode["Batched"])
+                        p_val = stat_res.pvalue
+                        stat_name = "Paired t-test"
+                    else:
+                        p_val = np.nan
+                        stat_name = "N/A"
+
+                    sns.boxplot(
+                        data=df,
+                        x="Mode",
+                        y="F1",
+                        ax=axes[1],
+                        palette={"Single-Term": "#ff7f0e", "Batched": "#1f77b4"},
+                        width=0.4,
+                        boxprops=dict(alpha=0.6),
+                        showfliers=False
+                    )
+                    sns.stripplot(
+                        data=df,
+                        x="Mode",
+                        y="F1",
+                        ax=axes[1],
+                        color="black",
+                        alpha=0.5,
+                        size=6,
+                        jitter=0.1
+                    )
+                    title = f"Evaluation Strategy"
+                    if pd.notna(p_val):
+                        title += f"\nP-value: {p_val:.2e}"
+                    axes[1].set_title(title, fontsize=14, fontweight="bold")
+                    axes[1].set_ylabel(y_label, fontsize=12)
+                    axes[1].set_xlabel("Configuration", fontsize=12)
+                    axes[1].set_ylim(-0.05, 1.05)
+                    axes[1].grid(False)
+                except Exception as e:
+                    print(f"Error generating mode plot in {target_dir}: {e}")
+
+                # 3. Consensus Impact Analysis
+                try:
+                    pivot_cons = df.pivot(
+                        index=["Model", "Mode", "Definitions"],
+                        columns="Consensus",
+                        values="F1"
+                    ).dropna()
+
+                    consensus_values = sorted(pivot_cons.columns.tolist())
+                    if len(consensus_values) >= 2 and all(c in pivot_cons.columns for c in consensus_values):
+                        try:
+                            stat_res = stats.friedmanchisquare(*[pivot_cons[c] for c in consensus_values])
+                            p_val = stat_res.pvalue
+                            stat_name = "Friedman test"
+                        except Exception:
+                            p_val = np.nan
+                            stat_name = "N/A"
+                    else:
+                        p_val = np.nan
+                        stat_name = "N/A"
+
+                    sns.boxplot(
+                        data=df,
+                        x="Consensus",
+                        y="F1",
+                        ax=axes[2],
+                        width=0.5,
+                        boxprops=dict(alpha=0.6),
+                        showfliers=False
+                    )
+                    sns.stripplot(
+                        data=df,
+                        x="Consensus",
+                        y="F1",
+                        ax=axes[2],
+                        color="black",
+                        alpha=0.5,
+                        size=6,
+                        jitter=0.1
+                    )
+                    title = f"Consensus"
+                    if pd.notna(p_val):
+                        title += f"\nP-value: {p_val:.2e}"
+                    axes[2].set_title(title, fontsize=14, fontweight="bold")
+                    axes[2].set_ylabel(y_label, fontsize=12)
+                    axes[2].set_xlabel("Number of Runs", fontsize=12)
+                    axes[2].set_ylim(-0.05, 1.05)
+                    axes[2].grid(False)
+                except Exception as e:
+                    print(f"Error generating consensus plot in {target_dir}: {e}")
+
+                plt.tight_layout()
+                plt.savefig(os.path.join(target_dir, "combined_impact.png"), dpi=300, bbox_inches="tight")
+                plt.close()
+
+            # Generate global plots
+            print("Generating global decision impact plots...")
+            generate_decision_plots(llm_perf_df, decisions_dir, title_suffix="")
+
+            # Generate per-model plots in subfolders
+            print("Generating per-model decision impact plots...")
+            for model_name in sorted(llm_perf_df["Model"].unique()):
+                model_df = llm_perf_df[llm_perf_df["Model"] == model_name]
+                model_folder_name = model_name.replace("/", "_").replace(" ", "_").replace(":", "_")
+                model_target_dir = os.path.join(decisions_dir, model_folder_name)
+                generate_decision_plots(model_df, model_target_dir, title_suffix=f" ({model_name})")
+
+            print(f"Decision impact plots saved to: {decisions_dir}")
+        except Exception as e:
+            print(f"Error generating decision impact plots: {e}")
 
     print(f"All combined plots saved successfully to: {args.output_dir}")
 

@@ -1,0 +1,9 @@
+cellular
+cellular > increase inflammation
+cellular > increased inflammation
+individual
+individual > decrease growth
+individual > decreased body weight
+individual > growth reduction
+tissue
+tissue > increase in inflammation

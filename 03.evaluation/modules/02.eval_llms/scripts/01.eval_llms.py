@@ -198,55 +198,63 @@ def main() -> None:
                     "Comments": ""
                 }, None, None
 
-            try:
-                # Execute graph logic
-                candidates_list = None
-                if args.candidate_pool_file:
-                    candidates_list = phrase_to_candidates.get(phrase.lower().strip())
-                    if candidates_list is None:
-                        logger.warning(f"Phrase '{phrase}' not found in candidate pool!")
+            max_attempts = 3
+            last_err = None
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    # Execute graph logic
+                    candidates_list = None
+                    if args.candidate_pool_file:
+                        candidates_list = phrase_to_candidates.get(phrase.lower().strip())
+                        if candidates_list is None:
+                            logger.warning(f"Phrase '{phrase}' not found in candidate pool!")
 
-                row_result_values, reasoning, selected, token_usage = graph.execute(llm, phrase, direct_candidates=candidates_list)
+                    row_result_values, reasoning, selected, token_usage = graph.execute(llm, phrase, direct_candidates=candidates_list)
 
-                # Extract URIs
-                selected_uris = []
-                for term in selected:
-                    node_info = graph.nodes.get(term, {})
-                    uri = node_info.get('uri', 'Unknown')
-                    selected_uris.append(str(uri))
+                    # Extract URIs
+                    selected_uris = []
+                    for term in selected:
+                        node_info = graph.nodes.get(term, {})
+                        uri = node_info.get('uri', 'Unknown')
+                        selected_uris.append(str(uri))
 
-                selected_candidates_str = "|".join(selected) if selected else "None"
-                selected_uris_str = "|".join(selected_uris) if selected_uris else "None"
+                    selected_candidates_str = "|".join(selected) if selected else "None"
+                    selected_uris_str = "|".join(selected_uris) if selected_uris else "None"
 
-                result = {
-                    "Index": index,
-                    "Phrase": phrase,
-                    "Selected_Candidates": selected_candidates_str,
-                    "Selected_URIs": selected_uris_str,
-                    "Manual_Terms": "None",
-                    "Toxicological_Effect_Does_Not_Make_Sense": "0",
-                    "Not_My_Expertise": "0",
-                    "Comments": ""
-                }
-                reasoning_val = {
-                    "reasoning": reasoning,
-                    "selected": selected
-                }
-                avg_tokens = token_usage.get("avg_completion_tokens", 0.0)
-                return result, (phrase, reasoning_val), avg_tokens
+                    result = {
+                        "Index": index,
+                        "Phrase": phrase,
+                        "Selected_Candidates": selected_candidates_str,
+                        "Selected_URIs": selected_uris_str,
+                        "Manual_Terms": "None",
+                        "Toxicological_Effect_Does_Not_Make_Sense": "0",
+                        "Not_My_Expertise": "0",
+                        "Comments": ""
+                    }
+                    reasoning_val = {
+                        "reasoning": reasoning,
+                        "selected": selected
+                    }
+                    avg_tokens = token_usage.get("avg_completion_tokens", 0.0)
+                    return result, (phrase, reasoning_val), avg_tokens
 
-            except Exception as e:
-                logger.error(f"Error processing phrase '{phrase}': {e}")
-                return {
-                    "Index": index,
-                    "Phrase": phrase,
-                    "Selected_Candidates": "None",
-                    "Selected_URIs": "None",
-                    "Manual_Terms": "None",
-                    "Toxicological_Effect_Does_Not_Make_Sense": "0",
-                    "Not_My_Expertise": "0",
-                    "Comments": f"Error during processing: {str(e)}"
-                }, None, None
+                except Exception as e:
+                    last_err = e
+                    logger.warning(f"Attempt {attempt}/{max_attempts} failed for phrase '{phrase}': {e}")
+                    if attempt < max_attempts:
+                        time.sleep(1.0)
+
+            logger.error(f"All {max_attempts} attempts failed for phrase '{phrase}'. Last error: {last_err}")
+            return {
+                "Index": index,
+                "Phrase": phrase,
+                "Selected_Candidates": "None",
+                "Selected_URIs": "None",
+                "Manual_Terms": "None",
+                "Toxicological_Effect_Does_Not_Make_Sense": "0",
+                "Not_My_Expertise": "0",
+                "Comments": f"Error during processing: {str(last_err)}"
+            }, None, None
 
         rows = df.iter_rows(named=True)
         with ThreadPoolExecutor(max_workers=args.descriptions_concurrency) as executor:

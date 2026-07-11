@@ -63,7 +63,8 @@ def load_ground_truth(csv_path: str, toxval_path: str) -> list[dict]:
     return gt_data
 
 class Precomputer:
-    def __init__(self, ground_truth: list[dict], ontology_db: str, target_db: str) -> None:
+    def __init__(self, ground_truth: list[dict], ontology_db: str, target_db: str,
+                 global_definitions_db: str = None, data_variant: str = "base") -> None:
         """
         Description:
         Initialize the Precomputer class.
@@ -72,6 +73,8 @@ class Precomputer:
             ground_truth (list[dict]): The ground truth list of dictionaries.
             ontology_db (str): Path to the ontology database file.
             target_db (str): Path to the target embeddings database file.
+            global_definitions_db (str): Path to the global definitions database file. Defaults to None.
+            data_variant (str): Reranker context variant (base, def, hier, def_hier). Defaults to "base".
 
         Returns:
             None
@@ -79,9 +82,17 @@ class Precomputer:
         self.ground_truth = ground_truth
         self.ontology_db = ontology_db
         self.target_db = target_db
+        self.data_variant = data_variant
         self.ontology_embeddings = []
         self._ontology_matrix = None
         self.q0_mat = None
+
+        # Load parent map and definitions for reranker context
+        self.parent_map = {}   # name -> list[parent_name]
+        self.definitions = {}  # name -> definition text
+        self._load_parent_map()
+        if global_definitions_db:
+            self._load_definitions(global_definitions_db)
 
         # Load precomputed query embeddings (q0 only for now, as ground truth only has one column)
         self._load_query_embeddings()
@@ -154,6 +165,132 @@ class Precomputer:
         # For std, some might be None if no standardized text. Fallback to cleaned if None.
         q_std_fixed = [v if v is not None else q_cleaned[i] for i, v in enumerate(q_std)]
         self.q_std_mat = torch.stack(q_std_fixed).to(self.q_cleaned_mat.device)
+
+    def _load_parent_map(self) -> None:
+        """
+        Description:
+        Load parent mapping from ontology DB for hierarchy breadcrumbs.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+        logger.info(f"Loading parent map from {self.ontology_db}...")
+        with sqlite3.connect(self.ontology_db) as conn:
+            cursor = conn.cursor()
+            # Determine parent column name
+            cursor.execute("PRAGMA table_info(embeddings)")
+            cols = [col[1] for col in cursor.fetchall()]
+            parent_col = "parents" if "parents" in cols else "parent" if "parent" in cols else None
+            if not parent_col:
+                logger.warning("No parent column found in ontology DB.")
+                return
+            cursor.execute(f"SELECT name, {parent_col} FROM embeddings")
+            for name, parents_json in cursor:
+                if parents_json:
+                    if parents_json.startswith('['):
+                        try:
+                            parents_list = json.loads(parents_json)
+                        except Exception:
+                            parents_list = [parents_json]
+                    else:
+                        parents_list = [parents_json]
+                    if parents_list:
+                        self.parent_map[name] = parents_list
+        logger.info(f"Loaded parent map for {len(self.parent_map)} nodes.")
+
+    def _load_definitions(self, definitions_db: str) -> None:
+        """
+        Description:
+        Load definitions from a global definitions DB, mapping URI to definition text.
+
+        Args:
+            definitions_db (str): Path to the global definitions SQLite database.
+
+        Returns:
+            None
+        """
+        if not os.path.exists(definitions_db):
+            logger.warning(f"Definitions DB not found: {definitions_db}")
+            return
+
+        # First build URI -> name map from ontology DB
+        uri_to_name = {}
+        with sqlite3.connect(self.ontology_db) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT uri, name FROM embeddings")
+            for uri, name in cursor:
+                uri_to_name[str(uri)] = name
+
+        # Load definitions
+        with sqlite3.connect(definitions_db) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT uri, definition FROM global_definitions")
+            count = 0
+            for uri, definition in cursor:
+                name = uri_to_name.get(str(uri))
+                if name and definition and len(definition.strip()) > 5:
+                    self.definitions[name] = definition.strip()
+                    count += 1
+        logger.info(f"Loaded {count} definitions from {definitions_db}.")
+
+    def _get_breadcrumbs(self, name: str) -> str:
+        """
+        Description:
+        Build hierarchy breadcrumbs for a node by traversing its parent chain.
+
+        Args:
+            name (str): The node name to get breadcrumbs for.
+
+        Returns:
+            str: Formatted breadcrumb string(s).
+        """
+        paths = []
+        def dfs(curr, current_path):
+            if not curr or curr in current_path:
+                paths.append(current_path)
+                return
+            parents = self.parent_map.get(curr, [])
+            if not parents:
+                paths.append(current_path + [curr])
+                return
+            for p in parents:
+                dfs(p, current_path + [curr])
+        dfs(name, [])
+        if not paths:
+            return name
+        formatted = []
+        for path in paths:
+            formatted.append(" > ".join(reversed(path)))
+        if len(formatted) > 1:
+            return "\n".join([f"Path {i+1}: {p}" for i, p in enumerate(formatted)])
+        return formatted[0]
+
+    def _build_doc_text(self, candidate: dict) -> str:
+        """
+        Description:
+        Build the document text for the reranker based on the data variant.
+
+        Args:
+            candidate (dict): Candidate dictionary with 'sanitized_name' and 'name' keys.
+
+        Returns:
+            str: The document text for the reranker.
+        """
+        doc = candidate['sanitized_name']
+        use_def = self.data_variant in ("def", "def_hier")
+        use_hier = self.data_variant in ("hier", "def_hier")
+
+        if use_hier:
+            hierarchy = self._get_breadcrumbs(candidate['name'])
+            doc = f"{doc}\n<Hierarchy>: {hierarchy}"
+        if use_def:
+            definition = self.definitions.get(candidate['name'], "")
+            if definition:
+                doc = f"{doc}\n<Definition>: {definition}"
+        return doc
 
     def _load_ontology(self) -> None:
         """
@@ -251,7 +388,7 @@ class Precomputer:
             for qi, candidates in enumerate(all_candidates):
                 query_text = self.ground_truth[qi]["cleaned"]
                 for c in candidates:
-                    doc_text = c['sanitized_name']
+                    doc_text = self._build_doc_text(c)
                     pair_key = (query_text, doc_text)
                     if pair_key not in pair_to_idx:
                         pair_text = f"<Instruct>: {instruction}\n<Query>: {query_text}\n<Document>: {doc_text}"
@@ -281,7 +418,7 @@ class Precomputer:
             for qi in range(len(all_candidates)):
                 query_text = self.ground_truth[qi]["cleaned"]
                 for ci in range(len(all_candidates[qi])):
-                    doc_text = all_candidates[qi][ci]["sanitized_name"]
+                    doc_text = self._build_doc_text(all_candidates[qi][ci])
                     idx = pair_to_idx[(query_text, doc_text)]
                     all_candidates[qi][ci]["rerank_score"] = rerank_scores_flat[idx]
 
@@ -297,10 +434,15 @@ if __name__ == "__main__":
     parser.add_argument("--reranker_config", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--toxval_db", required=True)
+    parser.add_argument("--global_definitions_db", default=None, help="Path to global definitions DB for reranker context.")
+    parser.add_argument("--data_variant", default="base", choices=["base", "def", "hier", "def_hier"],
+                        help="Reranker context variant: base, def, hier, def_hier.")
     args = parser.parse_args()
 
     gt_data = load_ground_truth(args.ground_truth, args.toxval_db)
-    precomputer = Precomputer(gt_data, args.ontology_db, args.target_embedding_db)
+    precomputer = Precomputer(gt_data, args.ontology_db, args.target_embedding_db,
+                              global_definitions_db=args.global_definitions_db,
+                              data_variant=args.data_variant)
 
     # 1. Get Top 150 candidates for each GRF value
     results_by_grf = precomputer.get_top_k_candidates(top_k=150)
@@ -312,6 +454,7 @@ if __name__ == "__main__":
     output_data = {
         "embedding_model": args.embedding_model,
         "reranker_model": args.reranker_model,
+        "data_variant": args.data_variant,
         "ground_truth": gt_data,
         "precomputed_results_by_grf": full_data_by_grf
     }

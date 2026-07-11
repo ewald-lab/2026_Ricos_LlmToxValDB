@@ -339,6 +339,21 @@ def main() -> None:
     nodes_map = {item['name']: item for item in ontology_data}
 
     # Helper for hierarchy breadcrumbs
+    def get_all_paths(name: str, nodes_map: dict) -> list[list[str]]:
+        paths = []
+        def dfs(curr, current_path):
+            if not curr or curr in current_path:
+                paths.append(current_path)
+                return
+            parents = nodes_map.get(curr, {}).get('parents', [])
+            if not parents:
+                paths.append(current_path + [curr])
+                return
+            for p in parents:
+                dfs(p, current_path + [curr])
+        dfs(name, [])
+        return paths
+
     def get_breadcrumbs(name: str, nodes_map: dict) -> str:
         """
         Description:
@@ -351,14 +366,13 @@ def main() -> None:
         Returns:
             str: The breadcrumbs path string.
         """
-        path = []
-        curr = name
-        visited = set()
-        while curr and curr in nodes_map and curr not in visited:
-            visited.add(curr)
-            path.append(nodes_map[curr].get('sanitized_name', curr))
-            curr = nodes_map[curr].get('parent')
-        return " > ".join(reversed(path))
+        paths = get_all_paths(name, nodes_map)
+        if not paths: return name
+        formatted = []
+        for i, path in enumerate(paths):
+            labels = [nodes_map.get(n, {}).get('sanitized_name', n) for n in path]
+            formatted.append(" > ".join(reversed(labels)))
+        return "\n".join([f"Path {i+1}: {p}" for i, p in enumerate(formatted)]) if len(formatted) > 1 else formatted[0]
 
     def evaluate_candidates(phrase: str, phrase_vec: torch.Tensor) -> list[dict]:
         """

@@ -29,5 +29,5 @@ python3 03.summarize_best_configs.py
 # Step 2: Generate the comparison plot
 python3 04.plot_model_comparison_highlighted.py
 
-# Step 3: Generate the GRF 0 vs 1 comparison plot
-python3 05.plot_grf_comparison.py
+# Step 3: Generate the decision impact plots
+python3 06.plot_decision_impact.py

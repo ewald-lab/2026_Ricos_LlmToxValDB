@@ -1,0 +1,13 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of the immune system
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin
+phenotypic abnormality > abnormality of the immune system > abnormality of immune system physiology > abnormal inflammatory response > increased inflammatory response > inflammatory abnormality of the skin > skin rash
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > skin plaque
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > skin plaque > urticarial plaque

@@ -1,0 +1,98 @@
+phenotypic abnormality
+phenotypic abnormality > abnormality of metabolism homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal drug response
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal drug response > adverse drug response
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of temperature regulation
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of temperature regulation > fever
+phenotypic abnormality > abnormality of metabolism homeostasis > abnormal homeostasis > abnormality of temperature regulation > fever > hyperpyrexia
+phenotypic abnormality > abnormality of metabolism homeostasis > amyloid deposition
+phenotypic abnormality > abnormality of metabolism homeostasis > amyloid deposition > amyloid deposition by anatomical site
+phenotypic abnormality > abnormality of metabolism homeostasis > amyloid deposition > amyloid deposition by anatomical site > hepatic amyloidosis
+phenotypic abnormality > abnormality of the cardiovascular system
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia > cardiac arrest
+phenotypic abnormality > abnormality of the cardiovascular system > abnormal cardiovascular system physiology > abnormality of cardiovascular system electrophysiology > arrhythmia > cardiac arrest > sudden cardiac death
+phenotypic abnormality > abnormality of the cardiovascular system > abnormality of the vasculature
+phenotypic abnormality > abnormality of the digestive system
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormal digestive system morphology > abnormal gastrointestinal tract morphology > abnormal intestine morphology > abnormal large intestine morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > abdominal distention
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > abnormal bowel sounds
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > diarrhea
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > feeding difficulties
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > nausea and vomiting
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > nausea and vomiting > vomiting
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > nausea and vomiting > vomiting > bilious emesis
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > nausea and vomiting > vomiting > episodic vomiting
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > nausea and vomiting > vomiting > feculent vomiting
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > nausea and vomiting > vomiting > projectile vomiting
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > abdominal symptom > poor appetite
+phenotypic abnormality > abnormality of the digestive system > abnormality of digestive system physiology > functional abnormality of the gastrointestinal tract
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormal peritoneum morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic fibrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic necrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > hepatic necrosis > hepatocellular necrosis
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > liver abscess
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > liver rupture
+phenotypic abnormality > abnormality of the digestive system > abnormality of the abdominal organs > abnormality of the liver > abnormal liver morphology > scalloped appearance of liver surface
+phenotypic abnormality > abnormality of the digestive system > abnormality of the gastrointestinal tract
+phenotypic abnormality > abnormality of the immune system
+phenotypic abnormality > abnormality of the immune system > abnormal immune system morphology
+phenotypic abnormality > abnormality of the immune system > abnormal immune system morphology > granuloma
+phenotypic abnormality > abnormality of the integument
+phenotypic abnormality > abnormality of the integument > abnormality of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > blotching pigmentation of the skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > depigmentation hyperpigmentation of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > mottled pigmentation
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > mottled pigmentation > mottled pigmentation of photoexposed areas
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > abnormality of skin pigmentation > profuse pigmented skin lesions
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > cutaneous wound
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > cutaneous wound > chronic cutaneous wound
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > dry skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > fragile skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > fragile skin > skin fragility with non scarring blistering
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > generalized papillary lesions
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > generalized abnormality of skin > poor wound healing
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > localized skin lesion > exuberant granulation tissue
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > ochronosis
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > regional abnormality of skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > skin burn
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > stiff skin
+phenotypic abnormality > abnormality of the integument > abnormality of the skin > abnormal skin morphology > thickened skin
+phenotypic abnormality > abnormality of the musculoskeletal system
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue
+phenotypic abnormality > abnormality of the musculoskeletal system > abnormality of connective tissue > abnormal adipose tissue morphology
+phenotypic abnormality > abnormality of the nervous system
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy
+phenotypic abnormality > abnormality of the nervous system > abnormal nervous system physiology > encephalopathy > acute encephalopathy
+phenotypic abnormality > abnormality of the respiratory system
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory arrest
+phenotypic abnormality > abnormality of the respiratory system > abnormal respiratory system physiology > respiratory insufficiency > respiratory arrest > cardiorespiratory arrest
+phenotypic abnormality > constitutional symptom
+phenotypic abnormality > constitutional symptom > sudden death
+phenotypic abnormality > constitutional symptom > sudden death > sudden unexpected death in epilepsy
+phenotypic abnormality > growth abnormality
+phenotypic abnormality > growth abnormality > abnormality of body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > failure to thrive in infancy
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > failure to thrive > severe failure to thrive
+phenotypic abnormality > growth abnormality > abnormality of body weight > decreased body weight > weight loss
+phenotypic abnormality > growth abnormality > abnormality of body weight > increased body weight

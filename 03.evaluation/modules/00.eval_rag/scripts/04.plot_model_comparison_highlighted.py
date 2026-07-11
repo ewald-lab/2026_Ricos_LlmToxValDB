@@ -76,12 +76,11 @@ def plot_comparison_with_highlights(summary_csv: str, output_name: str) -> None:
                      markersize=6,
                      color=color)
 
-    # Highlight the best overall KaLM 12B configuration at Context 20
-    kalm_df = df[df['Model'] == "KaLM 12B"]
-    kalm_20 = kalm_df[kalm_df['x'] == 20]
-    if not kalm_20.empty:
-        # Find the one with highest Recall (then MAP)
-        best_row = kalm_20.sort_values(['Recall', 'MAP'], ascending=[False, False]).iloc[0]
+    # Highlight the Qwen3-Embedding-8B, Qwen3-Reranker-0.6B configuration at Context 20
+    qwen_df = df[(df['Model'] == "Qwen 8B") & (df['Reranker'] == "Qwen/Qwen3-Reranker-0.6B")]
+    qwen_20 = qwen_df[qwen_df['x'] == 20]
+    if not qwen_20.empty:
+        best_row = qwen_20.iloc[0]
         
         # Draw the highlight circle
         ax.scatter(best_row['x'], best_row['Recall'], s=350, facecolors='none', edgecolors='black', linewidth=1.5, zorder=10)
@@ -91,20 +90,20 @@ def plot_comparison_with_highlights(summary_csv: str, output_name: str) -> None:
         if reranker_name != 'None' and '/' in str(reranker_name):
             reranker_name = str(reranker_name).split('/')[-1]
 
-        # Parameters text with Title Case and no underscores
-        params_str = (f"Best Configuration (KaLM 12B):\n"
-                      f"Top K RAG = {best_row['top_k_rag']}\n"
-                      f"Threshold RAG = {best_row['thresh_rag']}\n"
-                      f"Reranker = {reranker_name}\n"
-                      f"Top K Rerank = {best_row['top_k_rerank']}\n"
-                      f"Threshold Rerank = {best_row['thresh_rerank']}")
+        # Parameters text with MathText to selectively bold keys and equals sign
+        params_str = (r"$\bf{Model\ =}$ Qwen3-Embedding-8B" + "\n"
+                      r"$\bf{Top\ K\ RAG\ =}$ " + f"{best_row['top_k_rag']}\n"
+                      r"$\bf{Threshold\ RAG\ =}$ " + f"{best_row['thresh_rag']}\n"
+                      r"$\bf{Reranker\ =}$ " + f"{reranker_name}\n"
+                      r"$\bf{Top\ K\ Rerank\ =}$ " + f"{best_row['top_k_rerank']}\n"
+                      r"$\bf{Threshold\ Rerank\ =}$ " + f"{best_row['thresh_rerank']}")
 
         props = dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='black', linewidth=1)
 
         # Annotation with arrow pointing to the circle
         ax.annotate(params_str,
                     xy=(best_row['x'], best_row['Recall']),
-                    xytext=(best_row['x'] + 5, 0.86), # Move box
+                    xytext=(best_row['x'] + 5, 0.92), # Move box slightly higher
                     bbox=props,
                     arrowprops=dict(arrowstyle='->',
                                     connectionstyle='arc3,rad=.1',
@@ -112,7 +111,7 @@ def plot_comparison_with_highlights(summary_csv: str, output_name: str) -> None:
                                     linewidth=1.5,
                                     shrinkB=12),
                     fontsize=8,
-                    fontweight='bold',
+                    fontweight='normal',
                     zorder=20)
 
     plt.xlabel('Max Context Burden', fontsize=12)
@@ -120,9 +119,10 @@ def plot_comparison_with_highlights(summary_csv: str, output_name: str) -> None:
     plt.grid(True, linestyle=':', alpha=0.7)
     plt.legend(loc='lower right', framealpha=1.0, fontsize=8, ncol=2) # two columns legend to fit all 12 lines nicely
 
-    plt.ylim(0.85, 1.0)
+    plt.ylim(0.90, 1.0)
     plt.xticks([5, 10, 15, 20, 30, 40, 50])
-    plt.yticks([0.85, 0.90, 0.95, 1.00])
+    plt.yticks([0.90, 0.95, 1.00])
+
     plt.xlim(0, 55)
 
     plt.tight_layout()

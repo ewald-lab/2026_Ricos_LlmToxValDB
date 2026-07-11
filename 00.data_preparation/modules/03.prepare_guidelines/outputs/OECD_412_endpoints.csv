@@ -1,42 +1,22 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-412,Clinical Observations,Skin and fur changes,Required,Guideline text,
-412,Clinical Observations,Eyes and mucous membranes changes,Required,Guideline text,
-412,Clinical Observations,Respiratory system changes,Required,Guideline text,
-412,Clinical Observations,Circulatory system changes,Required,Guideline text,
-412,Clinical Observations,Nervous system changes,Required,Guideline text,
-412,Clinical Observations,Somatomotor activity,Required,Guideline text,
-412,Clinical Observations,Behaviour patterns,Required,Guideline text,
-412,Clinical Observations,Tremors,Required,Guideline text,
-412,Clinical Observations,Convulsions,Required,Guideline text,
-412,Clinical Observations,Salivation,Required,Guideline text,
-412,Clinical Observations,Diarrhoea,Required,Guideline text,
-412,Clinical Observations,Lethargy,Required,Guideline text,
-412,Clinical Observations,Sleep,Required,Guideline text,
-412,Clinical Observations,Coma,Required,Guideline text,
-412,Clinical Observations,Rectal temperature,Required,Guideline text,Supportive evidence of reflex bradypnea or hypo/hyperthermia
-412,Clinical Observations,Biomonitoring (urine/faeces),Optional,Guideline text,Additional assessments may be included
-412,Clinical Observations,Lung function assessment,Optional,Guideline text,Additional assessments may be included
-412,Body Weights,Individual animal weight,Required,Guideline text,Recorded before first exposure, twice weekly, and at death
-412,Food/Water,Food consumption,Required,Guideline text,Measured weekly
-412,Food/Water,Water consumption,Optional,Guideline text,May also be measured
-412,Ophthalmology,Fundus examination,Required,Guideline text,Prior to administration and at termination (high/control)
-412,Ophthalmology,Refractive media examination,Required,Guideline text,Prior to administration and at termination (high/control)
-412,Ophthalmology,Iris examination,Required,Guideline text,Prior to administration and at termination (high/control)
-412,Ophthalmology,Conjunctivae examination,Required,Guideline text,Prior to administration and at termination (high/control)
+412,Clinical Observations,Clinical signs of toxicity,Required,Guideline text,Observed daily before, during, and after exposure
+412,Body Weight,Individual animal body weight,Required,Guideline text,Recorded before first exposure, twice weekly, and at sacrifice
+412,Food Consumption,Weekly food consumption,Required,Guideline text,Measured weekly
+412,Water Consumption,Water consumption,Optional,Guideline text,May also be measured
 412,Haematology,Erythrocyte count,Required,Guideline text,Table 1
-412,Haematology,Hematocrit,Required,Guideline text,Table 1
-412,Haematology,Hemoglobin concentration,Required,Guideline text,Table 1
-412,Haematology,Mean corpuscular hemoglobin,Required,Guideline text,Table 1
+412,Haematology,Haematocrit,Required,Guideline text,Table 1
+412,Haematology,Haemoglobin concentration,Required,Guideline text,Table 1
+412,Haematology,Mean corpuscular haemoglobin,Required,Guideline text,Table 1
 412,Haematology,Mean corpuscular volume,Required,Guideline text,Table 1
-412,Haematology,Mean corpuscular hemoglobin concentration,Required,Guideline text,Table 1
+412,Haematology,Mean corpuscular haemoglobin concentration,Required,Guideline text,Table 1
 412,Haematology,Reticulocytes,Required,Guideline text,Table 1
 412,Haematology,Total leukocyte count,Required,Guideline text,Table 1
 412,Haematology,Differential leukocyte count,Required,Guideline text,Table 1
 412,Haematology,Platelet count,Required,Guideline text,Table 1
-412,Haematology,Prothrombin time,Required,Guideline text,Select one clotting potential parameter
-412,Haematology,Clotting time,Required,Guideline text,Select one clotting potential parameter
-412,Haematology,Partial thromboplastin time,Required,Guideline text,Select one clotting potential parameter
-412,Clinical Chemistry,Glucose,Required,Guideline text,Table 1; fasting status should be determined by study director
+412,Haematology,Prothrombin time,Required,Guideline text,Select one clotting potential measure
+412,Haematology,Clotting time,Required,Guideline text,Select one clotting potential measure
+412,Haematology,Partial thromboplastin time,Required,Guideline text,Select one clotting potential measure
+412,Clinical Chemistry,Glucose,Required,Guideline text,Fasting may be required depending on study director decision
 412,Clinical Chemistry,Total cholesterol,Required,Guideline text,Table 1
 412,Clinical Chemistry,Triglycerides,Required,Guideline text,Table 1
 412,Clinical Chemistry,Blood urea nitrogen,Required,Guideline text,Table 1
@@ -53,92 +33,35 @@ guideline_number,category,endpoint_name,requirement_level,source,footnotes
 412,Clinical Chemistry,Calcium,Required,Guideline text,Table 1
 412,Clinical Chemistry,Phosphorus,Required,Guideline text,Table 1
 412,Clinical Chemistry,Chloride,Required,Guideline text,Table 1
-412,Urinalysis,Appearance (colour/turbidity),Optional,Guideline text,Not required on routine basis
-412,Urinalysis,Volume,Optional,Guideline text,Not required on routine basis
-412,Urinalysis,Specific gravity or osmolality,Optional,Guideline text,Not required on routine basis
-412,Urinalysis,pH,Optional,Guideline text,Not required on routine basis
-412,Urinalysis,Total protein,Optional,Guideline text,Not required on routine basis
-412,Urinalysis,Glucose,Optional,Guideline text,Not required on routine basis
-412,Urinalysis,Blood/blood cells,Optional,Guideline text,Not required on routine basis
-412,BALF Analysis,Lactate dehydrogenase (LDH),Required,Guideline text,Mandatory BALF analysis
-412,BALF Analysis,Total protein or albumin,Required,Guideline text,Mandatory BALF analysis
-412,BALF Analysis,Cell counts and differentials (macrophages, lymphocytes, neutrophils, eosinophils),Required,Guideline text,Mandatory BALF analysis
-412,Lung Burden,Lung burden measurement,Optional,Guideline text,When testing poorly soluble solid aerosols and retention is suggested
-412,Organ Weights,Adrenals,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Brain,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Heart,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Kidneys,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Liver,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Lung,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Spleen,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Thymus,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Thyroid,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Ovaries,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Seminal vesicles,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Testes,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Uterus,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Lymph nodes (hilar),Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Larynx,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Trachea,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Nasopharyngeal tissues,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Olfactory bulb,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Spinal cord,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Stomach,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Oesophagus,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Urinary bladder,Required,Guideline text,Wet weight (Table 2)
-412,Organ Weights,Bone marrow,Required,Guideline text,Preserved for histopathology (Table 2)
-412,Organ Weights,Eyes,Optional,Guideline text,At discretion of study director (Table 2)
-412,Organ Weights,Lymph nodes (distal),Optional,Guideline text,For more in-depth examinations (Table 2)
-412,Histopathology,Adrenals,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Bone marrow,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Brain,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Heart,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Kidneys,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Larynx,Required,Guideline text,Control and high dose groups (Table 2); 3 levels including base of epiglottis
-412,Histopathology,Liver,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Lung,Required,Guideline text,Control and high dose groups (Table 2); left lung preferred; 3 levels
-412,Histopathology,Lymph nodes (hilar),Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Nasopharyngeal tissues,Required,Guideline text,Control and high dose groups (Table 2); at least 4 levels
-412,Histopathology,Oesophagus,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Olfactory bulb,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Ovaries,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Spinal cord,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Spleen,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Stomach,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Seminal vesicles,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Testes,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Thymus,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Thyroid,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Trachea,Required,Guideline text,Control and high dose groups (Table 2); 2 levels
-412,Histopathology,Urinary bladder,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,Uterus,Required,Guideline text,Control and high dose groups (Table 2)
-412,Histopathology,All gross lesions,Required,Guideline text,Examination of any identified lesions
-412,Histopathology,Eyes,Optional,Guideline text,At discretion of study director (Table 2)
-412,Histopathology,Lymph nodes (distal),Optional,Guideline text,For immunological focus (Table 2)
-412,Other,Particle size distribution (MMAD/GSD),Required,Guideline text,Reported for aerosols
-412,Other,Particle surface area,Optional,Guideline text,Valuable addition for particulates
-412,Other,Particle shape/size (EM),Required,Guideline text,Periodically for monitoring (scanning/transmission electron microscopy)
-412,Clinical Observations,Clinical observations (signs of toxicity, mortality, severity, onset, duration),Required,Guideline text,Tabulation of response data for each animal
-412,Body Weight,Individual animal body weight measurements,Required,Guideline text,Tabulation required
-412,Nutrition,Food consumption,Required,Guideline text,Tabulation required
-412,Nutrition,Water consumption,Required,Guideline text,Tabulation required
-412,Clinical Pathology,Clinical pathology data (Haematology/Clinical Biochemistry),Required,Guideline text,Includes standard parameters for inhalation studies
-412,Gross Pathology,Gross pathology findings,Required,Guideline text,Organ weights included
-412,Organ Weights,Lung weight (Left lung),Required,Guideline text,Specifically listed in both Option A and B main studies
-412,Histopathology,Histopathology (Left lung),Required,Guideline text,Specifically listed in both Option A and B main studies
-412,BALF,Bronchoalveolar lavage fluid (BALF) analysis,Required,Guideline text,Specifically Right Lung in main study schemes
-412,Lung Burden,Lung burden measurement,Optional,Guideline text,"Required for poorly soluble solid aerosols (Option B); otherwise determined by study director based on purpose"
-412,Pulmonary Function,Pulmonary function data,Optional,Guideline text,"Measured when indicated"
-412,Temperature,Body temperature,Optional,Guideline text,"Measured when indicated"
-412,Systemic Toxicity,Immunotoxicity assessments,Optional,Guideline text,"Report findings from optional health assessments of systemic toxicity"
-412,Systemic Toxicity,Neurotoxicity assessments,Optional,Guideline text,"Report findings from optional health assessments of systemic toxicity"
-412,Systemic Toxicity,Hepatotoxicity assessments,Optional,Guideline text,"Report findings from optional health assessments of systemic toxicity"
-412,Systemic Toxicity,Cardiovascular effects assessments,Optional,Guideline text,"Report findings from optional health assessments of systemic toxicity"
-412,Aerosol Characterization,Particle size distribution (MMAD, σg),Required,Guideline text,"For aerosols with MMAD >1µm"
-412,Aerosol Characterization,Thermodynamic equivalent diameter (CMD, σg),Required,Guideline text,"For aerosols predominantly <100 nm"
-412,Aerosol Characterization,Particle fraction <100 nm,Required,Guideline text,"For aerosols with significant components in both nano-size and larger ranges"
-412,Aerosol Characterization,Degree of NP agglomeration,Required,Guideline text,"Analysis of degree of agglomeration in aerosol"
-412,Post-Exposure Recovery,Lung weight (Left lung) - Satellite,Optional,Guideline text,"PEO-2 satellite group examination"
-412,Post-Exposure Recovery,Histopathology (Left lung) - Satellite,Optional,Guideline text,"PEO-2 satellite group examination"
-412,Post-Exposure Recovery,BALF (Right lung) - Satellite,Optional,Guideline text,"PEO-2 satellite group examination (females only)"
-412,Post-Exposure Recovery,Lung burden (Right lung) - Satellite,Optional,Guideline text,"PEO-2 and PEO-3 satellite group examination (males only)"
+412,Urinalysis,Appearance (colour and turbidity),Optional,Guideline text,Not required routinely
+412,Urinalysis,Volume,Optional,Guideline text,Not required routinely
+412,Urinalysis,Specific gravity or osmolality,Optional,Guideline text,Not required routinely
+412,Urinalysis,pH,Optional,Guideline text,Not required routinely
+412,Urinalysis,Total protein,Optional,Guideline text,Not required routinely
+412,Urinalysis,Glucose,Optional,Guideline text,Not required routinely
+412,Urinalysis,Blood/blood cells,Optional,Guideline text,Not required routinely
+412,BALF Analysis,Lactate dehydrogenase (LDH),Required,Guideline text,Mandatory parameter
+412,BALF Analysis,Total protein or albumin,Required,Guideline text,Mandatory parameter
+412,BALF Analysis,Cell counts and differentials,Required,Guideline text,Macrophages, lymphocytes, neutrophils, eosinophils
+412,Lung Burden,Lung burden measurement,Required,Guideline text,Mandatory for poorly soluble solid aerosols (Option B)
+412,Organ Weights,Adrenals weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Brain weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Heart weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Kidneys weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Liver weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Left Lung weight,Required,Guideline text,Preserved for histopathology, weighed before fixation
+412,Organ Weights,Spleen weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Testes weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Ovaries weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Uterus weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Thyroid weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Thymus weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Seminal vesicles weight,Required,Guideline text,Trimmed and weighed wet
+412,Organ Weights,Nasopharyngeal tissues weight,Required,Guideline text,Preserved for histopathology
+412,Organ Weights,Trachea weight,Required,Guideline text,Preserved for histopathology
+412,Histopathology,Histopathological evaluation,Required,Guideline text,Of all organs/tissues listed in Table 2 for control/high dose
+412,Ophthalmological Examination,Fundus examination,Required,Guideline text,Prior to administration and at termination for high/control groups
+412,Ophthalmological Examination,Refractive media examination,Required,Guideline text,Prior to administration and at termination for high/control groups
+412,Ophthalmological Examination,Iris examination,Required,Guideline text,Prior to administration and at termination for high/control groups
+412,Ophthalmological Examination,Conjunctivae examination,Required,Guideline text,Prior to administration and at termination for high/control groups
+412,Pulmonary Function,Pulmonary function measurement,Optional,Guideline text,If evidence of reflex bradypnea or Paintal reflex in range-finding

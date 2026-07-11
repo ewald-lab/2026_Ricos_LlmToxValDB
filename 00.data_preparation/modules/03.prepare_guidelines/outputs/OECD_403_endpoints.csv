@@ -1,34 +1,7 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-403,Mortality,Death / Morbidity,Required,Guideline text,"Moribund animals or animals obviously in pain should be humanely killed and considered as deaths."
-403,Clinical Signs,Clinical Observations,Required,Guideline text,"Includes changes in skin, fur, eyes, mucous membranes, respiratory, circulatory, autonomic/CNS, somatomotor activity, behavior patterns."
-403,Gross Pathology,Gross Necropsy,Required,Guideline text,"All animals must undergo gross necropsy; preservation of tissues with gross lesions."
-403,Clinical Observations,Skin and fur changes,Required,Guideline text,
-403,Clinical Observations,Eyes and mucous membranes,Required,Guideline text,
-403,Clinical Observations,Respiratory system signs,Required,Guideline text,
-403,Clinical Observations,Circulatory system signs,Required,Guideline text,
-403,Clinical Observations,Autonomic system signs,Required,Guideline text,
-403,Clinical Observations,Central nervous system signs,Required,Guideline text,
-403,Clinical Observations,Somatomotor activity,Required,Guideline text,
-403,Clinical Observations,Behavior patterns,Required,Guideline text,
-403,Clinical Observations,Tremors,Required,Guideline text,
-403,Clinical Observations,Convulsions,Required,Guideline text,
-403,Clinical Observations,Salivation,Required,Guideline text,
-403,Clinical Observations,Diarrhoea,Required,Guideline text,
-403,Clinical Observations,Lethargy,Required,Guideline text,
-403,Clinical Observations,Sleep,Required,Guideline text,
-403,Clinical Observations,Coma,Required,Guideline text,
-403,Clinical Observations,Rectal temperature,Optional,Guideline text,"May provide supportive evidence of reflex bradypnea or hypo/hyperthermia"
-403,Clinical Observations,Time of death,Required,Guideline text,"Recorded as precisely as possible"
-403,Body Weight,Individual animal body weight,Required,Guideline text,"Recorded at specific intervals: acclimatization, Day 0, Days 1, 3, 7, weekly, and at death/euthanasia"
-403,Pathology,Gross necropsy findings,Required,Guideline text,"Mandatory for all animals including those dying during test or euthanized"
-403,Pathology,Respiratory tract gross pathology,Required,Guideline text,"Particular attention required"
-403,Organ Weights,Lung weight,Optional,Guideline text,"Included a priori by design to extend interpretive value; measuring lung weight of surviving rats"
-403,Histopathology,Respiratory tract microscopic examination,Optional,Guideline text,"Recommended for reactive test articles (e.g., acids, hygroscopic) or if gross pathology present"
-403,Histopathology,Other organs with gross pathology,Optional,Guideline text,"Microscopic examination for organs showing evidence of gross pathology in animals surviving 24+ hours"
-403,Statistical Analysis,Lethal Concentration 50 (LC50),Required,Guideline text,"Calculated for a given time period using P = 5 (50% response)"
-403,Statistical Analysis,Lethal Concentration 01 (LC01),Optional,Guideline text,"Calculated using P = 2.67"
-403,Statistical Analysis,C x t Relationship Coefficient (n),Required,Guideline text,"Derived from b1/b2 in the response equation"
-403,Statistical Analysis,Probit Regression Parameters (b0, b1),Required,Guideline text,"Used in Equation 1: ln(P) = b0 + b1*ln(C) + b2*ln(t)"
-403,Exposure Protocol,Minimum Exposure Duration,Required,Guideline text,"Preferably exceed 5 minutes"
-403,Exposure Protocol,Maximum Exposure Duration,Required,Guideline text,"Should not exceed 8 hours"
-403,Exposure Protocol,Concentration Adjustment Factor,Required,Guideline text,"Geometric division factor of 1.4 (√2)"
+403,Clinical Observations,Clinical signs of toxicity (skin, fur, eyes, mucous membranes, respiratory, CNS, etc.),Required,Guideline text,Observed frequently during exposure and at least twice on day of exposure, then daily for 14 days.
+403,Body Weights,Individual animal body weights,Required,Guideline text,Recorded during acclimatization, pre-exposure (Day 0), Day 1, Day 3, Day 7, weekly thereafter, and at death/euthanasia.
+403,Gross Necropsy,Gross pathological findings (all animals),Required,Guideline text,Performed as soon as possible after death or euthanasia. Special attention to respiratory tract.
+403,Organ Weights,Lung weight,Optional,Guideline text,Additional examination included a priori to extend interpretive value.
+403,Histopathology,Microscopic examination of respiratory tract,Optional,Guideline text,Considered a priori, especially for reactive test articles (acids, hygroscopic) or if gross pathology suggests irritation.
+403,Histopathology,Microscopic examination of other affected organs,Optional,Guideline text,Organs showing evidence of gross pathology or known/expected to be affected.

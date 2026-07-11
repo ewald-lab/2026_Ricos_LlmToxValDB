@@ -1,0 +1,14 @@
+abnormal fluid distribution
+accumulation abnormal fluid
+edema extracellular
+fluid within tissue
+morphologic change
+morphologic change > hemodynamic disorders
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial
+morphologic change > hemodynamic disorders > accumulation of unmodified blood plasma > edema > edema interstitial > edema dermal
+morphologic change > hemodynamic disorders > locally increased intravascular blood
+morphologic change > hemodynamic disorders > locally increased intravascular blood > hyperemia
+morphologic change > inflammatory processes
+morphologic change > inflammatory processes > inflammation

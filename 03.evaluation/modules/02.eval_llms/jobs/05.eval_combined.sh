@@ -45,6 +45,14 @@ echo "  LLM Expanded dir   : ${LLM_EXPANDED_DIR}"
 echo "  Figures dir        : ${OUTPUT_DIR}"
 echo "  Manual terms       : excluded from evaluation/plots"
 echo "  Jaccard boxplot    : skipped"
+echo "  Pattern summary    : combined A-D panels plus standalone selected-term excess panel"
+echo "  Panel C colour     : human-LLM Jaccard similarity"
+
+# Remove stale outputs from previous figure layouts.
+rm -f \
+    "${OUTPUT_DIR}/term_variability_pattern_summary_abc.png" \
+    "${OUTPUT_DIR}/term_variability_pattern_summary_b.png" \
+    "${OUTPUT_DIR}/term_variability_pattern_summary_de.png"
 
 python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --expert_expanded_dir "${EXPERT_EXPANDED_DIR}" \
@@ -61,3 +69,7 @@ python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --expert_equivalence_file "${EVAL_DIR}/modules/01.eval_experts/inputs/expert_equivalence.txt"
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"
+echo "  - term_variability_pattern_summary.png"
+echo "  - term_variability_pattern_summary_c.png"
+echo "  - model_comparison_table.png"
+echo "  - speedup_comparison_table.png"

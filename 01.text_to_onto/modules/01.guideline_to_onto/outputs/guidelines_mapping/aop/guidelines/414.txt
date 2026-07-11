@@ -1,0 +1,46 @@
+cellular
+cellular > cell differentiation altered
+individual
+individual > abnormal behavior
+individual > abnormal foraging activity and behavior
+individual > decrease growth
+individual > decreased body weight
+individual > decreased fertility reduced number of oocytes ovulated
+individual > decreased locomotion
+individual > decreased viable offspring
+individual > growth reduction
+individual > increased locomotion
+individual > inhibition feeding
+individual > locomotor activity decreased
+individual > reduced feeding 1
+individual > viable offspring decreased
+organ
+organ > decrease ovulation
+organ > impaired ovulation
+organ > increase tissue organ damage
+organ > increased ataxia paralysis or hyperactivity
+organ > increased thyroxine in serum
+organ > vascular remodeling
+tissue
+tissue > accumulation collagen
+tissue > alterations cellular proliferation hyperplasia
+tissue > anogenital distance decreased
+tissue > anogenital distance increased
+tissue > collagen deposition
+tissue > decrease serum thyroid hormone
+tissue > decreased serum t4 t3
+tissue > decreased triiodothyronine
+tissue > facial cartilage structures are reduced in size and morphologically distorted
+tissue > hyperplasia hyperplasia
+tissue > increase thyroid stimulating hormone
+tissue > increase tissue degeneration necrosis atrophy
+tissue > increased extracellular matrix deposition
+tissue > increased free serum thyroxine
+tissue > increased histomorphological alteration of testis
+tissue > increased hyperplasia
+tissue > increased liposarcoma
+tissue > increased thyroid stimulating hormone
+tissue > increased vascular fibrosis
+tissue > necrosis
+tissue > thyroxine in serum decreased
+tissue > weak collagen matrix

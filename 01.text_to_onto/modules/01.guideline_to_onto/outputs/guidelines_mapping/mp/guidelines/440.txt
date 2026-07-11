@@ -1,0 +1,43 @@
+mammalian phenotype
+mammalian phenotype > growth size body region phenotype
+mammalian phenotype > growth size body region phenotype > abnormal birth body size
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > abnormal birth weight
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > abnormal birth weight > decreased birth weight
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > abnormal birth weight > increased birth weight
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > decreased birth body size
+mammalian phenotype > growth size body region phenotype > abnormal birth body size > increased birth body size
+mammalian phenotype > growth size body region phenotype > abnormal body composition
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass > decreased body weight
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass > decreased body weight > slow postnatal weight gain
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > decreased total tissue mass > decreased body weight > weight loss
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > increased total tissue mass
+mammalian phenotype > growth size body region phenotype > abnormal body composition > abnormal total tissue mass > increased total tissue mass > increased body weight
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size
+mammalian phenotype > growth size body region phenotype > abnormal postnatal growth weight body size > abnormal body size > abnormal body weight
+mammalian phenotype > homeostasis metabolism phenotype
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema
+mammalian phenotype > homeostasis metabolism phenotype > abnormal homeostasis > abnormal fluid regulation > edema > generalized edema
+mammalian phenotype > integument phenotype
+mammalian phenotype > integument phenotype > abnormal skin morphology
+mammalian phenotype > integument phenotype > abnormal skin morphology > abnormal skin appearance
+mammalian phenotype > reproductive system phenotype
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > abnormal uterus weight
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > abnormal uterus weight > decreased uterus weight
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > abnormal uterus weight > increased uterus weight
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > enlarged uterus
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > enlarged uterus > uterus hyperplasia
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > enlarged uterus > uterus hypertrophy
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > small uterus
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > small uterus > uterus atrophy
+mammalian phenotype > reproductive system phenotype > abnormal reproductive system morphology > abnormal female reproductive system morphology > abnormal female genitalia morphology > abnormal internal female genitalia morphology > abnormal uterus morphology > abnormal uterus size > small uterus > uterus hypoplasia

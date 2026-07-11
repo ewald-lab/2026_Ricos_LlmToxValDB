@@ -1,0 +1,44 @@
+mammalian phenotype
+mammalian phenotype > endocrine exocrine gland phenotype
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal bulbourethral gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal bulbourethral gland morphology > absent bulbourethral gland
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal bulbourethral gland morphology > bulbourethral gland hyperplasia
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal bulbourethral gland morphology > small bulbourethral gland
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal bulbourethral gland morphology > small bulbourethral gland > bulbourethral gland hypoplasia
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight > decreased prostate gland ventral lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal prostate gland morphology > abnormal prostate gland size > abnormal prostate gland weight > increased prostate gland ventral lobe weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size > abnormal seminal vesicle weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size > abnormal seminal vesicle weight > decreased seminal vesicle weight
+mammalian phenotype > endocrine exocrine gland phenotype > abnormal gland morphology > abnormal exocrine gland morphology > abnormal male accessory sex gland morphology > abnormal seminal vesicle morphology > abnormal seminal vesicle size > abnormal seminal vesicle weight > increased seminal vesicle weight
+mammalian phenotype > muscle phenotype
+mammalian phenotype > muscle phenotype > abnormal muscle morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight > abnormal skeletal muscle weight
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight > abnormal skeletal muscle weight > decreased skeletal muscle weight
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight > abnormal skeletal muscle weight > increased skeletal muscle weight
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight > decreased muscle weight
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal muscle weight > increased muscle weight
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > abnormal skeletal muscle size
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > abnormal skeletal muscle size > decreased skeletal muscle size
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > abnormal skeletal muscle size > decreased skeletal muscle size > skeletal muscle atrophy
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > abnormal skeletal muscle size > decreased skeletal muscle size > skeletal muscle hypotrophy
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > abnormal skeletal muscle size > increased skeletal muscle size
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > abnormal skeletal muscle size > increased skeletal muscle size > skeletal muscle hypertrophy
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > decreased skeletal muscle mass
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > abnormal skeletal muscle morphology > abnormal skeletal muscle mass > increased skeletal muscle mass
+mammalian phenotype > muscle phenotype > abnormal muscle morphology > muscular atrophy
+mammalian phenotype > renal urinary system phenotype
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology > abnormal glans penis morphology
+mammalian phenotype > renal urinary system phenotype > abnormal renal urinary system morphology > abnormal penis morphology > abnormal glans penis morphology > abnormal penile bone morphology

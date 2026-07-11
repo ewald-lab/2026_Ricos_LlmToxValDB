@@ -35,7 +35,7 @@ MODEL_PORTS = {
     "Qwen3.5-122B-A10B-FP8": "8003",
     "gpt-oss-120b": "8004",
     "Qwen3.5-35B-A3B-FP8": "8005",
-    "Qwen3.6-35B-A3B-FP8": "8006",
+    "Qwen3.6-35B-A3B-FP8": "8052",
     "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": "8007",
     "Qwen3.5-27B-FP8": "8008",
     "Qwen3.6-27B-FP8": "8009"
@@ -78,7 +78,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--output_file", required=True, help="Path to output CSV file.")
     parser.add_argument("--reasoning_file", required=True, help="Path to output JSON file for reasoning.")
     parser.add_argument("--target_column", default="TOXICOLOGICAL_EFFECT", help="Column name containing the text to process.")
-    parser.add_argument("--std_column", default="TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED", help="Column name containing the standardized text.")
+    parser.add_argument("--std_column", default=None, help="Column name containing the standardized text.")
 
     # --- LLM Configuration ---
     parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
@@ -89,7 +89,8 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--mode", type=int, default=1, choices=[1, 2], help="Execution mode: 1 for individual verification, 2 for batch selection.")
     parser.add_argument("--consensus_runs", type=int, default=3, help="Number of runs for majority voting consensus.")
     parser.add_argument("--num_backups", type=int, default=4, help="Number of backups to save during processing (0 to disable).")
-    parser.add_argument("--ontology_definitions", action="store_true", help="Use node definitions from DB in prompts.")
+    parser.add_argument("--ontology_definitions", dest="ontology_definitions", action="store_true", default=None, help="Use node definitions from DB in prompts.")
+    parser.add_argument("--no_ontology_definitions", dest="ontology_definitions", action="store_false", help="Do not use node definitions from DB in prompts.")
     parser.add_argument("--context_ontology", default="", help="Context information about the ontology to use in prompts.")
 
     # --- Embedding & Database Configuration ---
@@ -124,6 +125,8 @@ def load_llm_config(args: argparse.Namespace) -> None:
         None
     """
     if not args.llm_config or not os.path.exists(args.llm_config):
+        if args.ontology_definitions is None:
+            args.ontology_definitions = False
         return
 
     logger.info(f"Loading configuration from llm_config: {args.llm_config}")
@@ -133,7 +136,8 @@ def load_llm_config(args: argparse.Namespace) -> None:
     model = best_config["model"]
     args.mode = best_config["mode"]
     args.consensus_runs = best_config["consensus_runs"]
-    args.ontology_definitions = best_config.get("ontology_definitions", False)
+    if args.ontology_definitions is None:
+        args.ontology_definitions = best_config.get("ontology_definitions", False)
     args.model_config = MODEL_CONFIG_TEMPLATE.format(model=model)
     
     # Replace placeholders in filenames
@@ -144,11 +148,14 @@ def load_llm_config(args: argparse.Namespace) -> None:
 
     port = MODEL_PORTS.get(model, "8003")
     if args.base_url:
-        args.base_url = args.base_url.replace("PORT", port)
-        args.base_url = re.sub(r':\d+/', f':{port}/', args.base_url)
+        if "PORT" in args.base_url:
+            args.base_url = args.base_url.replace("PORT", port)
 
     if args.system_prompt_file:
         args.system_prompt_file = replace_placeholders(args.system_prompt_file, "mode", str(args.mode))
+
+    if args.ontology_definitions is None:
+        args.ontology_definitions = False
 
 def load_rag_config(args: argparse.Namespace) -> dict:
     """

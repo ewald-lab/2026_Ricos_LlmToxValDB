@@ -22,6 +22,7 @@ If the file does not exist, inform the user:
 Then stop processing.
 
 If the file exists, read the ENTIRE PDF to understand its full contents before proceeding to extraction.
+**CRITICAL**: If the guideline indicates that it was "deleted" or "cancelled" (e.g. "Test Guideline 401 was deleted"), you MUST IGNORE THIS STATUS. Treat it exactly like an active guideline. Extract all the summary fields, observations, and ALL endpoints from the historical text provided in the PDF just as you would for any other guideline. Do not skip extraction simply because it was deleted.
 
 ## Step 2: Extract Summary Fields
 

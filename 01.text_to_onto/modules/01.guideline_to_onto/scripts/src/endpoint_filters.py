@@ -465,7 +465,7 @@ class EndpointOntologyFilterBuilder:
                                 "confidence": float(votes) / self.consensus_runs,
                                 "reason": f"Selected via RAG matching {name}. {candidate_reasoning[name][0] if candidate_reasoning[name] else ''}"
                             })
-                        curr = curr_node.parent if curr_node else None
+                        curr = curr_node.parents[0] if curr_node and curr_node.parents else None
                     # Enqueue unasked direct children of the accepted node
                     for child_name in self.tree.get_children(name):
                         if child_name not in verified_nodes and child_name not in evaluated_nodes:
@@ -473,7 +473,7 @@ class EndpointOntologyFilterBuilder:
                             if child_info and child_info not in next_round_candidates:
                                 next_round_candidates.append(child_info)
                 else:
-                    parent_name = cand.parent
+                    parent_name = cand.parents[0] if cand.parents else None
                     if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
                         node_info = self.tree.nodes.get(parent_name)
                         if node_info and node_info not in next_round_candidates:
@@ -594,7 +594,7 @@ class EndpointOntologyFilterBuilder:
                                 "confidence": float(votes) / self.consensus_runs,
                                 "reason": f"Selected via Batch RAG matching {name}"
                             })
-                        curr = curr_node.parent if curr_node else None
+                        curr = curr_node.parents[0] if curr_node and curr_node.parents else None
                     # Enqueue unasked direct children of the accepted node
                     for child_name in self.tree.get_children(name):
                         if child_name not in verified_nodes and child_name not in evaluated_nodes:
@@ -602,7 +602,7 @@ class EndpointOntologyFilterBuilder:
                             if child_info and child_info not in next_round_candidates:
                                 next_round_candidates.append(child_info)
                 else:
-                    parent_name = cand.parent
+                    parent_name = cand.parents[0] if cand.parents else None
                     if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
                         node_info = self.tree.nodes.get(parent_name)
                         if node_info and node_info not in next_round_candidates:

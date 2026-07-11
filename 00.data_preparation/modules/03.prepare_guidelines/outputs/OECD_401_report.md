@@ -1,6 +1,6 @@
 # OECD Test Guideline 401: Acute Oral Toxicity
 
-**Generated:** 2023-10-27
+**Generated:** 2024-05-23
 **Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/401.pdf`
 
 ## Summary
@@ -10,51 +10,49 @@
 | Guideline Number | 401 |
 | Title | Acute Oral Toxicity |
 | Adoption Date | N/A (Deleted) |
-| Preferred Species | N/A |
-| Study Duration | N/A |
-| Animals per Dose Level | N/A |
-| Dose Groups | N/A |
-| Route of Administration | N/A |
+| Preferred Species | Not specified in provided text |
+| Study Duration | Not specified in provided text |
+| Animals per Dose Level | Not specified in provided text |
+| Dose Groups | Not specified in provided text |
+| Route of Administration | Oral |
 
 ## Purpose and Scope
 
-This document serves as a historical record indicating that OECD Test Guideline 401 'Acute Oral Toxicity' was officially deleted on 17th December 2002. It is no longer an active guideline for testing chemicals. Those requiring acute oral toxicity data should refer to subsequent guidelines such as TG 423 (Acute Oral Toxicity - Acute Toxic Class Method), TG 425 (Acute Oral Toxicity - Up-and-Down Procedure), or TG 420 (Acute Oral Toxicity - Fixed Dose Procedure).
+Test Guideline 401 was an acute oral toxicity test. Following the OECD Council decision, it was deleted on 17th December 2002. It is no longer an active guideline.
 
 ## Key Observations
 
-*No observations can be extracted as the guideline is deleted.*
-
 ### Clinical Observations
-N/A
+No specific clinical observation details available in the provided text snippet.
 
 ### Haematology
-N/A
+No haematology details available in the provided text snippet.
 
 ### Clinical Biochemistry
-N/A
+No clinical biochemistry details available in the provided text snippet.
 
 ### Pathology
-N/A
+No pathology details available in the provided text snippet.
 
 ## Endpoints
 
 **Source:** None
 **Column Convention:** N/A
 
-This guideline does not contain extractable endpoints because it was deleted on 17th December 2002.
+This guideline does not contain extractable endpoints.
 
 ### Endpoint Summary
 
 | Category | Required | Optional |
 |----------|----------|----------|
-| Total | 0 | 0 |
+| **Total** | **0** | **0** |
 
 ### Detailed Endpoints
 
 | Category | Endpoint | Requirement Level | Source | Footnotes |
 |----------|----------|-------------------|--------|-----------|
-| N/A | N/A | N/A | None | N/A |
+| No endpoints found. | | | | |
 
 ### Footnotes
 
-None.
+N/A

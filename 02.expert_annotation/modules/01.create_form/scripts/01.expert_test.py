@@ -4,13 +4,14 @@ import os
 import sys
 import sqlite3
 
-def load_ontology_data(ontology_db: str) -> dict:
+def load_ontology_data(ontology_db: str, global_definitions_db: str) -> dict:
     """
     Description:
     Extracts ontology nodes from the embeddings database for the tree interface.
 
     Args:
         ontology_db (str): Path to the ontology database file.
+        global_definitions_db (str): Path to the global definitions database file.
 
     Returns:
         dict: A dictionary mapping node IDs to node data.
@@ -21,21 +22,43 @@ def load_ontology_data(ontology_db: str) -> dict:
 
     conn = sqlite3.connect(ontology_db)
     cursor = conn.cursor()
-    cursor.execute("SELECT name, sanitized_name, parent, definition, is_llm_generated FROM embeddings")
+    cursor.execute("SELECT name, sanitized_name, parent, uri FROM embeddings")
     rows = cursor.fetchall()
     conn.close()
 
+    def_map = {}
+    is_llm_map = {}
+    if os.path.exists(global_definitions_db):
+        conn_def = sqlite3.connect(global_definitions_db)
+        cursor_def = conn_def.cursor()
+        try:
+            cursor_def.execute("SELECT uri, definition, is_llm_generated FROM global_definitions")
+            for r_uri, r_def, is_llm in cursor_def.fetchall():
+                def_map[str(r_uri)] = r_def
+                is_llm_map[str(r_uri)] = is_llm
+        except sqlite3.OperationalError:
+            cursor_def.execute("SELECT uri, definition FROM global_definitions")
+            for r_uri, r_def in cursor_def.fetchall():
+                def_map[str(r_uri)] = r_def
+                is_llm_map[str(r_uri)] = 0
+        conn_def.close()
+
     nodes = {}
-    for name, sanitized_name, parent, definition, is_llm_generated in rows:
+    import json
+    for name, sanitized_name, parent, uri in rows:
+        parents = json.loads(parent) if parent and parent.startswith('[') else ([parent] if parent else [])
+        primary_parent = parents[0] if parents else None
+
         # Use full name as key to avoid collisions with same sanitized_names
         node_id = f"node_{name}"
         nodes[node_id] = {
             "data": {
                 "name": name,
                 "sanitized_name": sanitized_name,
-                "parent": parent,
-                "definition": definition,
-                "is_llm_generated": is_llm_generated
+                "parent": primary_parent,
+                "parents": parents,
+                "definition": def_map.get(str(uri), ""),
+                "is_llm_generated": is_llm_map.get(str(uri), 0)
             }
         }
     return nodes
@@ -437,7 +460,7 @@ def generate_html(
                     name: n.data.name,
                     sanitizedName: n.data.sanitized_name,
                     displayName: n.data.name,
-                    parent: n.data.parent ? n.data.parent.trim() : null,
+                    parents: n.data.parents || [],
                     definition: n.data.definition,
                     isLlmGenerated: n.data.is_llm_generated,
                     children: []
@@ -445,8 +468,12 @@ def generate_html(
             }
         });
         Object.values(nodesByName).forEach(node => {
-            if (node.parent && nodesByName[node.parent]) {
-                nodesByName[node.parent].children.push(node);
+            if (node.parents && node.parents.length > 0) {
+                node.parents.forEach(p => {
+                    if (nodesByName[p]) {
+                        nodesByName[p].children.push(node);
+                    }
+                });
             }
         });
 
@@ -560,78 +587,102 @@ def generate_html(
 
                     const safeCandId = cand.name.replace(/[^a-zA-Z0-9]/g, '_') + '_' + candIdx;
 
-                    let pathNodes = [];
-                    let curr = cand.name;
-                    while (curr && nodesByName[curr]) {
-                        pathNodes.unshift(nodesByName[curr]);
-                        curr = nodesByName[curr].parent;
-                    }
-                    if (pathNodes.length === 0) {
-                        pathNodes = [{name: cand.name, displayName: cand.name}];
-                    }
-
-                    const pathContainer = document.createElement('div');
-                    pathContainer.className = 'cand-path';
-
-                    const nodesToRender = (SKIP_FIRST_LEVEL && pathNodes.length > 1) ? pathNodes.slice(1) : pathNodes;
-
-                    nodesToRender.forEach((pn, pnIdx) => {
-                        const nodeEl = document.createElement('span');
-                        nodeEl.className = 'path-node';
-                        if (pnIdx === nodesToRender.length - 1) nodeEl.classList.add('path-node-leaf');
-
-                        nodeEl.textContent = pn.displayName;
-                        const nodeData = nodesByName[pn.name];
-                        let defStr = nodeData?.definition;
-                        if (defStr && defStr.toLowerCase() !== 'under construction') {
-                            defStr = defStr.charAt(0).toUpperCase() + defStr.slice(1);
-                            const sourceText = nodeData.isLlmGenerated ? 'LLM Generated Definition' : 'Ontology Definition';
-                            const sourceClass = nodeData.isLlmGenerated ? 'def-source-llm' : 'def-source-ontology';
-                            const tooltip = document.createElement('div');
-                            tooltip.className = 'custom-tooltip';
-                            tooltip.innerHTML = `<span class="def-source ${sourceClass}" style="margin-bottom: 6px;">${sourceText}</span><br>${defStr}`;
-                            nodeEl.appendChild(tooltip);
-
-                            nodeEl.addEventListener('mouseenter', () => {
-                                tooltip.style.left = '50%';
-                                tooltip.style.right = 'auto';
-                                tooltip.style.transform = 'translateX(-50%)';
-
-                                const rect = tooltip.getBoundingClientRect();
-                                const padding = 15;
-                                if (rect.right > window.innerWidth - padding) {
-                                    tooltip.style.left = 'auto';
-                                    tooltip.style.right = '0';
-                                    tooltip.style.transform = 'none';
-                                } else if (rect.left < padding) {
-                                    tooltip.style.left = '0';
-                                    tooltip.style.right = 'auto';
-                                    tooltip.style.transform = 'none';
-                                }
+                    function getAllPaths(startName) {
+                        let paths = [];
+                        function dfs(curr, currentPath) {
+                            if (!curr || currentPath.includes(curr) || !nodesByName[curr]) {
+                                paths.push(currentPath);
+                                return;
+                            }
+                            let pList = nodesByName[curr].parents;
+                            if (!pList || pList.length === 0) {
+                                paths.push([...currentPath, nodesByName[curr]]);
+                                return;
+                            }
+                            pList.forEach(p => {
+                                dfs(p, [...currentPath, nodesByName[curr]]);
                             });
-                        } else {
-                            nodeEl.title = 'Description Unavailable';
                         }
-                        nodeEl.onclick = (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
+                        dfs(startName, []);
+                        return paths;
+                    }
 
-                            if (!userState[idx]) userState[idx] = { selected: [], manual: [], badDescription: false, notMyExpertise: false, comments: "" };
-                            if (!userState[idx].selected) userState[idx].selected = [];
+                    let allPaths = getAllPaths(cand.name);
+                    if (allPaths.length === 0) {
+                        allPaths = [[{name: cand.name, displayName: cand.name}]];
+                    }
+                    
+                    const pathsWrapper = document.createElement('div');
+                    pathsWrapper.className = 'cand-paths-wrapper';
+                    
+                    const pathElementsMap = [];
 
-                            const clickedNodeName = pn.name;
-                            const currentSelected = userState[idx].selected;
-                            selectLineage(idx, clickedNodeName);
-                        };
+                    allPaths.forEach((pathNodesRaw) => {
+                        let pathNodes = [...pathNodesRaw].reverse();
+                        const pathContainer = document.createElement('div');
+                        pathContainer.className = 'cand-path';
 
-                        pathContainer.appendChild(nodeEl);
+                        const nodesToRender = (SKIP_FIRST_LEVEL && pathNodes.length > 1) ? pathNodes.slice(1) : pathNodes;
 
-                        if (pnIdx < nodesToRender.length - 1) {
-                            const sep = document.createElement('span');
-                            sep.className = 'path-sep';
-                            sep.innerHTML = '&#9656;';
-                            pathContainer.appendChild(sep);
-                        }
+                        nodesToRender.forEach((pn, pnIdx) => {
+                            const nodeEl = document.createElement('span');
+                            nodeEl.className = 'path-node';
+                            if (pnIdx === nodesToRender.length - 1) nodeEl.classList.add('path-node-leaf');
+
+                            nodeEl.textContent = pn.displayName;
+                            const nodeData = nodesByName[pn.name];
+                            let defStr = nodeData?.definition;
+                            if (defStr && defStr.toLowerCase() !== 'under construction') {
+                                defStr = defStr.charAt(0).toUpperCase() + defStr.slice(1);
+                                const sourceText = nodeData.isLlmGenerated ? 'LLM Generated Definition' : 'Ontology Definition';
+                                const sourceClass = nodeData.isLlmGenerated ? 'def-source-llm' : 'def-source-ontology';
+                                const tooltip = document.createElement('div');
+                                tooltip.className = 'custom-tooltip';
+                                tooltip.innerHTML = `<span class="def-source ${sourceClass}" style="margin-bottom: 6px;">${sourceText}</span><br>${defStr}`;
+                                nodeEl.appendChild(tooltip);
+
+                                nodeEl.addEventListener('mouseenter', () => {
+                                    tooltip.style.left = '50%';
+                                    tooltip.style.right = 'auto';
+                                    tooltip.style.transform = 'translateX(-50%)';
+
+                                    const rect = tooltip.getBoundingClientRect();
+                                    const padding = 15;
+                                    if (rect.right > window.innerWidth - padding) {
+                                        tooltip.style.left = 'auto';
+                                        tooltip.style.right = '0';
+                                        tooltip.style.transform = 'none';
+                                    } else if (rect.left < padding) {
+                                        tooltip.style.left = '0';
+                                        tooltip.style.right = 'auto';
+                                        tooltip.style.transform = 'none';
+                                    }
+                                });
+                            } else {
+                                nodeEl.title = 'Description Unavailable';
+                            }
+                            nodeEl.onclick = (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                if (!userState[idx]) userState[idx] = { selected: [], manual: [], badDescription: false, notMyExpertise: false, comments: "" };
+                                if (!userState[idx].selected) userState[idx].selected = [];
+
+                                const clickedNodeName = pn.name;
+                                selectLineage(idx, clickedNodeName);
+                            };
+
+                            pathContainer.appendChild(nodeEl);
+
+                            if (pnIdx < nodesToRender.length - 1) {
+                                const sep = document.createElement('span');
+                                sep.className = 'path-sep';
+                                sep.innerHTML = '&#9656;';
+                                pathContainer.appendChild(sep);
+                            }
+                        });
+                        pathsWrapper.appendChild(pathContainer);
+                        pathElementsMap.push({container: pathContainer, nodes: nodesToRender});
                     });
 
                     updateVisuals.push(() => {
@@ -639,27 +690,36 @@ def generate_html(
                         if (userState[idx]) {
                             const combined = [...(userState[idx].selected || []), ...(userState[idx].manual || [])];
                             combined.forEach(s => {
-                                let curr = s;
-                                while (curr) {
-                                    activeNodes.add(curr);
-                                    curr = nodesByName[curr]?.parent;
+                                let queue = [s];
+                                let visited = new Set();
+                                while (queue.length > 0) {
+                                    let curr = queue.shift();
+                                    if (curr && !visited.has(curr)) {
+                                        visited.add(curr);
+                                        activeNodes.add(curr);
+                                        let pList = nodesByName[curr]?.parents || [];
+                                        queue.push(...pList);
+                                    }
                                 }
                             });
                         }
 
-                        let isPathActive = false;
-                        for(let i=0; i < nodesToRender.length; i++) {
-                            const el = pathContainer.children[i*2]; // nodes are at even indices
-                            if (el && activeNodes.has(nodesToRender[i].name)) {
-                                el.classList.add('selected-path');
-                                isPathActive = true;
-                            } else if (el) {
-                                el.classList.remove('selected-path');
+                        let isAnyPathActive = false;
+                        pathElementsMap.forEach(pMap => {
+                            const pContainer = pMap.container;
+                            const nToRender = pMap.nodes;
+                            for(let i=0; i < nToRender.length; i++) {
+                                const el = pContainer.children[i*2]; // nodes are at even indices
+                                if (el && activeNodes.has(nToRender[i].name)) {
+                                    el.classList.add('selected-path');
+                                    isAnyPathActive = true;
+                                } else if (el) {
+                                    el.classList.remove('selected-path');
+                                }
                             }
-                        }
+                        });
 
-                        const leafNode = pathNodes[pathNodes.length - 1];
-                        if (activeNodes.has(leafNode.name)) {
+                        if (activeNodes.has(cand.name)) {
                             opt.classList.add('selected');
                         } else {
                             opt.classList.remove('selected');
@@ -698,7 +758,7 @@ def generate_html(
 
                     info.innerHTML = `${llmHtml}`;
 
-                    opt.appendChild(pathContainer);
+                    opt.appendChild(pathsWrapper);
                     opt.appendChild(info);
                     grid.appendChild(opt);
                 });
@@ -822,7 +882,7 @@ def generate_html(
         function buildTreeHTML() {
             const trueRoots = [];
             Object.values(nodesByName).forEach(node => {
-                if (!node.parent || !nodesByName[node.parent]) {
+                if (!node.parents || node.parents.length === 0 || !node.parents.some(p => nodesByName[p])) {
                     trueRoots.push(node);
                 }
             });
@@ -1017,11 +1077,17 @@ def generate_html(
                 const combined = [ ...(state.selected || []), ...(state.manual || []) ];
                 combined.forEach(s => {
                     explicitNodes.add(s);
-                    let curr = s;
-                    while (curr) {
-                        activeNodes.add(curr);
-                        curr = nodesByName[curr]?.parent;
-                    }
+                    let queue = [s];
+                                let visited = new Set();
+                                while (queue.length > 0) {
+                                    let curr = queue.shift();
+                                    if (curr && !visited.has(curr)) {
+                                        visited.add(curr);
+                                        activeNodes.add(curr);
+                                        let pList = nodesByName[curr]?.parents || [];
+                                        queue.push(...pList);
+                                    }
+                                }
                 });
             }
 
@@ -1053,10 +1119,16 @@ def generate_html(
         }
 
         function isAncestorOf(parentName, childName) {
-            let curr = nodesByName[childName]?.parent;
-            while (curr) {
+            let visited = new Set();
+            let queue = nodesByName[childName]?.parents ? [...nodesByName[childName].parents] : [];
+            while (queue.length > 0) {
+                let curr = queue.shift();
                 if (curr === parentName) return true;
-                curr = nodesByName[curr]?.parent;
+                if (!visited.has(curr)) {
+                    visited.add(curr);
+                    let pList = nodesByName[curr]?.parents || [];
+                    queue.push(...pList);
+                }
             }
             return false;
         }
@@ -1072,11 +1144,17 @@ def generate_html(
             // Calculate active nodes before click
             const activeNodes = new Set();
             [...currentSelected, ...currentManual].forEach(s => {
-                let curr = s;
-                while (curr) {
-                    activeNodes.add(curr);
-                    curr = nodesByName[curr]?.parent;
-                }
+                let queue = [s];
+                                let visited = new Set();
+                                while (queue.length > 0) {
+                                    let curr = queue.shift();
+                                    if (curr && !visited.has(curr)) {
+                                        visited.add(curr);
+                                        activeNodes.add(curr);
+                                        let pList = nodesByName[curr]?.parents || [];
+                                        queue.push(...pList);
+                                    }
+                                }
             });
 
             const isActive = activeNodes.has(clickedNodeName);
@@ -1094,15 +1172,17 @@ def generate_html(
                     return true;
                 });
 
-                const parentName = nodesByName[clickedNodeName]?.parent;
-                if (parentName) {
-                    if (!userState[idx].selected.includes(parentName) && !userState[idx].manual.includes(parentName)) {
-                        if (!isFromBrowseOntology) {
-                            userState[idx].selected.push(parentName);
-                        } else {
-                            const isCandidate = rawPoolData[idx].candidates.some(c => c.name === parentName);
-                            if (isCandidate) userState[idx].selected.push(parentName);
-                            else userState[idx].manual.push(parentName);
+                const parentsList = nodesByName[clickedNodeName]?.parents || [];
+                for (let parentName of parentsList) {
+                    if (parentName) {
+                        if (!userState[idx].selected.includes(parentName) && !userState[idx].manual.includes(parentName)) {
+                            if (!isFromBrowseOntology) {
+                                userState[idx].selected.push(parentName);
+                            } else {
+                                const isCandidate = rawPoolData[idx].candidates.some(c => c.name === parentName);
+                                if (isCandidate) userState[idx].selected.push(parentName);
+                                else userState[idx].manual.push(parentName);
+                            }
                         }
                     }
                 }
@@ -1193,25 +1273,45 @@ def generate_html(
             const tag = document.createElement('div');
             tag.className = 'tag';
 
-            let pathNodes = [];
-            let curr = term;
-            while (curr && nodesByName[curr]) {
-                pathNodes.unshift(nodesByName[curr]);
-                curr = nodesByName[curr].parent;
+            function getAllPaths(startName) {
+                let paths = [];
+                function dfs(curr, currentPath) {
+                    if (!curr || currentPath.includes(curr) || !nodesByName[curr]) {
+                        paths.push(currentPath);
+                        return;
+                    }
+                    let pList = nodesByName[curr].parents;
+                    if (!pList || pList.length === 0) {
+                        paths.push([...currentPath, nodesByName[curr]]);
+                        return;
+                    }
+                    pList.forEach(p => {
+                        dfs(p, [...currentPath, nodesByName[curr]]);
+                    });
+                }
+                dfs(startName, []);
+                return paths;
             }
-            if (pathNodes.length === 0) {
-                pathNodes = [{displayName: term}];
+            
+            let allPaths = getAllPaths(term);
+            if (allPaths.length === 0) {
+                allPaths = [[{displayName: term}]];
             }
+            
+            allPaths.forEach(pathNodesRaw => {
+                let pathNodes = [...pathNodesRaw].reverse();
+                const nodesToRender = (SKIP_FIRST_LEVEL && pathNodes.length > 1) ? pathNodes.slice(1) : pathNodes;
 
-            const nodesToRender = (SKIP_FIRST_LEVEL && pathNodes.length > 1) ? pathNodes.slice(1) : pathNodes;
-
-            const pathHtml = nodesToRender.map((pn, i) => {
-                if (i === nodesToRender.length - 1) return `<strong>${pn.displayName}</strong>`;
-                return pn.displayName;
-            }).join(' <span style="margin: 0 5px; opacity: 0.6; font-size: 0.9em;">&#9656;</span> ');
-
-            tag.innerHTML = `${pathHtml} <span class="tag-remove" style="margin-left: 10px;" onclick="removeManualTerm(${idx}, '${term}')">&times;</span>`;
-            container.appendChild(tag);
+                const pathHtml = nodesToRender.map((pn, i) => {
+                    if (i === nodesToRender.length - 1) return `<strong>${pn.displayName}</strong>`;
+                    return pn.displayName;
+                }).join(' <span style="margin: 0 5px; opacity: 0.6; font-size: 0.9em;">&#9656;</span> ');
+                
+                const t = document.createElement('div');
+                t.className = 'tag';
+                t.innerHTML = `${pathHtml} <span class="tag-remove" style="margin-left: 10px;" onclick="removeManualTerm(${idx}, '${term}')">&times;</span>`;
+                container.appendChild(t);
+            });
         }
 
         // --- STATE & EXPORT ---
@@ -1410,6 +1510,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Expert Annotation HTML Interface")
     parser.add_argument("--input_pool", required=True, help="Path to JSON file from test.py containing candidate pools.")
     parser.add_argument("--ontology_db", required=True, help="Path to ontology embeddings database.")
+    parser.add_argument("--global_definitions_db", required=True, help="Path to global definitions database.")
     parser.add_argument("--output_file", required=True, help="Path to output HTML file.")
     parser.add_argument("--email", default="ricos@ebi.ac.uk", help="Contact email for results.")
     parser.add_argument("--context_ontology", default="", help="Context definition of the ontology.")
@@ -1431,7 +1532,7 @@ if __name__ == "__main__":
     if args.num_phrases is not None and args.num_phrases > 0:
         pool_data = pool_data[:args.num_phrases]
 
-    ontology_data = load_ontology_data(args.ontology_db)
+    ontology_data = load_ontology_data(args.ontology_db, args.global_definitions_db)
 
     # helper for hierarchy
     def get_hierarchy_path(node_name: str, nodes_dict: dict) -> str:

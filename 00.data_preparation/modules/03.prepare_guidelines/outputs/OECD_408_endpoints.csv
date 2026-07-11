@@ -2,50 +2,34 @@ guideline_number,category,endpoint_name,requirement_level,source,footnotes
 408,Organ Weights,Testes,Required,Annex,
 408,Organ Weights,Epididymides,Required,Annex,
 408,Organ Weights,Adrenal glands,Required,Annex,
-408,Organ Weights,"Prostate + seminal vesicles with coagulating glands",Required,Annex,
+408,Organ Weights,"Prostate + seminal vesicles with coagulating glands as a whole complex",Required,Annex,
 408,Organ Weights,Uterus,Required,Annex,
 408,Organ Weights,Ovaries,Required,Annex,
 408,Organ Weights,Pituitary gland,Required,Annex,
 408,Organ Weights,Thyroid gland,Required,Annex,
 408,Histopathology,Thyroid and parathyroid glands,Required,Annex,
 408,Histopathology,Adrenal glands,Required,Annex,
-408,Histopathology,Pituitary gland,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Pituitary gland,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination as endocrine active test agents may cause histological changes that, while not overtly pathological, may differ fro m the condition anticipated based on the stage of ovarian cycle"
 408,Histopathology,Testis,Required,Annex,
 408,Histopathology,Epididymides,Required,Annex,
 408,Histopathology,Ventral and dorsolateral prostate,Required,Annex,
 408,Histopathology,Seminal vesicles and coagulating glands,Required,Annex,
-408,Histopathology,Ovaries,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
-408,Histopathology,Cervix,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
-408,Histopathology,Vagina,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
-408,Histopathology,Uterus,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
-408,Histopathology,Vaginal smear (collected at necropsy),Required,Annex,
-408,Histopathology,Mammary glands (female and male),Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination"
+408,Histopathology,Ovaries,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination as endocrine active test agents may cause histological changes that, while not overtly pathological, may differ fro m the condition anticipated based on the stage of ovarian cycle"
+408,Histopathology,Cervix,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination as endocrine active test agents may cause histological changes that, while not overtly pathological, may differ fro m the condition anticipated based on the stage of ovarian cycle"
+408,Histopathology,Vagina,Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination as endocrine active test agents may cause histological changes that, while not overtly pathological, may differ fro m the condition anticipated based on the stage of ovarian cycle"
+408,Histopathology,Mammary glands (female and male),Required,Annex,"The condition of the oestrogen-sensitive organs in the female should be assessed with reference to the stage of oestrus cycle at termination as endocrine active test agents may cause histological changes that, while not overtly pathological, may differ fro m the condition anticipated based on the stage of ovarian cycle"
 408,Histopathology,Pancreatic islets,Required,Annex,
+408,Histopathology,Vaginal smear (collected at necropsy) to determine stage of oestrus cycle,Required,Annex,
 408,Serum/Plasma Biochemistry,Total cholesterol,Required,Annex,
 408,Serum/Plasma Biochemistry,HDL,Required,Annex,
 408,Serum/Plasma Biochemistry,LDL,Required,Annex,
 408,Serum/Plasma Hormone Analyses,Thyroxine (T4),Required,Annex,
 408,Serum/Plasma Hormone Analyses,TSH,Required,Annex,
 408,Serum/Plasma Hormone Analyses,T3,Required,Annex,
-408,Serum/Plasma Hormone Analyses,FSH,Required,Annex,
-408,Serum/Plasma Hormone Analyses,LH,Required,Annex,
-408,Serum/Plasma Hormone Analyses,Oestradiol,Required,Annex,
-408,Serum/Plasma Hormone Analyses,Testosterone,Required,Annex,
+408,Serum/Plasma Hormone Analyses,FSH,Optional,Annex,
+408,Serum/Plasma Hormone Analyses,LH,Optional,Annex,
+408,Serum/Plasma Hormone Analyses,Oestradiol,Optional,Annex,
+408,Serum/Plasma Hormone Analyses,Testosterone,Optional,Annex,
 408,Sperm Measures,Cauda epididymis sperm reserves,Optional,Annex,
 408,Sperm Measures,Sperm motility,Optional,Annex,
 408,Sperm Measures,Sperm morphology,Optional,Annex,
-408,Clinical Observations,Body weight and changes,Required,Guideline text,
-408,Clinical Observations,Food consumption,Required,Guideline text,
-408,Clinical Observations,Water consumption,Required,Guideline text,
-408,Clinical Observations,Ophthalmological examination,Required,Guideline text,
-408,Clinical Observations,Sensory activity,Optional,Guideline text,"when available"
-408,Clinical Observations,Grip strength,Optional,Guideline text,"when available"
-408,Clinical Observations,Motor activity,Optional,Guideline text,"when available"
-408,Clinical Observations,Terminal vaginal cytology,Required,Guideline text,
-408,Clinical Observations,Signs of toxicity,Required,Guideline text,
-408,Haematology,Haematological tests,Required,Guideline text,with relevant baseline values
-408,Clinical Biochemistry,Clinical biochemistry tests,Required,Guideline text,with relevant baseline values
-408,Necropsy,All gross lesions,Required,Guideline text,
-408,Organ Weights,Terminal body weight,Required,Guideline text,
-408,Organ Weights,Organ weights,Required,Guideline text,
-408,Organ Weights,Organ/body weight ratios,Required,Guideline text,

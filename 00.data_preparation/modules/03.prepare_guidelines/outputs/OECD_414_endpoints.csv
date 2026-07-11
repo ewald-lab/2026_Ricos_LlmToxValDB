@@ -1,32 +1,22 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-414,Clinical Observations,Mortality/Moribundity,Required,Guideline text,Recorded at least once daily
-414,Clinical Observations,Behavioural changes,Required,Guideline text,Pertinent changes only
-414,Clinical Observations,Signs of overt toxicity,Required,Guideline text,All signs recorded
-414,Clinical Observations,Body weight,Required,Guideline text,Day 0/3, dosing start, every 3 days, termination
-414,Clinical Observations,Food consumption,Required,Guideline text,Every 3 days
-414,Maternal Weights & Consumption,Water consumption,Optional,Guideline text,If measured
-414,Maternal Weights & Consumption,Body weight change corrected for gravid uterine weight,Optional,Guideline text,If calculated
-414,Hormones (Dams),Thyroxine (T4),Required,Guideline text,Mandatory for rat dams at termination
-414,Hormones (Dams),Triiodothyronine (T3),Required,Guideline text,Mandatory for rat dams at termination
-414,Hormones (Dams),Thyroid Stimulating Hormone (TSH),Required,Guideline text,Mandatory for rat dams at termination
-414,Hormones (Dams),Other hormones,Optional,Guideline text,If relevant
-414,Uterine Contents,Corpora lutea count,Required,Guideline text,For pregnant animals
-414,Uterine Contents,Implantation sites,Required,Guideline text,To determine pregnancy status
-414,Uterine Contents,Embryonic/Fetal deaths,Required,Guideline text,Including early/late resorption degree
-414,Uterine Contents,Viable fetuses,Required,Guideline text,Count per litter
-414,Fetal Measurements,Fetal body weight,Required,Guideline text,By sex and combined
-414,Fetal Measurements,Anogenital distance (AGD),Required,Guideline text,All live rodent fetuses
-414,Fetal Alterations (External),External alterations/malformations,Required,Guideline text,Examined in all fetuses
-414,Fetal Alterations (Skeletal),Skeletal alterations,Required,Guideline text,Approx. half of rodent litters; all non-rodents
-414,Fetal Alterations (Soft Tissue),Soft tissue alterations,Required,Guideline text,Remainder of rodent litters; all non-rodents
-414,Fetal Alterations (Soft Tissue),Cryptorchidism,Required,Guideline text,Indication noted in male fetuses
-414,Developmental,Fetal Body Weight,Required,Guideline text,"Standard parameter for assessing altered growth"
-414,Developmental,Litter Size,Required,Guideline text,"Derived from implantation site count minus resorptions"
-414,Developmental,Number of Resorptions,Required,Guideline text,"Includes both early and late resorptions"
-414,Developmental,External Malformations,Required,Guideline text,"Structural changes considered detrimental"
-414,Developmental,Skeletal Malformations,Required,Guideline text,"Detected via double staining techniques (Alcian Blue/Alizarin Red)"
-414,Developmental,Skeletal Variations,Required,Guideline text,"Transient structural changes occurring frequently in controls"
-414,Developmental,Visceral Malformations,Required,Guideline text,"Internal soft tissue anomalies detected via dissection/staining"
-414,Developmental,Anogenital Distance (AGD),Optional,Guideline text,"Often measured as a sensitive indicator of endocrine disruption"
-414,Developmental,Fetal Sex Ratio,Required,Guideline text,"Determination of sex of each fetus"
-414,Developmental,Gestation Length,Required,Guideline text,"Duration from mating to delivery"
+414,Maternal Clinical Signs,Mortality/Moribundity,Required,Guideline text,Recorded at least once daily
+414,Maternal Clinical Signs,Overt Toxicity Signs,Required,Guideline text,Include onset, duration, severity
+414,Maternal Body Weight,Dam Body Weight,Required,Guideline text,Weighed on day 0/3, first dosing day, every 3 days, and termination
+414,Maternal Food Consumption,Dam Food Consumption,Required,Guideline text,Recorded at three-day intervals
+414,Dam Thyroid Histopathology,Thyroid Gland Histopathology,Required,Guideline text,Taken from every dam
+414,Dam Thyroid Weight,Thyroid Gland Weight,Required,Guideline text,Taken from every dam
+414,Dam Thyroid Hormones,Thyroxine (T4),Required,Guideline text,From dam blood at termination
+414,Dam Thyroid Hormones,Triiodothyronine (T3),Required,Guideline text,From dam blood at termination
+414,Dam Thyroid Hormones,Thyroid Stimulating Hormone (TSH),Required,Guideline text,From dam blood at termination
+414,Uterine Weight,Gravid Uterine Weight,Required,Guideline text,Weighed immediately after termination
+414,Corpora Lutea Count,Number of Corpora Lutea,Required,Guideline text,Determined for pregnant animals
+414,Resorption Counts,Early Resorptions,Required,Guideline text,Evidence of implantation without recognizable embryo/fetus
+414,Resorption Counts,Late Resorptions,Required,Guideline text,Dead embryo/fetus with external degenerative changes
+414,Fetal Sex Ratio,Fetal Sex Ratio,Required,Guideline text,Reported by dose for litters with live fetuses
+414,Fetal Body Weight,Fetal Body Weight,Required,Guideline text,Preferably by sex and combined
+414,Fetal Anogenital Distance (AGD),Anogenital Distance (AGD),Required,Guideline text,Measured in all live rodent fetuses
+414,Fetal External Alterations,External Alterations,Required,Guideline text,Examined for each fetus
+414,Fetal Skeletal Alterations,Skeletal Alterations,Required,Guideline text,Variations and malformations/anomalies
+414,Fetal Soft Tissue Alterations,Soft Tissue Alterations,Required,Guideline text,Variations and malformations/anomalies
+414,Cryptorchidism,Cryptorchidism,Required,Guideline text,Indication of incomplete testicular descent in male fetuses
+414,Other Hormones,Other Hormone Levels,Optional,Guideline text,Measured if relevant

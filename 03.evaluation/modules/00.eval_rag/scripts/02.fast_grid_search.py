@@ -7,7 +7,7 @@ from tqdm import tqdm
 def calculate_metrics(
     retrieved_candidates: list[dict],
     ground_truth_matches: list[str] | set[str],
-    parent_map: dict[str, str] | None = None
+    parent_map: dict[str, list[str]] | None = None
 ) -> tuple[float, float, int]:
     """
     Description:
@@ -16,7 +16,7 @@ def calculate_metrics(
     Args:
         retrieved_candidates (list[dict]): The list of candidates retrieved.
         ground_truth_matches (list[str] | set[str]): The ground truth matches.
-        parent_map (dict[str, str] | None): A map of node names to parent names. Defaults to None.
+        parent_map (dict[str, list[str]] | None): A map of node names to parent names. Defaults to None.
 
     Returns:
         tuple[float, float, int]: A tuple of (recall, ap, context_burden).
@@ -29,12 +29,15 @@ def calculate_metrics(
             retrieved_names.append(name)
             seen.add(name)
         if parent_map:
-            curr = name
-            while curr in parent_map and parent_map[curr]:
-                curr = parent_map[curr]
-                if curr not in seen:
-                    retrieved_names.append(curr)
-                    seen.add(curr)
+            queue = [name]
+            while queue:
+                curr = queue.pop(0)
+                parents = parent_map.get(curr, [])
+                for p in parents:
+                    if p and p not in seen:
+                        retrieved_names.append(p)
+                        seen.add(p)
+                        queue.append(p)
 
     retrieved_set = set(retrieved_names)
     ground_truth_matches = set(ground_truth_matches)
@@ -52,7 +55,7 @@ def calculate_metrics(
 
     return recall, ap, context_burden
 
-def run_evaluation(precomputed_data: dict, config: dict, parent_map: dict[str, str]) -> dict:
+def run_evaluation(precomputed_data: dict, config: dict, parent_map: dict[str, list[str]]) -> dict:
     """
     Description:
     Run evaluation on all queries for a given configuration using precomputed candidates.
@@ -60,7 +63,7 @@ def run_evaluation(precomputed_data: dict, config: dict, parent_map: dict[str, s
     Args:
         precomputed_data (dict): The precomputed candidate data dictionary.
         config (dict): The configuration dictionary containing evaluation parameters.
-        parent_map (dict[str, str]): A map of node names to parent names.
+        parent_map (dict[str, list[str]]): A map of node names to parent names.
 
     Returns:
         dict: A dictionary of evaluation metrics and the configuration parameters.
@@ -112,6 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("--config_grid", required=True)
     parser.add_argument("--ontology_db", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--data_variant", default=None, help="Filter configs to this data variant (base, def, hier, def_hier).")
     args = parser.parse_args()
 
     # Load precomputed data
@@ -125,14 +129,28 @@ if __name__ == "__main__":
     # Load parent map from ontology DB for hierarchical recall
     import sqlite3
     parent_map = {}
+    import json
     with sqlite3.connect(args.ontology_db) as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT name, parent FROM embeddings")
-        for name, parent in cursor:
-            if parent: parent_map[name] = parent
+        try:
+            cursor.execute("SELECT name, parent FROM embeddings")
+        except sqlite3.OperationalError:
+            cursor.execute("SELECT name, parents FROM embeddings")
+        for name, parents_json in cursor:
+            if parents_json:
+                if parents_json.startswith('['):
+                    try:
+                        parents_list = json.loads(parents_json)
+                    except Exception:
+                        parents_list = [parents_json]
+                else:
+                    parents_list = [parents_json]
+                if parents_list:
+                    parent_map[name] = parents_list
 
     target_embedding = precomputed_data.get("embedding_model")
     target_reranker = precomputed_data.get("reranker_model")
+    target_variant = args.data_variant or precomputed_data.get("data_variant")
 
     results = []
     for cfg in tqdm(all_configs, desc="Evaluating Configurations"):
@@ -143,6 +161,9 @@ if __name__ == "__main__":
         if cfg.get("use_reranker"):
             if target_reranker and cfg.get("reranker_model") != target_reranker:
                 continue
+        # Filter configs by data variant
+        if target_variant and cfg.get("data_variant") != target_variant:
+            continue
 
         res = run_evaluation(precomputed_data, cfg, parent_map)
         results.append(res)

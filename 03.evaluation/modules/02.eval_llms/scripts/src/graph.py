@@ -80,6 +80,64 @@ class TokenUsageCallbackHandler(BaseCallbackHandler):
             return 0.0
         return self.completion_tokens / self.num_calls
 
+def _repair_unescaped_quotes(text: str) -> str:
+    """
+    Description:
+    Character-level scanner that escapes unescaped double quotes inside JSON string values.
+    Handles LLM outputs that contain literal double quotes inside string fields.
+
+    Args:
+        text (str): A JSON string that may contain unescaped double quotes inside string values.
+
+    Returns:
+        str: The repaired JSON string.
+    """
+    result = []
+    n = len(text)
+    in_string = False
+    i = 0
+    while i < n:
+        ch = text[i]
+
+        if ch == '\\' and in_string:
+            # Pass through the escape sequence as-is
+            result.append(ch)
+            if i + 1 < n:
+                result.append(text[i + 1])
+                i += 2
+            else:
+                i += 1
+            continue
+
+        if ch == '"':
+            if not in_string:
+                in_string = True
+                result.append(ch)
+            else:
+                # Peek ahead to determine if this quote closes the string or is a literal interior quote.
+                # A closing quote is followed (after optional whitespace) by one of: , } ] :
+                j = i + 1
+                while j < n and text[j] in (' ', '\t', '\r', '\n'):
+                    j += 1
+                next_structural = text[j] if j < n else ''
+                if next_structural in (',', '}', ']', ':'):
+                    in_string = False
+                    result.append(ch)
+                else:
+                    # It's an interior unescaped quote — escape it
+                    result.append('\\"')
+        elif ch == '\n' and in_string:
+            # Escape bare newlines inside string values
+            result.append('\\n')
+        elif ch == '\r' and in_string:
+            result.append('\\r')
+        else:
+            result.append(ch)
+        i += 1
+
+    return "".join(result)
+
+
 def clean_llm_output(message: Any) -> str:
     """
     Description:
@@ -119,41 +177,86 @@ def clean_llm_output(message: Any) -> str:
     # Remove trailing commas inside JSON objects/arrays
     text = re.sub(r',\s*([\]}])', r'\1', text)
 
+    def repair_eval(eval_dict: Any) -> Any:
+        """
+        Description:
+        Repairs common structural anomalies in evaluation dictionaries from the LLM.
+
+        Args:
+            eval_dict (Any): The parsed evaluation dictionary.
+
+        Returns:
+            Any: The repaired dictionary.
+        """
+        if not isinstance(eval_dict, dict):
+            return eval_dict
+
+        # 1. If 'decision' is not present or not valid, look for any key whose value is ACCEPTED/REJECTED
+        if 'decision' not in eval_dict or eval_dict['decision'] not in ('ACCEPTED', 'REJECTED'):
+            for k, v in list(eval_dict.items()):
+                if isinstance(v, str) and v.strip().upper() in ('ACCEPTED', 'REJECTED'):
+                    eval_dict['decision'] = v.strip().upper()
+                    if k != 'decision':
+                        del eval_dict[k]
+                    break
+
+        # 2. If 'decision' is still not found/valid, try to extract it from the 'reason' or other string values starting with ACCEPTED/REJECTED
+        if 'decision' not in eval_dict or eval_dict['decision'] not in ('ACCEPTED', 'REJECTED'):
+            reason = eval_dict.get('reason', '')
+            if isinstance(reason, str):
+                reason_upper = reason.upper().strip()
+                if reason_upper.startswith("ACCEPTED"):
+                    eval_dict['decision'] = "ACCEPTED"
+                    eval_dict['reason'] = re.sub(r'^accepted[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
+                elif reason_upper.startswith("REJECTED"):
+                    eval_dict['decision'] = "REJECTED"
+                    eval_dict['reason'] = re.sub(r'^rejected[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
+
+        # Normalize decision value to uppercase
+        if 'decision' in eval_dict and isinstance(eval_dict['decision'], str):
+            eval_dict['decision'] = eval_dict['decision'].upper()
+
+        # 3. If 'reason' is not present or empty, try to populate it from any other string field
+        if 'reason' not in eval_dict or not eval_dict['reason']:
+            for k, v in list(eval_dict.items()):
+                if k not in ('candidate_name', 'decision') and isinstance(v, str):
+                    eval_dict['reason'] = v
+                    if k != 'reason':
+                        del eval_dict[k]
+                    break
+        return eval_dict
+
     try:
         data = json.loads(text)
         if isinstance(data, dict):
-            # Check Mode 2 BatchVerificationResult
             if "evaluation" in data and isinstance(data["evaluation"], list):
-                for item in data["evaluation"]:
-                    if isinstance(item, dict):
-                        decision = item.get("decision")
-                        reason = item.get("reason", "")
-                        if not decision or str(decision).upper() not in ["ACCEPTED", "REJECTED"]:
-                            reason_upper = str(reason).upper().strip()
-                            if reason_upper.startswith("ACCEPTED"):
-                                item["decision"] = "ACCEPTED"
-                                item["reason"] = re.sub(r'^accepted[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-                            elif reason_upper.startswith("REJECTED"):
-                                item["decision"] = "REJECTED"
-                                item["reason"] = re.sub(r'^rejected[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-
-            # Check Mode 1 CandidateEvaluation
-            elif "candidate_name" in data:
-                decision = data.get("decision")
-                reason = data.get("reason", "")
-                if not decision or str(decision).upper() not in ["ACCEPTED", "REJECTED"]:
-                    reason_upper = str(reason).upper().strip()
-                    if reason_upper.startswith("ACCEPTED"):
-                        data["decision"] = "ACCEPTED"
-                        data["reason"] = re.sub(r'^accepted[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-                    elif reason_upper.startswith("REJECTED"):
-                        data["decision"] = "REJECTED"
-                        data["reason"] = re.sub(r'^rejected[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-
+                data["evaluation"] = [repair_eval(item) for item in data["evaluation"]]
+            else:
+                data = repair_eval(data)
         return json.dumps(data, indent=2, ensure_ascii=False)
     except Exception:
-        # Fallback to the raw string if JSON parsing/fixing fails
-        return text.strip()
+        # Fallback 1: allow literal control characters (bare newlines) inside strings
+        try:
+            data = json.loads(text, strict=False)
+            if isinstance(data, dict):
+                if "evaluation" in data and isinstance(data["evaluation"], list):
+                    data["evaluation"] = [repair_eval(item) for item in data["evaluation"]]
+                else:
+                    data = repair_eval(data)
+            return json.dumps(data, indent=2, ensure_ascii=False)
+        except Exception:
+            # Fallback 2: character-level repair of unescaped quotes and bare newlines
+            try:
+                repaired = _repair_unescaped_quotes(text)
+                data = json.loads(repaired, strict=False)
+                if isinstance(data, dict):
+                    if "evaluation" in data and isinstance(data["evaluation"], list):
+                        data["evaluation"] = [repair_eval(item) for item in data["evaluation"]]
+                    else:
+                        data = repair_eval(data)
+                return json.dumps(data, indent=2, ensure_ascii=False)
+            except Exception:
+                return text.strip()
 
 
 def clean_reason(reason: str) -> str:
@@ -261,13 +364,13 @@ class TextToOntoGraph:
 
             self.nodes[name] = {
                 'sanitized_name': item['sanitized_name'],
-                'parent': item.get('parent'),
+                'parents': item.get('parents', []),
                 'uri': uri
             }
             self.prompt_map[name] = item.get('def', '')
-            parent_name = item.get('parent')
-            if parent_name:
-                self.parent_map[name] = parent_name
+            parents_list = item.get('parents', [])
+            if parents_list:
+                self.parent_map[name] = parents_list
 
         # Optionally load global definitions (overrides default ones)
         if global_definitions_db and os.path.exists(global_definitions_db):
@@ -420,7 +523,9 @@ class TextToOntoGraph:
             visited.add(curr)
             label = self.nodes.get(curr, {}).get('sanitized_name', curr)
             path.append(label)
-            curr = self.parent_map.get(curr)
+            # Just take the first parent for linear breadcrumbs display
+            parents = self.parent_map.get(curr, [])
+            curr = parents[0] if parents else None
         return " > ".join(reversed(path))
 
     def execute(
@@ -565,6 +670,10 @@ class TextToOntoGraph:
                             if retry == self.max_retries - 1:
                                 logger.warning(f"Node {meta['name']} Run {meta['run_i']+1}: All {self.max_retries} retries failed - {retry_e}")
 
+            for result in batch_results_all:
+                if isinstance(result, Exception):
+                    raise RuntimeError(f"Failed to parse LLM response in Mode 1 after retries: {result}")
+
             candidate_votes = {}
             candidate_reasoning = {}
             for i, meta in enumerate(batch_metadata):
@@ -607,25 +716,31 @@ class TextToOntoGraph:
                 if yes_votes >= threshold:
                     curr = name
                     while curr:
-                        if curr in verified_nodes:
-                            break
-                        verified_nodes.add(curr)
-                        if curr in self.categories:
-                            results[curr] = 1 # Store only hits
-                        curr = self.parent_map.get(curr)
+                        queue = [curr]
+                        while queue:
+                            c = queue.pop(0)
+                            if c in verified_nodes:
+                                continue
+                            verified_nodes.add(c)
+                            if c in self.categories:
+                                results[c] = 1
+                            parents = self.parent_map.get(c, [])
+                            for p in parents:
+                                if p: queue.append(p)
                 else:
                     if direct_candidates is None:
-                        parent_name = self.parent_map.get(name)
-                        if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes and parent_name not in next_round_candidates_map:
-                            node_info = self.nodes.get(parent_name)
-                            if node_info:
-                                next_round_candidates_map[parent_name] = {
-                                    'name': parent_name,
-                                    'sanitized_name': node_info.get('sanitized_name', parent_name),
-                                    'def': self.prompt_map.get(parent_name, ''),
-                                    'source': f'superior of : {name}',
-                                    'ann_score': 0.0
-                                }
+                        parents = self.parent_map.get(name, [])
+                        for parent_name in parents:
+                            if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes and parent_name not in next_round_candidates_map:
+                                node_info = self.nodes.get(parent_name)
+                                if node_info:
+                                    next_round_candidates_map[parent_name] = {
+                                        'name': parent_name,
+                                        'sanitized_name': node_info.get('sanitized_name', parent_name),
+                                        'def': self.prompt_map.get(parent_name, ''),
+                                        'source': f'superior of : {name}',
+                                        'ann_score': 0.0
+                                    }
 
             current_candidates = list(next_round_candidates_map.values())
             iteration += 1
@@ -739,6 +854,10 @@ class TextToOntoGraph:
                                 if retry == self.max_retries - 1:
                                     logger.warning(f"Mode 2 Iter {iteration} Run {i+1}: All {self.max_retries} retries failed - {retry_e}")
 
+                for result in batch_results:
+                    if isinstance(result, Exception):
+                        raise RuntimeError(f"Failed to parse LLM response in Mode 2 after retries: {result}")
+
                 for run_i, result in enumerate(batch_results):
                     if isinstance(result, Exception):
                         continue
@@ -770,12 +889,17 @@ class TextToOntoGraph:
             for selected in final_selected_names:
                 curr = selected
                 while curr:
-                    if curr in verified_nodes:
-                        break
-                    verified_nodes.add(curr)
-                    if curr in self.categories:
-                        results[curr] = 1 # Store only hits
-                    curr = self.parent_map.get(curr)
+                    queue = [curr]
+                    while queue:
+                        c = queue.pop(0)
+                        if c in verified_nodes:
+                            continue
+                        verified_nodes.add(c)
+                        if c in self.categories:
+                            results[c] = 1
+                        parents = self.parent_map.get(c, [])
+                        for p in parents:
+                            if p: queue.append(p)
 
             for name in final_selected_names:
                  cand_obj = next((c for c in candidates if c['name'] == name), None)

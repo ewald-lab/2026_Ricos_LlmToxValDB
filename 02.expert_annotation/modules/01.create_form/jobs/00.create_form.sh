@@ -19,6 +19,7 @@ source "${REPO_ROOT}/02.expert_annotation/env-expert-annot/bin/activate"
 python "${REPO_ROOT}/02.expert_annotation/modules/01.create_form/scripts/01.expert_test.py" \
     --input_pool "${REPO_ROOT}/02.expert_annotation/modules/00.create_test/outputs/test_pool_${ONTOLOGY}.json" \
     --ontology_db "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/qwen/${ONTOLOGY}.db" \
+    --global_definitions_db "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
     --output_file "${REPO_ROOT}/02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html" \
     --email "ricos@ebi.ac.uk" \
     --context_ontology "$(cat "${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \

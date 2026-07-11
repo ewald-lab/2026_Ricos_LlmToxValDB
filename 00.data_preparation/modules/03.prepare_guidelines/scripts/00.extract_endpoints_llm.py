@@ -37,10 +37,18 @@ def parse_llm_responses(
     summary_csv_row = ""
 
     for i, response_text in enumerate(responses):
-        # Extract markdown report
+        # Normalize carriage returns
+        response_text = response_text.replace('\r\n', '\n').replace('\r', '\n')
+
+        # Extract markdown report (supporting both closed and unclosed blocks due to truncation)
         md_match = re.search(r'```markdown\n(.*?)\n```', response_text, re.DOTALL)
         if md_match:
             content = md_match.group(1).strip()
+        else:
+            md_unclosed = re.search(r'```markdown\n(.*)', response_text, re.DOTALL)
+            content = md_unclosed.group(1).strip() if md_unclosed else ""
+
+        if content:
             if i == 0:
                 merged_report = content
             else:
@@ -50,18 +58,46 @@ def parse_llm_responses(
                     if obs_match:
                         merged_report += "\n\n--- (Continued from next segment) ---\n\n" + obs_match.group(0)
 
-        # Extract CSV blocks
-        csv_matches = re.finditer(r'```csv\n(.*?)\n```', response_text, re.DOTALL)
-        for m in csv_matches:
-            csv_block = m.group(1).strip()
-            if "guideline_number,category,endpoint_name" in csv_block:
+        # Extract CSV blocks (robust parsing for closed and unclosed blocks)
+        csv_start_tag = "```csv\n"
+        idx = 0
+        while True:
+            idx = response_text.find(csv_start_tag, idx)
+            if idx == -1:
+                break
+            start_pos = idx + len(csv_start_tag)
+            end_pos = response_text.find("```", start_pos)
+            if end_pos != -1:
+                csv_block = response_text[start_pos:end_pos].strip()
+                idx = end_pos + 3
+            else:
+                csv_block = response_text[start_pos:].strip()
+                idx = len(response_text)
+
+            # Normalize headers check (case-insensitive and ignoring spaces)
+            block_lower = csv_block.lower().replace(" ", "")
+            
+            # Check if this is the endpoints CSV block
+            if "guideline_number" in block_lower and "category" in block_lower and ("endpoint_name" in block_lower or "endpoint" in block_lower):
                 lines = csv_block.split('\n')
-                header = lines[0]
-                rows = lines[1:]
-                merged_endpoints_csv_rows.extend(rows)
-            elif i == 0 and len(csv_block.split(',')) >= 5:
-                # Likely the summary row from the first chunk
-                summary_csv_row = csv_block
+                lines = [l.strip() for l in lines if l.strip()]
+                if lines:
+                    header_cols = len(lines[0].split(','))
+                    if len(lines[-1].split(',')) < header_cols and end_pos == -1:
+                        # Drop potentially truncated last line
+                        lines = lines[:-1]
+                    rows = lines[1:]
+                    merged_endpoints_csv_rows.extend(rows)
+            # Check if this is the summary CSV block
+            elif ("guideline_number" in block_lower and ("adoption_date" in block_lower or "species" in block_lower or "duration" in block_lower)) or (i == 0 and len(csv_block.split(',')) >= 5):
+                lines = csv_block.split('\n')
+                lines = [l.strip() for l in lines if l.strip()]
+                if lines:
+                    header_cols = len(lines[0].split(','))
+                    if len(lines[-1].split(',')) < header_cols and end_pos == -1:
+                        # Drop potentially truncated last line
+                        lines = lines[:-1]
+                    summary_csv_row = "\n".join(lines)
 
     # Save merged report
     if merged_report:
@@ -91,7 +127,7 @@ def parse_llm_responses(
         with open(summary_path, 'a') as f:
             lines = summary_csv_row.split('\n')
             for line in lines:
-                if not line.startswith("guideline_number"):
+                if not line.lower().startswith("guideline_number"):
                     f.write(line + "\n")
 
 def main() -> None:
@@ -129,6 +165,11 @@ def main() -> None:
         # Pop parameters that are not recognized by init_chat_model/OpenAI
         model_kwargs.pop("max_concurrency", 10)
 
+        # Override/ensure high max_tokens to prevent truncation on long outputs
+        if model_kwargs.get("max_tokens", 0) < 8192:
+            print(f"Overriding model config max_tokens from {model_kwargs.get('max_tokens', 'None')} to 8192 to avoid truncation.")
+            model_kwargs["max_tokens"] = 8192
+
         if args.base_url:
             model_kwargs["base_url"] = args.base_url
         # Override temperature if it was fixed before or keep from config
@@ -140,7 +181,8 @@ def main() -> None:
             model=args.model,
             model_provider=args.model_provider,
             base_url=args.base_url,
-            temperature=0.1
+            temperature=0.1,
+            max_tokens=8192
         )
 
 
@@ -172,33 +214,15 @@ def main() -> None:
         pages = loader.load_and_split()
         pdf_text = "\n".join([p.page_content for p in pages])
 
-        # Windowing logic
-        chunk_size = 30000
-        overlap = 2000
-        chunks = []
-        if len(pdf_text) > chunk_size:
-            for i in range(0, len(pdf_text), chunk_size - overlap):
-                chunks.append(pdf_text[i:i + chunk_size])
-        else:
-            chunks = [pdf_text]
+        prompt = modified_prompt.replace("$ARGUMENTS", guideline_number)
+        prompt += f"\n\nHere is the extracted text from the PDF:\n\n{pdf_text}"
 
         responses = []
-        for i, chunk in enumerate(chunks):
-            print(f"  Processing chunk {i+1}/{len(chunks)}...", flush=True)
-            prompt = modified_prompt.replace("$ARGUMENTS", guideline_number)
-            if i > 0:
-                prompt += "\n\nIMPORTANT: You already provided the summary fields in the previous chunk. " \
-                          "In this chunk, focus ONLY on extracting NEW endpoints and key observations found in this specific text. " \
-                          "Output the CSV block with any NEW endpoints. " \
-                          "In the Markdown report, you can omit the header/summary table and just provide the 'Key Observations' and 'Endpoints' sections."
-
-            prompt += f"\n\nHere is the extracted text from this part of the PDF:\n\n{chunk}"
-
-            try:
-                response = llm.invoke(prompt)
-                responses.append(response.content)
-            except Exception as e:
-                print(f"  Error in chunk {i+1}: {e}", flush=True)
+        try:
+            response = llm.invoke(prompt)
+            responses.append(response.content)
+        except Exception as e:
+            print(f"  Error invoking LLM: {e}", flush=True)
 
         if responses:
             try:

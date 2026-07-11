@@ -1,0 +1,10 @@
+individual
+individual > decreased body weight
+individual > decreased mortality
+individual > increase mortality
+organ
+organ > liver injury
+population
+population > decreased survival
+population > increased mortality
+population > reduced survival

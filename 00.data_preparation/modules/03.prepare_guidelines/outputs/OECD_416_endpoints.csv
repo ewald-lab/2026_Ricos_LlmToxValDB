@@ -1,75 +1,41 @@
 guideline_number,category,endpoint_name,requirement_level,source,footnotes
-416,Clinical Observations,General clinical observation (daily),Required,Guideline text,"Includes signs of toxicity, difficult/prolonged parturition"
-416,Clinical Observations,Detailed clinical examination,Required,Guideline text,At least weekly
-416,Clinical Observations,Morbidity and mortality check,Required,Guideline text,Twice daily (weekends once daily)
-416,Clinical Observations,Body weight (Parental),Required,Guideline text,"Weekly, plus gestation days 0, 7, 14, 20/21, lactation days"
-416,Clinical Observations,Body weight (Offspring),Required,Guideline text,Birth, days 4, 7, 14, 21
-416,Clinical Observations,Food consumption,Required,Guideline text,Weekly minimum (pre-mating/gestation)
-416,Clinical Observations,Water consumption,Required,Guideline text,Weekly minimum if administered via water
-416,Clinical Observations,Oestrous cycle length/normality,Required,Guideline text,Vaginal smears prior to mating
-416,Clinical Observations,Physical development parameters,Optional,Guideline text,"Ear/eye opening, tooth eruption, hair growth"
-416,Clinical Observations,Functional observations,Optional,Guideline text,"Motor activity, sensory function, reflex ontogeny"
-416,Organ Weights,Uterus,Required,Guideline text,Paired organs weighed individually
-416,Organ Weights,Ovaries,Required,Guideline text,Paired organs weighed individually
-416,Organ Weights,Testes,Required,Guideline text,Paired organs weighed individually
-416,Organ Weights,Epididymides (total),Required,Guideline text,Paired organs weighed individually
-416,Organ Weights,Epididymides (cauda),Required,Guideline text,Paired organs weighed individually
-416,Organ Weights,Prostate,Required,Guideline text,
-416,Organ Weights,Seminal vesicles with coagulating glands,Required,Guideline text,As one unit
-416,Organ Weights,Brain,Required,Guideline text,For parents and selected offspring
-416,Organ Weights,Liver,Required,Guideline text,
-416,Organ Weights,Kidneys,Required,Guideline text,
-416,Organ Weights,Spleen,Required,Guideline text,For parents and selected offspring
-416,Organ Weights,Pituitary,Required,Guideline text,
-416,Organ Weights,Thyroid,Required,Guideline text,
-416,Organ Weights,Adrenal glands,Required,Guideline text,
-416,Organ Weights,Target organs,Required,Guideline text,Known target organs identified
-416,Histopathology,Vagina,Required,Guideline text,Fixed in suitable medium
-416,Histopathology,Uterus with cervix,Required,Guideline text,Fixed in suitable medium
-416,Histopathology,Ovaries,Required,Guideline text,"Preserved in appropriate fixative (Optional for P animals)"
-416,Histopathology,Testis,Required,Guideline text,One testis preserved in Bouin's or comparable fixative
-416,Histopathology,Epididymis,Required,Guideline text,One epididymis preserved
-416,Histopathology,Seminal vesicles,Required,Guideline text,
-416,Histopathology,Prostate,Required,Guideline text,
-416,Histopathology,Coagulating gland,Required,Guideline text,
-416,Histopathology,Target organs,Required,Guideline text,From all P and F1 animals selected for mating
-416,Histopathology,Primordial follicle count,Optional,Guideline text,Quantitative evaluation for F1 females
-416,Sperm Measures,Homogenisation-resistant spermatids enumeration,Required,Guideline text,Subset of at least ten males
-416,Sperm Measures,Cauda epididymides sperm reserves,Required,Guideline text,Subset of at least ten males
-416,Sperm Measures,Sperm motility,Required,Guideline text,Evaluation or video taped immediately after sacrifice
-416,Sperm Measures,Sperm morphology,Required,Guideline text,At least 200 per sample
-416,Developmental,Number and sex of pups,Required,Guideline text,Lactation day 0
-416,Developmental,Stillbirths/Live births,Required,Guideline text,Lactation day 0
-416,Developmental,Gross anomalies (pups),Required,Guideline text,Lactation day 0
-416,Developmental,Age at vaginal opening,Required,Guideline text,F1 weanlings selected for mating
-416,Developmental,Preputial separation age,Required,Guideline text,F1 weanlings selected for mating
-416,Developmental,Anogenital distance,Optional,Guideline text,Postnatal day 0 in F2 pups if triggered
-416,Developmental,Sexual maturation timing,Optional,Guideline text,Context for physical parameters
-416,Reproductive,Mating index,Required,Guideline text,Implied by pairing and copulation checks
-416,Reproductive,Fertility index,Required,Guideline text,Implied by pregnancy confirmation
-416,Reproductive,Gestation length,Required,Guideline text,Day 0 defined by plug/sperm
-416,Reproductive Indices,Number of fertile animals,Required,Guideline text,Must be reported individually and summarised
-416,Reproductive Indices,Number of pregnant females,Required,Guideline text,Must be reported individually and summarised
-416,Reproductive Indices,Mating index,Required,Guideline text,Reported by sex and dose
-416,Reproductive Indices,Fertility index,Required,Guideline text,Reported by sex and dose
-416,Reproductive Indices,Gestation length,Required,Guideline text,Time-to-mating and gestation length
-416,Reproductive Indices,Birth index / Viability,Required,Guideline text,Indices of birth and viability
-416,Reproductive Indices,Lactation index,Required,Guideline text,Indices of lactation performance
-416,Sperm Measures,Total cauda epididymal sperm number,Required,Guideline text,For parental males
-416,Sperm Measures,Percent progressively motile sperm,Required,Guideline text,For parental males
-416,Sperm Measures,Percent morphologically normal sperm,Required,Guideline text,For parental males
-416,Sperm Measures,Percent of sperm with identified abnormality,Required,Guideline text,Breakdown by abnormality type
-416,Organ Weights,Absolute organ weights (parental),Required,Guideline text,At sacrifice
-416,Organ Weights,Relative organ weights (parental),Required,Guideline text,At sacrifice
-416,Histopathology,Epididymis histopathology,Required,Guideline text,Evaluation for leukocyte infiltration, cell types, phagocytosis
-416,Histopathology,Ovary histopathology (primordial follicles),Required,Guideline text,Qualitative depletion and quantitative enumeration for F1 females
-416,Histopathology,Weanling reproductive organ histopathology,Required,Guideline text,Special emphasis on reproductive system for F1/F2 pups
-416,Developmental/Pup Data,Number of implantations,Required,Guideline text,Per litter
-416,Developmental/Pup Data,Number of corpora lutea,Required,Guideline text,Per female
-416,Developmental/Pup Data,Litter size,Required,Guideline text,Live births
-416,Developmental/Pup Data,Post-implantation loss,Required,Guideline text,Calculated from implantations vs live births
-416,Developmental/Pup Data,Pups with grossly visible abnormalities,Required,Guideline text,Including number of runts
-416,General Toxicity,Food consumption,Required,Guideline text,P and F1 animals (excluding cohabitation/late lactation)
-416,General Toxicity,Water consumption,Required,Guideline text,If available
-416,General Toxicity,Body weight gain (food efficiency),Required,Guideline text,Grams body weight gain per gram food consumed
-416,General Toxicity,NOAEL values,Required,Guideline text,Conclusions must include NOAEL for maternal and offspring effects
+416,Clinical Observations,General clinical observation,Required,Guideline text,Made each day
+416,Clinical Observations,Behavioural changes,Required,Guideline text,Recorded
+416,Clinical Observations,Signs of toxicity,Required,Guideline text,Recorded
+416,Clinical Observations,Morbidity and mortality,Required,Guideline text,Observed twice daily
+416,Sperm Parameters,Homogenisation-resistant spermatids enumeration,Required,Guideline text,From subset of at least 10 males/group
+416,Sperm Parameters,Cauda epididymides sperm reserves enumeration,Required,Guideline text,From subset of at least 10 males/group
+416,Sperm Parameters,Sperm motility,Required,Guideline text,Percentage of progressively motile sperm
+416,Sperm Parameters,Sperm morphology,Required,Guideline text,Classification as normal or abnormal
+416,Offspring Development,Stillbirths count,Required,Guideline text,Established after delivery
+416,Offspring Development,Live births count,Required,Guideline text,Counted and weighed individually
+416,Offspring Development,Body weight gain,Required,Guideline text,Regular weigh days (e.g., days 4, 7, 14, 21)
+416,Offspring Development,Physical landmarks (ear/eye opening, tooth eruption, hair growth),Optional,Guideline text,Supplementary information
+416,Offspring Development,Functional investigations (motor activity, sensory function, reflex ontogeny),Optional,Guideline text,Recommended if not in separate studies
+416,Gross Necropsy,Macroscopic examination of structural abnormalities,Required,Guideline text,On all specified animals
+416,Gross Necropsy,Implantation sites examination,Required,Guideline text,Uteri of all primiparous females
+416,Organ Weights,Uterus weight,Required,Guideline text,Paired organs weighed individually
+416,Organ Weights,Ovaries weight,Required,Guideline text,Paired organs weighed individually
+416,Organ Weights,Testes weight,Required,Guideline text,Total and cauda
+416,Organ Weights,Epididymides weight,Required,Guideline text,Total and cauda
+416,Organ Weights,Prostate weight,Required,Guideline text,
+416,Organ Weights,Seminal vesicles with coagulating glands weight,Required,Guideline text,As one unit
+416,Organ Weights,Brain weight,Required,Guideline text,
+416,Organ Weights,Liver weight,Required,Guideline text,
+416,Organ Weights,Kidneys weight,Required,Guideline text,
+416,Organ Weights,Spleen weight,Required,Guideline text,
+416,Organ Weights,Pituitary weight,Required,Guideline text,
+416,Organ Weights,Thyroid weight,Required,Guideline text,
+416,Organ Weights,Adrenal glands weight,Required,Guideline text,
+416,Organ Weights,Known target organs weight,Required,Guideline text,
+416,Organ Weights,Thymus weight (offspring),Required,Guideline text,From one random pup/sex/litter
+416,Histopathology,Vagina histopathology,Required,Guideline text,Fixed and stored
+416,Histopathology,Uterus with cervix histopathology,Required,Guideline text,Fixed and stored
+416,Histopathology,Ovaries histopathology,Required,Guideline text,Fixed and stored
+416,Histopathology,Testis histopathology,Required,Guideline text,One testis preserved
+416,Histopathology,Epididymis histopathology,Required,Guideline text,One epididymis preserved
+416,Histopathology,Seminal vesicles histopathology,Required,Guideline text,
+416,Histopathology,Prostate histopathology,Required,Guideline text,
+416,Histopathology,Coagulating gland histopathology,Required,Guideline text,
+416,Histopathology,Target organs histopathology,Required,Guideline text,Previously identified target organs
+416,Histopathology,Primordial follicle enumeration (F1 females),Optional,Guideline text,Quantitative evaluation recommended

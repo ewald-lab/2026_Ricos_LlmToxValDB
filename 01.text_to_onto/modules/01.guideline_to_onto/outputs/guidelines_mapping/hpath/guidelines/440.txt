@@ -1,0 +1,11 @@
+morphologic change
+morphologic change > cell adaptation injury death
+morphologic change > cell adaptation injury death > cellular adaptation of growth
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hyperplasia > hyperplasia myometrial
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy smooth muscle cell
+morphologic change > cell adaptation injury death > cellular adaptation of growth > hypertrophy > hypertrophy smooth muscle cell > hypertrophy myometrial
+morphologic change > neoplasia
+morphologic change > neoplasia > benign tumor
+morphologic change > neoplasia > benign tumor > myoma

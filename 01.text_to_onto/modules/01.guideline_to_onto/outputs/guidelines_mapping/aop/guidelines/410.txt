@@ -1,0 +1,80 @@
+cellular
+cellular > bile accumulation pathological condition
+cellular > damaging red blood cells hemolysis
+cellular > hepatocytotoxicity
+cellular > hepatotoxicity
+cellular > increase ca
+cellular > increased sympathetic nerve activity
+individual
+individual > abnormal behavior
+individual > abnormal foraging activity and behavior
+individual > decrease growth
+individual > decreased body weight
+individual > decreased locomotion
+individual > decreased lymphocytes
+individual > growth reduction
+individual > increase pigmentation
+individual > increased cardiovascular dysfunction
+individual > increased locomotion
+individual > inhibition feeding
+individual > locomotor activity decreased
+individual > parkinsonian motor deficits
+individual > reduced feeding 1
+individual > reduction fo pigmentation pattern
+molecular
+molecular > decreased extracellular chloride
+molecular > decreased extracellular sodium
+molecular > increase mucous
+organ
+organ > abnormal glucose homeostasis
+organ > altered function of the brain
+organ > altered neurophysiology
+organ > coagulation
+organ > decrease cardiac contractility
+organ > dysregulation of heart rate and vascular tone
+organ > eczematous eruption
+organ > formation hepatocellular and bile duct tumors
+organ > heart failure
+organ > immune mediated hepatitis
+organ > impaired oxygenation of the blood
+organ > increase rbc congestion in liver
+organ > increase renal pathology due to vtg deposition
+organ > increase tissue organ damage
+organ > increased cardiac stress
+organ > increased cholinergic signaling
+organ > increased glomerular rupture and renal hemorrhaging
+organ > increased liver steatosis
+organ > increased renal vitellogenin deposition
+organ > increased serum creatinine
+organ > inflammation liver
+organ > liver cancer
+organ > liver dysfunction
+organ > liver injury
+organ > lung fibrosis
+organ > n a liver fibrosis
+organ > n a liver steatosis
+organ > n a methemoglobinemia decreased hemoglobin hematocrit red blood cell number
+organ > n a steatohepatisis
+organ > respiratory distress arrest
+organ > scaling lichenification
+organ > testicular atrophy
+organ > vascular remodeling
+tissue
+tissue > decreased mucous
+tissue > decreased plasma sodium concentrations
+tissue > development liver cancer
+tissue > formation liver fibrosis
+tissue > increase necrosis
+tissue > increase necrotic tissue
+tissue > increase tissue degeneration necrosis atrophy
+tissue > increased blood potassium concentration
+tissue > increased cardiac dysregulation
+tissue > increased histomorphological alteration of testis
+tissue > induction somatic muscle paralysis
+tissue > n a hepatotoxicity hepatopathy including a constellation of observable effects
+tissue > necrosis
+tissue > necrotic tissue
+tissue > occurrence renal proximal tubular necrosis
+tissue > reduction in melanin lead to decrease of pigmentation
+tissue > reduction of melanosome level
+tissue > trigeminal and or vagal nerve excitation causes airway hyper responsiveness cough dyspnea

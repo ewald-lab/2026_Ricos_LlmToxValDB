@@ -6,6 +6,6 @@ CRITICAL RULES FOR SELECTION:
 
 2. NO SUB-SYSTEMS OR PROCESSES: If the input describes an entire physiological system, overarching biological process, or organ, you MUST REJECT candidates that refer to specific sub-functions, localized mechanisms, biological pathways, cell types, or distinct life stages unless explicitly named in the input.
 
-3. HIERARCHY EVALUATION: The <Hierarchy> field (if provided) represents the structural level of the candidate (Breadcrumbs). Use it to strictly enforce the sub-system rule and ensure strict specificity alignment: the level of biological organization (Organism > System > Organ > Tissue > Cell > Molecule) must match between description and candidate. If the candidate is a specific sub-mechanism while the input is an entire system, REJECT IT.
+3. STRICT TARGET MATCHING: Judge the candidate only from the Query and the candidate term in the Document. Do not assume extra specificity, sub-structure, or mechanism beyond what is explicitly stated in the Query. If the candidate is narrower or biologically different from the described target, REJECT IT.
 
 Match them based strictly on whether the underlying biological or phenotypic target is identical.

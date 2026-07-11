@@ -1,0 +1,21 @@
+cellular
+cellular > increase necrosis
+individual
+individual > decrease growth
+individual > decreased body weight
+individual > decreased mortality
+individual > growth reduction
+individual > increase mortality
+organ
+organ > increase tissue organ damage
+organ > lung fibrosis
+population
+population > decreased survival
+population > increased mortality
+population > reduced survival
+tissue
+tissue > alterations cellular proliferation hyperplasia
+tissue > increase necrotic tissue
+tissue > increase tissue degeneration necrosis atrophy
+tissue > necrosis
+tissue > necrotic tissue
