@@ -1,0 +1,103 @@
+UNMAPPED PHRASE QUALITATIVE SUMMARY (MP)
+Total phrases: 16723 | Mapped: 16356 (97.81%) | Unmapped: 367 (2.19%)
+
+=== Category: Other Unmapped Endpoint (237 phrases, 64.6%) ===
+   1. decreased minute volume
+   2. minute volume
+   3. epithelial atrophy or disorganization
+   4. increased incidence of demodectic mange
+   5. regeneration in the larynx
+   6. epithelial atrophy
+   7. presence of ectodermal dysplasia 1 protein antibodies
+   8. hemosiderin in adventitia/BALT
+   9. clinical signs: bilateral ptosis
+  10. clinical signs: peripheral
+  11. gross pathology: fistula draining
+  12. gross pathology: abscess
+  13. histopathology: non-neoplastic colloid alteration
+  14. histopathology: non-neoplastic atrophy
+  15. clinical signs: altered closure
+  16. gross pathology: hyperplasia
+  17. gross pathology: adhesion
+  18. histopathology: non-neoplastic regeneration
+  19. altered histopathology: non-neoplastic parameters
+  20. histopathology: non-neoplastic pancreas
+
+=== Category: Molecular / Enzyme Assay Endpoint (84 phrases, 22.9%) ===
+   1. increased ap activity
+   2. altered dopamine receptor (caudate-putamen) binding
+   3. elevated hepatic transaminase
+   4. increased n-acetyl-beta-d-glucosaminidase (nag)
+   5. genetics: estrogen receptor beta mrna
+   6. enzyme(s): altered acid phosphatase
+   7. enzyme(s): altered ceruloplasmin activity
+   8. genetics: interleukin-2 mRNA
+   9. genetics: interleukin 1 alpha mrna
+  10. genetics: altered interleukin 4 mrna
+  11. genetics: interleukin 12a mrna
+  12. cell(s): altered androgen receptors
+  13. enzyme(s): altered adenosine triphosphatase activity
+  14. genetics: gonadotropin alpha subunit mrna
+  15. genetics: gonadotrophin releasing hormone (gnrh) mrna
+  16. genetics: insl3 mrna
+  17. genetics: ornithine decarboxylase mrna
+  18. genetics: cytochrome p-450 1a2 mrna
+  19. genetics: estrogen receptor alpha mrna
+  20. genetics: ca2+/calmodulin-dependent protein kinase 1-gamma splice 1 mrna
+
+=== Category: Generic / Vague Description (18 phrases, 4.9%) ===
+   1. histopathology: nonneoplastic
+   2. altered organ weight
+   3. effect on organ weights
+   4. effect on gross pathology
+   5. effect on epithelium
+   6. regeneration
+   7. degeneration
+   8. premature sacrifice
+   9. effect on histopathology: non-neoplastic
+  10. clinical signs: lesion
+  11. histopathology: non-neoplastic
+  12. fibrotic
+  13. nodule
+  14. hyperplastic
+  15. effect on liver mrna
+  16. effect on superoxide dismutase (sod) in brain
+  17. effect on external
+  18. effect on bromine levels in fat
+
+=== Category: Negative / Normal Clinical Finding (17 phrases, 4.6%) ===
+   1. no discharge of treatment sites
+   2. ophthalmoscopy: no adverse ophthalmic effects observed
+   3. respiratory rate: no adverse effect
+   4. peak expiratory flow: no adverse effect
+   5. electrocardiography: no adverse effect on qrs intervals
+   6. electrocardiography: no adverse effect on p-r intervals
+   7. electrocardiography: no adverse effect on qt intervals
+   8. electrocardiography: no adverse effect on heart rate
+   9. histopathology: non-neoplastic abnormal cell number
+  10. abnormal mucosa morphology
+  11. blood: normalized plasma pfhxa concentration
+  12. increased rate of abnormal physiology
+  13. increased incidence of abnormalities
+  14. clinical signs: abnormalities were noted
+  15. whole body: necropsy abnormalities
+  16. morphology: abnormality
+  17. abnormalities
+
+=== Category: Administrative / Text Noise (6 phrases, 1.6%) ===
+   1. -
+   2. na
+   3. hd
+   4. p0:
+   5. f2:
+   6. f1:
+
+=== Category: Pharmacokinetic / Exposure Parameter (4 phrases, 1.1%) ===
+   1. increased auc
+   2. increased cmax
+   3. increased AUC
+   4. drug plasma levels increased
+
+=== Category: Study Metadata / Text Block Artifact (1 phrases, 0.3%) ===
+   1. mortality: all animals were checked early morning and as late as possible each day for viability. there was 1 death prio
+

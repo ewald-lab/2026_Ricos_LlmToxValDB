@@ -928,7 +928,10 @@ def main() -> None:
             meta = parse_llm_metadata(eid)
             if meta:
                 metrics_df.at[idx, "Entity"] = meta["model"].replace("-fp8", "").replace("-FP8", "")
-    # Standalone Plot 2 & 3: Avg Terms and Max Depth plots removed as per user request
+    print("=== TERM USAGE & ONTOLOGY DEPTH STATS ===", flush=True)
+    for _, row in metrics_df.iterrows():
+        print(f"Entity: {row['Entity']:<25} | Type: {row['Type']:<12} | Avg Orig Terms: {row.get('Avg_Orig_Num_Terms', np.nan):.2f} | Avg Expanded Terms: {row.get('Avg_Expanded_Num_Terms', np.nan):.2f} | Mean Max Depth: {row.get('Mean_Max_Depth', np.nan):.2f}", flush=True)
+    print("==========================================", flush=True)
 
 
 
@@ -1169,20 +1172,20 @@ def main() -> None:
         x_indices = np.arange(len(phrases_display))
         
         # Plot 1: Human-Human
-        axes[0].bar(x_indices, var_df["Human-Human Variability"], color="#4C78A8", edgecolor="black", alpha=0.8)
-        axes[0].set_ylabel("Variability")
+        axes[0].bar(x_indices, 1.0 - var_df["Human-Human Variability"], color="#4C78A8", edgecolor="black", alpha=0.8)
+        axes[0].set_ylabel("Jaccard Similarity")
         axes[0].set_ylim(0.0, 1.0)
         axes[0].set_yticks([0.0, 0.5, 1.0])
         
         # Plot 2: LLM-LLM
-        axes[1].bar(x_indices, var_df["LLM-LLM Variability"], color="#34A853", edgecolor="black", alpha=0.8)
-        axes[1].set_ylabel("Variability")
+        axes[1].bar(x_indices, 1.0 - var_df["LLM-LLM Variability"], color="#34A853", edgecolor="black", alpha=0.8)
+        axes[1].set_ylabel("Jaccard Similarity")
         axes[1].set_ylim(0.0, 1.0)
         axes[1].set_yticks([0.0, 0.5, 1.0])
         
         # Plot 3: Human-LLM
-        axes[2].bar(x_indices, var_df["Human-LLM Variability"], color="#EA4335", edgecolor="black", alpha=0.8)
-        axes[2].set_ylabel("Variability")
+        axes[2].bar(x_indices, 1.0 - var_df["Human-LLM Variability"], color="#EA4335", edgecolor="black", alpha=0.8)
+        axes[2].set_ylabel("Jaccard Similarity")
         axes[2].set_ylim(0.0, 1.0)
         axes[2].set_yticks([0.0, 0.5, 1.0])
         
@@ -1299,10 +1302,24 @@ def main() -> None:
             }
             dist_df["Jaccard Similarity"] = 1.0 - dist_df["Variability"]
             valid_b = paper_df[["Human-Human Variability", "LLM-LLM Variability", "Human-LLM Variability"]].dropna()
+            hh_jacc = 1.0 - valid_b["Human-Human Variability"]
+            ll_jacc = 1.0 - valid_b["LLM-LLM Variability"]
+            hl_jacc = 1.0 - valid_b["Human-LLM Variability"]
+            
             import scipy.stats as stats
-            _, p_hh_ll = stats.ttest_rel(valid_b["Human-Human Variability"], valid_b["LLM-LLM Variability"])
-            _, p_hh_hl = stats.ttest_rel(valid_b["Human-Human Variability"], valid_b["Human-LLM Variability"])
-            _, p_ll_hl = stats.ttest_rel(valid_b["LLM-LLM Variability"], valid_b["Human-LLM Variability"])
+            _, p_hh_ll = stats.ttest_rel(hh_jacc, ll_jacc)
+            _, p_hh_hl = stats.ttest_rel(hh_jacc, hl_jacc)
+            _, p_ll_hl = stats.ttest_rel(ll_jacc, hl_jacc)
+
+            print("=== FIGURE 2B STATISTICAL SUMMARY ===", flush=True)
+            print(f"Mean Human-Human Jaccard Similarity: {hh_jacc.mean():.4f} (std: {hh_jacc.std():.4f})", flush=True)
+            print(f"Mean LLM-LLM Jaccard Similarity    : {ll_jacc.mean():.4f} (std: {ll_jacc.std():.4f})", flush=True)
+            print(f"Mean Human-LLM Jaccard Similarity  : {hl_jacc.mean():.4f} (std: {hl_jacc.std():.4f})", flush=True)
+            print(f"Ratio LLM-LLM / Human-Human        : {ll_jacc.mean() / hh_jacc.mean():.4f}x", flush=True)
+            print(f"Ratio Human-LLM / Human-Human      : {hl_jacc.mean() / hh_jacc.mean():.4f}x", flush=True)
+            print(f"Paired t-test LLM-LLM vs Human-Human: p = {p_hh_ll:.4e}", flush=True)
+            print(f"Paired t-test Human-LLM vs Human-Human: p = {p_hh_hl:.4e}", flush=True)
+            print("=====================================", flush=True)
             
             def draw_bracket(ax, x1, x2, y, h, p_val):
                 ax.plot([x1, x1, x2, x2], [y, y+h, y+h, y], lw=1.2, color='black')

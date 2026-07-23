@@ -5,8 +5,6 @@
 #SBATCH --mem=16G
 #SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=2
-#SBATCH --mail-user=ricos@ebi.ac.uk
-#SBATCH --mail-type=END
 
 SCRIPT_DIR=$(dirname "$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)")
 MODULE_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
