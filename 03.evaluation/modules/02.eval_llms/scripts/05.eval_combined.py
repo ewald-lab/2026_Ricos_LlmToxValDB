@@ -2123,6 +2123,10 @@ def main() -> None:
                 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
                 y_label = "F1 vs Human Consensus Reference"
 
+                def draw_decision_bracket(ax, x1, x2, y, h, p_val):
+                    ax.plot([x1, x1, x2, x2], [y, y+h, y+h, y], lw=1.2, color='black')
+                    ax.text((x1+x2)/2, y+h+0.005, get_asterisks(p_val), ha='center', va='bottom', color='black', fontsize=11, fontweight='bold')
+
                 # 1. Definitions Impact Analysis
                 try:
                     pivot_defs = df.pivot(
@@ -2159,13 +2163,13 @@ def main() -> None:
                         size=6,
                         jitter=0.1
                     )
-                    title = f"Definitions"
                     if pd.notna(p_val):
-                        title += f"\nP-value: {p_val:.2e}"
-                    axes[0].set_title(title, fontsize=14, fontweight="bold")
+                        draw_decision_bracket(axes[0], 0, 1, 1.03, 0.02, p_val)
+                    axes[0].set_title("")
                     axes[0].set_ylabel(y_label, fontsize=12)
                     axes[0].set_xlabel("Configuration", fontsize=12)
-                    axes[0].set_ylim(-0.05, 1.05)
+                    axes[0].set_ylim(-0.05, 1.18)
+                    axes[0].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
                     axes[0].grid(False)
                 except Exception as e:
                     print(f"Error generating definitions plot in {target_dir}: {e}")
@@ -2206,13 +2210,13 @@ def main() -> None:
                         size=6,
                         jitter=0.1
                     )
-                    title = f"Evaluation Strategy"
                     if pd.notna(p_val):
-                        title += f"\nP-value: {p_val:.2e}"
-                    axes[1].set_title(title, fontsize=14, fontweight="bold")
+                        draw_decision_bracket(axes[1], 0, 1, 1.03, 0.02, p_val)
+                    axes[1].set_title("")
                     axes[1].set_ylabel(y_label, fontsize=12)
                     axes[1].set_xlabel("Configuration", fontsize=12)
-                    axes[1].set_ylim(-0.05, 1.05)
+                    axes[1].set_ylim(-0.05, 1.18)
+                    axes[1].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
                     axes[1].grid(False)
                 except Exception as e:
                     print(f"Error generating mode plot in {target_dir}: {e}")
@@ -2257,14 +2261,26 @@ def main() -> None:
                         size=6,
                         jitter=0.1
                     )
-                    title = f"Consensus"
                     if pd.notna(p_val):
-                        title += f"\nP-value: {p_val:.2e}"
-                    axes[2].set_title(title, fontsize=14, fontweight="bold")
+                        draw_decision_bracket(axes[2], 0, len(consensus_values)-1, 1.03, 0.02, p_val)
+
+                    axes[2].set_title("")
                     axes[2].set_ylabel(y_label, fontsize=12)
                     axes[2].set_xlabel("Number of Runs", fontsize=12)
-                    axes[2].set_ylim(-0.05, 1.05)
+                    axes[2].set_ylim(-0.05, 1.18)
+                    axes[2].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
                     axes[2].grid(False)
+
+                    # Significance legend box placed cleanly outside to the right, including ns
+                    axes[2].text(
+                        1.03, 0.98,
+                        "* p < 0.05\n** p < 0.01\n*** p < 0.001\nns: not significant",
+                        transform=axes[2].transAxes,
+                        fontsize=10,
+                        va="top",
+                        ha="left",
+                        bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor="0.7", alpha=0.9),
+                    )
                 except Exception as e:
                     print(f"Error generating consensus plot in {target_dir}: {e}")
 
