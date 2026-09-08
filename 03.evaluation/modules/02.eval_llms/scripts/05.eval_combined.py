@@ -505,18 +505,11 @@ def main() -> None:
             pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0).sum()
             if df_orig is not None and "Not_My_Expertise" in df_orig.columns else 0
         )
-        if df_orig is not None:
-            if "Not_My_Expertise" in df_orig.columns:
-                not_exp_mask = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0) == 1
-                filtered_df_exp = df_exp[~not_exp_mask]
-            else:
-                filtered_df_exp = df_exp
-            avg_orig_terms = (
-                filtered_df_exp["All_Terms_Set"].apply(len).mean()
-                if not filtered_df_exp.empty else 0
-            )
-        else:
-            avg_orig_terms = df_exp["All_Terms_Set"].apply(len).mean()
+        filtered_df_exp = df_exp[df_exp["Not_My_Expertise"] != 1]
+        avg_expanded_terms = (
+            filtered_df_exp["All_Terms_Set"].apply(len).mean()
+            if not filtered_df_exp.empty else 0
+        )
 
         filtered_for_depth = df_exp[df_exp["Not_My_Expertise"] != 1]
         mean_max_depth = filtered_for_depth["Max_Depth"].mean() if not filtered_for_depth.empty else 0
@@ -526,7 +519,7 @@ def main() -> None:
                 "Entity_ID": expert_id,
                 "Entity": clean_expert_name(expert_id),
                 "Type": "Human Expert",
-                "Avg_Orig_Num_Terms": avg_orig_terms,
+                "Avg_Expanded_Num_Terms": avg_expanded_terms,
                 "Mean_Max_Depth": mean_max_depth,
                 "Selected_Terms": selected_count_total,
                 "Manual_Terms": manual_count_total,
@@ -601,7 +594,7 @@ def main() -> None:
         if len(parts_id) > 1 and parts_id[-1].isdigit() and 1 <= int(parts_id[-1]) <= 10:
             is_repro_run = True
 
-        avg_orig_terms = 0.0
+        avg_expanded_terms = 0.0
         mean_max_depth = 0.0
 
         if not is_repro_run:
@@ -617,29 +610,34 @@ def main() -> None:
             if not df_runs:
                 df_runs = [df_exp]
 
-            run_avg_orig_terms = []
+            run_avg_expanded_terms = []
             run_mean_max_depth = []
 
             for df_run in df_runs:
-                # Calculate metrics for this run
-                if df_orig is not None:
-                    if "Not_My_Expertise" in df_orig.columns:
-                        not_exp_mask = pd.to_numeric(df_orig["Not_My_Expertise"], errors="coerce").fillna(0) == 1
-                        filtered_df_run = df_run[~not_exp_mask]
-                    else:
-                        filtered_df_run = df_run
-                    run_avg = filtered_df_run["All_Terms_Set"].apply(len).mean() if not filtered_df_run.empty else 0
-                else:
-                    run_avg = df_run["All_Terms_Set"].apply(len).mean()
-                
-                df_run["Max_Depth"] = df_run["All_Terms_Set"].apply(lambda x: get_max_depth(x, depth_map))
-                filtered_for_depth = df_run[df_run.get("Not_My_Expertise", 0) != 1]
-                run_depth = filtered_for_depth["Max_Depth"].mean() if not filtered_for_depth.empty else 0
+                exclusion_mask = df_exp["Not_My_Expertise"].eq(1).to_numpy()
+                if len(exclusion_mask) != len(df_run):
+                    raise ValueError(
+                        "LLM reproducibility run and reference data have different lengths"
+                    )
 
-                run_avg_orig_terms.append(run_avg)
+                filtered_df_run = df_run.loc[~exclusion_mask].copy()
+                run_avg = (
+                    filtered_df_run["All_Terms_Set"].apply(len).mean()
+                    if not filtered_df_run.empty else 0
+                )
+
+                filtered_df_run["Max_Depth"] = filtered_df_run["All_Terms_Set"].apply(
+                    lambda x: get_max_depth(x, depth_map)
+                )
+                run_depth = (
+                    filtered_df_run["Max_Depth"].mean()
+                    if not filtered_df_run.empty else 0
+                )
+
+                run_avg_expanded_terms.append(run_avg)
                 run_mean_max_depth.append(run_depth)
 
-            avg_orig_terms = np.mean(run_avg_orig_terms)
+            avg_expanded_terms = np.mean(run_avg_expanded_terms)
             mean_max_depth = np.mean(run_mean_max_depth)
 
         if not is_repro_run:
@@ -648,7 +646,7 @@ def main() -> None:
                     "Entity_ID": llm_id,
                     "Entity": clean_llm_name(llm_id),
                     "Type": "LLM",
-                    "Avg_Orig_Num_Terms": avg_orig_terms,
+                    "Avg_Expanded_Num_Terms": avg_expanded_terms,
                     "Mean_Max_Depth": mean_max_depth,
                     "Selected_Terms": selected_count_total,
                     "Manual_Terms": manual_count_total,
@@ -930,7 +928,13 @@ def main() -> None:
                 metrics_df.at[idx, "Entity"] = meta["model"].replace("-fp8", "").replace("-FP8", "")
     print("=== TERM USAGE & ONTOLOGY DEPTH STATS ===", flush=True)
     for _, row in metrics_df.iterrows():
-        print(f"Entity: {row['Entity']:<25} | Type: {row['Type']:<12} | Avg Orig Terms: {row.get('Avg_Orig_Num_Terms', np.nan):.2f} | Avg Expanded Terms: {row.get('Avg_Expanded_Num_Terms', np.nan):.2f} | Mean Max Depth: {row.get('Mean_Max_Depth', np.nan):.2f}", flush=True)
+        print(
+            f"Entity: {row['Entity']:<25} | "
+            f"Type: {row['Type']:<12} | "
+            f"Avg Expanded Terms: {row.get('Avg_Expanded_Num_Terms', np.nan):.2f} | "
+            f"Mean Max Depth: {row.get('Mean_Max_Depth', np.nan):.2f}",
+            flush=True,
+        )
     print("==========================================", flush=True)
 
 
@@ -1459,7 +1463,7 @@ def main() -> None:
             np.fill_diagonal(dist_matrix, 0)
             dist_matrix = (dist_matrix + dist_matrix.T) / 2
             condensed_dist = squareform(dist_matrix)
-            Z = linkage(condensed_dist, method="ward")
+            Z = linkage(condensed_dist, method="average")
 
             fig_summary = plt.figure(figsize=(17, 14), constrained_layout=False)
             gs_summary = fig_summary.add_gridspec(
@@ -1513,7 +1517,7 @@ def main() -> None:
             sns.barplot(
                 data=metrics_df,
                 x="Entity",
-                y="Avg_Orig_Num_Terms",
+                y="Avg_Expanded_Num_Terms",
                 hue="Type",
                 palette={"Human Expert": "#4C78A8", "LLM": "#EA4335"},
                 ax=ax_terms,
