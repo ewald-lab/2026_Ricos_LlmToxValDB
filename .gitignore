@@ -208,3 +208,7 @@ __marimo__/
 !**/config/**/*.json
 !**/params/**/*.json
 *.pdf
+
+# Documentation outputs
+**/outputs/Documentation/
+*.html.html

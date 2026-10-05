@@ -31,17 +31,13 @@ Systematic evaluation of retrieval-augmented generation parameters. Includes hyp
 
 Generation of expert annotation test sets and interactive HTML interfaces for domain expert evaluation. Supports sampling strategies (PCA/K-Means) for representative phrase selection and produces structured outputs for computing inter-annotator agreement.
 
-## Setup
+## Citation
 
-### Development tools (repo root)
-
-```bash
-uv venv .venv --python=python3.12
-source .venv/bin/activate
-uv pip install --no-cache -r requirements-dev.txt
-pre-commit install --hook-type pre-commit --hook-type pre-push
+```bibtex
+@article{saurina2026automated,
+  title={Automated Ontology Annotation of Phenotypic Descriptions using Large Language Models (LLMs)},
+  author={Saurina-i-Ricos, Joan and Puig-Barbe, Aleix and Carli, Francesco and Johannesson, Bjarki and Chouhan, Bhavik and McLaughlin, James and Ewald, Jessica D.},
+  year={2026},
+  note={In preparation}
+}
 ```
-
-### Data
-
-Large input files (ToxValDB dumps, ontology databases, embeddings) are not committed to the repository. See `download_*.sh` scripts in the relevant `inputs/` directories, or set up symlinks to the shared storage location on the EBI cluster.
