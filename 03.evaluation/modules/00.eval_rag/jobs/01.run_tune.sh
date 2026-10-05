@@ -63,7 +63,7 @@ case $RERANKER_MODEL in
 esac
 
 ONTOLOGY_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/02.prepare_ontologies/outputs/${DIR}/mp.db"
-TARGET_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.prepare_database/outputs/embeddings_db/tox_effects_${DIR}.db"
+TARGET_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_${DIR}.db"
 CACHE_FILE="../outputs/cache/precomputed_scores_${DIR}_${RERANK_SHORT}_${DATA_VARIANT}.json"
 
 # Step 1: Precompute Top 150 candidates and Reranker scores
@@ -76,7 +76,7 @@ python3 01.precompute_eval_data.py \
     --embedding_model "$MODEL" \
     --reranker_model "$RERANKER_MODEL" \
     --reranker_config "$RERANKER_CONFIG" \
-    --toxval_db "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.prepare_database/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
+    --toxval_db "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
     --global_definitions_db "$DEFINITIONS_DB" \
     --data_variant "$DATA_VARIANT" \
     --output "$CACHE_FILE"
