@@ -35,7 +35,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--target_embedding_db", required=True, help="Path to save embedding database for target column.")
 
     # --- Environment ---
-    parser.add_argument("--hf_home", default="/nfs/research/ewald/ricos/huggingface_cache", help="HuggingFace cache directory.")
+    parser.add_argument("--hf_home", default=os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface")), help="HuggingFace cache directory.")
 
     return parser.parse_args()
 
