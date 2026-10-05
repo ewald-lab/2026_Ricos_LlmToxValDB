@@ -17,7 +17,12 @@ source env-<name>/bin/activate
 
 ### `00.data_preparation/`
 
-Preprocessing and cleaning of the ToxValDB dataset and ontology sources. Includes LLM-assisted standardisation of free-text effect descriptions and preparation of ontology databases (parsing OWL files, generating definitions, building embedding databases).
+Contains data acquisition, curation, and embedding preparation pipelines divided into specialized modules:
+
+- **`00.download_toxvaldb/`**: Downloads the raw ToxValDB database release dumps and unifies partitioned data chunks into a consolidated dataset.
+- **`01.preprocess_toxvaldb/`**: Filters and curates toxicological effect descriptions, performing exploratory data analysis, LLM-assisted cleaning/splitting of multi-effect entries, identification of negative/no-effect descriptors, and generation of dense vector embedding databases.
+- **`02.prepare_ontologies/`**: Parses biomedical ontologies (MP, HP, HPATH, TXPO, AOP-Wiki) from OWL/TTL sources, reconstructs class hierarchies, generates and evaluates missing definitions using LLMs, and creates embedding databases for vector retrieval.
+- **`03.prepare_guidelines/`**: Ingests and processes OECD toxicity testing guidelines, extracting standardized endpoints and generating structured guideline reports using LLMs.
 
 ### `01.ontology_pipeline/`
 
