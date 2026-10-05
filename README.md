@@ -21,7 +21,7 @@ Contains data acquisition, curation, and embedding preparation pipelines divided
 
 - **`00.download_toxvaldb/`**: Downloads the raw ToxValDB database release dumps and unifies partitioned data chunks into a consolidated dataset.
 - **`01.preprocess_toxvaldb/`**: Filters and curates toxicological effect descriptions, performing exploratory data analysis, LLM-assisted cleaning/splitting of multi-effect entries, identification of negative/no-effect descriptors, and generation of dense vector embedding databases.
-- **`02.prepare_ontologies/`**: Parses biomedical ontologies (MP, HP, HPATH, TXPO, AOP-Wiki) from OWL/TTL sources, reconstructs class hierarchies, generates and evaluates missing definitions using LLMs, and creates embedding databases for vector retrieval.
+- **`02.prepare_ontologies/`**: Parses biomedical ontologies from OWL/TTL sources, reconstructs class hierarchies, generates and evaluates missing definitions using LLMs, and creates embedding databases for vector retrieval.
 - **`03.prepare_guidelines/`**: Ingests and processes OECD toxicity testing guidelines, extracting standardized endpoints and generating structured guideline reports using LLMs.
 
 ### `01.ontology_pipeline/`
