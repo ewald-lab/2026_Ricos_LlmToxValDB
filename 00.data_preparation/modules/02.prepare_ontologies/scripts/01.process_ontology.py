@@ -19,7 +19,7 @@ from model.llm import get_model, test_model
 from model.embeddings import EmbeddingModel
 from src.utils import setup_logging, sanitize_name
 
-DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
+DEFAULT_HF_HOME = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))
 DEFAULT_HF_TRANSFER = "1"
 
 logger = setup_logging()

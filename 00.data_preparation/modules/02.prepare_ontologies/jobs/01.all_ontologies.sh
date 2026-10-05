@@ -13,19 +13,31 @@
 
 ONTOLOGIES=("aop" "hp" "hpath" "mp" "txpo")
 
-SCRIPT_DIR=$(dirname "$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)")
+if [ -n "$SLURM_JOB_ID" ]; then
+    SCRIPT_PATH=$(scontrol show job "$SLURM_JOB_ID" | awk -F= '/Command=/{print $2}' | head -n 1)
+    SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+else
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
-export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
+mkdir -p "${SCRIPT_DIR}/logs"
 
-module purge && module load cuda/12.8.0 gcc
+export HF_HUB_ENABLE_HF_TRANSFER="${HF_HUB_ENABLE_HF_TRANSFER:-1}"
+export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
-source "${PREP_ROOT}/env-data-prep/bin/activate"
+module purge 2>/dev/null || true
+module load cuda/12.8.0 gcc 2>/dev/null || true
 
-ONTOLOGY="${ONTOLOGIES[$SLURM_ARRAY_TASK_ID]}"
-EMBED_DIR="qwen"
+if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/env-data-prep/bin/activate"
+fi
+
+# Optional argument overrides: $1 = ontology, $2 = embedding model (default: qwen)
+TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
+ONTOLOGY="${1:-${ONTOLOGIES[$TASK_ID]}}"
+EMBED_DIR="${2:-qwen}"
 
 # Select root class URI based on ontology
 ROOT_FLAG=""
@@ -44,10 +56,18 @@ case "$ONTOLOGY" in
         ;;
 esac
 
+mkdir -p "${REPO_ROOT}/outputs/${EMBED_DIR}"
+
+echo "=========================================================="
+echo "Ontology: ${ONTOLOGY} | Model: ${EMBED_DIR} | Array ID: ${SLURM_ARRAY_TASK_ID:-manual}"
+echo "HF_HOME: ${HF_HOME}"
+echo "=========================================================="
+
 python "${REPO_ROOT}/scripts/01.process_ontology.py" \
     $ROOT_FLAG \
     --ontology_file "${REPO_ROOT}/inputs/owl_files/${ONTOLOGY}.ttl" \
     --ontology_db "${REPO_ROOT}/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
     --rag_config "${REPO_ROOT}/config/rag/embeddings.json" \
     --embeddings_model_id "${EMBED_DIR}" \
-    --global_definitions_db "${REPO_ROOT}/outputs/definitions_${ONTOLOGY}.db"
+    --global_definitions_db "${REPO_ROOT}/outputs/definitions_${ONTOLOGY}.db" \
+    --hf_home "${HF_HOME}"
