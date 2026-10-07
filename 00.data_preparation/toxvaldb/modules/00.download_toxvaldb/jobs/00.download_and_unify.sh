@@ -8,8 +8,13 @@
 
 SCRIPT_DIR=$(dirname "$(scontrol show job $SLURM_JOB_ID | awk -F= '/Command=/{print $2}' | head -n 1)")
 MODULE_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
-source "$(cd "${SCRIPT_DIR}/../../.." && pwd)/env-data-prep/bin/activate"
+if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 
 cd "${MODULE_DIR}/outputs"
 

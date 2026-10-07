@@ -24,7 +24,11 @@ POSITIVES="${1:-${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_positives.tsv}"
 NEGATIVES="${2:-${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_negatives.tsv}"
 OUTPUT="${3:-${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv}"
 
-source "${PREP_ROOT}/env-data-prep/bin/activate"
+if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 
 python "${REPO_ROOT}/scripts/02.merge_pos_neg.py" \
     --positives "${POSITIVES}" \

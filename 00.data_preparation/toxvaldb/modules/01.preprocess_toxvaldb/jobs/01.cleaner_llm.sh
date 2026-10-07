@@ -5,9 +5,9 @@
 #SBATCH --cpus-per-task=24
 #SBATCH --nodes=1
 #SBATCH --mem=48G
-#SBATCH -J "clean_llm_neg"
-#SBATCH -o "logs/clean_llm_neg%j.out"
-#SBATCH -e "logs/clean_llm_neg%j.err"
+#SBATCH -J "clean_llm"
+#SBATCH -o "logs/clean_llm%j.out"
+#SBATCH -e "logs/clean_llm%j.err"
 
 if [ -n "$SLURM_JOB_ID" ]; then
     SCRIPT_PATH=$(scontrol show job "$SLURM_JOB_ID" | awk -F= '/Command=/{print $2}' | head -n 1)
@@ -37,19 +37,22 @@ else
     FINAL_BASE_URL="http://${ENDPOINT}.ebi.ac.uk:${PORT}/v1"
 fi
 
-source "${PREP_ROOT}/env-data-prep/bin/activate"
+if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 
-echo "=== LLM Cleaning (Negatives) ==="
+echo "=== LLM Cleaning (Positives) ==="
 echo "Endpoint URL : ${FINAL_BASE_URL}"
 echo "Model Config : ${MODEL_CONFIG}"
 
-python "${REPO_ROOT}/scripts/01.llm_clean_negatives.py" \
+python "${REPO_ROOT}/scripts/01.llm_clean.py" \
     --input "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_01.tsv" \
-    --output "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_negatives.tsv" \
-    --reasoning_file "${REPO_ROOT}/outputs/llm_clean_reasoning_negatives.json" \
+    --output "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_02_positives.tsv" \
+    --reasoning_file "${REPO_ROOT}/outputs/llm_clean_reasoning_positives.json" \
     --model_config "${MODEL_CONFIG}" \
-    --pipeline_dir "${REPO_ROOT}/config/clean_prompts_negatives/pipeline" \
-    --system_prompt_positivize_file "${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_positivize.txt" \
-    --system_prompt_standardize_file "${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_standardize.txt" \
-    --system_prompt_exceptions_file "${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_clean_exceptions.txt" \
+    --pipeline_dir "${REPO_ROOT}/config/clean_prompts/pipeline" \
+    --system_prompt_standardize_file "${REPO_ROOT}/config/clean_prompts/system_prompt_standardize.txt" \
+    --system_prompt_exceptions_file "${REPO_ROOT}/config/clean_prompts/system_prompt_clean_exceptions.txt" \
     --base_url "${FINAL_BASE_URL}"

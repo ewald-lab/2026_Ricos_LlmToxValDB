@@ -43,7 +43,11 @@ module purge 2>/dev/null || true
 module load cuda/12.8.0 gcc 2>/dev/null || true
 
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 fi
 
 mkdir -p "${REPO_ROOT}/outputs/${EMBED_DIR}"

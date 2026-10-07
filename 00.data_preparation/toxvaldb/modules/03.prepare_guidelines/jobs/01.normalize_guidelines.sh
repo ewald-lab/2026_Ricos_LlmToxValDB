@@ -24,7 +24,11 @@ INPUT_DIR="${1:-${REPO_ROOT}/outputs}"
 OUTPUT_DIR="${2:-${REPO_ROOT}/outputs}"
 
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 fi
 
 echo "=========================================================="

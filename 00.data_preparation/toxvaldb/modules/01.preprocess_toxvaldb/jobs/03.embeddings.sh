@@ -37,7 +37,11 @@ fi
 
 module purge && module load cuda/12.8.0 gcc 2>/dev/null || true
 
-source "${PREP_ROOT}/env-data-prep/bin/activate"
+if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 
 if [ -n "$MODEL_OVERRIDE" ]; then
     EMBED_MODEL="$MODEL_OVERRIDE"

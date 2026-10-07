@@ -24,7 +24,11 @@ mkdir -p "${REPO_ROOT}/outputs"
 NOTEBOOK="${1:-00_eda_toxvaldb.ipynb}"
 
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
+    if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"
+elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
+    source "${PREP_ROOT}/../env-data-prep/bin/activate"
+fi
 fi
 
 cd "${REPO_ROOT}/analysis"
