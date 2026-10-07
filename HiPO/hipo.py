@@ -1,18 +1,19 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
-import sys
 import os
 from pathlib import Path
-
-# Ensure HiPO root is in sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+import random
+import sys
 import time
-from typing import Any, List, Optional, Tuple
+from typing import Any, Optional, Tuple
 
 import polars as pl
 import torch
 from tqdm import tqdm
+
+# Ensure package modules (model, src) resolve when invoking hipo.py from any working directory
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from model.llm import get_model, test_model
 from src.graph import TextToOntoGraph
@@ -27,22 +28,7 @@ from src.utils import (
 )
 
 # --- Global Constants ---
-DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
-DEFAULT_HF_TRANSFER = "1"
-MODEL_CONFIG_TEMPLATE = "/nfs/research/ewald/ricos/code/playground/models/config/{model}.json"
-
-MODEL_PORTS = {
-    "GLM-5.1": "8000",
-    "gpt-oss-20b": "8001",
-    "NVIDIA-Nemotron-3-Super-120B-A12B-FP8": "8002",
-    "Qwen3.5-122B-A10B-FP8": "8003",
-    "gpt-oss-120b": "8004",
-    "Qwen3.5-35B-A3B-FP8": "8005",
-    "Qwen3.6-35B-A3B-FP8": "8052",
-    "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": "8007",
-    "Qwen3.5-27B-FP8": "8008",
-    "Qwen3.6-27B-FP8": "8009"
-}
+DEFAULT_MODELS_DIR = Path(__file__).resolve().parent / "config" / "models"
 
 logger = setup_logging()
 
@@ -74,18 +60,19 @@ def arg_parser() -> argparse.Namespace:
     Returns:
         argparse.Namespace: The parsed command-line arguments namespace.
     """
-    parser = argparse.ArgumentParser(description="HiPO: Hierarchy-informed Phenotype Ontology Mapping Framework")
+    parser = argparse.ArgumentParser(description="HiPO: Text to Ontology LLM Classifier")
 
     # --- File I/O & Columns ---
-    parser.add_argument("--input_file", required=True, help="Path to input tabular file (TSV/CSV).")
+    parser.add_argument("--input_file", required=True, help="Path to input TSV/CSV file.")
+    parser.add_argument("--separator", default=None, help="Field separator for input file (defaults to auto-detection from extension).")
     parser.add_argument("--output_file", required=True, help="Path to output CSV file.")
     parser.add_argument("--reasoning_file", required=True, help="Path to output JSON file for reasoning.")
-    parser.add_argument("--target_column", default="text", help="Column name containing the text descriptions to map to ontology terms.")
-    parser.add_argument("--separator", default=None, help="Field delimiter for input file ('	', ',', etc.). Auto-detected from extension if None.")
+    parser.add_argument("--target_column", default="TOXICOLOGICAL_EFFECT", help="Column name containing the text to process.")
+    parser.add_argument("--std_column", default=None, help="Column name containing the standardized text.")
 
     # --- LLM Configuration ---
-    parser.add_argument("--model", default=None, help="Name of LLM model to override value in llm_config.")
-    parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
+    parser.add_argument("--model", default=None, help="Name of LLM model to override or specify model.")
+    parser.add_argument("--model_config", default=None, help="Path to model config JSON file (optional).")
     parser.add_argument("--base_url", help="Base URL for the LLM API. Overrides value in model_config if provided.")
     parser.add_argument("--system_prompt_file", default=None, help="Path to the system prompt text file.")
 
@@ -119,7 +106,7 @@ def arg_parser() -> argparse.Namespace:
 def load_llm_config(args: argparse.Namespace) -> None:
     """
     Description:
-    Loads configuration from llm_config and resolves dynamic model, mode, consensus, output paths, and ports.
+    Loads configuration from llm_config and resolves dynamic model, mode, consensus, output paths, and prompt files.
 
     Args:
         args (argparse.Namespace): The parsed command-line arguments to be modified in-place.
@@ -136,23 +123,22 @@ def load_llm_config(args: argparse.Namespace) -> None:
     with open(args.llm_config, 'r', encoding='utf-8') as jf:
         best_config = json.load(jf)
     
-    model = args.model if getattr(args, 'model', None) else best_config["model"]
-    args.mode = best_config["mode"]
-    args.consensus_runs = best_config["consensus_runs"]
+    model = args.model if getattr(args, 'model', None) else best_config.get("model")
+    if model:
+        args.model = model
+    
+    if "mode" in best_config:
+        args.mode = best_config["mode"]
+    if "consensus_runs" in best_config:
+        args.consensus_runs = best_config["consensus_runs"]
     if args.ontology_definitions is None:
         args.ontology_definitions = best_config.get("ontology_definitions", False)
-    args.model_config = MODEL_CONFIG_TEMPLATE.format(model=model)
-    
+
     # Replace placeholders in filenames
     for attr in ('output_file', 'reasoning_file'):
         val = getattr(args, attr)
-        if val:
+        if val and model:
             setattr(args, attr, replace_placeholders(val, "model", model))
-
-    port = MODEL_PORTS.get(model, "8003")
-    if args.base_url:
-        if "PORT" in args.base_url:
-            args.base_url = args.base_url.replace("PORT", port)
 
     if args.system_prompt_file:
         args.system_prompt_file = replace_placeholders(args.system_prompt_file, "mode", str(args.mode))
@@ -216,12 +202,11 @@ def init_env(args: argparse.Namespace) -> None:
     if args.system_prompt_file is None:
         args.system_prompt_file = f"config/prompts/system_prompt_{args.mode}.txt"
 
-    # --- Set Environment Variables ---
-    hf_home = args.hf_home or os.environ.get("HF_HOME") or DEFAULT_HF_HOME
-    hf_transfer = args.hf_transfer or os.environ.get("HF_HUB_ENABLE_HF_TRANSFER") or DEFAULT_HF_TRANSFER
-
-    os.environ["HF_HOME"] = hf_home
-    os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = hf_transfer
+    # --- Set Environment Variables if provided ---
+    if args.hf_home:
+        os.environ["HF_HOME"] = args.hf_home
+    if args.hf_transfer is not None:
+        os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = str(args.hf_transfer)
 
 def load_input_data(input_file: str, separator: Optional[str] = None) -> pl.DataFrame:
     """
@@ -241,11 +226,11 @@ def load_input_data(input_file: str, separator: Optional[str] = None) -> pl.Data
         raise FileNotFoundError(f"Input file not found: {input_file}")
     if separator is None:
         if input_file.endswith('.tsv') or input_file.endswith('.txt'):
-            separator = '	'
+            separator = '\t'
         elif input_file.endswith('.csv'):
             separator = ','
         else:
-            separator = '	'
+            separator = '\t'
     return pl.read_csv(input_file, separator=separator, ignore_errors=True, quote_char=None)
 
 def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
@@ -259,8 +244,32 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
     Returns:
         Tuple[Any, int]: A tuple containing the initialized LLM client object and the maximum number of retries.
     """
-    with open(args.model_config, 'r', encoding='utf-8') as f:
-        model_config = json.load(f)
+    model_config = {}
+    if args.model_config and args.model_config != "placeholder" and os.path.exists(args.model_config):
+        logger.info(f"Loading model configuration from: {args.model_config}")
+        with open(args.model_config, 'r', encoding='utf-8') as f:
+            model_config = json.load(f)
+    elif args.model:
+        candidate = DEFAULT_MODELS_DIR / f"{args.model}.json"
+        if candidate.exists():
+            logger.info(f"Loading model configuration from built-in template: {candidate}")
+            with open(candidate, 'r', encoding='utf-8') as f:
+                model_config = json.load(f)
+        else:
+            logger.info(f"Creating default OpenAI-compatible config for model: {args.model}")
+            model_config = {
+                "model": args.model,
+                "model_provider": "openai",
+                "api_key": "EMPTY",
+                "temperature": 0.1,
+                "max_tokens": 4096,
+                "top_p": 0.8,
+                "timeout": 300,
+                "max_retries": 3,
+                "max_concurrency": 50,
+            }
+    else:
+        raise ValueError("Either a valid --model_config or --model must be provided.")
 
     max_concurrency = model_config.pop("max_concurrency", 10)
 
@@ -268,7 +277,7 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
         model_config["base_url"] = args.base_url
         logger.info(f"Overriding base_url from CLI: {args.base_url}")
 
-    logger.info(f"Loading model configuration from: {args.model_config}")
+    logger.info("Configured LLM parameters:")
     logger.info(f"  max_concurrency: {max_concurrency}")
     for key, value in model_config.items():
         if key != "api_key":
@@ -276,7 +285,7 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
 
     llm = get_model(**model_config)
 
-    test_retries = model_config.get('max_retries', 3)
+    test_retries = model_config.get("max_retries", 3)
     if not test_model(llm, max_retries=test_retries):
         raise RuntimeError("Model connectivity test failed. Please check your configuration.")
 
@@ -346,24 +355,27 @@ def init_graph(args: argparse.Namespace, categories: list, test_retries: int, ra
         top_k_reranker=rag_params["top_k_reranker"]
     )
 
-
 def setup_target_schema_and_embeddings(
     df: pl.DataFrame,
     categories: list,
     target_column: str,
+    std_column: Optional[str],
     embedding_model: str,
-    target_embedding_db: str
+    target_embedding_db: str,
+    use_std: bool
 ) -> dict:
     """
     Description:
-    Determines target schema and ensures embeddings exist for the target column.
+    Determines target schema and ensures embeddings exist for target and standard columns.
 
     Args:
         df (pl.DataFrame): Input dataset DataFrame.
         categories (list): List of ontology categories.
-        target_column (str): Name of the column containing the description.
+        target_column (str): Name of the column containing the raw description.
+        std_column (Optional[str]): Name of the column containing the standardized description.
         embedding_model (str): Name or identifier of the embedding model.
         target_embedding_db (str): Path to the target embedding database.
+        use_std (bool): Whether to generate embeddings for the standardized column as well.
 
     Returns:
         dict: A dictionary mapping column names to their Polars types representing the output schema.
@@ -377,8 +389,13 @@ def setup_target_schema_and_embeddings(
     logger.info(f"Checking embeddings for target column '{target_column}' ({len(unique_descs)} unique texts)...")
     get_or_create_embeddings(unique_descs, embedding_model, target_embedding_db, return_vectors=False)
 
-    return target_schema
+    if use_std and std_column:
+        unique_stds = df.select(std_column).unique().drop_nulls().to_series().to_list()
+        unique_stds = [d for d in unique_stds if is_valid_description(d)]
+        logger.info(f"Checking embeddings for standardized column '{std_column}' ({len(unique_stds)} unique texts)...")
+        get_or_create_embeddings(unique_stds, embedding_model, target_embedding_db, return_vectors=False)
 
+    return target_schema
 
 def run_inference(
     args: argparse.Namespace,
@@ -387,6 +404,7 @@ def run_inference(
     target_schema: dict,
     graph: TextToOntoGraph,
     llm: Any,
+    use_std: bool,
     grf_alpha: Optional[float]
 ) -> None:
     """
@@ -400,12 +418,24 @@ def run_inference(
         target_schema (dict): The output schema mapping.
         graph (TextToOntoGraph): The ontology graph pipeline helper.
         llm (Any): The initialized LLM client instance.
+        use_std (bool): Whether to use standardized descriptions.
         grf_alpha (Optional[float]): Optional alpha parameter for GRF.
 
     Returns:
         None
     """
+    if args.debug_rows is None and args.random_debug_rows is not None:
+        rng = random.Random(args.seed)
+        n = min(args.random_debug_rows, len(df))
+        args.debug_rows = sorted(rng.sample(range(len(df)), n))
+        logger.info(f"Selected {len(args.debug_rows)} random rows for debugging: {args.debug_rows}")
+
     unique_descriptions, seen_descriptions = get_unique_descriptions(df, args.target_column, args.debug_rows)
+
+    desc_to_std = {}
+    if use_std and args.std_column:
+        mapping_df = df.select([args.target_column, args.std_column]).drop_nulls().group_by(args.target_column, maintain_order=True).agg(pl.col(args.std_column).first())
+        desc_to_std = dict(zip(mapping_df[args.target_column], mapping_df[args.std_column]))
 
     description_cache = {}
     total_descs = len(unique_descriptions)
@@ -424,11 +454,12 @@ def run_inference(
         Returns:
             Tuple[str, dict, str, list]: A tuple of (description, row result values, reasoning, selected categories).
         """
+        std_desc = desc_to_std.get(desc) if use_std else None
         max_attempts = 3
         last_err = None
         for attempt in range(1, max_attempts + 1):
             try:
-                row_result_values, reasoning, selected = graph.execute(llm, desc, alpha=grf_alpha)
+                row_result_values, reasoning, selected = graph.execute(llm, desc, std_desc=std_desc, alpha=grf_alpha)
                 return desc, row_result_values, reasoning, selected
             except Exception as e:
                 last_err = e
@@ -436,7 +467,6 @@ def run_inference(
                 if attempt < max_attempts:
                     time.sleep(1.0)
         raise RuntimeError(f"All {max_attempts} attempts failed for description '{desc}'. Last error: {last_err}")
-
 
     with ThreadPoolExecutor(max_workers=args.descriptions_concurrency) as executor:
         futures = {executor.submit(process_description, desc): desc for desc in unique_descriptions}
@@ -469,7 +499,6 @@ def run_inference(
         save_backup_chunk(df, description_cache, 0, categories, args.target_column,
                          args.output_file, args.reasoning_file, target_schema,
                          is_final=True, debug_rows=args.debug_rows, seen_descriptions=seen_descriptions)
-        # Rename backup 0 to final safely using Path
         out_path = Path(args.output_file)
         reason_path = Path(args.reasoning_file)
         
@@ -514,19 +543,20 @@ def main() -> None:
     logger.info(f"Using ontology prefix: {prefix}")
     nodes, categories = load_ontology_nodes(args.ontology_embedding_db, prefix=prefix)
 
+    use_std = bool(args.std_column and args.std_column in df.columns)
+
     target_schema = setup_target_schema_and_embeddings(
-        df, categories, args.target_column, 
-        rag_params["embedding_model"], args.target_embedding_db)
+        df, categories, args.target_column, args.std_column,
+        rag_params["embedding_model"], args.target_embedding_db, use_std)
 
     graph = init_graph(args, categories, test_retries, rag_params)
 
     try:
-        run_inference(args, df, categories, target_schema, graph, llm, rag_params["grf_alpha"])
+        run_inference(args, df, categories, target_schema, graph, llm, use_std, rag_params["grf_alpha"])
     finally:
         graph.close()
 
     logger.info(f"Total execution time: {time.time() - start_time:.2f}s")
-
 
 if __name__ == "__main__":
     main()
