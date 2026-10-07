@@ -1,0 +1,13 @@
+{
+    "embedding_model": "tencent/KaLM-Embedding-Gemma3-12B-2511",
+    "Mean Recall": 0.98,
+    "MAP": 0.8507084868911925,
+    "Context Burden": 19.98,
+    "top_k_rag": 150,
+    "threshold_rag": 0.1,
+    "reranker_model": "Qwen/Qwen3-Reranker-8B",
+    "threshold_reranker": 0.05,
+    "reranker_batch_size": 32,
+    "reranker_prompt": "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/toxvaldb/03.evaluation/modules/02.eval_llms/config/rag/reranker_prompt.txt",
+    "grf": 0.0
+}
