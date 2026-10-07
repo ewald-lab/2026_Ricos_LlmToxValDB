@@ -7,9 +7,8 @@ from pathlib import Path
 
 # Ensure HiPO root is in sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import re
 import time
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple
 
 import polars as pl
 import torch
@@ -85,6 +84,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--separator", default=None, help="Field delimiter for input file ('	', ',', etc.). Auto-detected from extension if None.")
 
     # --- LLM Configuration ---
+    parser.add_argument("--model", default=None, help="Name of LLM model to override value in llm_config.")
     parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
     parser.add_argument("--base_url", help="Base URL for the LLM API. Overrides value in model_config if provided.")
     parser.add_argument("--system_prompt_file", default=None, help="Path to the system prompt text file.")
@@ -137,7 +137,7 @@ def load_llm_config(args: argparse.Namespace) -> None:
     with open(args.llm_config, 'r', encoding='utf-8') as jf:
         best_config = json.load(jf)
     
-    model = best_config["model"]
+    model = args.model if getattr(args, 'model', None) else best_config["model"]
     args.mode = best_config["mode"]
     args.consensus_runs = best_config["consensus_runs"]
     if args.ontology_definitions is None:

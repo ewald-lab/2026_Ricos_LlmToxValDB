@@ -10,55 +10,51 @@
 #SBATCH -o "logs/out_tvllm_prod_%j.out"
 #SBATCH -e "logs/err_tvllm_prod_%j.err"
 
-USE_DEFINITIONS="true"
-CODON_NODE=""
-CODON_PORT="8052"
+# Default parameters
+DEF_FLAG="--ontology_definitions"
+ENDPOINT=""
+MODEL="Qwen3.6-35B-A3B-FP8"
+PORT="8052"
+ONTOLOGY="hpath"
 
-# Positional arguments counter
+# Parse positional arguments and flags
 pos_args=0
-
-while [[ $# -gt 0 ]]; do
-    case "$1" in
+for arg in "$@"; do
+    case "$arg" in
         --use_definitions)
-            if [[ "$2" == "true" || "$2" == "false" ]]; then
-                USE_DEFINITIONS="$2"
-                shift 2
-            else
-                USE_DEFINITIONS="true"
-                shift 1
-            fi
+            DEF_FLAG="--ontology_definitions"
             ;;
-        --use_definitions=*)
-            USE_DEFINITIONS="${1#*=}"
-            shift 1
+        --no_definitions|--no_ontology_definitions)
+            DEF_FLAG="--no_ontology_definitions"
             ;;
         *)
             if [ $pos_args -eq 0 ]; then
-                CODON_NODE="$1"
+                ENDPOINT="$arg"
             elif [ $pos_args -eq 1 ]; then
-                CODON_PORT="$1"
+                MODEL="$arg"
+            elif [ $pos_args -eq 2 ]; then
+                PORT="$arg"
+            elif [ $pos_args -eq 3 ]; then
+                ONTOLOGY="$arg"
             fi
             pos_args=$((pos_args + 1))
-            shift 1
             ;;
     esac
 done
 
-if [ -z "$CODON_NODE" ]; then
-    echo "Error: CODON_NODE is required."
-    echo "Usage: sbatch $0 <codon-node> [port] [--use_definitions true|false]  (e.g. sbatch $0 codon-gpu-001 8052 --use_definitions false)"
+if [ -z "$ENDPOINT" ]; then
+    echo "Error: Host node / endpoint is required."
+    echo "Usage: sbatch $0 <codon-node|base_url> [model] [port] [ontology] [--use_definitions | --no_definitions]"
+    echo "Example: sbatch $0 codon-gpu-010 Qwen3.6-35B-A3B-FP8 8052 hpath"
     exit 1
 fi
 
-if [ "$USE_DEFINITIONS" = "false" ]; then
-    DEF_FLAG="--no_ontology_definitions"
+if [[ "$ENDPOINT" =~ ^https?:// ]]; then
+    BASE_URL="$ENDPOINT"
 else
-    DEF_FLAG="--ontology_definitions"
+    BASE_URL="http://${ENDPOINT}.ebi.ac.uk:${PORT}/v1"
 fi
 
-ONTOLOGY="hpath"
-
-BASE_URL="http://${CODON_NODE}.ebi.ac.uk:${CODON_PORT}/v1"
 if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
     SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
 else
@@ -67,7 +63,7 @@ fi
 
 TOXVALDB_ROOT="$(cd "${SCRIPT_DIR}/../../../../" && pwd)"
 REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
-HIPO_DIR="${REPO_ROOT}/HiPO" 
+HIPO_DIR="${REPO_ROOT}/HiPO"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
@@ -90,6 +86,7 @@ python "${HIPO_DIR}/hipo.py" \
     --num_backups 10 \
     --context_ontology "$(cat "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
     --model_config "placeholder" \
+    --model "${MODEL}" \
     --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/llm_config.json" \
     --descriptions_concurrency 100 \
     $DEF_FLAG
