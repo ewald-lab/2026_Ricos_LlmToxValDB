@@ -1,8 +1,12 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import sys
 import os
 from pathlib import Path
+
+# Ensure HiPO root is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import re
 import time
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -71,13 +75,14 @@ def arg_parser() -> argparse.Namespace:
     Returns:
         argparse.Namespace: The parsed command-line arguments namespace.
     """
-    parser = argparse.ArgumentParser(description="Text to Onto LLM Classifier")
+    parser = argparse.ArgumentParser(description="HiPO: Hierarchy-informed Phenotype Ontology Mapping Framework")
 
     # --- File I/O & Columns ---
-    parser.add_argument("--input_file", required=True, help="Path to input TSV file.")
+    parser.add_argument("--input_file", required=True, help="Path to input tabular file (TSV/CSV).")
     parser.add_argument("--output_file", required=True, help="Path to output CSV file.")
     parser.add_argument("--reasoning_file", required=True, help="Path to output JSON file for reasoning.")
-    parser.add_argument("--target_column", default="TOXICOLOGICAL_EFFECT", help="Column name containing the text to process.")
+    parser.add_argument("--target_column", default="text", help="Column name containing the text descriptions to map to ontology terms.")
+    parser.add_argument("--separator", default=None, help="Field delimiter for input file ('	', ',', etc.). Auto-detected from extension if None.")
 
     # --- LLM Configuration ---
     parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
@@ -219,13 +224,14 @@ def init_env(args: argparse.Namespace) -> None:
     os.environ["HF_HOME"] = hf_home
     os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = hf_transfer
 
-def load_input_data(input_file: str) -> pl.DataFrame:
+def load_input_data(input_file: str, separator: Optional[str] = None) -> pl.DataFrame:
     """
     Description:
-    Loads input TSV file using Polars, raising an error if it doesn't exist.
+    Loads input TSV or CSV file using Polars, raising an error if it doesn't exist.
 
     Args:
-        input_file (str): Path to the input TSV file.
+        input_file (str): Path to the input tabular file.
+        separator (Optional[str]): Field delimiter. Auto-detected from extension if None.
 
     Returns:
         pl.DataFrame: The loaded dataset as a Polars DataFrame.
@@ -234,7 +240,14 @@ def load_input_data(input_file: str) -> pl.DataFrame:
         logger.error(f"Input file not found: {input_file}")
         logger.error(f"Current working directory: {os.getcwd()}")
         raise FileNotFoundError(f"Input file not found: {input_file}")
-    return pl.read_csv(input_file, separator='\t', ignore_errors=True, quote_char=None)
+    if separator is None:
+        if input_file.endswith('.tsv') or input_file.endswith('.txt'):
+            separator = '	'
+        elif input_file.endswith('.csv'):
+            separator = ','
+        else:
+            separator = '	'
+    return pl.read_csv(input_file, separator=separator, ignore_errors=True, quote_char=None)
 
 def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
     """
@@ -488,7 +501,11 @@ def main() -> None:
 
     start_time = time.time()
 
-    df = load_input_data(args.input_file)
+    df = load_input_data(args.input_file, args.separator)
+
+    if args.target_column not in df.columns:
+        logger.error(f"Target column '{args.target_column}' not found in input columns: {df.columns}")
+        raise KeyError(f"Target column '{args.target_column}' not found in input file '{args.input_file}'. Available columns: {df.columns}")
 
     rag_params = extract_rag_params(rag_config)
 
