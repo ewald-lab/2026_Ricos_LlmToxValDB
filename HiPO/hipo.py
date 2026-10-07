@@ -176,7 +176,13 @@ def load_rag_config(args: argparse.Namespace) -> dict:
         rag_config = json.load(f)
     rag_config.pop("_comment", None)
     if "reranker_prompt" in rag_config and rag_config["reranker_prompt"]:
-        rag_config["reranker_prompt"] = os.path.expandvars(str(rag_config["reranker_prompt"]))
+        p = os.path.expandvars(str(rag_config["reranker_prompt"]))
+        if not os.path.isabs(p):
+            # Resolve relative to rag_config file directory
+            candidate = (Path(rag_config_path).parent / p).resolve()
+            if candidate.exists():
+                p = str(candidate)
+        rag_config["reranker_prompt"] = p
 
     embedding_model_name = rag_config.get("embedding_model", "").lower()
     if "kalm" in embedding_model_name:

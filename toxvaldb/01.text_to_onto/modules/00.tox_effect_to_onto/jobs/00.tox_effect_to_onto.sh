@@ -35,7 +35,7 @@ else
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
-TOXVALDB_ROOT="$(cd "${SCRIPT_DIR}/../../../../" && pwd)"
+export TOXVALDB_ROOT="$(cd "${SCRIPT_DIR}/../../../../" && pwd)"
 REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
 HIPO_DIR="${REPO_ROOT}/HiPO"
 

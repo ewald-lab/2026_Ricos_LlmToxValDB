@@ -6,5 +6,5 @@
     "top_k_reranker": 20,
     "threshold_reranker": 0.3,
     "reranker_batch_size": 100,
-    "reranker_prompt": "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/reranker_prompt.txt"
+    "reranker_prompt": "../config/reranker_prompt.txt"
 }
