@@ -1,7 +1,7 @@
 # OECD Test Guideline 205: Avian Dietary Toxicity Test
 
 **Generated:** 2024-05-22
-**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/205.pdf`
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/205.pdf`
 
 ## Summary
 

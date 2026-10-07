@@ -199,8 +199,8 @@ __marimo__/
 *.xlsx
 *.zip
 !requirements*.txt
-!/00.data_preparation/toxvaldb/modules/03.prepare_guidelines/**/*.csv
-!/00.data_preparation/toxvaldb/modules/03.prepare_guidelines/**/*.csv
+!/00.data_preparation/modules/03.prepare_guidelines/**/*.csv
+!/00.data_preparation/modules/03.prepare_guidelines/**/*.csv
 **/inputs/raw_*/
 **/outputs/results_*/
 **/outputs/debug/

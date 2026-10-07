@@ -48,14 +48,14 @@ for ONTOLOGY in hpath mp; do
     fi
 
     python "${MODULE_ROOT}/scripts/00.create_test.py" \
-        --input_file "${GIT_ROOT}/00.data_preparation/toxvaldb/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
+        --input_file "${GIT_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
         --output_file "${MODULE_ROOT}/outputs/test_candidates_${ONTOLOGY}.txt" \
         --output_json "${MODULE_ROOT}/outputs/test_pool_${ONTOLOGY}.json" \
         --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
         --rag_config "${MODULE_ROOT}/config/best_config.json" \
         --embeddings_model_id "${EMBED_DIR}" \
-        --target_embedding_db "${GIT_ROOT}/00.data_preparation/toxvaldb/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_${EMBED_DIR}.db" \
-        --ontology_embedding_db "${GIT_ROOT}/00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
+        --target_embedding_db "${GIT_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_${EMBED_DIR}.db" \
+        --ontology_embedding_db "${GIT_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
         --output_visualization "${MODULE_ROOT}/figures/test_visualization_${ONTOLOGY}.png" \
         --num_samples 50 \
         --seed 2011 \

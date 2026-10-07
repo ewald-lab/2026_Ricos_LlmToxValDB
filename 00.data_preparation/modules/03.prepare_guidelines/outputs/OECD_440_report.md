@@ -1,7 +1,7 @@
 # OECD Test Guideline 440: Uterotrophic Bioassay in Rodents: A short-term screening test for oestrogenic properties
 
 **Generated:** 2023-10-27
-**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/440.pdf`
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/440.pdf`
 
 ## Summary
 

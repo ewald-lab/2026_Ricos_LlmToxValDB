@@ -1,7 +1,7 @@
 # OECD Test Guideline 410: Repeated Dose Dermal Toxicity: 21/28-day Study
 
 **Generated:** 2024-05-22
-**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/410.pdf`
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/410.pdf`
 
 ## Summary
 

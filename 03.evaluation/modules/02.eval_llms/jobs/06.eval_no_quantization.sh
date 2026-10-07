@@ -23,9 +23,9 @@ EVAL_DIR="$(dirname "$(dirname "${MODULE_DIR}")")"
 ONTOLOGY="mp"
 EMBED_DIR="kalm"
 RAG_CONFIG="${MODULE_DIR}/inputs/best_config.json"
-ONTOLOGY_DB="${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
-CONTEXT_FILE="${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
-GLOBAL_DEFINITIONS_DB="${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
+ONTOLOGY_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
+CONTEXT_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
+GLOBAL_DEFINITIONS_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
 INPUT_FILE="${EVAL_DIR}/modules/01.eval_experts/outputs/Expanded_average_human.csv"
 TARGET_EMBEDDING_DB="${MODULE_DIR}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
 
@@ -114,7 +114,7 @@ echo "Expanding LLM responses..."
 echo "================================================================================"
 python3 "${MODULE_DIR}/scripts/03.expand_llm_responses.py" \
     --input_dir "${OUT_FOLDER}" \
-    --owl_file "${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl" \
+    --owl_file "${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl" \
     --output_dir "${OUT_FOLDER}" \
     --ontology "${ONTOLOGY}"
 

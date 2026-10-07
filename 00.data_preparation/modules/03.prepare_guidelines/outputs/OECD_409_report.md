@@ -1,7 +1,7 @@
 # OECD Test Guideline 409: Repeated Dose 90-day Oral Toxicity Study in Non-Rodents
 
 **Generated:** 2026-05-21
-**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/409.pdf`
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/409.pdf`
 
 ## Summary
 

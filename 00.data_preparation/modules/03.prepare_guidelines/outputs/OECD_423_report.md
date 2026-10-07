@@ -1,7 +1,7 @@
 # OECD Test Guideline 423: Acute Oral Toxicity – Acute Toxic Class Method
 
 **Generated:** 2024-05-21
-**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/423.pdf`
+**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/423.pdf`
 
 ## Summary
 

@@ -42,9 +42,9 @@ if [ -z "${ONTOLOGY}" ] || [ -z "${ROOT_TERM}" ] || [ -z "${TREE_MIN_CASE}" ]; t
 fi
 
 INPUT_FILE="${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Classified_${ONTOLOGY}_Qwen3.6-35B-A3B-FP8.csv"
-OWL_FILE="${REPO_ROOT}/00.data_preparation/toxvaldb/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
+OWL_FILE="${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
 JSON_FILE="${REPO_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Reasoning_${ONTOLOGY}_Qwen3.6-35B-A3B-FP8.json"
-ONTOLOGY_DB="${REPO_ROOT}/00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/qwen/${ONTOLOGY}.db"
+ONTOLOGY_DB="${REPO_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/qwen/${ONTOLOGY}.db"
 FIGURES_DIR="${REPO_ROOT}/03.evaluation/modules/03.eval_results/outputs/${ONTOLOGY}"
 
 source "${REPO_ROOT}/03.evaluation/env-evaluation/bin/activate"

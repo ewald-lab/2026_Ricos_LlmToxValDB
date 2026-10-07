@@ -23,7 +23,7 @@ ROOT_TERM="mammalian phenotype"
 # ──────────────────────────────────────────────────────────────────────────────
 
 INPUT_DIR="${MODULE_DIR}/outputs"
-OWL_FILE="${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
+OWL_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
 OUTPUT_DIR="${MODULE_DIR}/outputs"
 
 # Activate environment
