@@ -1,0 +1,10 @@
+{
+    "embedding_model": "Qwen/Qwen3-Embedding-8B",
+    "top_k_rag": 100,
+    "threshold_rag": 0.1,
+    "reranker_model": "Qwen/Qwen3-Reranker-0.6B",
+    "top_k_reranker": 20,
+    "threshold_reranker": 0.3,
+    "reranker_batch_size": 100,
+    "reranker_prompt": "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/reranker_prompt.txt"
+}

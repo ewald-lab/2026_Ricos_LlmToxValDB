@@ -1,12 +1,4 @@
 {
-    "_comment": "Default RAG and Reranker configuration for HiPO. Specify embedding and reranking models, candidate retrieval top_k, similarity thresholds, and optional GRF alpha blending.",
     "embedding_model": "Qwen/Qwen3-Embedding-8B",
-    "top_k_rag": 15,
-    "threshold_rag": 0.5,
-    "reranker_model": "Qwen/Qwen3-Reranker-8B",
-    "threshold_reranker": 0.0,
-    "top_k_reranker": 10,
-    "reranker_batch_size": 32,
-    "reranker_prompt": null,
-    "grf": null
+    "reranker_model": "Qwen/Qwen3-Reranker-8B"
 }

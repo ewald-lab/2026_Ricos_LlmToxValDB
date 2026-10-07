@@ -166,6 +166,8 @@ def load_rag_config(args: argparse.Namespace) -> dict:
     with open(rag_config_path, 'r', encoding='utf-8') as f:
         rag_config = json.load(f)
     rag_config.pop("_comment", None)
+    if "reranker_prompt" in rag_config and rag_config["reranker_prompt"]:
+        rag_config["reranker_prompt"] = os.path.expandvars(str(rag_config["reranker_prompt"]))
 
     embedding_model_name = rag_config.get("embedding_model", "").lower()
     if "kalm" in embedding_model_name:
@@ -314,8 +316,7 @@ def extract_rag_params(rag_config: dict) -> dict:
         "threshold_reranker": rag_config.get("threshold_reranker", 0.0),
         "top_k_reranker": rag_config.get("top_k_reranker"),
         "reranker_batch_size": rag_config.get("reranker_batch_size", 32),
-        "reranker_prompt_file": rag_config.get("reranker_prompt"),
-        "grf_alpha": rag_config.get("grf")
+        "reranker_prompt_file": rag_config.get("reranker_prompt")
     }
 
 def init_graph(args: argparse.Namespace, categories: list, test_retries: int, rag_params: dict) -> TextToOntoGraph:
@@ -407,8 +408,7 @@ def run_inference(
     target_schema: dict,
     graph: TextToOntoGraph,
     llm: Any,
-    use_std: bool,
-    grf_alpha: Optional[float]
+    use_std: bool
 ) -> None:
     """
     Description:
@@ -422,7 +422,6 @@ def run_inference(
         graph (TextToOntoGraph): The ontology graph pipeline helper.
         llm (Any): The initialized LLM client instance.
         use_std (bool): Whether to use standardized descriptions.
-        grf_alpha (Optional[float]): Optional alpha parameter for GRF.
 
     Returns:
         None
@@ -462,7 +461,7 @@ def run_inference(
         last_err = None
         for attempt in range(1, max_attempts + 1):
             try:
-                row_result_values, reasoning, selected = graph.execute(llm, desc, std_desc=std_desc, alpha=grf_alpha)
+                row_result_values, reasoning, selected = graph.execute(llm, desc, std_desc=std_desc)
                 return desc, row_result_values, reasoning, selected
             except Exception as e:
                 last_err = e
@@ -555,7 +554,7 @@ def main() -> None:
     graph = init_graph(args, categories, test_retries, rag_params)
 
     try:
-        run_inference(args, df, categories, target_schema, graph, llm, use_std, rag_params["grf_alpha"])
+        run_inference(args, df, categories, target_schema, graph, llm, use_std)
     finally:
         graph.close()
 

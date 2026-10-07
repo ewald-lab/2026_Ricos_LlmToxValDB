@@ -52,15 +52,14 @@ python "${HIPO_DIR}/hipo.py" \
     --reasoning_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Reasoning_${ONTOLOGY}_${MODEL}.json" \
     --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
     --system_prompt_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/system_prompt_{MODE}.txt" \
-    --rag_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/rag/best_config.json" \
+    --rag_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/inputs/choice_rag.json" \
     --ontology_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/{EMBED_DIR}/${ONTOLOGY}.db" \
     --global_definitions_db "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
     --target_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_{EMBED_DIR}.db" \
     --base_url "${BASE_URL}" \
     --num_backups 10 \
     --context_ontology "$(cat "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
-    --model_config "placeholder" \
     --model "${MODEL}" \
-    --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/llm_config.json" \
+    --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/inputs/choice_llm.json" \
     --descriptions_concurrency 100 \
     --ontology_definitions
