@@ -1,7 +1,7 @@
 # OECD Test Guideline 403: Acute Inhalation Toxicity
 
 **Generated:** 2024-06-25
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/403.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/403.pdf`
 
 ## Summary
 

@@ -1,7 +1,7 @@
 # OECD Test Guideline 402: Acute Dermal Toxicity: Fixed Dose Procedure
 
 **Generated:** 2024-05-23
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/402.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/402.pdf`
 
 ## Summary
 

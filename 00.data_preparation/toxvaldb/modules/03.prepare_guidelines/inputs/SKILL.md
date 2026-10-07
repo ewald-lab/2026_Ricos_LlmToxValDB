@@ -11,11 +11,11 @@ Process OECD Test Guideline number **$ARGUMENTS** by reading its PDF, extracting
 
 Use the 'pdf' to access to PDFs.
 
-Read the PDF file at path: `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/$ARGUMENTS.pdf`
+Read the PDF file at path: `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/$ARGUMENTS.pdf`
 
 If the file does not exist, inform the user:
 
-> PDF not found at `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/$ARGUMENTS.pdf`.
+> PDF not found at `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/$ARGUMENTS.pdf`.
 > Please download it manually from the OECD website and place it at that path.
 > OECD guidelines can be found at: https://www.oecd.org/en/search/publications.html (filter by "OECD Guidelines for the Testing of Chemicals, Section 4")
 
@@ -198,18 +198,18 @@ If neither an annex table (3a) nor body text endpoints (3b) yield any measurable
 Run this bash command to ensure the output directory exists:
 
 ```bash
-mkdir -p 00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints
+mkdir -p 00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints
 ```
 
 ## Step 5: Generate Markdown Report
 
-Create the file `00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_report.md` using the Write tool with this structure:
+Create the file `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_report.md` using the Write tool with this structure:
 
 ```
 # OECD Test Guideline {number}: {title}
 
 **Generated:** {current date YYYY-MM-DD}
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/{number}.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/{number}.pdf`
 
 ## Summary
 
@@ -273,7 +273,7 @@ Create the file `00.data_preparation/modules/03.prepare_guidelines/outputs/endpo
 
 ## Step 6: Generate Endpoints CSV
 
-If any endpoints were extracted (from either annex or body text), create `00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_endpoints.csv` using the Write tool.
+If any endpoints were extracted (from either annex or body text), create `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_endpoints.csv` using the Write tool.
 
 Only skip CSV generation if `endpoint_source` is "None" (truly zero endpoints found).
 
@@ -298,7 +298,7 @@ guideline_number,category,endpoint_name,requirement_level,source,footnotes
 
 ## Step 7: Update Summary CSV
 
-File: `00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints/OECD_guideline_summary.csv`
+File: `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints/OECD_guideline_summary.csv`
 
 **If the file does not exist**, create it with this header:
 ```
@@ -333,6 +333,6 @@ Then report to the user:
 > - **Endpoint source:** {Annex / Guideline text / None}
 > - **Endpoints found:** {required_count} required, {optional_count} optional
 > - **Files generated:**
->   - `00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_report.md`
->   - `00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_endpoints.csv` (if endpoints found)
->   - `00.data_preparation/modules/03.prepare_guidelines/outputs/endpoints/OECD_guideline_summary.csv` (updated)
+>   - `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_report.md`
+>   - `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints/OECD_$ARGUMENTS_endpoints.csv` (if endpoints found)
+>   - `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/outputs/endpoints/OECD_guideline_summary.csv` (updated)

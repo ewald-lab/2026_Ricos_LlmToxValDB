@@ -1,7 +1,7 @@
 # OECD Test Guideline 407: Repeated Dose 28-Day Oral Toxicity Study in Rodents
 
 **Generated:** 2026-05-21
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/407.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/407.pdf`
 
 ## Summary
 

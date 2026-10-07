@@ -1,7 +1,7 @@
 # OECD Test Guideline 441: Hershberger Bioassay in Rats: A Short-term Screening Assay for (Anti)Androgenic Properties
 
 **Generated:** 2024-05-22
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/441.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/441.pdf`
 
 ## Summary
 

@@ -1,7 +1,7 @@
 # OECD Test Guideline 401: Acute Oral Toxicity
 
 **Generated:** 2024-05-23
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/401.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/401.pdf`
 
 ## Summary
 

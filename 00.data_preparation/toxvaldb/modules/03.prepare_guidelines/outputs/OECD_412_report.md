@@ -1,7 +1,7 @@
 # OECD Test Guideline 412: 28-day (subacute) inhalation toxicity study
 
 **Generated:** 2024-05-23
-**Source PDF:** `00.data_preparation/modules/03.prepare_guidelines/inputs/OECD Guidelines/412.pdf`
+**Source PDF:** `00.data_preparation/toxvaldb/modules/03.prepare_guidelines/inputs/OECD Guidelines/412.pdf`
 
 ## Summary
 

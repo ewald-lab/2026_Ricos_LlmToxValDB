@@ -26,7 +26,7 @@ cd modules/00.eval_rag/scripts
 GROUND_TRUTH="../inputs/ground_truth_mp_expanded.csv"
 EVAL_CONFIG="../config/eval_rag.json"
 RERANKER_CONFIG="../config/reranker_prompt.txt" 
-DEFINITIONS_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_mp.db"
+DEFINITIONS_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/definitions_mp.db"
 
 # Determine embedding model, reranker model, and data variant for current task
 # Layout: 4 models × 3 rerankers × 4 variants = 48 tasks
@@ -62,8 +62,8 @@ case $RERANKER_MODEL in
     *) RERANK_SHORT=$(echo "$RERANKER_MODEL" | tr '/' '_') ;;
 esac
 
-ONTOLOGY_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/02.prepare_ontologies/outputs/${DIR}/mp.db"
-TARGET_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_${DIR}.db"
+ONTOLOGY_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/${DIR}/mp.db"
+TARGET_DB="/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/toxvaldb/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_${DIR}.db"
 CACHE_FILE="../outputs/cache/precomputed_scores_${DIR}_${RERANK_SHORT}_${DATA_VARIANT}.json"
 
 # Step 1: Precompute Top 150 candidates and Reranker scores
@@ -76,7 +76,7 @@ python3 01.precompute_eval_data.py \
     --embedding_model "$MODEL" \
     --reranker_model "$RERANKER_MODEL" \
     --reranker_config "$RERANKER_CONFIG" \
-    --toxval_db "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
+    --toxval_db "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/toxvaldb/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
     --global_definitions_db "$DEFINITIONS_DB" \
     --data_variant "$DATA_VARIANT" \
     --output "$CACHE_FILE"

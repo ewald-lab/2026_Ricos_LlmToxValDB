@@ -30,8 +30,8 @@ EXPERT_ORIG_DIR="${EVAL_DIR}/modules/01.eval_experts/inputs/${ONTOLOGY}"
 LLM_EXPANDED_DIR="${MODULE_DIR}/outputs"
 LLM_ORIG_DIR="${MODULE_DIR}/outputs"
 
-OWL_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
-ONTOLOGY_EMBEDDING_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/kalm/${ONTOLOGY}.db"
+OWL_FILE="${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
+ONTOLOGY_EMBEDDING_DB="${EVAL_DIR}/../00.data_preparation/toxvaldb/modules/02.prepare_ontologies/outputs/kalm/${ONTOLOGY}.db"
 OUTPUT_DIR="${MODULE_DIR}/outputs/figures"
 
 # Activate environment

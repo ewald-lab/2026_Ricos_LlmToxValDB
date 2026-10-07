@@ -93,7 +93,7 @@ def main() -> None:
 
         # Load ontology graph
         if ontology not in ontology_graphs:
-            owl_file = f"/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/{ontology}.ttl"
+            owl_file = f"/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/00.data_preparation/toxvaldb/modules/02.prepare_ontologies/inputs/owl_files/{ontology}.ttl"
             if not os.path.exists(owl_file):
                 print(f"OWL file not found: {owl_file}")
                 continue
