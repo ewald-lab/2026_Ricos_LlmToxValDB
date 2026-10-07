@@ -130,6 +130,8 @@ ENV/
 env.bak/
 venv.bak/
 env-*/
+env-*
+**/env-*
 
 # Spyder
 .spyderproject
