@@ -58,7 +58,7 @@ python "${HIPO_DIR}/hipo.py" \
     --target_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_{EMBED_DIR}.db" \
     --base_url "${BASE_URL}" \
     --num_backups 10 \
-    --context_ontology "$(cat "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt")" \
+    --context_ontology_file "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt" \
     --model "${MODEL}" \
     --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/inputs/choice_llm.json" \
     --descriptions_concurrency 100 \
