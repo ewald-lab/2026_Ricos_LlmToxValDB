@@ -33,7 +33,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def configure_fonts() -> None:
-    font_dir = Path(__file__).resolve().parents[4] / "assets" / "fonts" / "ibm-plex-sans"
+    font_dir = Path(__file__).resolve().parents[4] / "02.expert_annotation" / "modules" / "01.create_form" / "assets" / "fonts" / "ibm-plex-sans"
     for font_path in font_dir.glob("*.ttf"):
         font_manager.fontManager.addfont(str(font_path))
     plt.rcParams.update({
