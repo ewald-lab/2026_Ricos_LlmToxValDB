@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 # Import the model loader
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from scripts.model.llm import get_model
+from scripts.model.llm import get_model, test_model
 
 
 
@@ -144,7 +144,7 @@ def main() -> None:
     """
 
     parser = argparse.ArgumentParser(description="Extract endpoints from OECD guidelines using LLM")
-    parser.add_argument("--model", required=True, help="Model name")
+    parser.add_argument("--model", default=None, help="Model name (optional if specified in model_config)")
     parser.add_argument("--model_provider", default="openai", help="Model provider")
     parser.add_argument("--base_url", help="Base URL for the model")
     parser.add_argument("--skill_file", required=True, help="Path to SKILL.md")
@@ -172,11 +172,15 @@ def main() -> None:
 
         if args.base_url:
             model_kwargs["base_url"] = args.base_url
+        if args.model:
+            model_kwargs["model"] = args.model
         # Override temperature if it was fixed before or keep from config
         if "temperature" not in model_kwargs:
             model_kwargs["temperature"] = 0.1
         llm = get_model(**model_kwargs)
     else:
+        if not args.model:
+            raise ValueError("--model is required when --model_config is not provided")
         llm = get_model(
             model=args.model,
             model_provider=args.model_provider,
@@ -184,6 +188,9 @@ def main() -> None:
             temperature=0.1,
             max_tokens=8192
         )
+
+    if not test_model(llm):
+        raise RuntimeError("Model connectivity test failed. Please check your configuration.")
 
 
     with open(args.skill_file, 'r') as f:
