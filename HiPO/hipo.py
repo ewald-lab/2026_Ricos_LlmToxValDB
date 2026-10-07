@@ -30,7 +30,9 @@ from src.utils import (
 # --- Global Constants ---
 DEFAULT_CONFIG_DIR = Path(__file__).resolve().parent / "config"
 DEFAULT_LLM_CONFIG_FILE = DEFAULT_CONFIG_DIR / "llm.json"
-DEFAULT_RAG_CONFIG_FILE = DEFAULT_CONFIG_DIR / "rag.json" 
+DEFAULT_RAG_CONFIG_FILE = DEFAULT_CONFIG_DIR / "rag.json"
+DEFAULT_CHOICE_LLM_FILE = DEFAULT_CONFIG_DIR / "choice_llm.json"
+DEFAULT_CHOICE_RAG_FILE = DEFAULT_CONFIG_DIR / "choice_rag.json" 
 
 logger = setup_logging()
 
@@ -116,6 +118,9 @@ def load_llm_config(args: argparse.Namespace) -> None:
     Returns:
         None
     """
+    if not args.llm_config and DEFAULT_CHOICE_LLM_FILE.exists():
+        args.llm_config = str(DEFAULT_CHOICE_LLM_FILE)
+
     if not args.llm_config or not os.path.exists(args.llm_config):
         if args.ontology_definitions is None:
             args.ontology_definitions = False
@@ -159,7 +164,10 @@ def load_rag_config(args: argparse.Namespace) -> dict:
     Returns:
         dict: The loaded RAG configuration dictionary.
     """
-    rag_config_path = args.rag_config if args.rag_config else str(DEFAULT_RAG_CONFIG_FILE)
+    if not args.rag_config:
+        rag_config_path = str(DEFAULT_CHOICE_RAG_FILE) if DEFAULT_CHOICE_RAG_FILE.exists() else str(DEFAULT_RAG_CONFIG_FILE)
+    else:
+        rag_config_path = args.rag_config
     if not os.path.exists(rag_config_path):
         raise FileNotFoundError(f"RAG config file not found: {rag_config_path}")
     logger.info(f"Loading RAG configuration from: {rag_config_path}")
