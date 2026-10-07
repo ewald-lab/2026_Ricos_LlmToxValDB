@@ -53,6 +53,5 @@ python "${REPO_ROOT}/scripts/01.llm_clean.py" \
     --reasoning_file "${REPO_ROOT}/outputs/llm_clean_reasoning_positives.json" \
     --model_config "${MODEL_CONFIG}" \
     --pipeline_dir "${REPO_ROOT}/config/clean_prompts/pipeline" \
-    --system_prompt_standardize_file "${REPO_ROOT}/config/clean_prompts/system_prompt_standardize.txt" \
     --system_prompt_exceptions_file "${REPO_ROOT}/config/clean_prompts/system_prompt_clean_exceptions.txt" \
     --base_url "${FINAL_BASE_URL}"

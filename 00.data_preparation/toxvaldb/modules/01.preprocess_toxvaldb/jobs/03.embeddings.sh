@@ -62,7 +62,6 @@ mkdir -p "$(dirname "${OUTPUT_DB}")"
 python "${REPO_ROOT}/scripts/03.embeddings.py" \
     --input_file "${REPO_ROOT}/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
     --target_column "TOXICOLOGICAL_EFFECT_LLM_CLEANED" \
-    --std_column "TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED" \
     --rag_config "${REPO_ROOT}/config/rag/embeddings.json" \
     --embeddings_model_id "${EMBED_MODEL}" \
     --target_embedding_db "${OUTPUT_DB}" \

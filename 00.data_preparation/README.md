@@ -18,7 +18,7 @@ The reference preparation workflow is organized into 4 focused modules:
 - **Goal:** Filter, clean with LLM into atomic phenotypic effects, separate negative/control findings, and generate dense embeddings.
 - **Workflow:**
   1. **EDA (`00.eda_toxvaldb.sh`):** Filters out records missing effect descriptions or identifiers.
-  2. **LLM Cleaning (`01.cleaner_llm.sh` -> `01.llm_clean.py`):** Uses an LLM to split multi-effect descriptions into atomic phenotypic phrases (`TOXICOLOGICAL_EFFECT_LLM_CLEANED`, `TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED`).
+  2. **LLM Cleaning (`01.cleaner_llm.sh` -> `01.llm_clean.py`):** Uses an LLM to split multi-effect descriptions into atomic phenotypic phrases (`TOXICOLOGICAL_EFFECT_LLM_CLEANED`).
   3. **LLM Negatives (`01.cleaner_llm_negatives.sh` -> `01.llm_clean_negatives.py`):** Detects control or no-effect findings.
   4. **Merge (`02.merge.sh` -> `02.merge_pos_neg.py`):** Assigns `NEGATIVE=False` to positives and `NEGATIVE=True` to negatives, producing `outputs/ToxValDB_v9.7.0_Cleaned_03.tsv`.
   5. **Embeddings (`03.embeddings.sh` -> `03.embeddings.py`):** Computes dense vector embeddings for unique strings into SQLite `outputs/embeddings_db/tox_effects_<model>.db` with incremental caching.
@@ -47,7 +47,6 @@ The final clean file must be a tab-delimited file (`.tsv`) containing at minimum
 | `casrn` | String | CAS Registry Number (if available, else empty string). |
 | `TOXICOLOGICAL_EFFECT` | String | Original raw effect text from the database. |
 | `TOXICOLOGICAL_EFFECT_LLM_CLEANED` | String | Atomic phenotypic effect phrase extracted by LLM (dosage, duration, routes stripped). |
-| `TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED` | String | Canonical standardized term phrase. |
 | `NEGATIVE` | Boolean | `False` for observed toxic/adverse effects; `True` for control, normal, or no-effect findings. |
 
 ### B. SQLite Target Embeddings Contract (`*_effects_<model>.db`)
@@ -112,7 +111,7 @@ cp 00.data_preparation/toxvaldb/requirements.txt 00.data_preparation/<dataset_na
 
 ### Step 6: Verification Checklist
 Ensure:
-- [ ] `outputs/<Dataset>_Cleaned_03.tsv` has `TOXICOLOGICAL_EFFECT`, `TOXICOLOGICAL_EFFECT_LLM_CLEANED`, `TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED`, and `NEGATIVE`.
+- [ ] `outputs/<Dataset>_Cleaned_03.tsv` has `TOXICOLOGICAL_EFFECT`, `TOXICOLOGICAL_EFFECT_LLM_CLEANED`, and `NEGATIVE`.
 - [ ] SQLite database `outputs/embeddings_db/<dataset>_effects_<model>.db` exists with table `input_embeddings`.
 - [ ] Slurm jobs dynamically parse host endpoint and model config without hardcoded hostnames.
 - [ ] Virtual environment activation checks both `${PREP_ROOT}/env-data-prep/bin/activate` and `${PREP_ROOT}/../env-data-prep/bin/activate`.

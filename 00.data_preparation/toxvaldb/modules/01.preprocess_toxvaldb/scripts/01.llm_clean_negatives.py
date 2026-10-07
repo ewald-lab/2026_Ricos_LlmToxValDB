@@ -24,7 +24,6 @@ from src.utils import (
     load_system_prompt,
     clean_llm_response,
     parse_llm_result,
-    process_standardize_batch,
     process_clean_exceptions_batch,
     needs_cleanup,
 )
@@ -59,11 +58,6 @@ def arg_parser() -> argparse.Namespace:
         "--system_prompt_positivize_file",
         default=None,
         help="Path to system prompt for converting negative effects to positive.",
-    )
-    parser.add_argument(
-        "--system_prompt_standardize_file",
-        default=None,
-        help="Path to system prompt for standardization phase.",
     )
     parser.add_argument(
         "--system_prompt_exceptions_file",
@@ -293,9 +287,6 @@ def main() -> None:
     if args.system_prompt_positivize_file is None:
         args.system_prompt_positivize_file = str(project_root / "config" / "clean_prompts_negatives" / "system_prompt_positivize.txt")
 
-    if args.system_prompt_standardize_file is None:
-        args.system_prompt_standardize_file = str(project_root / "config" / "clean_prompts_negatives" / "system_prompt_standardize.txt")
-
     if args.system_prompt_exceptions_file is None:
         args.system_prompt_exceptions_file = str(project_root / "config" / "clean_prompts_negatives" / "system_prompt_clean_exceptions.txt")
 
@@ -412,27 +403,13 @@ def main() -> None:
             lambda e: pos_cache.get(e, {"positive_name": e})["positive_name"] if isinstance(e, str) else e
         )
 
-    # --- Phase 3: Standardization ---
-    logger.info("Starting Phase 3: Standardization of positive effects...")
-    if not os.path.exists(args.system_prompt_standardize_file):
-        logger.error(f"Standardize system prompt not found: {args.system_prompt_standardize_file}")
-        result_df['TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED'] = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED']
-    else:
-        sys_prompt_std = load_system_prompt(args.system_prompt_standardize_file)
-        positivized_effects = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'].dropna().unique().tolist()
-        std_cache = asyncio.run(process_standardize_batch(llm, sys_prompt_std, positivized_effects, max_concurrency))
-
-        result_df['TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED'] = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'].apply(
-            lambda e: std_cache.get(e, {"standard_name": e})["standard_name"] if isinstance(e, str) else e
-        )
-
     result_df['NEGATIVE'] = True
 
     # --- Save ---
     logger.info(f"Saving results to: {args.output}")
 
 
-    target_cols = ['TOXICOLOGICAL_EFFECT', 'NEGATIVE', 'TOXICOLOGICAL_EFFECT_LLM_CLEANED', 'TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED']
+    target_cols = ['TOXICOLOGICAL_EFFECT', 'NEGATIVE', 'TOXICOLOGICAL_EFFECT_LLM_CLEANED']
     cols_to_keep = [c for c in result_df.columns if c not in target_cols and c != temp_neg_col]
     final_cols = target_cols + cols_to_keep
 

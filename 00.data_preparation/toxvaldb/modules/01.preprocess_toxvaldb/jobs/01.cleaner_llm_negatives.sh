@@ -54,6 +54,5 @@ python "${REPO_ROOT}/scripts/01.llm_clean_negatives.py" \
     --model_config "${MODEL_CONFIG}" \
     --pipeline_dir "${REPO_ROOT}/config/clean_prompts_negatives/pipeline" \
     --system_prompt_positivize_file "${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_positivize.txt" \
-    --system_prompt_standardize_file "${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_standardize.txt" \
     --system_prompt_exceptions_file "${REPO_ROOT}/config/clean_prompts_negatives/system_prompt_clean_exceptions.txt" \
     --base_url "${FINAL_BASE_URL}"

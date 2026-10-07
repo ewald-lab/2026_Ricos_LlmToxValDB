@@ -26,8 +26,7 @@ def arg_parser() -> argparse.Namespace:
 
     # --- File I/O & Columns ---
     parser.add_argument("--input_file", required=True, help="Path to input TSV file.")
-    parser.add_argument("--target_column", default="TOXICOLOGICAL_EFFECT", help="Column name containing the text to process.")
-    parser.add_argument("--std_column", default="TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED", help="Column name containing the standardized text.")
+    parser.add_argument("--target_column", default="TOXICOLOGICAL_EFFECT_LLM_CLEANED", help="Column name containing the text to process.")
 
     # --- Embedding Configuration ---
     parser.add_argument("--rag_config", required=True, help="Path to RAG configuration JSON file.")
@@ -42,7 +41,7 @@ def arg_parser() -> argparse.Namespace:
 def main() -> None:
     """
     Description:
-    Main entry point for generating embeddings of unique descriptions and standardized descriptions
+    Main entry point for generating embeddings of unique descriptions
     using a model specified in the RAG configuration, and saving them to the embeddings database.
 
     Args:
@@ -94,16 +93,6 @@ def main() -> None:
     logger.info(f"Found {len(unique_descs)} unique descriptions to embed.")
     get_or_create_embeddings(unique_descs, embedding_model, args.target_embedding_db, return_vectors=False)
 
-    # Process Standardized Column if it exists
-    if args.std_column in df.columns:
-        logger.info(f"Processing standardized column: {args.std_column}")
-        unique_stds = df.select(args.std_column).unique().drop_nulls().to_series().to_list()
-        unique_stds = [d for d in unique_stds if is_valid_description(d)]
-
-        logger.info(f"Found {len(unique_stds)} unique standardized descriptions to embed.")
-        get_or_create_embeddings(unique_stds, embedding_model, args.target_embedding_db, return_vectors=False)
-    else:
-        logger.info(f"Standardized column '{args.std_column}' not found in input file.")
 
 if __name__ == "__main__":
     main()

@@ -24,7 +24,6 @@ from src.utils import (
     load_system_prompt,
     clean_llm_response,
     parse_llm_result,
-    process_standardize_batch,
     process_clean_exceptions_batch,
     needs_cleanup,
 )
@@ -59,11 +58,6 @@ def arg_parser() -> argparse.Namespace:
         "--system_prompt_file",
         default=None,
         help="Path to single system prompt (alternative to --pipeline_dir).",
-    )
-    parser.add_argument(
-        "--system_prompt_standardize_file",
-        default=None,
-        help="Path to system prompt for standardization phase (default: config/system_prompt_standardize.txt).",
     )
     parser.add_argument(
         "--system_prompt_exceptions_file",
@@ -232,9 +226,6 @@ def main() -> None:
     if not prompts:
         logger.error("No prompts loaded. Execution aborted.")
         return
-
-    if args.system_prompt_standardize_file is None:
-        args.system_prompt_standardize_file = str(project_root / "inputs" / "clean_prompts" / "system_prompt_standardize.txt")
 
     if args.system_prompt_exceptions_file is None:
         args.system_prompt_exceptions_file = str(project_root / "inputs" / "clean_prompts" / "system_prompt_clean_exceptions.txt")
@@ -413,54 +404,6 @@ def main() -> None:
                 reasoning_output[key]["effects"] = new_effects
                 if exp_reasonings:
                     reasoning_output[key]["reasoning_exceptions"] = exp_reasonings
-
-    # --- Phase 2: Standardization ---
-    logger.info("Starting Phase 2: Standardization of cleaned effects...")
-
-    if not os.path.exists(args.system_prompt_standardize_file):
-        logger.error(f"Standardize system prompt not found: {args.system_prompt_standardize_file}")
-        return
-
-    sys_prompt_std = load_system_prompt(args.system_prompt_standardize_file)
-    logger.info(f"Loaded standardize system prompt from: {args.system_prompt_standardize_file}")
-
-    cleaned_effects = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'].dropna().unique().tolist()
-    cleaned_effects = [e for e in cleaned_effects if isinstance(e, str) and len(e.strip()) >= 2]
-    logger.info(f"Found {len(cleaned_effects)} unique cleaned effects for standardization.")
-
-    std_cache = asyncio.run(process_standardize_batch(llm, sys_prompt_std, cleaned_effects, max_concurrency))
-
-    std_col = "TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED"
-    def get_std_name(effect: Any) -> Any:
-        """
-        Description:
-        Helper mapping function to retrieve standard names from the standardization cache.
-
-        Args:
-            effect (Any): The cleaned term value.
-
-        Returns:
-            Any: The standardized term name.
-        """
-        if not isinstance(effect, str): return effect
-        res = std_cache.get(effect)
-        return res.get("standard_name", effect) if res else effect
-
-    result_df[std_col] = result_df['TOXICOLOGICAL_EFFECT_LLM_CLEANED'].apply(get_std_name)
-
-    # Merge standardization reasoning into main reasoning JSON
-    for key in reasoning_output:
-        std_entries = []
-        for e in reasoning_output[key]["effects"]:
-            res = std_cache.get(e)
-            if res:
-                std_entries.append({
-                    "cleaned": e,
-                    "standard_name": res.get("standard_name", e),
-                    "reasoning": res.get("reasoning", ""),
-                })
-        if std_entries:
-            reasoning_output[key]["reasoning_standardization"] = std_entries
 
     # --- Final Save ---
     logger.info(f"Saving all cleaning reasoning to: {args.reasoning_file}")
