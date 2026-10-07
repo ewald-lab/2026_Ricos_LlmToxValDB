@@ -86,6 +86,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--num_backups", type=int, default=4, help="Number of backups to save during processing (0 to disable).")
     parser.add_argument("--ontology_definitions", action="store_true", default=None, help="Use node definitions from DB in prompts.")
     parser.add_argument("--context_ontology", default="", help="Context information about the ontology to use in prompts.")
+    parser.add_argument("--context_ontology_file", default=None, help="Path to text file containing context information about the ontology.")
 
     # --- Embedding & Database Configuration ---
     parser.add_argument("--rag_config", default=None, help="Path to RAG configuration JSON file (defaults to HiPO/config/rag.json).")
@@ -345,6 +346,11 @@ def init_graph(args: argparse.Namespace, categories: list, test_retries: int, ra
     if not os.path.exists(ontology_db_path):
         logger.warning(f"Ontology DB not found at {ontology_db_path}. Please ensure you ran process_ontology or check the path.")
 
+    context_onto = args.context_ontology
+    if getattr(args, "context_ontology_file", None) and os.path.exists(args.context_ontology_file):
+        with open(args.context_ontology_file, "r", encoding="utf-8") as f:
+            context_onto = f.read()
+
     return TextToOntoGraph(
         categories,
         ontology_db=ontology_db_path,
@@ -360,7 +366,7 @@ def init_graph(args: argparse.Namespace, categories: list, test_retries: int, ra
         ontology_definitions=args.ontology_definitions,
         max_concurrency=args.max_concurrency,
         max_retries=test_retries,
-        context_ontology=args.context_ontology,
+        context_ontology=context_onto,
         reranker_prompt_file=rag_params["reranker_prompt_file"],
         reranker_batch_size=rag_params["reranker_batch_size"],
         global_definitions_db=args.global_definitions_db,
