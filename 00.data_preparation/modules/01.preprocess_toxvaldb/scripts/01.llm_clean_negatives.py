@@ -48,7 +48,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--input", default="ToxValDB_v9.7.0_Cleaned_01.tsv", help="Path to input TSV file.")
     parser.add_argument("--output", default="ToxValDB_v9.7.0_Cleaned_02_negatives.tsv", help="Path to output TSV file.")
     parser.add_argument("--reasoning_file", default="llm_clean_reasoning_negatives.json", help="Path to save LLM reasoning traces.")
-    parser.add_argument("--model_config", default=None, help="Path to model config JSON file.")
+    parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
     parser.add_argument("--base_url", default=None, help="Base URL for the LLM API. Overrides config value.")
     parser.add_argument(
         "--pipeline_dir",
@@ -300,8 +300,6 @@ def main() -> None:
         args.system_prompt_exceptions_file = str(project_root / "config" / "clean_prompts_negatives" / "system_prompt_clean_exceptions.txt")
 
     # --- Model ---
-    if args.model_config is None:
-        args.model_config = str(project_root / "config" / "models" / "Qwen3.5-122B-A10B-FP8.json")
     with open(args.model_config, "r", encoding="utf-8") as f:
         model_config = json.load(f)
 

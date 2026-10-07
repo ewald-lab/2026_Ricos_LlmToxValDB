@@ -21,12 +21,13 @@ PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 mkdir -p "${SCRIPT_DIR}/logs"
 
 ENDPOINT="${1:-${CODON_NODE:-${BASE_URL:-}}}"
-MODEL_CONFIG="${2:-${MODEL_CONFIG:-${REPO_ROOT}/config/models/Qwen3.5-122B-A10B-FP8.json}}"
+MODEL_CONFIG="${2:-${MODEL_CONFIG:-}}"
 PORT="${3:-${CODON_PORT:-8003}}"
 
-if [ -z "$ENDPOINT" ]; then
-    echo "Error: Host node or base URL is required."
-    echo "Usage: sbatch $0 <codon-node|base_url> [model_config] [port]  (e.g. sbatch $0 hl-codon-gpu-020)"
+if [ -z "$ENDPOINT" ] || [ -z "$MODEL_CONFIG" ]; then
+    echo "Error: Both host node/base_url and model_config are required."
+    echo "Usage: sbatch $0 <codon-node|base_url> <model_config> [port]"
+    echo "Example: sbatch $0 codon-gpu-007 /nfs/research/ewald/ricos/code/playground/models/config/Qwen3.6-35B-A3B-FP8.json 8052"
     exit 1
 fi
 
