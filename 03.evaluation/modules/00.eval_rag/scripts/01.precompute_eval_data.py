@@ -37,7 +37,6 @@ def load_ground_truth(csv_path: str, toxval_path: str) -> list[dict]:
             orig = orig.strip()
             tox_map[orig] = {
                 "cleaned": row.get("TOXICOLOGICAL_EFFECT_LLM_CLEANED", "").strip() if row.get("TOXICOLOGICAL_EFFECT_LLM_CLEANED") else "",
-                "standardized": row.get("TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED", "").strip() if row.get("TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED") else ""
             }
 
     df = pl.read_csv(csv_path)
@@ -49,15 +48,13 @@ def load_ground_truth(csv_path: str, toxval_path: str) -> list[dict]:
         matches = set([m.strip() for m in str(matches_str).split("|") if m.strip()])
         if len(matches) == 0: continue
 
-        mapping = tox_map.get(orig, {"cleaned": "", "standardized": ""})
+        mapping = tox_map.get(orig, {"cleaned": ""})
         # If mapping not found or empty, fallback to orig for cleaned
         cleaned = mapping["cleaned"] if mapping["cleaned"] else orig
-        std = mapping["standardized"] if mapping["standardized"] else ""
 
         gt_data.append({
             "original": orig,
             "cleaned": cleaned,
-            "standardized": std,
             "matches": list(matches) # Convert to list for JSON serialization
         })
     return gt_data
@@ -153,18 +150,13 @@ class Precomputer:
             return vec
 
         q_cleaned = []
-        q_std = []
 
         for row in self.ground_truth:
             cleaned_vec = get_vec(row["cleaned"])
-            std_vec = get_vec(row["standardized"])
             q_cleaned.append(cleaned_vec)
-            q_std.append(std_vec)
 
         self.q_cleaned_mat = torch.stack(q_cleaned).to("cuda" if torch.cuda.is_available() else "cpu")
-        # For std, some might be None if no standardized text. Fallback to cleaned if None.
-        q_std_fixed = [v if v is not None else q_cleaned[i] for i, v in enumerate(q_std)]
-        self.q_std_mat = torch.stack(q_std_fixed).to(self.q_cleaned_mat.device)
+        self.q_std_mat = self.q_cleaned_mat
 
     def _load_parent_map(self) -> None:
         """

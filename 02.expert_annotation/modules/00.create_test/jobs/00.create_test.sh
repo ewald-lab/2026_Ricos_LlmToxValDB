@@ -52,7 +52,6 @@ for ONTOLOGY in hpath mp; do
         --output_file "${MODULE_ROOT}/outputs/test_candidates_${ONTOLOGY}.txt" \
         --output_json "${MODULE_ROOT}/outputs/test_pool_${ONTOLOGY}.json" \
         --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
-        --std_column TOXICOLOGICAL_EFFECT_LLM_STANDARDIZED \
         --rag_config "${MODULE_ROOT}/config/best_config.json" \
         --embeddings_model_id "${EMBED_DIR}" \
         --target_embedding_db "${GIT_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_${EMBED_DIR}.db" \

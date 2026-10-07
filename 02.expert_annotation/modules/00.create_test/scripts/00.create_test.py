@@ -57,7 +57,6 @@ def arg_parser() -> argparse.Namespace:
 
     parser.add_argument("--reranker_model", default="Qwen/Qwen3-Reranker-8B", help="HuggingFace model for reranking.")
     parser.add_argument("--threshold_reranker", type=float, default=0.0, help="Score threshold for reranker. If > 0.0, reranker is active.")
-    parser.add_argument("--std_column", default=None, help="Column name for standardized text.")
     parser.add_argument("--grf_alpha", type=float, help="Alpha for GRF (1.0 = original, 0.0 = standardized). Overrides config.")
 
     # --- LLM Configuration ---
@@ -193,47 +192,20 @@ def main() -> None:
     logger.info(f"Loading input file: {args.input_file}")
     df = pl.read_csv(args.input_file, separator='\t', ignore_errors=True, quote_char=None)
 
-    use_std = args.std_column is not None and args.grf_alpha is not None and args.grf_alpha != 1.0
-    if use_std:
-        pairs_df = df.select([pl.col(args.target_column), pl.col(args.std_column)]).unique(maintain_order=True).drop_nulls()
-        unique_pairs = {}
-        for row in pairs_df.iter_rows(named=True):
-            orig = row[args.target_column]
-            std = row[args.std_column]
-            if is_valid_description(orig):
-                unique_pairs[orig] = std
+    descriptions = df.select(pl.col(args.target_column)).unique(maintain_order=True).drop_nulls().to_series().to_list()
+    descriptions.sort()
+    descriptions = [d for d in descriptions if is_valid_description(d)]
 
-        descriptions = sorted(list(unique_pairs.keys()))
-        logger.info(f"Found {len(descriptions)} unique description pairs.")
+    logger.info(f"Found {len(descriptions)} unique descriptions.")
 
-        if not descriptions:
-            logger.error("No valid descriptions found.")
-            return
+    if not descriptions:
+        logger.error("No valid descriptions found.")
+        return
 
-        logger.info("Loading/Generating input embeddings...")
-        all_texts_for_embedding = set(descriptions)
-        all_texts_for_embedding.update(unique_pairs.values())
+    logger.info("Loading/Generating input embeddings...")
+    text_to_vec = get_or_create_embeddings(descriptions, args.embedding_model, args.target_embedding_db)
 
-        text_to_vec = get_or_create_embeddings(list(all_texts_for_embedding), args.embedding_model, args.target_embedding_db)
-    else:
-        descriptions = df.select(pl.col(args.target_column)).unique(maintain_order=True).drop_nulls().to_series().to_list()
-        descriptions.sort()
-        descriptions = [d for d in descriptions if is_valid_description(d)]
-        unique_pairs = {d: d for d in descriptions}
-
-        logger.info(f"Found {len(descriptions)} unique descriptions.")
-
-        if not descriptions:
-            logger.error("No valid descriptions found.")
-            return
-
-        logger.info("Loading/Generating input embeddings...")
-        text_to_vec = get_or_create_embeddings(descriptions, args.embedding_model, args.target_embedding_db)
-
-    if use_std:
-        valid_descs = [d for d in descriptions if d in text_to_vec and unique_pairs[d] in text_to_vec]
-    else:
-        valid_descs = [d for d in descriptions if d in text_to_vec]
+    valid_descs = [d for d in descriptions if d in text_to_vec]
     if not valid_descs:
         logger.error("No embeddings available.")
         return
@@ -477,13 +449,7 @@ def main() -> None:
     else:
         query_vecs = []
         for d in valid_descs:
-            v0 = text_to_vec[d].detach().clone()
-            if use_std:
-                std = unique_pairs[d]
-                vf = text_to_vec[std].detach().clone()
-                qvec = args.grf_alpha * v0 + (1.0 - args.grf_alpha) * vf
-            else:
-                qvec = v0
+            qvec = text_to_vec[d].detach().clone()
             query_vecs.append(qvec)
 
         embeddings_matrix = torch.stack(query_vecs).numpy()
@@ -578,18 +544,7 @@ def main() -> None:
         if phrase in precomputed_candidates:
             final_pool = precomputed_candidates[phrase]
         else:
-            v0 = text_to_vec[phrase].detach().clone()
-            if use_std:
-                std = unique_pairs[phrase]
-                vf = text_to_vec[std].detach().clone()
-                phrase_vec = args.grf_alpha * v0 + (1.0 - args.grf_alpha) * vf
-            elif getattr(args, 'use_llm_cleaned_for_reranker', False) and args.std_column:
-                std = unique_pairs[phrase]
-                vf = text_to_vec[std].detach().clone()
-                phrase_vec = vf
-            else:
-                phrase_vec = v0
-
+            phrase_vec = text_to_vec[phrase].detach().clone()
             final_pool = evaluate_candidates(phrase, phrase_vec)
 
         if not args.debug:

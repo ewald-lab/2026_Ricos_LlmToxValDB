@@ -78,7 +78,6 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--output_file", required=True, help="Path to output CSV file.")
     parser.add_argument("--reasoning_file", required=True, help="Path to output JSON file for reasoning.")
     parser.add_argument("--target_column", default="TOXICOLOGICAL_EFFECT", help="Column name containing the text to process.")
-    parser.add_argument("--std_column", default=None, help="Column name containing the standardized text.")
 
     # --- LLM Configuration ---
     parser.add_argument("--model_config", required=True, help="Path to model config JSON file.")
@@ -340,23 +339,19 @@ def setup_target_schema_and_embeddings(
     df: pl.DataFrame,
     categories: list,
     target_column: str,
-    std_column: str,
     embedding_model: str,
-    target_embedding_db: str,
-    use_std: bool
+    target_embedding_db: str
 ) -> dict:
     """
     Description:
-    Determines target schema and ensures embeddings exist for target and standard columns.
+    Determines target schema and ensures embeddings exist for the target column.
 
     Args:
         df (pl.DataFrame): Input dataset DataFrame.
         categories (list): List of ontology categories.
-        target_column (str): Name of the column containing the raw description.
-        std_column (str): Name of the column containing the standardized description.
+        target_column (str): Name of the column containing the description.
         embedding_model (str): Name or identifier of the embedding model.
         target_embedding_db (str): Path to the target embedding database.
-        use_std (bool): Whether to generate embeddings for the standardized column as well.
 
     Returns:
         dict: A dictionary mapping column names to their Polars types representing the output schema.
@@ -367,14 +362,8 @@ def setup_target_schema_and_embeddings(
 
     unique_descs = df.select(target_column).unique().drop_nulls().to_series().to_list()
     unique_descs = [d for d in unique_descs if is_valid_description(d)]
-    logger.info(f"Checking embeddings for CLEANED column '{target_column}' ({len(unique_descs)} unique texts)...")
+    logger.info(f"Checking embeddings for target column '{target_column}' ({len(unique_descs)} unique texts)...")
     get_or_create_embeddings(unique_descs, embedding_model, target_embedding_db, return_vectors=False)
-
-    if use_std:
-        unique_stds = df.select(std_column).unique().drop_nulls().to_series().to_list()
-        unique_stds = [d for d in unique_stds if is_valid_description(d)]
-        logger.info(f"Checking embeddings for STANDARDIZED column '{std_column}' ({len(unique_stds)} unique texts)...")
-        get_or_create_embeddings(unique_stds, embedding_model, target_embedding_db, return_vectors=False)
 
     return target_schema
 
@@ -386,7 +375,6 @@ def run_inference(
     target_schema: dict,
     graph: TextToOntoGraph,
     llm: Any,
-    use_std: bool,
     grf_alpha: Optional[float]
 ) -> None:
     """
@@ -400,19 +388,12 @@ def run_inference(
         target_schema (dict): The output schema mapping.
         graph (TextToOntoGraph): The ontology graph pipeline helper.
         llm (Any): The initialized LLM client instance.
-        use_std (bool): Whether to use standardized descriptions.
         grf_alpha (Optional[float]): Optional alpha parameter for GRF.
 
     Returns:
         None
     """
     unique_descriptions, seen_descriptions = get_unique_descriptions(df, args.target_column, args.debug_rows)
-
-    desc_to_std = {}
-    if use_std:
-        # Create a mapping from target_column to std_column
-        mapping_df = df.select([args.target_column, args.std_column]).drop_nulls().group_by(args.target_column, maintain_order=True).agg(pl.col(args.std_column).first())
-        desc_to_std = dict(zip(mapping_df[args.target_column], mapping_df[args.std_column]))
 
     description_cache = {}
     total_descs = len(unique_descriptions)
@@ -431,12 +412,11 @@ def run_inference(
         Returns:
             Tuple[str, dict, str, list]: A tuple of (description, row result values, reasoning, selected categories).
         """
-        std_desc = desc_to_std.get(desc) if use_std else None
         max_attempts = 3
         last_err = None
         for attempt in range(1, max_attempts + 1):
             try:
-                row_result_values, reasoning, selected = graph.execute(llm, desc, std_desc=std_desc, alpha=grf_alpha)
+                row_result_values, reasoning, selected = graph.execute(llm, desc, alpha=grf_alpha)
                 return desc, row_result_values, reasoning, selected
             except Exception as e:
                 last_err = e
@@ -518,16 +498,14 @@ def main() -> None:
     logger.info(f"Using ontology prefix: {prefix}")
     nodes, categories = load_ontology_nodes(args.ontology_embedding_db, prefix=prefix)
 
-    use_std = args.std_column in df.columns if args.std_column else False
-
     target_schema = setup_target_schema_and_embeddings(
-        df, categories, args.target_column, args.std_column, 
-        rag_params["embedding_model"], args.target_embedding_db, use_std)
+        df, categories, args.target_column, 
+        rag_params["embedding_model"], args.target_embedding_db)
 
     graph = init_graph(args, categories, test_retries, rag_params)
 
     try:
-        run_inference(args, df, categories, target_schema, graph, llm, use_std, rag_params["grf_alpha"])
+        run_inference(args, df, categories, target_schema, graph, llm, rag_params["grf_alpha"])
     finally:
         graph.close()
 
