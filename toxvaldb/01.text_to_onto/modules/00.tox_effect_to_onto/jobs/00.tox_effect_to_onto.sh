@@ -10,42 +10,16 @@
 #SBATCH -o "logs/out_tvllm_prod_%j.out"
 #SBATCH -e "logs/err_tvllm_prod_%j.err"
 
-# Default parameters
-DEF_FLAG="--ontology_definitions"
-ENDPOINT=""
-MODEL="Qwen3.6-35B-A3B-FP8"
-PORT="8052"
-ONTOLOGY="hpath"
-
-# Parse positional arguments and flags
-pos_args=0
-for arg in "$@"; do
-    case "$arg" in
-        --use_definitions)
-            DEF_FLAG="--ontology_definitions"
-            ;;
-        --no_definitions|--no_ontology_definitions)
-            DEF_FLAG="--no_ontology_definitions"
-            ;;
-        *)
-            if [ $pos_args -eq 0 ]; then
-                ENDPOINT="$arg"
-            elif [ $pos_args -eq 1 ]; then
-                MODEL="$arg"
-            elif [ $pos_args -eq 2 ]; then
-                PORT="$arg"
-            elif [ $pos_args -eq 3 ]; then
-                ONTOLOGY="$arg"
-            fi
-            pos_args=$((pos_args + 1))
-            ;;
-    esac
-done
+# Arguments: endpoint (required), model (optional), port (optional), ontology (optional)
+ENDPOINT="${1:-}"
+MODEL="${2:-Qwen3.6-35B-A3B-FP8}"
+PORT="${3:-8052}"
+ONTOLOGY="${4:-hpath}"
 
 if [ -z "$ENDPOINT" ]; then
     echo "Error: Host node / endpoint is required."
-    echo "Usage: sbatch $0 <codon-node|base_url> [model] [port] [ontology] [--use_definitions | --no_definitions]"
-    echo "Example: sbatch $0 codon-gpu-010 Qwen3.6-35B-A3B-FP8 8052 hpath"
+    echo "Usage: sbatch $0 <codon-node|base_url> [model] [port] [ontology]"
+    echo "Example: sbatch $0 codon-slurm-login-01 Qwen3.6-35B-A3B-FP8 8052 hpath"
     exit 1
 fi
 
@@ -74,8 +48,8 @@ source "${TOXVALDB_ROOT}/01.text_to_onto/env-text-to-onto/bin/activate"
 
 python "${HIPO_DIR}/hipo.py" \
     --input_file "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
-    --output_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Classified_${ONTOLOGY}_{MODEL}.csv" \
-    --reasoning_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Reasoning_${ONTOLOGY}_{MODEL}.json" \
+    --output_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
+    --reasoning_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Reasoning_${ONTOLOGY}_${MODEL}.json" \
     --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
     --system_prompt_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/system_prompt_{MODE}.txt" \
     --rag_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/rag/best_config.json" \
@@ -89,4 +63,4 @@ python "${HIPO_DIR}/hipo.py" \
     --model "${MODEL}" \
     --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/llm_config.json" \
     --descriptions_concurrency 100 \
-    $DEF_FLAG
+    --ontology_definitions

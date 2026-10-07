@@ -93,8 +93,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--mode", type=int, default=1, choices=[1, 2], help="Execution mode: 1 for individual verification, 2 for batch selection.")
     parser.add_argument("--consensus_runs", type=int, default=3, help="Number of runs for majority voting consensus.")
     parser.add_argument("--num_backups", type=int, default=4, help="Number of backups to save during processing (0 to disable).")
-    parser.add_argument("--ontology_definitions", dest="ontology_definitions", action="store_true", default=None, help="Use node definitions from DB in prompts.")
-    parser.add_argument("--no_ontology_definitions", dest="ontology_definitions", action="store_false", help="Do not use node definitions from DB in prompts.")
+    parser.add_argument("--ontology_definitions", action="store_true", default=None, help="Use node definitions from DB in prompts.")
     parser.add_argument("--context_ontology", default="", help="Context information about the ontology to use in prompts.")
 
     # --- Embedding & Database Configuration ---
