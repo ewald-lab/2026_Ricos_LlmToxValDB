@@ -779,6 +779,8 @@ def main() -> None:
 
     parser.add_argument("--ontology_file", required=True, help="Path to input .ttl ontology file")
     parser.add_argument("--root_uri", help="URI of the root class to start traversal (optional)")
+    parser.add_argument("--root_uris_file", help="Path to JSON file mapping ontology names to root URIs (optional)")
+    parser.add_argument("--ontology_name", help="Ontology identifier (optional, defaults to filename stem)")
     parser.add_argument("--prompt_template", help="Path to custom prompt template file (optional)")
     parser.add_argument("--evaluate_prompt_template", help="Path to evaluation prompt template file (optional)")
     parser.add_argument("--definitions_report", help="Path to save the JSON report of definitions (optional)")
@@ -854,7 +856,29 @@ def main() -> None:
     logger.info(f"HuggingFace Home: {hf_home}")
     logger.info(f"HF Transfer: {hf_transfer}")
 
-    generator = OntologyToHierarchy(args.ontology_file, args.root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency, evaluate_prompt_template_path=args.evaluate_prompt_template, definitions_report_path=args.definitions_report)
+    # Determine root URI: priority to --root_uri, then lookup in --root_uris_file or inputs/root_uris.json
+    root_uri = args.root_uri
+    if not root_uri:
+        root_uris_file = args.root_uris_file
+        if not root_uris_file:
+            default_roots_file = Path(__file__).resolve().parent.parent / "inputs" / "root_uris.json"
+            if default_roots_file.is_file():
+                root_uris_file = str(default_roots_file)
+
+        if root_uris_file and os.path.exists(root_uris_file):
+            logger.info(f"Loading root URIs from: {root_uris_file}")
+            with open(root_uris_file, "r", encoding="utf-8") as f:
+                root_uris_map = json.load(f)
+
+            ontology_key = (args.ontology_name or Path(args.ontology_file).stem).lower()
+            root_map_lower = {k.lower(): v for k, v in root_uris_map.items()}
+            root_uri = root_map_lower.get(ontology_key)
+            if root_uri:
+                logger.info(f"Resolved root URI for '{ontology_key}': {root_uri}")
+            else:
+                logger.info(f"No specific root URI configured for '{ontology_key}'. Auto-detecting roots.")
+
+    generator = OntologyToHierarchy(args.ontology_file, root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency, evaluate_prompt_template_path=args.evaluate_prompt_template, definitions_report_path=args.definitions_report)
 
     if llm:
         if not test_model(llm):

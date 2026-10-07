@@ -39,23 +39,6 @@ TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
 ONTOLOGY="${1:-${ONTOLOGIES[$TASK_ID]}}"
 EMBED_DIR="${2:-qwen}"
 
-# Select root class URI based on ontology
-ROOT_FLAG=""
-case "$ONTOLOGY" in
-    mp)
-        ROOT_FLAG="--root_uri http://purl.obolibrary.org/obo/MP_0000001"
-        ;;
-    hp)
-        ROOT_FLAG="--root_uri http://purl.obolibrary.org/obo/HP_0000001"
-        ;;
-    txpo)
-        ROOT_FLAG="--root_uri http://purl.obolibrary.org/obo/TXPO_0000009"
-        ;;
-    *)
-        ROOT_FLAG=""
-        ;;
-esac
-
 mkdir -p "${REPO_ROOT}/outputs/${EMBED_DIR}"
 
 echo "=========================================================="
@@ -64,8 +47,8 @@ echo "HF_HOME: ${HF_HOME}"
 echo "=========================================================="
 
 python "${REPO_ROOT}/scripts/01.process_ontology.py" \
-    $ROOT_FLAG \
     --ontology_file "${REPO_ROOT}/inputs/owl_files/${ONTOLOGY}.ttl" \
+    --root_uris_file "${REPO_ROOT}/inputs/root_uris.json" \
     --ontology_db "${REPO_ROOT}/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
     --rag_config "${REPO_ROOT}/config/rag/embeddings.json" \
     --embeddings_model_id "${EMBED_DIR}" \
