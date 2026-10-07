@@ -1,5 +1,6 @@
 {
-    "model": "Qwen3.6-27B-FP8",
+    "_comment": "Template LLM configuration. For custom models, check Hugging Face for model-specific parameters, sampling hyperparameters, and chat_template_kwargs (e.g., enable_thinking, thinking_budget). For cloud LLMs (OpenAI, Anthropic, etc.), set 'model_provider' and supply your API key in 'api_key' or via environment variables.",
+    "model": "Qwen3.6-35B-A3B-FP8",
     "model_provider": "openai",
     "api_key": "EMPTY",
     "temperature": 0.1,

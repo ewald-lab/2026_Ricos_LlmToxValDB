@@ -28,7 +28,9 @@ from src.utils import (
 )
 
 # --- Global Constants ---
-DEFAULT_MODELS_DIR = Path(__file__).resolve().parent / "config" / "models"
+DEFAULT_CONFIG_DIR = Path(__file__).resolve().parent / "config"
+DEFAULT_LLM_CONFIG_FILE = DEFAULT_CONFIG_DIR / "llm.json"
+DEFAULT_RAG_CONFIG_FILE = DEFAULT_CONFIG_DIR / "rag.json" 
 
 logger = setup_logging()
 
@@ -84,7 +86,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--context_ontology", default="", help="Context information about the ontology to use in prompts.")
 
     # --- Embedding & Database Configuration ---
-    parser.add_argument("--rag_config", required=True, help="Path to RAG configuration JSON file.")
+    parser.add_argument("--rag_config", default=None, help="Path to RAG configuration JSON file (defaults to HiPO/config/rag.json).")
     parser.add_argument("--embeddings_model_id", default="qwen", help="Identifier for the model configuration in RAG config (e.g., qwen, nemotron)")
     parser.add_argument("--ontology_embedding_db", required=True, help="Path to ontology embeddings database.")
     parser.add_argument("--target_embedding_db", default="", help="Path to save embedding database for target column.")
@@ -157,11 +159,13 @@ def load_rag_config(args: argparse.Namespace) -> dict:
     Returns:
         dict: The loaded RAG configuration dictionary.
     """
-    if not os.path.exists(args.rag_config):
-        raise FileNotFoundError(f"RAG config file not found: {args.rag_config}")
-    logger.info(f"Loading RAG configuration from: {args.rag_config}")
-    with open(args.rag_config, 'r', encoding='utf-8') as f:
+    rag_config_path = args.rag_config if args.rag_config else str(DEFAULT_RAG_CONFIG_FILE)
+    if not os.path.exists(rag_config_path):
+        raise FileNotFoundError(f"RAG config file not found: {rag_config_path}")
+    logger.info(f"Loading RAG configuration from: {rag_config_path}")
+    with open(rag_config_path, 'r', encoding='utf-8') as f:
         rag_config = json.load(f)
+    rag_config.pop("_comment", None)
 
     embedding_model_name = rag_config.get("embedding_model", "").lower()
     if "kalm" in embedding_model_name:
@@ -245,31 +249,30 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
         Tuple[Any, int]: A tuple containing the initialized LLM client object and the maximum number of retries.
     """
     model_config = {}
-    if args.model_config and args.model_config != "placeholder" and os.path.exists(args.model_config):
-        logger.info(f"Loading model configuration from: {args.model_config}")
-        with open(args.model_config, 'r', encoding='utf-8') as f:
+    config_path = args.model_config if (args.model_config and args.model_config != "placeholder") else str(DEFAULT_LLM_CONFIG_FILE)
+    if os.path.exists(config_path):
+        logger.info(f"Loading model configuration from: {config_path}")
+        with open(config_path, 'r', encoding='utf-8') as f:
             model_config = json.load(f)
     elif args.model:
-        candidate = DEFAULT_MODELS_DIR / f"{args.model}.json"
-        if candidate.exists():
-            logger.info(f"Loading model configuration from built-in template: {candidate}")
-            with open(candidate, 'r', encoding='utf-8') as f:
-                model_config = json.load(f)
-        else:
-            logger.info(f"Creating default OpenAI-compatible config for model: {args.model}")
-            model_config = {
-                "model": args.model,
-                "model_provider": "openai",
-                "api_key": "EMPTY",
-                "temperature": 0.1,
-                "max_tokens": 4096,
-                "top_p": 0.8,
-                "timeout": 300,
-                "max_retries": 3,
-                "max_concurrency": 50,
-            }
+        logger.info(f"Creating default OpenAI-compatible config for model: {args.model}")
+        model_config = {
+            "model": args.model,
+            "model_provider": "openai",
+            "api_key": "EMPTY",
+            "temperature": 0.1,
+            "max_tokens": 4096,
+            "top_p": 0.8,
+            "timeout": 300,
+            "max_retries": 3,
+            "max_concurrency": 50,
+        }
     else:
         raise ValueError("Either a valid --model_config or --model must be provided.")
+
+    model_config.pop("_comment", None)
+    if args.model:
+        model_config["model"] = args.model
 
     max_concurrency = model_config.pop("max_concurrency", 10)
 
