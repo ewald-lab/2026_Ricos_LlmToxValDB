@@ -1,0 +1,19 @@
+{
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "model_provider": "openai",
+  "api_key": "EMPTY",
+  "temperature": 0.1,
+  "max_tokens": 4096,
+  "top_p": 0.8,
+  "presence_penalty": 1.5,
+  "timeout": 300,
+  "max_retries": 3,
+  "max_concurrency": 50,
+  "extra_body": {
+    "top_k": 20,
+    "repetition_penalty": 1.0,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  }
+}
