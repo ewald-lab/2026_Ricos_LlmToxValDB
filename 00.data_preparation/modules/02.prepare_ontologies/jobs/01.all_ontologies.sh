@@ -24,8 +24,20 @@ PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 mkdir -p "${SCRIPT_DIR}/logs"
 
+# Optional argument overrides:
+# $1: ontology override (default: from ONTOLOGIES array based on SLURM_ARRAY_TASK_ID)
+# $2: embedding model (default: qwen)
+# $3: custom HF_HOME directory
+TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
+ONTOLOGY="${1:-${ONTOLOGIES[$TASK_ID]}}"
+EMBED_DIR="${2:-qwen}"
+
 export HF_HUB_ENABLE_HF_TRANSFER="${HF_HUB_ENABLE_HF_TRANSFER:-1}"
 export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
+
+if [ -n "$3" ] && [ -d "$3" ]; then
+    export HF_HOME="$3"
+fi
 
 module purge 2>/dev/null || true
 module load cuda/12.8.0 gcc 2>/dev/null || true
@@ -34,16 +46,13 @@ if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"
 fi
 
-# Optional argument overrides: $1 = ontology, $2 = embedding model (default: qwen)
-TASK_ID="${SLURM_ARRAY_TASK_ID:-0}"
-ONTOLOGY="${1:-${ONTOLOGIES[$TASK_ID]}}"
-EMBED_DIR="${2:-qwen}"
-
 mkdir -p "${REPO_ROOT}/outputs/${EMBED_DIR}"
 
 echo "=========================================================="
-echo "Ontology: ${ONTOLOGY} | Model: ${EMBED_DIR} | Array ID: ${SLURM_ARRAY_TASK_ID:-manual}"
-echo "HF_HOME: ${HF_HOME}"
+echo "=== Processing Ontology Embeddings (All Ontologies) ==="
+echo "Ontology     : ${ONTOLOGY} (Array ID: ${SLURM_ARRAY_TASK_ID:-manual})"
+echo "Embed Model  : ${EMBED_DIR}"
+echo "HF_HOME      : ${HF_HOME}"
 echo "=========================================================="
 
 python "${REPO_ROOT}/scripts/01.process_ontology.py" \
