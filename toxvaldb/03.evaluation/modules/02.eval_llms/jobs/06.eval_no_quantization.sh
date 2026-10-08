@@ -10,44 +10,52 @@
 #SBATCH -o "logs/eval_no_quant_%A_%a.out"
 #SBATCH -e "logs/eval_no_quant_%A_%a.err"
 
-mkdir -p logs
-
-SCRIPT_DIR="$SLURM_SUBMIT_DIR"
-if [ -z "$SCRIPT_DIR" ]; then
-    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Resolve paths relative to this script location
+if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
+    SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
+else
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
-MODULE_DIR="$(dirname "${SCRIPT_DIR}")"
-EVAL_DIR="$(dirname "$(dirname "${MODULE_DIR}")")"
+
+MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+
+mkdir -p "${SCRIPT_DIR}/logs"
 
 # Fixed Parameters
 ONTOLOGY="mp"
 EMBED_DIR="kalm"
-RAG_CONFIG="${MODULE_DIR}/inputs/best_config.json"
-ONTOLOGY_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
-CONTEXT_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
-GLOBAL_DEFINITIONS_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
-INPUT_FILE="${EVAL_DIR}/modules/01.eval_experts/outputs/Expanded_average_human.csv"
-TARGET_EMBEDDING_DB="${MODULE_DIR}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
+RAG_CONFIG="${MODULE_ROOT}/inputs/best_config.json"
+ONTOLOGY_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
+CONTEXT_FILE="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
+GLOBAL_DEFINITIONS_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
+INPUT_FILE="${EVAL_ROOT}/modules/01.eval_experts/outputs/Expanded_average_human.csv"
+TARGET_EMBEDDING_DB="${MODULE_ROOT}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
+CANDIDATE_POOL_FILE="${TOXVALDB_ROOT}/02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
+export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
 
-module purge
-module load cuda/12.8.0
-module load gcc
+module purge 2>/dev/null || true
+module load cuda/12.8.0 2>/dev/null || true
+module load gcc 2>/dev/null || true
+
 GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+if [ -d "$GCC_LIB_PATH" ]; then
+    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+fi
 
-source "${EVAL_DIR}/env-evaluation/bin/activate"
-cd "${MODULE_DIR}"
+source "${EVAL_ROOT}/env-evaluation/bin/activate"
+cd "${MODULE_ROOT}"
 
 CONSENSUS=1
 MODE=2
 DEFS="false"
 DEFS_ARG=""
 DEFS_SUFFIX="no_defs"
-SYSTEM_PROMPT="${MODULE_DIR}/config/system_prompt_${MODE}.txt"
-CANDIDATE_POOL_FILE="${EVAL_DIR}/../02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
+SYSTEM_PROMPT="${MODULE_ROOT}/config/system_prompt_${MODE}.txt"
 
 INDEX="${SLURM_ARRAY_TASK_ID:-0}"
 
@@ -71,7 +79,7 @@ esac
 BASE_URL="http://${NODE}.ebi.ac.uk:${PORT}/v1"
 MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
 
-OUT_FOLDER="${MODULE_DIR}/outputs/no_quantization"
+OUT_FOLDER="${MODULE_ROOT}/outputs/no_quantization"
 mkdir -p "${OUT_FOLDER}"
 
 for RUN in {1..10}; do
@@ -88,7 +96,7 @@ for RUN in {1..10}; do
     echo "  Run               : ${RUN}"
     echo "================================================================================"
 
-    python3 "${MODULE_DIR}/scripts/01.eval_llms.py" \
+    python3 "${MODULE_ROOT}/scripts/01.eval_llms.py" \
         --input_file "${INPUT_FILE}" \
         --output_file "${OUTPUT_FILE}" \
         --reasoning_file "${REASONING_FILE}" \
@@ -112,9 +120,9 @@ done
 echo "================================================================================"
 echo "Expanding LLM responses..."
 echo "================================================================================"
-python3 "${MODULE_DIR}/scripts/03.expand_llm_responses.py" \
+python3 "${MODULE_ROOT}/scripts/03.expand_llm_responses.py" \
     --input_dir "${OUT_FOLDER}" \
-    --owl_file "${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl" \
+    --owl_file "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl" \
     --output_dir "${OUT_FOLDER}" \
     --ontology "${ONTOLOGY}"
 

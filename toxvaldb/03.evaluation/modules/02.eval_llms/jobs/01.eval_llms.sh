@@ -10,8 +10,22 @@
 #SBATCH -o "logs/eval_llms_%A_%a.out"
 #SBATCH -e "logs/eval_llms_%A_%a.err"
 
+# Resolve paths relative to this script location
+if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
+    SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
+else
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
+
+MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+
+mkdir -p "${SCRIPT_DIR}/logs"
+
 # ==============================================================================
-# Model & Endpoint Configuration (at the very top)
+# Model & Endpoint Configuration
 # ==============================================================================
 # Get the codon node from the first argument or environment variable, defaulting to codon-gpu-007
 CODON_NODE="${1:-${CODON_NODE:-codon-gpu-007}}"
@@ -19,7 +33,7 @@ CODON_NODE="${1:-${CODON_NODE:-codon-gpu-007}}"
 # Handle manual runs where SLURM_ARRAY_TASK_ID is not set
 INDEX="${SLURM_ARRAY_TASK_ID:-${2:-8}}"
 
-# Define model mapping based on array index (0-7)
+# Define model mapping based on array index (0-9)
 case $INDEX in
     0)
         MODEL="GLM-5.1"
@@ -69,48 +83,40 @@ esac
 
 BASE_URL="http://${CODON_NODE}.ebi.ac.uk:${PORT}/v1"
 
-# Ensure logs directory exists (run from jobs/ dir)
-mkdir -p logs
-
-# Resolve paths relative to this script's location
-SCRIPT_DIR="$SLURM_SUBMIT_DIR"
-if [ -z "$SCRIPT_DIR" ]; then
-    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-fi
-MODULE_DIR="$(dirname "${SCRIPT_DIR}")"
-EVAL_DIR="$(dirname "$(dirname "${MODULE_DIR}")")"
-
 # ==============================================================================
 # Fixed Parameters
 # ==============================================================================
 ONTOLOGY="mp"
 EMBED_DIR="kalm"
-RAG_CONFIG="${MODULE_DIR}/inputs/best_config.json"
-ONTOLOGY_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
-CONTEXT_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
-GLOBAL_DEFINITIONS_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
+RAG_CONFIG="${MODULE_ROOT}/inputs/best_config.json"
+ONTOLOGY_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/${EMBED_DIR}/${ONTOLOGY}.db"
+CONTEXT_FILE="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"
+GLOBAL_DEFINITIONS_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"
 
 # Other resolved fixed paths
-INPUT_FILE="${EVAL_DIR}/modules/01.eval_experts/outputs/Expanded_average_human.csv"
+INPUT_FILE="${EVAL_ROOT}/modules/01.eval_experts/outputs/Expanded_average_human.csv"
 MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
-TARGET_EMBEDDING_DB="${MODULE_DIR}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
+TARGET_EMBEDDING_DB="${MODULE_ROOT}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
+CANDIDATE_POOL_FILE="${TOXVALDB_ROOT}/02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
 
 # Environment & hardware variables
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
+export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
 
 # Load system environments
-module purge
-module load cuda/12.8.0
-module load gcc
+module purge 2>/dev/null || true
+module load cuda/12.8.0 2>/dev/null || true
+module load gcc 2>/dev/null || true
 
 GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+if [ -d "$GCC_LIB_PATH" ]; then
+    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+fi
 
 # Activate evaluation environment
-source "${EVAL_DIR}/env-evaluation/bin/activate"
+source "${EVAL_ROOT}/env-evaluation/bin/activate"
 
-cd "${MODULE_DIR}"
+cd "${MODULE_ROOT}"
 
 # ==============================================================================
 # Loop Parameters & Execution
@@ -128,13 +134,12 @@ for CONSENSUS in 1 3 5 10; do
             fi
 
             # Define system prompt based on mode
-            SYSTEM_PROMPT="${MODULE_DIR}/config/system_prompt_${MODE}.txt"
+            SYSTEM_PROMPT="${MODULE_ROOT}/config/system_prompt_${MODE}.txt"
 
             # Outputs matching expert evaluation formats, parameterized by loop variables
-            # Outputs go into a per-model subdirectory
-            mkdir -p "${MODULE_DIR}/outputs/${MODEL}"
-            OUTPUT_FILE="${MODULE_DIR}/outputs/${MODEL}/ToxValLlm_llm_${MODEL}_ontology_${ONTOLOGY}_mode_${MODE}_consensus_${CONSENSUS}_${DEFS_SUFFIX}.csv"
-            REASONING_FILE="${MODULE_DIR}/outputs/${MODEL}/ToxValLlm_llm_${MODEL}_ontology_${ONTOLOGY}_mode_${MODE}_consensus_${CONSENSUS}_${DEFS_SUFFIX}_reasoning.json"
+            mkdir -p "${MODULE_ROOT}/outputs/${MODEL}"
+            OUTPUT_FILE="${MODULE_ROOT}/outputs/${MODEL}/ToxValLlm_llm_${MODEL}_ontology_${ONTOLOGY}_mode_${MODE}_consensus_${CONSENSUS}_${DEFS_SUFFIX}.csv"
+            REASONING_FILE="${MODULE_ROOT}/outputs/${MODEL}/ToxValLlm_llm_${MODEL}_ontology_${ONTOLOGY}_mode_${MODE}_consensus_${CONSENSUS}_${DEFS_SUFFIX}_reasoning.json"
 
             echo "================================================================================"
             echo "Running evaluation (NEW prompts):"
@@ -148,9 +153,7 @@ for CONSENSUS in 1 3 5 10; do
             echo "  Manual Terms      : none; LLM outputs only Selected_Candidates"
             echo "================================================================================"
 
-            CANDIDATE_POOL_FILE="${EVAL_DIR}/../02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
-
-            python3 "${MODULE_DIR}/scripts/01.eval_llms.py" \
+            python3 "${MODULE_ROOT}/scripts/01.eval_llms.py" \
                 --input_file "${INPUT_FILE}" \
                 --output_file "${OUTPUT_FILE}" \
                 --reasoning_file "${REASONING_FILE}" \

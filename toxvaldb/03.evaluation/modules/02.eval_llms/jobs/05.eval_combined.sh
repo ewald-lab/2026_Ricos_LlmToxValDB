@@ -9,33 +9,44 @@
 #SBATCH -o "logs/eval_combined_%j.out"
 #SBATCH -e "logs/eval_combined_%j.err"
 
-# Ensure logs directory exists (run from jobs/ dir)
-mkdir -p logs
-
-# Resolve paths relative to this script's location
-SCRIPT_DIR="$SLURM_SUBMIT_DIR"
-if [ -z "$SCRIPT_DIR" ]; then
-    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Resolve paths relative to this script location
+if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
+    SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
+else
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
-MODULE_DIR="$(dirname "${SCRIPT_DIR}")"
-EVAL_DIR="$(dirname "$(dirname "${MODULE_DIR}")")"
+
+MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+
+mkdir -p "${SCRIPT_DIR}/logs" "${MODULE_ROOT}/outputs/figures/decisions"
 
 # ─── Configuration ────────────────────────────────────────────────────────────
-ONTOLOGY="mp"
-ROOT_TERM="mammalian phenotype"
+ONTOLOGY="${1:-mp}"
+ROOT_TERM="${2:-mammalian phenotype}"
 # ──────────────────────────────────────────────────────────────────────────────
 
-EXPERT_EXPANDED_DIR="${EVAL_DIR}/modules/01.eval_experts/outputs"
-EXPERT_ORIG_DIR="${EVAL_DIR}/modules/01.eval_experts/inputs/${ONTOLOGY}"
-LLM_EXPANDED_DIR="${MODULE_DIR}/outputs"
-LLM_ORIG_DIR="${MODULE_DIR}/outputs"
+EXPERT_EXPANDED_DIR="${EVAL_ROOT}/modules/01.eval_experts/outputs"
+EXPERT_ORIG_DIR="${EVAL_ROOT}/modules/01.eval_experts/inputs/${ONTOLOGY}"
+LLM_EXPANDED_DIR="${MODULE_ROOT}/outputs"
+LLM_ORIG_DIR="${MODULE_ROOT}/outputs"
 
-OWL_FILE="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
-ONTOLOGY_EMBEDDING_DB="${EVAL_DIR}/../00.data_preparation/modules/02.prepare_ontologies/outputs/kalm/${ONTOLOGY}.db"
-OUTPUT_DIR="${MODULE_DIR}/outputs/figures"
+OWL_FILE="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/${ONTOLOGY}.ttl"
+ONTOLOGY_EMBEDDING_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/kalm/${ONTOLOGY}.db"
+OUTPUT_DIR="${MODULE_ROOT}/outputs/figures"
+
+module purge 2>/dev/null || true
+module load gcc 2>/dev/null || true
+
+GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
+if [ -d "$GCC_LIB_PATH" ]; then
+    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+fi
 
 # Activate environment
-source "${EVAL_DIR}/env-evaluation/bin/activate"
+source "${EVAL_ROOT}/env-evaluation/bin/activate"
 
 echo "=== Evaluating Combined Responses (Humans + LLMs) ==="
 echo "  Ontology           : ${ONTOLOGY}"
@@ -54,7 +65,7 @@ rm -f \
     "${OUTPUT_DIR}/term_variability_pattern_summary_b.png" \
     "${OUTPUT_DIR}/term_variability_pattern_summary_de.png"
 
-python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
+python3 "${MODULE_ROOT}/scripts/05.eval_combined.py" \
     --expert_expanded_dir "${EXPERT_EXPANDED_DIR}" \
     --expert_orig_dir     "${EXPERT_ORIG_DIR}" \
     --llm_expanded_dir    "${LLM_EXPANDED_DIR}" \
@@ -65,7 +76,7 @@ python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --root_term            "${ROOT_TERM}" \
     --ontology_embedding_db "${ONTOLOGY_EMBEDDING_DB}" \
     --exclude_average_human \
-    --skip_inter_annotator_agreement_boxplot \
+    --skip_inter_annotator_agreement_boxplot
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"
 echo "  - term_variability_pattern_summary.png"
