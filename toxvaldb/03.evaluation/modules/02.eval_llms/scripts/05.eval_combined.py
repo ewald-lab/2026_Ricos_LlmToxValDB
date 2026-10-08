@@ -159,7 +159,7 @@ def clean_expert_name(name: str) -> str:
     import re
     m = re.match(r"^expert_?(\d+)$", name, re.IGNORECASE)
     if m:
-        return f"$\mathbf{{Expert\ {m.group(1)}}}$"
+        return rf"$\mathbf{{Expert\ {m.group(1)}}}"
     for k, v in EXPERT_MAP.items():
         if k.lower() in name.lower() or name.lower() in k.lower():
             return v
