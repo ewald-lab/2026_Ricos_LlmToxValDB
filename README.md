@@ -9,7 +9,7 @@ The pipeline combines retrieval-augmented generation (RAG) with LLM-based rerank
 - **`HiPO/`**: Core hierarchy-aware phenotype ontology mapping framework.
 - **`toxvaldb/`**: Reference implementation and end-to-end pipeline applied to ToxValDB:
   - **`00.data_preparation/`**: Data acquisition, curation, guidelines, and vector embedding databases.
-  - **`01.text_to_onto/`**: Core mapping pipeline matching toxicological effect descriptions to ontology terms via RAG + LLM hierarchy validation.
+  - **`01.hipo/`**: Core mapping pipeline matching toxicological effect descriptions to ontology terms via RAG + LLM hierarchy validation.
   - **`02.expert_annotation/`**: Expert annotation test set generation and interactive annotation interfaces.
   - **`03.evaluation/`**: Systematic evaluation of RAG parameters, LLM backbones, expert agreement metrics, and figure generation.
 

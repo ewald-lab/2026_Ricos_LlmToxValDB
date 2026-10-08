@@ -20,8 +20,8 @@ else
 fi
 
 MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-TEXT_TO_ONTO_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
-DATA_PREP_ROOT="$(cd "${TEXT_TO_ONTO_ROOT}/../00.data_preparation" && pwd)"
+HIPO_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
+DATA_PREP_ROOT="$(cd "${HIPO_ROOT}/../00.data_preparation" && pwd)"
 
 ENDPOINT="${1:-${CODON_NODE:-}}"
 PORT="${2:-8052}"
@@ -52,7 +52,7 @@ export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
 
 module purge && module load cuda/12.8.0 gcc
 
-source "${TEXT_TO_ONTO_ROOT}/env-text-to-onto/bin/activate"
+source "${HIPO_ROOT}/env-text-to-onto/bin/activate"
 
 mkdir -p "${MODULE_ROOT}/outputs"
 mkdir -p "${SCRIPT_DIR}/logs"

@@ -33,7 +33,7 @@ if [ -z "${ONTOLOGY}" ]; then
     exit 1
 fi
 
-JSON_FILE="${REPO_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/outputs/ToxValDB_Reasoning_${ONTOLOGY}_Qwen3.6-35B-A3B-FP8.json"
+JSON_FILE="${REPO_ROOT}/01.hipo/modules/00.hipo_toxvaldb/outputs/ToxValDB_Reasoning_${ONTOLOGY}_Qwen3.6-35B-A3B-FP8.json"
 OUTPUT_DIR="${REPO_ROOT}/03.evaluation/modules/03.eval_results/outputs/${ONTOLOGY}"
 
 source "${REPO_ROOT}/03.evaluation/env-evaluation/bin/activate"

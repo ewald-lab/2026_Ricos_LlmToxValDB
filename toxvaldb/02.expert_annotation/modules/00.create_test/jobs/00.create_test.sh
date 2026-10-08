@@ -76,7 +76,7 @@ for ONTOLOGY in hpath mp; do
         --model_config "${HIPO_DIR}/config/llm.json" \
         --llm_model "${MODEL}" \
         --base_url "${BASE_URL}" \
-        --system_prompt_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/config/system_prompt_1.txt" \
+        --system_prompt_file "${TOXVALDB_ROOT}/01.hipo/modules/00.hipo_toxvaldb/config/system_prompt_1.txt" \
         ${EXTRA_FLAGS}
 
 done

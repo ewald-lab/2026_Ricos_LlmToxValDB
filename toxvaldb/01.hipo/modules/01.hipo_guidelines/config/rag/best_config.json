@@ -9,6 +9,6 @@
     "top_k_reranker": 20,
     "threshold_reranker": 0.3,
     "reranker_batch_size": 100,
-    "reranker_prompt": "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/toxvaldb/01.text_to_onto/modules/01.hipo_guidelines/config/rag/reranker_prompt.txt",
+    "reranker_prompt": "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/toxvaldb/01.hipo/modules/01.hipo_guidelines/config/rag/reranker_prompt.txt",
     "grf": 1.0
 }

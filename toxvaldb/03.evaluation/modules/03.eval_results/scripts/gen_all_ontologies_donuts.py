@@ -364,7 +364,7 @@ def main() -> None:
         no_inner = ont["no_inner_donut"]
         inner_labels = ont["inner_labels"]
 
-        json_file = (args.repo_root / "01.text_to_onto" / "modules"
+        json_file = (args.repo_root / "01.hipo" / "modules"
                      / "00.hipo_toxvaldb" / "outputs"
                      / f"ToxValDB_Reasoning_{name}_{MODEL}.json")
         db_file = (args.repo_root / "00.data_preparation" / "modules"
