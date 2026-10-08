@@ -1,6 +1,0 @@
-Expert 1: Alexander Cole Dynanet Corporation (Alexander_Cole_Dynanet_Corporation)
-Expert 2: Chelsea Weitekamp ULRI Chemical Insights (Chelsea_Weitekamp_ULRI_Chemical_Insights)
-Expert 3: Joshua Harrill Corteva (Joshua_Harrill_Corteva)
-Expert 4: Liz McInnes Syngenta (Liz_McInnes_Syngenta)
-Expert 5: Lucie Ford Recursion (Lucie_Ford_Recursion)
-Expert 6: Sean Watford ULRI (Sean_Watford_ULRI)

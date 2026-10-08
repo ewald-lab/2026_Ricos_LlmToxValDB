@@ -216,3 +216,7 @@ __marimo__/
 # Documentation outputs
 **/outputs/Documentation/
 *.html.html
+
+# Expert privacy
+**/expert_equivalence.txt
+expert_equivalence.txt

@@ -70,12 +70,18 @@ def arg_parser() -> argparse.Namespace:
 
 
 EXPERT_MAP = {
-    "Alexander_Cole_Dynanet_Corporation": r"$\mathbf{Expert\ 1}$",
-    "Chelsea_Weitekamp_ULRI_Chemical_Insights": r"$\mathbf{Expert\ 2}$",
-    "Joshua_Harrill_Corteva": r"$\mathbf{Expert\ 3}$",
-    "Liz_McInnes_Syngenta": r"$\mathbf{Expert\ 4}$",
-    "Lucie_Ford_Recursion": r"$\mathbf{Expert\ 5}$",
-    "Sean_Watford_ULRI": r"$\mathbf{Expert\ 6}$",
+    "expert1": r"$\mathbf{Expert\ 1}$",
+    "expert2": r"$\mathbf{Expert\ 2}$",
+    "expert3": r"$\mathbf{Expert\ 3}$",
+    "expert4": r"$\mathbf{Expert\ 4}$",
+    "expert5": r"$\mathbf{Expert\ 5}$",
+    "expert6": r"$\mathbf{Expert\ 6}$",
+    "expert_1": r"$\mathbf{Expert\ 1}$",
+    "expert_2": r"$\mathbf{Expert\ 2}$",
+    "expert_3": r"$\mathbf{Expert\ 3}$",
+    "expert_4": r"$\mathbf{Expert\ 4}$",
+    "expert_5": r"$\mathbf{Expert\ 5}$",
+    "expert_6": r"$\mathbf{Expert\ 6}$",
 }
 
 
@@ -108,6 +114,10 @@ def clean_expert_name(name: str) -> str:
     """
     if name in EXPERT_MAP:
         return EXPERT_MAP[name]
+    import re
+    m = re.match(r"^expert_?(\d+)$", name, re.IGNORECASE)
+    if m:
+        return f"$\mathbf{{Expert\ {m.group(1)}}}$"
     for k, v in EXPERT_MAP.items():
         if k.lower() in name.lower() or name.lower() in k.lower():
             return v

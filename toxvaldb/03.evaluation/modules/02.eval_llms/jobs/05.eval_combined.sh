@@ -66,7 +66,6 @@ python3 "${MODULE_DIR}/scripts/05.eval_combined.py" \
     --ontology_embedding_db "${ONTOLOGY_EMBEDDING_DB}" \
     --exclude_average_human \
     --skip_inter_annotator_agreement_boxplot \
-    --expert_equivalence_file "${EVAL_DIR}/modules/01.eval_experts/inputs/expert_equivalence.txt"
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"
 echo "  - term_variability_pattern_summary.png"
