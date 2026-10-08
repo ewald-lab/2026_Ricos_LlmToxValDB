@@ -135,6 +135,16 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--hf_home", default=None, help="HuggingFace cache directory.")
     parser.add_argument("--hf_transfer", default=None, help="Enable/disable HF transfer.")
     parser.add_argument(
+        "--model",
+        default=None,
+        help="Optional model name override.",
+    )
+    parser.add_argument(
+        "--model_config",
+        default=None,
+        help="Optional path to model config JSON file.",
+    )
+    parser.add_argument(
         "--llm_config",
         required=True,
         help="Path to llm_config.json configuration file.",
@@ -218,10 +228,19 @@ def main() -> None:
     with open(args.llm_config, 'r', encoding='utf-8') as jf:
         best_config = json.load(jf)
         
-        model = best_config["model"]
-        args.mode = best_config["mode"]
-        args.consensus_runs = best_config["consensus_runs"]
-        args.model_config = f"/nfs/research/ewald/ricos/code/playground/models/config/{model}.json"
+        model = args.model or best_config.get("model", "Qwen3.6-35B-A3B-FP8")
+        args.mode = best_config.get("mode", 2)
+        args.consensus_runs = best_config.get("consensus_runs", 1)
+        
+        if not args.model_config:
+            playground_path = Path(f"/nfs/research/ewald/ricos/code/playground/models/config/{model}.json")
+            repo_hipo_path = SCRIPT_DIR.parent.parent.parent.parent / "HiPO" / "config" / "llm.json"
+            if playground_path.exists():
+                args.model_config = str(playground_path)
+            elif repo_hipo_path.exists():
+                args.model_config = str(repo_hipo_path)
+            else:
+                args.model_config = str(playground_path)
         
         model_ports = {
             "GLM-5.1": "8000",
@@ -230,17 +249,15 @@ def main() -> None:
             "Qwen3.5-122B-A10B-FP8": "8003",
             "gpt-oss-120b": "8004",
             "Qwen3.5-35B-A3B-FP8": "8005",
-            "Qwen3.6-35B-A3B-FP8": "8006",
+            "Qwen3.6-35B-A3B-FP8": "8052",
             "NVIDIA-Nemotron-3-Nano-30B-A3B-FP8": "8007",
             "Qwen3.5-27B-FP8": "8008",
             "Qwen3.6-27B-FP8": "8009",
             "Qwen3.6-35B-A3B": "8012"
         }
-        port = model_ports.get(model, "8003")
-        if args.base_url:
+        port = model_ports.get(model, "8052")
+        if args.base_url and "PORT" in args.base_url:
             args.base_url = args.base_url.replace("PORT", port)
-            import re
-            args.base_url = re.sub(r':\d+/', f':{port}/', args.base_url)
 
     # The LLM wrapper is imported after sys.path setup so this new module can
     # share the existing text_to_onto model implementation.
@@ -298,6 +315,8 @@ def main() -> None:
     top_k_reranker = rag_config.get("top_k_reranker")
     reranker_batch_size = rag_config.get("reranker_batch_size", 32)
     reranker_prompt_file = rag_config.get("reranker_prompt")
+    if reranker_prompt_file and not os.path.isabs(reranker_prompt_file):
+        reranker_prompt_file = str((Path(args.rag_config).resolve().parent / reranker_prompt_file).resolve())
 
     print("=== Endpoints To Phenotypes ===")
     print(f"Ontology: {args.ontology}")
