@@ -9,21 +9,34 @@
 #SBATCH -o "logs/generate_configs_%j.out"
 #SBATCH -e "logs/generate_configs_%j.err"
 
-# Environmental setup
+if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
+    SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
+else
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
+
+MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
+export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
 
-# Activate environment
-cd ../../../
-source env-evaluation/bin/activate
+module purge && module load gcc
 
-# Go to scripts dir
-cd modules/00.eval_rag/scripts
+GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
+if [ -d "$GCC_LIB_PATH" ]; then
+    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
+fi
 
-# Run config generation
-echo "Generating evaluation configurations..."
-python3 00.generate_configs.py \
-    --output "../config/eval_rag.json" \
+source "${EVAL_ROOT}/env-evaluation/bin/activate"
+
+mkdir -p "${SCRIPT_DIR}/logs" "${MODULE_ROOT}/config"
+
+echo "=== Generating evaluation configurations ==="
+python3 "${MODULE_ROOT}/scripts/00.generate_configs.py" \
+    --output "${MODULE_ROOT}/config/eval_rag.json" \
     --models "microsoft/harrier-oss-v1-27b" "tencent/KaLM-Embedding-Gemma3-12B-2511" "nvidia/llama-embed-nemotron-8b" "Qwen/Qwen3-Embedding-8B" \
     --top_k 20 50 100 150 \
     --threshold_rag 0.1 0.2 0.3 0.4 0.5 0.6 \
@@ -33,4 +46,4 @@ python3 00.generate_configs.py \
     --reranker_models "Qwen/Qwen3-Reranker-0.6B" "Qwen/Qwen3-Reranker-4B" "Qwen/Qwen3-Reranker-8B" \
     --data_variants base def hier def_hier
 
-echo "Configuration generation complete. File saved to ../config/eval_rag.json"
+echo "Configuration generation complete. File saved to: ${MODULE_ROOT}/config/eval_rag.json"
