@@ -2306,14 +2306,6 @@ def main() -> None:
             print("Generating global decision impact plots...")
             generate_decision_plots(llm_perf_df, decisions_dir, title_suffix="")
 
-            # Generate per-model plots in subfolders
-            print("Generating per-model decision impact plots...")
-            for model_name in sorted(llm_perf_df["Model"].unique()):
-                model_df = llm_perf_df[llm_perf_df["Model"] == model_name]
-                model_folder_name = model_name.replace("/", "_").replace(" ", "_").replace(":", "_")
-                model_target_dir = os.path.join(decisions_dir, model_folder_name)
-                generate_decision_plots(model_df, model_target_dir, title_suffix=f" ({model_name})")
-
             print(f"Decision impact plots saved to: {decisions_dir}")
         except Exception as e:
             print(f"Error generating decision impact plots: {e}")

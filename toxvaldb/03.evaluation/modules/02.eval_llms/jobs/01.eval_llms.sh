@@ -74,6 +74,9 @@ mkdir -p logs
 
 # Resolve paths relative to this script's location
 SCRIPT_DIR="$SLURM_SUBMIT_DIR"
+if [ -z "$SCRIPT_DIR" ]; then
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+fi
 MODULE_DIR="$(dirname "${SCRIPT_DIR}")"
 EVAL_DIR="$(dirname "$(dirname "${MODULE_DIR}")")"
 
