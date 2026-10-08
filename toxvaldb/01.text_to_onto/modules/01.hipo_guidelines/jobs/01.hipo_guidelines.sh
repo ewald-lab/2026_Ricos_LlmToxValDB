@@ -13,7 +13,13 @@
 
 ONTOLOGIES=(mp hpath aop hp txpo)
 
-MODULE_ROOT="$(cd "${SLURM_SUBMIT_DIR}/.." && pwd)"
+if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
+    SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
+else
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
+
+MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 TEXT_TO_ONTO_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
 DATA_PREP_ROOT="$(cd "${TEXT_TO_ONTO_ROOT}/../00.data_preparation" && pwd)"
 

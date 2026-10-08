@@ -365,7 +365,7 @@ def main() -> None:
         inner_labels = ont["inner_labels"]
 
         json_file = (args.repo_root / "01.text_to_onto" / "modules"
-                     / "00.tox_effect_to_onto" / "outputs"
+                     / "00.hipo_toxvaldb" / "outputs"
                      / f"ToxValDB_Reasoning_{name}_{MODEL}.json")
         db_file = (args.repo_root / "00.data_preparation" / "modules"
                    / "02.prepare_ontologies" / "outputs" / "qwen" / f"{name}.db")

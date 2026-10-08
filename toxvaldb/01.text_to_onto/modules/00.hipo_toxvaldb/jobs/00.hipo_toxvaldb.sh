@@ -48,11 +48,11 @@ source "${TOXVALDB_ROOT}/01.text_to_onto/env-text-to-onto/bin/activate"
 
 python "${HIPO_DIR}/hipo.py" \
     --input_file "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
-    --output_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
-    --reasoning_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/outputs/ToxValDB_Reasoning_${ONTOLOGY}_${MODEL}.json" \
+    --output_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
+    --reasoning_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/outputs/ToxValDB_Reasoning_${ONTOLOGY}_${MODEL}.json" \
     --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
-    --system_prompt_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/config/system_prompt_{MODE}.txt" \
-    --rag_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/inputs/choice_rag.json" \
+    --system_prompt_file "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/config/system_prompt_{MODE}.txt" \
+    --rag_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/inputs/choice_rag.json" \
     --ontology_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/{EMBED_DIR}/${ONTOLOGY}.db" \
     --global_definitions_db "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
     --target_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_{EMBED_DIR}.db" \
@@ -60,6 +60,6 @@ python "${HIPO_DIR}/hipo.py" \
     --num_backups 10 \
     --context_ontology_file "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt" \
     --model "${MODEL}" \
-    --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.tox_effect_to_onto/inputs/choice_llm.json" \
+    --llm_config "${TOXVALDB_ROOT}/01.text_to_onto/modules/00.hipo_toxvaldb/inputs/choice_llm.json" \
     --descriptions_concurrency 100 \
     --ontology_definitions
