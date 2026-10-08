@@ -221,3 +221,8 @@ __marimo__/
 **/expert_equivalence.txt
 expert_equivalence.txt
 !toxvaldb/03.evaluation/modules/01.eval_experts/inputs/**/*.csv
+
+# LLM evaluation outputs - only figures are tracked
+toxvaldb/03.evaluation/modules/02.eval_llms/outputs/*/
+!toxvaldb/03.evaluation/modules/02.eval_llms/outputs/figures/
+!toxvaldb/03.evaluation/modules/02.eval_llms/outputs/figures/**
