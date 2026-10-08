@@ -210,6 +210,7 @@ __marimo__/
 **/outputs/*.json
 !**/config/**/*.json
 !**/params/**/*.json
+!toxvaldb/02.expert_annotation/modules/00.create_test/outputs/*.json
 *.pdf
 
 # Documentation outputs
