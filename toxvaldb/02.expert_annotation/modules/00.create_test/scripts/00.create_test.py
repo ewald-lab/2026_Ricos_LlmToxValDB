@@ -18,11 +18,11 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from model.llm import get_model
+from model.llm import get_model, test_model
 from src.utils import get_or_create_embeddings, is_valid_description, load_ontology_embeddings, setup_logging
 
-DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
-DEFAULT_HF_TRANSFER = "1"
+DEFAULT_HF_HOME = os.environ.get("HF_HOME", "/nfs/research/ewald/ricos/huggingface_cache")
+DEFAULT_HF_TRANSFER = os.environ.get("HF_HUB_ENABLE_HF_TRANSFER", "1")
 
 logger = setup_logging()
 
@@ -57,7 +57,8 @@ def arg_parser() -> argparse.Namespace:
 
     parser.add_argument("--reranker_model", default="Qwen/Qwen3-Reranker-8B", help="HuggingFace model for reranking.")
     parser.add_argument("--threshold_reranker", type=float, default=0.0, help="Score threshold for reranker. If > 0.0, reranker is active.")
-    parser.add_argument("--grf_alpha", type=float, help="Alpha for GRF (1.0 = original, 0.0 = standardized). Overrides config.")
+    parser.add_argument("--reranker_batch_size", type=int, default=16, help="Batch size for reranker.")
+    parser.add_argument("--reranker_prompt_file", default=None, help="Path to reranker prompt instruction text file.")
 
     # --- LLM Configuration ---
     parser.add_argument("--model_config", help="Path to model config JSON file.")
@@ -152,8 +153,8 @@ def main() -> None:
         with open(args.rag_config, 'r', encoding='utf-8') as f:
             rag_config = json.load(f)
 
-        # If it's a dictionary, look up by embeddings_model_id or embedding_model string
-        if isinstance(rag_config, dict):
+        # If it's a nested dictionary (not flat with embedding_model directly), look up block
+        if isinstance(rag_config, dict) and "embedding_model" not in rag_config:
             key = args.embeddings_model_id or args.embedding_model
             model_config_block = rag_config.get(key)
             if model_config_block:
@@ -169,8 +170,11 @@ def main() -> None:
         args.reranker_model = rag_config.get("reranker_model", args.reranker_model)
         args.threshold_reranker = rag_config.get("threshold_reranker", args.threshold_reranker)
         args.reranker_batch_size = rag_config.get("reranker_batch_size", getattr(args, 'reranker_batch_size', 16))
-        args.reranker_prompt_file = rag_config.get("reranker_prompt", getattr(args, 'reranker_prompt_file', None))
-        args.grf_alpha = rag_config.get("grf", args.grf_alpha)
+        
+        reranker_prompt_file = rag_config.get("reranker_prompt", getattr(args, 'reranker_prompt_file', None))
+        if reranker_prompt_file and not os.path.isabs(reranker_prompt_file):
+            reranker_prompt_file = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(args.rag_config)), reranker_prompt_file))
+        args.reranker_prompt_file = reranker_prompt_file
 
         # Centralized path construction for target embeddings if placeholder or missing
         if not args.target_embedding_db or "tox_effects_embeddings.db" in args.target_embedding_db:
@@ -224,6 +228,7 @@ def main() -> None:
         with open(args.model_config, 'r', encoding='utf-8') as f:
             model_config = json.load(f)
 
+        model_config.pop("_comment", None)
         max_concurrency = model_config.pop("max_concurrency", args.max_concurrency)
         if args.base_url:
             model_config["base_url"] = args.base_url
@@ -231,6 +236,7 @@ def main() -> None:
             model_config["model"] = args.llm_model
 
         llm = get_model(**model_config)
+        test_model(llm, max_retries=model_config.get("max_retries", 3))
 
     if args.histopathology:
         if not llm:
@@ -303,6 +309,11 @@ def main() -> None:
             with open(reranker_prompt_file, 'r', encoding='utf-8') as f:
                 reranker_instruction = f.read().strip()
             logger.info(f"Loaded reranker instruction from: {reranker_prompt_file}")
+        elif os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config", "reranker_prompt.txt")):
+            default_prompt = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config", "reranker_prompt.txt")
+            with open(default_prompt, 'r', encoding='utf-8') as f:
+                reranker_instruction = f.read().strip()
+            logger.info(f"Loaded reranker instruction from module config: {default_prompt}")
         else:
             reranker_instruction = "Given a biological phenotype description observed after chemical exposure, retrieve the identical ontology term.\nCRITICAL RULES FOR SELECTION:\n1. STRICT SPECIFICITY ALIGNMENT: The scope of the description must match the biological scope of the candidate. A broad, system-level description MUST ONLY be mapped to equally broad, system-level ontology terms.\n2. NO SUB-SYSTEMS OR PROCESSES: If the input describes an entire physiological system, you MUST REJECT candidates that refer to specific sub-functions, localized mechanisms, or pathways.\nMatch them based strictly on whether the underlying biological or phenotypic target is identical."
             logger.warning("reranker_prompt file not found or not set — using fallback hardcoded instruction.")
