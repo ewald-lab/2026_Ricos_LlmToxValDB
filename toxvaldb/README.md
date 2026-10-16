@@ -12,7 +12,7 @@ The pipeline is organized into four sequential stages (`00` to `03`), each desig
 Handles raw data acquisition, curation, guideline standardization, and the creation of biomedical ontology knowledge bases.
 - **`00.download_toxvaldb`**: Automated retrieval and extraction of the raw ToxValDB database dumps.
 - **`01.preprocess_toxvaldb`**: Cleans, parses, and extracts unique free-text toxicological effect phrases from study records.
-- **`02.prepare_ontologies`**: Downloads biomedical ontologies (Mammalian Phenotype Ontology, Human Phenotype Ontology, HPATH, AOP-Wiki, TxPO), formats them as OWL/TTL graphs, and builds dense vector embedding databases (e.g. KaLM) and definition lookup stores.
+- **`02.prepare_ontologies`**: Downloads target biomedical ontologies, formats them as OWL/TTL graphs, and builds dense vector embedding databases and definition lookup stores.
 - **`03.prepare_guidelines`**: Curates and standardizes OECD test guidelines and study endpoints.
 
 ---
@@ -26,7 +26,7 @@ Production mapping pipeline matching toxicological effect descriptions to ontolo
 
 ### `02.expert_annotation/`
 Curation of human expert benchmark datasets and interactive validation interfaces.
-- **`00.create_test`**: Constructs stratified test sets and candidate term pools across ontologies (e.g. MP and HPATH) for domain expert evaluation.
+- **`00.create_test`**: Constructs stratified test sets and candidate term pools across target ontologies for domain expert evaluation.
 - **`01.create_form`**: Generates standalone, interactive HTML annotation forms with bundled styling and typography for toxicologists and domain experts.
 
 ---
@@ -62,4 +62,4 @@ source env-<name>/bin/activate
 | `02.expert_annotation/` | `install_env.sh` | `env-expert-annotation` |
 | `03.evaluation/` | `install_env.sh` | `env-evaluation` |
 
-All Slurm jobs in each module automatically activate their respective `env-<name>` environment upon execution.\n
+All Slurm jobs in each module automatically activate their respective `env-<name>` environment upon execution.
