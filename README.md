@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/HiPO-logo.png" alt="HiPO Logo" width="360" />
+</p>
+
 # Hierarchy-aware Phenotype-to-Ontology mapping
 
 This repository provides **HiPO** (Hierarchy-aware Phenotype-to-Ontology mapping), a framework designed to translate free-text phenotypic descriptions into standardized biomedical ontology terms.
