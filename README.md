@@ -1,26 +1,15 @@
-# LLM-based Curation of ToxValDB Using Biomedical Ontologies
+# Hierarchy-aware Phenotype-to-Ontology mapping
 
-This project investigates the use of large language models (LLMs) to map free-text toxicological effect descriptions from [ToxValDB](https://www.epa.gov/chemical-research/toxicity-value-database-toxvaldb) to structured biomedical ontologies (e.g. Mammalian Phenotype Ontology, Human Phenotype Ontology, HPATH, AOP-Wiki, TxPO). The goal is to produce high-quality, machine-readable annotations that can support downstream computational toxicology applications such as hazard classification and chemical grouping.
+This repository provides **HiPO** (Hierarchy-aware Phenotype-to-Ontology mapping), a general framework designed to translate free-text phenotypic and toxicological descriptions into standardized biomedical ontology terms (e.g., Mammalian Phenotype Ontology, Human Phenotype Ontology, HPATH, AOP-Wiki, TxPO).
 
-The pipeline combines retrieval-augmented generation (RAG) with LLM-based reranking to identify the most appropriate ontology terms for each effect description. Performance is evaluated both computationally (via retrieval metrics) and through expert annotation.
+By integrating dense retrieval-augmented generation (RAG) with large language model (LLM) hierarchy validation, HiPO identifies appropriate ontology concepts while preserving parent-child relationships and semantic depth.
 
-## Repository Structure
+While HiPO is domain-agnostic and applicable to diverse biomedical and clinical annotation tasks, this repository presents its reference application to the curation of the EPA Toxicity Value Database ([ToxValDB](https://www.epa.gov/chemical-research/toxicity-value-database-toxvaldb)). The end-to-end pipeline standardizes thousands of unstructured chemical toxicity study outcomes into machine-readable ontological annotations, supporting downstream computational toxicology, chemical grouping, and hazard assessment.
 
-- **`HiPO/`**: Core hierarchy-aware phenotype ontology mapping framework.
-- **`toxvaldb/`**: Reference implementation and end-to-end pipeline applied to ToxValDB:
-  - **`00.data_preparation/`**: Data acquisition, curation, guidelines, and vector embedding databases.
-  - **`01.hipo/`**: Core mapping pipeline matching toxicological effect descriptions to ontology terms via RAG + LLM hierarchy validation.
-  - **`02.expert_annotation/`**: Expert annotation test set generation and interactive annotation interfaces.
-  - **`03.evaluation/`**: Systematic evaluation of RAG parameters, LLM backbones, expert agreement metrics, and figure generation.
+## Repository Overview
 
-Each analysis module in `toxvaldb/` has its own Python environment managed by [uv](https://docs.astral.sh/uv/). To set up a module:
-
-```bash
-cd ./toxvaldb/XX.module_name
-chmod ugo+x install_env.sh
-./install_env.sh
-source env-<name>/bin/activate
-```
+- **`HiPO/`**: Core hierarchy-aware phenotype-to-ontology mapping framework and standalone Python package.
+- **`toxvaldb/`**: Complete reference implementation, data preparation, expert annotation benchmark, and evaluation pipelines applied to ToxValDB. Detailed documentation and submodule setup instructions can be found in the [ToxValDB Pipeline README](toxvaldb/README.md).
 
 ## Citation
 
@@ -31,4 +20,4 @@ source env-<name>/bin/activate
   year={2026},
   note={In preparation}
 }
-```
+```\n
