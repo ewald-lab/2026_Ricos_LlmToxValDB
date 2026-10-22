@@ -51,12 +51,13 @@ export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
 
 module purge && module load cuda/12.8.0 gcc
 
-source "${TOXVALDB_ROOT}/01.hipo/env-text-to-onto/bin/activate"
+VENV_DIR="${TOXVALDB_ROOT}/01.hipo/env-text-to-onto"
+source "${VENV_DIR}/bin/activate"
 
 mkdir -p "${MODULE_ROOT}/jobs/logs"
 mkdir -p "${MODULE_ROOT}/outputs"
 
-python "${HIPO_DIR}/hipo.py" \
+"${VENV_DIR}/bin/python" "${HIPO_DIR}/hipo.py" \
     --input_file "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/ToxValDB_v9.7.0_Cleaned_03.tsv" \
     --output_file "${MODULE_ROOT}/outputs/ToxValDB_Classified_${ONTOLOGY}_${MODEL}.csv" \
     --reasoning_file "${MODULE_ROOT}/outputs/ToxValDB_Reasoning_${ONTOLOGY}_${MODEL}.json" \
