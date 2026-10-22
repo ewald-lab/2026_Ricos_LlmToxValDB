@@ -7,9 +7,12 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 MODULE_ROOT = SCRIPT_DIR.parent
+TOXVALDB_ROOT = MODULE_ROOT.parents[2]
+REPO_ROOT = TOXVALDB_ROOT.parent
 
-# Reuse this module's helpers and the sibling model wrappers
-# without requiring the command to be launched from a specific working directory.
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.append(str(SCRIPT_DIR))
 
@@ -259,9 +262,7 @@ def main() -> None:
         if args.base_url and "PORT" in args.base_url:
             args.base_url = args.base_url.replace("PORT", port)
 
-    # The LLM wrapper is imported after sys.path setup so this new module can
-    # share the existing text_to_onto model implementation.
-    from model.llm import get_model, test_model
+    from HiPO.model.llm import get_model, test_model
 
     # Keep the same HuggingFace/cache defaults used by the rest of the project,
     # while still allowing environment variables or CLI arguments to override them.

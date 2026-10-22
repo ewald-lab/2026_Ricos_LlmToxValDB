@@ -2,7 +2,7 @@ import csv
 import json
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional, Set, Tuple
+from typing import Any, List, Literal, Optional, Tuple
 
 import torch
 from langchain_core.prompts import ChatPromptTemplate
@@ -11,6 +11,7 @@ from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
+from HiPO.model.embeddings import EmbeddingModel
 from .ontology import OntologyTree
 
 
@@ -169,8 +170,6 @@ class EndpointOntologyFilterBuilder:
         Returns:
             None
         """
-        from model.embeddings import EmbeddingModel
-
         self.ontology = ontology
         self.tree = tree
         self.max_paths_per_endpoint = max_paths_per_endpoint
@@ -453,19 +452,22 @@ class EndpointOntologyFilterBuilder:
                 })
 
                 if status == "ACCEPTED":
-                    curr = name
-                    while curr:
-                        if curr in verified_nodes:
-                            break
-                        verified_nodes.add(curr)
-                        curr_node = self.tree.nodes.get(curr)
-                        if curr_node:
+                    queue = [name]
+                    while queue:
+                        c = queue.pop(0)
+                        if c in verified_nodes:
+                            continue
+                        verified_nodes.add(c)
+                        c_node = self.tree.nodes.get(c)
+                        if c_node:
                             filters.append({
-                                "node": curr_node,
+                                "node": c_node,
                                 "confidence": float(votes) / self.consensus_runs,
                                 "reason": f"Selected via RAG matching {name}. {candidate_reasoning[name][0] if candidate_reasoning[name] else ''}"
                             })
-                        curr = curr_node.parents[0] if curr_node and curr_node.parents else None
+                            for p in (c_node.parents or []):
+                                if p and p not in verified_nodes:
+                                    queue.append(p)
                     # Enqueue unasked direct children of the accepted node
                     for child_name in self.tree.get_children(name):
                         if child_name not in verified_nodes and child_name not in evaluated_nodes:
@@ -473,11 +475,11 @@ class EndpointOntologyFilterBuilder:
                             if child_info and child_info not in next_round_candidates:
                                 next_round_candidates.append(child_info)
                 else:
-                    parent_name = cand.parents[0] if cand.parents else None
-                    if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
-                        node_info = self.tree.nodes.get(parent_name)
-                        if node_info and node_info not in next_round_candidates:
-                            next_round_candidates.append(node_info)
+                    for parent_name in (cand.parents or []):
+                        if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
+                            node_info = self.tree.nodes.get(parent_name)
+                            if node_info and node_info not in next_round_candidates:
+                                next_round_candidates.append(node_info)
 
             current_candidates = self._rerank_candidates(desc, next_round_candidates)
             iteration += 1
@@ -583,18 +585,22 @@ class EndpointOntologyFilterBuilder:
                 })
 
                 if status == "ACCEPTED":
-                    curr = name
-                    while curr:
-                        if curr in verified_nodes: break
-                        verified_nodes.add(curr)
-                        curr_node = self.tree.nodes.get(curr)
-                        if curr_node:
+                    queue = [name]
+                    while queue:
+                        c = queue.pop(0)
+                        if c in verified_nodes:
+                            continue
+                        verified_nodes.add(c)
+                        c_node = self.tree.nodes.get(c)
+                        if c_node:
                             filters.append({
-                                "node": curr_node,
+                                "node": c_node,
                                 "confidence": float(votes) / self.consensus_runs,
                                 "reason": f"Selected via Batch RAG matching {name}"
                             })
-                        curr = curr_node.parents[0] if curr_node and curr_node.parents else None
+                            for p in (c_node.parents or []):
+                                if p and p not in verified_nodes:
+                                    queue.append(p)
                     # Enqueue unasked direct children of the accepted node
                     for child_name in self.tree.get_children(name):
                         if child_name not in verified_nodes and child_name not in evaluated_nodes:
@@ -602,11 +608,11 @@ class EndpointOntologyFilterBuilder:
                             if child_info and child_info not in next_round_candidates:
                                 next_round_candidates.append(child_info)
                 else:
-                    parent_name = cand.parents[0] if cand.parents else None
-                    if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
-                        node_info = self.tree.nodes.get(parent_name)
-                        if node_info and node_info not in next_round_candidates:
-                            next_round_candidates.append(node_info)
+                    for parent_name in (cand.parents or []):
+                        if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes:
+                            node_info = self.tree.nodes.get(parent_name)
+                            if node_info and node_info not in next_round_candidates:
+                                next_round_candidates.append(node_info)
 
             current_candidates = self._rerank_candidates(desc, next_round_candidates)
             iteration += 1

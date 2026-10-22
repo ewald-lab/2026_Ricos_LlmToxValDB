@@ -1,3 +1,4 @@
+import json
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass
@@ -81,7 +82,6 @@ class OntologyTree:
             )
             rows = cursor.fetchall()
 
-        import json
         nodes = {
             row[1]: OntologyNode(
                 uri=row[0] or "",

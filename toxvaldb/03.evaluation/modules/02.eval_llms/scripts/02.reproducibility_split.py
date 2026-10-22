@@ -4,8 +4,6 @@ import re
 import json
 import glob
 import rdflib
-import hashlib
-import random
 import networkx as nx
 import pandas as pd
 from rdflib.namespace import RDFS

@@ -15,8 +15,6 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 import networkx as nx
-import seaborn as sns
-import numpy as np
 
 
 def parse_args() -> argparse.Namespace:

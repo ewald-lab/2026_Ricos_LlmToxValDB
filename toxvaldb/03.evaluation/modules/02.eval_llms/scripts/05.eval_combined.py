@@ -5,7 +5,6 @@ import os
 import sqlite3
 import json
 import textwrap
-from io import BytesIO
 from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -18,7 +17,6 @@ import seaborn as sns
 from rdflib.namespace import RDFS
 from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.spatial.distance import squareform
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 from typing import Any
 
 

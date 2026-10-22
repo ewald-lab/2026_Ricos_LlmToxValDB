@@ -3,14 +3,14 @@ import sqlite3
 import os
 from functools import lru_cache
 
-from typing import List, Dict, Literal, Any, Optional, Union, Tuple, Set
+from typing import List, Dict, Literal, Any, Optional, Tuple
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
 from langchain_core.callbacks import BaseCallbackHandler
 
-from .utils import setup_logging, load_ontology_embeddings
+from HiPO.src.utils import setup_logging, load_ontology_embeddings
 
 logger = setup_logging()
 
@@ -714,19 +714,18 @@ class TextToOntoGraph:
                 })
 
                 if yes_votes >= threshold:
-                    curr = name
-                    while curr:
-                        queue = [curr]
-                        while queue:
-                            c = queue.pop(0)
-                            if c in verified_nodes:
-                                continue
-                            verified_nodes.add(c)
-                            if c in self.categories:
-                                results[c] = 1
-                            parents = self.parent_map.get(c, [])
-                            for p in parents:
-                                if p: queue.append(p)
+                    queue = [name]
+                    while queue:
+                        c = queue.pop(0)
+                        if c in verified_nodes:
+                            continue
+                        verified_nodes.add(c)
+                        if c in self.categories:
+                            results[c] = 1
+                        parents = self.parent_map.get(c, [])
+                        for p in parents:
+                            if p and p not in verified_nodes:
+                                queue.append(p)
                 else:
                     if direct_candidates is None:
                         parents = self.parent_map.get(name, [])
@@ -887,19 +886,18 @@ class TextToOntoGraph:
                 reasoning_trace.append(f"{iter_prefix}- {name} ({pos}/{total_cands}): {votes} votes -> {status}")
 
             for selected in final_selected_names:
-                curr = selected
-                while curr:
-                    queue = [curr]
-                    while queue:
-                        c = queue.pop(0)
-                        if c in verified_nodes:
-                            continue
-                        verified_nodes.add(c)
-                        if c in self.categories:
-                            results[c] = 1
-                        parents = self.parent_map.get(c, [])
-                        for p in parents:
-                            if p: queue.append(p)
+                queue = [selected]
+                while queue:
+                    c = queue.pop(0)
+                    if c in verified_nodes:
+                        continue
+                    verified_nodes.add(c)
+                    if c in self.categories:
+                        results[c] = 1
+                    parents = self.parent_map.get(c, [])
+                    for p in parents:
+                        if p and p not in verified_nodes:
+                            queue.append(p)
 
             for name in final_selected_names:
                  cand_obj = next((c for c in candidates if c['name'] == name), None)
@@ -909,17 +907,17 @@ class TextToOntoGraph:
             next_round_candidates_map = {}
             if self.include_superiors and direct_candidates is None:
                 for name in rejected_names:
-                    parent_name = self.parent_map.get(name)
-                    if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes and parent_name not in next_round_candidates_map:
-                        node_info = self.nodes.get(parent_name)
-                        if node_info:
-                            next_round_candidates_map[parent_name] = {
-                                'name': parent_name,
-                                'sanitized_name': node_info.get('sanitized_name', parent_name),
-                                'def': self.prompt_map.get(parent_name, ''),
-                                'source': f'superior_of_{name}',
-                                'ann_score': 0.0
-                            }
+                    for parent_name in self.parent_map.get(name, []):
+                        if parent_name and parent_name not in verified_nodes and parent_name not in evaluated_nodes and parent_name not in next_round_candidates_map:
+                            node_info = self.nodes.get(parent_name)
+                            if node_info:
+                                next_round_candidates_map[parent_name] = {
+                                    'name': parent_name,
+                                    'sanitized_name': node_info.get('sanitized_name', parent_name),
+                                    'def': self.prompt_map.get(parent_name, ''),
+                                    'source': f'superior_of_{name}',
+                                    'ann_score': 0.0
+                                }
 
             current_candidates = list(next_round_candidates_map.values())
             iteration += 1

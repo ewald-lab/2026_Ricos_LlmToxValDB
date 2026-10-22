@@ -8,13 +8,20 @@ import polars as pl
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Add scripts directory to sys.path to resolve local packages
-sys.path.insert(0, os.path.dirname(__file__))
+from pathlib import Path
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parents[4]
 
-from src.utils import (
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.append(str(SCRIPT_DIR))
+
+from HiPO.src.utils import (
     setup_logging, is_valid_description, load_ontology_nodes
 )
-from model.llm import get_model, test_model
+from HiPO.model.llm import get_model, test_model
 from src.graph import TextToOntoGraph
 
 logger = setup_logging()

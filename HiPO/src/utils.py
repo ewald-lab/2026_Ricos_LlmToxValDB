@@ -80,7 +80,6 @@ def load_ontology_embeddings(db_path: str) -> List[Dict]:
             'name': name,
             'sanitized_name': sanitized_name,
             'def': '',
-            'parent': parents[0] if parents else None,
             'parents': parents,
             'is_llm_generated': 0,
             'vector': torch.frombuffer(bytearray(vector), dtype=torch.float32),
@@ -112,10 +111,11 @@ def load_ontology_nodes(db_path: str, prefix: str = "") -> Tuple[dict, list]:
     nodes = {}
     categories = []
     for name, sanitized_name, parent in rows:
+        parents = json.loads(parent) if parent and parent.startswith('[') else ([parent] if parent else [])
         prefixed_name = f"{prefix}{name}"
         nodes[name] = {
             'sanitized_name': sanitized_name,
-            'parents': json.loads(parent) if parent and parent.startswith('[') else ([parent] if parent else []),
+            'parents': parents,
             'definition': '',
             'prefixed_name': prefixed_name
         }

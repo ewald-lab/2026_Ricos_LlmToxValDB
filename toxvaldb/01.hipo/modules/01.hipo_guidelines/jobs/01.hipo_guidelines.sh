@@ -21,7 +21,12 @@ fi
 
 MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 HIPO_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${HIPO_ROOT}/.." && pwd)"
+REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+HIPO_DIR="${REPO_ROOT}/HiPO"
 DATA_PREP_ROOT="$(cd "${HIPO_ROOT}/../00.data_preparation" && pwd)"
+
+export PYTHONPATH="${REPO_ROOT}:${SCRIPT_DIR}/../scripts:${PYTHONPATH}"
 
 ENDPOINT="${1:-${CODON_NODE:-}}"
 PORT="${2:-8052}"

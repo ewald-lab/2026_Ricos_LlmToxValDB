@@ -22,6 +22,8 @@ EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
 TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
 REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
 
+export PYTHONPATH="${REPO_ROOT}:${SCRIPT_DIR}/../scripts:${PYTHONPATH}"
+
 mkdir -p "${SCRIPT_DIR}/logs"
 
 # Fixed Parameters

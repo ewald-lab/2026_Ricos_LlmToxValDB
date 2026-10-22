@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 import sys
-from typing import Any, Dict, Literal, Optional, Set, Tuple, Union
+from typing import Any, Literal
 
 sys.modules['torchvision'] = None
 
