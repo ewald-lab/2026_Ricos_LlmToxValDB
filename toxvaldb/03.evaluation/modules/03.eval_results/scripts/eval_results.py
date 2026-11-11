@@ -287,9 +287,12 @@ def draw_year_vs_max_depth_line(
     min_rows: int = 5,
     marker_size: float = 120,
     cax=None,
+    min_year: int | None = 1924,
 ) -> None:
     """Draw mean ± std depth by study year on the given axes."""
     ys = year_stats[year_stats["n_rows"] >= min_rows].copy()
+    if min_year is not None:
+        ys = ys[ys["YEAR"] >= min_year]
     ax.fill_between(
         ys["YEAR"],
         ys["mean_depth"] - ys["std_depth"],

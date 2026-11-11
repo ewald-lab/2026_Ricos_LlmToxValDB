@@ -22,6 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--root_term", required=True)
     parser.add_argument("--no_inner_donut", action="store_true", help="Exclude the inner donut chart showing depth levels")
     parser.add_argument("--no_inner_label_2", action="store_true", help="Hide the '2' label in the inner donut (show only '1')")
+    parser.add_argument("--min_year", type=int, default=1924, help="Minimum study year to plot on the line chart (default: 1924)")
     return parser.parse_args()
 
 
@@ -258,6 +259,7 @@ def plot_combined_summary(
     root_term: str,
     no_inner_donut: bool = False,
     no_inner_label_2: bool = False,
+    min_year: int = 1924,
 ) -> None:
     # 2-row grid layout using GridSpec
     # Row 1 has A (depth bar) and B (coverage bar), Row 2 has C (year vs depth line) spanning both columns.
@@ -407,7 +409,7 @@ def plot_combined_summary(
             ax_line.set_position([total_x0, pos_line_now.y0, line_width, pos_line_now.height])
             cax = fig.add_axes([total_x0 + line_width + gap, pos_line_now.y0, cax_width, pos_line_now.height])
 
-            draw_year_vs_max_depth_line(ax_line, year_stats, fig=fig, font_size=11, marker_size=60, cax=cax)
+            draw_year_vs_max_depth_line(ax_line, year_stats, fig=fig, font_size=11, marker_size=60, cax=cax, min_year=min_year)
         else:
             ax_line.text(0.5, 0.5, "year_depth_stats.csv not found", ha="center", va="center", fontsize=10)
 
@@ -456,6 +458,7 @@ def main() -> None:
         args.root_term,
         no_inner_donut=args.no_inner_donut,
         no_inner_label_2=args.no_inner_label_2,
+        min_year=args.min_year,
     )
 
 
