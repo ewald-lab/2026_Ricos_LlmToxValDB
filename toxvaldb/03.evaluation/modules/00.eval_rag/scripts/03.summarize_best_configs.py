@@ -107,7 +107,8 @@ def make_best_config_json(best: dict, model_name: str) -> dict:
 
 
 if __name__ == "__main__":
-    res_dir = "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/toxvaldb/03.evaluation/modules/00.eval_rag/outputs/results_tune"
+    module_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    res_dir = os.path.join(module_dir, "outputs", "results_tune")
     all_summary = []
 
     models_info = {

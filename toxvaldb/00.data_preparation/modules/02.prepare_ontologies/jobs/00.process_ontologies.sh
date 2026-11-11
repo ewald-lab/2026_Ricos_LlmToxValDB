@@ -21,6 +21,11 @@ else
 fi
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${PREP_ROOT}/.." && pwd)"
+PROJECT_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}"
+
+source "${TOXVALDB_ROOT}/cluster_env.sh"
 
 mkdir -p "${SCRIPT_DIR}/logs"
 
@@ -31,17 +36,13 @@ ONTOLOGY="${4:-${ONTOLOGY:-mp}}"
 MODEL_OVERRIDE="${5:-}"
 
 if [ -z "$ENDPOINT" ] || [ -z "$MODEL_CONFIG" ]; then
-    echo "Error: Both host node/base_url and model_config are required."
-    echo "Usage: sbatch $0 <codon-node|base_url> <model_config> [port] [ontology] [model_override]"
-    echo "Example: sbatch $0 codon-gpu-010 /nfs/research/ewald/ricos/code/playground/models/config/Qwen3.6-35B-A3B-FP8.json 8053 mp"
+    echo "Error: Both host/base_url and model_config are required."
+    echo "Usage: sbatch $0 <host|base_url> <model_config> [port] [ontology] [model_override]"
+    echo "Example: sbatch $0 http://localhost:8000/v1 HiPO/config/models/Qwen3.6-35B-A3B-FP8.json 8000 mp"
     exit 1
 fi
 
-if [[ "$ENDPOINT" =~ ^https?:// ]]; then
-    FINAL_BASE_URL="$ENDPOINT"
-else
-    FINAL_BASE_URL="http://${ENDPOINT}.ebi.ac.uk:${PORT}/v1"
-fi
+FINAL_BASE_URL="$(resolve_base_url "${ENDPOINT}" "${PORT}")"
 
 if [ -n "$MODEL_OVERRIDE" ]; then
     EMBED_DIR="$MODEL_OVERRIDE"
@@ -53,8 +54,7 @@ fi
 export HF_HUB_ENABLE_HF_TRANSFER="${HF_HUB_ENABLE_HF_TRANSFER:-1}"
 export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
-module purge 2>/dev/null || true
-module load cuda/12.8.0 gcc 2>/dev/null || true
+setup_cluster_env cuda/12.8.0 gcc
 
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then

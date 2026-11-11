@@ -37,17 +37,12 @@ INPUT_FILE="${EVAL_ROOT}/modules/01.eval_experts/outputs/Expanded_average_human.
 TARGET_EMBEDDING_DB="${MODULE_ROOT}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
 CANDIDATE_POOL_FILE="${TOXVALDB_ROOT}/02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
 
+source "${TOXVALDB_ROOT}/cluster_env.sh"
+
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
+export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
-module purge 2>/dev/null || true
-module load cuda/12.8.0 2>/dev/null || true
-module load gcc 2>/dev/null || true
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-if [ -d "$GCC_LIB_PATH" ]; then
-    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
-fi
+setup_cluster_env cuda/12.8.0 gcc
 
 source "${EVAL_ROOT}/env-evaluation/bin/activate"
 cd "${MODULE_ROOT}"
@@ -59,18 +54,17 @@ DEFS_ARG=""
 DEFS_SUFFIX="no_defs"
 SYSTEM_PROMPT="${MODULE_ROOT}/config/system_prompt_${MODE}.txt"
 
-INDEX="${SLURM_ARRAY_TASK_ID:-0}"
+ENDPOINT="${1:-${CODON_NODE:-localhost}}"
+INDEX="${SLURM_ARRAY_TASK_ID:-${2:-0}}"
 
 case $INDEX in
     0)
         MODEL="Qwen3.5-35B-A3B"
         PORT="8005"
-        NODE="hl-codon-gpu-020"
         ;;
     1)
         MODEL="Qwen3.6-35B-A3B"
         PORT="8012"
-        NODE="codon-gpu-001"
         ;;
     *)
         echo "Error: Invalid index: $INDEX"
@@ -78,8 +72,8 @@ case $INDEX in
         ;;
 esac
 
-BASE_URL="http://${NODE}.ebi.ac.uk:${PORT}/v1"
-MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
+BASE_URL="${BASE_URL:-$(resolve_base_url "${ENDPOINT}" "${PORT}")}"
+MODEL_CONFIG="${REPO_ROOT}/HiPO/config/models/${MODEL}.json"
 
 OUT_FOLDER="${MODULE_ROOT}/outputs/no_quantization"
 mkdir -p "${OUT_FOLDER}"

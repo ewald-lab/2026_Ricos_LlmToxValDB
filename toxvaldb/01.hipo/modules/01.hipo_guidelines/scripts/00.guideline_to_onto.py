@@ -23,7 +23,7 @@ from src.endpoint_filters import (
 )
 from src.ontology import OntologyTree
 
-DEFAULT_HF_HOME = "/nfs/research/ewald/ricos/huggingface_cache"
+DEFAULT_HF_HOME = os.path.join(os.path.expanduser("~"), ".cache", "huggingface")
 DEFAULT_HF_TRANSFER = "1"
 DEFAULT_ENDPOINTS = (
     MODULE_ROOT
@@ -236,14 +236,14 @@ def main() -> None:
         args.consensus_runs = best_config.get("consensus_runs", 1)
         
         if not args.model_config:
-            playground_path = Path(f"/nfs/research/ewald/ricos/code/playground/models/config/{model}.json")
-            repo_hipo_path = SCRIPT_DIR.parent.parent.parent.parent / "HiPO" / "config" / "llm.json"
-            if playground_path.exists():
-                args.model_config = str(playground_path)
-            elif repo_hipo_path.exists():
-                args.model_config = str(repo_hipo_path)
+            model_config_path = REPO_ROOT / "HiPO" / "config" / "models" / f"{model}.json"
+            fallback_config_path = REPO_ROOT / "HiPO" / "config" / "llm.json"
+            if model_config_path.exists():
+                args.model_config = str(model_config_path)
+            elif fallback_config_path.exists():
+                args.model_config = str(fallback_config_path)
             else:
-                args.model_config = str(playground_path)
+                args.model_config = str(model_config_path)
         
         model_ports = {
             "GLM-5.1": "8000",

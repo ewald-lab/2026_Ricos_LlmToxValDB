@@ -12,12 +12,14 @@ import polars as pl
 import torch
 from tqdm import tqdm
 
-# Ensure package modules (model, src) resolve when invoking hipo.py from any working directory
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+# Ensure repository root resolves when invoking hipo.py from any working directory
+REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
-from model.llm import get_model, test_model
-from src.graph import TextToOntoGraph
-from src.utils import (
+from HiPO.model.llm import get_model, test_model
+from HiPO.src.graph import TextToOntoGraph
+from HiPO.src.utils import (
     get_or_create_embeddings,
     get_unique_descriptions,
     is_valid_description,
@@ -266,7 +268,13 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
         Tuple[Any, int]: A tuple containing the initialized LLM client object and the maximum number of retries.
     """
     model_config = {}
-    config_path = args.model_config if (args.model_config and args.model_config != "placeholder") else str(DEFAULT_LLM_CONFIG_FILE)
+    default_model_file = DEFAULT_CONFIG_DIR / "models" / f"{args.model}.json" if args.model else None
+    if args.model_config and args.model_config != "placeholder":
+        config_path = args.model_config
+    elif default_model_file and default_model_file.exists():
+        config_path = str(default_model_file)
+    else:
+        config_path = str(DEFAULT_LLM_CONFIG_FILE)
     if os.path.exists(config_path):
         logger.info(f"Loading model configuration from: {config_path}")
         with open(config_path, 'r', encoding='utf-8') as f:

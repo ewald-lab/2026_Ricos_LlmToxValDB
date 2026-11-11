@@ -67,7 +67,11 @@ def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, re
     Returns:
         Dict[str, torch.Tensor]: A dictionary mapping each text to its embedding tensor, or empty dict if return_vectors is False.
     """
-    from model.embeddings import EmbeddingModel
+    repo_root = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+    if str(repo_root) not in sys.path:
+        sys.path.insert(0, str(repo_root))
+
+    from HiPO.model.embeddings import EmbeddingModel
 
     logger = setup_logging()
     path_obj = Path(db_path)

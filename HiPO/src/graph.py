@@ -12,7 +12,7 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
 
-from model.embeddings import EmbeddingModel
+from HiPO.model.embeddings import EmbeddingModel
 from .utils import setup_logging, load_ontology_embeddings
 
 logger = setup_logging()

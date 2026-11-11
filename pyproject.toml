@@ -1,6 +1,6 @@
 [tool.ruff]
 line-length = 120
-src = ["00.data_preparation", "01.ontology_pipeline", "02.rag_evaluation", "03.expert_annotation"]
+src = ["HiPO", "toxvaldb"]
 target-version = "py312"
 include = ["pyproject.toml", "**/*.py"]
 

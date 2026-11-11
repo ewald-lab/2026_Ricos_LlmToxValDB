@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+from pathlib import Path
 import sys
 from typing import Any, Literal
 
@@ -18,10 +19,14 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from model.llm import get_model, test_model
+_REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import get_model, test_model
 from src.utils import get_or_create_embeddings, is_valid_description, load_ontology_embeddings, setup_logging
 
-DEFAULT_HF_HOME = os.environ.get("HF_HOME", "/nfs/research/ewald/ricos/huggingface_cache")
+DEFAULT_HF_HOME = os.environ.get("HF_HOME", os.path.join(os.path.expanduser("~"), ".cache", "huggingface"))
 DEFAULT_HF_TRANSFER = os.environ.get("HF_HUB_ENABLE_HF_TRANSFER", "1")
 
 logger = setup_logging()

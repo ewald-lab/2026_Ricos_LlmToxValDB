@@ -12,11 +12,16 @@ from typing import List, Optional, Any
 from rdflib.namespace import RDF, RDFS, SKOS, OWL
 from tqdm import tqdm
 import os
+import sys
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-from model.llm import get_model, test_model
-from model.embeddings import EmbeddingModel
+_REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import get_model, test_model
+from HiPO.model.embeddings import EmbeddingModel
 from src.utils import setup_logging, sanitize_name
 
 DEFAULT_HF_HOME = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))

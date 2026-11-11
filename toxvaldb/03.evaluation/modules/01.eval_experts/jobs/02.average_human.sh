@@ -26,13 +26,8 @@ INPUT_DIR="${MODULE_ROOT}/outputs"
 OUTPUT_FILE="${MODULE_ROOT}/outputs/Expanded_average_human.csv"
 MIN_EXPERTS="${1:-2}"
 
-module purge 2>/dev/null || true
-module load gcc 2>/dev/null || true
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-if [ -d "$GCC_LIB_PATH" ]; then
-    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
-fi
+source "${TOXVALDB_ROOT}/cluster_env.sh"
+setup_cluster_env gcc
 
 source "${EVAL_ROOT}/env-evaluation/bin/activate"
 

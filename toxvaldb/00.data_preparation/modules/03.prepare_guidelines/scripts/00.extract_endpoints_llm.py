@@ -6,12 +6,15 @@ import os
 import glob
 import re
 from langchain_community.document_loaders import PyPDFLoader
+from pathlib import Path
 import sys
 from tqdm import tqdm
 
-# Import the model loader
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from scripts.model.llm import get_model, test_model
+_REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import get_model, test_model
 
 
 

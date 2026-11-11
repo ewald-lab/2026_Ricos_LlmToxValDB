@@ -21,16 +21,14 @@ MODULE_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
 TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
 REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+export PYTHONPATH="${REPO_ROOT}:${PYTHONPATH:-}"
+
+source "${TOXVALDB_ROOT}/cluster_env.sh"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
+export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
-module purge && module load cuda/12.8.0 gcc
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-if [ -d "$GCC_LIB_PATH" ]; then
-    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
-fi
+setup_cluster_env cuda/12.8.0 gcc
 
 source "${EVAL_ROOT}/env-evaluation/bin/activate"
 

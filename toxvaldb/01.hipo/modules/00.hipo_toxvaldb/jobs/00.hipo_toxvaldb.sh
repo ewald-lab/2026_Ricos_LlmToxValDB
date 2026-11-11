@@ -19,15 +19,9 @@ ONTOLOGY="${4:-mp}"
 
 if [ -z "$ENDPOINT" ]; then
     echo "Error: Host node / endpoint is required."
-    echo "Usage: sbatch $0 <codon-node|base_url> [model] [port] [ontology]"
-    echo "Example: sbatch $0 codon-gpu-015 Qwen3.6-35B-A3B-FP8 8053 mp"
+    echo "Usage: sbatch $0 <host|base_url> [model] [port] [ontology]"
+    echo "Example: sbatch $0 http://localhost:8000/v1 Qwen3.6-35B-A3B-FP8 8000 mp"
     exit 1
-fi
-
-if [[ "$ENDPOINT" =~ ^https?:// ]]; then
-    BASE_URL="$ENDPOINT"
-else
-    BASE_URL="http://${ENDPOINT}.ebi.ac.uk:${PORT}/v1"
 fi
 
 CURRENT_DIR="${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
@@ -45,11 +39,14 @@ export TOXVALDB_ROOT="${REPO_ROOT}/toxvaldb"
 HIPO_DIR="${REPO_ROOT}/HiPO"
 MODULE_ROOT="${TOXVALDB_ROOT}/01.hipo/modules/00.hipo_toxvaldb"
 
+source "${TOXVALDB_ROOT}/cluster_env.sh"
+BASE_URL="$(resolve_base_url "${ENDPOINT}" "${PORT}")"
+
 export PYTHONPATH="${REPO_ROOT}:${PYTHONPATH}"
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
+export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
-module purge && module load cuda/12.8.0 gcc
+setup_cluster_env cuda/12.8.0 gcc
 
 VENV_DIR="${TOXVALDB_ROOT}/01.hipo/env-text-to-onto"
 source "${VENV_DIR}/bin/activate"

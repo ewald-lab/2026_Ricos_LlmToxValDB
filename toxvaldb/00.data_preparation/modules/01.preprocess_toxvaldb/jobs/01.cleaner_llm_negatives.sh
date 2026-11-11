@@ -17,6 +17,11 @@ else
 fi
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${PREP_ROOT}/.." && pwd)"
+PROJECT_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}"
+
+source "${TOXVALDB_ROOT}/cluster_env.sh"
 
 mkdir -p "${SCRIPT_DIR}/logs"
 
@@ -25,17 +30,13 @@ MODEL_CONFIG="${2:-${MODEL_CONFIG:-}}"
 PORT="${3:-${CODON_PORT:-8003}}"
 
 if [ -z "$ENDPOINT" ] || [ -z "$MODEL_CONFIG" ]; then
-    echo "Error: Both host node/base_url and model_config are required."
-    echo "Usage: sbatch $0 <codon-node|base_url> <model_config> [port]"
-    echo "Example: sbatch $0 codon-gpu-007 /nfs/research/ewald/ricos/code/playground/models/config/Qwen3.6-35B-A3B-FP8.json 8052"
+    echo "Error: Both host/base_url and model_config are required."
+    echo "Usage: sbatch $0 <host|base_url> <model_config> [port]"
+    echo "Example: sbatch $0 http://localhost:8000/v1 HiPO/config/models/Qwen3.6-35B-A3B-FP8.json"
     exit 1
 fi
 
-if [[ "$ENDPOINT" =~ ^https?:// ]]; then
-    FINAL_BASE_URL="$ENDPOINT"
-else
-    FINAL_BASE_URL="http://${ENDPOINT}.ebi.ac.uk:${PORT}/v1"
-fi
+FINAL_BASE_URL="$(resolve_base_url "${ENDPOINT}" "${PORT}")"
 
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"

@@ -3,6 +3,7 @@ import csv
 import json
 from collections import defaultdict
 from pathlib import Path
+import sys
 from typing import Any, List, Literal, Optional
 import torch
 
@@ -172,7 +173,11 @@ class EndpointOntologyFilterBuilder:
         Returns:
             None
         """
-        from model.embeddings import EmbeddingModel
+        repo_root = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+        if str(repo_root) not in sys.path:
+            sys.path.insert(0, str(repo_root))
+
+        from HiPO.model.embeddings import EmbeddingModel
 
         self.ontology = ontology
         self.tree = tree

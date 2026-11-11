@@ -37,13 +37,8 @@ OWL_FILE="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inp
 ONTOLOGY_EMBEDDING_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/kalm/${ONTOLOGY}.db"
 OUTPUT_DIR="${MODULE_ROOT}/outputs/figures"
 
-module purge 2>/dev/null || true
-module load gcc 2>/dev/null || true
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-if [ -d "$GCC_LIB_PATH" ]; then
-    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
-fi
+source "${TOXVALDB_ROOT}/cluster_env.sh"
+setup_cluster_env gcc
 
 # Activate environment
 source "${EVAL_ROOT}/env-evaluation/bin/activate"

@@ -1,6 +1,7 @@
 from __future__ import annotations
 import sys
 import os
+from pathlib import Path
 import argparse
 import json
 import torch
@@ -8,9 +9,12 @@ import polars as pl
 from tqdm import tqdm
 import sqlite3
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+_REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
 from src.utils import load_ontology_embeddings, setup_logging
-from model.embeddings import EmbeddingModel
+from HiPO.model.embeddings import EmbeddingModel
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 logger = setup_logging()

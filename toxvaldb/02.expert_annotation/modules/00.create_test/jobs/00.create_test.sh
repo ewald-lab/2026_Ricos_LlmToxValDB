@@ -17,15 +17,9 @@ PORT="${3:-8052}"
 
 if [ -z "$ENDPOINT" ]; then
     echo "Error: Host node / endpoint is required. Pass it as the first argument or set CODON_NODE."
-    echo "Usage: sbatch $0 <codon-node|base_url> [model] [port]"
-    echo "Example: sbatch $0 codon-gpu-010 Qwen3.6-35B-A3B-FP8 8052"
+    echo "Usage: sbatch $0 <host|base_url> [model] [port]"
+    echo "Example: sbatch $0 http://localhost:8000/v1 Qwen3.6-35B-A3B-FP8 8000"
     exit 1
-fi
-
-if [[ "$ENDPOINT" =~ ^https?:// ]]; then
-    BASE_URL="$ENDPOINT"
-else
-    BASE_URL="http://${ENDPOINT}.ebi.ac.uk:${PORT}/v1"
 fi
 
 if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
@@ -39,16 +33,15 @@ EXPERT_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
 TOXVALDB_ROOT="$(cd "${EXPERT_ROOT}/.." && pwd)"
 REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
 HIPO_DIR="${REPO_ROOT}/HiPO"
+export PYTHONPATH="${REPO_ROOT}:${PYTHONPATH:-}"
+
+source "${TOXVALDB_ROOT}/cluster_env.sh"
+BASE_URL="$(resolve_base_url "${ENDPOINT}" "${PORT}")"
 
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME=/nfs/research/ewald/ricos/huggingface_cache
+export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
-module purge && module load cuda/12.8.0 gcc
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-if [ -d "$GCC_LIB_PATH" ]; then
-    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
-fi
+setup_cluster_env cuda/12.8.0 gcc
 
 source "${EXPERT_ROOT}/env-expert-annot/bin/activate"
 

@@ -137,7 +137,7 @@ def get_or_create_embeddings(texts: List[str], model_name: str, db_path: str, re
     Returns:
         Dict[str, torch.Tensor]: A dictionary mapping each text to its embedding tensor, or empty dict if return_vectors is False.
     """
-    from model.embeddings import EmbeddingModel
+    from HiPO.model.embeddings import EmbeddingModel
 
     logger = setup_logging()
     path_obj = Path(db_path)

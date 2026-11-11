@@ -58,7 +58,8 @@ def get_run_indices(phrase: str, cand_name: str, votes: int) -> list[int]:
     return list(range(1, min(votes, 10) + 1))
 
 def main() -> None:
-    base_dir = "/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/toxvaldb/03.evaluation/modules/02.eval_llms"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    toxvaldb_dir = os.path.abspath(os.path.join(base_dir, "..", "..", ".."))
     outputs_dir = os.path.join(base_dir, "outputs")
     reproducibility_dir = os.path.join(outputs_dir, "reproducibility")
     os.makedirs(reproducibility_dir, exist_ok=True)
@@ -91,7 +92,15 @@ def main() -> None:
 
         # Load ontology graph
         if ontology not in ontology_graphs:
-            owl_file = f"/nfs/research/ewald/ricos/code/2026_Ricos_LlmToxValDB/toxvaldb/00.data_preparation/modules/02.prepare_ontologies/inputs/owl_files/{ontology}.ttl"
+            owl_file = os.path.join(
+                toxvaldb_dir,
+                "00.data_preparation",
+                "modules",
+                "02.prepare_ontologies",
+                "inputs",
+                "owl_files",
+                f"{ontology}.ttl",
+            )
             if not os.path.exists(owl_file):
                 print(f"OWL file not found: {owl_file}")
                 continue

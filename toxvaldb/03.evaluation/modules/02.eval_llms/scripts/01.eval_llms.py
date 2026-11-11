@@ -126,7 +126,7 @@ def main() -> None:
             module_dir, "config", f"system_prompt_{args.mode}.txt"
         )
 
-    os.environ["HF_HOME"] = "/nfs/research/ewald/ricos/huggingface_cache"
+    os.environ.setdefault("HF_HOME", os.path.join(os.path.expanduser("~"), ".cache", "huggingface"))
     os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
     if not os.path.exists(args.input_file):

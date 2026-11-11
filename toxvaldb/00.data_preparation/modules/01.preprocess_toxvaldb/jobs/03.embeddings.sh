@@ -21,6 +21,11 @@ else
 fi
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PREP_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+TOXVALDB_ROOT="$(cd "${PREP_ROOT}/.." && pwd)"
+PROJECT_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
+export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}"
+
+source "${TOXVALDB_ROOT}/cluster_env.sh"
 
 mkdir -p "${SCRIPT_DIR}/logs"
 
@@ -35,7 +40,7 @@ else
     MODEL_OVERRIDE="${1:-}"
 fi
 
-module purge && module load cuda/12.8.0 gcc 2>/dev/null || true
+setup_cluster_env cuda/12.8.0 gcc
 
 if [ -f "${PREP_ROOT}/env-data-prep/bin/activate" ]; then
     source "${PREP_ROOT}/env-data-prep/bin/activate"

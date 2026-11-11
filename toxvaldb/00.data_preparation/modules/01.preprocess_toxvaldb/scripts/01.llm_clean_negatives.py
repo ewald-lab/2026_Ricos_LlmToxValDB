@@ -17,7 +17,12 @@ if "HF_HUB_ENABLE_HF_TRANSFER" not in os.environ:
 
 from tqdm import tqdm
 from pathlib import Path
-from model.llm import get_model, test_model
+
+_REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import get_model, test_model
 from src.utils import (
     setup_logging,
     load_pipeline_prompts,

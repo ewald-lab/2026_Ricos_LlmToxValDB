@@ -58,8 +58,8 @@ source env-<name>/bin/activate
 | Stage Folder | Environment Script | Virtual Environment Name |
 | :--- | :--- | :--- |
 | `00.data_preparation/` | `install_env.sh` | `env-data-prep` |
-| `01.hipo/` | `install_env.sh` | `env-hipo` |
-| `02.expert_annotation/` | `install_env.sh` | `env-expert-annotation` |
+| `01.hipo/` | `install_env.sh` | `env-text-to-onto` |
+| `02.expert_annotation/` | `install_env.sh` | `env-expert-annot` |
 | `03.evaluation/` | `install_env.sh` | `env-evaluation` |
 
 All Slurm jobs in each module automatically activate their respective `env-<name>` environment upon execution.

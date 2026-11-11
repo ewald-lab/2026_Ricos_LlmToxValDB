@@ -22,6 +22,8 @@ EVAL_ROOT="$(cd "${MODULE_ROOT}/../.." && pwd)"
 TOXVALDB_ROOT="$(cd "${EVAL_ROOT}/.." && pwd)"
 REPO_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
 
+source "${TOXVALDB_ROOT}/cluster_env.sh"
+
 export PYTHONPATH="${REPO_ROOT}:${SCRIPT_DIR}/../scripts:${PYTHONPATH}"
 
 mkdir -p "${SCRIPT_DIR}/logs"
@@ -29,8 +31,8 @@ mkdir -p "${SCRIPT_DIR}/logs"
 # ==============================================================================
 # Model & Endpoint Configuration
 # ==============================================================================
-# Get the codon node from the first argument or environment variable, defaulting to codon-gpu-007
-CODON_NODE="${1:-${CODON_NODE:-codon-gpu-007}}"
+# Get the host or full base_url from the first argument or environment variable, defaulting to localhost
+ENDPOINT="${1:-${CODON_NODE:-localhost}}"
 
 # Handle manual runs where SLURM_ARRAY_TASK_ID is not set
 INDEX="${SLURM_ARRAY_TASK_ID:-${2:-8}}"
@@ -83,7 +85,7 @@ case $INDEX in
         ;;
 esac
 
-BASE_URL="http://${CODON_NODE}.ebi.ac.uk:${PORT}/v1"
+BASE_URL="${BASE_URL:-$(resolve_base_url "${ENDPOINT}" "${PORT}")}"
 
 # ==============================================================================
 # Fixed Parameters
@@ -97,23 +99,16 @@ GLOBAL_DEFINITIONS_DB="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_o
 
 # Other resolved fixed paths
 INPUT_FILE="${EVAL_ROOT}/modules/01.eval_experts/outputs/Expanded_average_human.csv"
-MODEL_CONFIG="/nfs/research/ewald/ricos/code/playground/models/config/${MODEL}.json"
+MODEL_CONFIG="${REPO_ROOT}/HiPO/config/models/${MODEL}.json"
 TARGET_EMBEDDING_DB="${MODULE_ROOT}/outputs/tox_effects_embeddings_${EMBED_DIR}.db"
 CANDIDATE_POOL_FILE="${TOXVALDB_ROOT}/02.expert_annotation/modules/01.create_form/outputs/expert_annotation_${ONTOLOGY}.html"
 
 # Environment & hardware variables
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export HF_HOME="${HF_HOME:-/nfs/research/ewald/ricos/huggingface_cache}"
+export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
 
 # Load system environments
-module purge 2>/dev/null || true
-module load cuda/12.8.0 2>/dev/null || true
-module load gcc 2>/dev/null || true
-
-GCC_LIB_PATH="/hps/software/spack/opt/spack/linux-rhel9-cascadelake/gcc-11.2.0/gcc-14.2.0-lwfz56aikpunnn56j24sziq4gzrvizji/lib64"
-if [ -d "$GCC_LIB_PATH" ]; then
-    export LD_LIBRARY_PATH=$GCC_LIB_PATH:$LD_LIBRARY_PATH
-fi
+setup_cluster_env cuda/12.8.0 gcc
 
 # Activate evaluation environment
 source "${EVAL_ROOT}/env-evaluation/bin/activate"
