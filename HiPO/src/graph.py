@@ -469,41 +469,73 @@ class TextToOntoGraph:
 
         return passed_candidates
 
-    def get_breadcrumbs(self, name: str) -> str:
+    def get_breadcrumbs(self, name: str, inline: bool = False) -> str:
         """
         Description:
-        Constructs the hierarchical path (breadcrumbs) for a node. Cached per unique name.
+        Constructs the hierarchical path(s) (breadcrumbs) for a node across all parents.
+        Cached per unique name.
 
         Args:
-            name (str): Node name to build the breadcrumb path for.
+            name (str): Node name to build the breadcrumb path(s) for.
+            inline (bool): If True, join multiple paths on a single line with ' | ';
+                otherwise separate them with newlines. Defaults to False.
 
         Returns:
-            str: The joined breadcrumb hierarchical string path.
+            str: The joined breadcrumb hierarchical string path(s).
         """
-        return self._get_breadcrumbs_cached(name)
+        paths = self._get_breadcrumbs_cached(name)
+        if len(paths) <= 1:
+            return paths[0] if paths else name
+        sep = " | " if inline else "\n"
+        return sep.join(f"Path {i + 1}: {p}" for i, p in enumerate(paths))
 
     @lru_cache(maxsize=None)
-    def _get_breadcrumbs_cached(self, name: str) -> str:
+    def _get_breadcrumbs_cached(self, name: str) -> Tuple[str, ...]:
         """
         Description:
-        LRU cached internal builder for breadcrumbs.
+        LRU cached internal builder returning all unique root-to-node breadcrumb paths.
 
         Args:
-            name (str): Node name to build the breadcrumb path for.
+            name (str): Node name to build the breadcrumb paths for.
 
         Returns:
-            str: The joined breadcrumb path.
+            Tuple[str, ...]: Ordered unique root-to-node path strings.
         """
-        path = []
-        curr = name
-        visited = set()
-        while curr and curr not in visited:
-            visited.add(curr)
-            label = self.nodes.get(curr, {}).get('sanitized_name', curr)
-            path.append(label)
-            parents = self.parent_map.get(curr, [])
-            curr = parents[0] if parents else None
-        return " > ".join(reversed(path))
+        max_paths = 32
+        raw_paths: List[List[str]] = []
+
+        def dfs(curr: str, current_path: List[str], active: set[str]) -> None:
+            if len(raw_paths) >= max_paths:
+                return
+            if not curr or curr in active:
+                if current_path:
+                    raw_paths.append(current_path)
+                return
+            active.add(curr)
+            next_path = current_path + [curr]
+            parents = [p for p in self.parent_map.get(curr, []) if p]
+            if not parents:
+                raw_paths.append(next_path)
+            else:
+                for p in parents:
+                    dfs(p, next_path, active)
+                    if len(raw_paths) >= max_paths:
+                        break
+            active.remove(curr)
+
+        dfs(name, [], set())
+        if not raw_paths:
+            return (self.nodes.get(name, {}).get("sanitized_name", name),)
+
+        formatted: List[str] = []
+        seen: set[str] = set()
+        for path in raw_paths:
+            labels = [self.nodes.get(n, {}).get("sanitized_name", n) for n in reversed(path)]
+            joined = " > ".join(labels)
+            if joined not in seen:
+                seen.add(joined)
+                formatted.append(joined)
+        return tuple(formatted)
 
     def execute(self, llm: Any, description: str, std_desc: Optional[str] = None, alpha: Optional[float] = None) -> Tuple[dict, list, list]:
         """
@@ -807,7 +839,7 @@ class TextToOntoGraph:
             candidate_strings = []
             for s_name, c in zip(s_names, candidates):
                 cand_str = f"- {s_name}"
-                cand_str += f" (Hierarchy: {self.get_breadcrumbs(c['name'])})"
+                cand_str += f" (Hierarchy: {self.get_breadcrumbs(c['name'], inline=True)})"
                 if self.ontology_definitions:
                     cand_str += f": {self.prompt_map.get(c['name'], c.get('def', ''))}"
                 candidate_strings.append(cand_str)
