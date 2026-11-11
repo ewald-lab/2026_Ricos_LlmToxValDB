@@ -35,7 +35,9 @@ def get_model(model: str, model_provider: str, base_url: Optional[str] = None, a
     if api_key:
         init_args["api_key"] = api_key
 
-    init_args.update(kwargs)
+    # Strip client-side metadata/concurrency fields before forwarding to LangChain
+    clean_kwargs = {k: v for k, v in kwargs.items() if k != "max_concurrency" and not k.startswith("_")}
+    init_args.update(clean_kwargs)
 
     return init_chat_model(**init_args)
 

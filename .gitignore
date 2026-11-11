@@ -193,6 +193,9 @@ __marimo__/
 
 # Large data files — download via scripts or symlinks
 *.tsv
+!examples/local_llm/sample_effects.tsv
+examples/local_llm/models/
+examples/local_llm/outputs/
 *.db
 *.parquet
 *.csv
