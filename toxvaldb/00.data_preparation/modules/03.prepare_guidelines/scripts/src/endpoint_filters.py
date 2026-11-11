@@ -11,32 +11,14 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
-from transformers import AutoTokenizer, AutoModelForCausalLM
 
+_REPO_ROOT = next((p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir()), None)
+if _REPO_ROOT and str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import clean_llm_output
+from HiPO.model.reranker import CausalReranker
 from .ontology import OntologyTree
-
-def clean_llm_output(message: Any) -> str:
-    """
-    Description:
-    Cleans raw LLM response by stripping out thinking/reasoning tags and markdown JSON block formatting.
-
-    Args:
-        message (Any): The raw response message from the LLM.
-
-    Returns:
-        str: The sanitized JSON string.
-    """
-    text = message.content if hasattr(message, "content") else str(message)
-    if "</think>" in text:
-        text = text.split("</think>")[-1].strip()
-    text = text.strip()
-    if text.startswith("```json"):
-        text = text.replace("```json", "", 1)
-    elif text.startswith("```"):
-        text = text.replace("```", "", 1)
-    if text.endswith("```"):
-        text = text[:-3]
-    return text.strip()
 
 def clean_reason(reason: str) -> str:
     """
@@ -193,28 +175,22 @@ class EndpointOntologyFilterBuilder:
 
         self.threshold_reranker = threshold_reranker
         self.reranker_batch_size = reranker_batch_size
+        self.reranker = None
         self.reranker_model = None
         self.reranker_tokenizer = None
+        self.reranker_instruction = "Find candidates that perfectly match the described endpoint."
 
         if self.threshold_reranker > 0.0:
-            print(f"Loading Reranker Model: {reranker_model}")
-            self.reranker_tokenizer = AutoTokenizer.from_pretrained(reranker_model, padding_side='left')
-            self.reranker_model_hf = AutoModelForCausalLM.from_pretrained(
-                reranker_model, torch_dtype=torch.bfloat16, device_map="auto"
-            ).eval()
-            self.reranker_device = self.reranker_model_hf.device
-            self.token_false_id = self.reranker_tokenizer.convert_tokens_to_ids("no")
-            self.token_true_id = self.reranker_tokenizer.convert_tokens_to_ids("yes")
-            prefix = "<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be \"yes\" or \"no\".<|im_end|>\n<|im_start|>user\n"
-            suffix = "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
-            self.reranker_prefix_tokens = self.reranker_tokenizer.encode(prefix, add_special_tokens=False)
-            self.reranker_suffix_tokens = self.reranker_tokenizer.encode(suffix, add_special_tokens=False)
-            self._reranker_max_content_len = 1024 - len(self.reranker_prefix_tokens) - len(self.reranker_suffix_tokens)
             if reranker_prompt_file and Path(reranker_prompt_file).exists():
                 with open(reranker_prompt_file, 'r', encoding='utf-8') as f:
                     self.reranker_instruction = f.read().strip()
-            else:
-                self.reranker_instruction = "Find candidates that perfectly match the described endpoint."
+            self.reranker = CausalReranker(
+                model_name=reranker_model,
+                instruction=self.reranker_instruction,
+                batch_size=self.reranker_batch_size,
+            )
+            self.reranker_model = self.reranker.model
+            self.reranker_tokenizer = self.reranker.tokenizer
 
         self.embedder = EmbeddingModel(embedding_model_name)
 
@@ -261,39 +237,14 @@ class EndpointOntologyFilterBuilder:
         Returns:
             list[Any]: List of reranked candidates passing the threshold.
         """
-        if self.threshold_reranker <= 0.0 or not candidates or self.reranker_model_hf is None:
+        if self.threshold_reranker <= 0.0 or not candidates or self.reranker is None:
             return candidates
 
-        pairs = []
-        for c in candidates:
-            doc = c.sanitized_name
-            hierarchy = self.tree.breadcrumbs(c.name)
-            doc = f"{doc}\n<Hierarchy>: {hierarchy}"
-            pair_text = f"<Instruct>: {self.reranker_instruction}\n<Query>: {description}\n<Document>: {doc}"
-            pairs.append(pair_text)
-
-        batch_size = self.reranker_batch_size
-        scores = []
-
-        with torch.no_grad():
-            for i in range(0, len(pairs), batch_size):
-                batch_pairs = pairs[i:i+batch_size]
-                inputs = self.reranker_tokenizer(
-                    batch_pairs, padding=False, truncation='longest_first',
-                    return_attention_mask=False, max_length=self._reranker_max_content_len
-                )
-                for j, ele in enumerate(inputs['input_ids']):
-                    inputs['input_ids'][j] = self.reranker_prefix_tokens + ele + self.reranker_suffix_tokens
-                inputs = self.reranker_tokenizer.pad(inputs, padding=True, return_tensors="pt")
-                inputs = {k: v.to(self.reranker_device) for k, v in inputs.items()}
-
-                batch_logits = self.reranker_model_hf(**inputs).logits[:, -1, :]
-                true_vector = batch_logits[:, self.token_true_id]
-                false_vector = batch_logits[:, self.token_false_id]
-                batch_scores = torch.stack([false_vector, true_vector], dim=1)
-                batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
-                batch_probs = batch_scores[:, 1].exp().tolist()
-                scores.extend(batch_probs)
+        pairs = [
+            (description, f"{c.sanitized_name}\n<Hierarchy>: {self.tree.breadcrumbs(c.name)}")
+            for c in candidates
+        ]
+        scores = self.reranker.score_pairs(pairs, instruction=self.reranker_instruction)
 
         passed_candidates = []
         for score, cand in zip(scores, candidates):

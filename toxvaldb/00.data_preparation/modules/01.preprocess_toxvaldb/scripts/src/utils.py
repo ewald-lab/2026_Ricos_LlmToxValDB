@@ -12,6 +12,12 @@ from typing import Any, Dict, List
 from pathlib import Path
 from tqdm import tqdm
 
+_REPO_ROOT = next((p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir()), None)
+if _REPO_ROOT and str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import extract_reasoning_and_content
+
 def setup_logging(level: int = logging.INFO, stream: Any = sys.stdout, fmt: str = "%(message)s") -> logging.Logger:
     """
     Description:
@@ -171,9 +177,7 @@ def clean_llm_response(raw: str) -> str:
     Returns:
         str: The extracted JSON string or cleaned text.
     """
-    text = raw
-    if "</think>" in text:
-        text = text.split("</think>")[-1].strip()
+    _, text = extract_reasoning_and_content(raw)
     # Try to extract JSON from markdown code blocks
     match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
     if match:

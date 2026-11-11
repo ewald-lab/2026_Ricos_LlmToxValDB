@@ -15,7 +15,7 @@ if str(_REPO_ROOT) not in sys.path:
 
 from src.utils import load_ontology_embeddings, setup_logging
 from HiPO.model.embeddings import EmbeddingModel
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from HiPO.model.reranker import CausalReranker
 
 logger = setup_logging()
 
@@ -358,22 +358,14 @@ class Precomputer:
         Returns:
             dict[str, list]: The updated dictionary with reranker scores filled in.
         """
-        logger.info(f"Loading Reranker Model: {reranker_model_name}")
-        tokenizer = AutoTokenizer.from_pretrained(reranker_model_name, padding_side='left')
-        model = AutoModelForCausalLM.from_pretrained(
-            reranker_model_name, torch_dtype=torch.bfloat16, device_map="auto"
-        ).eval()
-
-        token_false_id = tokenizer.convert_tokens_to_ids("no")
-        token_true_id = tokenizer.convert_tokens_to_ids("yes")
-        prefix = "<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be \"yes\" or \"no\".<|im_end|>\n<|im_start|>user\n"
-        suffix = "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
-        prefix_tokens = tokenizer.encode(prefix, add_special_tokens=False)
-        suffix_tokens = tokenizer.encode(suffix, add_special_tokens=False)
-        max_content_len = 1024 - len(prefix_tokens) - len(suffix_tokens)
-
         with open(reranker_config_path, 'r', encoding='utf-8') as f:
             instruction = f.read().strip()
+
+        reranker = CausalReranker(
+            model_name=reranker_model_name,
+            instruction=instruction,
+            batch_size=32,
+        )
 
         # To avoid re-computing reranker for same candidate-query pair across GRF alphas,
         # we compute it once per unique pair.
@@ -387,27 +379,14 @@ class Precomputer:
                     doc_text = self._build_doc_text(c)
                     pair_key = (query_text, doc_text)
                     if pair_key not in pair_to_idx:
-                        pair_text = f"<Instruct>: {instruction}\n<Query>: {query_text}\n<Document>: {doc_text}"
                         pair_to_idx[pair_key] = len(flat_pairs)
-                        flat_pairs.append(pair_text)
+                        flat_pairs.append(pair_key)
 
         logger.info(f"Computing {len(flat_pairs)} UNIQUE reranker scores...")
-        rerank_scores_flat = []
-        batch_size = 32
-        with torch.no_grad():
-            for i in tqdm(range(0, len(flat_pairs), batch_size)):
-                batch_pairs = flat_pairs[i:i + batch_size]
-                inputs = tokenizer(batch_pairs, padding=False, truncation='longest_first',
-                                              return_attention_mask=False, max_length=max_content_len)
-                for j, ele in enumerate(inputs['input_ids']):
-                    inputs['input_ids'][j] = prefix_tokens + ele + suffix_tokens
-                inputs = tokenizer.pad(inputs, padding=True, return_tensors="pt")
-                inputs = {k: v.to(model.device) for k, v in inputs.items()}
-
-                batch_logits = model(**inputs).logits[:, -1, :]
-                batch_scores = torch.stack([batch_logits[:, token_false_id], batch_logits[:, token_true_id]], dim=1)
-                batch_probs = torch.nn.functional.log_softmax(batch_scores, dim=1)[:, 1].exp().tolist()
-                rerank_scores_flat.extend(batch_probs)
+        rerank_scores_flat = reranker.score_pairs(
+            flat_pairs, instruction=instruction, batch_size=32, show_progress=True
+        )
+        reranker.close()
 
         # Map back to structured format
         for alpha_str, all_candidates in results_by_grf.items():

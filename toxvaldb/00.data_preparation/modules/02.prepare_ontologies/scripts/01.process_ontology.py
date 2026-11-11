@@ -20,7 +20,7 @@ _REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from HiPO.model.llm import get_model, test_model
+from HiPO.model.llm import extract_reasoning_and_content, get_model, test_model
 from HiPO.model.embeddings import EmbeddingModel
 from src.utils import setup_logging, sanitize_name
 
@@ -348,9 +348,7 @@ class OntologyToHierarchy:
 
         decisions = []
         for res in generated_results:
-            text = res.strip()
-            if "</think>" in text:
-                text = text.split("</think>")[-1].strip()
+            _, text = extract_reasoning_and_content(res)
 
             decision = "BAD"
             try:

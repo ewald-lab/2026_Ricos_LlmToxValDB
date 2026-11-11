@@ -17,13 +17,13 @@ from pydantic import BaseModel, Field
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 _REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir())
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from HiPO.model.llm import get_model, test_model
+from HiPO.model.llm import clean_llm_output, get_model, test_model
+from HiPO.model.reranker import CausalReranker
 from src.utils import get_or_create_embeddings, is_valid_description, load_ontology_embeddings, setup_logging
 
 DEFAULT_HF_HOME = os.environ.get("HF_HOME", os.path.join(os.path.expanduser("~"), ".cache", "huggingface"))
@@ -82,28 +82,6 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--hf_transfer", default=None, help="Enable/disable HF transfer (0 or 1).")
 
     return parser.parse_args()
-
-def clean_llm_output(message: Any) -> str:
-    """
-    Description:
-    Removes <think> tags and markdown JSON formatting from LLM output.
-
-    Args:
-        message (Any): The message or string to clean.
-
-    Returns:
-        str: The cleaned message content.
-    """
-    text = message.content if hasattr(message, "content") else str(message)
-    if "</think>" in text:
-        text = text.split("</think>")[-1].strip()
-    if text.startswith("```json"):
-        text = text.replace("```json", "", 1)
-    elif text.startswith("```"):
-        text = text.replace("```", "", 1)
-    if text.endswith("```"):
-        text = text[::-1].replace("```", "", 1)[::-1]
-    return text.strip()
 
 def clean_reason(reason: str) -> str:
     """
@@ -288,27 +266,9 @@ def main() -> None:
 
     # --- RERANKER AND RAG HELPERS ---
     # Initialize Reranker if requested
-    reranker_model = None
-    reranker_tokenizer = None
-    reranker_device = None
-    token_false_id = None
-    token_true_id = None
-    reranker_prefix_tokens = None
-    reranker_suffix_tokens = None
+    reranker = None
     reranker_instruction = ""
     if args.threshold_reranker > 0.0:
-        logger.info(f"Loading Reranker Model: {args.reranker_model} (Threshold: {args.threshold_reranker})")
-        reranker_tokenizer = AutoTokenizer.from_pretrained(args.reranker_model, padding_side='left')
-        reranker_model = AutoModelForCausalLM.from_pretrained(
-            args.reranker_model, torch_dtype=torch.bfloat16, device_map="auto"
-        ).eval()
-        reranker_device = reranker_model.device
-        token_false_id = reranker_tokenizer.convert_tokens_to_ids("no")
-        token_true_id = reranker_tokenizer.convert_tokens_to_ids("yes")
-        prefix = "<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be \"yes\" or \"no\".<|im_end|>\n<|im_start|>user\n"
-        suffix = "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
-        reranker_prefix_tokens = reranker_tokenizer.encode(prefix, add_special_tokens=False)
-        reranker_suffix_tokens = reranker_tokenizer.encode(suffix, add_special_tokens=False)
         reranker_prompt_file = getattr(args, 'reranker_prompt_file', None)
         if reranker_prompt_file and os.path.exists(reranker_prompt_file):
             with open(reranker_prompt_file, 'r', encoding='utf-8') as f:
@@ -322,6 +282,11 @@ def main() -> None:
         else:
             reranker_instruction = "Given a biological phenotype description observed after chemical exposure, retrieve the identical ontology term.\nCRITICAL RULES FOR SELECTION:\n1. STRICT SPECIFICITY ALIGNMENT: The scope of the description must match the biological scope of the candidate. A broad, system-level description MUST ONLY be mapped to equally broad, system-level ontology terms.\n2. NO SUB-SYSTEMS OR PROCESSES: If the input describes an entire physiological system, you MUST REJECT candidates that refer to specific sub-functions, localized mechanisms, or pathways.\nMatch them based strictly on whether the underlying biological or phenotypic target is identical."
             logger.warning("reranker_prompt file not found or not set — using fallback hardcoded instruction.")
+        reranker = CausalReranker(
+            model_name=args.reranker_model,
+            instruction=reranker_instruction,
+            batch_size=getattr(args, 'reranker_batch_size', 16),
+        )
 
     # Pre-compute nodes map for faster breadcrumb generation
     nodes_map = {item['name']: item for item in ontology_data}
@@ -391,44 +356,20 @@ def main() -> None:
                 "is_llm_generated": item['is_llm_generated']
             })
 
-        if args.threshold_reranker > 0.0 and len(final_pool) > 0:
-            pairs = []
+        if args.threshold_reranker > 0.0 and len(final_pool) > 0 and reranker is not None:
             reranker_query = phrase # Always use original for reranker query
+            pairs = []
             for c in final_pool:
                 h = get_breadcrumbs(c['name'], nodes_map)
                 c['hierarchy'] = h # Cache it for later use
-                doc = c['sanitized_name']
-                doc = f"{doc}\n<Hierarchy>: {h}"
-                pair_text = f"<Instruct>: {reranker_instruction}\n<Query>: {reranker_query}\n<Document>: {doc}"
-                pairs.append(pair_text)
+                doc = f"{c['sanitized_name']}\n<Hierarchy>: {h}"
+                pairs.append((reranker_query, doc))
 
-            batch_size = getattr(args, 'reranker_batch_size', 16)
-            scores_out = []
-
-            with torch.no_grad():
-                for i in range(0, len(pairs), batch_size):
-                    batch_pairs = pairs[i:i+batch_size]
-
-                    inputs = reranker_tokenizer(
-                        batch_pairs, padding=False, truncation='longest_first',
-                        return_attention_mask=False, max_length=1024 - len(reranker_prefix_tokens) - len(reranker_suffix_tokens)
-                    )
-
-                    for j, ele in enumerate(inputs['input_ids']):
-                        inputs['input_ids'][j] = reranker_prefix_tokens + ele + reranker_suffix_tokens
-
-                    inputs = reranker_tokenizer.pad(inputs, padding=True, return_tensors="pt")
-
-                    for key in inputs:
-                        inputs[key] = inputs[key].to(reranker_device)
-
-                    batch_logits = reranker_model(**inputs).logits[:, -1, :]
-                    true_vector = batch_logits[:, token_true_id]
-                    false_vector = batch_logits[:, token_false_id]
-                    batch_scores = torch.stack([false_vector, true_vector], dim=1)
-                    batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
-                    batch_probs = batch_scores[:, 1].exp().tolist()
-                    scores_out.extend(batch_probs)
+            scores_out = reranker.score_pairs(
+                pairs,
+                instruction=reranker_instruction,
+                batch_size=getattr(args, 'reranker_batch_size', 16),
+            )
 
             passed_candidates = []
             for score, cand in zip(scores_out, final_pool):

@@ -1,161 +1,32 @@
 import sqlite3
 import json
+import re
 import torch
 import os
 import threading
 from functools import lru_cache
-from transformers import AutoTokenizer, AutoModelForCausalLM
 
-from typing import Any, Dict, List, Literal, Optional, Tuple
+from typing import Any, Callable, Dict, List, Literal, Optional, Tuple
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
 
 from HiPO.model.embeddings import EmbeddingModel
+from HiPO.model.llm import (
+    _repair_unescaped_quotes,
+    clean_llm_output,
+    extract_reasoning_and_content,
+)
+from HiPO.model.reranker import CausalReranker
 from .utils import setup_logging, load_ontology_embeddings
 
 logger = setup_logging()
 
-
-def _repair_unescaped_quotes(text: str) -> str:
-    """
-    Description:
-    Character-level scanner that escapes unescaped double quotes inside JSON string values.
-    Handles LLM outputs that contain literal double quotes (e.g. "abnormal morphology") inside string fields.
-
-    Args:
-        text (str): A JSON string that may contain unescaped double quotes inside string values.
-
-    Returns:
-        str: The repaired JSON string.
-    """
-    result = []
-    n = len(text)
-    in_string = False
-    i = 0
-    while i < n:
-        ch = text[i]
-
-        if ch == '\\' and in_string:
-            # Pass through the escape sequence as-is
-            result.append(ch)
-            if i + 1 < n:
-                result.append(text[i + 1])
-                i += 2
-            else:
-                i += 1
-            continue
-
-        if ch == '"':
-            if not in_string:
-                in_string = True
-                result.append(ch)
-            else:
-                # Peek ahead to determine if this quote closes the string or is a literal interior quote.
-                # A closing quote is followed (after optional whitespace) by one of: , } ] :
-                j = i + 1
-                while j < n and text[j] in (' ', '\t', '\r', '\n'):
-                    j += 1
-                next_structural = text[j] if j < n else ''
-                if next_structural in (',', '}', ']', ':'):
-                    in_string = False
-                    result.append(ch)
-                else:
-                    # It's an interior unescaped quote — escape it
-                    result.append('\\"')
-        elif ch == '\n' and in_string:
-            # Escape bare newlines inside string values
-            result.append('\\n')
-        elif ch == '\r' and in_string:
-            result.append('\\r')
-        else:
-            result.append(ch)
-        i += 1
-
-    return "".join(result)
-
-
-def clean_llm_output(message: Any) -> str:
-    """
-    Description:
-    Removes <think> tags and markdown JSON formatting from LLM output.
-
-    Args:
-        message (Any): The message object or string returned from the LLM.
-
-    Returns:
-        str: The cleaned JSON string.
-    """
-    text = message.content if hasattr(message, "content") else str(message)
-
-    if "</think>" in text:
-        text = text.split("</think>")[-1].strip()
-
-    if text.startswith("```json"):
-        text = text.replace("```json", "", 1)
-    elif text.startswith("```"):
-        text = text.replace("```", "", 1)
-    if text.endswith("```"):
-        text = text[::-1].replace("```", "", 1)[::-1]
-
-    text = text.strip()
-
-    try:
-        data = json.loads(text)
-        
-        def repair_eval(eval_dict: Any) -> Any:
-            """
-            Description:
-            Repairs common structural anomalies in evaluation dictionaries from the LLM.
-
-            Args:
-                eval_dict (Any): The parsed evaluation dictionary.
-
-            Returns:
-                Any: The repaired dictionary.
-            """
-            if not isinstance(eval_dict, dict):
-                return eval_dict
-            if 'decision' not in eval_dict or eval_dict['decision'] not in ('ACCEPTED', 'REJECTED'):
-                for k, v in list(eval_dict.items()):
-                    if isinstance(v, str) and v.strip().upper() in ('ACCEPTED', 'REJECTED'):
-                        eval_dict['decision'] = v.strip().upper()
-                        if k != 'decision':
-                            del eval_dict[k]
-                        break
-            if 'decision' in eval_dict and isinstance(eval_dict['decision'], str):
-                eval_dict['decision'] = eval_dict['decision'].upper()
-            if 'reason' not in eval_dict or not eval_dict['reason']:
-                for k, v in list(eval_dict.items()):
-                    if k not in ('candidate_name', 'decision') and isinstance(v, str):
-                        eval_dict['reason'] = v
-                        if k != 'reason':
-                            del eval_dict[k]
-                        break
-            return eval_dict
-
-        if isinstance(data, dict):
-            if 'evaluation' in data and isinstance(data['evaluation'], list):
-                data['evaluation'] = [repair_eval(item) for item in data['evaluation']]
-            else:
-                data = repair_eval(data)
-            text = json.dumps(data)
-    except Exception:
-        # Fallback 1: allow literal control characters (bare newlines) inside strings
-        try:
-            data = json.loads(text, strict=False)
-            text = json.dumps(data)
-        except Exception:
-            # Fallback 2: character-level repair of unescaped quotes and bare newlines
-            try:
-                repaired = _repair_unescaped_quotes(text)
-                data = json.loads(repaired, strict=False)
-                text = json.dumps(data)
-            except Exception:
-                pass  # Return the best-effort text and let the downstream parser raise
-
-    return text
+_CONTEXT_LEN_ERR_RE = re.compile(
+    r"maximum context length is (\d+) tokens.*?(\d+) in the messages",
+    flags=re.IGNORECASE | re.DOTALL,
+)
 
 
 
@@ -273,25 +144,20 @@ class TextToOntoGraph:
         self.consensus_runs = consensus_runs
         self.max_concurrency = max_concurrency
 
+        self.reranker = None
         self.reranker_model = None
         self.reranker_tokenizer = None
+        self.reranker_instruction = ""
         if self.threshold_reranker > 0.0:
-            logger.info(f"Loading Reranker Model: {self.reranker_model_name}")
-            self.reranker_tokenizer = AutoTokenizer.from_pretrained(self.reranker_model_name, padding_side='left')
-            self.reranker_model = AutoModelForCausalLM.from_pretrained(
-                self.reranker_model_name, torch_dtype=torch.bfloat16, device_map="auto"
-            ).eval()
-            self.reranker_device = self.reranker_model.device
-            self.token_false_id = self.reranker_tokenizer.convert_tokens_to_ids("no")
-            self.token_true_id = self.reranker_tokenizer.convert_tokens_to_ids("yes")
-            prefix = "<|im_start|>system\nJudge whether the Document meets the requirements based on the Query and the Instruct provided. Note that the answer can only be \"yes\" or \"no\".<|im_end|>\n<|im_start|>user\n"
-            suffix = "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
-            self.reranker_prefix_tokens = self.reranker_tokenizer.encode(prefix, add_special_tokens=False)
-            self.reranker_suffix_tokens = self.reranker_tokenizer.encode(suffix, add_special_tokens=False)
-            # Precompute available space for actual content tokens
-            self._reranker_max_content_len = 1024 - len(self.reranker_prefix_tokens) - len(self.reranker_suffix_tokens)
             with open(reranker_prompt_file, 'r', encoding='utf-8') as f:
                 self.reranker_instruction = f.read().strip()
+            self.reranker = CausalReranker(
+                model_name=self.reranker_model_name,
+                instruction=self.reranker_instruction,
+                batch_size=self.reranker_batch_size,
+            )
+            self.reranker_model = self.reranker.model
+            self.reranker_tokenizer = self.reranker.tokenizer
 
         self.nodes = {}
         self.parent_map = {}
@@ -400,6 +266,104 @@ class TextToOntoGraph:
         """
         if self._input_db_conn:
             self._input_db_conn.close()
+        if getattr(self, "reranker", None) is not None:
+            self.reranker.close()
+
+    def _build_retry_llm(self, llm: Any, error: Exception, retry_idx: int) -> Any:
+        """
+        Adapts sampling or completion limits on retry when thinking hits context bounds or loops.
+        """
+        err_str = str(error)
+        bind_kwargs: Dict[str, Any] = {}
+
+        ctx_match = _CONTEXT_LEN_ERR_RE.search(err_str)
+        if ctx_match:
+            ctx_limit = int(ctx_match.group(1))
+            prompt_tokens = int(ctx_match.group(2))
+            safe_completion = max(512, ctx_limit - prompt_tokens - 64)
+            bind_kwargs["max_tokens"] = safe_completion
+            logger.warning(
+                "Context length %d exceeded by prompt (%d tokens); retrying with max_tokens=%d.",
+                ctx_limit, prompt_tokens, safe_completion,
+            )
+
+        is_truncated_thinking = "finish_reason='length'" in err_str or "exhausted max_tokens" in err_str
+        cur_temp = getattr(llm, "temperature", None)
+        if cur_temp is not None and cur_temp < 0.3:
+            bind_kwargs["temperature"] = min(0.8, 0.6 + 0.1 * retry_idx)
+        elif is_truncated_thinking:
+            bind_kwargs["presence_penalty"] = 1.5
+
+        if is_truncated_thinking and retry_idx == self.max_retries - 1 and retry_idx >= 1:
+            existing_extra = dict(getattr(llm, "extra_body", None) or {})
+            chat_kwargs = dict(existing_extra.get("chat_template_kwargs") or {})
+            if chat_kwargs.get("enable_thinking") is True:
+                chat_kwargs["enable_thinking"] = False
+                existing_extra["chat_template_kwargs"] = chat_kwargs
+                bind_kwargs["extra_body"] = existing_extra
+                logger.warning(
+                    "Thinking repeatedly exhausted token budget on one item; disabling thinking on final retry."
+                )
+
+        return llm.bind(**bind_kwargs) if bind_kwargs else llm
+
+    def _parse_message_with_thinking(self, message: Any, parser: Any = None) -> Tuple[Any, str]:
+        """Extracts `(parsed_or_text, thinking_text)` from a raw LLM message."""
+        thinking, _ = extract_reasoning_and_content(message)
+        cleaned = clean_llm_output(message)
+        parsed = parser.parse(cleaned) if parser is not None else cleaned
+        return parsed, thinking
+
+    def _invoke_batch_with_thinking(
+        self,
+        prompt_template: ChatPromptTemplate,
+        llm: Any,
+        inputs: List[Dict[str, Any]],
+        parser: Any = None,
+        label_fn: Optional[Callable[[int], str]] = None,
+    ) -> List[Any]:
+        """
+        Invokes `prompt_template | llm` concurrently, preserves reasoning traces, and retries
+        parse/truncation/context-length failures per item.
+        """
+        if not inputs:
+            return []
+
+        raw_chain = prompt_template | llm
+        raw_results = raw_chain.batch(
+            inputs,
+            config={"max_concurrency": self.max_concurrency},
+            return_exceptions=True,
+        )
+
+        outputs: List[Any] = [None] * len(inputs)
+        for i, raw_res in enumerate(raw_results):
+            if not isinstance(raw_res, Exception):
+                try:
+                    outputs[i] = self._parse_message_with_thinking(raw_res, parser=parser)
+                    continue
+                except Exception as parse_err:
+                    last_err: Exception = parse_err
+            else:
+                last_err = raw_res
+
+            item_label = label_fn(i) if label_fn else f"Item {i + 1}"
+            for retry in range(self.max_retries):
+                try:
+                    retry_llm = self._build_retry_llm(llm, last_err, retry)
+                    retry_msg = (prompt_template | retry_llm).invoke(inputs[i])
+                    outputs[i] = self._parse_message_with_thinking(retry_msg, parser=parser)
+                    last_err = None
+                    break
+                except Exception as retry_err:
+                    last_err = retry_err
+                    if retry == self.max_retries - 1:
+                        logger.warning(f"{item_label}: All {self.max_retries} retries failed - {retry_err}")
+
+            if last_err is not None:
+                outputs[i] = last_err
+
+        return outputs
 
     def _rerank_candidates(self, description: str, candidates: list) -> list:
         """
@@ -413,54 +377,20 @@ class TextToOntoGraph:
         Returns:
             list: The filtered list of candidates.
         """
-        if self.threshold_reranker <= 0.0 or not candidates or self.reranker_model is None:
+        if self.threshold_reranker <= 0.0 or not candidates or self.reranker is None:
             return candidates
 
-        pairs = []
-        for c in candidates:
-            doc = c['sanitized_name']
-            hierarchy = self.get_breadcrumbs(c['name'])
-            doc = f"{doc}\n<Hierarchy>: {hierarchy}"
-            pair_text = f"<Instruct>: {self.reranker_instruction}\n<Query>: {description}\n<Document>: {doc}"
-            pairs.append(pair_text)
-
-        batch_size = self.reranker_batch_size
-        scores = []
-
-        with self.reranker_lock:
-            with torch.no_grad():
-                for i in range(0, len(pairs), batch_size):
-                    batch_pairs = pairs[i:i+batch_size]
-
-                    inputs = self.reranker_tokenizer(
-                        batch_pairs, padding=False, truncation='longest_first',
-                        return_attention_mask=False, max_length=self._reranker_max_content_len
-                    )
-
-                    for j, ele in enumerate(inputs['input_ids']):
-                        inputs['input_ids'][j] = self.reranker_prefix_tokens + ele + self.reranker_suffix_tokens
-
-                    inputs = self.reranker_tokenizer.pad(
-                        inputs, padding=True, return_tensors="pt"
-                    )
-                    inputs = {k: v.to(self.reranker_device) for k, v in inputs.items()}
-
-                    batch_logits = self.reranker_model(**inputs).logits[:, -1, :]
-                    true_vector = batch_logits[:, self.token_true_id]
-                    false_vector = batch_logits[:, self.token_false_id]
-                    batch_scores = torch.stack([false_vector, true_vector], dim=1)
-                    batch_scores = torch.nn.functional.log_softmax(batch_scores, dim=1)
-                    batch_probs = batch_scores[:, 1].exp().tolist()
-                    scores.extend(batch_probs)
+        pairs = [
+            (description, f"{c['sanitized_name']}\n<Hierarchy>: {self.get_breadcrumbs(c['name'])}")
+            for c in candidates
+        ]
+        scores = self.reranker.score_pairs(pairs, instruction=self.reranker_instruction)
 
         passed_candidates = []
-        rejected_count = 0
         for score, cand in zip(scores, candidates):
             if score >= self.threshold_reranker:
                 cand['rerank_score'] = score
                 passed_candidates.append(cand)
-            else:
-                rejected_count += 1
 
         # Apply top_k_reranker limit if specified
         if self.top_k_reranker is not None and self.top_k_reranker > 0:
@@ -557,18 +487,22 @@ class TextToOntoGraph:
 
         description_analysis = ""
         if self.mode == 1:
-            analysis_chain = self.description_analysis_prompt | llm | self._clean_llm_runner
             try:
-                description_analysis = analysis_chain.invoke({"description": description})
-                if hasattr(description_analysis, 'content'):
-                    description_analysis = description_analysis.content
-                description_analysis = str(description_analysis).strip()
+                analysis_outcomes = self._invoke_batch_with_thinking(
+                    self.description_analysis_prompt,
+                    llm,
+                    [{"description": description}],
+                    parser=None,
+                    label_fn=lambda _: f"Mode 1 description_analysis ('{description}')",
+                )
+                analysis_outcome = analysis_outcomes[0]
+                if isinstance(analysis_outcome, Exception):
+                    raise analysis_outcome
+                description_analysis = str(analysis_outcome[0]).strip()
             except Exception as e:
                 logger.warning(f"Failed to generate specificity analysis: {e}")
                 description_analysis = "Analysis failed or unavailable."
 
-        # Build the evaluation chain (LangChain) dynamically with the provided llm
-        chain = self._mode1_prompt | llm | self._clean_llm_runner | self.parser
         results = {}
         reasoning_trace = []
 
@@ -680,20 +614,15 @@ class TextToOntoGraph:
             if not valid_candidates:
                 break
 
-            batch_results_all = [None] * len(batch_inputs)
+            batch_results_all = []
             if batch_inputs:
-                batch_results_all = chain.batch(batch_inputs, config={"max_concurrency": self.max_concurrency}, return_exceptions=True)
-
-            for i, result in enumerate(batch_results_all):
-                if isinstance(result, Exception):
-                    meta = batch_metadata[i]
-                    for retry in range(self.max_retries):
-                        try:
-                            batch_results_all[i] = chain.invoke(batch_inputs[i])
-                            break
-                        except Exception as retry_e:
-                            if retry == self.max_retries - 1:
-                                logger.warning(f"Node {meta['name']} Run {meta['run_i']+1}: All {self.max_retries} retries failed - {retry_e}")
+                batch_results_all = self._invoke_batch_with_thinking(
+                    self._mode1_prompt,
+                    llm,
+                    batch_inputs,
+                    parser=self.parser,
+                    label_fn=lambda idx: f"Node {batch_metadata[idx]['name']} Run {batch_metadata[idx]['run_i']+1}",
+                )
 
             for result in batch_results_all:
                 if isinstance(result, Exception):
@@ -701,6 +630,7 @@ class TextToOntoGraph:
 
             candidate_votes = {}
             candidate_reasoning = {}
+            candidate_thinking = {}
             for i, meta in enumerate(batch_metadata):
                 name = meta["name"]
                 run_i = meta["run_i"]
@@ -708,15 +638,18 @@ class TextToOntoGraph:
                 if name not in candidate_votes:
                     candidate_votes[name] = 0
                     candidate_reasoning[name] = []
+                    candidate_thinking[name] = []
 
-                result = batch_results_all[i]
-                if isinstance(result, Exception):
+                outcome = batch_results_all[i]
+                if isinstance(outcome, Exception):
                     candidate_reasoning[name].append(f"Run {run_i+1}: Parse error")
-                elif result is not None:
+                elif outcome is not None:
+                    result, thinking_text = outcome
                     if result.decision == 'ACCEPTED':
                         candidate_votes[name] += 1
                     reason_clean = clean_reason(result.reason)
                     candidate_reasoning[name].append(f"Run {run_i+1}: {result.decision} - {reason_clean}")
+                    candidate_thinking[name].append(thinking_text)
                 else:
                     candidate_reasoning[name].append(f"Run {run_i+1}: Error")
 
@@ -726,15 +659,19 @@ class TextToOntoGraph:
                 name = cand['name']
                 yes_votes = candidate_votes.get(name, 0)
                 accumulated_reasoning = candidate_reasoning.get(name, [])
+                accumulated_thinking = candidate_thinking.get(name, [])
                 status = "ACCEPTED" if yes_votes >= threshold else "REJECTED"
 
-                reasoning_trace.append({
+                trace_entry = {
                     "candidate": name,
                     "decision": status,
                     "votes": f"{yes_votes}/{self.consensus_runs}",
                     "source": cand['source'],
                     "runs": accumulated_reasoning
-                })
+                }
+                if any(accumulated_thinking):
+                    trace_entry["thinking_runs"] = accumulated_thinking
+                reasoning_trace.append(trace_entry)
 
                 if yes_votes >= threshold:
                     queue = [name]
@@ -804,9 +741,6 @@ class TextToOntoGraph:
         current_candidates = top_k_candidates
         iteration = 1
 
-        # Build the chain once
-        base_chain = self._mode2_prompt | llm | self._clean_llm_runner | self._mode2_parser
-
         final_selection_with_info = []
 
         while current_candidates:
@@ -846,7 +780,6 @@ class TextToOntoGraph:
 
             candidates_str = "\n".join(candidate_strings)
 
-            chain = base_chain
             threshold = self.consensus_threshold
             candidate_votes = {name: 0 for name in candidate_names}
 
@@ -860,31 +793,28 @@ class TextToOntoGraph:
             ]
 
             try:
-                batch_results = chain.batch(invoke_inputs, config={"max_concurrency": self.max_concurrency}, return_exceptions=True)
-
-                for i, result in enumerate(batch_results):
-                    if isinstance(result, Exception):
-                        for retry in range(self.max_retries):
-                            try:
-                                batch_results[i] = chain.invoke(invoke_inputs[i])
-                                break
-                            except Exception as retry_e:
-                                if retry == self.max_retries - 1:
-                                    logger.warning(f"Mode 2 Iter {iteration} Run {i+1}: All {self.max_retries} retries failed - {retry_e}")
+                batch_results = self._invoke_batch_with_thinking(
+                    self._mode2_prompt,
+                    llm,
+                    invoke_inputs,
+                    parser=self._mode2_parser,
+                    label_fn=lambda idx: f"Mode 2 Iter {iteration} Run {idx+1}",
+                )
 
                 for result in batch_results:
                     if isinstance(result, Exception):
                         raise RuntimeError(f"Failed to parse LLM response in Mode 2 after retries: {result}")
 
                 runs_details = []
-                for run_i, result in enumerate(batch_results):
-                    if isinstance(result, Exception) or result is None:
+                for run_i, outcome in enumerate(batch_results):
+                    if isinstance(outcome, Exception) or outcome is None:
                         runs_details.append({
                             "run": run_i + 1,
-                            "error": str(result) if result is not None else "Unknown error"
+                            "error": str(outcome) if outcome is not None else "Unknown error"
                         })
                         continue
 
+                    result, thinking_text = outcome
                     evals_details = []
                     for ev in result.evaluation:
                         evals_details.append({
@@ -893,12 +823,15 @@ class TextToOntoGraph:
                             "reason": ev.reason
                         })
 
-                    runs_details.append({
+                    run_entry = {
                         "run": run_i + 1,
                         "analysis": result.analysis,
                         "evaluations": evals_details,
                         "selected_candidates": result.selected_candidates
-                    })
+                    }
+                    if thinking_text:
+                        run_entry["thinking"] = thinking_text
+                    runs_details.append(run_entry)
 
                     candidate_name_map = {}
                     for c in candidates:

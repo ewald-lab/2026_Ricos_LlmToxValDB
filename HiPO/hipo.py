@@ -83,8 +83,8 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument("--system_prompt_file", default=None, help="Path to the system prompt text file.")
 
     # --- Execution Logic & Consensus ---
-    parser.add_argument("--mode", type=int, default=1, choices=[1, 2], help="Execution mode: 1 for individual verification, 2 for batch selection.")
-    parser.add_argument("--consensus_runs", type=int, default=3, help="Number of runs for majority voting consensus.")
+    parser.add_argument("--mode", type=int, default=None, choices=[1, 2], help="Execution mode: 1 for individual verification, 2 for batch selection (default: 1 unless set in llm_config).")
+    parser.add_argument("--consensus_runs", type=int, default=None, help="Number of runs for majority voting consensus (default: 3 unless set in llm_config).")
     parser.add_argument("--num_backups", type=int, default=4, help="Number of backups to save during processing (0 to disable).")
     parser.add_argument("--ontology_definitions", action="store_true", default=None, help="Use node definitions from DB in prompts.")
     parser.add_argument("--context_ontology", default="", help="Context information about the ontology to use in prompts.")
@@ -125,6 +125,10 @@ def load_llm_config(args: argparse.Namespace) -> None:
         args.llm_config = str(DEFAULT_CHOICE_LLM_FILE)
 
     if not args.llm_config or not os.path.exists(args.llm_config):
+        if args.mode is None:
+            args.mode = 1
+        if args.consensus_runs is None:
+            args.consensus_runs = 3
         if args.ontology_definitions is None:
             args.ontology_definitions = False
         return
@@ -137,10 +141,10 @@ def load_llm_config(args: argparse.Namespace) -> None:
     if model:
         args.model = model
     
-    if "mode" in best_config:
-        args.mode = best_config["mode"]
-    if "consensus_runs" in best_config:
-        args.consensus_runs = best_config["consensus_runs"]
+    if args.mode is None:
+        args.mode = best_config.get("mode", 1)
+    if args.consensus_runs is None:
+        args.consensus_runs = best_config.get("consensus_runs", 3)
     if args.ontology_definitions is None:
         args.ontology_definitions = best_config.get("ontology_definitions", False)
 
@@ -269,10 +273,12 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
     """
     model_config = {}
     default_model_file = DEFAULT_CONFIG_DIR / "models" / f"{args.model}.json" if args.model else None
+    resolved_from_named_preset = False
     if args.model_config and args.model_config != "placeholder":
         config_path = args.model_config
     elif default_model_file and default_model_file.exists():
         config_path = str(default_model_file)
+        resolved_from_named_preset = True
     else:
         config_path = str(DEFAULT_LLM_CONFIG_FILE)
     if os.path.exists(config_path):
@@ -296,7 +302,9 @@ def init_llm(args: argparse.Namespace) -> Tuple[Any, int]:
         raise ValueError("Either a valid --model_config or --model must be provided.")
 
     model_config.pop("_comment", None)
-    if args.model:
+    # Keep the served model name from a matched preset (e.g. *-thinking.json -> served base model)
+    # unless the user explicitly supplied a separate --model_config.
+    if args.model and not (resolved_from_named_preset and model_config.get("model")):
         model_config["model"] = args.model
 
     max_concurrency = model_config.pop("max_concurrency", 10)

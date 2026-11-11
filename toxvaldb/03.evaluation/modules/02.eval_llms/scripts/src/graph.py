@@ -3,6 +3,8 @@ import sqlite3
 import os
 from functools import lru_cache
 
+from pathlib import Path
+import sys
 from typing import List, Dict, Literal, Any, Optional, Tuple
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
@@ -10,6 +12,11 @@ from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel, Field
 from langchain_core.callbacks import BaseCallbackHandler
 
+_REPO_ROOT = next((p for p in Path(__file__).resolve().parents if (p / "HiPO" / "model").is_dir()), None)
+if _REPO_ROOT and str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from HiPO.model.llm import _repair_unescaped_quotes, clean_llm_output
 from HiPO.src.utils import setup_logging, load_ontology_embeddings
 
 logger = setup_logging()
@@ -79,185 +86,6 @@ class TokenUsageCallbackHandler(BaseCallbackHandler):
         if self.num_calls == 0:
             return 0.0
         return self.completion_tokens / self.num_calls
-
-def _repair_unescaped_quotes(text: str) -> str:
-    """
-    Description:
-    Character-level scanner that escapes unescaped double quotes inside JSON string values.
-    Handles LLM outputs that contain literal double quotes inside string fields.
-
-    Args:
-        text (str): A JSON string that may contain unescaped double quotes inside string values.
-
-    Returns:
-        str: The repaired JSON string.
-    """
-    result = []
-    n = len(text)
-    in_string = False
-    i = 0
-    while i < n:
-        ch = text[i]
-
-        if ch == '\\' and in_string:
-            # Pass through the escape sequence as-is
-            result.append(ch)
-            if i + 1 < n:
-                result.append(text[i + 1])
-                i += 2
-            else:
-                i += 1
-            continue
-
-        if ch == '"':
-            if not in_string:
-                in_string = True
-                result.append(ch)
-            else:
-                # Peek ahead to determine if this quote closes the string or is a literal interior quote.
-                # A closing quote is followed (after optional whitespace) by one of: , } ] :
-                j = i + 1
-                while j < n and text[j] in (' ', '\t', '\r', '\n'):
-                    j += 1
-                next_structural = text[j] if j < n else ''
-                if next_structural in (',', '}', ']', ':'):
-                    in_string = False
-                    result.append(ch)
-                else:
-                    # It's an interior unescaped quote — escape it
-                    result.append('\\"')
-        elif ch == '\n' and in_string:
-            # Escape bare newlines inside string values
-            result.append('\\n')
-        elif ch == '\r' and in_string:
-            result.append('\\r')
-        else:
-            result.append(ch)
-        i += 1
-
-    return "".join(result)
-
-
-def clean_llm_output(message: Any) -> str:
-    """
-    Description:
-    Removes <think> tags, markdown code blocks, and fixes formatting in the LLM's raw response to ensure a valid JSON output.
-
-    Args:
-        message (Any): The raw response message from the LLM.
-
-    Returns:
-        str: The sanitized and formatted JSON string.
-    """
-    import re
-    import json
-    text = message.content if hasattr(message, "content") else str(message)
-
-    # Remove <think> blocks
-    text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
-    if "<think>" in text:
-        text = text.split("<think>")[0].strip()
-
-    text = text.strip()
-
-    # Extract JSON object if surrounded by text
-    start_idx = text.find('{')
-    end_idx = text.rfind('}')
-    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-        text = text[start_idx:end_idx+1]
-
-    # Remove code block markers
-    if text.startswith("```json"):
-        text = text[7:].strip()
-    elif text.startswith("```"):
-        text = text[3:].strip()
-    if text.endswith("```"):
-        text = text[:-3].strip()
-
-    # Remove trailing commas inside JSON objects/arrays
-    text = re.sub(r',\s*([\]}])', r'\1', text)
-
-    def repair_eval(eval_dict: Any) -> Any:
-        """
-        Description:
-        Repairs common structural anomalies in evaluation dictionaries from the LLM.
-
-        Args:
-            eval_dict (Any): The parsed evaluation dictionary.
-
-        Returns:
-            Any: The repaired dictionary.
-        """
-        if not isinstance(eval_dict, dict):
-            return eval_dict
-
-        # 1. If 'decision' is not present or not valid, look for any key whose value is ACCEPTED/REJECTED
-        if 'decision' not in eval_dict or eval_dict['decision'] not in ('ACCEPTED', 'REJECTED'):
-            for k, v in list(eval_dict.items()):
-                if isinstance(v, str) and v.strip().upper() in ('ACCEPTED', 'REJECTED'):
-                    eval_dict['decision'] = v.strip().upper()
-                    if k != 'decision':
-                        del eval_dict[k]
-                    break
-
-        # 2. If 'decision' is still not found/valid, try to extract it from the 'reason' or other string values starting with ACCEPTED/REJECTED
-        if 'decision' not in eval_dict or eval_dict['decision'] not in ('ACCEPTED', 'REJECTED'):
-            reason = eval_dict.get('reason', '')
-            if isinstance(reason, str):
-                reason_upper = reason.upper().strip()
-                if reason_upper.startswith("ACCEPTED"):
-                    eval_dict['decision'] = "ACCEPTED"
-                    eval_dict['reason'] = re.sub(r'^accepted[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-                elif reason_upper.startswith("REJECTED"):
-                    eval_dict['decision'] = "REJECTED"
-                    eval_dict['reason'] = re.sub(r'^rejected[\s.,:-]*', '', reason, flags=re.IGNORECASE).strip()
-
-        # Normalize decision value to uppercase
-        if 'decision' in eval_dict and isinstance(eval_dict['decision'], str):
-            eval_dict['decision'] = eval_dict['decision'].upper()
-
-        # 3. If 'reason' is not present or empty, try to populate it from any other string field
-        if 'reason' not in eval_dict or not eval_dict['reason']:
-            for k, v in list(eval_dict.items()):
-                if k not in ('candidate_name', 'decision') and isinstance(v, str):
-                    eval_dict['reason'] = v
-                    if k != 'reason':
-                        del eval_dict[k]
-                    break
-        return eval_dict
-
-    try:
-        data = json.loads(text)
-        if isinstance(data, dict):
-            if "evaluation" in data and isinstance(data["evaluation"], list):
-                data["evaluation"] = [repair_eval(item) for item in data["evaluation"]]
-            else:
-                data = repair_eval(data)
-        return json.dumps(data, indent=2, ensure_ascii=False)
-    except Exception:
-        # Fallback 1: allow literal control characters (bare newlines) inside strings
-        try:
-            data = json.loads(text, strict=False)
-            if isinstance(data, dict):
-                if "evaluation" in data and isinstance(data["evaluation"], list):
-                    data["evaluation"] = [repair_eval(item) for item in data["evaluation"]]
-                else:
-                    data = repair_eval(data)
-            return json.dumps(data, indent=2, ensure_ascii=False)
-        except Exception:
-            # Fallback 2: character-level repair of unescaped quotes and bare newlines
-            try:
-                repaired = _repair_unescaped_quotes(text)
-                data = json.loads(repaired, strict=False)
-                if isinstance(data, dict):
-                    if "evaluation" in data and isinstance(data["evaluation"], list):
-                        data["evaluation"] = [repair_eval(item) for item in data["evaluation"]]
-                    else:
-                        data = repair_eval(data)
-                return json.dumps(data, indent=2, ensure_ascii=False)
-            except Exception:
-                return text.strip()
-
 
 def clean_reason(reason: str) -> str:
     """
