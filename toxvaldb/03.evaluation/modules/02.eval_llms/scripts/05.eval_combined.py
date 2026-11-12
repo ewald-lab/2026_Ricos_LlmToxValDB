@@ -1657,14 +1657,14 @@ def main() -> None:
             )
 
             # ── Figure 2: 2 rows x 3 columns (A-F) Combined Summary ─────────────────
-            fig_summary = plt.figure(figsize=(24, 13), constrained_layout=False)
+            fig_summary = plt.figure(figsize=(24, 15.5), constrained_layout=False)
             gs_summary = fig_summary.add_gridspec(
                 2,
                 3,
-                width_ratios=[1.0, 1.1, 1.1],
-                height_ratios=[1.15, 1.0],
-                hspace=0.35,
-                wspace=0.22,
+                width_ratios=[0.95, 1.15, 1.15],
+                height_ratios=[1.25, 1.0],
+                hspace=0.56,
+                wspace=0.24,
             )
 
             # Row 1, Col 0: Panel A (Old 2B - Pairwise Jaccard Boxplot)
@@ -1682,7 +1682,7 @@ def main() -> None:
 
             # Row 1, Col 1: Panel B (Old 2C - Hierarchical Clustering Dendrogram)
             ax_heatmap = fig_summary.add_subplot(gs_summary[0, 1])
-            dendrogram_tick_size = 11.5
+            dendrogram_tick_size = 11
             dendrogram(
                 Z,
                 labels=pairwise_cleaned_names,
@@ -1737,7 +1737,7 @@ def main() -> None:
             ax_depth.set_ylabel("Mean Max Depth", fontsize=axis_label_fontsize)
             ax_depth.yaxis.set_label_coords(-0.06, 0.5)
             ax_depth.set_xlabel("")
-            ax_depth.tick_params(axis="x", rotation=90, labelsize=11.5)
+            ax_depth.tick_params(axis="x", rotation=90, labelsize=11)
 
             if ax_depth.get_legend():
                 ax_depth.get_legend().remove()
