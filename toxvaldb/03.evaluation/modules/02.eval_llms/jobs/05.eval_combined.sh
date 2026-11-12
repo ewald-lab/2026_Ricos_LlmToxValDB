@@ -75,8 +75,7 @@ python3 "${MODULE_ROOT}/scripts/05.eval_combined.py" \
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"
 echo "  - term_variability_pattern_summary.png (Figure 2: A-F)"
-echo "  - figure_2_combined.png (Figure 2 alias)"
-echo "  - supplementary_figure_8_pearson_scatterplot.png (Supplementary Figure 8)"
+echo "  - supplementary_figure_8.png (Supplementary Figure 8)"
 echo "  - term_variability_pattern_summary_c.png"
 echo "  - model_comparison_table.png"
 echo "  - speedup_comparison_table.png"

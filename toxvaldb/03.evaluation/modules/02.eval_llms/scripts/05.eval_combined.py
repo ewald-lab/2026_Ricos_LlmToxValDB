@@ -1639,22 +1639,15 @@ def main() -> None:
             ax_supp = fig_supp.add_subplot(1, 1, 1)
             plot_panel_a(ax_supp)
             fig_supp.subplots_adjust(left=0.14, right=0.96, top=0.92, bottom=0.14)
-            for supp_filename in [
-                "supplementary_figure_8_pearson_scatterplot.png",
-                "supplementary_figure_8.png",
-                "term_variability_pattern_summary_a.png",
-            ]:
-                fig_supp.savefig(
-                    os.path.join(args.output_dir, supp_filename),
-                    dpi=300,
-                    bbox_inches="tight",
-                    pad_inches=0.18,
-                )
-            plt.close(fig_supp)
-            print(
-                "Supplementary Figure 8 (old Panel A scatterplot) saved to: "
-                f"{os.path.join(args.output_dir, 'supplementary_figure_8_pearson_scatterplot.png')}"
+            supp_out_path = os.path.join(args.output_dir, "supplementary_figure_8.png")
+            fig_supp.savefig(
+                supp_out_path,
+                dpi=300,
+                bbox_inches="tight",
+                pad_inches=0.18,
             )
+            plt.close(fig_supp)
+            print(f"Supplementary Figure 8 (Pearson scatterplot) saved to: {supp_out_path}")
 
             # ── Figure 2: 2 rows x 3 columns (A-F) Combined Summary ─────────────────
             fig_summary = plt.figure(figsize=(24, 15.5), constrained_layout=False)
@@ -1771,23 +1764,15 @@ def main() -> None:
             add_panel_label(ax_cons, "F")
 
             fig_summary.subplots_adjust(left=0.065, right=0.965, top=0.965, bottom=0.10)
+            fig2_out_path = os.path.join(args.output_dir, "term_variability_pattern_summary.png")
             fig_summary.savefig(
-                os.path.join(args.output_dir, "term_variability_pattern_summary.png"),
-                dpi=300,
-                bbox_inches="tight",
-                pad_inches=0.18,
-            )
-            fig_summary.savefig(
-                os.path.join(args.output_dir, "figure_2_combined.png"),
+                fig2_out_path,
                 dpi=300,
                 bbox_inches="tight",
                 pad_inches=0.18,
             )
             plt.close(fig_summary)
-            print(
-                "Paper-ready Figure 2 (6 panels A-F) saved to: "
-                f"{os.path.join(args.output_dir, 'term_variability_pattern_summary.png')}"
-            )
+            print(f"Paper-ready Figure 2 (6 panels A-F) saved to: {fig2_out_path}")
         
     except Exception as e:
         print(f"Error generating term_variability_comparison.png: {e}")
