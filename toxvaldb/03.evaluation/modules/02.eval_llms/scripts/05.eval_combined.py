@@ -1473,34 +1473,216 @@ def main() -> None:
             condensed_dist = squareform(dist_matrix)
             Z = linkage(condensed_dist, method="average")
 
-            fig_summary = plt.figure(figsize=(17, 14), constrained_layout=False)
+            def draw_decision_bracket(ax, x1, x2, y, h, p_val):
+                ax.plot([x1, x1, x2, x2], [y, y + h, y + h, y], lw=1.2, color="black")
+                ax.text((x1 + x2) / 2, y + h + 0.005, get_asterisks(p_val), ha="center", va="bottom", color="black", fontsize=11, fontweight="bold")
+
+            def plot_decision_defs(ax, df, y_label="F1 vs Human Consensus Reference"):
+                try:
+                    pivot_defs = df.pivot(
+                        index=["Model", "Mode", "Consensus"],
+                        columns="Definitions",
+                        values="F1",
+                    ).dropna()
+
+                    if len(pivot_defs) >= 2:
+                        stat_res = stats.ttest_rel(pivot_defs["With Defs"], pivot_defs["No Defs"])
+                        p_val = stat_res.pvalue
+                    else:
+                        p_val = np.nan
+
+                    sns.boxplot(
+                        data=df,
+                        x="Definitions",
+                        y="F1",
+                        order=["With Defs", "No Defs"],
+                        ax=ax,
+                        palette={"No Defs": "#ff7f0e", "With Defs": "#1f77b4"},
+                        width=0.4,
+                        boxprops=dict(alpha=0.6),
+                        showfliers=False,
+                    )
+                    sns.stripplot(
+                        data=df,
+                        x="Definitions",
+                        y="F1",
+                        order=["With Defs", "No Defs"],
+                        ax=ax,
+                        color="black",
+                        alpha=0.5,
+                        size=6,
+                        jitter=0.1,
+                    )
+                    if pd.notna(p_val):
+                        draw_decision_bracket(ax, 0, 1, 1.03, 0.02, p_val)
+                    ax.set_title("")
+                    ax.set_ylabel(y_label, fontsize=13)
+                    ax.set_xlabel("Configuration", fontsize=13)
+                    ax.set_ylim(-0.05, 1.18)
+                    ax.set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+                    ax.grid(False)
+                except Exception as e:
+                    print(f"Error in plot_decision_defs: {e}")
+
+            def plot_decision_mode(ax, df, y_label="F1 vs Human Consensus Reference"):
+                try:
+                    pivot_mode = df.pivot(
+                        index=["Model", "Definitions", "Consensus"],
+                        columns="Mode",
+                        values="F1",
+                    ).dropna()
+
+                    if len(pivot_mode) >= 2:
+                        stat_res = stats.ttest_rel(pivot_mode["Single-Term"], pivot_mode["Batched"])
+                        p_val = stat_res.pvalue
+                    else:
+                        p_val = np.nan
+
+                    sns.boxplot(
+                        data=df,
+                        x="Mode",
+                        y="F1",
+                        order=["Batched", "Single-Term"],
+                        ax=ax,
+                        palette={"Single-Term": "#ff7f0e", "Batched": "#1f77b4"},
+                        width=0.4,
+                        boxprops=dict(alpha=0.6),
+                        showfliers=False,
+                    )
+                    sns.stripplot(
+                        data=df,
+                        x="Mode",
+                        y="F1",
+                        order=["Batched", "Single-Term"],
+                        ax=ax,
+                        color="black",
+                        alpha=0.5,
+                        size=6,
+                        jitter=0.1,
+                    )
+                    if pd.notna(p_val):
+                        draw_decision_bracket(ax, 0, 1, 1.03, 0.02, p_val)
+                    ax.set_title("")
+                    ax.set_ylabel(y_label, fontsize=13)
+                    ax.set_xlabel("Configuration", fontsize=13)
+                    ax.set_ylim(-0.05, 1.18)
+                    ax.set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+                    ax.grid(False)
+                except Exception as e:
+                    print(f"Error in plot_decision_mode: {e}")
+
+            def plot_decision_consensus(ax, df, y_label="F1 vs Human Consensus Reference", show_legend=True):
+                try:
+                    pivot_cons = df.pivot(
+                        index=["Model", "Mode", "Definitions"],
+                        columns="Consensus",
+                        values="F1",
+                    ).dropna()
+
+                    consensus_values = sorted(pivot_cons.columns.tolist())
+                    if len(consensus_values) >= 2 and all(c in pivot_cons.columns for c in consensus_values):
+                        try:
+                            stat_res = stats.friedmanchisquare(*[pivot_cons[c] for c in consensus_values])
+                            p_val = stat_res.pvalue
+                        except Exception:
+                            p_val = np.nan
+                    else:
+                        p_val = np.nan
+
+                    sns.boxplot(
+                        data=df,
+                        x="Consensus",
+                        y="F1",
+                        order=consensus_values,
+                        ax=ax,
+                        width=0.5,
+                        boxprops=dict(alpha=0.6),
+                        showfliers=False,
+                    )
+                    sns.stripplot(
+                        data=df,
+                        x="Consensus",
+                        y="F1",
+                        order=consensus_values,
+                        ax=ax,
+                        color="black",
+                        alpha=0.5,
+                        size=6,
+                        jitter=0.1,
+                    )
+                    if pd.notna(p_val):
+                        draw_decision_bracket(ax, 0, len(consensus_values) - 1, 1.03, 0.02, p_val)
+
+                    ax.set_title("")
+                    ax.set_ylabel(y_label, fontsize=13)
+                    ax.set_xlabel("Number of Runs", fontsize=13)
+                    ax.set_ylim(-0.05, 1.18)
+                    ax.set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+                    ax.grid(False)
+
+                    if show_legend:
+                        ax.text(
+                            1.03,
+                            0.98,
+                            "* p < 0.05\n** p < 0.01\n*** p < 0.001\nns: not significant",
+                            transform=ax.transAxes,
+                            fontsize=10,
+                            va="top",
+                            ha="left",
+                            bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor="0.7", alpha=0.9),
+                        )
+                except Exception as e:
+                    print(f"Error in plot_decision_consensus: {e}")
+
+            # ── Supplementary Figure 8: Standalone Panel A (Pearson r Scatterplot) ──
+            fig_supp = plt.figure(figsize=(6.5, 6))
+            ax_supp = fig_supp.add_subplot(1, 1, 1)
+            plot_panel_a(ax_supp)
+            fig_supp.subplots_adjust(left=0.14, right=0.96, top=0.92, bottom=0.14)
+            for supp_filename in [
+                "supplementary_figure_8_pearson_scatterplot.png",
+                "supplementary_figure_8.png",
+                "term_variability_pattern_summary_a.png",
+            ]:
+                fig_supp.savefig(
+                    os.path.join(args.output_dir, supp_filename),
+                    dpi=300,
+                    bbox_inches="tight",
+                    pad_inches=0.18,
+                )
+            plt.close(fig_supp)
+            print(
+                "Supplementary Figure 8 (old Panel A scatterplot) saved to: "
+                f"{os.path.join(args.output_dir, 'supplementary_figure_8_pearson_scatterplot.png')}"
+            )
+
+            # ── Figure 2: 2 rows x 3 columns (A-F) Combined Summary ─────────────────
+            fig_summary = plt.figure(figsize=(24, 13), constrained_layout=False)
             gs_summary = fig_summary.add_gridspec(
                 2,
-                2,
-                width_ratios=[1.0, 1.0],
-                height_ratios=[1.0, 1.05],
-                hspace=0.22,
-                wspace=0.16,
+                3,
+                width_ratios=[1.0, 1.1, 1.1],
+                height_ratios=[1.15, 1.0],
+                hspace=0.35,
+                wspace=0.22,
             )
-            ax_scatter = fig_summary.add_subplot(gs_summary[0, 0])
-            gs_b_summary = gridspec.GridSpecFromSubplotSpec(
+
+            # Row 1, Col 0: Panel A (Old 2B - Pairwise Jaccard Boxplot)
+            gs_a_summary = gridspec.GridSpecFromSubplotSpec(
                 1,
                 2,
-                subplot_spec=gs_summary[0, 1],
+                subplot_spec=gs_summary[0, 0],
                 width_ratios=[0.88, 0.12],
                 wspace=0.01,
             )
-            ax_dist = fig_summary.add_subplot(gs_b_summary[0, 0])
-            ax_dist_legend = fig_summary.add_subplot(gs_b_summary[0, 1])
-            ax_heatmap = fig_summary.add_subplot(gs_summary[1, 0])
-            gs_inner = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gs_summary[1, 1], hspace=0.08)
-            ax_terms = fig_summary.add_subplot(gs_inner[0])
-            ax_depth = fig_summary.add_subplot(gs_inner[1])
-
-            plot_panel_a(ax_scatter)
+            ax_dist = fig_summary.add_subplot(gs_a_summary[0, 0])
+            ax_dist_legend = fig_summary.add_subplot(gs_a_summary[0, 1])
             plot_panel_b(ax_dist, legend_ax=ax_dist_legend)
+            add_panel_label(ax_dist, "A")
 
-            dendrogram_tick_size = 13
+            # Row 1, Col 1: Panel B (Old 2C - Hierarchical Clustering Dendrogram)
+            ax_heatmap = fig_summary.add_subplot(gs_summary[0, 1])
+            dendrogram_tick_size = 11.5
             dendrogram(
                 Z,
                 labels=pairwise_cleaned_names,
@@ -1509,9 +1691,9 @@ def main() -> None:
                 color_threshold=0,
                 link_color_func=lambda _: "black",
                 above_threshold_color="black",
-                ax=ax_heatmap
+                ax=ax_heatmap,
             )
-            ax_heatmap.set_ylabel("Distance")
+            ax_heatmap.set_ylabel("Distance", fontsize=axis_label_fontsize)
             ax_heatmap.set_yticks([0.0, 0.5, 1.0])
 
             for label in ax_heatmap.get_xticklabels():
@@ -1521,6 +1703,12 @@ def main() -> None:
 
             ax_heatmap.spines["top"].set_visible(False)
             ax_heatmap.spines["right"].set_visible(False)
+            add_panel_label(ax_heatmap, "B")
+
+            # Row 1, Col 2: Panel C (Old 2D - Mean No. of Terms & Mean Max Depth Bars)
+            gs_inner = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gs_summary[0, 2], hspace=0.08)
+            ax_terms = fig_summary.add_subplot(gs_inner[0])
+            ax_depth = fig_summary.add_subplot(gs_inner[1])
 
             sns.barplot(
                 data=metrics_df,
@@ -1530,14 +1718,14 @@ def main() -> None:
                 palette={"Human Expert": "#4C78A8", "LLM": "#EA4335"},
                 ax=ax_terms,
             )
-            ax_terms.set_ylabel("Mean No. of Terms", fontsize=15)
-            ax_terms.yaxis.set_label_coords(-0.045, 0.5)
+            ax_terms.set_ylabel("Mean No. of Terms", fontsize=axis_label_fontsize)
+            ax_terms.yaxis.set_label_coords(-0.06, 0.5)
             ax_terms.set_xlabel("")
             ax_terms.set_xticks([])
-            
+
             if ax_terms.get_legend():
                 ax_terms.get_legend().remove()
-                
+
             sns.barplot(
                 data=metrics_df,
                 x="Entity",
@@ -1546,34 +1734,58 @@ def main() -> None:
                 palette={"Human Expert": "#4C78A8", "LLM": "#EA4335"},
                 ax=ax_depth,
             )
-            ax_depth.set_ylabel("Mean Max Depth", fontsize=15)
-            ax_depth.yaxis.set_label_coords(-0.045, 0.5)
+            ax_depth.set_ylabel("Mean Max Depth", fontsize=axis_label_fontsize)
+            ax_depth.yaxis.set_label_coords(-0.06, 0.5)
             ax_depth.set_xlabel("")
-            ax_depth.tick_params(axis='x', rotation=90, labelsize=13)
-            
+            ax_depth.tick_params(axis="x", rotation=90, labelsize=11.5)
+
             if ax_depth.get_legend():
                 ax_depth.get_legend().remove()
-                
+
             for label in ax_depth.get_xticklabels():
                 if label.get_text() in human_clean_names:
                     label.set_color("black")
                     label.set_fontweight("bold")
 
-            add_panel_label(ax_scatter, "A")
-            add_panel_label(ax_dist, "B", x=-0.115)
-            add_panel_label(ax_heatmap, "C")
-            add_panel_label(ax_terms, "D", x=-0.085, y=1.085)
+            add_panel_label(ax_terms, "C", x=-0.085, y=1.085)
 
-            fig_summary.subplots_adjust(left=0.075, right=0.975, top=0.965, bottom=0.18)
+            # Row 2 (Bottom - Ablation of parameters vs human consensus):
+            # Col 0: Panel D (Old 3 left - With Defs vs No Defs)
+            ax_defs = fig_summary.add_subplot(gs_summary[1, 0])
+            # Col 1: Panel E (Old 3 center - Batched vs Single-Term)
+            ax_mode = fig_summary.add_subplot(gs_summary[1, 1])
+            # Col 2: Panel F (Old 3 right - Number of Runs: 1, 3, 5, 10)
+            ax_cons = fig_summary.add_subplot(gs_summary[1, 2])
+
+            if not llm_perf_df.empty:
+                plot_decision_defs(ax_defs, llm_perf_df)
+                plot_decision_mode(ax_mode, llm_perf_df)
+                plot_decision_consensus(ax_cons, llm_perf_df, show_legend=True)
+            else:
+                ax_defs.text(0.5, 0.5, "LLM performance data not available", ha="center", va="center")
+                ax_mode.text(0.5, 0.5, "LLM performance data not available", ha="center", va="center")
+                ax_cons.text(0.5, 0.5, "LLM performance data not available", ha="center", va="center")
+
+            add_panel_label(ax_defs, "D")
+            add_panel_label(ax_mode, "E")
+            add_panel_label(ax_cons, "F")
+
+            fig_summary.subplots_adjust(left=0.065, right=0.965, top=0.965, bottom=0.10)
             fig_summary.savefig(
                 os.path.join(args.output_dir, "term_variability_pattern_summary.png"),
                 dpi=300,
                 bbox_inches="tight",
                 pad_inches=0.18,
             )
+            fig_summary.savefig(
+                os.path.join(args.output_dir, "figure_2_combined.png"),
+                dpi=300,
+                bbox_inches="tight",
+                pad_inches=0.18,
+            )
             plt.close(fig_summary)
             print(
-                "Paper-ready term variability summary panels A-D saved to: "
+                "Paper-ready Figure 2 (6 panels A-F) saved to: "
                 f"{os.path.join(args.output_dir, 'term_variability_pattern_summary.png')}"
             )
         
@@ -2131,171 +2343,10 @@ def main() -> None:
 
             def generate_decision_plots(df, target_dir, title_suffix=""):
                 os.makedirs(target_dir, exist_ok=True)
-
                 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-                y_label = "F1 vs Human Consensus Reference"
-
-                def draw_decision_bracket(ax, x1, x2, y, h, p_val):
-                    ax.plot([x1, x1, x2, x2], [y, y+h, y+h, y], lw=1.2, color='black')
-                    ax.text((x1+x2)/2, y+h+0.005, get_asterisks(p_val), ha='center', va='bottom', color='black', fontsize=11, fontweight='bold')
-
-                # 1. Definitions Impact Analysis
-                try:
-                    pivot_defs = df.pivot(
-                        index=["Model", "Mode", "Consensus"],
-                        columns="Definitions",
-                        values="F1"
-                    ).dropna()
-
-                    if len(pivot_defs) >= 2:
-                        stat_res = stats.ttest_rel(pivot_defs["With Defs"], pivot_defs["No Defs"])
-                        p_val = stat_res.pvalue
-                        stat_name = "Paired t-test"
-                    else:
-                        p_val = np.nan
-                        stat_name = "N/A"
-
-                    sns.boxplot(
-                        data=df,
-                        x="Definitions",
-                        y="F1",
-                        ax=axes[0],
-                        palette={"No Defs": "#ff7f0e", "With Defs": "#1f77b4"},
-                        width=0.4,
-                        boxprops=dict(alpha=0.6),
-                        showfliers=False
-                    )
-                    sns.stripplot(
-                        data=df,
-                        x="Definitions",
-                        y="F1",
-                        ax=axes[0],
-                        color="black",
-                        alpha=0.5,
-                        size=6,
-                        jitter=0.1
-                    )
-                    if pd.notna(p_val):
-                        draw_decision_bracket(axes[0], 0, 1, 1.03, 0.02, p_val)
-                    axes[0].set_title("")
-                    axes[0].set_ylabel(y_label, fontsize=12)
-                    axes[0].set_xlabel("Configuration", fontsize=12)
-                    axes[0].set_ylim(-0.05, 1.18)
-                    axes[0].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
-                    axes[0].grid(False)
-                except Exception as e:
-                    print(f"Error generating definitions plot in {target_dir}: {e}")
-
-                # 2. Mode Impact Analysis
-                try:
-                    pivot_mode = df.pivot(
-                        index=["Model", "Definitions", "Consensus"],
-                        columns="Mode",
-                        values="F1"
-                    ).dropna()
-
-                    if len(pivot_mode) >= 2:
-                        stat_res = stats.ttest_rel(pivot_mode["Single-Term"], pivot_mode["Batched"])
-                        p_val = stat_res.pvalue
-                        stat_name = "Paired t-test"
-                    else:
-                        p_val = np.nan
-                        stat_name = "N/A"
-
-                    sns.boxplot(
-                        data=df,
-                        x="Mode",
-                        y="F1",
-                        ax=axes[1],
-                        palette={"Single-Term": "#ff7f0e", "Batched": "#1f77b4"},
-                        width=0.4,
-                        boxprops=dict(alpha=0.6),
-                        showfliers=False
-                    )
-                    sns.stripplot(
-                        data=df,
-                        x="Mode",
-                        y="F1",
-                        ax=axes[1],
-                        color="black",
-                        alpha=0.5,
-                        size=6,
-                        jitter=0.1
-                    )
-                    if pd.notna(p_val):
-                        draw_decision_bracket(axes[1], 0, 1, 1.03, 0.02, p_val)
-                    axes[1].set_title("")
-                    axes[1].set_ylabel(y_label, fontsize=12)
-                    axes[1].set_xlabel("Configuration", fontsize=12)
-                    axes[1].set_ylim(-0.05, 1.18)
-                    axes[1].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
-                    axes[1].grid(False)
-                except Exception as e:
-                    print(f"Error generating mode plot in {target_dir}: {e}")
-
-                # 3. Consensus Impact Analysis
-                try:
-                    pivot_cons = df.pivot(
-                        index=["Model", "Mode", "Definitions"],
-                        columns="Consensus",
-                        values="F1"
-                    ).dropna()
-
-                    consensus_values = sorted(pivot_cons.columns.tolist())
-                    if len(consensus_values) >= 2 and all(c in pivot_cons.columns for c in consensus_values):
-                        try:
-                            stat_res = stats.friedmanchisquare(*[pivot_cons[c] for c in consensus_values])
-                            p_val = stat_res.pvalue
-                            stat_name = "Friedman test"
-                        except Exception:
-                            p_val = np.nan
-                            stat_name = "N/A"
-                    else:
-                        p_val = np.nan
-                        stat_name = "N/A"
-
-                    sns.boxplot(
-                        data=df,
-                        x="Consensus",
-                        y="F1",
-                        ax=axes[2],
-                        width=0.5,
-                        boxprops=dict(alpha=0.6),
-                        showfliers=False
-                    )
-                    sns.stripplot(
-                        data=df,
-                        x="Consensus",
-                        y="F1",
-                        ax=axes[2],
-                        color="black",
-                        alpha=0.5,
-                        size=6,
-                        jitter=0.1
-                    )
-                    if pd.notna(p_val):
-                        draw_decision_bracket(axes[2], 0, len(consensus_values)-1, 1.03, 0.02, p_val)
-
-                    axes[2].set_title("")
-                    axes[2].set_ylabel(y_label, fontsize=12)
-                    axes[2].set_xlabel("Number of Runs", fontsize=12)
-                    axes[2].set_ylim(-0.05, 1.18)
-                    axes[2].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
-                    axes[2].grid(False)
-
-                    # Significance legend box placed cleanly outside to the right, including ns
-                    axes[2].text(
-                        1.03, 0.98,
-                        "* p < 0.05\n** p < 0.01\n*** p < 0.001\nns: not significant",
-                        transform=axes[2].transAxes,
-                        fontsize=10,
-                        va="top",
-                        ha="left",
-                        bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor="0.7", alpha=0.9),
-                    )
-                except Exception as e:
-                    print(f"Error generating consensus plot in {target_dir}: {e}")
-
+                plot_decision_defs(axes[0], df)
+                plot_decision_mode(axes[1], df)
+                plot_decision_consensus(axes[2], df, show_legend=True)
                 plt.tight_layout()
                 plt.savefig(os.path.join(target_dir, "combined_impact.png"), dpi=300, bbox_inches="tight")
                 plt.close()
