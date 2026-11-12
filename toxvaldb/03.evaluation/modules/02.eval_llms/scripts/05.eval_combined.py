@@ -1649,18 +1649,16 @@ def main() -> None:
             plt.close(fig_supp)
             print(f"Supplementary Figure 8 (Pearson scatterplot) saved to: {supp_out_path}")
 
-            # ── Figure 2: 2 rows x 3 columns (A-F) Combined Summary ─────────────────
-            fig_summary = plt.figure(figsize=(24, 15.5), constrained_layout=False)
+            # ── Figure 2: 1 row x 3 columns (A-C) Summary ───────────────────────────
+            fig_summary = plt.figure(figsize=(24, 7.8), constrained_layout=False)
             gs_summary = fig_summary.add_gridspec(
-                2,
+                1,
                 3,
                 width_ratios=[0.95, 1.15, 1.15],
-                height_ratios=[1.25, 1.0],
-                hspace=0.56,
                 wspace=0.24,
             )
 
-            # Row 1, Col 0: Panel A (Old 2B - Pairwise Jaccard Boxplot)
+            # Col 0: Panel A (Pairwise Jaccard Boxplot)
             gs_a_summary = gridspec.GridSpecFromSubplotSpec(
                 1,
                 2,
@@ -1673,7 +1671,7 @@ def main() -> None:
             plot_panel_b(ax_dist, legend_ax=ax_dist_legend)
             add_panel_label(ax_dist, "A")
 
-            # Row 1, Col 1: Panel B (Old 2C - Hierarchical Clustering Dendrogram)
+            # Col 1: Panel B (Hierarchical Clustering Dendrogram)
             ax_heatmap = fig_summary.add_subplot(gs_summary[0, 1])
             dendrogram_tick_size = 11
             dendrogram(
@@ -1698,7 +1696,7 @@ def main() -> None:
             ax_heatmap.spines["right"].set_visible(False)
             add_panel_label(ax_heatmap, "B")
 
-            # Row 1, Col 2: Panel C (Old 2D - Mean No. of Terms & Mean Max Depth Bars)
+            # Col 2: Panel C (Mean No. of Terms & Mean Max Depth Bars)
             gs_inner = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gs_summary[0, 2], hspace=0.08)
             ax_terms = fig_summary.add_subplot(gs_inner[0])
             ax_depth = fig_summary.add_subplot(gs_inner[1])
@@ -1742,28 +1740,7 @@ def main() -> None:
 
             add_panel_label(ax_terms, "C", x=-0.085, y=1.085)
 
-            # Row 2 (Bottom - Ablation of parameters vs human consensus):
-            # Col 0: Panel D (Old 3 left - With Defs vs No Defs)
-            ax_defs = fig_summary.add_subplot(gs_summary[1, 0])
-            # Col 1: Panel E (Old 3 center - Batched vs Single-Term)
-            ax_mode = fig_summary.add_subplot(gs_summary[1, 1])
-            # Col 2: Panel F (Old 3 right - Number of Runs: 1, 3, 5, 10)
-            ax_cons = fig_summary.add_subplot(gs_summary[1, 2])
-
-            if not llm_perf_df.empty:
-                plot_decision_defs(ax_defs, llm_perf_df)
-                plot_decision_mode(ax_mode, llm_perf_df)
-                plot_decision_consensus(ax_cons, llm_perf_df, show_legend=True)
-            else:
-                ax_defs.text(0.5, 0.5, "LLM performance data not available", ha="center", va="center")
-                ax_mode.text(0.5, 0.5, "LLM performance data not available", ha="center", va="center")
-                ax_cons.text(0.5, 0.5, "LLM performance data not available", ha="center", va="center")
-
-            add_panel_label(ax_defs, "D")
-            add_panel_label(ax_mode, "E")
-            add_panel_label(ax_cons, "F")
-
-            fig_summary.subplots_adjust(left=0.065, right=0.965, top=0.965, bottom=0.10)
+            fig_summary.subplots_adjust(left=0.065, right=0.965, top=0.92, bottom=0.28)
             fig2_out_path = os.path.join(args.output_dir, "term_variability_pattern_summary.png")
             fig_summary.savefig(
                 fig2_out_path,
@@ -1772,7 +1749,7 @@ def main() -> None:
                 pad_inches=0.18,
             )
             plt.close(fig_summary)
-            print(f"Paper-ready Figure 2 (6 panels A-F) saved to: {fig2_out_path}")
+            print(f"Paper-ready Figure 2 (3 panels A-C) saved to: {fig2_out_path}")
         
     except Exception as e:
         print(f"Error generating term_variability_comparison.png: {e}")
@@ -2094,99 +2071,116 @@ def main() -> None:
                     6: r["Avg Tokens"]
                 }
 
-            fig, ax = plt.subplots(figsize=(18, 5.0))
-            ax.axis('off')
-
+            # --- Render and Save Model Comparison Table and Combined Figure 3 ---
             col_labels = [
                 "", "Model", "Precision (Mean ± Std)", "Recall (Mean ± Std)", "F1 Score (Mean ± Std)",
                 "Jaccard Overlap (Mean ± Std)",
                 "Avg Tokens", "GPU Requirements"
             ]
-
             col_widths = [0.035, 0.22, 0.12, 0.12, 0.12, 0.15, 0.08, 0.12]
 
-            table = ax.table(
-                cellText=table_data,
-                colLabels=col_labels,
-                colWidths=col_widths,
-                cellLoc='center',
-                loc='upper center'
-            )
+            def render_model_table(target_ax, target_fig, font_size=10, row_scale=2.2):
+                target_ax.axis('off')
+                tbl = target_ax.table(
+                    cellText=table_data,
+                    colLabels=col_labels,
+                    colWidths=col_widths,
+                    cellLoc='center',
+                    loc='upper center'
+                )
+                tbl.auto_set_font_size(False)
+                tbl.set_fontsize(font_size)
+                tbl.scale(1.0, row_scale)
 
-            table.auto_set_font_size(False)
-            table.set_fontsize(10)
-            table.scale(1.0, 2.2)
-
-            for (row_idx, col_idx), cell in table.get_celld().items():
-                if row_idx == 0:
-                    cell.set_text_props(weight='bold', color='white')
-                    cell.set_facecolor(header_color)
-                elif col_idx == 0:
-                    # Column 0: GPU Group styling — hide ALL cell borders by matching edge to face
-                    group = row_group.get(row_idx)
-                    bg_color = '#d5e1ed' if group == '1gpu' else '#b9cfe7'
-                    cell.set_facecolor(bg_color)
-                    cell.set_edgecolor(bg_color)
-                else:
-                    is_selected = row_selected.get(row_idx, False)
-                    
-                    # Bold model name (col 1)
-                    should_bold = (col_idx == 1)
-                    
-                    # Bold if it has the best score in its category for its group
-                    if col_idx in [2, 3, 4, 5, 6]:
-                        val = row_metric_vals.get(row_idx, {}).get(col_idx, -1.0)
-                        group = row_group.get(row_idx)
-                        if group and group in group_bests:
-                            best_val = group_bests[group].get(col_idx, -2.0)
-                            if abs(val - best_val) < 1e-9:
-                                should_bold = True
-                    
-                    if should_bold:
-                        cell.set_text_props(weight='bold')
-                    
-                    if is_selected:
-                        cell.set_facecolor('#d9ead3')  # Light green highlight
-                    elif row_idx % 2 == 0:
-                        cell.set_facecolor(row_even_color)
+                for (r_idx, c_idx), c_cell in tbl.get_celld().items():
+                    if r_idx == 0:
+                        c_cell.set_text_props(weight='bold', color='white')
+                        c_cell.set_facecolor(header_color)
+                    elif c_idx == 0:
+                        grp = row_group.get(r_idx)
+                        bg = '#d5e1ed' if grp == '1gpu' else '#b9cfe7'
+                        c_cell.set_facecolor(bg)
+                        c_cell.set_edgecolor(bg)
                     else:
-                        cell.set_facecolor(row_odd_color)
+                        is_sel = row_selected.get(r_idx, False)
+                        sh_bold = (c_idx == 1)
+                        if c_idx in [2, 3, 4, 5, 6]:
+                            v = row_metric_vals.get(r_idx, {}).get(c_idx, -1.0)
+                            grp = row_group.get(r_idx)
+                            if grp and grp in group_bests:
+                                b_val = group_bests[grp].get(c_idx, -2.0)
+                                if abs(v - b_val) < 1e-9:
+                                    sh_bold = True
+                        if sh_bold:
+                            c_cell.set_text_props(weight='bold')
+                        if is_sel:
+                            c_cell.set_facecolor('#d9ead3')
+                        elif r_idx % 2 == 0:
+                            c_cell.set_facecolor(row_even_color)
+                        else:
+                            c_cell.set_facecolor(row_odd_color)
 
-            # Draw outer border rectangles and group labels manually
-            fig.canvas.draw()
-            renderer = fig.canvas.get_renderer()
+                target_fig.canvas.draw()
+                rndr = target_fig.canvas.get_renderer()
+                from matplotlib.patches import Rectangle
+                for grp_n, grp_c, f_row, l_row in [
+                    ("Single GPU", '#d5e1ed', 1, len(group_1gpu)),
+                    ("Multi GPU", '#b9cfe7', len(group_1gpu) + 1, len(table_data))
+                ]:
+                    top_c = tbl[f_row, 0]
+                    bot_c = tbl[l_row, 0]
+                    top_bb = top_c.get_window_extent(rndr).transformed(target_ax.transData.inverted())
+                    bot_bb = bot_c.get_window_extent(rndr).transformed(target_ax.transData.inverted())
+                    x_r = top_bb.x0
+                    y_r = bot_bb.y0
+                    w_r = top_bb.x1 - top_bb.x0
+                    h_r = top_bb.y1 - bot_bb.y0
+                    r_patch = Rectangle((x_r, y_r), w_r, h_r, linewidth=1.0, edgecolor='black',
+                                        facecolor='none', zorder=5, clip_on=False)
+                    target_ax.add_patch(r_patch)
+                    cx_p = (top_bb.x0 + top_bb.x1) / 2
+                    cy_p = (top_bb.y1 + bot_bb.y0) / 2
+                    target_ax.text(cx_p, cy_p, grp_n, transform=target_ax.transData,
+                                   weight='bold', color='#1f4e79', fontsize=font_size,
+                                   rotation=90, va='center', ha='center', zorder=6)
+                return tbl
 
-            from matplotlib.patches import Rectangle
-
-            for grp_name, grp_color, first_row, last_row in [
-                ("Single GPU", '#d5e1ed', 1, len(group_1gpu)),
-                ("Multi GPU", '#b9cfe7', len(group_1gpu) + 1, len(table_data))
-            ]:
-                top_cell = table[first_row, 0]
-                bot_cell = table[last_row, 0]
-                top_bbox = top_cell.get_window_extent(renderer).transformed(ax.transData.inverted())
-                bot_bbox = bot_cell.get_window_extent(renderer).transformed(ax.transData.inverted())
-                
-                # Draw outer black border rectangle around the group in col 0
-                x = top_bbox.x0
-                y = bot_bbox.y0
-                w = top_bbox.x1 - top_bbox.x0
-                h = top_bbox.y1 - bot_bbox.y0
-                rect = Rectangle((x, y), w, h, linewidth=1.0, edgecolor='black',
-                                  facecolor='none', zorder=5, clip_on=False)
-                ax.add_patch(rect)
-                
-                # Draw label centered in the group
-                cx_ax = (top_bbox.x0 + top_bbox.x1) / 2
-                cy_ax = (top_bbox.y1 + bot_bbox.y0) / 2
-                ax.text(cx_ax, cy_ax, grp_name, transform=ax.transData,
-                        weight='bold', color='#1f4e79', fontsize=10,
-                        rotation=90, va='center', ha='center', zorder=6)
-
+            # Standalone table plot
+            fig_tbl, ax_tbl = plt.subplots(figsize=(18, 5.0))
+            render_model_table(ax_tbl, fig_tbl, font_size=10, row_scale=2.2)
             output_path = os.path.join(args.output_dir, "model_comparison_table.png")
-            plt.savefig(output_path, dpi=300, bbox_inches='tight')
-            plt.close()
+            fig_tbl.savefig(output_path, dpi=300, bbox_inches='tight')
+            plt.close(fig_tbl)
             print(f"Saved summary table plot to: {output_path}")
+
+            # Combined Figure 3: Ablation (A: Defs, B: Mode, C: Runs) + D: Models Table
+            if not llm_perf_df.empty:
+                try:
+                    fig_comb = plt.figure(figsize=(20, 11), constrained_layout=False)
+                    gs_comb = fig_comb.add_gridspec(2, 3, height_ratios=[1.0, 0.95], hspace=0.35, wspace=0.22)
+
+                    ax_a = fig_comb.add_subplot(gs_comb[0, 0])
+                    ax_b = fig_comb.add_subplot(gs_comb[0, 1])
+                    ax_c = fig_comb.add_subplot(gs_comb[0, 2])
+                    ax_d = fig_comb.add_subplot(gs_comb[1, :])
+
+                    plot_decision_defs(ax_a, llm_perf_df)
+                    plot_decision_mode(ax_b, llm_perf_df)
+                    plot_decision_consensus(ax_c, llm_perf_df, show_legend=True)
+
+                    render_model_table(ax_d, fig_comb, font_size=10, row_scale=2.0)
+
+                    add_panel_label(ax_a, "A", x=-0.12, y=1.04)
+                    add_panel_label(ax_b, "B", x=-0.12, y=1.04)
+                    add_panel_label(ax_c, "C", x=-0.12, y=1.04)
+                    add_panel_label(ax_d, "D", x=-0.04, y=1.03)
+
+                    comb_fig_path = os.path.join(args.output_dir, "model_decision_and_comparison_summary.png")
+                    fig_comb.savefig(comb_fig_path, dpi=300, bbox_inches='tight', pad_inches=0.18)
+                    plt.close(fig_comb)
+                    print(f"Saved combined ablation and model comparison (Figure 3: A-D) to: {comb_fig_path}")
+                except Exception as e_comb:
+                    print(f"Error generating combined ablation and model comparison figure: {e_comb}")
 
             # --- Find best model on a single GPU and save llm_config.json ---
             single_gpu_results = [r for r in table_results if r["GPU Requirements"].startswith("1x")]

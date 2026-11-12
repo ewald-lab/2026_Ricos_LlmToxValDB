@@ -51,7 +51,7 @@ echo "  LLM Expanded dir   : ${LLM_EXPANDED_DIR}"
 echo "  Figures dir        : ${OUTPUT_DIR}"
 echo "  Manual terms       : excluded from evaluation/plots"
 echo "  Jaccard boxplot    : skipped"
-echo "  Pattern summary    : Figure 2 6-panel grid (A-F) + Supplementary Figure 8 scatterplot"
+echo "  Pattern summary    : Figure 2 3-panel grid (A-C) + Figure 3 (A-D) + Supplementary Figure 8"
 echo "  Panel C colour     : human-LLM Jaccard similarity"
 
 # Remove stale outputs from previous figure layouts.
@@ -74,7 +74,8 @@ python3 "${MODULE_ROOT}/scripts/05.eval_combined.py" \
     --skip_inter_annotator_agreement_boxplot
 
 echo "Done. Combined plots written to: ${OUTPUT_DIR}"
-echo "  - term_variability_pattern_summary.png (Figure 2: A-F)"
+echo "  - term_variability_pattern_summary.png (Figure 2: A-C)"
+echo "  - model_decision_and_comparison_summary.png (Figure 3: A-D)"
 echo "  - supplementary_figure_8.png (Supplementary Figure 8)"
 echo "  - term_variability_pattern_summary_c.png"
 echo "  - model_comparison_table.png"
