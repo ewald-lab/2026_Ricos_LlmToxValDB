@@ -27,7 +27,7 @@ This repository presents the reference application of HiPO to the curation of th
 | **Embeddings** | `Qwen/Qwen3-Embedding-8B` ([`choice_rag.json`](HiPO/config/choice_rag.json)) / `tencent/KaLM-Embedding-Gemma3-12B-2511` | Local PyTorch inside `HiPO` | Runs on the client node GPU (`1x A100` in full ToxValDB production/evaluation jobs). |
 | **Reranker** | `Qwen/Qwen3-Reranker-0.6B` ([`choice_rag.json`](HiPO/config/choice_rag.json)) / `Qwen/Qwen3-Reranker-8B` ([`rag.json`](HiPO/config/rag.json)) | Local PyTorch inside `HiPO` | `0.6B` keeps local VRAM modest; `8B` is available for heavier retrieval configurations. |
 
-To set up vLLM locally and test connectivity with HiPO, follow the [Local LLM Deployment Guide](examples/local_llm/README.md).
+To set up vLLM locally and test connectivity with HiPO, follow the [Local LLM Deployment Guide](examples/local_llm/README.md). For context length (`MAX_MODEL_LEN`), `enable_thinking` client presets (`*-thinking.json`), latency trade-offs, and multi-GPU vLLM scaling, see [Recommendations: Normal vs. Thinking Models](examples/local_llm/README.md#recommendations-normal-vs-thinking-models).
 
 ## Citation
 
