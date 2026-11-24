@@ -32,7 +32,8 @@ logger = setup_logging()
 class OntologyToHierarchy:
     def __init__(self, ontology_path: str, root_uri: Optional[str] = None, prompt_template_path: Optional[str] = None, 
             global_definitions_db: str = "definitions.db", max_concurrency: int = 10, evaluate_prompt_template_path: Optional[str] = None,
-            definitions_report_path: Optional[str] = None) -> None:
+            definitions_report_path: Optional[str] = None, ontology_format: Optional[str] = None,
+            exclude_uris: Optional[list[str]] = None) -> None:
         """
         Description:
         Initializes the OntologyToHierarchy parser.
@@ -43,14 +44,25 @@ class OntologyToHierarchy:
             prompt_template_path (Optional[str]): Optional path to custom prompt template.
             global_definitions_db (str): Central definition caching DB path. Defaults to "definitions.db".
             max_concurrency (int): Maximum concurrent LLM batch requests.
+            ontology_format (Optional[str]): Optional rdflib format hint (e.g. "xml"), needed when
+                loading from a URL whose HTTP Content-Type isn't recognized by rdflib's auto-detection.
+            exclude_uris (Optional[list[str]]): Class URIs to leave out of the tree. A descendant
+                reachable only through an excluded class is dropped with it.
 
         Returns:
             None
         """
         self.graph = rdflib.Graph()
         logger.info(f"Loading ontology: {ontology_path}\n")
-        self.graph.parse(ontology_path)
+        self.graph.parse(ontology_path, format=ontology_format)
+        self._log_ontology_version()
         self.root_uri = rdflib.URIRef(root_uri) if root_uri else None
+        self.exclude_uris = {rdflib.URIRef(u) for u in (exclude_uris or [])}
+        for uri in sorted(self.exclude_uris):
+            if (uri, None, None) not in self.graph:
+                logger.warning(f"Excluded URI not found in the ontology: {uri}")
+            else:
+                logger.info(f"Excluding: {uri} ({self.get_label(uri)})")
         self.prompt_template_path = prompt_template_path
         self.evaluate_prompt_template_path = evaluate_prompt_template_path
         self.definitions_report_path = definitions_report_path
@@ -86,6 +98,27 @@ class OntologyToHierarchy:
                         self.llm_generated_labels.add(rdflib.URIRef(ruri))
                     count += 1
             logger.info(f"Loaded {count} cached definitions from {self.global_definitions_db}")
+
+    def _log_ontology_version(self) -> None:
+        """
+        Description:
+        Logs the release of the ontology that was just parsed. Most OBO purls are
+        unversioned and track the latest release, so this log line is the only
+        record of which release built a given DB.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+        for subject in self.graph.subjects(RDF.type, OWL.Ontology):
+            version_iri = next(self.graph.objects(subject, OWL.versionIRI), None)
+            version_info = next(self.graph.objects(subject, OWL.versionInfo), None)
+            logger.info(
+                f"Ontology {subject} | versionIRI={version_iri or 'none'} "
+                f"| versionInfo={version_info or 'none'}\n"
+            )
 
     def get_label(self, uri: rdflib.URIRef) -> str:
         """
@@ -132,6 +165,7 @@ class OntologyToHierarchy:
         """
         Description:
         Returns sorted list of children URIs subclassing the specified parent URI.
+        Excluded URIs are skipped here, so every traversal prunes them and their subtree.
 
         Args:
             parent_uri (rdflib.URIRef): The parent class URI.
@@ -141,7 +175,7 @@ class OntologyToHierarchy:
         """
         children = []
         for s in self.graph.subjects(RDFS.subClassOf, parent_uri):
-            if isinstance(s, rdflib.URIRef):
+            if isinstance(s, rdflib.URIRef) and s not in self.exclude_uris:
                 children.append(s)
         children.sort(key=lambda x: self.get_label(x).lower())
         return children
@@ -780,10 +814,10 @@ def main() -> None:
     start_time = time.time()
     parser = argparse.ArgumentParser(description="Generate Hierarchy and Prompts from Ontology using LLM")
 
-    parser.add_argument("--ontology_file", required=True, help="Path to input .ttl ontology file")
-    parser.add_argument("--root_uri", help="URI of the root class to start traversal (optional)")
-    parser.add_argument("--root_uris_file", help="Path to JSON file mapping ontology names to root URIs (optional)")
-    parser.add_argument("--ontology_name", help="Ontology identifier (optional, defaults to filename stem)")
+    parser.add_argument("--ontology_file", required=True, help="Path to input .ttl ontology file, or a URL to fetch it from")
+    parser.add_argument("--ontology_format", default=None, help="rdflib format hint (e.g. 'xml') for --ontology_file. Needed for URLs whose Content-Type isn't auto-detectable; local files auto-detect from extension.")
+    parser.add_argument("--root_uri", help="URI of the root class to start traversal (optional; auto-detects the roots when omitted)")
+    parser.add_argument("--exclude_uris", nargs="*", default=[], help="Class URIs to leave out of the tree, together with every descendant reachable only through them (optional)")
     parser.add_argument("--prompt_template", help="Path to custom prompt template file (optional)")
     parser.add_argument("--evaluate_prompt_template", help="Path to evaluation prompt template file (optional)")
     parser.add_argument("--definitions_report", help="Path to save the JSON report of definitions (optional)")
@@ -859,29 +893,7 @@ def main() -> None:
     logger.info(f"HuggingFace Home: {hf_home}")
     logger.info(f"HF Transfer: {hf_transfer}")
 
-    # Determine root URI: priority to --root_uri, then lookup in --root_uris_file or inputs/root_uris.json
-    root_uri = args.root_uri
-    if not root_uri:
-        root_uris_file = args.root_uris_file
-        if not root_uris_file:
-            default_roots_file = Path(__file__).resolve().parent.parent / "inputs" / "root_uris.json"
-            if default_roots_file.is_file():
-                root_uris_file = str(default_roots_file)
-
-        if root_uris_file and os.path.exists(root_uris_file):
-            logger.info(f"Loading root URIs from: {root_uris_file}")
-            with open(root_uris_file, "r", encoding="utf-8") as f:
-                root_uris_map = json.load(f)
-
-            ontology_key = (args.ontology_name or Path(args.ontology_file).stem).lower()
-            root_map_lower = {k.lower(): v for k, v in root_uris_map.items()}
-            root_uri = root_map_lower.get(ontology_key)
-            if root_uri:
-                logger.info(f"Resolved root URI for '{ontology_key}': {root_uri}")
-            else:
-                logger.info(f"No specific root URI configured for '{ontology_key}'. Auto-detecting roots.")
-
-    generator = OntologyToHierarchy(args.ontology_file, root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency, evaluate_prompt_template_path=args.evaluate_prompt_template, definitions_report_path=args.definitions_report)
+    generator = OntologyToHierarchy(args.ontology_file, args.root_uri, args.prompt_template, global_definitions_db=args.global_definitions_db, max_concurrency=max_concurrency, evaluate_prompt_template_path=args.evaluate_prompt_template, definitions_report_path=args.definitions_report, ontology_format=args.ontology_format, exclude_uris=args.exclude_uris)
 
     if llm:
         if not test_model(llm):

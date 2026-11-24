@@ -13,9 +13,8 @@
     "to work; 'exclude_note' records why each exclusion was made.",
     "",
     "'db_dir' is where this ontology's generated DBs live, relative to the",
-    "02.prepare_ontologies module root. every ontology added after the freeze uses 'outputs_local'",
-    "because the shared 'outputs' symlink is not writable by us (issue #5); when",
-    "write access lands, set it to 'outputs' here and nothing else changes.",
+    "02.prepare_ontologies module root. Every ontology uses 'outputs'; the field is",
+    "per ontology so that one can be sent elsewhere without touching any job.",
     "",
     "local_sha256 is verified on every resolve. The snapshots are gitignored (~0.5GB),",
     "so the checksum is the only in-repo record of which bytes produced a result;",
@@ -151,7 +150,7 @@
     },
     "uberon": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": "uberon-basic.owl",
       "local_format": "xml",
       "local_sha256": "5a5290f7f64f5e06efa77c77b1703565f6cd7779926a059126aeeb37692962c4",
@@ -165,7 +164,7 @@
     },
     "mondo": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": "mondo-simple.owl",
       "local_format": "xml",
       "local_sha256": "fb22e16b002bf10a70195e8b8ed10d5deaccbea8e2bf9accb32a3979c5ceb1fe",
@@ -179,7 +178,7 @@
     },
     "symp": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": "symp.owl",
       "local_format": "xml",
       "local_sha256": "9054e6a87d4af4ac18876aef953a5cf151aa0a3d82d15f8850928bd0413e5b87",
@@ -193,7 +192,7 @@
     },
     "mpath": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": null,
       "local_format": null,
       "local_sha256": null,
@@ -213,7 +212,7 @@
     },
     "cmo": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": null,
       "local_format": null,
       "local_sha256": null,
@@ -227,7 +226,7 @@
     },
     "doid": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": null,
       "local_format": null,
       "local_sha256": null,
@@ -241,7 +240,7 @@
     },
     "oae": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": null,
       "local_format": null,
       "local_sha256": null,
@@ -255,7 +254,7 @@
     },
     "nbo": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": null,
       "local_format": null,
       "local_sha256": null,
@@ -269,7 +268,7 @@
     },
     "pato": {
       "pin": "url",
-      "db_dir": "outputs_local",
+      "db_dir": "outputs",
       "local_file": null,
       "local_format": null,
       "local_sha256": null,

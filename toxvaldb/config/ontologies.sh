@@ -322,8 +322,8 @@ ontology_require_resolved() {
 # embedding/definition DBs live, echoed to stdout.
 #
 # The per-ontology part (db_dir) comes from ontologies.json, so this function
-# holds no ontology-specific knowledge. Which ontologies build into outputs
-# and which into outputs_local, and why, is recorded there.
+# holds no ontology-specific knowledge. Every ontology builds into outputs
+# today.
 ontology_db_root() {
     local module_root="${1:-}"
 
@@ -376,8 +376,8 @@ ontology_db_root_for() {
 # ontology_db_roots_for_group <group> <prepare_module_root> -- the distinct DB
 # roots the group spans, one per line, in canonical order.
 #
-# The ontologies in a group do not all share a root (db_dir differs between
-# entries), so a job that reads DBs for a whole group has to
+# db_dir is set per ontology, so the ontologies in a group need not share a
+# root (today they all do), and a job that reads DBs for a whole group has to
 # search every root the group touches. Which ids share a root is a fact about
 # the config, so the walk and the de-duplication live here rather than being
 # hand-rolled in each such job.

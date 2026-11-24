@@ -26,6 +26,9 @@ PROJECT_ROOT="$(cd "${TOXVALDB_ROOT}/.." && pwd)"
 export PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}"
 
 source "${TOXVALDB_ROOT}/cluster_env.sh"
+# Ontology source, rdflib format, root class, exclusions and DB location all
+# come from toxvaldb/config/ontologies.json.
+source "${TOXVALDB_ROOT}/config/ontologies.sh" || exit 1
 
 mkdir -p "${SCRIPT_DIR}/logs"
 
@@ -64,27 +67,34 @@ elif [ -f "${PREP_ROOT}/../env-data-prep/bin/activate" ]; then
 fi
 fi
 
-mkdir -p "${REPO_ROOT}/outputs/${EMBED_DIR}"
+ontology_config "${ONTOLOGY}" || exit 1
+
+OUTPUT_ROOT="$(ontology_db_root "${REPO_ROOT}")" || exit 1
+mkdir -p "${OUTPUT_ROOT}/${EMBED_DIR}"
 
 echo "=========================================================="
 echo "=== Processing Ontology with LLM Definitions & Embeddings ==="
-echo "Ontology     : ${ONTOLOGY}"
+echo "Ontology     : ${ONTOLOGY_ID}"
 echo "Embed Model  : ${EMBED_DIR} (Array ID: ${SLURM_ARRAY_TASK_ID:-manual})"
 echo "Endpoint URL : ${FINAL_BASE_URL}"
 echo "Model Config : ${MODEL_CONFIG}"
 echo "HF_HOME      : ${HF_HOME}"
+echo "Output root  : ${OUTPUT_ROOT}"
+ontology_echo_config
 echo "=========================================================="
 
 python "${REPO_ROOT}/scripts/01.process_ontology.py" \
-    --ontology_file "${REPO_ROOT}/inputs/owl_files/${ONTOLOGY}.ttl" \
-    --root_uris_file "${REPO_ROOT}/inputs/root_uris.json" \
-    --ontology_db "${REPO_ROOT}/outputs/${EMBED_DIR}/${ONTOLOGY}.db" \
+    ${ONTOLOGY_ROOT_URI_FLAG} \
+    ${ONTOLOGY_EXCLUDE_URIS_FLAG} \
+    ${ONTOLOGY_FORMAT_FLAG} \
+    --ontology_file "${ONTOLOGY_FILE}" \
+    --ontology_db "${OUTPUT_ROOT}/${EMBED_DIR}/${ONTOLOGY_ID}.db" \
     --rag_config "${REPO_ROOT}/config/rag/embeddings.json" \
     --embeddings_model_id "${EMBED_DIR}" \
-    --global_definitions_db "${REPO_ROOT}/outputs/definitions_${ONTOLOGY}.db" \
+    --global_definitions_db "${OUTPUT_ROOT}/definitions_${ONTOLOGY_ID}.db" \
     --prompt_template "${REPO_ROOT}/config/tools/create_description_prompt.txt" \
     --evaluate_prompt_template "${REPO_ROOT}/config/tools/evaluate_description_prompt.txt" \
-    --definitions_report "${REPO_ROOT}/outputs/${ONTOLOGY}_definitions_report.json" \
+    --definitions_report "${OUTPUT_ROOT}/${ONTOLOGY_ID}_definitions_report.json" \
     --model_config "${MODEL_CONFIG}" \
     --base_url "${FINAL_BASE_URL}" \
     --hf_home "${HF_HOME}"
