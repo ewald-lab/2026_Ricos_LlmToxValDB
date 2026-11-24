@@ -40,6 +40,14 @@ Comprehensive computational benchmarking, agreement analysis, and downstream vis
 
 ---
 
+### `config/`
+Central registry of the ontologies the pipeline can run on, with one accessor per language.
+- **`ontologies.json`**: Per-ontology source (local snapshot or URL), rdflib format, root class, tree threshold and database location, plus the canonical order and the named groups that jobs select.
+- **`ontologies.sh`**: Bash accessor for job scripts (`source "${TOXVALDB_ROOT}/config/ontologies.sh"`). Requires `jq`, which it loads from an environment module when the host does not ship it.
+- **`ontology_config.py`**: Python accessor for scripts (`from toxvaldb.config.ontology_config import ontology_ids`), with the repository root on `PYTHONPATH` or `sys.path`, as for `HiPO`.
+
+---
+
 ## Environment Setup
 
 Each of the four main stages maintains an independent, isolated Python environment managed by [uv](https://docs.astral.sh/uv/) to ensure reproducible dependencies and clean separation of concerns.
