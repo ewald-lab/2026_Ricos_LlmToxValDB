@@ -12,15 +12,22 @@
 #SBATCH -e "logs/err_tvllm_prod_%j.err"
 
 # Arguments: endpoint (required), model (optional), port (optional), ontology (optional)
+#
+# The ontology is any id in toxvaldb/config/ontologies.json (default: mp).
+# To map several ontologies, submit the job as an array without the ontology
+# argument: each task takes the registry entry at its index, e.g.
+#   sbatch --array=0-13 00.hipo_toxvaldb.sh <host> [model] [port]
+# runs every ontology in the registry. The job log prints the index map.
 ENDPOINT="${1:-}"
 MODEL="${2:-Qwen3.6-35B-A3B-FP8}"
 PORT="${3:-8053}"
-ONTOLOGY="${4:-mp}"
+ONTOLOGY_ARG="${4:-}"
 
 if [ -z "$ENDPOINT" ]; then
     echo "Error: Host node / endpoint is required."
     echo "Usage: sbatch $0 <host|base_url> [model] [port] [ontology]"
     echo "Example: sbatch $0 http://localhost:8000/v1 Qwen3.6-35B-A3B-FP8 8000 mp"
+    echo "All ontologies: sbatch --array=0-13 $0 <host|base_url> [model] [port]"
     exit 1
 fi
 
@@ -42,6 +49,25 @@ MODULE_ROOT="${TOXVALDB_ROOT}/01.hipo/modules/00.hipo_toxvaldb"
 source "${TOXVALDB_ROOT}/cluster_env.sh"
 BASE_URL="$(resolve_base_url "${ENDPOINT}" "${PORT}")"
 
+# The ontology ids and the location of their databases come from
+# toxvaldb/config/ontologies.json.
+source "${TOXVALDB_ROOT}/config/ontologies.sh" || exit 1
+PREP_ONTO_ROOT="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies"
+
+if [ -n "${ONTOLOGY_ARG}" ]; then
+    ontology_config "${ONTOLOGY_ARG}" || exit 1
+elif [ -n "${SLURM_ARRAY_TASK_ID:-}" ]; then
+    ontology_by_index "${SLURM_ARRAY_TASK_ID}" all || exit 1
+    ontology_echo_index_map all
+else
+    ontology_config mp || exit 1
+fi
+ONTOLOGY="${ONTOLOGY_ID}"
+ONTOLOGY_DB_ROOT="$(ontology_db_root "${PREP_ONTO_ROOT}")" || exit 1
+
+echo "--- Processing Ontology: ${ONTOLOGY} (Task ID: ${SLURM_ARRAY_TASK_ID:-single}) ---"
+ontology_echo_config
+
 export PYTHONPATH="${REPO_ROOT}:${PYTHONPATH}"
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME="${HF_HOME:-${HOME}/.cache/huggingface}"
@@ -61,12 +87,12 @@ mkdir -p "${MODULE_ROOT}/outputs"
     --target_column TOXICOLOGICAL_EFFECT_LLM_CLEANED \
     --system_prompt_file "${MODULE_ROOT}/config/system_prompt_{MODE}.txt" \
     --rag_config "${MODULE_ROOT}/inputs/choice_rag.json" \
-    --ontology_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/{EMBED_DIR}/${ONTOLOGY}.db" \
-    --global_definitions_db "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db" \
+    --ontology_embedding_db "${ONTOLOGY_DB_ROOT}/{EMBED_DIR}/${ONTOLOGY}.db" \
+    --global_definitions_db "${ONTOLOGY_DB_ROOT}/definitions_${ONTOLOGY}.db" \
     --target_embedding_db "${TOXVALDB_ROOT}/00.data_preparation/modules/01.preprocess_toxvaldb/outputs/embeddings_db/tox_effects_{EMBED_DIR}.db" \
     --base_url "${BASE_URL}" \
     --num_backups 10 \
-    --context_ontology_file "${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt" \
+    --context_ontology_file "${PREP_ONTO_ROOT}/inputs/ontology_context/${ONTOLOGY}.txt" \
     --model "${MODEL}" \
     --llm_config "${MODULE_ROOT}/inputs/choice_llm.json" \
     --descriptions_concurrency 100 \
