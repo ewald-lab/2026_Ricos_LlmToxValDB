@@ -1,12 +1,11 @@
 #!/bin/bash
 # Restore the local ontology snapshots listed in toxvaldb/config/ontologies.json.
 #
-# The snapshots are gitignored (~0.5GB) but they are NOT disposable: eight of
-# the fourteen ontologies keep one, and five of those (aop, hp, hpath, mp, txpo)
-# are pinned to it, so they are the sources the published results were built
+# The snapshots are gitignored but they are NOT disposable: the ontologies
+# pinned to one (pin=local) are the sources the published results were built
 # from. Each is verified against the local_sha256 recorded in the config, which
-# is the only in-repo record of which bytes produced a result. The other six
-# ontologies are loaded from their URL at run time and are skipped here.
+# is the only in-repo record of which bytes produced a result. Ontologies that
+# declare no local_file are loaded from their URL at run time and are skipped.
 #
 #   ./download_ontologies.sh            # restore whatever is missing or corrupt
 #   ./download_ontologies.sh --force    # re-fetch everything
@@ -14,14 +13,16 @@
 # Optional environment overrides:
 #   ONTOLOGY_SNAPSHOT_SRC : Directory that already holds the snapshots (for
 #                           example the owl_files directory of another
-#                           checkout). A file found there is copied from it;
-#                           anything else is fetched from the ontology's URL.
+#                           checkout). A file found there is copied from it.
 #   JQ_MODULE             : See toxvaldb/config/ontologies.sh.
 #
-# aop and hpath have no URL, and the hp, mp and txpo snapshots are Turtle
-# files that their URLs do not serve, so the five pinned snapshots can only be
-# restored from ONTOLOGY_SNAPSHOT_SRC. A URL download that does not match the
-# recorded checksum is reported as a failure.
+# A pin=local snapshot is restored only from ONTOLOGY_SNAPSHOT_SRC, never from
+# the ontology's URL: the URL is not guaranteed to serve the same bytes, or
+# even the same serialization. A pin=url snapshot not found in
+# ONTOLOGY_SNAPSHOT_SRC is fetched from its URL.
+#
+# A file is put in place only after its checksum matches. A copy or download
+# that does not verify is discarded and whatever was there before is kept.
 
 set -uo pipefail
 
@@ -76,41 +77,47 @@ while read -r id && read -r pin && read -r file && read -r expected && read -r u
     dest="${DEST_DIR}/${file}"
 
     if [ "${FORCE}" -eq 0 ] && [ -f "${dest}" ]; then
-        actual="$(sha256sum "${dest}" | cut -d' ' -f1)"
-        if [ "${actual}" == "${expected}" ]; then
+        if ontology_verify_checksum "${dest}" "${expected}" 2>/dev/null; then
             echo "ok       ${id} (${file})"
             continue
         fi
         echo "stale    ${id}: checksum differs, re-fetching"
     fi
 
+    # Fetch next to the destination, so the final mv is a rename on the same
+    # filesystem and never follows a symlinked destination into its target.
+    tmp="${dest}.download.$$"
+
     if [ -n "${SNAPSHOT_SRC}" ] && [ -f "${SNAPSHOT_SRC}/${file}" ]; then
         echo "copying  ${id} from ${SNAPSHOT_SRC}"
-        cp "${SNAPSHOT_SRC}/${file}" "${dest}" || {
-            echo "         FAILED to copy ${id}" >&2; failed=1; continue; }
+        cp "${SNAPSHOT_SRC}/${file}" "${tmp}" || {
+            echo "         FAILED to copy ${id}" >&2; rm -f "${tmp}"; failed=1; continue; }
+    elif [ "${pin}" == "local" ]; then
+        echo "         MISSING ${id}: pinned to its local snapshot, which is not fetched" >&2
+        echo "         from a URL. Set ONTOLOGY_SNAPSHOT_SRC to a directory that holds" >&2
+        echo "         ${file}, or ask a colleague for the file." >&2
+        failed=1
+        continue
     elif [ -n "${url}" ]; then
         echo "fetching ${id} from ${url}"
-        curl -sSL --retry 3 --retry-delay 2 --max-time 900 -o "${dest}" "${url}" || {
-            echo "         FAILED to fetch ${id}" >&2; failed=1; continue; }
+        curl -sSL --retry 3 --retry-delay 2 --max-time 900 -o "${tmp}" "${url}" || {
+            echo "         FAILED to fetch ${id}" >&2; rm -f "${tmp}"; failed=1; continue; }
     else
-        echo "         MISSING ${id}: it has no URL, so it can only be copied from a" >&2
-        echo "         directory that already holds ${file}. Set ONTOLOGY_SNAPSHOT_SRC" >&2
-        echo "         to that directory, or ask a colleague for the file." >&2
+        echo "         MISSING ${id}: it has no URL. Set ONTOLOGY_SNAPSHOT_SRC to a" >&2
+        echo "         directory that holds ${file}, or ask a colleague for the file." >&2
         failed=1
         continue
     fi
 
-    actual="$(sha256sum "${dest}" | cut -d' ' -f1)"
-    if [ "${actual}" == "${expected}" ]; then
+    if ontology_verify_checksum "${tmp}" "${expected}" && mv -f "${tmp}" "${dest}"; then
         echo "         verified ${id}"
     else
-        echo "         CHECKSUM MISMATCH for ${id}" >&2
-        echo "           expected ${expected}" >&2
-        echo "           actual   ${actual}" >&2
-        # Ontologies that track a moving URL will legitimately differ from the
-        # pinned snapshot; anything pinned to local must match exactly.
-        echo "         If this ontology tracks a URL, upstream has released a new" >&2
-        echo "         version since the snapshot was taken. Update local_sha256 and" >&2
+        rm -f "${tmp}"
+        echo "         NOT RESTORED ${id}: ${dest} was left as it was." >&2
+        # An ontology that tracks a moving URL will legitimately differ from
+        # its recorded snapshot once a new release is out.
+        echo "         If this ontology tracks a URL, a new version may have been" >&2
+        echo "         released since the snapshot was taken. Update local_sha256 and" >&2
         echo "         release_seen in ${CONFIG_JSON} only if that is intended." >&2
         failed=1
     fi
