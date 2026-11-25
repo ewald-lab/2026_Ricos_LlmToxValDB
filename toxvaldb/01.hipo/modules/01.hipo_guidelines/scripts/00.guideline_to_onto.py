@@ -22,6 +22,7 @@ from src.endpoint_filters import (
     write_json,
 )
 from src.ontology import OntologyTree
+from toxvaldb.config.ontology_config import ontology_ids
 
 DEFAULT_HF_HOME = os.path.join(os.path.expanduser("~"), ".cache", "huggingface")
 DEFAULT_HF_TRANSFER = "1"
@@ -60,7 +61,7 @@ def arg_parser() -> argparse.Namespace:
     parser.add_argument(
         "--ontology",
         required=True,
-        choices=["mp", "hpath", "aop", "hp", "txpo"],
+        choices=ontology_ids("guidelines"),
         help="Ontology key to process.",
     )
     parser.add_argument(

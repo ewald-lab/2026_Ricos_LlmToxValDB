@@ -11,7 +11,11 @@
 #SBATCH -o "logs/out_endpoint_to_phenotype_%A_%a.out"
 #SBATCH -e "logs/err_endpoint_to_phenotype_%A_%a.err"
 
-ONTOLOGIES=(mp hpath aop hp txpo)
+# One array task per ontology of the "guidelines" group in
+# toxvaldb/config/ontologies.json, in the registry order. The job log prints
+# which ontology each index selects.
+# The --array range above must cover that group: Slurm parses the directive
+# before the script runs, so it cannot be read from the registry.
 
 if [[ "${BASH_SOURCE[0]}" == /var/spool/slurmd/* ]]; then
     SCRIPT_DIR="${SLURM_SUBMIT_DIR}"
@@ -33,13 +37,36 @@ PORT="${2:-8052}"
 MODEL="${3:-Qwen3.6-35B-A3B-FP8}"
 ONTOLOGY_ARG="${4:-hpath}"
 
-if [ -n "$SLURM_ARRAY_TASK_ID" ]; then
-    ONTOLOGY="${ONTOLOGIES[$SLURM_ARRAY_TASK_ID]}"
-else
-    ONTOLOGY="$ONTOLOGY_ARG"
-fi
-
 source "${TOXVALDB_ROOT}/cluster_env.sh"
+# The ontology ids and the location of their databases come from
+# toxvaldb/config/ontologies.json.
+source "${TOXVALDB_ROOT}/config/ontologies.sh" || exit 1
+ONTOLOGY_GROUP="guidelines"
+PREP_ONTO_ROOT="${DATA_PREP_ROOT}/modules/02.prepare_ontologies"
+
+# Only the ontology id and its database folder are needed here. The ontology
+# source file is not read, so it is not resolved and no snapshot is required.
+ONTOLOGY_LIST="$(ontology_group_ids "${ONTOLOGY_GROUP}")" || exit 1
+mapfile -t ONTOLOGY_CHOICES <<< "${ONTOLOGY_LIST}"
+
+if [ -n "${SLURM_ARRAY_TASK_ID:-}" ]; then
+    if [ "${SLURM_ARRAY_TASK_COUNT:-${#ONTOLOGY_CHOICES[@]}}" -ne "${#ONTOLOGY_CHOICES[@]}" ]; then
+        echo "WARNING: --array covers ${SLURM_ARRAY_TASK_COUNT} task(s) but group '${ONTOLOGY_GROUP}'" \
+             "has ${#ONTOLOGY_CHOICES[@]} ontologies." >&2
+    fi
+    ONTOLOGY="${ONTOLOGY_CHOICES[${SLURM_ARRAY_TASK_ID}]:-}"
+    if [ -z "${ONTOLOGY}" ]; then
+        echo "Error: array index ${SLURM_ARRAY_TASK_ID} is outside 0-$(( ${#ONTOLOGY_CHOICES[@]} - 1 ))." >&2
+        exit 1
+    fi
+else
+    ONTOLOGY="${ONTOLOGY_ARG}"
+    if [[ " ${ONTOLOGY_CHOICES[*]} " != *" ${ONTOLOGY} "* ]]; then
+        echo "Error: '${ONTOLOGY}' is not in group '${ONTOLOGY_GROUP}' (${ONTOLOGY_CHOICES[*]})." >&2
+        exit 1
+    fi
+fi
+ONTOLOGY_DB_ROOT="$(ontology_db_root_for "${ONTOLOGY}" "${PREP_ONTO_ROOT}")" || exit 1
 
 if [ -z "$ENDPOINT" ]; then
     echo "Error: Host node / endpoint is required."
@@ -61,5 +88,7 @@ mkdir -p "${MODULE_ROOT}/outputs"
 mkdir -p "${SCRIPT_DIR}/logs"
 
 echo "--- Processing Ontology: ${ONTOLOGY} (Task ID: ${SLURM_ARRAY_TASK_ID:-single}) ---"
+ontology_echo_index_map "${ONTOLOGY_GROUP}"
+echo "  Ontology databases: ${ONTOLOGY_DB_ROOT}"
 
-python "${MODULE_ROOT}/scripts/00.guideline_to_onto.py"     --input_endpoints "${DATA_PREP_ROOT}/modules/03.prepare_guidelines/outputs/normalized_endpoint_list.csv"     --output_dir "${MODULE_ROOT}/outputs"     --ontology "${ONTOLOGY}"     --ontology_embedding_db "${DATA_PREP_ROOT}/modules/02.prepare_ontologies/outputs/{EMBED_DIR}/${ONTOLOGY}.db"     --global_definitions_db "${DATA_PREP_ROOT}/modules/02.prepare_ontologies/outputs/definitions_${ONTOLOGY}.db"     --base_url "${BASE_URL}"     --system_prompt_file "${MODULE_ROOT}/config/system_prompt_endpoint_filter.txt"     --context_ontology "${DATA_PREP_ROOT}/modules/02.prepare_ontologies/inputs/ontology_context/${ONTOLOGY}.txt"     --rag_config "${MODULE_ROOT}/config/rag/best_config.json"     --llm_config "${MODULE_ROOT}/config/llm_config.json"     --model "${MODEL}"
+python "${MODULE_ROOT}/scripts/00.guideline_to_onto.py"     --input_endpoints "${DATA_PREP_ROOT}/modules/03.prepare_guidelines/outputs/normalized_endpoint_list.csv"     --output_dir "${MODULE_ROOT}/outputs"     --ontology "${ONTOLOGY}"     --ontology_embedding_db "${ONTOLOGY_DB_ROOT}/{EMBED_DIR}/${ONTOLOGY}.db"     --global_definitions_db "${ONTOLOGY_DB_ROOT}/definitions_${ONTOLOGY}.db"     --base_url "${BASE_URL}"     --system_prompt_file "${MODULE_ROOT}/config/system_prompt_endpoint_filter.txt"     --context_ontology "${PREP_ONTO_ROOT}/inputs/ontology_context/${ONTOLOGY}.txt"     --rag_config "${MODULE_ROOT}/config/rag/best_config.json"     --llm_config "${MODULE_ROOT}/config/llm_config.json"     --model "${MODEL}"
