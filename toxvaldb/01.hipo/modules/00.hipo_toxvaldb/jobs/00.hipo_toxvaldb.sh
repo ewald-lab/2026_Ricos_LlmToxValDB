@@ -17,7 +17,8 @@
 # To map several ontologies, submit the job as an array without the ontology
 # argument: each task takes the registry entry at its index, e.g.
 #   sbatch --array=0-13 00.hipo_toxvaldb.sh <host> [model] [port]
-# runs every ontology in the registry. The job log prints the index map.
+# runs the 14 ontologies the registry has today. The job log prints the index
+# map, and an index past the end of the registry stops the task.
 ENDPOINT="${1:-}"
 MODEL="${2:-Qwen3.6-35B-A3B-FP8}"
 PORT="${3:-8053}"
@@ -54,19 +55,29 @@ BASE_URL="$(resolve_base_url "${ENDPOINT}" "${PORT}")"
 source "${TOXVALDB_ROOT}/config/ontologies.sh" || exit 1
 PREP_ONTO_ROOT="${TOXVALDB_ROOT}/00.data_preparation/modules/02.prepare_ontologies"
 
-if [ -n "${ONTOLOGY_ARG}" ]; then
-    ontology_config "${ONTOLOGY_ARG}" || exit 1
-elif [ -n "${SLURM_ARRAY_TASK_ID:-}" ]; then
-    ontology_by_index "${SLURM_ARRAY_TASK_ID}" all || exit 1
-    ontology_echo_index_map all
-else
-    ontology_config mp || exit 1
+# Only the ontology id and its database folder are needed here. The ontology
+# source file is not read, so it is not resolved and no snapshot is required.
+if [ -n "${ONTOLOGY_ARG}" ] && [ -n "${SLURM_ARRAY_TASK_ID:-}" ]; then
+    echo "Error: give an ontology or submit an array, not both." >&2
+    echo "  Every array task would map '${ONTOLOGY_ARG}' and write the same output files." >&2
+    exit 1
 fi
-ONTOLOGY="${ONTOLOGY_ID}"
-ONTOLOGY_DB_ROOT="$(ontology_db_root "${PREP_ONTO_ROOT}")" || exit 1
+if [ -n "${SLURM_ARRAY_TASK_ID:-}" ]; then
+    ONTOLOGY_LIST="$(ontology_group_ids all)" || exit 1
+    mapfile -t ONTOLOGY_CHOICES <<< "${ONTOLOGY_LIST}"
+    ONTOLOGY="${ONTOLOGY_CHOICES[${SLURM_ARRAY_TASK_ID}]:-}"
+    ontology_echo_index_map all
+    if [ -z "${ONTOLOGY}" ]; then
+        echo "Error: array index ${SLURM_ARRAY_TASK_ID} is outside 0-$(( ${#ONTOLOGY_CHOICES[@]} - 1 ))." >&2
+        exit 1
+    fi
+else
+    ONTOLOGY="${ONTOLOGY_ARG:-mp}"
+fi
+ONTOLOGY_DB_ROOT="$(ontology_db_root_for "${ONTOLOGY}" "${PREP_ONTO_ROOT}")" || exit 1
 
 echo "--- Processing Ontology: ${ONTOLOGY} (Task ID: ${SLURM_ARRAY_TASK_ID:-single}) ---"
-ontology_echo_config
+echo "  Ontology databases: ${ONTOLOGY_DB_ROOT}"
 
 export PYTHONPATH="${REPO_ROOT}:${PYTHONPATH}"
 export HF_HUB_ENABLE_HF_TRANSFER=1
